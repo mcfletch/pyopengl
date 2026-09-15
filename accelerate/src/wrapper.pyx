@@ -2,6 +2,7 @@
 #cython: language_level=3
 import ctypes
 from OpenGL import error
+from OpenGL._bytes import short_repr_tuple
 from OpenGL._null import NULL as _NULL
 
 cdef extern from "Python.h":
@@ -317,7 +318,12 @@ cdef class Wrapper:
         try:
             result = self.wrappedOperation( *cArguments )
         except (ctypes.ArgumentError,TypeError,AttributeError) as err:
-            err.args = err.args + (cArguments,)
+            # Shortened: a GL call's arguments are routinely a mesh or a
+            # texture, and an error that formats one whole is megabytes of
+            # digits with the message that mattered scrolled past behind
+            # them.  See OpenGL._bytes.short_repr_tuple and
+            # https://github.com/mcfletch/pyopengl/issues/114
+            err.args = err.args + (short_repr_tuple(cArguments),)
             raise err
         except error.GLError as err:
             err.cArgs = cArgs 
@@ -441,7 +447,7 @@ cdef class MultiReturn(object):
             try:
                 result.append( child(*args,**named) )
             except Exception as err:
-                err.args += ( child, args, named )
+                err.args += ( child, short_repr_tuple( args ), named )
                 raise
         return result
     
