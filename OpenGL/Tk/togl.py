@@ -34,6 +34,7 @@ from OpenGL.GL import (
     glViewport,
 )
 from OpenGL.GLU import gluLookAt, gluPerspective, gluProject, gluUnProject
+from OpenGL.raw.GL._types import GLfloat
 from OpenGL.Tk.attributes import ContextAttributes
 from OpenGL.Tk.widget import GLFrame
 from OpenGL._scalar import as_int
@@ -434,7 +435,11 @@ widget, or subclass and override it.
         Also switch on the depth buffer."""
 
         self.activate()
-        light_position = (1, 1, 1, 0)
+        # Built as an array rather than written as a tuple: a tuple has no
+        # data pointer to give the driver, so under ERROR_ON_COPY -- which is
+        # a caller's instruction that this library make no implicit copies for
+        # them -- the call is refused, in code of ours they never wrote.
+        light_position = (GLfloat * 4)(1.0, 1.0, 1.0, 0.0)
         glLightfv(GL_LIGHT0, GL_POSITION, light_position)
         glEnable(GL_LIGHTING)
         glEnable(GL_LIGHT0)
