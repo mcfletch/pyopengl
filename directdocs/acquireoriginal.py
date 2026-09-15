@@ -13,15 +13,9 @@ def ensure_sources( ):
     """Ensure that the OpenGL.org man-page sources are available"""
     for source, target in MAN_SOURCES:
         if not os.path.exists(target):
-            subprocess.check_call(
-                'git clone %(source)s %(target)s'%locals(),
-                shell=True
-            )
+            subprocess.check_call(['git', 'clone', source, target])
         else:
-            subprocess.check_call(
-                'cd %(target)s && git pull --ff-only'%locals(),
-                shell=True,
-            )
+            subprocess.check_call(['git', 'pull', '--ff-only'], cwd=target)
 
 def package_name( name ):
     if name.startswith( 'glX' ):

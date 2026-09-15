@@ -77,7 +77,7 @@ class Reference(object):
 
     def check_crossrefs(self):
         sections = sorted(self.sections.items())
-        for i, (name, section) in enumerate(sections):
+        for i, (_name, section) in enumerate(sections):
             list(section.get_crossrefs(self))
             if i > 0:
                 section.previous = sections[i - 1][1]
@@ -377,7 +377,7 @@ class Parameter(object):
 
     @property
     def has_default(self):
-        return not (self.default is NOT_DEFINED)
+        return self.default is not NOT_DEFINED
 
 
 class ParameterReference(object):
@@ -386,7 +386,6 @@ class ParameterReference(object):
         self.description = description
 
     def __repr__(self):
-        result = []
         return '\t\t%s -- %s' % (', '.join(self.names), self.description)
 
 

@@ -360,7 +360,7 @@ def main():
     # Now store out references for things which want to do Python: refsect
     # lookups...
     mapping = {}
-    for sectname,section in ref.sections.items():
+    for section in ref.sections.values():
         for function in section.functions.keys():
             mapping[function] = ref.url( section )
         for pyname in section.py_functions.keys():

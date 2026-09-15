@@ -147,7 +147,7 @@ class PyModule( object ):
                     if isinstance( value, types ):
                         collection = getattr( self, attr )
                         is_duplicate = False
-                        for (k,v) in collection:
+                        for (_key,v) in collection:
                             if getattr(v,'target',v) is value:
                                 if not hasattr( v, 'aliases' ):
                                     v.aliases = []
