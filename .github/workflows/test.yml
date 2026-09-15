@@ -73,23 +73,33 @@ jobs:
           # and it is invisible to the suite: a stub is read by a checker and by
           # nothing else.  See [tool.mypy] in pyproject.toml for what is in the
           # gate and why the package's own source is not.
-          - {python: '3.12', toxenv: typecheck}
+          #
+          # `gate: true` on a row means the environment is run exactly as
+          # `tox.ini` declares it, with no test paths appended: its command is
+          # a checker or a script of its own, and `{posargs}` there is a
+          # different argument list from pytest's.  `norender: true` means the
+          # environment installs no PyOpenGL and opens no context, so the
+          # renderer report below has nothing to ask.
+          - {python: '3.12', toxenv: typecheck, gate: true, norender: true}
           # The `requires-python` floor, read off the text rather than run.
           # A py39 row only reaches the files it imports -- a helper used on
           # one platform, a branch behind a flag -- and a standard-library
           # module that arrived later is a question about the source that can
           # be settled for every file at once.
-          - {python: '3.12', toxenv: floor}
+          - {python: '3.12', toxenv: floor, gate: true, norender: true}
           # A name that may be unbound where it is read, which is the shape of
           # a handler that raises NameError while reporting something else --
           # and an error path is exactly what no case enters, so nothing else
           # here can find one.
-          - {python: '3.12', toxenv: possiblyundefined}
+          - {python: '3.12', toxenv: possiblyundefined, gate: true, norender: true}
           # The error paths a run of the suite never enters, which is where
           # the handlers that raise instead of reporting have all been found.
           # It runs the suite under coverage, so it is a row of its own rather
           # than a measurement bolted onto one of the cells below.
-          - {python: '3.12', toxenv: errorpaths}
+          # It renders -- the suite is what it measures -- so it keeps the
+          # renderer report; it takes no paths, because its own command is the
+          # one `{posargs}` reaches.
+          - {python: '3.12', toxenv: errorpaths, gate: true}
           # The interpreter sweep, on the ordinary configuration: numpy present,
           # no compiled extension, ctypes entry points.
           #
@@ -206,7 +216,11 @@ jobs:
         # In the environment the tests will run in, so it is that PyOpenGL
         # being asked.  A suite that silently found no GL would skip its way to
         # green, so say what is about to render before anything runs.
-        if: matrix.windowing != 'osmesa'
+        #
+        # Not on a `norender` row: those environments install vermin or mypy
+        # and no PyOpenGL, so the report's own import is what would fail, and
+        # a gate that reads the source has nothing to render anyway.
+        if: matrix.windowing != 'osmesa' && !matrix.norender
         run: >
           python -m tox exec -e ${{ matrix.toxenv }} --
           python tests/report_egl_device_enumeration.py
@@ -250,11 +264,27 @@ jobs:
         # if a worker dies rather than replacing it: a replaced worker leaves
         # the run waiting on a queue nothing will drain, which is a job that
         # hangs to its timeout instead of reporting the crash.
+        if: '!matrix.gate'
         run: >
           xvfb-run -a
           python -m tox -e ${{ matrix.toxenv }} --
           ${{ inputs.tests || matrix.paths || 'tests/' }}
           -n 4 --dist loadfile --max-worker-restart=0
+
+      - name: Run the gate
+        # The environment as `tox.ini` declares it.  These rows' commands are
+        # vermin, mypy and two scripts of this tree's own, and each reads
+        # `{posargs}` as its own argument list -- so a row here that were
+        # handed pytest's paths and workers would hold vermin to the wrong
+        # tree, or end in `unrecognized arguments`.
+        #
+        # Under Xvfb like the suite, for the one row that renders:
+        # `errorpaths` runs the whole suite to measure which error paths it
+        # entered, and a run that found no windowing would report every path
+        # behind one as unentered.  The rows that only read the source neither
+        # need it nor notice it.
+        if: matrix.gate
+        run: xvfb-run -a python -m tox -e ${{ matrix.toxenv }}
 
   windows:
     name: Windows / WGL pbuffer / ${{ matrix.toxenv }}
