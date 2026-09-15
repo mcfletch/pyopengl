@@ -32,32 +32,41 @@ class FormatHandler(object):
 
     @classmethod
     def loadPlugin(cls, entrypoint):
-        """Load a single entry-point via plugins module"""
-        if not entrypoint.loaded:
-            from OpenGL.arrays.arraydatatype import ArrayDatatype
+        """Load a single entry-point via plugins module
 
-            try:
-                plugin_class = entrypoint.load()
-            except ImportError as err:
+        A handler that cannot be imported is an ordinary state of affairs --
+        numpy is an optional dependency, and the handler for it is registered
+        whether or not numpy is installed -- so this reports and carries on
+        rather than raising.  ``WARN_ON_FORMAT_UNAVAILABLE`` says at which
+        level, since for most callers an absent numpy is not news.
+        """
+        from OpenGL.arrays.arraydatatype import ArrayDatatype
+
+        if not entrypoint.loaded:
+            # `plugins.Plugin.load` reports the ImportError to the
+            # "OpenGL.plugins" logger and answers None; it does not raise.
+            plugin_class = entrypoint.load()
+            entrypoint.loaded = True
+            if plugin_class is None:
                 from OpenGL import logs
                 from OpenGL._configflags import WARN_ON_FORMAT_UNAVAILABLE
 
                 _log = logs.getLog('OpenGL.formathandler')
                 if WARN_ON_FORMAT_UNAVAILABLE:
-                    logFunc = _log.warn
+                    logFunc = _log.warning
                 else:
                     logFunc = _log.info
                 logFunc(
-                    'Unable to load registered array format handler %s:\n%s',
+                    'Unable to load registered array format handler %s from %s',
                     entrypoint.name,
-                    _log.getException(err),
+                    entrypoint.import_path,
                 )
-            else:
-                handler = plugin_class()
-                # handler.register( handler.HANDLED_TYPES )
-                ArrayDatatype.getRegistry()[entrypoint.name] = handler
-                return handler
-            entrypoint.loaded = True
+                return None
+            handler = plugin_class()
+            # handler.register( handler.HANDLED_TYPES )
+            ArrayDatatype.getRegistry()[entrypoint.name] = handler
+            return handler
+        return ArrayDatatype.getRegistry().get(entrypoint.name)
 
     @classmethod
     def typeLookup(cls, type):

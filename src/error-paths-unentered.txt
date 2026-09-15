@@ -123,7 +123,6 @@ arrays/arraydatatype.py::HandlerRegistry.handler_by_plugin_name::ImportError::0 
 arrays/arrayhelpers.py::<module>::ImportError::0  # not reached by any case
 arrays/buffers.py::<module>::ImportError::0  # not reached by any case
 arrays/ctypesparameters.py::<module>::NameError::0  # not reached by any case
-arrays/formathandler.py::FormatHandler.loadPlugin::ImportError::0  # not reached by any case
 arrays/lists.py::ListHandler.dimsOf::TypeError,AttributeError,ValueError::0  # not reached by any case
 arrays/lists.py::ListHandler.from_param::TypeError,AttributeError::0  # not reached by any case
 arrays/nones.py::<module>::ImportError::0  # not reached by any case
