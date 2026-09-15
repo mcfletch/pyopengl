@@ -106,7 +106,9 @@ tests/
 │                             library: the backends, the context requirements,
 │                             what collects where
 ├── checks/                 stand-alone check scripts and the runner that
-│                             discovers them
+│                             discovers them; `suitepath.py` there is what
+│                             lets one import the helpers below when it is
+│                             run as a file rather than by the runner
 ├── directdocs/             the documentation build tool
 ├── data/                   fixtures the suites read rather than build
 │
@@ -559,6 +561,20 @@ read out of the file rather than imported, since whether it imports at all is
 part of what running it answers. The vocabulary is `numpy`, `window-server`,
 `xlib`, `glx` and `glut`; a word outside it fails the run rather than quietly
 skipping, so a typo cannot become a check that never runs.
+
+A script that reaches for `checkutils`, `arraycompat`, `testdecorator` or any
+other of the suite's own modules imports `suitepath` first:
+
+```python
+import suitepath  # noqa: F401  -- the suite's modules, by bare name
+import checkutils
+```
+
+`test_checks.py` names `tests/` in each child's `PYTHONPATH`, so those bare
+names resolve under the runner either way. Run as a file — `python
+tests/checks/check_osmesa.py`, which is how a platform is driven by hand and
+how CI reports the renderer before the OSMesa row — `sys.path` starts at
+`tests/checks` instead, one directory below the modules those names refer to.
 
 A script that cannot run on *this particular* machine — a driver that refuses
 the context, an SDL that will not open a display — says so at run time by

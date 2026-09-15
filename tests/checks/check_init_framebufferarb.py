@@ -1,3 +1,4 @@
+import suitepath  # noqa: F401  -- the suite's modules, by bare name
 import checkutils
 
 checkutils.require('pygame')

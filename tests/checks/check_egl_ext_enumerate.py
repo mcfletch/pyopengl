@@ -1,3 +1,4 @@
+import suitepath  # noqa: F401  -- the suite's modules, by bare name
 from checkutils import skip
 
 try:

@@ -10,6 +10,7 @@ extension string, and the attributes of each framebuffer configuration.
 
 from __future__ import print_function
 
+import suitepath  # noqa: F401  -- the suite's modules, by bare name
 import checkutils
 
 import os

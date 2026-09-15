@@ -11,6 +11,7 @@ except ImportError as err:
         return findLib(string)[0]
 
 
+import suitepath  # noqa: F401  -- the suite's modules, by bare name
 import checkutils
 
 # The Unix library names: this check is that a plain ctypes load of them works,

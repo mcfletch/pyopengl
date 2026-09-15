@@ -2,6 +2,7 @@
 """Test GLUT forward-compatible mode..."""
 
 from __future__ import print_function
+import suitepath  # noqa: F401  -- the suite's modules, by bare name
 import OpenGL
 
 OpenGL.FORWARD_COMPATIBLE_ONLY = True

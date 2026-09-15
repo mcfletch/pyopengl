@@ -2,6 +2,7 @@
 """Test for github issue #47"""
 
 import sys
+import suitepath  # noqa: F401  -- the suite's modules, by bare name
 import checkutils
 
 # This check is a reference-count leak detector: it asserts that the refcount of

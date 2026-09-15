@@ -1,6 +1,7 @@
 """Transliteration of https://open.gl/feedback into Python"""
 
 from __future__ import print_function
+import suitepath  # noqa: F401  -- the suite's modules, by bare name
 import testdecorator
 from arraycompat import one
 from OpenGL.GL import *

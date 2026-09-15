@@ -15,6 +15,7 @@ import os
 
 os.environ.setdefault('PYOPENGL_PLATFORM', 'angle')
 
+import suitepath  # noqa: F401,E402  -- the suite's modules, by bare name
 import checkutils  # noqa: E402  -- after the platform is pinned
 
 from OpenGL import platform  # noqa: E402

@@ -7,6 +7,7 @@ import OpenGL
 OpenGL.FORWARD_COMPATIBLE_ONLY = True
 OpenGL.ERROR_CHECKING = True
 # OpenGL.USE_ACCELERATE = False
+import suitepath  # noqa: F401,E402  -- the suite's modules, by bare name
 from arraycompat import one
 from OpenGL.GL import *
 from OpenGL.GLU import *

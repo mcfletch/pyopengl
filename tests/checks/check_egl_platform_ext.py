@@ -1,6 +1,7 @@
 # requires: xlib
 """This checking script from https://github.com/mcfletch/pyopengl/issues/6"""
 
+import suitepath  # noqa: F401  -- the suite's modules, by bare name
 import checkutils
 
 # EGL ships with the graphics driver, and a platform with none -- macOS -- says
