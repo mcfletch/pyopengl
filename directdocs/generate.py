@@ -143,7 +143,7 @@ class RefSect( model.RefSect ):
             elif id:
                 self.discussions.append(section)
             elif not id:
-                log.warn( 'Found reference section without id: %s', list(section.items()) )
+                log.warning( 'Found reference section without id: %s', list(section.items()) )
                 self.discussions.append( section )
                 continue
             processed_sections[ id ] = True
@@ -194,7 +194,7 @@ class RefSect( model.RefSect ):
             function = Function(funcname,self)
             self.functions[ funcname ] = function
 #           err.args += (self.functions.keys(),)
-#           log.warn( """Unable to process function prototype for %r (current keys: %s)""", funcname, self.functions.keys() )
+#           log.warning( """Unable to process function prototype for %r (current keys: %s)""", funcname, self.functions.keys() )
         function.return_value = return_value
         function.parameters = paramresults
         for param in paramresults:
@@ -283,7 +283,7 @@ def main():
         import pickle
         samples = pickle.loads( open(references.CACHE_FILE,'rb').read())
     else:
-        log.warn( """Loading references directly, run ./references.py to pre-generate""" )
+        log.warning( """Loading references directly, run ./references.py to pre-generate""" )
         samples = references.loadData()
     base_names = set()
     files = []
@@ -340,7 +340,7 @@ def main():
 
     for name,section in sorted(ref.sections.items()):
         output_file = os.path.join( OUTPUT_DIRECTORY,ref.url(section))
-        log.warn( 'Generating: %s -> %s',name, output_file )
+        log.warning( 'Generating: %s -> %s',name, output_file )
         # log.info( 'Input xml: %s', ET.tostring(section.reference))
         stream = loader.load(
             'section.kid',
@@ -365,7 +365,7 @@ def main():
             mapping[function] = ref.url( section )
         for pyname in section.py_functions.keys():
             if pyname in mapping:
-                log.warn( 'Duplicate python function name: %s', pyname )
+                log.warning( 'Duplicate python function name: %s', pyname )
             mapping[pyname] = ref.url( section )
     data = pickle.dumps( mapping )
     open( '.pyfunc-urls.pkl','wb').write( data )

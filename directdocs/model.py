@@ -35,7 +35,7 @@ class Reference(object):
         """Add the given section to our tables"""
         if section.id != section.title:
             if not section.id:
-                log.warn('Null section id in %s', section.title)
+                log.warning('Null section id in %s', section.title)
             elif (
                 '.' in section.id
                 and section.id.split('.')[0] == section.title
@@ -43,13 +43,13 @@ class Reference(object):
             ):
                 pass
             else:
-                log.warn(
+                log.warning(
                     "Unmatched id/title: %s (title) %s (id)", section.title, section.id
                 )
         if section.id in self.sections:
-            log.warn("Duplicate section id: %s", section.id)
+            log.warning("Duplicate section id: %s", section.id)
         if section.title in self.sections:
-            log.warn("Duplicate section title: %s", section.title)
+            log.warning("Duplicate section title: %s", section.title)
         self.sections[section.id] = section
         self.section_titles[section.title] = section
         for function in section.functions.values():
@@ -339,7 +339,7 @@ class PyFunction(Function):
         else:
             if hasattr(target, 'argtypes') and target.argtypes is None:
                 return []
-            log.warn("""No parameters for type: %r""", target.__class__)
+            log.warning("""No parameters for type: %r""", target.__class__)
             names = []
         return [Parameter(name, data_type=None, function=self) for name in names]
 

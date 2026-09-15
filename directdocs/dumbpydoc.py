@@ -180,7 +180,7 @@ class PyModule( object ):
         try:
             mod.inspect()
         except Exception as err:
-            log.warn( 'Unable to import %s: %s'%( mod.name, err ))
+            log.warning( 'Unable to import %s: %s'%( mod.name, err ))
             return None
         else:
             return mod
@@ -205,7 +205,7 @@ class PyModule( object ):
                     ) and self.name == 'OpenGL.GL'
                 ):
                     # only document where defined for functions...
-                    log.warn( 'Filtering %s by module exclusion: %s for %s', obj, module, self.name )
+                    log.warning( 'Filtering %s by module exclusion: %s for %s', obj, module, self.name )
                     return False
                     # Need to figure out how to restrict...
             return True
