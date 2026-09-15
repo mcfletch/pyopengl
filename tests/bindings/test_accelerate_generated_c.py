@@ -252,11 +252,21 @@ class TestTheGeneratedCSatisfiesClangToo:
             pytest.skip('no clang here; gcc is exercised by every build')
         return found
 
+    #: The generated module written against numpy's own declarations.  Where
+    #: numpy is absent, ``accelerate/setup.py`` builds every module but this
+    #: one and says so, and its headers are not there to read it with either
+    #: -- so a checkout carrying the C from an earlier build has one file here
+    #: that no compiler on this machine can be asked about.
+    NEEDS_NUMPY_HEADERS = ('numpy_formathandler.c',)
+
     def generated(self):
         root = os.path.join(paths.ROOT, 'accelerate', 'src')
         if not os.path.isdir(root):
             pytest.skip('the accelerate source tree is not in this checkout')
         found = sorted(name for name in os.listdir(root) if name.endswith('.c'))
+        if importlib.util.find_spec('numpy') is None:
+            found = [name for name in found
+                     if name not in self.NEEDS_NUMPY_HEADERS]
         if not found:
             pytest.skip(
                 'no generated C to read -- this is an environment with the '
