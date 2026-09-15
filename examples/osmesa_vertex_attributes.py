@@ -135,7 +135,7 @@ def render(names, fraction=.5):
             glDisableVertexAttribArray( names['color_location'] )
 
 def main():
-    with osmesa_context(400,400) as context:
+    with osmesa_context(400,400):
         print('Queried extensions:', sorted(extensions.GLQuerier.pullExtensions()))
         print('Queried version:', extensions.GLQuerier.pullVersion())
         names = setup()

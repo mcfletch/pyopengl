@@ -33,13 +33,13 @@ def torus(innerRadius, outerRadius, sides, rings):
     theta = 0.0
     cosTheta = 1.0
     sinTheta = 0.0
-    for i in range(rings - 1, -1, -1):
+    for _ring in range(rings - 1, -1, -1):
         theta1 = theta + ringDelta
         cosTheta1 = cos(theta1)
         sinTheta1 = sin(theta1)
         glBegin(GL_QUAD_STRIP)
         phi = 0.0
-        for j in range(sides, -1, -1):
+        for _side in range(sides, -1, -1):
             phi += sideDelta
             cosPhi = cos(phi)
             sinPhi = sin(phi)
