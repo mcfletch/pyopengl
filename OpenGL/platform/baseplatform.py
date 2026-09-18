@@ -376,12 +376,14 @@ class BasePlatform(object):
     def wrapContextCheck(self, func, dll):
         """Wrap function with context-checking if appropriate
 
-        ``CONTEXT_CHECKING`` is a question about *GL*, and two display APIs
+        ``CONTEXT_CHECKING`` is a question about *GL*, and three display APIs
         ship in the GL library rather than in one of their own: ``libGL``
-        exports ``glX*`` and ``opengl32`` exports ``wgl*``.  Their calls are
-        what a program makes to *get* a context, so a guard on one asks for a
-        context before there can be one and leaves no way to make the first.
-        EGL and CGL need no exemption, being libraries of their own.
+        exports ``glX*``, ``opengl32`` exports ``wgl*``, and the OSMesa
+        platform's GL library is ``libOSMesa``, which is where ``OSMesa*``
+        lives.  Their calls are what a program makes to *get* a context, so a
+        guard on one asks for a context before there can be one and leaves no
+        way to make the first.  EGL and CGL need no exemption, being libraries
+        of their own.
         """
         if (
             _configflags.CONTEXT_CHECKING
@@ -392,7 +394,7 @@ class BasePlatform(object):
                 'glGetStringi',
                 'glGetIntegerv',
             )
-            and not func.__name__.startswith(('glX', 'wgl'))
+            and not func.__name__.startswith(('glX', 'wgl', 'OSMesa'))
         ):
             return _CheckContext(func, self.CurrentContextIsValid)
         return func
@@ -427,12 +429,12 @@ class BasePlatform(object):
     ):
         """Core operation to create a new base ctypes function
 
-        A name is normally looked for where its declaration says it lives: a
-        core entry point in the library, an extension one through the
-        platform's ``getExtensionProcedure``.  ``force_extension`` and
-        ``force_base`` override that either way, for a platform whose loader
-        does not divide them where the declarations do -- see
-        :class:`OpenGL.platform.win32.Win32Platform`, which tries both.
+        A name is looked for where its declaration says it lives: a core entry
+        point in the library, an extension one through the platform's
+        ``getExtensionProcedure``.  ``force_extension`` and ``force_base``
+        override that either way, for a platform whose libraries do not divide
+        them where the declarations do -- see
+        :class:`SplitEntryPointPlatform`, which asks each route in turn.
         ``force_base`` also stands the extension gate aside, since a name the
         library exports is present whether or not the extension that
         re-specified it is advertised.
@@ -752,6 +754,57 @@ class BasePlatform(object):
     @lazy_property
     def OpenGL(self):
         return self.GL
+
+
+class SplitEntryPointPlatform(BasePlatform):
+    """A platform holding its entry points in more than one place
+
+    Windows' ``opengl32`` exports the GL 1.1 set and nothing above it, and
+    ``wglGetProcAddress`` answers for everything above GL 1.1 and returns NULL
+    for the 1.1 set; Mesa's Windows ``osmesa`` library is built to the same
+    export list, with ``OSMesaGetProcAddress`` beside it.  Neither split
+    follows the declarations -- ``glVertexAttribPointer`` is declared by a core
+    version, and it is an ordinary export of the same Mesa built for Linux --
+    so a name is looked for by each route in turn.
+
+    Only a platform whose procedure lookup is a *query* belongs here: it has to
+    be able to say no.  ``glXGetProcAddressARB`` under libglvnd answers with a
+    dispatch stub for any name at all, one no API has included, so a Linux
+    platform taking this route would report every undefined entry point as
+    present and hand the caller a stub to call.
+    """
+
+    def entryPointRoutes(self, dll):
+        """Where a name may be found, in the order to try
+
+        Each is the keyword arguments for one attempt at
+        :meth:`BasePlatform.constructFunction`: the library its declaration
+        names, then the platform's procedure lookup.
+        """
+        return (
+            dict(dll=dll),
+            dict(dll=dll, force_extension=True),
+        )
+
+    def constructFunction(self, functionName, dll, force_extension=False, **named):
+        """The first of :meth:`entryPointRoutes` that answers with the name
+
+        ``AttributeError`` from the last route is the answer that there is
+        nowhere left to look, which is what
+        :meth:`BasePlatform.createBaseFunction` turns into a null function.
+
+        Every route is tried here, so a caller's ``force_extension`` cannot
+        change what is found and is not passed on.
+        """
+        routes = self.entryPointRoutes(dll)
+        for index, route in enumerate(routes):
+            try:
+                return super().constructFunction(
+                    functionName, **dict(named, **route)
+                )
+            except AttributeError:
+                if index == len(routes) - 1:
+                    raise
 
 
 class _NullFunctionPointer(object):

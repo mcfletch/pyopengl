@@ -113,12 +113,13 @@ class TestTheGuardIsNotPutOnTheCallsThatMakeAContext:
     """The same rule, applied where the wrapper is put on rather than where the
     checker is built.
 
-    GLX and WGL are the two display APIs that live in the *GL* library --
-    ``libGL`` exports ``glX*`` and ``opengl32`` exports ``wgl*`` -- so they are
-    the two that reach this wrapper at all, EGL and CGL being libraries of
-    their own.  A guard on either is a guard on the calls a program makes to
-    get a context in the first place, so with ``CONTEXT_CHECKING`` on there is
-    no way to make one.
+    GLX, WGL and OSMesa are the three display APIs that live in the *GL*
+    library -- ``libGL`` exports ``glX*``, ``opengl32`` exports ``wgl*``, and
+    the OSMesa platform's GL library is ``libOSMesa`` itself -- so they are the
+    three that reach this wrapper at all, EGL and CGL being libraries of their
+    own.  A guard on any of them is a guard on the calls a program makes to get
+    a context in the first place, so with ``CONTEXT_CHECKING`` on there is no
+    way to make one.
     """
 
     def _entry(self, name):
@@ -142,7 +143,15 @@ class TestTheGuardIsNotPutOnTheCallsThatMakeAContext:
         entry = self._entry('glBindTexture')
         assert checking.wrapContextCheck(entry, checking.GL) is not entry
 
-    @pytest.mark.parametrize('name', ['glXCreateContext', 'wglCreateContext'])
+    @pytest.mark.parametrize(
+        'name',
+        [
+            'glXCreateContext',
+            'wglCreateContext',
+            'OSMesaCreateContext',
+            'OSMesaMakeCurrent',
+        ],
+    )
     def test_a_display_api_call_is_not(self, name, checking):
         entry = self._entry(name)
         assert checking.wrapContextCheck(entry, checking.GL) is entry, (

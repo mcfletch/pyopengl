@@ -11,8 +11,17 @@ from OpenGL.platform import baseplatform, ctypesloader
 from OpenGL.constant import Constant
 from OpenGL.raw.osmesa import _types
 
-class OSMesaPlatform( baseplatform.BasePlatform ):
-    """OSMesa implementation for PyOpenGL"""
+class OSMesaPlatform( baseplatform.SplitEntryPointPlatform ):
+    """OSMesa implementation for PyOpenGL
+
+    Which entry points the library exports is the build's business rather than
+    the API's.  Built for Linux it is the whole of Mesa and exports every name
+    in it; built for Windows it carries the ``opengl32`` export list, the GL
+    1.1 set and nothing above it, and ``OSMesaGetProcAddress`` answers for the
+    rest -- so this is a
+    :class:`~OpenGL.platform.baseplatform.SplitEntryPointPlatform`, and its
+    lookup is a query that says no for a name Mesa does not have.
+    """
     EXPORTED_NAMES = baseplatform.BasePlatform.EXPORTED_NAMES[:] + [
         'OSMesa',
     ]

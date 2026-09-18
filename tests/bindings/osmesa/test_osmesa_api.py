@@ -486,6 +486,51 @@ class TestPostprocess:
         assert report['pixel'] == [0, 255, 0, 255], report
 
 
+class TestTheQueriesReadTheAnswerTheyWereGiven:
+    """``OSMesaGetColorBuffer`` and ``OSMesaGetDepthBuffer`` answer a GLboolean.
+
+    One byte.  Read as a C ``int`` -- which is what an undeclared ctypes call
+    does -- the three bytes above it are whatever the call left in the
+    register, so whether a "no" reads as a no becomes the ABI's business rather
+    than the answer's.  Read as a yes it hands the caller the width, the height
+    and the buffer pointer that the call never wrote.
+
+    The declaration is what holds it, so these cases ask the declaration.
+    ``TestWhenTheQueryHasNothingToAnswerWith`` below drives the branch itself,
+    on whatever this machine's ABI leaves in the register -- which is the half
+    that can pass for the wrong reason.
+    """
+
+    #: The declarations, with the number of arguments each C signature names.
+    #: Private because the caller-facing function of the same name is Python --
+    #: these answer through pointer arguments -- so the declaration cannot
+    #: carry the public name.
+    DECLARED = {
+        '_OSMesaGetDepthBuffer': 5,
+        '_OSMesaGetColorBuffer': 5,
+        '_OSMesaGetIntegerv': 2,
+    }
+
+    def declaration(self, name):
+        return osmesa('''
+            entry = mesa.%s
+            report['restype'] = getattr(entry.restype, '__name__', None)
+            report['argtypes'] = len(entry.argtypes)
+        ''' % (name,))
+
+    @pytest.mark.parametrize(
+        'name', ['_OSMesaGetDepthBuffer', '_OSMesaGetColorBuffer']
+    )
+    def test_the_answer_is_declared_one_byte_wide(self, name):
+        assert self.declaration(name)['restype'] == 'c_ubyte'
+
+    @pytest.mark.parametrize('name,count', sorted(DECLARED.items()))
+    def test_every_argument_is_declared(self, name, count):
+        """Without argtypes ctypes accepts any arguments at all, so the
+        pointers these write their answers into are checked by nothing."""
+        assert self.declaration(name)['argtypes'] == count
+
+
 class TestWhenTheQueryHasNothingToAnswerWith:
     """``OSMesaGetColorBuffer`` and ``OSMesaGetDepthBuffer`` can say no.
 

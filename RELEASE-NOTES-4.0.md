@@ -100,6 +100,13 @@ What changed since the 3.x series. The current development version is
   PyOpenGL_accelerate was installed. The pure-Python registry is a dict
   subclass; the compiled one offered only `__setitem__`. It answers a lookup by
   type now, and a type nothing handles raises the documented `KeyError`.
+- `OSMesaGetColorBuffer` and `OSMesaGetDepthBuffer` answer with a `GLboolean`,
+  which is one byte, and were called with no declared result type — so a C
+  `int` was read and the three bytes above the answer, which the call never
+  wrote, decided whether "there is no buffer" arrived as "here is one", along
+  with a width, a height and a pointer that were never written either. Both
+  are declared now, with their argument types, and a query with nothing to
+  answer with gives `(0, 0, 0, None)` on every ABI.
 - `FormatHandler.dimensions` declared a `typeCode` parameter no handler accepts
   and no caller passes, so the interface a third party writing a handler reads
   described an argument every implementation would have refused.
@@ -174,6 +181,12 @@ well as with the defaults.
   registry generates arrives from the declaration tables and never passes
   through `OpenGL.platform.types`, which is the decorator the flag gates. What a
   type checker reads is the `.pyi` stub beside each package.
+- With `PYOPENGL_CONTEXT_CHECKING=1`, an OSMesa program could not make its
+  first context. The guard is a question about GL and stands aside for the
+  display APIs that live in the GL library — `libGL` exports `glX*` and
+  `opengl32` exports `wgl*` — and OSMesa is a third, its GL library being
+  `libOSMesa` itself, so `OSMesaCreateContext` was being asked for a current
+  context before there could be one. `OSMesa*` stands aside with them.
 - `ALLOW_NUMPY_SCALARS` has no effect from 4.0, and reading or setting it is
   still allowed. A numpy integer scalar is accepted wherever an integer is
   wanted with the flag or without it, because ctypes converts through
@@ -226,6 +239,13 @@ well as with the defaults.
   above GL 1.1 an address comes from the context, so on Windows, where
   `wglGetProcAddress` needs a current one, that is the usual reason a call
   like `glGenVertexArrays` is undefined on a machine whose driver has it.
+- **OSMesa on Windows reaches OpenGL 2.0 and above.** Mesa's Windows `osmesa`
+  library is built to the `opengl32` export list — the GL 1.1 set and nothing
+  above it — and answers for the rest through `OSMesaGetProcAddress`. The
+  ctypes binding path asked the library alone, so `glVertexAttribPointer` and
+  every other entry point above GL 1.1 was undefined against a context that
+  had just cleared and read back a frame. Both are asked now, the way the
+  Windows platform has always asked `opengl32` and then `wglGetProcAddress`.
 - **A GLUT you installed is found by its own name.** The Windows platform asks
   for `freeglut` and `glut32` — what the official freeglut binaries, MSYS2,
   vcpkg and the original GLUT install — before the builds we ship, and a

@@ -460,6 +460,16 @@ is real: <code>opengl32</code> exports GL 1.1 and nothing above it, while
 <code>wglGetProcAddress</code> answers for everything above GL 1.1 and returns
 NULL for the 1.1 set.  A name is looked for in both.</p>
 
+<p>Windows is not the only platform built that way.  Mesa's Windows
+<code>osmesa</code> library carries the same export list, with
+<code>OSMesaGetProcAddress</code> for the rest, so
+<code>PYOPENGL_PLATFORM=osmesa</code> there asks the library and then the
+lookup as well.  A platform says which routes it has, and only one whose
+lookup is a <em>query</em> &#8212; one that answers NULL for a name it does not
+have &#8212; takes this one: <code>glXGetProcAddressARB</code> under libglvnd
+answers with a dispatch stub for any name at all, so a Linux fallback would
+report an entry point the driver lacks as present.</p>
+
 <p>Nor does the driver's extension string decide it.  What an extension
 re-specifies about a core entry point is which arguments it takes, not whether
 the entry point is there, so importing <code>glGetPointerv</code> from

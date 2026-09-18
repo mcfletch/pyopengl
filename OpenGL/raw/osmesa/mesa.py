@@ -73,34 +73,88 @@ def OSMesaMakeCurrent( ctx, buffer, type,width,height ): pass
 @_p.types(None, GLint, GLint)
 def OSMesaPixelStore( pname, value ): pass
 
+# The three entry points that answer through pointer arguments.  The name each
+# one has is the Python function below it, which allocates those arguments and
+# reads them back, so the declaration is held privately here.
+#
+# Declared, rather than reached for as `_p.PLATFORM.GL.<name>`: an undeclared
+# ctypes call reads a result as a C `int`, and the two queries answer with a
+# GLboolean, which is one byte.  The three bytes above it are whatever the call
+# left in the register, so an undeclared "no" reads as a no or as a yes
+# according to the ABI -- and read as a yes it hands the caller the width, the
+# height and the buffer pointer that the call never wrote.
+def _query( name, resultType, argTypes, argNames, doc ):
+    """An OSMesa entry point with the types its C declaration gives it"""
+    return _p.createBaseFunction(
+        name, dll=_p.PLATFORM.OSMesa, resultType=resultType,
+        argTypes=argTypes, argNames=argNames, doc=doc,
+    )
+
+_OSMesaGetIntegerv = _query(
+    'OSMesaGetIntegerv', None,
+    [GLint, ctypes.POINTER(GLint)],
+    ('pname', 'value'),
+    'OSMesaGetIntegerv( GLint(pname), POINTER(GLint)(value) ) -> None',
+)
+_OSMesaGetDepthBuffer = _query(
+    'OSMesaGetDepthBuffer', GLboolean,
+    [OSMesaContext, ctypes.POINTER(GLint), ctypes.POINTER(GLint),
+     ctypes.POINTER(GLint), ctypes.POINTER(ctypes.POINTER(GLint))],
+    ('c', 'width', 'height', 'bytesPerValue', 'buffer'),
+    'OSMesaGetDepthBuffer( OSMesaContext(c), POINTER(GLint)(width), '
+    'POINTER(GLint)(height), POINTER(GLint)(bytesPerValue), '
+    'POINTER(POINTER(GLint))(buffer) ) -> GLboolean',
+)
+_OSMesaGetColorBuffer = _query(
+    'OSMesaGetColorBuffer', GLboolean,
+    [OSMesaContext, ctypes.POINTER(GLint), ctypes.POINTER(GLint),
+     ctypes.POINTER(GLint), ctypes.POINTER(ctypes.c_void_p)],
+    ('c', 'width', 'height', 'format', 'buffer'),
+    'OSMesaGetColorBuffer( OSMesaContext(c), POINTER(GLint)(width), '
+    'POINTER(GLint)(height), POINTER(GLint)(format), '
+    'POINTER(c_void_p)(buffer) ) -> GLboolean',
+)
+
 def OSMesaGetIntegerv(pname):
+    """The value OSMesa holds for `pname`, such as OSMESA_WIDTH"""
     value = GLint()
-    _p.PLATFORM.GL.OSMesaGetIntegerv(pname, ctypes.byref(value))
+    _OSMesaGetIntegerv(pname, ctypes.byref(value))
     return value.value
 
 def OSMesaGetDepthBuffer(c):
+    """The depth buffer of context `c` as (width, height, bytesPerValue, pointer)
+
+    ``(0, 0, 0, None)`` where there is none -- a context made with no depth
+    bits, or one that has not been made current -- so the absence is read from
+    the pointer rather than from an exception.
+    """
     width, height, bytesPerValue = GLint(), GLint(), GLint()
     buffer = ctypes.POINTER(GLint)()
 
-    if _p.PLATFORM.GL.OSMesaGetDepthBuffer(c, ctypes.byref(width),
-                                    ctypes.byref(height),
-                                    ctypes.byref(bytesPerValue),
-                                    ctypes.byref(buffer)):
+    if _OSMesaGetDepthBuffer(c, ctypes.byref(width),
+                             ctypes.byref(height),
+                             ctypes.byref(bytesPerValue),
+                             ctypes.byref(buffer)) and buffer:
         return width.value, height.value, bytesPerValue.value, buffer
     else:
         return 0, 0, 0, None
 
 def OSMesaGetColorBuffer(c):
-    # TODO: make output array types which can handle the operation 
+    """The colour buffer of context `c` as (width, height, format, pointer)
+
+    ``(0, 0, 0, None)`` where there is none: the buffer belongs to the
+    make-current, so a context that has not had one is such a case.
+    """
+    # TODO: make output array types which can handle the operation
     # provide an API to convert pointers + sizes to array instances,
     # e.g. numpy.ctypeslib.as_array( ptr, bytesize ).astype( 'B' ).reshape( height,width )
     width, height, format = GLint(), GLint(), GLint()
     buffer = ctypes.c_void_p()
 
-    if _p.PLATFORM.GL.OSMesaGetColorBuffer(c, ctypes.byref(width),
-                                    ctypes.byref(height),
-                                    ctypes.byref(format),
-                                    ctypes.byref(buffer)):
+    if _OSMesaGetColorBuffer(c, ctypes.byref(width),
+                             ctypes.byref(height),
+                             ctypes.byref(format),
+                             ctypes.byref(buffer)) and buffer:
         return width.value, height.value, format.value, buffer
     else:
         return 0, 0, 0, None

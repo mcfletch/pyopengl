@@ -706,10 +706,10 @@ rather than anyone's recollection. Current behaviour, measured:
   returns NULL for the 1.1 set, and an extension-declared name was looked for
   in the second place only. `OpenGL.GL.glGetPointerv` was an undefined function
   under the ctypes layer while `OpenGL.GL.VERSION.GL_1_1.glGetPointerv` beside
-  it worked. `Win32Platform.constructFunction` tries it each way round now --
-  `force_base` is the mirror of `force_extension` -- and
-  `tests/gl/test_core_entry_point_resolution.py` holds the two implementations
-  to the same answer.
+  it worked. The Windows platform tries it each way round now -- `force_base`
+  is the mirror of `force_extension`, and `Win32Platform.entryPointRoutes`
+  names the routes -- and `tests/gl/test_core_entry_point_resolution.py` holds
+  the two implementations to the same answer.
 
   *Found 2026-09-06, by `test_debug_output_default.py` on Windows.* The visible
   symptom was PyOpenGL installing its error-checking callback over an
@@ -717,6 +717,26 @@ rather than anyone's recollection. Current behaviour, measured:
   already has, and an undefined function cannot answer. A context that will not
   answer is offered the cheaper check rather than refused it forever, so the
   silence read as "nothing installed there".
+- **Windows is not the only platform that splits its entry points.** Mesa's
+  Windows `osmesa` library is built to the `opengl32` export list -- the GL 1.1
+  set and nothing above it -- and `OSMesaGetProcAddress` answers for the rest.
+  The ctypes path asked the library alone, so a `dispctypes` run on Windows
+  reported `glVertexAttribPointer` undefined against an OSMesa context the same
+  run had just cleared and read a frame back from. The compiled layer did not:
+  `support.resolve` ends at `getExtensionProcedure` whatever the declaration
+  said. `baseplatform.SplitEntryPointPlatform` is the route list both platforms
+  declare now, Windows adding gdi32 and the `force_base` mirror to it, and
+  `tests/bindings/platform/test_entry_point_lookup.py` holds it.
+
+  **It is a route a platform opts into, not the base's rule.** Falling back
+  everywhere makes Linux report every undefined entry point as present: under
+  libglvnd `glXGetProcAddressARB` answers with a dispatch stub for any name at
+  all, `somebodyElsesEntryPoint` included. The GLU, GLUT and GLE errors that
+  name the library that was not found would resolve to a stub and be called.
+  So the route belongs to a platform whose lookup is a query -- one that can
+  say no.
+
+  *Found 2026-09-18, by `tests/checks/check_osmesa.py` on Windows CI.*
 - **Which context is current is the driver's to say, not the record's.** Both
   ends of the debug-output mechanism make GL calls and so need a context
   current, and both decided they had one by reading a handle the layer was
