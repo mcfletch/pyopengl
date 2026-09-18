@@ -232,33 +232,40 @@ class TestACallWithSeveralPossibleNames:
     """``alternate()`` reports the same three situations.
 
     Thirty entry points are declared this way -- the framebuffer-object calls
-    among them, where the core name and the ``EXT`` name are the same call --
-    and none of them resolving says the same thing as one of them not
-    resolving. It said something else.
+    among them, where ``glBindFramebuffer`` and ``glBindFramebufferEXT`` are
+    the same call under a core name and an extension name -- and none of them
+    resolving says the same thing as one of them not resolving. It said
+    something else.
+
+    The pair below is spelled so that no implementation has either name.  A
+    real one resolves on the machine whose driver offers it, wherever the
+    address comes from: a null function tries again on every call, and
+    ``wglGetProcAddress`` answers for a name Windows' ``opengl32`` does not
+    export.  Then there is no report left to read.
     """
+
+    #: The name the caller's program wrote.
+    CALL = 'glNoSuchEntryPointExists'
+    #: The other spelling of the same call, which it falls back to.
+    OTHER = 'glNoSuchEntryPointExistsEXT'
 
     def alternates(self):
         from OpenGL import extensions
-        from OpenGL.platform import PLATFORM
 
         return extensions.alternate(
-            'glBindFramebuffer',
-            PLATFORM.nullFunction('glBindFramebuffer', dll=None, resultType=None,
-                                  argTypes=(), argNames=()),
-            PLATFORM.nullFunction('glBindFramebufferEXT', dll=None,
-                                  resultType=None, argTypes=(), argNames=()),
+            self.CALL, absent(self.CALL), absent(self.OTHER)
         )
 
     def test_it_names_the_call_the_program_wrote(self):
         """Not only the alternatives, which are names the caller never used."""
         said = message(self.alternates())
-        assert 'glBindFramebuffer' in said
+        assert self.CALL in said
 
     def test_it_still_lists_what_was_tried(self):
-        assert 'glBindFramebufferEXT' in message(self.alternates())
+        assert self.OTHER in message(self.alternates())
 
     def test_it_still_names_the_check(self):
-        assert 'bool(glBindFramebuffer)' in message(self.alternates())
+        assert 'bool(%s)' % (self.CALL,) in message(self.alternates())
 
     def test_it_says_why_rather_than_only_that(self):
         """Either a driver that has none of them or a call made too early --

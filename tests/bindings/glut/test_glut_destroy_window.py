@@ -7,6 +7,7 @@ first.  Whether that succeeds or not the window still has to be destroyed, so
 nothing.
 """
 import logging
+import types
 
 import pytest
 
@@ -16,11 +17,22 @@ from OpenGL.GLUT import special
 
 @pytest.fixture
 def store(monkeypatch):
-    """The context store and GLUT standing in, so no window is needed"""
+    """The context store and GLUT standing in, so no window is needed
+
+    ``special.GLUT`` is the library the platform loaded, and it is ``None``
+    where there was none to load -- which is any machine without freeglut,
+    a Windows one that did not ask for ``PyOpenGL[glut]`` among them.  So the
+    stand-in replaces the name rather than putting an attribute on whatever
+    happens to be there.
+    """
     seen = {}
-    monkeypatch.setattr(special.GLUT, 'glutSetWindow',
-                        lambda window: seen.__setitem__('current', window),
-                        raising=False)
+    monkeypatch.setattr(
+        special,
+        'GLUT',
+        types.SimpleNamespace(
+            glutSetWindow=lambda window: seen.__setitem__('current', window)
+        ),
+    )
     monkeypatch.setattr(contextdata, 'getContext', lambda: 'ctx')
     monkeypatch.setattr(contextdata, 'cleanupContext',
                         lambda context: seen.__setitem__('cleaned', context))
@@ -50,3 +62,12 @@ def test_the_report_says_what_went_wrong(store, monkeypatch, caplog):
     with caplog.at_level(logging.ERROR, logger=special._log.name):
         special.cleanupWindowContext(7)
     assert 'no valid context' in caplog.text
+
+
+def test_a_machine_with_no_glut_is_reported_too(monkeypatch, caplog):
+    """``PLATFORM.GLUT`` is None where the library was not found, and the
+    caller is still about to destroy a window."""
+    monkeypatch.setattr(special, 'GLUT', None)
+    with caplog.at_level(logging.ERROR, logger=special._log.name):
+        assert special.cleanupWindowContext(7) is False
+    assert 'window 7' in caplog.text

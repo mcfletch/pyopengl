@@ -50,6 +50,21 @@ class RecordingLoader:
         return 'the library at %s' % (name,)
 
 
+@pytest.fixture(autouse=True)
+def nothing_beside_the_interpreter(monkeypatch, tmp_path):
+    """No GL library in the directory the running interpreter is in.
+
+    Otherwise every case here answers partly from the machine it runs on:
+    dropping Mesa's ``opengl32.dll`` beside ``python.exe`` is how a Windows CI
+    runner is given a GL, and a tox environment's ``Scripts`` directory is
+    where that lands.  The cases that *are* about a dropped library put one in
+    this directory themselves.
+    """
+    monkeypatch.setattr(
+        ctypesloader.sys, 'executable', str(tmp_path / 'python.exe')
+    )
+
+
 @pytest.fixture
 def on_path(monkeypatch):
     """``find_library`` answers with a copy on ``PATH``, as conda's does.
@@ -131,20 +146,14 @@ class TestARendererDroppedBesideTheInterpreter:
     """
 
     @pytest.fixture
-    def dropped(self, monkeypatch, tmp_path):
-        """A Mesa ``opengl32.dll`` beside the running interpreter."""
-        monkeypatch.setattr(
-            ctypesloader.sys, 'executable', str(tmp_path / 'python.exe')
-        )
+    def dropped(self, tmp_path):
+        """A Mesa ``opengl32.dll`` beside the running interpreter.
+
+        Which is the directory ``nothing_beside_the_interpreter`` above points
+        the loader at, so this only has to put the file in it.
+        """
         (tmp_path / 'opengl32.dll').write_bytes(b'')
         return str(tmp_path / 'opengl32.dll')
-
-    @pytest.fixture
-    def nothing_dropped(self, monkeypatch, tmp_path):
-        """An interpreter directory with no GL library in it."""
-        monkeypatch.setattr(
-            ctypesloader.sys, 'executable', str(tmp_path / 'python.exe')
-        )
 
     def test_it_is_preferred_to_the_system_one(self, dropped, on_path):
         loader = RecordingLoader()
@@ -160,9 +169,7 @@ class TestARendererDroppedBesideTheInterpreter:
         assert ctypesloader._loadLibraryWindows(loader, 'opengl32', 0)
         assert loader.tried == [dropped, 'opengl32']
 
-    def test_nothing_beside_it_leaves_the_bare_name(
-        self, nothing_dropped, on_path
-    ):
+    def test_nothing_beside_it_leaves_the_bare_name(self, on_path):
         loader = RecordingLoader()
         ctypesloader._loadLibraryWindows(loader, 'opengl32', 0)
         assert loader.tried == ['opengl32']
