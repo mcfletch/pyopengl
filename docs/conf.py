@@ -54,6 +54,14 @@ primary_domain = 'py'
 add_module_names = False
 python_use_unqualified_type_names = True
 
+#: The equations in the reference pages are MathML, which is what the Khronos
+#: sources carry and what every current browser renders without help, so they
+#: are written through as raw HTML rather than translated to LaTeX.
+rst_prolog = """
+.. role:: raw-html(raw)
+   :format: html
+"""
+
 nitpicky = False
 suppress_warnings = [
     # The reference pages and the module pages both mention an entry point;

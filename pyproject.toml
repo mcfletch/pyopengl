@@ -79,9 +79,17 @@ test = [
     # check what it declares as a build requirement.
     "tomli ; python_version < '3.11'",
 ]
+# What `build-docs.py` needs.  The reference pages are generated from the
+# Khronos DocBook sources, which is what lxml is for; furo is the theme.
+docs = [
+    "sphinx >= 7",
+    "furo",
+    "lxml",
+]
 dev = [
     "cython >= 0.28",
     "PyOpenGL[test]",
+    "PyOpenGL[docs]",
 ]
 
 # PyInstaller reads this to find the hooks in OpenGL/__pyinstaller, which tell it
