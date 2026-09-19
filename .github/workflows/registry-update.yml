@@ -31,7 +31,14 @@ jobs:
           python-version: "3.12"
 
       - name: Install the generator's dependencies
-        run: python -m pip install lxml
+        # lxml parses the registry XML; the checkout is installed because the
+        # generator imports the package it generates for -- the registry
+        # parser reads its strings through `OpenGL._bytes`, and the GLU, GLUT
+        # and GLE stubs carry the argument names read off their wrappers.
+        # Editable, so what is imported is the tree being written.
+        run: |
+          python -m pip install lxml
+          python -m pip install -e .
 
       - name: Fetch the Khronos registries
         # Both of them, through the same script a developer runs, so that CI
