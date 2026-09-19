@@ -84,7 +84,7 @@ The `documentation pages`_ are useful for looking up the parameters and semantic
 PyOpenGL calls.
 
 .. _`tutorial page`: http://pyopengl.sourceforge.net/context/tutorials/index.html
-.. _`documentation pages`: https://mcfletch.github.io/pyopengl/documentation/index.html
+.. _`documentation pages`: https://mcfletch.github.io/pyopengl/index.html
 
 
 Choosing a dispatch implementation
@@ -121,7 +121,7 @@ been destroyed, which is what gives each context its own function pointer for
 every entry point.  See `the C dispatch layer`_ for what it covers, what
 differs, and how to tell it that the current context changed.
 
-.. _`the C dispatch layer`: https://mcfletch.github.io/pyopengl/documentation/c-dispatch.html
+.. _`the C dispatch layer`: https://mcfletch.github.io/pyopengl/c-dispatch.html
 
 
 Rendering without a display server
@@ -139,7 +139,7 @@ offscreen on a named device::
 See `EGL devices`_ for what each field means, how the software question is
 decided, and the ``eglGetPlatformDisplayEXT`` call a handle is for.
 
-.. _`EGL devices`: https://mcfletch.github.io/pyopengl/documentation/egl-devices.html
+.. _`EGL devices`: https://mcfletch.github.io/pyopengl/egl-devices.html
 
 On macOS the equivalent is ``OpenGL.CGL``, which creates a context with no
 window and no window server -- CGL is the layer NSGL and AGL are built on, and
@@ -156,7 +156,7 @@ See `Offscreen OpenGL on macOS`_ for the profiles available, how the renderer is
 chosen on a machine with no accelerated one, and why a framebuffer object is not
 optional there.
 
-.. _`Offscreen OpenGL on macOS`: https://mcfletch.github.io/pyopengl/documentation/cgl-offscreen.html
+.. _`Offscreen OpenGL on macOS`: https://mcfletch.github.io/pyopengl/cgl-offscreen.html
 
 
 OpenGL ES through ANGLE
@@ -195,7 +195,7 @@ search runs, which finds an ANGLE that is on ``PATH`` and nothing otherwise.
 See `OpenGL ES through ANGLE`_ for what a context can be asked for and what the
 platform does and does not supply.
 
-.. _`OpenGL ES through ANGLE`: https://mcfletch.github.io/pyopengl/documentation/angle-gles.html
+.. _`OpenGL ES through ANGLE`: https://mcfletch.github.io/pyopengl/angle-gles.html
 
 
 OpenGL in a Tkinter window
@@ -225,7 +225,7 @@ for what the context can be asked for, when it arrives, what happens when a
 driver refuses one, and what became of the Togl-based widgets (they keep their
 names and no longer need Togl).
 
-.. _`OpenGL in a Tkinter widget`: https://mcfletch.github.io/pyopengl/documentation/tk-widget.html
+.. _`OpenGL in a Tkinter widget`: https://mcfletch.github.io/pyopengl/tk-widget.html
 
 
 Running Tests

@@ -1,0 +1,35 @@
+/* Presentation for the parts of the set the generators write. */
+
+/* The reference pages give a C prototype and then the Python entry points
+ * that reach it.  The prototype is the shape the OpenGL specification
+ * describes, so it reads as code rather than as a signature Python can call. */
+.c-prototype {
+  font-family: var(--font-stack--monospace, monospace);
+  font-size: 0.9em;
+  margin: 0.2rem 0 0.8rem 0;
+  padding: 0.35rem 0.6rem;
+  border-left: 3px solid var(--color-background-border, #ccc);
+  background: var(--color-background-secondary, #f6f6f6);
+  overflow-x: auto;
+}
+
+/* The table of entry points at the head of each package's reference. */
+table.entry-point-index td:first-child {
+  white-space: nowrap;
+}
+
+/* Sample-code citations, where the sample scan has run. */
+.sample-project {
+  font-weight: bold;
+}
+
+.sample-lines {
+  color: var(--color-foreground-secondary, #555);
+}
+
+/* The front page's feature grid. */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem;
+}

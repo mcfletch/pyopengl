@@ -1,0 +1,97 @@
+[
+  {
+    "url": "_static/screenshots/blanch/dots.png",
+    "link": "https://bitbucket.org/rndblnch/opengl-programmable/",
+    "description": "Cube with an animated partially transparent texture, rendered from OpenGL 1.0 through to core profile"
+  },
+  {
+    "url": "_static/screenshots/blanch/mandelbrot.png",
+    "link": "http://iihm.imag.fr/blanch/teaching/opengl/src/c-shader/02-fragment.py",
+    "description": "Interactive Mandelbrot set, drawn as a procedural texture computed by the fragment shader"
+  },
+  {
+    "url": "_static/screenshots/blanch/webmichl_my_camera.png",
+    "link": "https://bitbucket.org/rndblnch/seagull/",
+    "description": "2D vector graphics (SVG) rendered with the Seagull package; Open Clip Art by webmichl"
+  },
+  {
+    "url": "_static/screenshots/context/twitch-viewer-screen-0001.png",
+    "description": "Twitch BSP (Quake III(TM) map file) loader"
+  },
+  {
+    "url": "_static/screenshots/context/glelathe.jpg",
+    "description": "OpenGLContext GLE tubing and extrusion demo"
+  },
+  {
+    "url": "_static/screenshots/context/shader_instanced.py-screen-0001.png",
+    "description": "OpenGLContext instanced-rendering tutorial"
+  },
+  {
+    "url": "_static/screenshots/context/shaderobjects.py-screen-0001.png",
+    "description": "OpenGLContext shader object-graph demo"
+  },
+  {
+    "url": "_static/screenshots/context/shadow_2.py-screen-0001.png",
+    "description": "OpenGLContext depth-map shadow tutorial"
+  },
+  {
+    "url": "_static/screenshots/context/lorentz_dots.jpg",
+    "description": "OpenGLContext dynamic point-set generation"
+  },
+  {
+    "url": "_static/screenshots/context/truetype3d.jpg",
+    "description": "OpenGLContext 3D TrueType text rendering"
+  },
+  {
+    "url": "_static/screenshots/context/alternateatlas.jpg",
+    "description": "OpenGLContext texture-atlas rendering"
+  },
+  {
+    "url": "_static/screenshots/context/smooth_shading.jpg",
+    "description": "OpenGLContext smooth-shading demo"
+  },
+  {
+    "url": "_static/screenshots/context/h_cyber.jpg",
+    "description": "VRML97 scene rendered by OpenGLContext"
+  },
+  {
+    "url": "_static/screenshots/context/h_secondplatform.jpg",
+    "description": "VRML97 scene rendered by OpenGLContext"
+  },
+  {
+    "url": "_static/screenshots/context/h_showroom.jpg",
+    "description": "VRML97 scene rendered by OpenGLContext"
+  },
+  {
+    "url": "_static/screenshots/context/h_wallworld.jpg",
+    "description": "VRML97 scene rendered by OpenGLContext"
+  },
+  {
+    "url": "_static/screenshots/context/h_office.jpg",
+    "description": "VRML97 scene rendered by OpenGLContext"
+  },
+  {
+    "url": "_static/screenshots/context/h_boardroom.jpg",
+    "description": "VRML97 scene rendered by OpenGLContext"
+  },
+  {
+    "url": "_static/screenshots/context/h_egypt_exterior_wide.jpg",
+    "description": "VRML97 scene rendered by OpenGLContext"
+  },
+  {
+    "url": "_static/screenshots/context/h_egypt_exterior.jpg",
+    "description": "VRML97 scene rendered by OpenGLContext"
+  },
+  {
+    "url": "_static/screenshots/context/h_egypt_interior.jpg",
+    "description": "VRML97 scene rendered by OpenGLContext"
+  },
+  {
+    "url": "_static/screenshots/context/h_baths.jpg",
+    "description": "VRML97 scene rendered by OpenGLContext"
+  },
+  {
+    "url": "_static/screenshots/context/h_baths_frigid.jpg",
+    "description": "VRML97 scene rendered by OpenGLContext"
+  }
+]

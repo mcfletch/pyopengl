@@ -282,7 +282,7 @@ import occurs the flags should no longer be changed.
         stub beside each package, generated from the registry and
         shipped with a py.typed marker, which describes the Python
         signature -- including the arguments the friendly form
-        drops.  See documentation/c-dispatch.html.
+        drops.  See docs/c-dispatch.rst.
 
         Default: False
 """

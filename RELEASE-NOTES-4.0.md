@@ -344,10 +344,10 @@ well as with the defaults.
 
 ## Documentation
 
-- [The C dispatch layer](https://mcfletch.github.io/pyopengl/documentation/c-dispatch.html)
+- [The C dispatch layer](https://mcfletch.github.io/pyopengl/c-dispatch.html)
   — what it covers, what differs, contexts, arrays, strings and error checking.
-- [EGL devices](https://mcfletch.github.io/pyopengl/documentation/egl-devices.html)
-- [Offscreen OpenGL on macOS](https://mcfletch.github.io/pyopengl/documentation/cgl-offscreen.html)
-- [OpenGL in a Tkinter widget](https://mcfletch.github.io/pyopengl/documentation/tk-widget.html)
-- [Offscreen OpenGL on Windows](https://mcfletch.github.io/pyopengl/documentation/wgl-offscreen.html)
-- [OpenGL ES through ANGLE](https://mcfletch.github.io/pyopengl/documentation/angle-gles.html)
+- [EGL devices](https://mcfletch.github.io/pyopengl/egl-devices.html)
+- [Offscreen OpenGL on macOS](https://mcfletch.github.io/pyopengl/cgl-offscreen.html)
+- [OpenGL in a Tkinter widget](https://mcfletch.github.io/pyopengl/tk-widget.html)
+- [Offscreen OpenGL on Windows](https://mcfletch.github.io/pyopengl/wgl-offscreen.html)
+- [OpenGL ES through ANGLE](https://mcfletch.github.io/pyopengl/angle-gles.html)
