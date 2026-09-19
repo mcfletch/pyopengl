@@ -210,7 +210,6 @@ platform/win32.py::Win32Platform.GL::OSError::0  # not reached by any case
 platform/win32.py::Win32Platform.GLE::OSError::0  # not reached by any case
 platform/win32.py::Win32Platform.GLU::OSError::0  # not reached by any case
 platform/win32.py::Win32Platform._optional_library::OSError::0  # not reached by any case
-platform/win32.py::Win32Platform.constructFunction::AttributeError::0  # not reached by any case
 plugins.py::Plugin.load::ImportError::0  # not reached by any case
 raw/EGL/_glgets.py::<module>::ImportError::0  # not reached by any case
 raw/GL/_glgets.py::<module>::ImportError::0  # not reached by any case

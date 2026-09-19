@@ -289,7 +289,7 @@ class OffscreenContext(object):
         """
         try:
             self.release()
-        except Exception:                  # pragma: no cover - shutdown only
+        except Exception:
             pass
 
     def __enter__(self):

@@ -481,7 +481,9 @@ tox -e errorpaths         # the suite under coverage, then the error paths
 `finally` block no case enters is one nothing has ever checked, and that is
 where the handlers that raise instead of reporting have all been found. The
 record lists what this configuration does not reach today; a new one is a
-failure, and the list is meant to shrink.
+failure, and the list is meant to shrink. It reads the coverage data and not a
+coverage report, so `# pragma: no cover` on a clause changes nothing here: the
+pragma decides what a report leaves out, and the gate asks the tracer.
 
 ## Running
 

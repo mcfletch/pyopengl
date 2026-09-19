@@ -293,11 +293,15 @@ def main(argv=None):
             'if this is that configuration, `--write` prunes them.'
             % len(gone)
         )
+        for key in gone:
+            print('    %s' % (key,))
     if removed:
         print(
             '\n%d recorded error path(s) are no longer in the package at all. '
             '`--write` takes them out.' % len(removed)
         )
+        for key in removed:
+            print('    %s' % (key,))
 
     if added:
         print(

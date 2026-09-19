@@ -519,6 +519,59 @@ class TestADroppedContextReleasesItself:
             'the dropped context is still live, so Mesa still holds the '
             'pointer to the array Python has just freed')
 
+    def test_a_release_that_cannot_finish_stays_inside_the_finaliser(self):
+        """The backstop has nobody to raise to, so a release that fails is quiet.
+
+        A finaliser runs where nothing can catch for it, and the last place one
+        runs is interpreter shutdown, which empties a module's globals: the
+        release then reaches through a name that has become ``None``, on a
+        teardown the process was ending anyway.  What escapes is an
+        ``Exception ignored in:`` traceback on stderr, out of whatever line
+        happened to collect the object.
+
+        Emptying the globals is how the case reaches that state, since it is
+        what shutdown does to them.  The array outlives the context here: the
+        release the case interrupts leaves Mesa holding the context, and the
+        pointer into the array with it.
+        """
+        report = osmesa('''
+            import gc, sys
+            from OpenGL.osmesa import offscreen
+            context = offscreen.OffscreenContext(
+                width=WIDTH, height=HEIGHT, profile='compatibility',
+                version=(2, 1))
+            glClear(GL_COLOR_BUFFER_BIT)
+            # Mesa holds the pointer to the array for as long as the context
+            # lives, and the interrupted release below leaves it living: this
+            # local is what keeps the array good until the case destroys the
+            # context itself.
+            buffer, raw = context.buffer, context.context
+
+            ignored = []
+            sys.unraisablehook = lambda call: ignored.append(repr(call.exc_value))
+
+            # A global the module reaches through, gone -- which is the state
+            # shutdown leaves every module in.  The release gets as far as
+            # finishing the context and no further.
+            dispatch, offscreen._dispatch = offscreen._dispatch, None
+            del context
+            gc.collect()
+
+            sys.unraisablehook = sys.__unraisablehook__
+            offscreen._dispatch = dispatch
+            report['ignored'] = ignored
+            report['dropped'] = True
+
+            # The context the interrupted release did not destroy, destroyed
+            # here while the array it holds a pointer into is still alive.
+            mesa.OSMesaDestroyContext(raw)
+            del buffer
+        ''')
+        assert report['dropped']
+        assert report['ignored'] == [], (
+            'the finaliser let its error out, so a dropped context prints a '
+            'traceback out of whatever line happened to collect it')
+
     def test_releasing_it_first_is_still_the_ordinary_way(self):
         """The finaliser is a backstop, not the path: an explicit release
         leaves nothing for it to do, and must not fail on the second pass."""

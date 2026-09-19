@@ -197,6 +197,12 @@ written for the wrong exception, a handler whose body raises, a `finally` that
 throws away the frame it was protecting — none of them has a syntax in common,
 and all of them share never having run.
 
+It reads the coverage data rather than a coverage report, so a clause marked
+`# pragma: no cover` is measured like any other: the pragma decides what a
+report leaves out, not what the tracer recorded. A handler carrying one is
+entered when a case reaches it, and the pragma is then a comment that has
+stopped being true.
+
 Cost: one pass over the tree, plus the coverage run the suite already does.
 The recorded list is the work, and it is a one-off.
 
