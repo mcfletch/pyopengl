@@ -112,6 +112,11 @@ class OSMesaBackend(object):
         pass
 
     def _destroy_context(self):
+        # Without the notification: whether the dispatch layer is told is the
+        # fixture's to decide, and ``_release_context`` is where it decides it.
+        # A case about what a program that never notifies PyOpenGL faces asks
+        # for this one directly, and the context object doing it anyway would
+        # leave that case unable to reach the state it is about.
         if self._osmesa_context is not None:
             context, self._osmesa_context = self._osmesa_context, None
-            context.release()
+            context.release(forget=False)

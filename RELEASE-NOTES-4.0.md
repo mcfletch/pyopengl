@@ -67,6 +67,21 @@ What changed since the 3.x series. The current development version is
   context. A program that holds GL names of its own can do the same.
 - Output arrays that are too short for what the call was told to write are
   refused rather than handed to the driver.
+- An `OpenGL.osmesa.offscreen.OffscreenContext` the program dropped without
+  releasing left Mesa holding a live context whose framebuffer Python had
+  freed — OSMesa rasterises into an array the caller owns, and keeps the
+  pointer for as long as the context lives. The next `OSMesaMakeCurrent` on
+  that thread flushed the dropped context's front buffer through it, a
+  512-byte write into freed memory, and the process came down later in a call
+  that had done nothing wrong. It releases itself when it is collected now.
+  `release()` also takes `forget=False`, as `OpenGL.WGL.offscreen` does, for a
+  caller tearing a context down without telling the dispatch layer.
+- `OffscreenContext.make_current` tells the dispatch layer, which cannot see
+  the switch: the compiled layer keeps a table of resolved entry points per
+  context and re-reads which is current only when resolving one, so a second
+  OSMesa context went on dispatching through the first one's table — its
+  resolved addresses, and its record of which commands that context has.
+  `OpenGL.WGL.offscreen` and `OpenGL.Tk` already said so.
 
 ## Binding fixes
 

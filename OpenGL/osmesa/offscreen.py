@@ -38,7 +38,7 @@ legacy context.
 
 import ctypes
 
-from OpenGL import arrays
+from OpenGL import _dispatch, arrays
 from OpenGL.raw.GL.VERSION.GL_1_1 import GL_UNSIGNED_BYTE
 from OpenGL.raw.osmesa import mesa as _mesa
 
@@ -108,7 +108,9 @@ class OffscreenContext(object):
     """An OpenGL context rendering into an array this object owns.
 
     Created current, and current again after :meth:`make_current`.  Release it
-    with :meth:`release`, or use it as a context manager.
+    with :meth:`release`, or use it as a context manager; one that is simply
+    dropped releases itself when it is collected, because Mesa holds the
+    pointer to the array it renders into and must not outlive it.
 
     ``width`` and ``height`` are in pixels, ``profile`` one of
     :data:`PROFILES`, and ``version`` the GL version asked for.  A Mesa that
@@ -169,7 +171,16 @@ class OffscreenContext(object):
     # -- being the current context -----------------------------------------
 
     def make_current(self):
-        """Bind this context and its buffer to the calling thread."""
+        """Bind this context and its buffer to the calling thread.
+
+        The dispatch layer is told, because it cannot see the switch: the
+        compiled one keeps a table of resolved entry points per context and
+        reads which one is current on the resolution slow path, so a second
+        context taken without a word goes on dispatching through the first
+        one's table -- holding the slots, and the flags saying which commands
+        that context has, of a context it has left.  ``OpenGL.WGL.offscreen``
+        and ``OpenGL.Tk.context`` say so for the same reason.
+        """
         if self.context is None:
             raise OSMesaError('this context has been released')
         if not _mesa.OSMesaMakeCurrent(self.context, self.buffer,
@@ -178,6 +189,7 @@ class OffscreenContext(object):
             raise OSMesaError(
                 'OSMesaMakeCurrent refused a %dx%d RGBA buffer'
                 % (self.width, self.height))
+        _dispatch.make_current(self.context)
         return self
 
     # -- what was drawn ----------------------------------------------------
@@ -231,7 +243,7 @@ class OffscreenContext(object):
 
         glFinish()
 
-    def release(self):
+    def release(self, forget=True):
         """Destroy the context.  Idempotent, and safe part-way through init.
 
         **The buffer outlives the context, by one statement.**  OSMesa holds
@@ -239,13 +251,46 @@ class OffscreenContext(object):
         context is torn down; dropping this object's reference first lets
         Python free the array under a Mesa that is still using it.  The local
         binding is what keeps it alive across the call.
+
+        The dispatch layer is told the context has gone, so that its table of
+        resolved entry points is retired rather than left for whichever context
+        Mesa hands that address to next.  See :meth:`make_current`.
+
+        ``forget=False`` destroys it *without* saying so, which is the state a
+        program is in when it tears a context down and does not notify
+        PyOpenGL.  A caller testing that behaviour asks for it; everything else
+        wants the notification.
         """
         context, self.context = self.context, None
         buffer, self.buffer = self.buffer, None
         if context is not None:
             self._finish_if_current(context)
+            if forget:
+                _dispatch.forget_context(context)
             _mesa.OSMesaDestroyContext(context)
         del buffer
+
+    def __del__(self):
+        """Release a context the program dropped without releasing it.
+
+        **Mesa keeps the pointer, so the array cannot be collected first.**
+        OSMesa rasterises into the array this object owns, and holds that
+        pointer for as long as the context lives.  Letting go of both leaves
+        Mesa with a context whose framebuffer Python has freed, and the next
+        ``OSMesaMakeCurrent`` on that thread flushes this context's front
+        buffer through it -- a write into freed memory, which corrupts
+        whatever the allocator has since put there and brings the process
+        down in some later call that did nothing wrong.
+
+        :meth:`release` is the ordinary way and this is the backstop; it is
+        idempotent, so a caller who released loses nothing by having one.
+        Errors are swallowed because a finaliser has nobody to raise to, and
+        because at interpreter shutdown the library may already be gone.
+        """
+        try:
+            self.release()
+        except Exception:                  # pragma: no cover - shutdown only
+            pass
 
     def __enter__(self):
         return self

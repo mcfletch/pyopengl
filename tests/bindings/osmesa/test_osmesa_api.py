@@ -486,6 +486,108 @@ class TestPostprocess:
         assert report['pixel'] == [0, 255, 0, 255], report
 
 
+class TestADroppedContextReleasesItself:
+    """A context the program lets go of must not leave Mesa writing into it.
+
+    OSMesa rasterises into the array the context owns and keeps that pointer
+    for as long as the context lives.  Dropping the object frees the array --
+    and leaves Mesa holding the context, and the pointer.  The next
+    ``OSMesaMakeCurrent`` flushes that context's front buffer through it: a
+    512-byte ``memcpy`` into freed memory, which corrupts whatever the
+    allocator has since put there and takes the process down somewhere else
+    entirely.
+
+    A caller that forgets to release is not owed that, so the object releases
+    itself when it is collected.  See ``plans/OSMESA-PARALLEL-CRASH.md``.
+    """
+
+    def test_dropping_it_lets_go_of_the_context(self):
+        report = osmesa('''
+            import gc
+            from OpenGL.osmesa import offscreen
+            context = offscreen.OffscreenContext(
+                width=WIDTH, height=HEIGHT, profile='compatibility',
+                version=(2, 1))
+            glClear(GL_COLOR_BUFFER_BIT)
+            del context
+            gc.collect()
+            report['still_current'] = bool(
+                ctypes.cast(mesa.OSMesaGetCurrentContext(),
+                            ctypes.c_void_p).value)
+        ''')
+        assert not report['still_current'], (
+            'the dropped context is still live, so Mesa still holds the '
+            'pointer to the array Python has just freed')
+
+    def test_releasing_it_first_is_still_the_ordinary_way(self):
+        """The finaliser is a backstop, not the path: an explicit release
+        leaves nothing for it to do, and must not fail on the second pass."""
+        report = osmesa('''
+            import gc
+            from OpenGL.osmesa import offscreen
+            context = offscreen.OffscreenContext(
+                width=WIDTH, height=HEIGHT, profile='compatibility',
+                version=(2, 1))
+            glClear(GL_COLOR_BUFFER_BIT)
+            context.release()
+            del context
+            gc.collect()
+            report['survived'] = True
+        ''')
+        assert report['survived']
+
+
+class TestAReleasedContextIsNotLeftCurrent:
+    """``OSMesaDestroyContext`` does not take the context off the thread.
+
+    Mesa goes on naming it as current, and the next ``OSMesaMakeCurrent``
+    flushes that context's front buffer into the array it was made current
+    with -- an array whose owner released it with the context, so the flush
+    is a write into freed memory.  It is a 512-byte ``memcpy`` inside
+    ``OSMesaMakeCurrent``, it corrupts whatever the allocator has put there,
+    and the process falls over somewhere else entirely.
+
+    So the thread lets go before the context is destroyed, and what this asks
+    is that it did.  See ``plans/OSMESA-PARALLEL-CRASH.md``.
+    """
+
+    def test_nothing_is_current_after_a_release(self):
+        report = osmesa('''
+            from OpenGL.osmesa import offscreen
+            context = offscreen.OffscreenContext(
+                width=WIDTH, height=HEIGHT, profile='compatibility',
+                version=(2, 1))
+            glClear(GL_COLOR_BUFFER_BIT)
+            context.release()
+            report['still_current'] = bool(
+                ctypes.cast(mesa.OSMesaGetCurrentContext(),
+                            ctypes.c_void_p).value)
+        ''')
+        assert not report['still_current'], (
+            'the destroyed context is still the thread"s, so the next '
+            'make-current writes its front buffer into a freed array')
+
+    def test_a_second_context_can_still_be_made_current(self):
+        """Letting go must not cost the next context its own make-current."""
+        report = osmesa('''
+            from OpenGL.osmesa import offscreen
+            first = offscreen.OffscreenContext(
+                width=WIDTH, height=HEIGHT, profile='compatibility',
+                version=(2, 1))
+            glClear(GL_COLOR_BUFFER_BIT)
+            first.release()
+            second = offscreen.OffscreenContext(
+                width=WIDTH, height=HEIGHT, profile='compatibility',
+                version=(2, 1))
+            glClearColor(0.0, 1.0, 0.0, 1.0)
+            glClear(GL_COLOR_BUFFER_BIT)
+            glFinish()
+            report['pixel'] = as_image(second.buffer)[HEIGHT // 2][WIDTH // 2]
+            second.release()
+        ''')
+        assert report['pixel'] == [0, 255, 0, 255], report
+
+
 class TestTheQueriesReadTheAnswerTheyWereGiven:
     """``OSMesaGetColorBuffer`` and ``OSMesaGetDepthBuffer`` answer a GLboolean.
 
