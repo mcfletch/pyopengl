@@ -15,6 +15,26 @@
     "description": "2D vector graphics (SVG) rendered with the Seagull package; Open Clip Art by webmichl"
   },
   {
+    "url": "_static/screenshots/gltf/flight-helmet.jpg",
+    "link": "https://github.com/KhronosGroup/glTF-Sample-Assets",
+    "description": "FlightHelmet, a Khronos glTF sample model (CC0), rendered by OpenGLContext's PBR pipeline"
+  },
+  {
+    "url": "_static/screenshots/gltf/scifi-helmet.jpg",
+    "link": "https://github.com/KhronosGroup/glTF-Sample-Assets",
+    "description": "SciFiHelmet, a Khronos glTF sample model (CC0): normal, roughness and ambient-occlusion maps"
+  },
+  {
+    "url": "_static/screenshots/gltf/sheen-chair.jpg",
+    "link": "https://github.com/KhronosGroup/glTF-Sample-Assets",
+    "description": "SheenChair, a Khronos glTF sample model (CC0), showing KHR_materials_sheen against an image-based light"
+  },
+  {
+    "url": "_static/screenshots/gltf/a-beautiful-game.jpg",
+    "link": "https://github.com/KhronosGroup/glTF-Sample-Assets",
+    "description": "A Beautiful Game: transmission and clearcoat materials; model by the MaterialX Project and Ed Mackey (CC-BY 4.0)"
+  },
+  {
     "url": "_static/screenshots/demos/forest.jpg",
     "link": "https://github.com/mcfletch/openglcontext-forest",
     "description": "The OpenGLContext forest demo: DEM terrain with instanced tree and grass levels of detail; tree models by Georgeous, 3D Error 404 and LOLIPOP (CC-BY 4.0)"
