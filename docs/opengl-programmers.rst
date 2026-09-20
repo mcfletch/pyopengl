@@ -58,9 +58,33 @@ shape.
 Errors raise exceptions
 -----------------------
 
-PyOpenGL checks ``glGetError`` after each call and raises, rather than leaving
-the program to ask.  The check can be switched off by setting a flag on the
-``OpenGL`` package before importing any submodule:
+PyOpenGL checks for a GL error after each call and raises, rather than leaving
+the program to ask.
+
+How the check is made depends on the context.  Where it offers
+``GL_KHR_debug``, the driver reports the error through a callback during the
+call and the check afterwards reads the flag that callback set; where it does
+not, the check is a ``glGetError`` round trip.  A context offering the
+extension is given the callback under either implementation, without the
+program asking for it:
+
+.. code-block:: python
+
+   >>> from OpenGL import dispatch
+   >>> dispatch.error_checking_mode()
+   'debug-output'
+
+``'get-error'`` is the round trip and ``'off'`` is no checking at all.
+:py:func:`OpenGL.dispatch.use_debug_output` turns the callback off for the
+current context and back on again, and ``OpenGL.ERROR_DEBUG_OUTPUT = False``
+before the first call stops it being offered.  :doc:`c-dispatch` has the
+mechanism and the measurements.
+
+The round trip is the cost of checking, and the callback removes it: about one
+nanosecond a call against eleven.  So on a context with ``GL_KHR_debug`` there
+is no speed argument for turning checking off, and a program can ship with it
+on.  Where the round trip is what the context offers, the flag that switches
+checking off is set on the ``OpenGL`` package before any submodule is imported:
 
 .. code-block:: python
 
@@ -68,10 +92,9 @@ the program to ask.  The check can be switched off by setting a flag on the
    OpenGL.ERROR_CHECKING = False
    from OpenGL.GL import *
 
-That roughly halves the number of calls issued to the driver.  Develop with
-checking on and switch it off for a release build.  PyOpenGL's own helper code
-assumes errors raise, so code that runs with checking off has to call
-``glGetError`` where it matters.
+That roughly halves the number of calls issued to the driver.  PyOpenGL's own
+helper code assumes errors raise, so code that runs with checking off has to
+call ``glGetError`` where it matters.
 
 The exceptions raised are:
 

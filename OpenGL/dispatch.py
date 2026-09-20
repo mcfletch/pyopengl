@@ -484,7 +484,7 @@ _offering = False
 
 
 def error_checking_mode():
-    """How GL errors are being noticed in the current context.
+    """How GL errors are detected in the current context.
 
     ``'debug-output'`` where the driver reports them through a
     ``GL_KHR_debug`` callback and the check is a read of the flag it sets,
