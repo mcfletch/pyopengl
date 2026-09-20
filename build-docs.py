@@ -39,6 +39,7 @@ from __future__ import annotations
 
 import argparse
 import datetime
+import glob
 import logging
 import os
 import shutil
@@ -111,6 +112,56 @@ def build_api(skip: list[str], verbose: bool) -> None:
     if verbose:
         command.append('--verbose')
     subprocess.check_call(command, cwd=HERE)
+
+
+#: The prose reviewer, if this checkout sits in the workspace that carries it.
+#: `.claude/skills/ai-isms` is a workspace-level skill rather than part of this
+#: repository, so a CI run building the docs from a clone has none and the step
+#: says so instead of failing.
+AI_ISMS = os.path.join(
+    '.claude', 'skills', 'ai-isms', 'scripts', 'scan.py'
+)
+
+
+def prose_scanner() -> str | None:
+    """Where the prose scanner is, or None where this checkout has no reach to one.
+
+    ``AI_ISMS_SCAN`` names it directly; otherwise the directories above this
+    one are searched, which is what finds the workspace copy from a submodule.
+    """
+    named = os.environ.get('AI_ISMS_SCAN')
+    if named:
+        return named if os.path.isfile(named) else None
+    directory = HERE
+    while True:
+        candidate = os.path.join(directory, AI_ISMS)
+        if os.path.isfile(candidate):
+            return candidate
+        parent = os.path.dirname(directory)
+        if parent == directory:
+            return None
+        directory = parent
+
+
+def check_prose() -> None:
+    """Report the marks of machine-written prose in the hand-written pages.
+
+    Reported rather than enforced: every match is a question about a particular
+    sentence, and a build is not where that is answered.  The generated
+    directories are left out -- their prose is Khronos's, and the fix to
+    anything in them is to the generator.
+    """
+    scanner = prose_scanner()
+    if scanner is None:
+        log.info('No prose scanner found; skipping the prose pass')
+        return
+    pages = sorted(glob.glob(os.path.join(DOCS, '*.rst')))
+    log.info('Reading %d hand-written pages for the marks of generated prose', len(pages))
+    subprocess.call(
+        [sys.executable, '-W', 'ignore::SyntaxWarning', scanner, '--all']
+        + pages,
+        cwd=HERE,
+    )
 
 
 def build_html(output: str, builder: str, warnings_are_errors: bool) -> None:
@@ -313,7 +364,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         '--only',
         action='append',
-        choices=['fetch', 'reference', 'api', 'html', 'none'],
+        choices=['fetch', 'reference', 'api', 'prose', 'html', 'none'],
         default=[],
         help=(
             'run just this step; may be given more than once.  "none" builds '
@@ -394,7 +445,7 @@ def main(argv: list[str] | None = None) -> int:
 
     steps = [
         step
-        for step in (options.only or ['fetch', 'reference', 'api', 'html'])
+        for step in (options.only or ['fetch', 'reference', 'api', 'prose', 'html'])
         if step != 'none'
     ]
     if options.push and not options.publish:
@@ -413,6 +464,8 @@ def main(argv: list[str] | None = None) -> int:
             build_reference(options.verbose)
         if 'api' in steps:
             build_api(options.skip, options.verbose)
+        if 'prose' in steps:
+            check_prose()
         if 'html' in steps:
             build_html(
                 options.output, options.builder, options.warnings_are_errors

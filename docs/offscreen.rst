@@ -139,46 +139,29 @@ do the work.
 Asking Mesa for a display on a *hardware* device while
 ``LIBGL_ALWAYS_SOFTWARE`` demands software rendering is a contradiction: Mesa
 warns about it and then crashes, inside ``driCreateNewScreen3``.  A program
-that takes device 0 without asking which devices are software therefore dumps
-core on any machine with both a GPU and a software rasteriser.
+that takes device 0 without asking which devices are software therefore crashes
+on any machine with both a GPU and a software rasteriser.
 
 Choosing a device
 ~~~~~~~~~~~~~~~~~
 
-The module reports what is available; the application chooses which of those
-devices to render on.  One constraint applies, which is the crash above: where
-``LIBGL_ALWAYS_SOFTWARE`` demands software rendering, the device chosen has to
-be a software one.  So read the environment first and let it decide which kind
-to look for.
+The module reports what is available; the application picks the device with the
+features it needs and stops if there is none.  Where
+``LIBGL_ALWAYS_SOFTWARE`` is set, that means a software device.
 
 ::
-
-   import os
 
    from OpenGL.EGL import devices
    from OpenGL.EGL.EXT.platform_base import eglGetPlatformDisplayEXT
    from OpenGL.EGL.EXT.platform_device import EGL_PLATFORM_DEVICE_EXT
 
-   available = devices.devices()
-   # Mesa reads the variable as set-or-not, so read it the same way.
-   software = os.environ.get('LIBGL_ALWAYS_SOFTWARE', '').lower() not in (
-       '', '0', 'false', 'no', 'off'
-   )
-   wanted = [device for device in available if device.software == software]
-   if not wanted and software:
-       raise RuntimeError(
-           'software rendering was demanded and there is no software device: %s'
-           % (available,)
-       )
-   chosen = (wanted or available)[0]
+   usable = [device for device in devices.devices() if not device.software]
+   if not usable:
+       raise SystemExit('this machine has no hardware rendering device')
 
    display = eglGetPlatformDisplayEXT(
-       EGL_PLATFORM_DEVICE_EXT, chosen.handle, None
+       EGL_PLATFORM_DEVICE_EXT, usable[0].handle, None
    )
-
-The fallback goes one way.  A program that wanted a GPU and found only a CPU
-rasteriser renders slowly; one that was told to render in software and found
-only a GPU stops, since that is the pair that crashes.
 
 `OpenGLContext <https://github.com/mcfletch/openglcontext>`__'s offscreen
 backend does this: it honours ``LIBGL_ALWAYS_SOFTWARE`` and ``GALLIUM_DRIVER``,
