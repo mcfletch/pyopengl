@@ -5,31 +5,6 @@ OpenGL from Python is OpenGL, so most of what has been written about OpenGL
 applies whatever language the example is in.  This page collects the material
 worth starting from.
 
-Books
------
-
-*OpenGL Programming Guide* (the Red Book)
-    The official guide.  Older editions are `widely available online
-    <https://www.google.com/search?q=OpenGL+Programming+Guide>`__; the second
-    edition covers OpenGL 1.1.  Addison-Wesley, ISBN 0-201-60458-2 for the
-    third edition.
-
-    Python versions of some of its tutorial code are in the ``redbook``
-    directory of `PyOpenGL-Demo
-    <https://github.com/mcfletch/pyopengl-demo>`__, kept close to the original
-    source.
-
-*OpenGL Shading Language* (the Orange Book)
-    An introduction to shaders, from one-line shaders through emulating fixed
-    function to non-photorealistic shading and caustics.  Adapting its code to
-    a real scene is part of the work, but the grounding is sound.
-    Addison-Wesley, ISBN 978-0-321-33489-3 for the second edition.
-
-*OpenGL SuperBible*
-    Covers OpenGL 1.0-era operations through to the 2.x model.  Older features
-    get exhaustive coverage and newer ones less.  Sams, ISBN 0-672-32601-9 for
-    the third edition.
-
 Tutorials
 ---------
 
@@ -64,7 +39,7 @@ Beyond it:
   thing in a framebuffer object, and then from the scenegraph
 - **Particle systems**, **transforms**, **NURBS surfaces** and **text**
 
-The engine's own documentation goes further again -- core-profile and
+The engine's own source and documentation cover more: core-profile and
 physically based rendering passes, a line-by-line walk through a PBR fragment
 shader, levels of detail, overlay UI.
 
@@ -99,6 +74,31 @@ Elsewhere
 `Learn OpenGL <https://learnopengl.com/>`__ is a modern, shader-first course.
 The code is C++, but the concepts and the GLSL carry over directly, and it is
 the best free introduction to the pipeline as it now is.
+
+Books
+-----
+
+*OpenGL Programming Guide* (the Red Book)
+    The official guide.  Older editions are `widely available online
+    <https://www.google.com/search?q=OpenGL+Programming+Guide>`__; the second
+    edition covers OpenGL 1.1.  Addison-Wesley, ISBN 0-201-60458-2 for the
+    third edition.
+
+    Python versions of some of its tutorial code are in the ``redbook``
+    directory of `PyOpenGL-Demo
+    <https://github.com/mcfletch/pyopengl-demo>`__, kept close to the original
+    source.
+
+*OpenGL Shading Language* (the Orange Book)
+    An introduction to shaders, from one-line shaders through emulating fixed
+    function to non-photorealistic shading and caustics.  Adapting its code to
+    a real scene is part of the work, but the grounding is sound.
+    Addison-Wesley, ISBN 978-0-321-33489-3 for the second edition.
+
+*OpenGL SuperBible*
+    Covers OpenGL 1.0-era operations through to the 2.x model.  Older features
+    get exhaustive coverage and newer ones less.  Sams, ISBN 0-672-32601-9 for
+    the third edition.
 
 Specifications and registries
 -----------------------------
