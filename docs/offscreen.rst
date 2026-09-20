@@ -1,12 +1,16 @@
 Offscreen rendering
 ===================
 
-Rendering with nothing on screen: a build machine, a container, a render farm
-node, a thumbnail service, a test suite.
+Offscreen rendering refers to running your OpenGL code in either a buffer with
+no relationship to your screen, or on a hidden window that doesn't graphically
+present on your screen.  There are major use cases for this, including using
+OpenGL accelerated hardware to render a graphic for a web server, test suites
+that want to run in the background, direct-to-video rendering and the like.
 
-Every route has the same three parts: a context that came from something other
-than a window, somewhere for the frame to land, and a read-back.  Which of the
-three the system provides and which the program builds differs by platform.
+The basic idea is that a backing "surface" is mapped into the hardware such
+that the GL can draw into it, and then some mechanism is used to read that
+surface back to the application.  The exact mechanisms differ by platform, but
+they all work in loosely the same way.
 
 Which route a machine has
 -------------------------
