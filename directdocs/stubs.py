@@ -130,7 +130,10 @@ def read_stub(path: str) -> dict[str, str]:
     found: dict[str, str] = {}
     for node in tree.body:
         if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
-            if node.name == CATCH_ALL:
+            # First definition wins: a handful of entry points are `@overload`
+            # sets in the stub -- `glDeleteTextures` and thirteen others -- and
+            # the first form is the one the rest are variations on.
+            if node.name == CATCH_ALL or node.name in found:
                 continue
             found[node.name] = _signature(node)
         elif isinstance(node, ast.ClassDef):

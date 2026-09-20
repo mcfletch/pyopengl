@@ -104,3 +104,20 @@ class TestWhatThePackageShips:
 
     def test_an_unstubbed_module_answers_empty(self):
         assert stubs.signatures('directdocs.stubs') == {}
+
+
+class TestOverloads:
+    def test_the_first_form_is_the_one_kept(self, tmp_path):
+        """Fourteen entry points are `@overload` sets; one signature is shown."""
+        (tmp_path / 'sample.pyi').write_text(
+            'from typing import overload\n'
+            '@overload\n'
+            'def glDeleteTextures(n: int, textures: UIntArray) -> None: ...\n'
+            '@overload\n'
+            'def glDeleteTextures(textures: UIntArray) -> None: ...\n',
+            encoding='utf-8',
+        )
+        found = stubs.read_stub(str(tmp_path / 'sample.pyi'))
+        assert found['glDeleteTextures'] == (
+            'glDeleteTextures(n: int, textures: UIntArray) -> None'
+        )

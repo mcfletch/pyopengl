@@ -48,7 +48,7 @@ if PACKAGE_ROOT not in sys.path:
     # cached samples unpickle as directdocs.model.Sample.
     sys.path.insert(0, PACKAGE_ROOT)
 
-from directdocs import model, references, rst  # noqa: E402
+from directdocs import model, references, rst, stubs  # noqa: E402
 from directdocs.model import (  # noqa: E402
     Function,
     Parameter,
@@ -878,7 +878,12 @@ class PageWriter:
             # The same name from two reference pages: index the first and let
             # this one render without claiming the cross-reference target.
             options['no-index'] = ''
-        writer.directive('py:function', python_signature(pyfunc), options)
+        # The API package's stub declares every entry point it re-exports,
+        # with the annotations; `module` is that package.
+        stubbed = stubs.signatures(module).get(getattr(pyfunc, 'name', name))
+        writer.directive(
+            'py:function', stubbed or python_signature(pyfunc), options
+        )
         docstring = docstring_of(pyfunc)
         if docstring:
             # What has been declared for this API so far.  The pages are
