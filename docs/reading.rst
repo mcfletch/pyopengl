@@ -33,24 +33,72 @@ Books
 Tutorials
 ---------
 
-The `NeHe tutorials <http://nehe.gamedev.net/>`__ by Jeff Molofee run from
-opening a window to particle systems, scene loading, video textures, text,
-morphing and multitexturing.  The older ones describe fixed-function OpenGL,
-which is worth knowing while reading them.
+OpenGLContext
+~~~~~~~~~~~~~
 
-Python translations:
+`OpenGLContext <https://github.com/mcfletch/openglcontext>`__ carries the
+tutorial series written for PyOpenGL, as annotated source you can run.  It
+teaches the OpenGL you would write today -- buffer objects, shaders,
+framebuffer objects -- rather than the fixed-function pipeline.
 
-- ``PyOpenGL-Demo/NeHe`` has tutorials 1 through 6, with a multitextured
-  variant of 6.  These follow the original C structure closely, which makes
-  them easier to read alongside the tutorial text than as Python.
-- `Paul Furber's PyGame versions
-  <https://www.pygame.org/gamelets/#NEHE>`__ are direct translations in
-  idiomatic, function-oriented Python, covering tutorials 1 through 10.
-- `OpenGLContext <https://github.com/mcfletch/openglcontext>`__ has ``nehe*.py``
-  in its tests directory: translations written for the result rather than the
-  structure, using object-oriented Python and OpenGLContext's own scenegraph.
-  Tutorials 1 through 8 are translated, and ``glprint.py`` is a loose
-  translation of 13, bitmapped text.
+The shader series runs from a first triangle to a scenegraph:
+
+- **First steps** -- geometry in a vertex buffer object, a vertex and a
+  fragment shader, and the draw call that uses them
+- **Interpolated values** -- colour across a primitive
+- **Uniform values** -- fog, and how a uniform reaches a shader
+- **Attribute values** -- per-vertex data, and tweening between two meshes
+- **Diffuse, ambient and directional lighting**, then **specular highlights
+  with indexed geometry**
+- **Multiple lights** -- GLSL arrays and structures, and then optimising the
+  directional case
+- **Point lights** and **spot-lights**
+- **Declarative structures** and **shader scenegraph nodes** -- moving from a
+  script that draws to a description of what to draw
+
+Beyond it:
+
+- **Instanced geometry** -- drawing many copies in one call, with texture
+  buffer objects supplying the per-instance data
+- **Shadows**, in three parts: depth comparison on the back buffer, the same
+  thing in a framebuffer object, and then from the scenegraph
+- **Particle systems**, **transforms**, **NURBS surfaces** and **text**
+
+The engine's own documentation goes further again -- core-profile and
+physically based rendering passes, a line-by-line walk through a PBR fragment
+shader, levels of detail, overlay UI.
+
+NeHe
+~~~~
+
+The `NeHe tutorials <http://nehe.gamedev.net/>`__ by Jeff Molofee are widely
+recommended and worth knowing about, with one caveat that matters:
+
+.. note::
+
+   They teach **fixed-function OpenGL** -- ``glBegin``, ``glVertex``,
+   ``glMatrixMode``, the fixed lighting model.  All of it is deprecated, none
+   of it is in a core profile, and a program written that way today is
+   writing against a compatibility path.  Read them for the ideas -- what a
+   texture is, what a depth buffer does, how a frame is put together -- and
+   write the code with buffer objects and shaders.
+
+Python translations, if you want them:
+
+- ``PyOpenGL-Demo/NeHe`` has tutorials 1 through 6, kept close to the original
+  C so they read alongside the tutorial text.
+- OpenGLContext's tests directory has ``nehe1.py`` through ``nehe8.py``,
+  written for the result rather than the structure, plus ``glprint.py`` as a
+  loose translation of 13.
+- `Paul Furber's PyGame versions <https://www.pygame.org/gamelets/#NEHE>`__
+  cover 1 through 10 in idiomatic, function-oriented Python.
+
+Elsewhere
+~~~~~~~~~
+
+`Learn OpenGL <https://learnopengl.com/>`__ is a modern, shader-first course.
+The code is C++, but the concepts and the GLSL carry over directly, and it is
+the best free introduction to the pipeline as it now is.
 
 Specifications and registries
 -----------------------------
@@ -74,8 +122,6 @@ Other resources
   the community around them.
 - `LightHouse3D tutorials <https://www.lighthouse3d.com/tutorials/>`__ --
   intermediate material on particular OpenGL subjects.
-- `Learn OpenGL <https://learnopengl.com/>`__ -- a modern, shader-first course;
-  the code is C++ but the concepts and the GLSL carry over directly.
 
 Support
 -------

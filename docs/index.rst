@@ -53,10 +53,15 @@ The packages
      - Windows GL interfaces
    * - :doc:`OpenGL.GLX <reference/glx/index>`
      - X Window System GL interfaces
+   * - :py:mod:`OpenGL.CGL`
+     - macOS GL interfaces, with or without a window
+   * - :py:mod:`OpenGL.AGL`
+     - macOS GL interfaces, the older Carbon ones
+   * - :py:mod:`OpenGL.Tk`
+     - An OpenGL widget for Tkinter
 
-Beside those, ``OpenGL.CGL`` reaches macOS' own context API, and
-:py:mod:`OpenGL.Tk` is a Tkinter widget.  Hundreds of extensions to GL, GLES,
-EGL, WGL and GLX come with each package; the reference lists them.
+Hundreds of extensions to GL, GLES, EGL, WGL and GLX come with each package;
+each reference lists them.
 
 The distributions
 -----------------

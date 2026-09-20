@@ -6,9 +6,12 @@ several thousand, and the result is most of a megabyte of navigation repeated
 on each of them -- a gigabyte of sidebar before any content.
 
 So the tree is asked for again, bounded: collapsed to the branch the reader is
-in, two levels deep, and without the hidden toctrees that carry the reference
-and module pages.  Those are reached from their own index pages, which list
-them in full.
+in and two levels deep.  Two levels is what puts the APIs under Reference and
+the packages under the API pages while leaving out the thousands of entry
+points and modules below them, which are reached from their own index pages.
+Hidden toctrees are included, because that depth limit is what does the
+bounding and the index pages hide their own toctrees to avoid listing their
+contents twice.
 
 The theme's own markup is kept: this hands the smaller tree through the same
 function the theme uses, so the expanders and the current-page highlighting
@@ -53,7 +56,7 @@ def bound_the_navigation_tree(
         collapse=True,
         titles_only=True,
         maxdepth=SIDEBAR_DEPTH,
-        includehidden=False,
+        includehidden=True,
     )
     try:
         context['furo_navigation_tree'] = _navigation_tree(html)

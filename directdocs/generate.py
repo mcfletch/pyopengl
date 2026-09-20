@@ -56,7 +56,12 @@ from directdocs.model import (  # noqa: E402
     c_prototype,
     python_signature,
 )
-from directdocs.rst import DOCBOOK_NS, MML_NS, Writer  # noqa: E402
+from directdocs.rst import (  # noqa: E402
+    DOCBOOK_NS,
+    MML_NS,
+    Writer,
+    write_docstring,
+)
 from OpenGL import __version__  # noqa: E402
 from OpenGL._bytes import as_8_bit  # noqa: E402
 
@@ -797,26 +802,12 @@ def docstring_of(function: Any) -> str:
     return textwrap.dedent(text).strip()
 
 
-def write_docstring(docstring: str, writer: Writer) -> None:
-    """Write an entry point's docstring into the directive body.
-
-    PyOpenGL's docstrings are plain text laid out with indentation: a call
-    signature, then a paragraph, then an indented list of what each argument
-    means.  Rendered as reST that layout is a string of warnings, so anything
-    with a second line goes in verbatim and only a one-line docstring is set as
-    prose.
-    """
-    lines = docstring.split('\n')
-    if len(lines) == 1:
-        writer.paragraph(rst.escape(lines[0]))
-    else:
-        writer.literal_block(docstring)
-
-
 class PageWriter:
     """Renders one reference page, and records what it declared."""
 
-    def __init__(self, reference: Reference, declared: dict[str, str]) -> None:
+    def __init__(
+        self, reference: Reference, declared: dict[str, dict[str, str]]
+    ) -> None:
         self.reference = reference
         #: Python entry point name -> the docname that declares it.  A name
         #: declared twice is indexed once, and the second page says so.
@@ -889,8 +880,11 @@ class PageWriter:
         writer.directive('py:function', python_signature(pyfunc), options)
         docstring = docstring_of(pyfunc)
         if docstring:
+            # What has been declared for this API so far.  The pages are
+            # written in one pass, so a docstring links to an entry point whose
+            # page has already been reached; a see-also covers the rest.
             with writer.indent():
-                write_docstring(docstring, writer)
+                write_docstring(docstring, writer, self.declared.get(module, {}))
 
     def write_parameters(
         self, section: RefSect, writer: Writer, renderer: rst.DocBookRenderer
@@ -1060,7 +1054,10 @@ def write_reference_index(reference: Reference, directory: str) -> None:
     )
 
     counts = {api.key: len(sections) for api, sections in reference.by_api()}
-    writer.directive('toctree', options={'maxdepth': '1'})
+    # Hidden: the table below is the visible list, and two of them on one page
+    # is one too many.  The toctree is still what puts the APIs in the sidebar
+    # and gives the pages a parent.
+    writer.directive('toctree', options={'hidden': '', 'maxdepth': '1'})
     with writer.indent():
         for api in APIS:
             writer.line('%s/index' % (api.key,))
