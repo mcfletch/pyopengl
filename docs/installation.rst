@@ -69,9 +69,3 @@ checkout in one command resolves them against each other.
 
 Compiling ``accelerate`` needs a working Python extension-building environment:
 a C compiler and the Python development headers.
-
-Building the documentation
---------------------------
-
-The documentation set is built from the checkout; :doc:`building-docs` says
-how.

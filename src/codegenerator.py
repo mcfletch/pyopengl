@@ -561,18 +561,35 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
             log.info("No spec-file in %s", specFile)
             return Specification('')
 
-    def generate(self):
-        for target in (self.rawPathName, self.pathName):
-            directory = os.path.dirname(target)
-            if not os.path.exists(directory):
-                log.warning('Creating target directory: %s', directory)
-                os.makedirs(directory)
-            if not os.path.isfile(os.path.join(directory, '__init__.py')):
-                open(os.path.join(directory, '__init__.py'), 'w').write(
-                    '''"""OpenGL Extensions"""'''
-                )
+    def _make_packages(self, target, root):
+        """Create ``target``'s directory, with an ``__init__.py`` at each level.
 
-        directory = os.path.dirname(self.rawPathName)
+        A module is written to ``<root>/<prefix>/<owner>/<module>.py``, so a
+        new API creates two directories, not one.  Every level needs an
+        initialiser: a directory of modules without one is an implicit
+        namespace package, which imports and holds nothing of its own, and
+        which ``pkgutil.walk_packages`` does not descend into -- so the
+        modules under it are reachable only by their full dotted names and are
+        documented nowhere.
+        """
+        directory = os.path.dirname(target)
+        if not os.path.exists(directory):
+            log.warning('Creating target directory: %s', directory)
+            os.makedirs(directory)
+        walked = root
+        for part in os.path.relpath(directory, root).split(os.sep):
+            if part in ('.', ''):
+                continue
+            walked = os.path.join(walked, part)
+            initialiser = os.path.join(walked, '__init__.py')
+            if not os.path.isfile(initialiser):
+                with open(initialiser, 'w') as fh:
+                    fh.write('''"""OpenGL Extensions"""''')
+
+    def generate(self):
+        self._make_packages(self.rawPathName, self.overall.rawTargetDirectory)
+        self._make_packages(self.pathName, self.overall.targetDirectory)
+
         current = ''
         toWrite = self.RAW_MODULE_TEMPLATE % self
         try:

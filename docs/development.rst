@@ -413,6 +413,5 @@ Running the tests and the gates
    $ tox -e errorpaths
 
 ``tox.ini`` declares the environments CI runs, including the linting and typing
-gates.  ``tests/`` has the suite; the offscreen backends in :doc:`egl-devices`,
-:doc:`cgl-offscreen` and :doc:`wgl-offscreen` are how it gets a context without
-a display.
+gates.  ``tests/`` has the suite; the backends in :doc:`offscreen` are how it gets a
+context without a display.

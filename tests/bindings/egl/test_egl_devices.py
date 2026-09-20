@@ -167,7 +167,7 @@ class TestTheModuleIsDocumented:
     """A public module nobody can find is a module nobody uses."""
 
     def test_there_is_a_page_for_it(self):
-        page = os.path.join(ROOT, 'docs', 'egl-devices.rst')
+        page = os.path.join(ROOT, 'docs', 'offscreen.rst')
         assert os.path.exists(page), page
         with open(page, encoding='utf-8') as handle:
             text = handle.read()

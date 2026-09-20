@@ -51,8 +51,6 @@ PyOpenGL includes bindings for these APIs:
      - X Window System GL interfaces
    * - :py:mod:`OpenGL.CGL`
      - macOS GL interfaces, with or without a window
-   * - :py:mod:`OpenGL.AGL`
-     - macOS GL interfaces, the older Carbon ones
    * - :py:mod:`OpenGL.Tk`
      - An OpenGL widget for Tkinter
 
@@ -100,13 +98,10 @@ Any of these works as well, and PyOpenGL draws into whatever is current:
 - `wxPython <https://wxpython.org/>`__
 - PyGTK
 - Tkinter, through :py:mod:`OpenGL.Tk`
-- GLUT, through :doc:`OpenGL.GLUT <reference/glut/index>`, for a program that
-  wants no other toolkit
+- GLUT through :doc:`OpenGL.GLUT <reference/glut/index>`
 - raw Xlib
 
-Or no window at all: :doc:`egl-devices` on Linux and Android,
-:doc:`cgl-offscreen` on macOS, :doc:`wgl-offscreen` on Windows, and OSMesa
-anywhere, all render into an offscreen surface.
+Or no window at all, using :doc:`offscreen`.
 
 Documentation
 -------------
@@ -123,12 +118,13 @@ Documentation
 
 .. toctree::
    :maxdepth: 2
-   :caption: Offscreen and platform notes
+   :caption: Platforms
 
-   egl-devices
+   offscreen
+   platform-linux
+   platform-macos
+   platform-windows
    angle-gles
-   cgl-offscreen
-   wgl-offscreen
 
 .. toctree::
    :maxdepth: 2

@@ -187,7 +187,7 @@ APIS = [
         'OpenGL.EGL',
         (),
         'Contexts and surfaces on Linux, Android and anywhere without a '
-        'display server.  See :doc:`/egl-devices`.',
+        'display server.  See :ref:`offscreen rendering on EGL <offscreen-egl>`.',
     ),
     Api(
         'glx',
@@ -201,7 +201,8 @@ APIS = [
         'WGL',
         'OpenGL.WGL',
         (),
-        'Contexts and surfaces on Windows.  See :doc:`/wgl-offscreen`.',
+        'Contexts and surfaces on Windows.  See :ref:`offscreen rendering with '
+        'pbuffers <offscreen-wgl>`.',
     ),
 ]
 
