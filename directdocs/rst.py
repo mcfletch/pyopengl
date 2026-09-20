@@ -14,6 +14,7 @@ PyOpenGL documentation set is in that object rather than here.
 from __future__ import annotations
 
 import contextlib
+import inspect
 import re
 import textwrap
 from typing import Any, Callable, Iterator, Protocol
@@ -27,6 +28,7 @@ __all__ = [
     'literal',
     'collapse',
     'squeeze',
+    'write_docstring',
 ]
 
 DOCBOOK_NS = 'http://docbook.org/ns/docbook'
@@ -541,6 +543,276 @@ class DocBookRenderer:
                 self.used_math = True
                 return ':raw-html:`%s`' % (serialize(child),)
         return self.inline_children_of(element)
+
+
+# ----------------------------------------------------------------------
+# docstrings
+
+
+#: A docstring that uses a role wrote itself as reStructuredText.
+_RST_ROLE = re.compile(r':[a-z:]+:`')
+
+#: A docstring that uses a directive has to be written through untouched: the
+#: directive and the indented body under it are one thing.
+_RST_DIRECTIVE = re.compile(r'^\s*\.\.\s+[\w-]+::', re.M)
+
+#: Inline markup a substitution must not reach inside: an entry point already
+#: written as a literal or as a cross-reference is already saying what it is.
+_PROTECTED = re.compile(r'``.*?``|:[a-z:]+:`[^`]*`|`[^`]*`_{0,2}', re.S)
+
+
+def write_docstring(
+    text: str, writer: Writer, entry_points: dict[str, str] | None = None
+) -> None:
+    """Write a docstring as the body of whatever directive is open.
+
+    PyOpenGL's docstrings are mostly a call signature, a sentence or two, and
+    an indented list of what each argument means.  The prose is written as
+    prose, so that a name in it can become a link; the argument list becomes a
+    definition list, which is what it is; anything else indented goes in
+    verbatim, its layout being what carries its meaning.
+
+    A docstring that uses a directive is written through untouched -- the
+    directive and its body have to stay together, and splitting them by indent
+    is exactly what would separate them.
+
+    :func:`inspect.cleandoc` rather than :func:`textwrap.dedent`: a docstring's
+    first line carries no indent and the rest carries the block's, so dedent
+    finds nothing in common and removes nothing -- which makes the whole of a
+    class docstring look indented, and lands all of it in a literal block.
+
+    ``entry_points`` maps an entry point name to its reference page; where it
+    is given, a name mentioned in the prose becomes a link to that page.
+    """
+    if not text:
+        return
+    text = inspect.cleandoc(text)
+    if _RST_DIRECTIVE.search(text) or _RST_ROLE.search(text):
+        # Written as reStructuredText, so it is written through: splitting it
+        # by indent would take its structure apart -- a list item and the line
+        # continuing it are not two blocks.  Only the argument lists are
+        # rewritten, those being the one thing in a docstring that reST reads
+        # as something else.
+        #
+        # A role or a directive, and not a bullet: the generated modules carry
+        # the specification's own prose as their docstring, and that is full of
+        # asterisks and indentation that were never markup.
+        writer.blank()
+        for line in convert_argument_lists(text).split('\n'):
+            # An indented line in a docstring is a sample or a literal block,
+            # and a link in the middle of a call is not what anybody wants.
+            if entry_points and line[:1] and not line[0].isspace():
+                line = link_entry_points(line, entry_points)
+            writer.line(line)
+        writer.blank()
+        return
+
+    #: A docstring using roles wrote itself as markup, so leave its markup
+    #: alone; a plain one has to be escaped or an asterisk in it is emphasis.
+    # Everything past here is plain text: whatever wrote itself as markup was
+    # written through above.  So it is escaped, or an asterisk in it becomes
+    # emphasis and a backquote opens a literal that never closes.
+    def prose(lines: list[str]) -> str:
+        body = escape(' '.join(line.strip() for line in lines))
+        if entry_points:
+            body = link_entry_points(body, entry_points)
+        return body
+
+    for indented, lines in docstring_blocks(text):
+        entries = argument_list(lines)
+        if entries is None:
+            if indented or looks_like_a_list(lines):
+                # Indented, so its layout is the point; or a list this could
+                # not read as one, which joining into a paragraph would run
+                # together into nonsense.
+                writer.literal_block('\n'.join(lines))
+            else:
+                writer.paragraph(prose(lines))
+            continue
+        writer.blank()
+        for term, description in entries:
+            writer.line(escape(term))
+            with writer.indent():
+                writer.line(textwrap.fill(prose(description), 72))
+            writer.blank()
+
+
+#: ``name -- what it is``, which is how every PyOpenGL docstring writes an
+#: argument.  Several names may share one description.
+_ARGUMENT = re.compile(r'^(\S[^-]*?)\s+--\s+(.*)$')
+
+#: What the left of a ``--`` has to look like to be argument names rather than
+#: a sentence with a dash in it: identifiers, possibly several, possibly
+#: starred.
+_ARGUMENT_NAMES = re.compile(r'^\*{0,2}\w+(?:\s*,\s*\*{0,2}\w+)*$')
+
+
+def looks_like_a_list(lines: list[str]) -> bool:
+    """Whether ``lines`` is a list this could not read as an argument list.
+
+    Such a run is left exactly as it is.  Joining it into a paragraph, which
+    is what prose gets, would run its entries together into one sentence.
+    """
+    for line in lines:
+        match = _ARGUMENT.match(line.strip())
+        if match and _ARGUMENT_NAMES.match(match.group(1).strip()):
+            return True
+    return False
+
+
+def argument_list(lines: list[str]) -> list[tuple[str, list[str]]] | None:
+    """``lines`` as ``(names, description)`` pairs, or ``None``.
+
+    ``None`` where the run is not an argument list at all -- a sample, a
+    table, a quoted message -- and should be left exactly as it is.  The names
+    have to look like names: a sentence with a dash in the middle of it is a
+    sentence.
+    """
+    body = textwrap.dedent('\n'.join(lines)).split('\n')
+    entries: list[tuple[str, list[str]]] = []
+    for line in body:
+        if not line.strip():
+            continue
+        if line[:1].isspace():
+            if not entries:
+                return None
+            entries[-1][1].append(line.strip())
+            continue
+        match = _ARGUMENT.match(line)
+        if not match or not _ARGUMENT_NAMES.match(match.group(1).strip()):
+            return None
+        entries.append((match.group(1).strip(), [match.group(2).strip()]))
+    return entries or None
+
+
+def convert_argument_lists(text: str) -> str:
+    """``name -- what it is`` runs in ``text``, as definition lists.
+
+    In place, at whatever indent they sit: everything around them is left
+    exactly as it was.  As reStructuredText such a run is a block quote whose
+    continuation lines are a second, unannounced indent -- which is an error,
+    and the reason a docstring that is otherwise ordinary markup cannot simply
+    be written through.
+    """
+    lines = text.split('\n')
+    out: list[str] = []
+    at = 0
+    while at < len(lines):
+        run, following = _argument_run(lines, at)
+        if run is None:
+            out.append(lines[at])
+            at += 1
+            continue
+        out.extend(run)
+        at = following
+    return '\n'.join(out)
+
+
+def _argument_run(lines: list[str], at: int) -> tuple[list[str] | None, int]:
+    """The definition list for the argument run at ``at``, and where it ends.
+
+    A run starts a block: it is the first line, the line above it is blank, or
+    the line above it is a label ending in a colon -- ``Attributes:`` and
+    ``Parameters:`` are how these lists are usually introduced.  Prose wraps,
+    and a sentence whose second line happens to begin ``instead -- ...`` is a
+    sentence rather than an argument called ``instead``.
+    """
+    above = lines[at - 1].strip() if at else ''
+    if above and not above.endswith(':'):
+        return None, at
+    first = _ARGUMENT.match(lines[at].strip())
+    if not first or not _ARGUMENT_NAMES.match(first.group(1).strip()):
+        return None, at
+    indent = ' ' * (len(lines[at]) - len(lines[at].lstrip()))
+    entries: list[tuple[str, list[str]]] = []
+    index = at
+    while index < len(lines):
+        line = lines[index]
+        if not line.strip():
+            # A blank line ends the run unless another entry follows it.
+            ahead = index + 1
+            while ahead < len(lines) and not lines[ahead].strip():
+                ahead += 1
+            nxt = _ARGUMENT.match(lines[ahead].strip()) if ahead < len(lines) else None
+            if not (nxt and _ARGUMENT_NAMES.match(nxt.group(1).strip())):
+                break
+            index = ahead
+            continue
+        here = len(line) - len(line.lstrip())
+        if here < len(indent):
+            break
+        match = _ARGUMENT.match(line.strip())
+        if here == len(indent) and match and _ARGUMENT_NAMES.match(
+            match.group(1).strip()
+        ):
+            entries.append((match.group(1).strip(), [match.group(2).strip()]))
+        elif here > len(indent) and entries:
+            entries[-1][1].append(line.strip())
+        else:
+            break
+        index += 1
+    if not entries:
+        return None, at
+    written: list[str] = []
+    for name, description in entries:
+        written.append(indent + name)
+        body = textwrap.fill(
+            ' '.join(description), width=max(72 - len(indent), 30)
+        )
+        written.extend(indent + '   ' + part for part in body.split('\n'))
+        written.append('')
+    return written, index
+
+
+def docstring_blocks(text: str) -> list[tuple[bool, list[str]]]:
+    """``text`` split into runs of indented and unindented lines.
+
+    A blank line inside a run of indented lines is part of it -- an argument
+    list with a paragraph between its halves is one block, not three -- and
+    between unindented lines it starts a new paragraph.
+    """
+    blocks: list[tuple[bool, list[str]]] = []
+    blank = False
+    for line in inspect.cleandoc(text).split('\n'):
+        if not line.strip():
+            blank = True
+            continue
+        indented = line[:1].isspace()
+        if blocks and blocks[-1][0] == indented and not (blank and not indented):
+            if blank:
+                blocks[-1][1].append('')
+            blocks[-1][1].append(line)
+        else:
+            blocks.append((indented, [line]))
+        blank = False
+    return blocks
+
+
+def link_entry_points(text: str, entry_points: dict[str, str]) -> str:
+    """Link the entry point names ``text`` mentions to their reference pages.
+
+    Only where the name is not already marked up: an entry point written as a
+    literal or as a cross-reference is already saying what it is.
+    """
+    names = re.compile(
+        r'\b(%s)\b(?![`(])'
+        % ('|'.join(
+            re.escape(name)
+            for name in sorted(entry_points, key=len, reverse=True)
+        ),)
+    )
+
+    def replace(match: re.Match) -> str:
+        name = match.group(1)
+        return ':doc:`%s </reference/%s>`' % (name, entry_points[name])
+
+    out, at = [], 0
+    for guarded in _PROTECTED.finditer(text):
+        out.append(names.sub(replace, text[at:guarded.start()]))
+        out.append(guarded.group(0))
+        at = guarded.end()
+    out.append(names.sub(replace, text[at:]))
+    return ''.join(out)
 
 
 # ----------------------------------------------------------------------

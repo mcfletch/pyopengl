@@ -54,7 +54,9 @@ import argparse  # noqa: E402
 import glob  # noqa: E402
 import json  # noqa: E402
 import logging  # noqa: E402
+import inspect  # noqa: E402
 import pkgutil  # noqa: E402
+import re  # noqa: E402
 import sys  # noqa: E402
 import textwrap  # noqa: E402
 import types  # noqa: E402
@@ -67,7 +69,7 @@ if PACKAGE_ROOT not in sys.path:
     sys.path.insert(0, PACKAGE_ROOT)
 
 from directdocs import model, rst  # noqa: E402
-from directdocs.rst import Writer  # noqa: E402
+from directdocs.rst import Writer, write_docstring  # noqa: E402
 from OpenGL import platform  # noqa: E402
 from OpenGL.constant import Constant  # noqa: E402
 from OpenGL.extensions import _Alternate as Alternate  # noqa: E402
@@ -328,6 +330,7 @@ class Class(object):
 
     def inspect(self):
         """Introspect to find methods, properties, etceteras"""
+        described = self.described_attributes()
         for key, value in sorted(
             list(self.cls.__dict__.items()), key=lambda x: x[0].lower()
         ):
@@ -344,14 +347,70 @@ class Class(object):
             ):
                 self.functions.append((key, model.PyFunction(None, value, alias=key)))
             elif hasattr(value, '__get__') and key not in ('__dict__', '__weakref__'):
-                self.properties.append((key, Property(value, key, self)))
+                annotation, default = described.get(key, (None, NOT_SET))
+                self.properties.append(
+                    (key, Property(value, key, self, annotation, default))
+                )
+
+    def described_attributes(self):
+        """``name -> (type, default)`` for the attributes, where those exist.
+
+        An attribute is often only a name here: a ``__slots__`` entry is a
+        descriptor and says nothing about itself.  What it is and what it
+        defaults to are in the annotations, or in the signature of the
+        ``__init__`` that sets it -- which for a class written this way is the
+        only place they are written down at all.
+        """
+        described = {}
+        for base in reversed(getattr(self.cls, '__mro__', [self.cls])):
+            for name, annotation in (
+                getattr(base, '__annotations__', None) or {}
+            ).items():
+                described[name] = (annotation_text(annotation), NOT_SET)
+        try:
+            signature = inspect.signature(self.cls.__init__)
+        except (TypeError, ValueError):
+            return described
+        for name, parameter in signature.parameters.items():
+            if name == 'self' or name.startswith('*'):
+                continue
+            annotation = described.get(name, (None, NOT_SET))[0]
+            if parameter.annotation is not inspect.Parameter.empty:
+                annotation = annotation_text(parameter.annotation)
+            default = (
+                NOT_SET
+                if parameter.default is inspect.Parameter.empty
+                else parameter.default
+            )
+            described[name] = (annotation, default)
+        return described
+
+
+#: An attribute with no default is not an attribute whose default is None.
+NOT_SET = object()
+
+
+def annotation_text(annotation):
+    """An annotation as it should read in the page.
+
+    A module using ``from __future__ import annotations`` has these already as
+    the strings they were written as, which is what a reader wants; anything
+    else is turned into one.
+    """
+    if isinstance(annotation, str):
+        return annotation
+    return getattr(annotation, '__name__', None) or str(annotation)
 
 
 class Property(object):
-    def __init__(self, target, name, cls):
+    def __init__(self, target, name, cls, annotation=None, default=NOT_SET):
         self.cls = cls
         self.target = target
         self.name = name
+        #: What it holds, where anything says so.
+        self.annotation = annotation
+        #: What it is when nothing sets it, or :data:`NOT_SET`.
+        self.default = default
 
     @property
     def docstring(self):
@@ -379,18 +438,17 @@ def docstring_lines(obj: Any) -> str:
     return text.strip()
 
 
-def write_docstring(text: str, writer: Writer) -> None:
-    """Write a docstring as the body of whatever directive is open.
-
-    PyOpenGL's docstrings are plain text laid out with indentation rather than
-    reStructuredText, so anything past the first line goes in verbatim.
-    """
-    if not text:
-        return
-    if '\n' in text:
-        writer.literal_block(text)
-    else:
-        writer.paragraph(rst.escape(text))
+def attribute_options(prop: Any) -> dict[str, str]:
+    """The ``:type:`` and ``:value:`` for an attribute, where they are known."""
+    options = {}
+    if prop.annotation:
+        options['type'] = prop.annotation
+    if prop.default is not NOT_SET:
+        try:
+            options['value'] = repr(prop.default)
+        except Exception as err:
+            log.debug('cannot show the default of %s: %s', prop.name, err)
+    return options
 
 
 def base_name(base: Any) -> str:
@@ -478,6 +536,9 @@ class Renderer:
         self.entry_points = entry_points
         #: What :func:`identity` returns -> the module and name declaring it.
         self.claims = claims
+        #: The modules that get a page, so a breadcrumb only names pages that
+        #: are there.  Filled in by :func:`render_projects`.
+        self.documented: set[str] = set()
 
     def reference_link(self, module: PyModule, name: str) -> str | None:
         page = self.entry_points.get(api_package(module.name), {}).get(name)
@@ -496,7 +557,10 @@ class Renderer:
         writer = Writer()
         writer.directive('py:module', module.name)
         writer.heading(module.name, 0)
-        write_docstring(docstring_lines(module), writer)
+        self.write_breadcrumb(module, writer)
+        write_docstring(
+            docstring_lines(module), writer, self.entry_points_for(module)
+        )
 
         self.write_submodules(module, writer)
         self.write_functions(module, writer)
@@ -505,6 +569,37 @@ class Renderer:
         self.write_reexports(module, writer)
         self.write_imports(module, writer)
         return writer.render()
+
+    def entry_points_for(self, module: PyModule) -> dict[str, str]:
+        """The reference pages a docstring on ``module`` may mention.
+
+        Its own API's, and desktop OpenGL's for a module that is not part of
+        one -- `OpenGL.arrays.vbo` and its neighbours talk about `glBindBuffer`
+        rather than about anything of their own.
+        """
+        return self.entry_points.get(
+            api_package(module.name)
+        ) or self.entry_points.get('OpenGL.GL', {})
+
+    def write_breadcrumb(self, module: PyModule, writer: Writer) -> None:
+        """A line of links up to the packages this module is inside.
+
+        Sphinx gives a page no way up on its own, and a reader who arrived at
+        `OpenGL.Tk.widget` from a search has nothing saying that `OpenGL.Tk`
+        exists.
+        """
+        parts = module.name.split('.')
+        ancestors = [
+            '.'.join(parts[:i])
+            for i in range(1, len(parts))
+            if '.'.join(parts[:i]) in self.documented
+        ]
+        if not ancestors:
+            return
+        writer.paragraph(
+            ' / '.join(':doc:`%s <%s>`' % (name, name) for name in ancestors)
+            + ' / **%s**' % (parts[-1],)
+        )
 
     def write_reexports(self, module: PyModule, writer: Writer) -> None:
         """Say which modules this one passes on the names of.
@@ -583,7 +678,9 @@ class Renderer:
             with writer.indent():
                 for alias in sorted(getattr(func, 'aliases', []) or []):
                     writer.paragraph('Also exported as ``%s``.' % (alias,))
-                write_docstring(docstring_lines(func), writer)
+                write_docstring(
+                    docstring_lines(func), writer, self.entry_points_for(module)
+                )
 
     def write_classes(self, module: PyModule, writer: Writer) -> None:
         declared = [
@@ -604,16 +701,19 @@ class Renderer:
             writer.directive(
                 'py:class', '%s(%s)' % (name, bases) if bases else name
             )
+            known = self.entry_points_for(module)
             with writer.indent():
-                write_docstring(docstring_lines(cls), writer)
+                write_docstring(docstring_lines(cls), writer, known)
                 for _key, prop in cls.properties:
-                    writer.directive('py:attribute', prop.name)
+                    writer.directive(
+                        'py:attribute', prop.name, attribute_options(prop)
+                    )
                     with writer.indent():
-                        write_docstring(docstring_lines(prop), writer)
+                        write_docstring(docstring_lines(prop), writer, known)
                 for _key, func in cls.functions:
                     writer.directive('py:method', model.python_signature(func))
                     with writer.indent():
-                        write_docstring(docstring_lines(func), writer)
+                        write_docstring(docstring_lines(func), writer, known)
 
     def write_constants(self, module: PyModule, writer: Writer) -> None:
         declared = [
@@ -826,6 +926,7 @@ def render_projects(
         module.modules = child_names(module.name, found)
 
     renderer = Renderer(load_entry_points(), claim_owners(modules))
+    renderer.documented = {module.name for module in modules}
     rendered: list[str] = []
     for module in modules:
         try:

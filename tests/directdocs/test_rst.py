@@ -284,3 +284,140 @@ class TestEscaping:
 
     def test_a_short_heading_still_gets_a_usable_underline(self):
         assert rst.heading('x', 0) == 'x\n==='
+
+
+class TestDocstrings:
+    """How a docstring becomes part of a page.
+
+    PyOpenGL's docstrings are mostly a call signature, a sentence or two, and
+    an indented list of what each argument means.  A few are hand-written
+    reStructuredText.  Both have to read as themselves.
+    """
+
+    def render(self, text, entry_points=None):
+        writer = rst.Writer()
+        rst.write_docstring(text, writer, entry_points)
+        return writer.render()
+
+    def test_one_line_is_a_paragraph(self):
+        assert self.render('Bind a named texture').strip() == (
+            'Bind a named texture'
+        )
+
+    def test_an_argument_list_becomes_a_definition_list(self):
+        out = self.render(
+            'Copy data into the bound buffer\n'
+            '\n'
+            '    target -- which buffer type is intended\n'
+            '    size -- the count in bytes\n'
+        )
+        assert 'target\n   which buffer type is intended' in out
+        assert 'size\n   the count in bytes' in out
+        assert 'code-block' not in out
+
+    def test_a_continuation_joins_its_entry(self):
+        out = self.render(
+            'Do a thing\n'
+            '\n'
+            '    data -- the pointer to use, which may be None to\n'
+            '        allocate without copying\n'
+        )
+        assert 'allocate without copying' in out
+        assert out.count('data') == 1
+
+    def test_an_indented_run_that_is_not_an_argument_list_stays_verbatim(self):
+        """Its layout is what carries its meaning.
+
+        Indented relative to prose above it -- a docstring whose whole body is
+        indented has that indent removed by `cleandoc`, and then nothing about
+        it is indented at all.
+        """
+        out = self.render(
+            'Map the buffer\n'
+            '\n'
+            'Taken from:\n'
+            '\n'
+            '    numpy-discussion, message 01161\n'
+            '    and the comment under it\n'
+        )
+        assert '.. code-block:: text' in out
+        assert 'numpy-discussion, message 01161' in out
+
+    def test_a_mixed_run_is_left_alone_rather_than_half_converted(self):
+        """Half of it reads as arguments and half does not, so none of it is
+        converted -- joining it into a paragraph would run the entries
+        together into one sentence."""
+        out = self.render(
+            'Query it\n'
+            '\n'
+            'program -- the program to query\n'
+            'Following parameters are optional:\n'
+            'bufSize -- the size of the buffer\n'
+        )
+        assert '.. code-block:: text' in out
+        assert 'program -- the program to query' in out
+
+    def test_a_sentence_with_a_dash_in_it_is_a_sentence(self):
+        """`--` between words is not an argument list."""
+        out = self.render('Copy the given data -- the fast path where it fits')
+        assert 'code-block' not in out
+        assert 'Copy the given data' in out
+
+    def test_a_role_written_by_hand_survives(self):
+        """`:class:`~OpenGL.Tk.widget.GLFrame`` is a link its author meant."""
+        out = self.render(
+            'A widget.\n\n:class:`~OpenGL.Tk.widget.GLFrame` owns a context.\n'
+        )
+        assert ':class:`~OpenGL.Tk.widget.GLFrame`' in out
+        assert '\\:class\\:' not in out
+
+    def test_plain_text_is_escaped(self):
+        """An asterisk in plain prose is an asterisk, not emphasis."""
+        out = self.render('Takes *args and returns None')
+        assert '\\*args' in out
+
+    def test_a_directive_is_written_through_untouched(self):
+        """A directive and the body indented under it are one thing."""
+        out = self.render(
+            'An example.\n\n.. code-block:: python\n\n   glBegin(GL_TRIANGLES)\n'
+        )
+        assert '.. code-block:: python' in out
+        assert 'glBegin(GL_TRIANGLES)' in out
+
+
+class TestLinkingEntryPoints:
+    def render(self, text, entry_points):
+        writer = rst.Writer()
+        rst.write_docstring(text, writer, entry_points)
+        return writer.render()
+
+    def test_a_name_in_prose_becomes_a_link(self):
+        out = self.render('Wraps glBegin for you', {'glBegin': 'gl/glBegin'})
+        assert ':doc:`glBegin </reference/gl/glBegin>`' in out
+
+    def test_a_name_already_marked_up_is_left_alone(self):
+        out = self.render(
+            'See :py:func:`glBegin` and ``glEnd``.\n\nMore about glBegin.',
+            {'glBegin': 'gl/glBegin', 'glEnd': 'gl/glEnd'},
+        )
+        assert ':py:func:`glBegin`' in out
+        assert '``glEnd``' in out
+        assert ':doc:`glBegin </reference/gl/glBegin>`' in out
+
+    def test_a_name_that_is_a_call_is_left_alone(self):
+        """`glBegin(GL_TRIANGLES)` is code, and a link inside a call is not
+        what anybody wants."""
+        out = self.render(
+            'Call glBegin(mode) first', {'glBegin': 'gl/glBegin'}
+        )
+        assert ':doc:' not in out
+
+    def test_a_longer_name_wins_over_a_shorter_one(self):
+        out = self.render(
+            'Use glBeginQuery here',
+            {'glBegin': 'gl/glBegin', 'glBeginQuery': 'gl/glBeginQuery'},
+        )
+        assert ':doc:`glBeginQuery </reference/gl/glBeginQuery>`' in out
+
+    def test_nothing_happens_without_a_manifest(self):
+        assert ':doc:' not in self.render('Wraps glBegin for you', {})
