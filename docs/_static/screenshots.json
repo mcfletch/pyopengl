@@ -15,8 +15,14 @@
     "description": "2D vector graphics (SVG) rendered with the Seagull package; Open Clip Art by webmichl"
   },
   {
-    "url": "_static/screenshots/context/twitch-viewer-screen-0001.png",
-    "description": "Twitch BSP (Quake III(TM) map file) loader"
+    "url": "_static/screenshots/demos/forest.jpg",
+    "link": "https://github.com/mcfletch/openglcontext-forest",
+    "description": "The OpenGLContext forest demo: DEM terrain with instanced tree and grass levels of detail; tree models by Georgeous, 3D Error 404 and LOLIPOP (CC-BY 4.0)"
+  },
+  {
+    "url": "_static/screenshots/demos/glisteel.jpg",
+    "link": "https://github.com/mcfletch/glisteel",
+    "description": "GLinting Steel, a racing game driving a streamed 3D Tiles world; tree models by Georgeous, 3D Error 404 and LOLIPOP (CC-BY 4.0)"
   },
   {
     "url": "_static/screenshots/context/glelathe.jpg",

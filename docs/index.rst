@@ -6,10 +6,6 @@ PyOpenGL is the cross-platform `Python <https://www.python.org/>`__ binding to
 ctypes, with an optional compiled dispatch layer beside it, and is provided
 under a BSD-style licence.
 
-`Source on GitHub <https://github.com/mcfletch/pyopengl>`__ ·
-`PyOpenGL on PyPI <https://pypi.org/project/PyOpenGL/>`__ ·
-`Issue tracker <https://github.com/mcfletch/pyopengl/issues>`__
-
 .. carousel::
    :source: _static/screenshots.json
    :height: 340
@@ -21,10 +17,10 @@ under a BSD-style licence.
 :doc:`installation` covers the rest, including what Windows needs for GLUT and
 GLE.
 
-The packages
-------------
+The APIs
+--------
 
-``import OpenGL`` gets you all of these; each links to its reference.
+PyOpenGL includes bindings for these APIs:
 
 .. list-table::
    :widths: auto
@@ -63,32 +59,34 @@ The packages
 Hundreds of extensions to GL, GLES, EGL, WGL and GLX come with each package;
 each reference lists them.
 
-The distributions
------------------
+The packages
+------------
 
-``PyOpenGL``
+`PyOpenGL <https://github.com/mcfletch/pyopengl>`__
     The ``OpenGL`` package, everything in the table above.
 
-``PyOpenGL_accelerate``
+`PyOpenGL_accelerate <https://github.com/mcfletch/pyopengl>`__
     Cython-coded accelerators and the C dispatch layer.  Optional, and worth
     having: a call reaches the driver several times faster through it.  Its
     source is in the PyOpenGL repository and it releases at the same version.
     See :doc:`c-dispatch`.
 
-``PyOpenGL-glut-binaries``
+`PyOpenGL-glut-binaries <https://github.com/mcfletch/pyopengl-glut-binaries>`__
     Windows builds of freeglut and GLE, pulled in by
     ``pip install PyOpenGL[glut]``.
 
-`OpenGLContext <https://github.com/mcfletch/openglcontext>`__ is a separate
-project: a scenegraph and testing toolkit built on PyOpenGL, with its own
-documentation.  PyOpenGL does not require it.
+`OpenGLContext <https://github.com/mcfletch/openglcontext>`__
+    A game engine and 3D viewer built on PyOpenGL, and the suite PyOpenGL is
+    tested and validated against.  A separate project with its own
+    documentation; PyOpenGL does not require it.
 
 Getting a window
 ----------------
 
-PyOpenGL draws into a context; something else has to create one.
-`GLFW <https://pypi.org/project/glfw/>`__ is the one to reach for -- small,
-current, cross-platform, and what PyOpenGL's own test suite uses:
+PyOpenGL draws into a context; something else has to create one.  If you want
+something simple and cross-platform, `GLFW <https://pypi.org/project/glfw/>`__
+is a strong choice: its portability and feature coverage are wide, including on
+modern Wayland Linux systems, and it is what PyOpenGL's own test suite uses.
 
 .. code-block:: console
 

@@ -33,3 +33,23 @@ table.entry-point-index td:first-child {
   grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
   gap: 1rem;
 }
+
+/* The badges at the foot of the sidebar.  A fixed height keeps the row from
+ * reflowing as each image arrives, and the images are small enough that a
+ * column is only needed on a narrow sidebar. */
+.project-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding: 0.75rem 1rem 1rem;
+  border-top: 1px solid var(--color-background-border, #ddd);
+}
+
+.project-badges a {
+  display: inline-flex;
+  line-height: 0;
+}
+
+.project-badges img {
+  height: 20px;
+}

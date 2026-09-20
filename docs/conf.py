@@ -102,10 +102,59 @@ html_favicon = 'images/pyopengl_icon.jpg'
 html_copy_source = False
 html_show_sourcelink = False
 
+#: Where to find the project, shown as badges at the foot of the sidebar.
+#: `_templates/sidebar/badges.html` renders these.
+PROJECT_LINKS = [
+    (
+        'https://pypi.org/project/PyOpenGL/',
+        'https://img.shields.io/pypi/v/PyOpenGL',
+        'PyOpenGL on PyPI',
+    ),
+    (
+        'https://pepy.tech/project/pyopengl',
+        'https://img.shields.io/pepy/dt/PyOpenGL',
+        'Total downloads from PyPI',
+    ),
+    (
+        'https://github.com/mcfletch/pyopengl/actions/workflows/test.yml',
+        'https://img.shields.io/github/actions/workflow/status'
+        '/mcfletch/pyopengl/test.yml?branch=develop&label=tests',
+        'The test suite on develop',
+    ),
+]
+
+#: Where the source is, for the link in the top-right icon row.
+PROJECT_URL = 'https://github.com/mcfletch/pyopengl'
+
 html_theme_options = {
-    'source_repository': 'https://github.com/mcfletch/pyopengl/',
-    'source_branch': 'develop',
-    'source_directory': 'docs/',
+    # One button in the top-right icon row.  It is the project link rather
+    # than an edit link: `_templates/components/edit-this-page.html` is what
+    # the theme includes for it, and that is what it renders.  `source_*` are
+    # deliberately unset, since those are what would make it an edit link.
+    'top_of_page_buttons': ['edit'],
+}
+
+#: What the two templates above read.  A template sees `html_context`, not
+#: this module.
+html_context = {
+    'project_url': PROJECT_URL,
+    'project_badges': PROJECT_LINKS,
+}
+
+#: Furo's own list, from its `theme.conf`, with the badges added after
+#: `scroll-end` so they sit below the navigation rather than scrolling with
+#: it.  Naming one sidebar means naming them all.
+html_sidebars = {
+    '**': [
+        'sidebar/brand.html',
+        'sidebar/search.html',
+        'sidebar/scroll-start.html',
+        'sidebar/navigation.html',
+        'sidebar/ethical-ads.html',
+        'sidebar/scroll-end.html',
+        'sidebar/badges.html',
+        'sidebar/variant-selector.html',
+    ]
 }
 
 #: Screenshots for the front-page carousel.  Each record wants a ``url`` and
