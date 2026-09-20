@@ -173,7 +173,7 @@ class GLFrame(tkinter.Frame):
         self._initialised = False
 
     def waitForMap(self, timeout: float = MAP_TIMEOUT) -> Any:
-        """Pump Tk until the window is on screen, and answer the context
+        """Pump Tk until the window is on screen; returns the context
 
         A Tk window has no native handle until the window system has mapped
         it, so there is nothing to make a context against before then.  This is

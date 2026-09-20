@@ -1,0 +1,55 @@
+/* Presentation for the parts of the set the generators write. */
+
+/* The reference pages give a C prototype and then the Python entry points
+ * that reach it.  The prototype is the shape the OpenGL specification
+ * describes, so it reads as code rather than as a signature Python can call. */
+.c-prototype {
+  font-family: var(--font-stack--monospace, monospace);
+  font-size: 0.9em;
+  margin: 0.2rem 0 0.8rem 0;
+  padding: 0.35rem 0.6rem;
+  border-left: 3px solid var(--color-background-border, #ccc);
+  background: var(--color-background-secondary, #f6f6f6);
+  overflow-x: auto;
+}
+
+/* The table of entry points at the head of each package's reference. */
+table.entry-point-index td:first-child {
+  white-space: nowrap;
+}
+
+/* Sample-code citations, where the sample scan has run. */
+.sample-project {
+  font-weight: bold;
+}
+
+.sample-lines {
+  color: var(--color-foreground-secondary, #555);
+}
+
+/* The front page's feature grid. */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem;
+}
+
+/* The badges at the foot of the sidebar.  A fixed height keeps the row from
+ * reflowing as each image arrives, and the images are small enough that a
+ * column is only needed on a narrow sidebar. */
+.project-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding: 0.75rem 1rem 1rem;
+  border-top: 1px solid var(--color-background-border, #ddd);
+}
+
+.project-badges a {
+  display: inline-flex;
+  line-height: 0;
+}
+
+.project-badges img {
+  height: 20px;
+}

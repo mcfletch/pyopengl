@@ -10,8 +10,8 @@ About the  CGL API, (from [1]):
 CGL or Core OpenGL is the lowest accessible interface API for OpenGL. 
 It knows nothing about windowing systems but can be used directly to 
 find both renderer information and as a full screen or off screen 
-interface. It is accessible from both Cocoa and Carbon and is what both 
-NSGL and AGL are built on. A complete Pbuffer interface is also provided. 
+interface. It is accessible from Cocoa and is what NSGL is built on. A complete
+Pbuffer interface is also provided. 
 Functionality is provided in via the OpenGL framework and applications 
 can include the OpenGL.h header to access CGL's functionality. Developers
 can see an example of using CGL with Carbon in the Carbon CGL code sample.
@@ -73,8 +73,8 @@ class DarwinPlatform( baseplatform.BasePlatform ):
     def releaseCurrentContext( self ):
         """Let go of the context this thread holds; answer whether there was one
 
-        CGL is the layer NSGL and AGL are built on, so a context made through
-        any of the three is the one this releases.  See
+        CGL is the layer NSGL is built on, so a context made through either is
+        the one this releases.  See
         :meth:`OpenGL.platform.baseplatform.BasePlatform.releaseCurrentContext`
         for why a program with two GL bindings in it needs to be able to say
         this.

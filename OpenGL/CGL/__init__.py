@@ -1,7 +1,7 @@
 """CGL, the interface that gives macOS an OpenGL context with no window.
 
-CGL is the layer NSGL and AGL are built on, and the only one of the three that
-will hand out a context without a window server to put a window on.  That makes
+CGL is the layer NSGL is built on, and the only one of the two that will hand
+out a context without a window server to put a window on.  That makes
 it what an offscreen renderer, a batch tool or a CI job on macOS needs::
 
     from OpenGL.CGL import headless_context

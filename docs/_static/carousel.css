@@ -1,0 +1,50 @@
+/* The rotating screenshot panel.  `--carousel-height` is set per panel by the
+ * `carousel` directive's `:height:` option. */
+
+.pyopengl-carousel {
+  --carousel-height: 320px;
+  margin: 1.5rem 0;
+}
+
+.pyopengl-carousel .carousel-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--carousel-height);
+  background: var(--color-background-secondary, #f4f4f4);
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.pyopengl-carousel .carousel-image {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 250ms ease-in-out;
+}
+
+.pyopengl-carousel .carousel-image.shown {
+  opacity: 1;
+}
+
+.pyopengl-carousel .carousel-caption {
+  margin-top: 0.4rem;
+  font-size: 0.85em;
+  text-align: center;
+  min-height: 1.4em;
+  color: var(--color-foreground-secondary, #555);
+}
+
+/* Without JavaScript the pictures stack, each under its own caption. */
+.pyopengl-carousel noscript figure {
+  margin: 0 0 1rem 0;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pyopengl-carousel .carousel-image {
+    transition: none;
+  }
+}

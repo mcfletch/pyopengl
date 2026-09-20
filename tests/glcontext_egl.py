@@ -148,7 +148,7 @@ def pick_device(found, env=None):
             'hardware device, so unset the variable to use one of these.'
             % ', '.join(repr(device) for device in found)
         )
-    # Only software devices: that is the whole offer, and nothing contradicts it.
+    # Only software devices are on offer, and nothing contradicts that.
     return found[0]
 
 

@@ -77,7 +77,7 @@ import occurs the flags should no longer be changed.
         Default: False
 
     ERROR_DEBUG_OUTPUT -- if True, a context offering GL_KHR_debug
-        notices errors through the driver's callback rather than
+        reports errors through the driver's callback rather than
         through a glGetError after every call.  The callback runs
         during the failing call, so the check on the ordinary path
         is a flag read; the same GLError is raised from the same
@@ -282,7 +282,7 @@ import occurs the flags should no longer be changed.
         stub beside each package, generated from the registry and
         shipped with a py.typed marker, which describes the Python
         signature -- including the arguments the friendly form
-        drops.  See documentation/c-dispatch.html.
+        drops.  See docs/c-dispatch.rst.
 
         Default: False
 """

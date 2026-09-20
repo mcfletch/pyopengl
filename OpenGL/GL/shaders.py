@@ -133,8 +133,8 @@ def _distinct_sampler_targets( program ):
     uniforms have not been set yet.  Ordinary shaders read a texture and a
     buffer, or a texture and a shadow map, so this is not a corner.
 
-    Counts to two and stops, because two is the whole of what the caller asks:
-    the alternative is a ``glGetActiveUniform`` round trip per uniform in the
+    Counts to two and stops, because two is all the caller asks about: the
+    alternative is a ``glGetActiveUniform`` round trip per uniform in the
     program, at every link.
 
     Returns 0 where the count cannot be had, which reads as "nothing to skip".

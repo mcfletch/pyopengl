@@ -1,5 +1,5 @@
 #! /usr/bin/env python3
-"""What the library believes about the context, against what the context says.
+"""What the library reports about the context, against what the context says.
 
 ``OpenGL.extensions`` decides whether an entry point exists by asking a querier
 about the version and the extension list, and the answer gates every

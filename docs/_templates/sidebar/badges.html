@@ -1,0 +1,17 @@
+{#-
+  The foot of the sidebar: released version, total downloads, and whether the
+  suite is passing.  Outside the scrolling region, so they stay put.
+
+  `project_badges` comes from `html_context` in `conf.py`, as
+  `(link, image, title)`.  The images are served by shields.io, so a reader
+  with no network sees their alt text rather than a broken layout.
+-#}
+{% if project_badges %}
+<div class="project-badges">
+  {% for url, image, title in project_badges %}
+  <a href="{{ url }}" rel="external" title="{{ title }}">
+    <img src="{{ image }}" alt="{{ title }}" loading="lazy">
+  </a>
+  {% endfor %}
+</div>
+{% endif %}

@@ -60,22 +60,36 @@ def generate_tokens_file( filename, filterFunction=glName, processFunction=glPro
     except Exception as err:
         pass
 
+#: Directories that hold no source anybody wrote.  `.git` is the expensive one:
+#: it is most of a checkout by file count, and every object in it is scanned as
+#: though it were Python.
+SKIP_DIRECTORIES = ('.svn', 'CVS', '.git', '.hg', '.tox', '.venv', '__pycache__')
+
 def generate_tokens_dir( directory, filterFunction=glName, processFunction=glProcess ):
-    """Generate tokens for all Python files in a directory"""
-    log.info( """Entering directory: %s""", directory )
+    """Generate tokens for all Python files in a directory
+
+    A directory that is not there is skipped rather than fatal: the sample
+    sources are other people's repositories, and one of them being renamed,
+    made private or simply not fetched yet should cost its own samples rather
+    than the whole scan.
+    """
+    if not os.path.isdir( directory ):
+        log.warning( """No checkout at %s; its samples are not in this scan""", directory )
+        return
+    log.debug( """Entering directory: %s""", directory )
     files = glob.glob( os.path.join(directory, '*.py'))
     for file in files:
         if os.path.isfile( file ):
             generate_tokens_file( file, filterFunction, processFunction )
     for file in os.listdir( directory ):
-        if file in ('.svn','CVS'):
+        if file in SKIP_DIRECTORIES:
             continue
         file = os.path.join(directory,file)
         if os.path.islink( file ):
             continue
         elif os.path.isdir(file):
             generate_tokens_dir( file, filterFunction, processFunction )
-    log.info( """Exiting directory: %s""", directory )
+    log.debug( """Exiting directory: %s""", directory )
 
 VIEWCVS =  '%(baseURL)s/%(deltaPath)s?rev=HEAD&content-type=text/vnd.viewcvs-markup'
 RAWSVN = '%(baseURL)s/%(deltaPath)s'

@@ -79,7 +79,7 @@ class TestChoosingADevice:
         assert glcontext_egl.pick_device([SOFTWARE, HARDWARE], {}) is HARDWARE
 
     def test_the_software_device_serves_where_it_is_the_only_one(self):
-        """A CI runner with no GPU: rendering in software is the whole offer."""
+        """A CI runner with no GPU offers software rendering and nothing else."""
         assert glcontext_egl.pick_device([SOFTWARE], {}) is SOFTWARE
 
     def test_asking_for_software_selects_the_software_device(self):

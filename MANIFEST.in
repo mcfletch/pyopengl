@@ -17,3 +17,11 @@ exclude directdocs
 include OpenGL/py.typed
 include OpenGL/raw/_declarations/*.dat
 recursive-include OpenGL *.pyi
+
+# The documentation sources ship; what a build leaves in them does not.
+# `docs/reference` and `docs/api` are written by the generators on every build
+# and `docs/_build` is the rendered site -- a couple of gigabytes of it, which
+# would otherwise land in an sdist made from a checkout that had built the docs.
+prune docs/_build
+prune docs/reference
+prune docs/api

@@ -195,7 +195,7 @@ def _desktop_checker( ):
 
 
 def end_abandoned_block( ):
-    """Close a ``glBegin`` block left open, and say whether there was one.
+    """Close a ``glBegin`` block left open; True where there was one.
 
     A block belongs to the context it was opened in and has to be closed
     there.  A context created or destroyed while one is open is undefined, and
@@ -359,7 +359,7 @@ if _configflags.ERROR_CHECKING:
             def setErrorReader( self, reader=None ):
                 """Read error codes from `reader`, or from glGetError again.
 
-                A GL_KHR_debug callback notices the error during the call, so
+                A GL_KHR_debug callback records the error during the call, so
                 the check afterwards is a flag read rather than a round trip.
                 `OpenGL.dispatch.use_debug_output` is the way in; this is where
                 the choice takes effect.

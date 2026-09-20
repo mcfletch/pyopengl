@@ -529,10 +529,10 @@ def _build(module_name):
     for source in contents['reexports']:
         built.update(_build(source)[0])
 
-    from OpenGL.constant import Constant
+    from OpenGL.constant import declared
 
     for key, value in contents['constants'].items():
-        built[key] = Constant(key, value)
+        built[key] = declared(key, value, module_name)
 
     api = api_of(module_name)
     extension = contents['extension']

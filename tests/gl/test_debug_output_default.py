@@ -1,10 +1,10 @@
 #! /usr/bin/env python3
 """A context that offers GL_KHR_debug is checked through it, without asking.
 
-Error checking is on by default, and its whole cost is a ``glGetError`` round
-trip after every call.  Where the driver will report an error through a
-callback during the call instead, that is the cheaper way to notice the same
-error -- so a context that offers it gets it, under either implementation, and
+Error checking is on by default, and it costs a ``glGetError`` round trip after
+every call.  Where the driver will report an error through a callback during
+the call instead, that is the cheaper way to catch the same error -- so a
+context that offers it gets it, under either implementation, and
 :func:`OpenGL.dispatch.error_checking_mode` says which one a context ended up
 with.
 

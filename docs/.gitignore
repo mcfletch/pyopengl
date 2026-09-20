@@ -1,0 +1,5 @@
+# Written by build-docs.py from the Khronos DocBook sources and from the
+# installed packages; regenerated on every build.
+/reference/
+/api/
+/_build/

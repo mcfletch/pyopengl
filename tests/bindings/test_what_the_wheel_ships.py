@@ -11,8 +11,8 @@ here are the ones that kept them arriving. They ship as
 ``PyOpenGL-glut-binaries`` now -- ``pip install PyOpenGL[glut]`` -- so what
 these cases hold is the opposite: that the wheel carries no binaries at all.
 A ``.dll`` reappearing in it is a Linux or macOS install downloading Windows
-libraries it cannot load, which is the whole of what the split was for, and
-it would come back silently.
+libraries it cannot load, which is what the split was for, and it would come
+back silently.
 
 See `plans/BUNDLED-DLLS.md <../../plans/BUNDLED-DLLS.md>`_.
 

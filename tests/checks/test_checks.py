@@ -197,7 +197,7 @@ REQUIREMENTS = {
     'glx': (_linux, ('xlib',)),
     'glut': (_glut, ('window-server',)),
     'angle': (_angle, ()),
-    # No window server implied: rendering with none is the whole point of it.
+    # No window server implied: rendering without one is what it is for.
     'osmesa': (_osmesa, ()),
 }
 

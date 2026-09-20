@@ -43,7 +43,7 @@ class TestTheDatatypeExists:
         assert arrays.GLintptrArray.baseType is _types.GLintptr
 
     def test_that_is_as_wide_as_a_pointer(self):
-        """Which is the whole reason it is not GLint64Array."""
+        """Which is why it is not GLint64Array."""
         assert ctypes.sizeof(_types.GLintptr) == ctypes.sizeof(ctypes.c_void_p)
 
     def test_a_vdpau_surface_is_one_of_them(self):

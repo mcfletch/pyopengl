@@ -9,7 +9,7 @@ PyOpenGL reaches it::
 
 It is never selected by guessing. A Windows machine's OpenGL is WGL's, and a
 program that did not ask for ES should go on getting desktop GL from the
-driver; asking for this platform is the whole of how it is chosen.
+driver; this platform is used only when it is asked for by name.
 
 **The libraries it binds are Windows DLLs.** Selecting it anywhere else raises
 :exc:`ImportError` naming the machine, since the ``libEGL.dll`` and

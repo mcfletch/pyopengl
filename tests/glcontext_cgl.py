@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 """Headless CGL backend for :class:`glcontext.ContextTestCase` (macOS).
 
-CGL is the layer NSGL and AGL are built on, and the only one that hands out a
+CGL is the layer NSGL is built on, and the only one that hands out a
 context with no window server to put a window on -- which is what a CI runner,
 a batch tool or a remote shell has.  It is the macOS counterpart of
 ``glcontext_egl``: no window, no display, and ``visible`` and the inter-test

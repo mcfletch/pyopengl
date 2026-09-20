@@ -339,7 +339,10 @@ class PyFunction(Function):
         else:
             if hasattr(target, 'argtypes') and target.argtypes is None:
                 return []
-            log.warning("""No parameters for type: %r""", target.__class__)
+            # A builtin does not say what it takes, and thousands of them go
+            # past in a documentation run, so this is a note rather than a
+            # warning.
+            log.debug("""No parameters for type: %r""", target.__class__)
             names = []
         return [Parameter(name, data_type=None, function=self) for name in names]
 
@@ -378,6 +381,37 @@ class Parameter(object):
     @property
     def has_default(self):
         return self.default is not NOT_DEFINED
+
+
+def python_signature(function):
+    """``name(arg, arg=default, *args, **named)`` for a Python entry point."""
+    parts = []
+    for parameter in function.parameters:
+        name = parameter.name
+        if isinstance(name, (list, tuple)):
+            name = '(%s)' % (', '.join(str(x) for x in name),)
+        if parameter.varargs:
+            parts.append('*%s' % (name,))
+        elif parameter.varnamed:
+            parts.append('**%s' % (name,))
+        elif parameter.has_default:
+            parts.append('%s=%r' % (name, parameter.default))
+        else:
+            parts.append(str(name))
+    return '%s(%s)' % (function.name, ', '.join(parts))
+
+
+def c_prototype(function):
+    """The C declaration of ``function`` as the specification gives it."""
+    parts = []
+    for parameter in function.parameters:
+        data_type = (parameter.data_type or '').strip()
+        parts.append(('%s %s' % (data_type, parameter.name)).strip())
+    return '%s %s(%s)' % (
+        (function.return_value or 'void').strip(),
+        function.name,
+        ', '.join(parts) or 'void',
+    )
 
 
 class ParameterReference(object):

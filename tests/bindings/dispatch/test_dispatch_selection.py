@@ -395,7 +395,7 @@ class TestTheVersionReachesTheCompiledObject:
 
     def test_the_number_is_not_passed_as_a_compiler_flag(self):
         """`define_macros` is invisible to the up-to-date comparison, which is
-        the whole reason the header exists."""
+        why the header exists."""
         with open(os.path.join(paths.ROOT, 'accelerate', 'setup.py'),
                   encoding='utf-8') as handle:
             source = handle.read()

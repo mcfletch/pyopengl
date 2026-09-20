@@ -76,8 +76,8 @@ class TestASuccessfulEglCallDoesNot:
         assert EGL.eglGetError() == EGL.EGL_SUCCESS
 
     def test_the_success_code_is_not_gls(self):
-        """The two differ, which is the whole reason the code cannot be
-        shared: 0 is a perfectly ordinary EGL error code."""
+        """The two differ, which is why the code cannot be shared: 0 is an
+        ordinary EGL error code."""
         assert EGL.EGL_SUCCESS == 0x3000
 
 
