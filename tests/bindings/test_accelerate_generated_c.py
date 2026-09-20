@@ -397,8 +397,7 @@ class TestNumpyIsABuildRequirement:
     """The numpy format handler is built because numpy is always there.
 
     ``numpy_formathandler`` is the module that makes a numpy array reach the
-    driver without a copy, and it is the whole reason most people install this
-    package.  ``setup.py`` skips building it where numpy cannot be imported --
+    driver without a copy, and it is why most people install this package.  ``setup.py`` skips building it where numpy cannot be imported --
     reasonable, since it ``cimport``s numpy -- so a build in an environment
     without numpy produces a package that installs cleanly, imports cleanly,
     and quietly has no numpy acceleration in it.  What the user sees is

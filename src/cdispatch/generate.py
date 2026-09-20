@@ -268,8 +268,7 @@ def _module_definitions(path, tabulated):
             if node.name.startswith('_') or node.name in tabulated:
                 continue
             if node.name.startswith('glInit'):
-                # The extension check: it takes nothing and answers a bool,
-                # which is the whole of its signature.
+                # The extension check takes nothing and answers a bool.
                 declarations.append(
                     (node.name, 'def %s() -> bool: ...' % (node.name,)))
             else:

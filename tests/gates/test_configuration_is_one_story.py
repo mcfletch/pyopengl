@@ -110,7 +110,7 @@ class TestTheFourStatementsAgree:
             'OpenGL/_configflags.py and `_SNAPSHOTTED_FLAGS` disagree about '
             'which flags are frozen.  `_SNAPSHOTTED_FLAGS` is what decides '
             'whether a late assignment warns, so a flag missing from it is '
-            'one that is silently dropped -- which is the whole defect.\n'
+            'one that is silently dropped.\n'
             '  only in _configflags: %s\n  only in the declaration: %s'
             % (
                 sorted(snapshotted() - declared()),

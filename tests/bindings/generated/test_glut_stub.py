@@ -78,7 +78,7 @@ def test_a_constant_is_an_int_and_an_entry_point_is_a_def():
 
 
 def test_a_callback_setter_takes_the_callback():
-    """``glutDisplayFunc(draw)`` is the whole point of the callback wrappers."""
+    """``glutDisplayFunc(draw)`` is what the callback wrappers are for."""
     node = DECLARED.get('glutDisplayFunc')
     assert isinstance(node, ast.FunctionDef)
     arguments = node.args.posonlyargs + node.args.args

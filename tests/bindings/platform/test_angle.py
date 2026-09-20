@@ -63,7 +63,7 @@ class TestWhatItDeclares:
         assert plugin.import_path == 'OpenGL.platform.angle.ANGLEPlatform'
 
     def test_it_offers_no_desktop_gl(self):
-        """The whole point. ANGLE has no desktop GL to give, and ``None`` is
+        """ANGLE has no desktop GL to give, and ``None`` is
         what BasePlatform documents for a library a platform lacks -- so
         ``OpenGL.GL`` still imports and its entry points report themselves
         missing, rather than binding to something that is not there."""

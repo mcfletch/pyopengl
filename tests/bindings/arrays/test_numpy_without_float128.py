@@ -14,7 +14,7 @@ do with glGenTextures.
 
 Asked in a child with the attribute removed, because whether the handler reads
 it is settled while the module is imported, and this process has already
-imported it. Removing the attribute is the whole of the simulation, and on
+imported it. Removing the attribute is all the simulation does, and on
 Windows there is nothing to remove -- what the handler sees is the same either
 way, which is what the cases assert.
 

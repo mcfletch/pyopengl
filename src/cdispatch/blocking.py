@@ -24,7 +24,7 @@ __all__ = ['blocks', 'BLOCKING_EXACT', 'BLOCKING_PATTERNS']
 #: patterns below rather than repeated here.
 BLOCKING_EXACT = frozenset(
     [
-        # Waiting for the driver to catch up is the whole purpose of these.
+        # These exist to wait for the driver to catch up.
         'glFinish',
         'glFlush',
         # Fences and queries: the caller is asking to be told when the GPU is

@@ -401,7 +401,7 @@ def main(argv: list[str] | None = None) -> int:
         parser.error('--push publishes, so it needs --publish as well')
 
     # Read before anything is built.  The build takes about ten minutes, and
-    # what this is for is noticing a publish that happened during them.
+    # this is what a publish landing during them is detected against.
     lease = None
     if options.publish and options.push:
         lease = remote_head(options.push, options.branch)

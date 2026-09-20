@@ -614,8 +614,8 @@ def parse_fragment(path: str) -> Any:
     )
 
 
-#: The two XPointer forms the reference pages use.  Anything else is left for
-#: the caller to notice.
+#: The two XPointer forms the reference pages use.  Anything else is reported
+#: to the caller rather than handled here.
 _XPOINTER_ALL = 'xpointer(/*/*)'
 _XPOINTER_ROLE = re.compile(r"^xpointer\(/\*/\*\[@role='([^']+)'\]/\*\)$")
 

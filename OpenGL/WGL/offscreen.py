@@ -779,7 +779,7 @@ class OffscreenContext:
         WGL.wglMakeCurrent(HDC(booted.dc), HGLRC(booted.context))
         # Said whatever `forget` asks, because the teardown below is itself
         # dispatched: ``wglReleasePbufferDCARB`` has to resolve, and it
-        # resolves in whichever context the layer believes is current.  Left
+        # resolves in whichever context the layer has recorded as current.  Left
         # unsaid, that is the context being destroyed, whose table does not
         # have it.
         _dispatch.make_current(booted.context)

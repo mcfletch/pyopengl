@@ -24,7 +24,7 @@ from OpenGL.raw.GLX._types import GLXQuerier, displayName
 
 
 class TestNamingTheDisplay:
-    """The name has to reach X as bytes; that is the whole of the defect."""
+    """The name has to reach X as bytes."""
 
     def test_it_is_bytes(self, monkeypatch):
         monkeypatch.setenv('DISPLAY', ':0')

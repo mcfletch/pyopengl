@@ -339,9 +339,9 @@ class PyFunction(Function):
         else:
             if hasattr(target, 'argtypes') and target.argtypes is None:
                 return []
-            # A builtin does not say what it takes.  Thousands of them go past
-            # in a documentation run and there is nothing to do about any of
-            # them, so this is a note rather than a warning.
+            # A builtin does not say what it takes, and thousands of them go
+            # past in a documentation run, so this is a note rather than a
+            # warning.
             log.debug("""No parameters for type: %r""", target.__class__)
             names = []
         return [Parameter(name, data_type=None, function=self) for name in names]

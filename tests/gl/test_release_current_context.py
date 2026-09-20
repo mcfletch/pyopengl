@@ -47,7 +47,7 @@ class TestReleasingTheCurrentContext(GLTestCase):
             self._create_context()
 
     def test_the_thread_can_be_taken_again_afterwards(self):
-        """Which is the whole point: the next API in gets a free thread."""
+        """The next API in gets a free thread."""
         platform.PLATFORM.releaseCurrentContext()
         self._create_context()
         assert platform.PLATFORM.GetCurrentContext()

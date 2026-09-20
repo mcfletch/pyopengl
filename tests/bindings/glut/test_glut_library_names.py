@@ -90,8 +90,8 @@ def loader(win32, monkeypatch):
 def platform(win32):
     """A Win32Platform with nothing loaded.
 
-    ``GLUT`` is a lazy property, so reading it once is the whole of the
-    behaviour under test.
+    ``GLUT`` is a lazy property, so reading it once is all the behaviour
+    under test.
     """
     return win32.Win32Platform()
 

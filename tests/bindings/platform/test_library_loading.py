@@ -259,7 +259,7 @@ class TestAMacOSFramework:
     def test_nothing_asks_whether_the_framework_is_a_file(
         self, found_by_nothing, frameworks, monkeypatch
     ):
-        """Which is the whole of #55: on Big Sur it is not one, and it loads.
+        """Which is #55: on Big Sur it is not one, and it loads.
 
         The bundled-DLL directory is still asked about, because that one holds
         ordinary files on the platform it is for.

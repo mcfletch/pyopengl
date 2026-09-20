@@ -61,7 +61,7 @@ __all__ = [
 
 
 class Status(NamedTuple):
-    """What was asked for, what is running, and why they differ."""
+    """The dispatch selection: what was asked for, what is running, and why."""
 
     #: Which implementation the configuration asks for: ``'c'`` or ``'ctypes'``.
     requested: str
@@ -133,7 +133,7 @@ def available():
 
 
 def settle():
-    """Choose the implementation now, and say which it is.
+    """Choose the implementation now; returns ``'c'`` or ``'ctypes'``.
 
     The first entry point built would otherwise make this choice, and it reads
     ``OpenGL.ERROR_CHECKING`` and its neighbours as it does -- so call this
@@ -141,7 +141,7 @@ def settle():
     setting them.
 
     For a caller that has to know before it has anything to draw with: a test
-    suite whose whole point is the C implementation, or a program that means to
+    suite written to exercise the C implementation, or a program that means to
     fail rather than run several times slower than it planned to.
     """
     if requested() != 'c':
@@ -154,7 +154,7 @@ def settle():
 
 
 def status():
-    """What was asked for, what is running, and why they differ.
+    """Returns a :class:`Status`: requested, active, available and reason.
 
     The reason is a sentence naming the switch or the absence responsible, for
     a caller to put in the message it raises::
@@ -183,7 +183,7 @@ def _reason(asked, running):
     if asked != 'c':
         # The switch first where a caller set it: naming the interpreter there
         # would answer a question nobody asked and hide the setting that
-        # actually decided.  Unset, the interpreter is the whole reason.
+        # actually decided.  Unset, the interpreter is what decided.
         if 'PYOPENGL_DISPATCH' in os.environ:
             return 'PYOPENGL_DISPATCH asks for the ctypes implementation'
         if sys.implementation.name != 'cpython':
@@ -422,7 +422,7 @@ def _drop_unnamed_arming():
     way the driver now answering has never been given our callback, and a check
     reading a flag nothing sets is a check that passes everything.  So the
     arming is given up here and the next context is offered afresh, rather than
-    waiting for the audit to notice at its own pace.
+    left for the next audit to find.
 
     The compiled layer needs none of this: it reads the handle itself, so 0
     there is a context that genuinely had none to give.
@@ -442,8 +442,8 @@ def reclaim_retired():
     is how it says they can go.
 
     **Only call this where no thread is still dispatching through a context
-    this process has destroyed** -- that is the judgement retirement exists to
-    avoid making on the caller's behalf, and nothing here can make it.
+    this process has destroyed.**  Whether that holds is something the caller
+    knows and PyOpenGL does not, so the caller says it by making this call.
     """
     layer = _layer()
     if layer is None:
@@ -627,12 +627,13 @@ def debug_output_available():
 
 
 def use_debug_output(enable=True):
-    """Notice GL errors through GL_KHR_debug rather than a glGetError per call.
+    """Use GL_KHR_debug callbacks instead of a ``glGetError`` per call.
 
-    A per-call ``glGetError`` is a driver round trip and it is the whole cost of
-    error checking.  With this on, the driver reports an error through a
-    callback during the call itself, and the check afterwards is a read of the
-    flag that callback set.  What a caller sees does not change: the same entry
+    Polling ``glGetError`` is an expensive operation, often as heavy as the call
+    it checks, and it introduces a stall.  Most modern implementations support a
+    callback-based error reporting mechanism, ``GL_KHR_debug``, which calls back
+    only when there is something to report; the check after each call is then a
+    read of the flag that callback set.  What a caller sees does not change: the same entry
     points are checked -- ``OpenGL.ERROR_CHECKING`` and :func:`set_error_checking`
     decide that either way -- and the same exception is raised from the same
     call, carrying the same GL error code.
@@ -676,8 +677,9 @@ def use_debug_output(enable=True):
     if _foreign_callback_installed(key, _callback_address(callback)):
         # The application is using GL_KHR_debug itself.  Installing over its
         # callback would take its debug output away, and its next
-        # glDebugMessageCallback would take our error checking away without
-        # either of us noticing -- so the context keeps glGetError.
+        # glDebugMessageCallback would take our error checking away, with
+        # neither side recording the exchange -- so the context keeps
+        # glGetError.
         return False
     glEnable(_DEBUG_OUTPUT)
     # Synchronous, because the callback has to run during the call it belongs
@@ -825,8 +827,8 @@ def _read_debug_error():
 
     The audit is what makes the flag trustworthy.  A flag that is never set
     looks exactly like a context with nothing wrong, and a context can stop
-    being ours without saying so: the ctypes implementation has no way to
-    notice a program destroying a context and making another current.  So the
+    being ours without saying so: the ctypes implementation is not told when a
+    program destroys a context and makes another current.  So the
     driver is asked anyway, rarely, and a context that turns out to be
     reporting elsewhere goes back to a ``glGetError`` per call.
     """

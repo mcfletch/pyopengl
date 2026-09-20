@@ -383,7 +383,7 @@ def emit_declarations(modules):
 
 
 def write_declarations(package_root, modules, annotations=None):
-    """Write one marshalled file per API, and say what was written.
+    """Write one marshalled file per API; returns each file's size, by name.
 
     ``annotations`` is written beside them as ``_annotations.dat``, keyed the
     same way the generator keys it.  It ships because the pure-Python path

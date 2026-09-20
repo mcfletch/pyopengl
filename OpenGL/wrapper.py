@@ -332,7 +332,7 @@ class Wrapper(LateBind):
             With ERROR_ON_COPY the conversion is left to the declared type
             wherever that type can do it: an array class's own ``from_param``
             takes whatever already has a data pointer and refuses what would
-            have to be copied, which is the whole of what the flag asks for.
+            have to be copied, which is what the flag asks for.
             Installing a converter to say the same thing again would cost a
             call per array argument per draw, which is what the flag is set to
             avoid.

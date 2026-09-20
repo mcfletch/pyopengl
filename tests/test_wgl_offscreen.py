@@ -238,8 +238,8 @@ class TestOffscreenRendering:
             context.release()
 
     def test_the_frame_holds_what_was_drawn(self, context):
-        """The whole point: a pbuffer is the default framebuffer, so an
-        ordinary clear and an ordinary readback are all this takes."""
+        """A pbuffer is the default framebuffer, so an ordinary clear and an
+        ordinary readback are all this takes."""
         import numpy as np
         from OpenGL import GL
 

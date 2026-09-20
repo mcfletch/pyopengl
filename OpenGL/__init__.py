@@ -77,7 +77,7 @@ import occurs the flags should no longer be changed.
         Default: False
 
     ERROR_DEBUG_OUTPUT -- if True, a context offering GL_KHR_debug
-        notices errors through the driver's callback rather than
+        reports errors through the driver's callback rather than
         through a glGetError after every call.  The callback runs
         during the failing call, so the check on the ordinary path
         is a flag read; the same GLError is raised from the same

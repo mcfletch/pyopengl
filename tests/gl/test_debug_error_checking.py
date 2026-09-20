@@ -1,8 +1,9 @@
 #! /usr/bin/env python3
 """Error checking through GL_KHR_debug rather than a glGetError per call.
 
-A per-call ``glGetError`` is a driver round trip, and it is the whole cost of
-error checking.  Where the context offers ``GL_KHR_debug``, the driver reports
+Polling ``glGetError`` after every call is expensive, often as heavy as the
+call it checks, and it stalls.  Where the context offers ``GL_KHR_debug``, the
+driver reports
 an error through a callback instead, and checking becomes a read of a flag the
 callback set.  What the caller sees does not change: the same exception, from
 the same call.

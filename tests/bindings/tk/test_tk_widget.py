@@ -207,8 +207,8 @@ class TestAWindowingSystemWithNoImplementation:
     inside a context that was never made.
 
     Asked with a stub rather than on Aqua, so the promise is held to from
-    wherever the suite runs; `tk windowingsystem` is the whole of what
-    `createContext` reads to decide.
+    wherever the suite runs; `tk windowingsystem` is all `createContext`
+    reads to decide.
     """
 
     class Widget:
@@ -555,7 +555,7 @@ class TestTheOldWidgets:
         assert_the_old_pipeline_is_there()
 
     def test_it_needs_no_togl(self, root):
-        """Which is the whole point: Togl is a Tcl extension nobody has."""
+        """Togl is a Tcl extension nobody has."""
         from OpenGL.Tk import RawOpengl
 
         made = RawOpengl(root, width=64, height=64)
