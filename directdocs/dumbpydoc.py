@@ -1,32 +1,71 @@
-#! /usr/bin/env python
-"""Extremely dumb replacement for pydoc"""
-from __future__ import absolute_import
-from __future__ import print_function
+#! /usr/bin/env python3
+"""Writes a reStructuredText page for every module in the packages.
+
+The pages go in ``docs/api/``, one per module, and are written by importing
+each module and looking at what it holds -- which is the only way to see what
+PyOpenGL actually exports, since most of it is built at import time from the
+registry tables rather than written out as ``def``.
+
+Everything found is declared in Sphinx's Python domain: ``py:module`` for the
+module, ``py:class`` for each type with ``py:method`` and ``py:attribute``
+under it, ``py:function`` for each entry point and ``py:data`` for each
+constant.  So every name in the packages is a cross-reference target and
+appears in the index: ``:py:func:`OpenGL.GL.glBegin``` and
+``:py:data:`OpenGL.GL.GL_TRIANGLES``` both resolve, and so does a bare
+``glBegin`` under the default role.
+
+An entry point the reference pages already declare is *linked* rather than
+declared a second time.  ``generate.py`` writes ``entrypoints.json`` saying
+which those are.
+
+Run it through ``build-docs.py``, which runs the reference generator first so
+that the manifest is there.
+"""
+
+from __future__ import annotations
+
 import os
+
 # Before anything imports OpenGL: the dispatch is chosen once, when
 # OpenGL._configflags is first read, and the pages want the Python entry points
 # with their argument names and docstrings.  setdefault, so that a build asking
 # for the C implementation on the command line still gets it.
 os.environ.setdefault('PYOPENGL_DISPATCH', 'ctypes')
-from directdocs import model,references
-import OpenGL
-import six
-from six.moves import range
-from six.moves import zip
-OpenGL.USE_ACCELERATE = False # document the Python versions
-OpenGL.MODULE_ANNOTATIONS = True # tell us where the constants/alternates are defined...
-from OpenGL.extensions import _Alternate as Alternate
-from OpenGL.GLUT.special import GLUTCallback
-from OpenGL.wrapper import Wrapper
-from OpenGL.constant import Constant
-from OpenGL.lazywrapper import _LazyWrapper as Lazy
-from ctypes import _CFuncPtr as CFunctionType
-from OpenGL.GL import glGetString
-from OpenGL.platform.baseplatform import _NullFunctionPointer as NullFunc
-from OpenGL import platform
-from . import dumbmarkup
 
-CythonMethod = type( platform.PLATFORM.GL.glGetString )
+import argparse  # noqa: E402
+import glob  # noqa: E402
+import json  # noqa: E402
+import logging  # noqa: E402
+import pkgutil  # noqa: E402
+import sys  # noqa: E402
+import textwrap  # noqa: E402
+import types  # noqa: E402
+from ctypes import _CFuncPtr as CFunctionType  # noqa: E402
+from typing import Any, Iterable  # noqa: E402
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+PACKAGE_ROOT = os.path.dirname(HERE)
+if PACKAGE_ROOT not in sys.path:
+    sys.path.insert(0, PACKAGE_ROOT)
+
+import OpenGL  # noqa: E402
+
+OpenGL.USE_ACCELERATE = False  # document the Python versions
+OpenGL.MODULE_ANNOTATIONS = True  # tell us where the constants/alternates are defined
+
+from directdocs import model, rst  # noqa: E402
+from directdocs.rst import Writer  # noqa: E402
+from OpenGL import platform  # noqa: E402
+from OpenGL.constant import Constant  # noqa: E402
+from OpenGL.extensions import _Alternate as Alternate  # noqa: E402
+from OpenGL.GLUT.special import GLUTCallback  # noqa: E402
+from OpenGL.lazywrapper import _LazyWrapper as Lazy  # noqa: E402
+from OpenGL.platform.baseplatform import _NullFunctionPointer as NullFunc  # noqa: E402
+from OpenGL.wrapper import Wrapper  # noqa: E402
+
+log = logging.getLogger('dumbpydoc')
+
+CythonMethod = type(platform.PLATFORM.GL.glGetString)
 
 # The entry-point type the C dispatch builds.  A build that documents the C
 # implementation finds every gl* name to be one of these, so a page set without
@@ -36,23 +75,29 @@ CythonMethod = type( platform.PLATFORM.GL.glGetString )
 try:
     from OpenGL._dispatch import _c as _dispatch_extension
 except ImportError:
-    GLProc = ()
+    GLProc: Any = ()
 else:
     GLProc = _dispatch_extension.GLProc
 
-import types,os,textwrap,glob,logging,pickle,inspect,shutil
-from genshi.template import TemplateLoader
-HERE = os.path.dirname( __file__ )
-loader = TemplateLoader([os.path.join(HERE,'templates')])
-log = logging.getLogger( 'dumbpydoc' )
-
-FUNCTION_MAPPING = pickle.load( open( os.path.join(HERE,'.pyfunc-urls.pkl'), 'rb' ))
-
-platform.PLATFORM.EGL = None 
+platform.PLATFORM.EGL = None
 platform.PLATFORM.WGL = None
 
+#: Where the pages are written.
+OUTPUT_DIRECTORY = os.path.join(PACKAGE_ROOT, 'docs', 'api')
 
-class PyModule( object ):
+#: What ``generate.py`` leaves saying which entry points the reference pages
+#: declare, so that this does not declare them a second time.
+ENTRYPOINTS = os.path.join(PACKAGE_ROOT, 'docs', 'reference', 'entrypoints.json')
+
+#: The packages documented by a plain run.  PyOpenGL and its accelerators;
+#: anything built on top of them documents itself.
+PROJECTS = ['OpenGL', 'OpenGL_accelerate']
+
+#: Module-name fragments that are not part of a package's public surface.
+SKIP_FRAGMENTS = ('.tests.', '.tests', '.test_', '.__main__')
+
+
+class PyModule(object):
     OPENGL_FUNCS = (
         NullFunc,
         Alternate,
@@ -62,7 +107,6 @@ class PyModule( object ):
         CFunctionType,
         CythonMethod,
         GLProc,
-        #platform.PLATFORM.DEFAULT_FUNCTION_TYPE,
     )
     INTERESTING_TYPES = OPENGL_FUNCS + (
         Constant,
@@ -75,310 +119,662 @@ class PyModule( object ):
     CONSTANT_TYPES = (Constant,)
     MODULE_TYPES = (types.ModuleType,)
     FT_MAP = [
-        ('functions',FUNCTIONAL_TYPES),
-        ('constants',CONSTANT_TYPES),
-        ('imports',MODULE_TYPES),
-        ('classes',CLASS_TYPES),
+        ('functions', FUNCTIONAL_TYPES),
+        ('constants', CONSTANT_TYPES),
+        ('imports', MODULE_TYPES),
+        ('classes', CLASS_TYPES),
     ]
-    def __init__( self, name ):
+
+    def __init__(self, name):
         self.name = name
-        self.basename = name.split( '.' )[-1]
+        self.basename = name.split('.')[-1]
         self.functions = []
         self.constants = []
         self.classes = []
         self.imports = []
         self.modules = []
+
     @property
-    def target( self ):
+    def target(self):
         return self.mod
+
     @property
-    def is_package( self ):
+    def is_package(self):
         # A module need not have a __file__ at all: the ones under OpenGL.raw
         # are built from the shipped declaration tables, and a module with no
         # file is a leaf rather than a package.
-        path = getattr( self.mod, '__file__', None )
+        path = getattr(self.mod, '__file__', None)
         if not path:
             return False
-        base = os.path.splitext(os.path.basename( path ))[0]
-        if base == "__init__":
-            return True
-        return False
+        base = os.path.splitext(os.path.basename(path))[0]
+        return base == '__init__'
+
     _mod = None
+
     @property
-    def mod( self ):
+    def mod(self):
         if not self._mod:
             self._mod = __import__(
-                self.name, {}, {},
+                self.name,
+                {},
+                {},
                 self.name.split('.'),
             )
         return self._mod
-    @property
-    def docstring( self ):
-        if self.mod.__doc__:
-            return textwrap.dedent( self.mod.__doc__ )
-        else:
-            return None
-    @property
-    def parents( self ):
-        """Produce parents in closest-to-farthest order"""
-        names = self.name.split('.')
-        result = []
-        for i in range(1,len(names)):
-            result.append( PyModule( ".".join( names[:i] )) )
-        result.append( self )
-        return result
 
     @property
-    def title( self ):
-        return 'Module: %s'%( self.name, )
-    @property
-    def outfile( self ):
-        return '%s.html'%( self.name, )
+    def docstring(self):
+        if self.mod.__doc__:
+            return textwrap.dedent(self.mod.__doc__)
+        return None
 
     _inspected = False
-    def inspect( self ):
+
+    def inspect(self):
         """Inspect the module"""
         if self._inspected:
             return
         self._inspected = True
-        for key,value in sorted( list(self.mod.__dict__.items()), key=lambda x: x[0].lower()):
-            if self.interesting( value ):
-                for attr,types in self.FT_MAP:
-                    if isinstance( value, types ):
-                        collection = getattr( self, attr )
-                        is_duplicate = False
-                        for (_key,v) in collection:
-                            if getattr(v,'target',v) is value:
-                                if not hasattr( v, 'aliases' ):
-                                    v.aliases = []
-                                v.aliases.append( key )
-                                is_duplicate = True
-                        if not is_duplicate:
-                            inspector = getattr( self, 'inspect_%s'%(attr,),None)
-                            if inspector:
-                                value = inspector( value, key )
-                            collection.append( (key,value))
-            else:
-                if not isinstance( value, (str,six.text_type,int,int,dict)):
-                    print('not interesting', key, type(value))
-        if self.is_package:
-            dirname = os.path.dirname( self.mod.__file__ )
-            for name in sorted(os.listdir( dirname )):
-                other = os.path.join( dirname, name )
-                if os.path.isdir( other ) and os.path.exists( os.path.join( other, '__init__.py' )):
-                    mod = self.sub_module(name)
-                    if mod:
-                        self.modules.append( mod )
-            for name in sorted(glob.glob(os.path.join( dirname, '*.py' ))+glob.glob(os.path.join( dirname, '*.so' ))):
-                basename = os.path.splitext( os.path.basename( name ))[0]
-                if basename != '__init__':
-                    mod = self.sub_module(basename)
-                    if mod:
-                        self.modules.append( mod )
-    def sub_module( self, name ):
-        mod = PyModule( ".".join( [self.name,name] ))
-        try:
-            mod.inspect()
-        except Exception as err:
-            log.warning( 'Unable to import %s: %s'%( mod.name, err ))
-            return None
-        else:
-            return mod
+        for key, value in sorted(
+            list(self.mod.__dict__.items()), key=lambda x: x[0].lower()
+        ):
+            if key.startswith('_') or not self.interesting(value):
+                continue
+            for attr, types_ in self.FT_MAP:
+                if not isinstance(value, types_):
+                    continue
+                # First match wins.  A ctypes function pointer type is both a
+                # class and one of the callable types, and adding it to both
+                # collections declares the same name twice on one page.
+                collection = getattr(self, attr)
+                is_duplicate = False
+                for _key, existing in collection:
+                    if getattr(existing, 'target', existing) is value:
+                        if not hasattr(existing, 'aliases'):
+                            existing.aliases = []
+                        existing.aliases.append(key)
+                        is_duplicate = True
+                if not is_duplicate:
+                    inspector = getattr(self, 'inspect_%s' % (attr,), None)
+                    if inspector:
+                        value = inspector(value, key)
+                    collection.append((key, value))
+                break
 
-    def doc_as_link( self, obj ):
-        """Should we document this thing as a link?"""
+    def interesting(self, obj):
+        """Whether this object is worth a place on a page.
 
-    def interesting( self, obj ):
-        """Whether this object is interesting for documentation"""
-        if isinstance( obj, self.INTERESTING_TYPES):
-            module = getattr(obj, '__module__',None)
-            if module is not None:
-                if not (
-                    module == self.name
-                    # is from raw definition of our module
-                    or module.replace( '.raw','' ) == self.name
-                    or module.replace('.raw','').replace('_DEPRECATED','') == self.name 
-                    # special case for the root namespace for OpenGL.GL
-                    or (
-                        module.startswith( 'OpenGL.raw.GL.VERSION' )
-                        or module.startswith( 'OpenGL.raw.GL.constants')
-                    ) and self.name == 'OpenGL.GL'
-                ):
-                    # only document where defined for functions...
-                    log.warning( 'Filtering %s by module exclusion: %s for %s', obj, module, self.name )
-                    return False
-                    # Need to figure out how to restrict...
+        Every public name of the right kind is, wherever it was defined.  Which
+        page *declares* it is settled once for the whole set by
+        :func:`claim_owners`, and a module that re-exports a name says so
+        rather than describing it again -- so the filtering that used to happen
+        here, by comparing ``__module__`` against the module being documented,
+        is no longer this function's job.
+        """
+        return isinstance(obj, self.INTERESTING_TYPES)
+
+    def owns(self, obj):
+        """Whether ``obj`` looks defined here rather than imported.
+
+        ``__module__`` is what an object says about itself.  For a constant or
+        an entry point that is the module whose declaration table it came from,
+        which is the module a reader should be sent to; the friendly module of
+        the same name -- ``OpenGL.GL.VERSION.GL_1_0`` beside
+        ``OpenGL.raw.GL.VERSION.GL_1_0`` -- is the one people import from, and
+        counts as the same place.
+        """
+        module = getattr(obj, '__module__', None)
+        if module is None:
             return True
-        return False
-    def inspect_functions( self, func, name ):
-        return model.PyFunction( None, func, alias=name )
-    def inspect_classes( self, cls, name ):
-        """Inspect the classes given"""
-        return Class( cls, self )
-    def link( self, func, name=None ):
-        """Should we do a link to the manual page instead of local description?"""
-        return FUNCTION_MAPPING.get( name or func.name )
-    
-    
+        return self.name in (
+            module,
+            module.replace('.raw', ''),
+            module.replace('.raw', '').replace('_DEPRECATED', ''),
+        )
 
-class Class( object ):
+    def inspect_functions(self, func, name):
+        return model.PyFunction(None, func, alias=name)
+
+    def inspect_classes(self, cls, name):
+        """Inspect the classes given"""
+        return Class(cls, self)
+
+
+class Class(object):
     """Metadata describing a class to be documented"""
-    def __init__( self, cls, module=None ):
+
+    def __init__(self, cls, module=None):
         self.cls = cls
         self.basename = cls.__name__
-        self.module = module or self.find_module( cls )
-        self.name = '%s.%s'%( self.module.name, cls.__name__ )
+        self.module = module or self.find_module(cls)
+        self.name = '%s.%s' % (self.module.name, cls.__name__)
         self.functions = []
         self.properties = []
         self.inspect()
-    @property
-    def target( self ):
-        return self.cls
-    @classmethod
-    def find_module( cls, target ):
-        if target.__module__:
-            return PyModule( target.__module__ )
-        raise RuntimeError('blah')
-    @property
-    def bases( self ):
-        return [Class( x ) for x in self.cls.__bases__]
 
     @property
-    def docstring( self ):
+    def target(self):
+        return self.cls
+
+    @classmethod
+    def find_module(cls, target):
+        if target.__module__:
+            return PyModule(target.__module__)
+        raise RuntimeError('%r has no module to document it under' % (target,))
+
+    @property
+    def bases(self):
+        return [Class(x) for x in self.cls.__bases__]
+
+    @property
+    def docstring(self):
         if self.cls.__doc__:
             try:
-                return textwrap.dedent( self.cls.__doc__ or '' )
-            except TypeError as err:
+                return textwrap.dedent(self.cls.__doc__ or '')
+            except TypeError:
                 return None
-        else:
-            return None
+        return None
 
-    def inspect( self ):
+    def inspect(self):
         """Introspect to find methods, properties, etceteras"""
-        for key,value in sorted(list(self.cls.__dict__.items()), key=lambda x: x[0].lower()):
-            if isinstance( value, (
-                types.FunctionType,
-                types.MethodType,
-                types.BuiltinFunctionType,
-                types.BuiltinMethodType,
-                classmethod,
-                staticmethod,
-            )):
-                self.functions.append( (key,model.PyFunction( None, value, alias=key )))
-            elif hasattr( value, '__get__' ) and key not in ('__dict__','__weakref__'):
-                self.properties.append( (key,Property(value,key,self)))
+        for key, value in sorted(
+            list(self.cls.__dict__.items()), key=lambda x: x[0].lower()
+        ):
+            if isinstance(
+                value,
+                (
+                    types.FunctionType,
+                    types.MethodType,
+                    types.BuiltinFunctionType,
+                    types.BuiltinMethodType,
+                    classmethod,
+                    staticmethod,
+                ),
+            ):
+                self.functions.append((key, model.PyFunction(None, value, alias=key)))
+            elif hasattr(value, '__get__') and key not in ('__dict__', '__weakref__'):
+                self.properties.append((key, Property(value, key, self)))
 
-class Property( object ):
-    def __init__( self, target, name, cls ):
+
+class Property(object):
+    def __init__(self, target, name, cls):
         self.cls = cls
         self.target = target
         self.name = name
+
     @property
-    def docstring( self ):
+    def docstring(self):
         if self.target.__doc__:
             try:
-                return textwrap.dedent( self.target.__doc__ or '' )
-            except TypeError as err:
+                return textwrap.dedent(self.target.__doc__ or '')
+            except TypeError:
                 return None
-        else:
+        return None
+
+
+# ----------------------------------------------------------------------
+# rendering
+
+
+def docstring_lines(obj: Any) -> str:
+    """``obj``'s docstring, or ``''`` where it has none that can be read."""
+    try:
+        text = obj.docstring
+    except Exception as err:  # a wrapper whose __doc__ is built on demand
+        log.debug('no docstring for %r: %s', obj, err)
+        return ''
+    if not isinstance(text, str):
+        return ''
+    return text.strip()
+
+
+def write_docstring(text: str, writer: Writer) -> None:
+    """Write a docstring as the body of whatever directive is open.
+
+    PyOpenGL's docstrings are plain text laid out with indentation rather than
+    reStructuredText, so anything past the first line goes in verbatim.
+    """
+    if not text:
+        return
+    if '\n' in text:
+        writer.literal_block(text)
+    else:
+        writer.paragraph(rst.escape(text))
+
+
+def base_name(base: Any) -> str:
+    """A base class as it should read in a class declaration.
+
+    ``object`` is spelled ``object``: every class has it somewhere and
+    ``builtins.object`` says nothing extra.
+    """
+    name = base.name
+    if name.startswith('builtins.'):
+        return name[len('builtins.'):]
+    return name
+
+
+def constant_value(constant: Any) -> str:
+    """``constant``'s value, as the header file would give it."""
+    try:
+        if isinstance(constant, int) and not isinstance(constant, bool):
+            return '0x%X' % (constant,) if constant >= 0 else str(int(constant))
+        if isinstance(constant, float):
+            return repr(float(constant))
+        if isinstance(constant, bytes):
+            return repr(constant)
+    except Exception as err:
+        log.debug('cannot read the value of %r: %s', constant, err)
+    return ''
+
+
+#: Where an object is declared and under what name: ``(module, name)``.
+Owner = tuple
+
+
+def identity(value: Any, module: PyModule, name: str) -> tuple[str, str]:
+    """What makes two exports of a name the same thing.
+
+    Not the identity of the object: the friendly module beside a declaration
+    table builds its own entry point for each command, so ``OpenGL.GL.glBegin``
+    and ``OpenGL.raw.GL.VERSION.GL_1_0.glBegin`` are two objects standing for
+    one command.  What they agree on is the module the declaration belongs to,
+    which each reports as its ``__module__``, so that and the name are the key.
+
+    A hand-written module that wraps an entry point rather than re-exporting it
+    reports itself, and is a separate thing with a page entry of its own --
+    which is right, since it behaves differently from what it wraps.
+    """
+    target = getattr(value, 'target', value)
+    return (getattr(target, '__module__', None) or module.name, name)
+
+
+def claim_owners(modules: Iterable[PyModule]) -> dict[tuple[str, str], Owner]:
+    """Decide which module declares each name.
+
+    A name in PyOpenGL is usually reachable from several modules: the
+    declaration table's own module, the friendly module beside it, and the
+    package that re-exports both.  Declaring it on each would put the same
+    entry in the index several times over and leave a cross-reference to it
+    ambiguous, so one module is chosen -- the one that looks like where the
+    name is defined, and failing that the shallowest module that has it.
+    """
+    claims: dict[tuple[str, str], tuple[tuple[int, int, str], Owner]] = {}
+    for module in modules:
+        for kind in ('functions', 'constants', 'classes'):
+            for name, value in getattr(module, kind):
+                key = identity(value, module, name)
+                rank = (
+                    0 if module.owns(getattr(value, 'target', value)) else 1,
+                    module.name.count('.'),
+                    module.name,
+                )
+                current = claims.get(key)
+                if current is None or rank < current[0]:
+                    claims[key] = (rank, (module.name, name))
+    return {key: owner for key, (_rank, owner) in claims.items()}
+
+
+class Renderer:
+    """Writes the page for one module."""
+
+    def __init__(
+        self, entry_points: dict[str, str], claims: dict[tuple[str, str], Owner]
+    ) -> None:
+        #: Entry point name -> the reference page that declares it.
+        self.entry_points = entry_points
+        #: What :func:`identity` returns -> the module and name declaring it.
+        self.claims = claims
+
+    def reference_link(self, name: str) -> str | None:
+        page = self.entry_points.get(name)
+        if page is None:
             return None
+        return ':doc:`%s </reference/%s>`' % (name, page)
+
+    def owner(self, module: PyModule, name: str, value: Any) -> Owner | None:
+        """Where ``value`` is declared, or ``None`` if it is declared here."""
+        claimed = self.claims.get(identity(value, module, name))
+        if claimed is None or claimed[0] == module.name:
+            return None
+        return claimed
+
+    def render(self, module: PyModule) -> str:
+        writer = Writer()
+        writer.directive('py:module', module.name)
+        writer.heading(module.name, 0)
+        write_docstring(docstring_lines(module), writer)
+
+        self.write_submodules(module, writer)
+        self.write_functions(module, writer)
+        self.write_classes(module, writer)
+        self.write_constants(module, writer)
+        self.write_reexports(module, writer)
+        self.write_imports(module, writer)
+        return writer.render()
+
+    def write_reexports(self, module: PyModule, writer: Writer) -> None:
+        """Say which modules this one passes on the names of.
+
+        ``OpenGL.GL`` offers a few thousand names that belong to the version
+        and extension modules underneath it.  Listing each one here would be
+        a page of links and a second index entry apiece; naming the modules
+        and how many names each contributes says the same thing, and each name
+        is one search away on the page that declares it.
+        """
+        counts: dict[str, int] = {}
+        for kind in ('functions', 'constants', 'classes'):
+            for name, value in getattr(module, kind):
+                claimed = self.owner(module, name, value)
+                if claimed:
+                    counts[claimed[0]] = counts.get(claimed[0], 0) + 1
+        if not counts:
+            return
+        writer.heading('Re-exported names', 1)
+        writer.paragraph(
+            'These names are available from this module and documented on the '
+            'module that declares each:'
+        )
+        for name in sorted(counts):
+            writer.line(
+                '- :py:mod:`%s` (%d name%s)'
+                % (name, counts[name], '' if counts[name] == 1 else 's')
+            )
+        writer.blank()
+
+    def write_submodules(self, module: PyModule, writer: Writer) -> None:
+        """List the modules one level below this one.
+
+        The toctree is hidden and the list is written out beside it.  A
+        visible toctree here would put every module of the package into the
+        sidebar of every page in the set -- a few thousand entries, rendered
+        several thousand times -- and the list says the same thing on the one
+        page where it belongs.
+        """
+        if not module.modules:
+            return
+        writer.heading('Submodules', 1)
+        writer.directive('toctree', options={'hidden': '', 'maxdepth': '1'})
+        with writer.indent():
+            for child in module.modules:
+                writer.line(child)
+        writer.blank()
+        for child in module.modules:
+            writer.line('- :doc:`%s <%s>`' % (child, child))
+        writer.blank()
+
+    def write_functions(self, module: PyModule, writer: Writer) -> None:
+        if not module.functions:
+            return
+        described = []
+        linked = []
+        for name, func in module.functions:
+            if self.owner(module, name, func):
+                continue  # another module declares it; counted as re-exported
+            link = self.reference_link(name)
+            if link:
+                linked.append(link)
+            else:
+                described.append((name, func))
+        if not (described or linked):
+            return
+        writer.heading('Functions', 1)
+        if linked:
+            writer.paragraph(
+                'These entry points wrap an OpenGL command and are described '
+                'on its reference page: ' + ', '.join(linked) + '.'
+            )
+        for _name, func in described:
+            writer.directive('py:function', model.python_signature(func))
+            with writer.indent():
+                for alias in sorted(getattr(func, 'aliases', []) or []):
+                    writer.paragraph('Also exported as ``%s``.' % (alias,))
+                write_docstring(docstring_lines(func), writer)
+
+    def write_classes(self, module: PyModule, writer: Writer) -> None:
+        declared = [
+            (name, cls)
+            for name, cls in module.classes
+            if not self.owner(module, name, cls)
+        ]
+        if not declared:
+            return
+        writer.heading('Classes', 1)
+        for _name, cls in declared:
+            bases = ', '.join(base_name(base) for base in cls.bases)
+            writer.directive(
+                'py:class', '%s(%s)' % (cls.basename, bases) if bases else cls.basename
+            )
+            with writer.indent():
+                write_docstring(docstring_lines(cls), writer)
+                for _key, prop in cls.properties:
+                    writer.directive('py:attribute', prop.name)
+                    with writer.indent():
+                        write_docstring(docstring_lines(prop), writer)
+                for _key, func in cls.functions:
+                    writer.directive('py:method', model.python_signature(func))
+                    with writer.indent():
+                        write_docstring(docstring_lines(func), writer)
+
+    def write_constants(self, module: PyModule, writer: Writer) -> None:
+        declared = [
+            (name, constant)
+            for name, constant in module.constants
+            if not self.owner(module, name, constant)
+        ]
+        if not declared:
+            return
+        writer.heading('Constants', 1)
+        for name, constant in declared:
+            value = constant_value(constant)
+            writer.directive(
+                'py:data', name, {'value': value} if value else None
+            )
+            aliases = sorted(getattr(constant, 'aliases', []) or [])
+            if aliases:
+                with writer.indent():
+                    writer.paragraph(
+                        'Also exported as %s.'
+                        % (', '.join('``%s``' % (a,) for a in aliases),)
+                    )
+
+    def write_imports(self, module: PyModule, writer: Writer) -> None:
+        """Modules this one imports into its own namespace.
+
+        They are named rather than declared: the module that defines one has
+        its own page, and that page is where it is documented.
+        """
+        names = sorted(
+            imported.__name__
+            for _key, imported in module.imports
+            if getattr(imported, '__name__', None)
+        )
+        if not names:
+            return
+        writer.heading('Imported modules', 1)
+        writer.paragraph(
+            ', '.join(':py:mod:`%s`' % (name,) for name in dict.fromkeys(names))
+        )
 
 
-
-def render( mod, recurse=True ):
-    if not isinstance( mod, PyModule ):
-        mod = PyModule( mod )
-    mod.inspect()
-    if mod.modules:
-        mod.next = mod.modules[0]
-        mod.modules[0].previous = mod
-        mod.modules[-1].next = mod
-    for child,next in zip(mod.modules,mod.modules[1:]):
-        child.next = next
-    for child,previous in zip(mod.modules[1:],mod.modules[:-1]):
-        child.previous = previous
-    tmpl = loader.load('module.html')
-    stream = tmpl.generate(
-        module = mod,
-        FUNCTION_MAPPING=FUNCTION_MAPPING,
-    )
-    output = stream.render()
-    if output:
-        open( os.path.join(HERE, 'pydoc',mod.outfile), 'w').write( output )
-    if recurse:
-        for child in mod.modules:
-            render( child )
-
-#: The projects documented by a plain ``python -m directdocs.dumbpydoc`` run.
-PROJECTS = [
-    'OpenGL',
-    'OpenGL_accelerate',
-    'OpenGLContext',
-    'OpenGLContext_qt',
-    'vrml',
-    'vrml_accelerate',
-    'pydispatch',
-    'ttfquery',
-    'omi_audio',
-    'omi_physics',
-    'openglcontext_forest_demo',
-    'twig_bb',
-]
-
-#: Module-name fragments that are not part of a project's public surface.
-SKIP_FRAGMENTS = ('.tests.', '.tests', '.test_', '.__main__')
-
-
-def package_modules( root ):
+def package_modules(root: str) -> list[str]:
     """Every importable module under ``root``, the root itself included.
 
-    :func:`render` finds child modules by looking at what is already an
-    attribute of a package, which only reaches a module some ``__init__`` has
-    imported. A project that finds its parts through plugin registries or
-    deferred imports -- backends, node types, loaders -- keeps most of itself
-    out of that graph, so the names are taken from the filesystem instead and
-    handed to :func:`render` directly.
+    A package that finds its parts through plugin registries or deferred
+    imports -- backends, node types, loaders -- keeps most of itself out of the
+    attribute graph, so the names come from the filesystem instead.
 
     A subpackage that cannot be imported is skipped rather than fatal: a
-    Windows-only or toolkit-specific module is absent by circumstance, not by
-    error, and the rest of the project still documents.
+    Windows-only or toolkit-specific module is absent by circumstance rather
+    than by error, and the rest of the package still documents.
     """
-    import pkgutil
     names = [root]
     try:
-        package = __import__( root, {}, {}, [root] )
+        package = __import__(root, {}, {}, [root])
     except ImportError as err:
-        log.warning( 'cannot import %s: %s', root, err )
+        log.warning('cannot import %s: %s', root, err)
         return []
-    path = getattr( package, '__path__', None )
+    path = getattr(package, '__path__', None)
     if not path:
         return names
     for _, name, _ in pkgutil.walk_packages(
-        path, prefix=root + '.', onerror=lambda name: None,
+        path,
+        prefix=root + '.',
+        onerror=lambda name: None,
     ):
-        if not any( fragment in name for fragment in SKIP_FRAGMENTS ):
-            names.append( name )
+        if not any(fragment in name for fragment in SKIP_FRAGMENTS):
+            names.append(name)
     return names
 
 
-def render_projects( projects=None ):
-    """Document whole projects, returning (rendered, failed) name lists."""
-    rendered, failed = [], []
-    for root in (projects or PROJECTS):
-        for name in package_modules( root ):
-            try:
-                render( name, recurse=False )
-            except Exception as err:
-                log.warning( 'could not document %s: %s', name, err )
-                failed.append( name )
-            else:
-                rendered.append( name )
-    for support in glob.glob( os.path.join( HERE, 'output', '*.css' )):
-        shutil.copy( support, os.path.join( HERE, 'pydoc' ))
+def load_entry_points() -> dict[str, str]:
+    """Which reference page declares each entry point, where one has been run."""
+    if not os.path.isfile(ENTRYPOINTS):
+        log.info(
+            'no reference manifest at %s; entry points are described here '
+            'rather than linked to their reference pages',
+            ENTRYPOINTS,
+        )
+        return {}
+    with open(ENTRYPOINTS, encoding='utf-8') as fh:
+        return json.load(fh).get('entry_points', {})
+
+
+def child_names(name: str, every: Iterable[str]) -> list[str]:
+    """The module names one level under ``name``."""
+    prefix = name + '.'
+    depth = name.count('.') + 1
+    return sorted(
+        other
+        for other in every
+        if other.startswith(prefix) and other.count('.') == depth
+    )
+
+
+def write_index(roots: list[str], written: list[str], directory: str) -> None:
+    writer = Writer()
+    writer.heading('API reference', 0)
+    writer.paragraph(
+        'A page per module, written from the packages as they are installed. '
+        'Every module, class, method, attribute, entry point and constant is '
+        'declared here, so each one is a cross-reference target and appears in '
+        'the :ref:`index <genindex>`.'
+    )
+    writer.paragraph(
+        'An entry point that wraps an OpenGL command is described on its '
+        ':doc:`reference page </reference/index>`; the module page links to it '
+        'rather than repeating it.'
+    )
+    writer.directive('toctree', options={'maxdepth': '1'})
+    with writer.indent():
+        for root in roots:
+            if root in written:
+                writer.line(root)
+    writer.blank()
+    writer.paragraph(
+        ':ref:`The module index <modindex>` lists every page of this section.'
+    )
+    with open(os.path.join(directory, 'index.rst'), 'w', encoding='utf-8') as fh:
+        fh.write(writer.render())
+
+
+def render_projects(
+    projects: list[str] | None = None,
+    directory: str = OUTPUT_DIRECTORY,
+    skip: Iterable[str] = (),
+) -> tuple[list[str], list[str]]:
+    """Write a page for every module of every project.
+
+    Returns the names written and the names that could not be documented.
+    """
+    os.makedirs(directory, exist_ok=True)
+    roots = list(projects or PROJECTS)
+    skip = tuple(skip)
+
+    names: list[str] = []
+    for root in roots:
+        for name in package_modules(root):
+            if any(name == prefix or name.startswith(prefix + '.') for prefix in skip):
+                continue
+            names.append(name)
+
+    # Importing and inspecting comes first for every module, because which
+    # page declares a name is a question about all of them at once.
+    modules: list[PyModule] = []
+    failed: list[str] = []
+    for name in names:
+        module = PyModule(name)
+        try:
+            module.inspect()
+        except Exception as err:
+            log.warning('could not document %s: %s', name, err)
+            failed.append(name)
+            continue
+        modules.append(module)
+
+    # The children a page lists are the ones that got a page: a module that
+    # could not be imported here -- a platform's, on another platform -- has
+    # none, and naming it in a toctree is a broken link rather than a gap.
+    found = {module.name for module in modules}
+    for module in modules:
+        module.modules = child_names(module.name, found)
+
+    renderer = Renderer(load_entry_points(), claim_owners(modules))
+    rendered: list[str] = []
+    for module in modules:
+        try:
+            page = renderer.render(module)
+        except Exception as err:
+            log.warning('could not write the page for %s: %s', module.name, err)
+            failed.append(module.name)
+            continue
+        with open(
+            os.path.join(directory, '%s.rst' % (module.name,)), 'w', encoding='utf-8'
+        ) as fh:
+            fh.write(page)
+        rendered.append(module.name)
+
+    write_index(roots, rendered, directory)
     return rendered, failed
 
 
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
+    parser.add_argument(
+        'projects',
+        nargs='*',
+        default=None,
+        help='packages to document (default: %s)' % (' '.join(PROJECTS),),
+    )
+    parser.add_argument(
+        '--output',
+        default=OUTPUT_DIRECTORY,
+        help='directory to write the pages into (default: %(default)s)',
+    )
+    parser.add_argument(
+        '--skip',
+        action='append',
+        default=[],
+        metavar='MODULE',
+        help=(
+            'leave out this module and anything under it; '
+            '"--skip OpenGL.raw" halves the page count and the build time'
+        ),
+    )
+    parser.add_argument(
+        '-v', '--verbose', action='store_true', help='report every module skipped'
+    )
+    options = parser.parse_args(argv)
+    logging.basicConfig(level=logging.DEBUG if options.verbose else logging.INFO)
+
+    rendered, failed = render_projects(
+        options.projects or None, options.output, options.skip
+    )
+    log.info(
+        '%d modules documented, %d could not be imported', len(rendered), len(failed)
+    )
+    return 0
+
+
 if __name__ == '__main__':
-    logging.basicConfig( level=logging.WARNING )
-    rendered, failed = render_projects()
-    print( '%d modules documented, %d skipped' % (len(rendered), len(failed)) )
+    sys.exit(main())

@@ -36,9 +36,15 @@ version = '.'.join(__version__.split('.')[:2])
 extensions = [
     'sphinx.ext.extlinks',
     'sphinx.ext.intersphinx',
-    'sphinx.ext.viewcode',
     'pyopengl_carousel',
+    'pyopengl_sidebar',
 ]
+
+# `sphinx.ext.viewcode` is deliberately absent.  Most of the packages is built
+# from the declaration tables rather than written out, so a source page for it
+# shows the loader rather than the entry point; and it follows imports into the
+# standard library, writing a highlighted copy of `tkinter`, `typing` and
+# `logging` into the set.  The repository is a click away in the header.
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', '_ext', 'Thumbs.db', '.DS_Store']

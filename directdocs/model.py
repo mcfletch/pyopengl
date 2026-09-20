@@ -380,6 +380,37 @@ class Parameter(object):
         return self.default is not NOT_DEFINED
 
 
+def python_signature(function):
+    """``name(arg, arg=default, *args, **named)`` for a Python entry point."""
+    parts = []
+    for parameter in function.parameters:
+        name = parameter.name
+        if isinstance(name, (list, tuple)):
+            name = '(%s)' % (', '.join(str(x) for x in name),)
+        if parameter.varargs:
+            parts.append('*%s' % (name,))
+        elif parameter.varnamed:
+            parts.append('**%s' % (name,))
+        elif parameter.has_default:
+            parts.append('%s=%r' % (name, parameter.default))
+        else:
+            parts.append(str(name))
+    return '%s(%s)' % (function.name, ', '.join(parts))
+
+
+def c_prototype(function):
+    """The C declaration of ``function`` as the specification gives it."""
+    parts = []
+    for parameter in function.parameters:
+        data_type = (parameter.data_type or '').strip()
+        parts.append(('%s %s' % (data_type, parameter.name)).strip())
+    return '%s %s(%s)' % (
+        (function.return_value or 'void').strip(),
+        function.name,
+        ', '.join(parts) or 'void',
+    )
+
+
 class ParameterReference(object):
     def __init__(self, names, description):
         self.names = names

@@ -39,7 +39,13 @@ if PACKAGE_ROOT not in sys.path:
     sys.path.insert(0, PACKAGE_ROOT)
 
 from directdocs import model, references, rst  # noqa: E402
-from directdocs.model import Function, Parameter, ParameterReference  # noqa: E402
+from directdocs.model import (  # noqa: E402
+    Function,
+    Parameter,
+    ParameterReference,
+    c_prototype,
+    python_signature,
+)
 from directdocs.rst import DOCBOOK_NS, MML_NS, Writer  # noqa: E402
 from OpenGL import GL, GLE, GLU, GLUT, GLX  # noqa: E402,F401
 from OpenGL import __version__  # noqa: E402
@@ -55,8 +61,12 @@ OUTPUT_DIRECTORY = os.path.join(PACKAGE_ROOT, 'docs', 'reference')
 REFPAGES = os.path.join(HERE, 'OpenGL-Refpages')
 
 #: The API directories of that checkout, best first: an entry point declared in
-#: more than one takes its page from the first that has it.
-REFPAGE_SETS = ['gl4', 'gl2.1', 'es3.2', 'es3.1', 'es3.0', 'es3', 'es2.0', 'es1.1']
+#: more than one takes its page from the first that has it.  ES 3.2 has no
+#: directory of its own; its pages are in ``es3``, which carries the ES 3.x
+#: pages together.  ``tests/directdocs/test_generate.py`` holds every name
+#: here to being a directory that exists, since one that is not reads as an
+#: API with no pages rather than as a mistake.
+REFPAGE_SETS = ['gl4', 'gl2.1', 'es3.1', 'es3.0', 'es3', 'es2.0', 'es1.1']
 
 IMPORTED_PACKAGES = [GL, GLU, GLUT, GLE, GLX]
 PACKAGES = ['GL', 'GLU', 'GLUT', 'GLE', 'GLX']
@@ -499,37 +509,6 @@ class PageLinks:
 def parameter_label(section: RefSect, name: str) -> str:
     """The Sphinx label for ``name`` as documented on ``section``'s page."""
     return 'ref-%s-param-%s' % (page_name(section.title).lower(), name.lower())
-
-
-def python_signature(function: Any) -> str:
-    """``name(arg, arg=default, *args, **named)`` for a Python entry point."""
-    parts = []
-    for parameter in function.parameters:
-        name = parameter.name
-        if isinstance(name, (list, tuple)):
-            name = '(%s)' % (', '.join(str(x) for x in name),)
-        if parameter.varargs:
-            parts.append('*%s' % (name,))
-        elif parameter.varnamed:
-            parts.append('**%s' % (name,))
-        elif parameter.has_default:
-            parts.append('%s=%r' % (name, parameter.default))
-        else:
-            parts.append(str(name))
-    return '%s(%s)' % (function.name, ', '.join(parts))
-
-
-def c_prototype(function: Any) -> str:
-    """The C declaration as the specification gives it."""
-    parts = []
-    for parameter in function.parameters:
-        data_type = (parameter.data_type or '').strip()
-        parts.append(('%s %s' % (data_type, parameter.name)).strip())
-    return '%s %s(%s)' % (
-        (function.return_value or 'void').strip(),
-        function.name,
-        ', '.join(parts) or 'void',
-    )
 
 
 def docstring_of(function: Any) -> str:

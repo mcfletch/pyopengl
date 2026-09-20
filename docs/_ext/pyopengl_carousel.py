@@ -97,7 +97,7 @@ class CarouselDirective(Directive):
         try:
             records = json.loads(raw)
         except ValueError as err:
-            raise ValueError('carousel records are not JSON: %s' % (err,))
+            raise ValueError('carousel records are not JSON: %s' % (err,)) from err
         if not isinstance(records, list):
             raise ValueError('carousel records must be a JSON list of objects')
         for record in records:
