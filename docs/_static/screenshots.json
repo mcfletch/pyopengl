@@ -1,20 +1,5 @@
 [
   {
-    "url": "_static/screenshots/blanch/dots.png",
-    "link": "https://bitbucket.org/rndblnch/opengl-programmable/",
-    "description": "Cube with an animated partially transparent texture, rendered from OpenGL 1.0 through to core profile"
-  },
-  {
-    "url": "_static/screenshots/blanch/mandelbrot.png",
-    "link": "http://iihm.imag.fr/blanch/teaching/opengl/src/c-shader/02-fragment.py",
-    "description": "Interactive Mandelbrot set, drawn as a procedural texture computed by the fragment shader"
-  },
-  {
-    "url": "_static/screenshots/blanch/webmichl_my_camera.png",
-    "link": "https://bitbucket.org/rndblnch/seagull/",
-    "description": "2D vector graphics (SVG) rendered with the Seagull package; Open Clip Art by webmichl"
-  },
-  {
     "url": "_static/screenshots/gltf/flight-helmet.jpg",
     "link": "https://github.com/KhronosGroup/glTF-Sample-Assets",
     "description": "FlightHelmet, a Khronos glTF sample model (CC0), rendered by OpenGLContext's PBR pipeline"
@@ -33,16 +18,6 @@
     "url": "_static/screenshots/gltf/a-beautiful-game.jpg",
     "link": "https://github.com/KhronosGroup/glTF-Sample-Assets",
     "description": "A Beautiful Game: transmission and clearcoat materials; model by the MaterialX Project and Ed Mackey (CC-BY 4.0)"
-  },
-  {
-    "url": "_static/screenshots/demos/forest.jpg",
-    "link": "https://github.com/mcfletch/openglcontext-forest",
-    "description": "The OpenGLContext forest demo: DEM terrain with instanced tree and grass levels of detail; tree models by Georgeous, 3D Error 404 and LOLIPOP (CC-BY 4.0)"
-  },
-  {
-    "url": "_static/screenshots/demos/glisteel.jpg",
-    "link": "https://github.com/mcfletch/glisteel",
-    "description": "GLinting Steel, a racing game driving a streamed 3D Tiles world; tree models by Georgeous, 3D Error 404 and LOLIPOP (CC-BY 4.0)"
   },
   {
     "url": "_static/screenshots/twig-bb/oa_shine.jpg",
@@ -73,6 +48,31 @@
     "url": "_static/screenshots/twig-bb/oa_bases3.jpg",
     "link": "https://github.com/mcfletch/twig-bb",
     "description": "Twitchy GLitchy Bang Bang rendering the OpenArena level oa_bases3; map by the OpenArena project (CC BY-SA 3.0)"
+  },
+  {
+    "url": "_static/screenshots/demos/forest.jpg",
+    "link": "https://github.com/mcfletch/openglcontext-forest",
+    "description": "The OpenGLContext forest demo: DEM terrain with instanced tree and grass levels of detail; tree models by Georgeous, 3D Error 404 and LOLIPOP (CC-BY 4.0)"
+  },
+  {
+    "url": "_static/screenshots/demos/glisteel.jpg",
+    "link": "https://github.com/mcfletch/glisteel",
+    "description": "GLinting Steel, a racing game driving a streamed 3D Tiles world; tree models by Georgeous, 3D Error 404 and LOLIPOP (CC-BY 4.0)"
+  },
+  {
+    "url": "_static/screenshots/blanch/dots.png",
+    "link": "https://bitbucket.org/rndblnch/opengl-programmable/",
+    "description": "Cube with an animated partially transparent texture, rendered from OpenGL 1.0 through to core profile"
+  },
+  {
+    "url": "_static/screenshots/blanch/mandelbrot.png",
+    "link": "http://iihm.imag.fr/blanch/teaching/opengl/src/c-shader/02-fragment.py",
+    "description": "Interactive Mandelbrot set, drawn as a procedural texture computed by the fragment shader"
+  },
+  {
+    "url": "_static/screenshots/blanch/webmichl_my_camera.png",
+    "link": "https://bitbucket.org/rndblnch/seagull/",
+    "description": "2D vector graphics (SVG) rendered with the Seagull package; Open Clip Art by webmichl"
   },
   {
     "url": "_static/screenshots/context/glelathe.jpg",
