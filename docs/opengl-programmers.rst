@@ -157,7 +157,15 @@ is for tracing a crash rather than for running.
 What a wrapped call does
 ------------------------
 
-An argument set passed to an entry point goes through these stages:
+Under the C implementation, an entry point is a C function generated for it
+from the Khronos registry.  Calling it checks the argument count, converts the
+scalars, acquires a buffer over each array -- directly where the element type
+already matches what the driver wants, and through the format-handler registry
+where it does not -- loads the function pointer held for the current context,
+calls it, releases the buffers, converts the result and checks for an error.
+
+Under the ctypes implementation the same work is done by a chain of Python
+objects built at import time, in these stages:
 
 1. *converters* turn the arguments into the object types the wrapper works
    with (``pyArgs``);
@@ -170,9 +178,12 @@ An argument set passed to an entry point goes through these stages:
    returns -- the object behind a pointer, for instance;
 5. a *return* function decides what the call gives back.
 
-:py:class:`OpenGL.wrapper.Wrapper` implements those stages, and is what
-``OpenGL_accelerate`` reimplements in C.  :doc:`wrapping` describes the
-machinery from the inside.
+:py:class:`OpenGL.wrapper.Wrapper` holds that chain, and those are the names
+``GLError`` reports.  The two implementations are meant to be
+indistinguishable from outside; where a module customises an entry point in a
+way the C does not perform, the entry point demotes to its ctypes binding and
+the customisation is replayed onto it.  :doc:`wrapping` describes the machinery
+from the inside, and :doc:`c-dispatch` what differs at the surface.
 
 Array handling
 --------------
