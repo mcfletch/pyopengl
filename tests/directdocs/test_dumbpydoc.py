@@ -119,21 +119,55 @@ class TestOwnership:
 
 
 class TestReferenceLinks:
+    MANIFEST = {
+        'OpenGL.GL': {'glBegin': 'gl/glBegin', 'glColor3f': 'gl/glColor',
+                      'glBindTexture': 'gl/glBindTexture'},
+        'OpenGL.GLES3': {'glBindTexture': 'gles3/glBindTexture'},
+    }
+
     def test_an_entry_point_with_a_reference_page_links_to_it(self):
-        renderer = dumbpydoc.Renderer({'glBegin': 'glBegin'}, {})
-        assert renderer.reference_link('glBegin') == (
-            ':doc:`glBegin </reference/glBegin>`'
+        renderer = dumbpydoc.Renderer(self.MANIFEST, {})
+        assert renderer.reference_link(FakeModule('OpenGL.GL'), 'glBegin') == (
+            ':doc:`glBegin </reference/gl/glBegin>`'
         )
 
     def test_an_alias_links_to_the_page_that_documents_it(self):
         """`glColor3f` is documented on `glColor`."""
-        renderer = dumbpydoc.Renderer({'glColor3f': 'glColor'}, {})
-        assert renderer.reference_link('glColor3f') == (
-            ':doc:`glColor3f </reference/glColor>`'
+        renderer = dumbpydoc.Renderer(self.MANIFEST, {})
+        assert renderer.reference_link(FakeModule('OpenGL.GL'), 'glColor3f') == (
+            ':doc:`glColor3f </reference/gl/glColor>`'
         )
 
+    def test_the_link_follows_the_api_the_module_belongs_to(self):
+        """One entry point, two APIs, two pages: a GLES module links to the
+        GLES page and a desktop module to the desktop one."""
+        renderer = dumbpydoc.Renderer(self.MANIFEST, {})
+        desktop = renderer.reference_link(
+            FakeModule('OpenGL.GL.VERSION.GL_1_1'), 'glBindTexture'
+        )
+        embedded = renderer.reference_link(
+            FakeModule('OpenGL.GLES3.VERSION.GLES3_3_0'), 'glBindTexture'
+        )
+        assert 'reference/gl/glBindTexture' in desktop
+        assert 'reference/gles3/glBindTexture' in embedded
+
     def test_a_name_with_no_page_has_no_link(self):
-        assert dumbpydoc.Renderer({}, {}).reference_link('glGenBuffersARB') is None
+        renderer = dumbpydoc.Renderer(self.MANIFEST, {})
+        assert renderer.reference_link(
+            FakeModule('OpenGL.GL'), 'glGenBuffersARB'
+        ) is None
+
+    @pytest.mark.parametrize(
+        'module,package',
+        [
+            ('OpenGL.GL', 'OpenGL.GL'),
+            ('OpenGL.GL.ARB.vertex_buffer_object', 'OpenGL.GL'),
+            ('OpenGL.GLES3.VERSION.GLES3_3_0', 'OpenGL.GLES3'),
+            ('OpenGL', 'OpenGL'),
+        ],
+    )
+    def test_the_api_package_is_the_first_two_components(self, module, package):
+        assert dumbpydoc.api_package(module) == package
 
 
 class TestRendering:
@@ -188,98 +222,42 @@ class TestValues:
         assert dumbpydoc.base_name(Base()) == 'OpenGL.arrays.vbo.VBO'
 
 
-class TestFoldingTheGeneratedModules:
-    """Every extension exists twice, and only one of the pair has content.
+class TestTheGeneratedHierarchy:
+    """``OpenGL.raw`` is left out of the pages entirely.
 
-    ``OpenGL.GL.ARB.foo`` is what a program imports; ``OpenGL.raw.GL.ARB.foo``
-    is the generated declarations it is built from.  They share their names and
-    one module declares each, so the raw half of nearly every pair would have a
-    page saying only that its names are documented elsewhere -- thirteen
-    hundred of them.
+    It is not a hierarchy of modules in the ordinary sense: there are no files,
+    only declaration tables that a finder turns into namespaces on demand.
+    Every name in it is exported by the module beside it -- `OpenGL.GL.ARB.foo`
+    for `OpenGL.raw.GL.ARB.foo` -- which is where the name is declared and
+    where a reader should be sent.
     """
 
-    def pair(self, declared_by_raw=()):
-        target = Fake('OpenGL.raw.GL.ARB.foo')
-        raw = FakeModule(
-            'OpenGL.raw.GL.ARB.foo',
-            functions=[('glFooARB', target)],
-            constants=[(name, Fake('OpenGL.raw.GL.ARB.foo')) for name in declared_by_raw],
+    def test_it_is_skipped(self):
+        assert 'OpenGL.raw' in dumbpydoc.SKIP_PACKAGES
+
+    def test_nothing_under_it_is_walked(self, monkeypatch):
+        monkeypatch.setattr(
+            dumbpydoc.pkgutil,
+            'walk_packages',
+            lambda path, prefix, onerror: [
+                (None, prefix + 'GL', True),
+                (None, prefix + 'raw', True),
+                (None, prefix + 'raw.GL.ARB.foo', False),
+            ],
         )
-        friendly = FakeModule(
-            'OpenGL.GL.ARB.foo', functions=[('glFooARB', target)]
-        )
-        return raw, friendly
+        names = dumbpydoc.package_modules('OpenGL')
+        assert 'OpenGL.GL' in names
+        assert not [name for name in names if name.startswith('OpenGL.raw')]
 
-    def folded_for(self, modules, entry_points=None):
-        renderer = dumbpydoc.Renderer(
-            entry_points or {}, dumbpydoc.claim_owners(modules)
-        )
-        return dumbpydoc.fold_generated_modules(modules, renderer), renderer
-
-    def test_a_raw_module_with_nothing_of_its_own_is_folded(self):
-        raw, friendly = self.pair()
-        folded, _ = self.folded_for([raw, friendly])
-        assert folded == {'OpenGL.raw.GL.ARB.foo': 'OpenGL.GL.ARB.foo'}
-
-    def test_a_raw_module_that_declares_something_keeps_its_page(self):
-        """`OpenGL.raw.GL._types` and its neighbours define names that exist
-        nowhere else."""
-        raw, friendly = self.pair(declared_by_raw=['GL_FOO_ARB'])
-        folded, _ = self.folded_for([raw, friendly])
-        assert folded == {}
-
-    def test_a_raw_module_with_no_counterpart_keeps_its_page(self):
-        raw, _friendly = self.pair()
-        folded, _ = self.folded_for([raw])
-        assert folded == {}
-
-    def test_a_package_waits_for_its_children(self):
-        """A raw package is only folded once everything under it is."""
-        raw, friendly = self.pair(declared_by_raw=['GL_FOO_ARB'])
-        raw_package = FakeModule('OpenGL.raw.GL.ARB')
-        raw_package.modules = ['OpenGL.raw.GL.ARB.foo']
-        friendly_package = FakeModule('OpenGL.GL.ARB')
-        folded, _ = self.folded_for([raw, friendly, raw_package, friendly_package])
-        assert 'OpenGL.raw.GL.ARB' not in folded
-
-    def test_a_package_whose_children_are_all_folded_goes_too(self):
-        raw, friendly = self.pair()
-        raw_package = FakeModule('OpenGL.raw.GL.ARB')
-        raw_package.modules = ['OpenGL.raw.GL.ARB.foo']
-        friendly_package = FakeModule('OpenGL.GL.ARB')
-        folded, _ = self.folded_for([raw, friendly, raw_package, friendly_package])
-        assert folded['OpenGL.raw.GL.ARB'] == 'OpenGL.GL.ARB'
-
-    def test_the_carrying_page_declares_the_folded_module(self):
-        """So a reference to it still resolves, and the module index still
-        lists it -- leading to where the content is."""
-        raw, friendly = self.pair()
-        folded, renderer = self.folded_for([raw, friendly])
-        renderer.folded = folded
-        page = renderer.render(friendly)
-        assert '.. py:module:: OpenGL.raw.GL.ARB.foo' in page
-        assert 'Generated declarations' in page
-
-    def test_the_declaration_comes_last(self):
-        """`py:module` sets which module the directives after it belong to."""
-        raw, friendly = self.pair()
-        folded, renderer = self.folded_for([raw, friendly])
-        renderer.folded = folded
-        page = renderer.render(friendly)
-        assert page.rstrip().endswith('.. py:module:: OpenGL.raw.GL.ARB.foo')
-
-    def test_a_folded_module_is_not_named_in_a_toctree(self):
-        """It has no page, so naming it would be a broken link."""
-        raw, friendly = self.pair()
-        raw_package = FakeModule('OpenGL.raw.GL.ARB')
-        raw_package.modules = ['OpenGL.raw.GL.ARB.foo']
-        friendly_package = FakeModule('OpenGL.GL.ARB')
-        folded, renderer = self.folded_for(
-            [raw, friendly, raw_package, friendly_package]
-        )
-        renderer.folded = folded
-        page = renderer.render(raw_package)
-        assert 'OpenGL.raw.GL.ARB.foo' not in page.split('Generated declarations')[0]
+    def test_a_name_it_declares_is_claimed_by_the_package_exporting_it(self):
+        """`GLfloat` reports `OpenGL.raw.GL._types`, which has no counterpart
+        and is not in the set, so the module a reader imports it from takes
+        it."""
+        target = Fake('OpenGL.raw.GL._types', name='GLfloat')
+        shallow = FakeModule('OpenGL.GL', classes=[('GLfloat', target)])
+        deep = FakeModule('OpenGL.GL.ARB.imaging', classes=[('GLfloat', target)])
+        claims = dumbpydoc.claim_owners([deep, shallow])
+        assert claims[('OpenGL.raw.GL._types', 'GLfloat')][0] == 'OpenGL.GL'
 
 
 class TestPrivateNames:

@@ -113,6 +113,15 @@ PROJECTS = ['OpenGL', 'OpenGL_accelerate']
 #: Module-name fragments that are not part of a package's public surface.
 SKIP_FRAGMENTS = ('.tests.', '.tests', '.test_', '.__main__')
 
+#: Left out of the pages entirely.  `OpenGL.raw` is not a hierarchy of modules
+#: in the ordinary sense: there are no files, only declaration tables that a
+#: finder turns into namespaces on demand.  Every name in it is exported by the
+#: module beside it -- `OpenGL.GL.ARB.foo` for `OpenGL.raw.GL.ARB.foo` -- which
+#: is where a reader should be sent and where the name is declared.  A name
+#: with no such counterpart, `GLfloat` and its neighbours from
+#: `OpenGL.raw.GL._types`, is declared by the package that exports it.
+SKIP_PACKAGES = ('OpenGL.raw',)
+
 #: The top-level packages a plain run documents.  A name that comes from
 #: outside them under its own name is somebody else's and is not described
 #: here; under one of ours it is ours, which is how `GLdouble = c_double` is
@@ -461,19 +470,17 @@ class Renderer:
     """Writes the page for one module."""
 
     def __init__(
-        self, entry_points: dict[str, str], claims: dict[tuple[str, str], Owner]
+        self,
+        entry_points: dict[str, dict[str, str]],
+        claims: dict[tuple[str, str], Owner],
     ) -> None:
         #: Entry point name -> the reference page that declares it.
         self.entry_points = entry_points
         #: What :func:`identity` returns -> the module and name declaring it.
         self.claims = claims
-        #: Module name -> the module whose page carries it; see
-        #: :func:`fold_generated_modules`.  Filled in after the claims are,
-        #: because what a module declares is what decides it.
-        self.folded: dict[str, str] = {}
 
-    def reference_link(self, name: str) -> str | None:
-        page = self.entry_points.get(name)
+    def reference_link(self, module: PyModule, name: str) -> str | None:
+        page = self.entry_points.get(api_package(module.name), {}).get(name)
         if page is None:
             return None
         return ':doc:`%s </reference/%s>`' % (name, page)
@@ -497,29 +504,7 @@ class Renderer:
         self.write_constants(module, writer)
         self.write_reexports(module, writer)
         self.write_imports(module, writer)
-        self.write_generated(module, writer)
         return writer.render()
-
-    def write_generated(self, module: PyModule, writer: Writer) -> None:
-        """Declare the generated modules this page is carrying.
-
-        Last on the page: ``py:module`` sets which module the directives after
-        it belong to, so anything following would be attributed to the wrong
-        one.
-        """
-        carried = sorted(
-            name for name, into in self.folded.items() if into == module.name
-        )
-        if not carried:
-            return
-        writer.heading('Generated declarations', 1)
-        writer.paragraph(
-            'The declarations this module is built from, which a program '
-            'wanting ctypes semantics rather than PyOpenGL\'s can import '
-            'directly.  They carry the same names, described above.'
-        )
-        for name in carried:
-            writer.directive('py:module', name)
 
     def write_reexports(self, module: PyModule, writer: Writer) -> None:
         """Say which modules this one passes on the names of.
@@ -559,9 +544,7 @@ class Renderer:
         several thousand times -- and the list says the same thing on the one
         page where it belongs.
         """
-        children = [
-            child for child in module.modules if child not in self.folded
-        ]
+        children = module.modules
         if not children:
             return
         writer.heading('Submodules', 1)
@@ -582,7 +565,7 @@ class Renderer:
         for name, func in module.functions:
             if self.owner(module, name, func):
                 continue  # another module declares it; counted as re-exported
-            link = self.reference_link(name)
+            link = self.reference_link(module, name)
             if link:
                 linked.append(link)
             else:
@@ -673,22 +656,6 @@ class Renderer:
         )
 
 
-def quieten_absent_platforms() -> None:
-    """Stop the inspection reaching for libraries this machine has none of.
-
-    Touching ``PLATFORM.EGL`` or ``PLATFORM.WGL`` loads a library, and on a
-    machine without one that is an error raised from the middle of a module's
-    inspection rather than a module reported as absent.
-
-    Called from :func:`render_projects` rather than when this module is
-    imported: it mutates the platform object the whole process shares, and a
-    process that imported this module for one of its functions should find
-    PyOpenGL exactly as it left it.
-    """
-    platform.PLATFORM.EGL = None
-    platform.PLATFORM.WGL = None
-
-
 def report_configuration() -> None:
     """Say so if the configuration is not the one the pages want.
 
@@ -738,13 +705,25 @@ def package_modules(root: str) -> list[str]:
         prefix=root + '.',
         onerror=lambda name: None,
     ):
-        if not any(fragment in name for fragment in SKIP_FRAGMENTS):
-            names.append(name)
+        if any(fragment in name for fragment in SKIP_FRAGMENTS):
+            continue
+        if any(
+            name == package or name.startswith(package + '.')
+            for package in SKIP_PACKAGES
+        ):
+            continue
+        names.append(name)
     return names
 
 
-def load_entry_points() -> dict[str, str]:
-    """Which reference page declares each entry point, where one has been run."""
+def load_entry_points() -> dict[str, dict[str, str]]:
+    """Which reference page declares each entry point, per API package.
+
+    Per package, because an entry point can be in several: ``glBindTexture``
+    is documented on one page for desktop OpenGL and another for ES 3.x, and
+    which one a module page should link to depends on which API that module
+    belongs to.
+    """
     if not os.path.isfile(ENTRYPOINTS):
         log.info(
             'no reference manifest at %s; entry points are described here '
@@ -756,51 +735,14 @@ def load_entry_points() -> dict[str, str]:
         return json.load(fh).get('entry_points', {})
 
 
-def declares_anything(module: PyModule, renderer: Renderer) -> bool:
-    """Whether this module is where any of its names is documented."""
-    for kind in ('functions', 'constants', 'classes'):
-        for name, value in getattr(module, kind):
-            if kind == 'functions' and renderer.reference_link(name):
-                continue
-            if not renderer.owner(module, name, value):
-                return True
-    return False
+def api_package(module_name: str) -> str:
+    """The API package ``module_name`` belongs to.
 
-
-def fold_generated_modules(
-    modules: list[PyModule], renderer: Renderer
-) -> dict[str, str]:
-    """Which ``OpenGL.raw`` modules to document on the module beside them.
-
-    Every extension exists twice: ``OpenGL.GL.ARB.foo``, which is what a
-    program imports, and ``OpenGL.raw.GL.ARB.foo``, the generated declarations
-    it is built from.  The pair shares its names, and one module declares each
-    -- so the raw half of nearly every pair has a page saying only that its
-    names are documented on the other one.  There are thirteen hundred of
-    those, at nineteen kilobytes of page furniture each.
-
-    A raw module is folded into its counterpart when it declares nothing, its
-    submodules are all folded too, and the counterpart is in the set.  The
-    counterpart's page then declares the raw module's name, so a reference to
-    it still resolves and the module index still lists it -- it leads to where
-    the content is rather than to a page that points at it.
-
-    Deepest first, so that a package is only folded once its children are.
+    ``OpenGL.GL.ARB.vertex_buffer_object`` is desktop OpenGL's;
+    ``OpenGL.GLES3.VERSION.GLES3_3_0`` is ES 3.x's.  Two components, because
+    that is how the packages are laid out.
     """
-    present = {module.name: module for module in modules}
-    folded: dict[str, str] = {}
-    for module in sorted(modules, key=lambda m: -m.name.count('.')):
-        if not module.name.startswith('OpenGL.raw.') and module.name != 'OpenGL.raw':
-            continue
-        counterpart = module.name.replace('.raw', '', 1)
-        if counterpart not in present:
-            continue
-        if declares_anything(module, renderer):
-            continue
-        if any(child not in folded for child in module.modules):
-            continue
-        folded[module.name] = counterpart
-    return folded
+    return '.'.join(module_name.split('.')[:2])
 
 
 def child_names(name: str, every: Iterable[str]) -> list[str]:
@@ -851,7 +793,6 @@ def render_projects(
     Returns the names written and the names that could not be documented.
     """
     report_configuration()
-    quieten_absent_platforms()
     os.makedirs(directory, exist_ok=True)
     roots = list(projects or PROJECTS)
     skip = tuple(skip)
@@ -885,16 +826,8 @@ def render_projects(
         module.modules = child_names(module.name, found)
 
     renderer = Renderer(load_entry_points(), claim_owners(modules))
-    renderer.folded = fold_generated_modules(modules, renderer)
-    if renderer.folded:
-        log.info(
-            '%d generated modules are documented on the module beside them',
-            len(renderer.folded),
-        )
     rendered: list[str] = []
     for module in modules:
-        if module.name in renderer.folded:
-            continue
         try:
             page = renderer.render(module)
         except Exception as err:
