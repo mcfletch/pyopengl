@@ -28,7 +28,7 @@ With those set, ``OpenGL.EGL`` and ``OpenGL.GLES2`` behave as they do on Linux �
 It is asked for, never guessed at
 ---------------------------------
 
-Nothing selects this platform on its own. A Windows machine's OpenGL is WGL's, and a program that did not ask for ES should go on getting desktop GL from the driver — so naming it in ``PYOPENGL_PLATFORM`` is the whole of how it is chosen. That is also why it is safe for it to supply no desktop GL at all: nothing lands here by accident.
+Nothing selects this platform on its own. A Windows machine's OpenGL is WGL's, and a program that did not ask for ES should go on getting desktop GL from the driver — so this platform is used only when it is named in ``PYOPENGL_PLATFORM``. That is also why it is safe for it to supply no desktop GL at all: nothing lands here by accident.
 
 OpenGL ES, and only OpenGL ES
 -----------------------------

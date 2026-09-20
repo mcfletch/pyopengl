@@ -53,3 +53,46 @@ table.entry-point-index td:first-child {
 .project-badges img {
   height: 20px;
 }
+
+/* Where a module page sits, under the sidebar's own navigation: the packages
+ * above it, the modules beside it, and the modules inside it.  The lists run
+ * long -- 172 extensions under `OpenGL.GL.ARB` -- so they scroll rather than
+ * pushing the rest of the sidebar away. */
+.module-neighbourhood {
+  padding: 0.5rem 1rem 0;
+  font-size: var(--sidebar-item-font-size, 0.9em);
+}
+
+.module-ancestors {
+  color: var(--color-foreground-secondary, #555);
+  word-break: break-all;
+}
+
+.module-separator {
+  opacity: 0.6;
+}
+
+.module-heading {
+  margin: 0.75rem 0 0.25rem;
+  font-weight: bold;
+  color: var(--color-foreground-secondary, #555);
+}
+
+.module-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-height: 18rem;
+  overflow-y: auto;
+}
+
+.module-list li {
+  margin: 0;
+  padding: 0.05rem 0;
+  word-break: break-all;
+}
+
+.module-list li.current > a {
+  font-weight: bold;
+  color: var(--color-sidebar-link-text--top-level, inherit);
+}

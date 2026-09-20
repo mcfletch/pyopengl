@@ -3,7 +3,7 @@
 The check runner launches each script as a subprocess and inspects its
 output/return code.  These helpers let a script bow out cleanly when an
 optional dependency is missing and report success in the form the runner
-understands.
+reads.
 """
 
 from __future__ import print_function

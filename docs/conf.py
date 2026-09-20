@@ -150,6 +150,7 @@ html_sidebars = {
         'sidebar/search.html',
         'sidebar/scroll-start.html',
         'sidebar/navigation.html',
+        'sidebar/modules.html',
         'sidebar/ethical-ads.html',
         'sidebar/scroll-end.html',
         'sidebar/badges.html',

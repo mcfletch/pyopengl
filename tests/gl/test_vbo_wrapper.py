@@ -4,8 +4,9 @@
 The wrapper's job is to look like the array it was given while keeping the
 buffer object behind it in step: bound where a pointer is wanted, re-uploaded
 where a slice is assigned, and deleted once rather than twice.  Each of those
-is a place a caller notices only much later -- a stale buffer draws the last
-frame's data, and a double delete takes a name the driver has since reissued.
+is a place where a fault shows up only much later -- a stale buffer draws the
+last frame's data, and a double delete takes a name the driver has since
+reissued.
 
 Also here: a memory-mapped file as the source of pixel data, which is the case
 where the array PyOpenGL is handed is a window onto something it does not own.
