@@ -51,12 +51,16 @@ Which module declares a name comes from the `__module__` the declaration
 tables record, which needs `MODULE_ANNOTATIONS`; `dumbpydoc.py` sets it before
 importing anything.
 
-A generated module that declares nothing of its own gets no page: every
-extension exists twice, `OpenGL.GL.ARB.foo` and the `OpenGL.raw.GL.ARB.foo` it
-is built from, and the raw half of nearly every pair would otherwise be a page
-saying its names are documented elsewhere. The module beside it declares its
-name instead, so the module index still lists it and a reference to it still
-resolves -- to the page with the content on it. See `plans/SPHINX-DOCS.md`.
+`OpenGL.raw` gets no pages at all. There are no source files under it, only
+declaration tables a finder turns into namespaces on demand, and every name in
+it is exported by the module beside it -- which is where it is declared.
+
+The reference is one directory and one index per API: `gl`, `gles1`, `gles2`,
+`gles3`, `glu`, `glut`, `gle`, `glx`, `egl`, `wgl`. The same entry point can be
+in several and mean something different in each, so each gets its own page, and
+`entrypoints.json` is keyed by API package for the same reason. Khronos
+publishes no reference pages for EGL or WGL, so those two indexes are built
+from the packages instead. See `plans/SPHINX-DOCS.md`.
 
 ## Sample code references
 

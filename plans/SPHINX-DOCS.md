@@ -41,10 +41,10 @@ page for the OpenGL command it wraps, and writes
 For everything with no reference page -- modules, classes, methods,
 attributes, constants, an extension's entry points -- `dumbpydoc.py` works out
 which module declares each name and declares it there. The module that
-declares it is the one whose `__module__` the object reports, preferring the
-friendly module beside a declaration table (`OpenGL.GL.VERSION.GL_1_0` over
-`OpenGL.raw.GL.VERSION.GL_1_0`), and failing that the shallowest module that
-has the name. Every other module that exports it gets a line saying where it
+declares it is the one whose `__module__` the object reports -- which for a
+constant or an entry point is the declaration table it came from, so the
+friendly module of the same name takes it -- and failing that the shallowest
+module that exports it. Every other module that exports it gets a line saying where it
 comes from and how many names it takes from there.
 
 Identity is `(declaring module, name)` rather than the identity of the object:
@@ -80,20 +80,16 @@ command, so two objects stand for one command and `id()` would declare both.
 - **A name could be declared twice on one page.** The type classification loop
   had no `break`, so a ctypes function-pointer type, which is both a class and
   a callable, went into both collections.
-
-## Size
-
-The set is about 2,100 pages. That is enough for the theme's default sidebar --
-the whole table of contents, expanded, on every page -- to be most of a
-megabyte per page: a first full build came to 2.6 GB of HTML in 51 minutes,
-almost all of it navigation.
-
-`docs/_ext/pyopengl_sidebar.py` bounds it: the tree is asked for again,
-collapsed to the branch the reader is in, two levels deep, and without the
-hidden toctrees that carry the reference and module pages. Those are reached
-from their own index pages, which list them in full. `sphinx.ext.viewcode` is
-deliberately not enabled, for the same reason and because most of the package
-has no source to show -- it is built from the declaration tables.
+- **An XInclude with no XPointer brought the wrong thing.** It means the
+  included document's element; the resolver took its children instead, which
+  dropped the `informaltable` wrapper off every format table -- which buffer
+  binding targets exist, which internal formats are sized -- so on thirty
+  pages every cell rendered as a paragraph of its own.
+- **EGL and WGL were documented on no machine.** `dumbpydoc` nulled both
+  platforms before inspecting anything, to avoid an error where the library is
+  absent. That also stopped them documenting where the library is present, and
+  the per-module tolerance that arrived later does the job without the cost:
+  206 pages that had never been written.
 
 ## The carousel
 
@@ -104,41 +100,89 @@ external URLs are all 404 now and are dropped; the rest are in the source tree.
 The panel pauses on hover, on a hidden tab, off screen and under
 `prefers-reduced-motion`, and without JavaScript renders as a list of figures.
 
-## How many pages there should be
+## How the reference is organised
 
-There are three ways a name could get a page, and only two of them are worth
-one.
+One directory and one index per API, under `docs/reference/`:
 
-A **reference page** is per Khronos reference entry, not per entry point:
-`glColor` is one page covering forty. 691 of them, which is what upstream has.
+| | pages | entry points | extension modules |
+| --- | --- | --- | --- |
+| `gl` — desktop OpenGL | 471 | 1,266 | 641 |
+| `gles1` / `gles2` / `gles3` | 94 / 107 / 258 | 145 / 143 / 317 | 75 / 324 / 2 |
+| `glu` | 54 | 59 | 2 |
+| `glut` | 85 | 142 | -- |
+| `gle` | 13 | 15 | -- |
+| `glx` | 44 | 44 | 74 |
+| `egl` | -- | 51 | 119 |
+| `wgl` | -- | 20 | 58 |
 
-A **module page** is per Python module. `OpenGL.GL.ARB.vertex_buffer_object`
-has content -- its constants, and links to the reference pages for its entry
-points.
+`reference/index` is the list of those, and each API's index carries its
+reference pages, the entry points Khronos publishes no page for, and its
+extension modules grouped by vendor. That is what makes it navigable: a reader
+who wants EGL should not have to know that `eglInitialize` sorts between
+`glEnable` and `glutMainLoop`.
 
-A **generated module** is the other half of every extension:
-`OpenGL.raw.GL.ARB.vertex_buffer_object`, the declarations the friendly module
-is built from. The pair shares its names, and one module declares each, so
-1,281 of the 1,300 raw pages said nothing but "documented on the module beside
-this one" -- 99% of them, at 19 KB of page furniture each.
+Khronos publishes no reference pages for EGL or WGL, so those two indexes are
+built from the packages instead -- every entry point the package exports,
+linked to its declaration on the API pages.
 
-Those fold into the module beside them, which declares the raw module's name in
-a closing section. Nothing is lost: the module index still lists all 1,300, and
-`:py:mod:`OpenGL.raw.GL.ARB.vertex_buffer_object`` still resolves -- to the page
-with the content on it rather than to a page pointing at that page. A raw module
-that does declare something of its own, like `OpenGL.raw.GL._types`, keeps its
-page; 48 do.
+### What was wrong before
 
-|                          | before | after |
-| ---                      | ---    | ---   |
-| pages                    | 3,388  | 2,137 |
-| built site               | 105 MB | 81 MB |
-| build                    | 10m50s | 5m22s |
-| cross-reference targets  | 21,241 | 21,241 |
+The whole reference was one flat directory of 691 pages, and three things
+conspired to make that wrong:
 
-The repository cost barely moved -- 7.6 MB packed to 7.4 -- because git deltas
-1,281 near-identical pages down to nearly nothing. The fold is worth doing for
-the reader and for the build, not for the repository.
+- **Which API a page belonged to was read from the entry point's name.**
+  Everything beginning `gl` was filed under GL, so every ES page was labelled
+  desktop OpenGL.
+- **Pages were deduplicated by file name across all the directories at once.**
+  `glBindTexture.xml` is in `gl4` and in four ES directories; the first was
+  kept and the rest dropped. They are not the same call -- the desktop
+  `glTexImage2D` takes arguments ES has never had -- so 462 ES pages were
+  being thrown away.
+- **`model.Reference` indexed sections by bare title**, so even the pages that
+  survived the first two overwrote each other.
+
+Each is fixed by carrying the API through: `api_of_page` reads it from the
+source directory, deduplication is per API, and the tables are keyed
+`(api, title)`. `docs/reference/entrypoints.json` is per API package too,
+which is how a module page knows to link `glBindTexture` to the desktop page
+from `OpenGL.GL.VERSION.GL_1_1` and to the ES page from
+`OpenGL.GLES3.VERSION.GLES3_3_0`.
+
+### The generated hierarchy is not documented
+
+`OpenGL.raw` gets no pages. It is not a hierarchy of modules in the ordinary
+sense -- there are no files, only declaration tables that a finder turns into
+namespaces on demand -- and every name in it is exported by the module beside
+it, which is where it is declared. A name with no such counterpart, `GLfloat`
+and its neighbours from `OpenGL.raw.GL._types`, is declared by the package
+that exports it.
+
+That was 1,300 pages, 1,281 of which declared nothing at all.
+
+### Usage references
+
+Each reference page lists source code that calls the entry point it
+describes, which is often the fastest way to see how one is used. The list
+comes from `directdocs/references.py`, which tokenises checkouts of eighteen
+other projects that `directdocs/samples.py` fetches, and writes
+`.reference_cache.pkl`. 1,421 entry points have at least one; `glBegin` has
+359.
+
+Neither script is needed to build the set: without the cache the pages are
+written without their sample sections. Two things in the scanner had to be
+fixed first -- it walked `.git`, and a checkout that was not there killed the
+whole scan rather than costing its own samples.
+
+### Size
+
+About 2,670 pages and 100 MB. The theme's default sidebar is the whole table
+of contents, expanded, on every page, which at this size is most of a megabyte
+per page: a first full build came to 2.6 GB in 51 minutes, almost all of it
+navigation. `docs/_ext/pyopengl_sidebar.py` bounds it -- collapsed to the
+branch the reader is in, two levels deep, without the hidden toctrees that
+carry the reference and module pages. `sphinx.ext.viewcode` is deliberately
+not enabled, for the same reason and because most of the package has no source
+to show.
 
 ## Publishing
 
@@ -182,10 +226,15 @@ and keeps the built site as an artifact either way.
   OpenGLContext screenshots in `docs/_static/screenshots/` are PyOpenGL's front
   page showing what people build with it. The tutorial generator belongs in the
   OpenGLContext repository.
-- **The platform modules absent from this machine.** `OpenGL.EGL`,
-  `OpenGL.osmesa` and `OpenGL.platform.win32` cannot be imported here, so they
-  get no page. A release build should run somewhere they can be, or the build
-  should be run once per platform and the results merged.
-- **`genindex.html` is 4.2 MB and `searchindex.js` 5.9 MB**, which is what an
+- **The three modules this machine cannot import.** `OpenGL.osmesa` wants
+  `PYOPENGL_PLATFORM=osmesa`, `OpenGL.platform.win32` wants Windows, and
+  `OpenGL.arrays._strings` wants an interpreter whose string layout it
+  recognises. Each gets no page. A release build should run somewhere they can
+  be imported, or run once per platform with the results merged. EGL and WGL
+  used to be in this list for a different reason and are not any more.
+- **`genindex.html` is 4.0 MB and `searchindex.js` 6.2 MB**, which is what an
   index of twenty-one thousand names comes to. Splitting the index per letter
   is a Sphinx option worth measuring.
+- **The WGL reference has no man pages and GLU's are OpenGL 2.1-era.** Khronos
+  publishes neither, so those indexes are built from the packages. Writing
+  reference pages for WGL would be writing them, not generating them.

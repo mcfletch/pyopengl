@@ -88,29 +88,96 @@ Each platform has its own
 Platform implementations are registered as entry points; ``sys.platform`` and
 then ``os.name`` decide which one is loaded.
 
-Generated wrappers
+Generated bindings
 ------------------
 
-The GL and EGL entry points are generated from the Khronos XML registry.  GLE
-and GLUT come from older generators, both APIs being long settled.  To
-regenerate:
+Almost everything PyOpenGL exports is generated from the Khronos XML
+registries rather than written out.  Two repositories, because Khronos
+publishes them separately, and both are working copies rather than files
+vendored here:
 
 .. code-block:: console
 
-   $ cd src
-   $ ./xml_generate.py
+   $ python src/fetch_registries.py
 
-That writes the C-shaped "raw" API -- the modules under :py:mod:`OpenGL.raw`,
-which can be imported and used directly by a program that wants ctypes
-semantics.  Much of the core API needs nothing beyond that, so each package
-module imports everything from its ``raw.XXX`` and ``raw.XXX.annotations``
-counterparts before importing the modules that customise it.
+``src/khronosapi``
+    `OpenGL-Registry <https://github.com/KhronosGroup/OpenGL-Registry>`__:
+    ``gl.xml``, ``glx.xml``, ``wgl.xml``, and the extension specifications.
 
-``glGet`` output arrays are handled by the generator, which registers each
-constant against the size of the array it returns, so that a ``glGet*`` call
-returns an array of the right size.  The sizes come from the specification
-documents together with ``src/glgetsizes.csv``.  The generator also copies the
-specification's "Overview" for each extension into the module docstring.
+``src/eglapi``
+    `EGL-Registry <https://github.com/KhronosGroup/EGL-Registry>`__:
+    ``api/egl.xml``.
+
+Which commit of each the shipped bindings came from is recorded in
+``src/cdispatch/registry_lock.json``.  A fetch that finds a different one
+stops the run: every enum value and every signature comes out of those
+repositories, and no test can catch a wrong one, because the tests are
+generated from the same input.  Moving to a newer registry is a decision with
+a diff attached rather than whatever the network answered today, so it is
+asked for:
+
+.. code-block:: console
+
+   $ python src/regenerate_c.py --update-registries
+
+What the generators write
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: console
+
+   $ python src/regenerate_c.py      # the compiled entry points
+   $ python src/xml_generate.py      # the Python-level API
+
+``regenerate_c.py`` writes the C dispatch layer into
+``accelerate/src/c/generated``, which is compiled into
+``OpenGL_accelerate.dispatch``.  :doc:`c-dispatch` describes what that layer
+does and ``src/cdispatch/README.md`` is the guide to the generator --
+including how to add an entry point that needs hand-written C.
+
+``xml_generate.py`` writes the Python-level API: the declaration tables in
+``OpenGL/raw/_declarations/*.dat``, which a finder turns into the
+``OpenGL.raw`` namespaces at import time, and the friendly modules beside
+them.  There are no ``OpenGL.raw`` source files to read; the tables are what
+there is.
+
+``glGet`` output sizes are part of that: the generator registers each constant
+against the size of the array it returns, so a ``glGet*`` call comes back the
+right length.  The sizes come from the specifications together with
+``src/glgetsizes.csv``.  Each extension module also gets the specification's
+"Overview" as its docstring.
+
+GLU, GLUT and GLE are not in the registries and are not generated; those
+wrappers are written by hand, all three APIs being long settled.
+
+Checking a regeneration
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: console
+
+   $ python src/check_registry.py --verbose
+
+Reports what the shipped bindings and the registry disagree about: a registry
+command with no binding, a binding whose signature no longer matches, an enum
+with no constant, and every entry point still on the ctypes path with the
+reason.  Differences that have already been looked at are recorded in
+``src/cdispatch/registry_baseline.json`` with a reason each, and
+``--new-only`` exits non-zero for what is new since.
+
+**A scheduled job already does this.**
+``.github/workflows/registry-update.yml`` runs weekly: it fetches the
+registries, regenerates, checks for drift nobody has recorded, and opens a
+pull request when the regeneration produced a diff -- with the report in the
+body, so the change can be read without checking anything out.  The registry
+gains entry points continuously, and a gap in the bindings is otherwise only
+noticed when somebody tries to call the thing that is missing.
+
+So regenerating by hand is for working on a generator, not for keeping up with
+Khronos.  An entry point whose generated body is not a plain macro expansion
+is the one thing in that pull request that needs a person; the rest is table
+data.
+
+Customising a generated module
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 An extension module is a single file with its generated half above a marker:
 
@@ -124,10 +191,6 @@ Customisations go below it.  Removing the marker takes the module out of the
 generator's reach, and out of reach of later improvements to it as well.
 Making an extension module more Pythonic and sending the change back is
 welcome.
-
-The compiled entry points are generated too, from the same registry, and built
-into ``PyOpenGL_accelerate``.  :doc:`c-dispatch` describes that layer and
-``src/cdispatch/README.md`` is the guide to its generator.
 
 Converters and wrappers
 -----------------------

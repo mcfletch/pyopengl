@@ -73,16 +73,5 @@ a C compiler and the Python development headers.
 Building the documentation
 --------------------------
 
-``build-docs.py`` at the top of the checkout writes this documentation set.  It
-generates the :doc:`reference pages <reference/index>` from the Khronos DocBook
-sources, the :doc:`API pages <api/index>` from the installed packages, and then
-runs Sphinx over the lot:
-
-.. code-block:: console
-
-   $ pip install -e .[docs]
-   $ python build-docs.py
-
-The result is in ``docs/_build/html``.  ``python build-docs.py --help`` lists
-the rest, including how to rebuild one half without the other and how to
-publish the built set.
+The documentation set is built from the checkout; :doc:`building-docs` says
+how.

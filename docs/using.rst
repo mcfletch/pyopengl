@@ -8,9 +8,12 @@ Accessing OpenGL functionality
 ------------------------------
 
 The OpenGL library is a single instance per process, shared by all in-process
-code that issues OpenGL commands.  Most programs use OpenGL from inside a GUI
-framework -- wxPython, PyGame, Tkinter, PyGTK or PyQt.  For a program with no
-other GUI, the GLUT library is often enough, and PyOpenGL wraps it.
+code that issues OpenGL commands.  Something has to create a context before
+PyOpenGL can draw into one: `GLFW <https://pypi.org/project/glfw/>`__ is the
+one to reach for, and is what PyOpenGL's own test suite uses.  A program that
+already has a GUI toolkit -- PyGame, PyQt or PySide, wxPython, PyGTK, Tkinter
+through :py:mod:`OpenGL.Tk` -- uses that toolkit's OpenGL widget instead, and
+one that wants no toolkit at all can use GLUT, which PyOpenGL also wraps.
 
 The GUI package defines an OpenGL "window" and makes it current.  Once it is
 current, PyOpenGL commands draw into it, as do commands issued from another
@@ -142,20 +145,40 @@ the call to them, so that a failure names the argument that caused it.
 Performance
 -----------
 
-Push iteration into the OpenGL implementation rather than running it in Python.
-Two ways of doing that:
+Every call into OpenGL costs something on the Python side, so the way to be
+fast is to make fewer, larger calls: put the data where the driver can reach it
+and let the hardware iterate.
 
-- array-based geometry
-- display lists
+Buffer objects
+    Geometry belongs in a vertex buffer object, uploaded once and drawn from
+    many times.  :py:mod:`OpenGL.arrays.vbo` wraps the creation, binding and
+    updating; a NumPy array goes to the driver without a Python-level loop and
+    without a copy, provided its data type already matches.  A vertex array
+    object then records the attribute bindings, so a draw is one state change
+    and one call.
 
-Array-based geometry passes a whole array to a single call.  With NumPy arrays
-the data goes straight to the driver with no Python-level loop, and the data
-can change between frames without recompiling anything, which is what
-translucency sorting and animation need.
+Instanced drawing
+    ``glDrawArraysInstanced`` and ``glDrawElementsInstanced`` draw the same
+    geometry many times from one call, with per-instance attributes supplying
+    what differs.  This is how to draw a forest, a particle system or a tile
+    map without a call per object.
 
-Display lists record a sequence of commands once and replay it with one call
-afterwards.  They suit static geometry, and they nest: a root list can call
-many others, or an array of list names can be called at once.
+Uniform buffer objects
+    A block of uniforms uploaded once and bound to several programs, rather
+    than a ``glUniform*`` call per value per frame.  Shader storage buffers do
+    the same for larger and writable data.
+
+Multi-draw
+    ``glMultiDrawElements`` and the indirect forms take a list of draws in one
+    call, including one whose parameters the GPU itself wrote.
+
+Batch by state
+    Sort what you draw so that programs, textures and buffers are bound as few
+    times as possible; a bind is a call, and calls are what cost.
+
+Display lists are not on this list.  They are fixed-function OpenGL, removed
+from the core profile, and where a driver still offers them it is through a
+compatibility path that is slower than a buffer object.
 
 Avoiding array copies
 ~~~~~~~~~~~~~~~~~~~~~
@@ -219,13 +242,14 @@ storage, or every array it ever passed stays reachable.  Set the values to
 Register the callback to run *after* the context is destroyed.  Rendering into
 a context whose storage has been cleaned up reads freed memory.
 
-Tkinter and Togl
-----------------
+Tkinter
+-------
 
-:py:mod:`OpenGL.Tk` wraps the Tk Togl widget.  The widget itself is not part of
-PyOpenGL: install the Togl package through the system package manager or build
-it from source, and build Python with Tk support.  :doc:`tk-widget` has the
-details.
+:py:mod:`OpenGL.Tk` gives Tkinter an OpenGL widget.  It needs nothing but
+PyOpenGL and a Python built with Tk support: the widget creates its own context
+through the platform's own API, so there is no separate extension to install.
+:doc:`tk-widget` has the details, including the widget options and what a
+program that used the old Togl-based widget has to change.
 
 Contributing
 ------------
