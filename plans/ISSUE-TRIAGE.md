@@ -199,3 +199,29 @@ git push -u origin issue/144-glut-create-window-str    # runs the matrix
 
 and a dispatch narrows it to the platform the ticket is about, with the
 `tests` input naming the one path to run.
+
+### Reading a macOS run
+
+The macOS cells do not fail the run on their own; the `macOS` gate job does,
+and it fails it for an area that reported a failure rather than for a cell that
+never got that far. Two things end a macOS cell without a verdict in it:
+GitHub cancels a job no runner has picked up after twenty-four hours, and a
+step killed at its `timeout-minutes` stopped in the middle of a case.
+`timeout-minutes` does not start until a runner takes the job, so it bounds the
+second and not the first.
+
+So a green run is not by itself a statement that macOS is green, and the gate
+says which it is. Its log names every cell that reported and warns about the
+ones that did not:
+
+```
+macOS macos-14 / CGL / py312-num1-accel0-dispctypes: pass
+    area gl pass
+    ...
+4 of 6 cells reported, and none had a failing area
+```
+
+A ticket that a macOS run is meant to settle wants that line to account for the
+cell it is about. Each cell's areas are in its `test-logs-macos-*` artifact,
+with the whole output of each as a file, and a crash arrives with its faulting
+frame in `crash-reports-macos-*`.

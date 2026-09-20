@@ -402,13 +402,32 @@ jobs:
       inputs.platforms == '' || inputs.platforms == 'all'
       || inputs.platforms == 'macos'
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 30
+    # Observed: a cell of this matrix takes between two and four minutes, and
+    # each area below is bounded on its own -- so twenty minutes is the backstop
+    # for the whole cell rather than the limit anything is expected to meet.
+    timeout-minutes: 20
+    # A cell that does not finish does not fail the run.  `macos-gate` below is
+    # what fails it, and it reads what the cells recorded: an area that reported
+    # a failure is a verdict on the library, and a cell that never reported is a
+    # job that ran out of time.  Two things end a cell without a verdict in it,
+    # and neither says anything about the code:
+    #
+    #   * GitHub holds a job no runner has picked up for twenty-four hours and
+    #     then cancels it.  `timeout-minutes` does not start until a runner
+    #     takes the job, so nothing here shortens that wait -- only the gate
+    #     keeps it from turning into a red suite a day later.
+    #   * A step killed at its own limit stopped in the middle of a case, so
+    #     there is no verdict to read out of it.
+    continue-on-error: true
     strategy:
       fail-fast: false
       matrix:
         # macos-13 is the last Intel runner GitHub offers; 14 and 15 are both
         # Apple Silicon.  #139 is a segfault on an Intel Mac, and without this
-        # row nothing in the matrix could ever see it.
+        # row nothing in the matrix could ever see it.  No run has picked one
+        # of these two cells up yet -- each has waited out GitHub's queue limit
+        # or been cancelled by the next push -- so they are the cells the gate
+        # reports as never having reported.
         os: [macos-13, macos-14, macos-15]
         # Both implementations, because the compiled one is the release's
         # substance and Linux is otherwise the only platform it is ever run on.
@@ -459,56 +478,70 @@ jobs:
       # One area per step, each allowed to fail, because a segfault ends the
       # process it happens in: run as one command and the first crash costs
       # every test after it, so a machine none of us can log into becomes one
-      # crash per push to learn about.  The gate below is what fails the job.
+      # crash per push to learn about.  Each runs through `run-test-area.sh`,
+      # which keeps the whole output as a file and records what the area said;
+      # the step that reads those records is below.
+      #
+      # Eight minutes apiece, which is above the five `pytest-timeout` takes to
+      # report a hung case: a stuck test arrives as a failing test with a
+      # traceback naming it, and the bound here is only for a hang that reaches
+      # past the one case -- an area that stops outside a test, or a process
+      # that ignores the alarm.
       - name: Run the tests -- bindings, harness and checks
-        id: root
         continue-on-error: true
-        run: |
-          mkdir -p test-logs
-          set -o pipefail
-          python -m tox -e ${{ matrix.toxenv }} -- \
-            ${{ inputs.tests || 'tests/bindings tests/harness tests/checks tests/directdocs' }} \
-            2>&1 | tee test-logs/root.log
+        timeout-minutes: 8
+        run: >
+          .github/scripts/run-test-area.sh root
+          python -m tox -e ${{ matrix.toxenv }} --
+          ${{ inputs.tests || 'tests/bindings tests/harness tests/checks tests/directdocs' }}
 
       - name: Run the tests -- cdispatch
-        id: cdispatch
         if: inputs.tests == ''
         continue-on-error: true
-        run: |
-          mkdir -p test-logs
-          set -o pipefail
-          python -m tox -e ${{ matrix.toxenv }} -- tests/cdispatch \
-            2>&1 | tee test-logs/cdispatch.log
+        timeout-minutes: 8
+        run: >
+          .github/scripts/run-test-area.sh cdispatch
+          python -m tox -e ${{ matrix.toxenv }} -- tests/cdispatch
 
       - name: Run the tests -- gl
-        id: gl
         if: inputs.tests == ''
         continue-on-error: true
-        run: |
-          mkdir -p test-logs
-          set -o pipefail
-          python -m tox -e ${{ matrix.toxenv }} -- tests/gl \
-            2>&1 | tee test-logs/gl.log
+        timeout-minutes: 8
+        run: >
+          .github/scripts/run-test-area.sh gl
+          python -m tox -e ${{ matrix.toxenv }} -- tests/gl
 
       - name: Run the tests -- glu
-        id: glu
         if: inputs.tests == ''
         continue-on-error: true
-        run: |
-          mkdir -p test-logs
-          set -o pipefail
-          python -m tox -e ${{ matrix.toxenv }} -- tests/glu \
-            2>&1 | tee test-logs/glu.log
+        timeout-minutes: 8
+        run: >
+          .github/scripts/run-test-area.sh glu
+          python -m tox -e ${{ matrix.toxenv }} -- tests/glu
 
       - name: Run the tests -- gles
-        id: gles
         if: inputs.tests == ''
         continue-on-error: true
-        run: |
-          mkdir -p test-logs
-          set -o pipefail
-          python -m tox -e ${{ matrix.toxenv }} -- tests/gles \
-            2>&1 | tee test-logs/gles.log
+        timeout-minutes: 8
+        run: >
+          .github/scripts/run-test-area.sh gles
+          python -m tox -e ${{ matrix.toxenv }} -- tests/gles
+
+      # What this cell reported, as a file in the artifact below: which areas
+      # passed, which failed, and which never finished.  It is the only thing
+      # the gate job reads, and it is written here rather than left to the
+      # steps' own outcomes because an outcome of `failure` covers both an area
+      # that failed and a step that was killed.
+      #
+      # The job still goes red for a failing area, which is the signal a person
+      # scanning the run reads; what turns that into a red *run* is the gate.
+      - name: Record what each area reported
+        if: always()
+        timeout-minutes: 5
+        env:
+          CELL: macOS ${{ matrix.os }} / CGL / ${{ matrix.toxenv }}
+          TOTAL: ${{ strategy.job-total }}
+        run: .github/scripts/record-test-areas.sh root cdispatch gl glu gles
 
       # A crash on a machine none of us can log into is only as debuggable as
       # what the run took away with it.  faulthandler prints the Python frame;
@@ -556,19 +589,28 @@ jobs:
           path: test-logs/
           if-no-files-found: ignore
 
-      - name: Fail the job if any area did
-        if: always()
-        run: |
-          printf 'root       %s\n' '${{ steps.root.outcome }}'
-          printf 'cdispatch  %s\n' '${{ steps.cdispatch.outcome }}'
-          printf 'gl         %s\n' '${{ steps.gl.outcome }}'
-          printf 'glu        %s\n' '${{ steps.glu.outcome }}'
-          printf 'gles       %s\n' '${{ steps.gles.outcome }}'
-          for outcome in '${{ steps.root.outcome }}' '${{ steps.cdispatch.outcome }}' \
-                         '${{ steps.gl.outcome }}' '${{ steps.glu.outcome }}' \
-                         '${{ steps.gles.outcome }}'; do
-            case "$outcome" in
-              success|skipped) ;;
-              *) echo "::error::an area did not pass: $outcome"; exit 1 ;;
-            esac
-          done
+  macos-gate:
+    name: macOS
+    needs: macos
+    # Whatever became of the cells, including none of them having run: a gate
+    # that only ran after a green matrix would have nothing left to decide.
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Collect what the cells reported
+        # Allowed to fail, because the action makes finding no artifact at all
+        # an error -- and a run where every macOS cell was still queued when
+        # GitHub cancelled it has exactly none.  That case is the gate's to
+        # report, so it has to reach the script below.
+        continue-on-error: true
+        timeout-minutes: 5
+        uses: actions/download-artifact@v4
+        with:
+          pattern: test-logs-macos-*
+          path: cells
+
+      - name: Fail the run for a failing area, and not for a cell that did not run
+        run: .github/scripts/read-cell-verdicts.sh cells
