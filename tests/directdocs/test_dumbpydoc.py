@@ -8,6 +8,8 @@ the rest link.  These hold that choice, and the way two exports of one command
 are recognised as the same thing despite being two objects.
 """
 
+import decimal
+
 import pytest
 
 from childenv import json_from_child
@@ -267,30 +269,35 @@ class TestSomebodyElsesClass:
     ``ArrayType = numpy.ndarray`` is a name OpenGLContext offers, so the page
     carries it; writing the class out under it copies a few thousand lines of
     numpy's own documentation into the page, and numpy documents it already.
+
+    The rule is about where a class comes from and reads ``__module__``, so
+    the class these use is ``decimal.Decimal``: numpy is one of the axes the
+    matrix runs without, and a rule that has nothing to do with numpy is a
+    rule to keep asking there.
     """
 
     def module(self):
         return FakeModule('OpenGLContext.arrays')
 
     def test_a_class_from_outside_the_packages_is_named(self):
-        import numpy
-
         assert (
-            dumbpydoc.defined_elsewhere(numpy.ndarray, self.module())
-            == 'numpy.ndarray'
+            dumbpydoc.defined_elsewhere(decimal.Decimal, self.module())
+            == 'decimal.Decimal'
         )
 
     def test_a_class_of_ours_is_not(self):
         assert dumbpydoc.defined_elsewhere(Fake('OpenGL.GL'), self.module()) is None
 
     def test_the_page_says_where_to_read_about_it(self):
-        import numpy
-
-        module = FakeModule('OpenGL.arrays', classes=[('ArrayType', numpy.ndarray)])
+        module = FakeModule(
+            'OpenGL.arrays', classes=[('ArrayType', decimal.Decimal)]
+        )
         page = dumbpydoc.Renderer({}, {}).render(module)
         assert '.. py:class:: ArrayType' in page
-        assert 'Another name for :py:class:`numpy.ndarray`.' in page
-        assert 'ctypes' not in page
+        assert 'Another name for :py:class:`decimal.Decimal`.' in page
+        # A member of the class, which is on the page only if the class was
+        # written out rather than named.
+        assert 'quantize' not in page
 
 
 class TestTheIndexPage:

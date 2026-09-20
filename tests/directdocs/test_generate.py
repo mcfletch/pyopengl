@@ -7,6 +7,7 @@ tables, and the section ids that say what a section is.
 """
 
 import os
+import urllib.parse
 
 import lxml.etree as ET
 import pytest
@@ -323,6 +324,28 @@ print(json.dumps(
     }
 ))
 '''
+
+
+class TestWhatAPagesReferencesResolveAgainst:
+    """A page names its entity sets by a system identifier beside it, and
+    libxml2 resolves that against the base URL the parser was given -- as a
+    URI.  A filesystem path is a URI on POSIX by coincidence and never on
+    Windows, where a drive letter reads as a scheme and a separator is a
+    character no URI holds.
+    """
+
+    def test_it_is_a_url(self, tmp_path):
+        assert generate.document_url(str(tmp_path / 'glThing.xml')).startswith(
+            'file:///'
+        )
+
+    def test_a_sibling_resolves_beside_the_page(self, tmp_path):
+        """``math.ent`` is the one every reference page with mathematics in
+        it declares, and it sits in the directory the page does."""
+        resolved = urllib.parse.urljoin(
+            generate.document_url(str(tmp_path / 'glThing.xml')), 'math.ent'
+        )
+        assert resolved == (tmp_path / 'math.ent').as_uri()
 
 
 @pytest.fixture(scope='module')

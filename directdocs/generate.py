@@ -25,6 +25,7 @@ import importlib
 import json
 import logging
 import os
+import pathlib
 import pickle
 import re
 import sys
@@ -603,15 +604,25 @@ def parser() -> Any:
     return ET.XMLParser(load_dtd=True, resolve_entities=True, no_network=True)
 
 
+def document_url(path: str) -> str:
+    """``path`` as the URL its own references resolve against.
+
+    A page declares its entity sets by a system identifier beside it --
+    ``math.ent`` -- and libxml2 resolves that against the base URL as a URI.
+    A Windows path is not one: ``C:\\pages\\glThing.xml`` gives ``C:\\pages``
+    a scheme of ``c`` and a backslash that no URI holds, and the entity set
+    resolves to something no opener accepts.
+    """
+    return pathlib.Path(os.path.abspath(path)).as_uri()
+
+
 def parse_fragment(path: str) -> Any:
     """The file at ``path``, wrapped and parsed, comments removed."""
     directory = os.path.dirname(os.path.abspath(path))
     entities = entity_file(directory)
     with open(path, 'rb') as fh:
         data = wrap(strip_bad_header(fh.read()), entities)
-    return filter_comments(
-        ET.XML(data, parser(), base_url=os.path.abspath(path))
-    )
+    return filter_comments(ET.XML(data, parser(), base_url=document_url(path)))
 
 
 #: The two XPointer forms the reference pages use.  Anything else is reported
