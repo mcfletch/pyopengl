@@ -260,6 +260,54 @@ class TestTheGeneratedHierarchy:
         assert claims[('OpenGL.raw.GL._types', 'GLfloat')][0] == 'OpenGL.GL'
 
 
+class TestSomebodyElsesClass:
+    """A package naming another project's class declares the name, not the class.
+
+    ``ArrayType = numpy.ndarray`` is a name OpenGLContext offers, so the page
+    carries it; writing the class out under it copies a few thousand lines of
+    numpy's own documentation into the page, and numpy documents it already.
+    """
+
+    def module(self):
+        return FakeModule('OpenGLContext.arrays')
+
+    def test_a_class_from_outside_the_packages_is_named(self):
+        import numpy
+
+        assert (
+            dumbpydoc.defined_elsewhere(numpy.ndarray, self.module())
+            == 'numpy.ndarray'
+        )
+
+    def test_a_class_of_ours_is_not(self):
+        assert dumbpydoc.defined_elsewhere(Fake('OpenGL.GL'), self.module()) is None
+
+    def test_the_page_says_where_to_read_about_it(self):
+        import numpy
+
+        module = FakeModule('OpenGL.arrays', classes=[('ArrayType', numpy.ndarray)])
+        page = dumbpydoc.Renderer({}, {}).render(module)
+        assert '.. py:class:: ArrayType' in page
+        assert 'Another name for :py:class:`numpy.ndarray`.' in page
+        assert 'ctypes' not in page
+
+
+class TestTheIndexPage:
+    def test_it_says_what_the_caller_asked_it_to(self, tmp_path):
+        """A set with no reference pages beside it says something else."""
+        dumbpydoc.write_index(
+            ['OpenGLContext'],
+            ['OpenGLContext'],
+            str(tmp_path),
+            title='API reference',
+            paragraphs=['A page per module of the engine.'],
+        )
+        page = (tmp_path / 'index.rst').read_text(encoding='utf-8')
+        assert 'A page per module of the engine.' in page
+        assert 'reference page' not in page
+        assert '   OpenGLContext' in page
+
+
 class TestPrivateNames:
     def test_the_packages_documented_are_pyopengl_and_its_accelerators(self):
         """OpenGLContext and the rest have documentation of their own."""

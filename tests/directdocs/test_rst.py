@@ -371,6 +371,18 @@ class TestDocstrings:
         assert ':class:`~OpenGL.Tk.widget.GLFrame`' in out
         assert '\\:class\\:' not in out
 
+    def test_a_literal_written_by_hand_survives(self):
+        """``p`` is a name its author wrote as a literal.
+
+        The packages built on PyOpenGL write their docstrings that way
+        throughout; escaping one leaves the backquotes on the page.
+        """
+        out = self.render(
+            'Matrix math.\n\nA point ``p`` is transformed as ``p @ M``.\n'
+        )
+        assert '``p``' in out
+        assert '\\`\\`' not in out
+
     def test_plain_text_is_escaped(self):
         """An asterisk in plain prose is an asterisk, not emphasis."""
         out = self.render('Takes *args and returns None')

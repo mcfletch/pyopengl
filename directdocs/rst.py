@@ -556,6 +556,12 @@ _RST_ROLE = re.compile(r':[a-z:]+:`')
 #: directive and the indented body under it are one thing.
 _RST_DIRECTIVE = re.compile(r'^\s*\.\.\s+[\w-]+::', re.M)
 
+#: A docstring that writes a name as a literal wrote itself as
+#: reStructuredText as well.  The packages built on PyOpenGL write their
+#: docstrings that way throughout, and escaping one leaves the backquotes
+#: visible on the page.
+_RST_LITERAL = re.compile(r'``[^`\n]+``')
+
 #: Inline markup a substitution must not reach inside: an entry point already
 #: written as a literal or as a cross-reference is already saying what it is.
 _PROTECTED = re.compile(r'``.*?``|:[a-z:]+:`[^`]*`|`[^`]*`_{0,2}', re.S)
@@ -587,16 +593,20 @@ def write_docstring(
     if not text:
         return
     text = inspect.cleandoc(text)
-    if _RST_DIRECTIVE.search(text) or _RST_ROLE.search(text):
+    if (
+        _RST_DIRECTIVE.search(text)
+        or _RST_ROLE.search(text)
+        or _RST_LITERAL.search(text)
+    ):
         # Written as reStructuredText, so it is written through: splitting it
         # by indent would take its structure apart -- a list item and the line
         # continuing it are not two blocks.  Only the argument lists are
         # rewritten, those being the one thing in a docstring that reST reads
         # as something else.
         #
-        # A role or a directive, and not a bullet: the generated modules carry
-        # the specification's own prose as their docstring, and that is full of
-        # asterisks and indentation that were never markup.
+        # A role, a directive or a literal, and not a bullet: the generated
+        # modules carry the specification's own prose as their docstring, and
+        # that is full of asterisks and indentation that were never markup.
         writer.blank()
         for line in convert_argument_lists(text).split('\n'):
             # An indented line in a docstring is a sample or a literal block,

@@ -221,11 +221,12 @@ and keeps the built site as an artifact either way.
 
 ## Still to do
 
-- **OpenGLContext's documentation.** `directdocs/oglctutorials.py` still writes
-  the OpenGLContext tutorial pages through Genshi templates, and the
-  OpenGLContext screenshots in `docs/_static/screenshots/` are PyOpenGL's front
-  page showing what people build with it. The tutorial generator belongs in the
-  OpenGLContext repository.
+- **OpenGLContext's documentation** is a Sphinx set of its own now, and the
+  tutorial generator went with it: `docbuild/` in that repository reads the
+  commentary and writes reStructuredText, and `oglctutorials.py`, `dumbmarkup.py`
+  and the Genshi templates are gone from here. `dumbpydoc.py` stayed, and writes
+  that set's module pages as well as this one's: `render_projects` takes the
+  packages, the output directory and what the index should say.
 - **The three modules this machine cannot import.** `OpenGL.osmesa` wants
   `PYOPENGL_PLATFORM=osmesa`, `OpenGL.platform.win32` wants Windows, and
   `OpenGL.arrays._strings` wants an interpreter whose string layout it

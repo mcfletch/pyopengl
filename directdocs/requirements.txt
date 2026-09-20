@@ -1,6 +1,3 @@
 # What the generators in this directory need.  `pip install -e .[docs]` at the
 # top of the checkout installs these and Sphinx together.
 lxml
-# oglctutorials.py, the OpenGLContext tutorial generator, still renders through
-# Genshi templates.
-genshi

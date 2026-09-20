@@ -451,6 +451,23 @@ def attribute_options(prop: Any) -> dict[str, str]:
     return options
 
 
+def defined_elsewhere(cls: Any, module: PyModule) -> str | None:
+    """The dotted name of a class from outside the packages, or None.
+
+    A package that gives somebody else's class a name of its own --
+    ``ArrayType = numpy.ndarray`` -- is declaring that name here, so the name
+    belongs on this page.  The class's own description does not: writing it out
+    copies a few thousand lines of another project's documentation into the
+    page, and the reader wants that project's page for it.
+    """
+    target = getattr(cls, 'cls', cls)
+    home = getattr(target, '__module__', None)
+    name = getattr(target, '__name__', None)
+    if not home or not name or home.split('.')[0] in module.roots:
+        return None
+    return '%s.%s' % (home, name)
+
+
 def base_name(base: Any) -> str:
     """A base class as it should read in a class declaration.
 
@@ -696,6 +713,14 @@ class Renderer:
         writer.heading('Classes', 1)
         stubbed = stubs.signatures(module.name)
         for name, cls in declared:
+            elsewhere = defined_elsewhere(cls, module)
+            if elsewhere:
+                writer.directive('py:class', name)
+                with writer.indent():
+                    writer.paragraph(
+                        'Another name for :py:class:`%s`.' % (elsewhere,)
+                    )
+                continue
             # Declared under the name the module binds it to, not under
             # ``__name__``: ctypes builds a type per function signature and
             # calls every one of them `CFunctionType`, so the module's own
@@ -797,7 +822,10 @@ def package_modules(root: str) -> list[str]:
 
     A subpackage that cannot be imported is skipped rather than fatal: a
     Windows-only or toolkit-specific module is absent by circumstance rather
-    than by error, and the rest of the package still documents.
+    than by error, and the rest of the package still documents.  So is one
+    that *exits* on import: a demo module that tells the reader to install the
+    toolkit it wants and stops, which :func:`render_projects` treats as a
+    module it cannot document rather than as the end of the run.
     """
     names = [root]
     try:
@@ -824,7 +852,7 @@ def package_modules(root: str) -> list[str]:
     return names
 
 
-def load_entry_points() -> dict[str, dict[str, str]]:
+def load_entry_points(path: str | None = None) -> dict[str, dict[str, str]]:
     """Which reference page declares each entry point, per API package.
 
     Per package, because an entry point can be in several: ``glBindTexture``
@@ -832,14 +860,15 @@ def load_entry_points() -> dict[str, dict[str, str]]:
     which one a module page should link to depends on which API that module
     belongs to.
     """
-    if not os.path.isfile(ENTRYPOINTS):
+    path = path or ENTRYPOINTS
+    if not os.path.isfile(path):
         log.info(
             'no reference manifest at %s; entry points are described here '
             'rather than linked to their reference pages',
-            ENTRYPOINTS,
+            path,
         )
         return {}
-    with open(ENTRYPOINTS, encoding='utf-8') as fh:
+    with open(path, encoding='utf-8') as fh:
         return json.load(fh).get('entry_points', {})
 
 
@@ -864,20 +893,32 @@ def child_names(name: str, every: Iterable[str]) -> list[str]:
     )
 
 
-def write_index(roots: list[str], written: list[str], directory: str) -> None:
+def write_index(
+    roots: list[str],
+    written: list[str],
+    directory: str,
+    title: str = 'API reference',
+    paragraphs: Iterable[str] | None = None,
+) -> None:
+    """The page listing the packages, and the toctree that carries them.
+
+    ``paragraphs`` is what to say above the list; the default describes a set
+    that has reference pages beside it, which is PyOpenGL's own.
+    """
+    if paragraphs is None:
+        paragraphs = [
+            'A page per module, written from the packages as they are '
+            'installed. Every module, class, method, attribute, entry point '
+            'and constant is declared here, so each one is a cross-reference '
+            'target and appears in the :ref:`index <genindex>`.',
+            'An entry point that wraps an OpenGL command is described on its '
+            ':doc:`reference page </reference/index>`; the module page links '
+            'to it rather than repeating it.',
+        ]
     writer = Writer()
-    writer.heading('API reference', 0)
-    writer.paragraph(
-        'A page per module, written from the packages as they are installed. '
-        'Every module, class, method, attribute, entry point and constant is '
-        'declared here, so each one is a cross-reference target and appears in '
-        'the :ref:`index <genindex>`.'
-    )
-    writer.paragraph(
-        'An entry point that wraps an OpenGL command is described on its '
-        ':doc:`reference page </reference/index>`; the module page links to it '
-        'rather than repeating it.'
-    )
+    writer.heading(title, 0)
+    for paragraph in paragraphs:
+        writer.paragraph(paragraph)
     writer.directive('toctree', options={'maxdepth': '1'})
     with writer.indent():
         for root in roots:
@@ -895,14 +936,25 @@ def render_projects(
     projects: list[str] | None = None,
     directory: str = OUTPUT_DIRECTORY,
     skip: Iterable[str] = (),
+    entrypoints: str | None = ENTRYPOINTS,
+    title: str = 'API reference',
+    paragraphs: Iterable[str] | None = None,
 ) -> tuple[list[str], list[str]]:
     """Write a page for every module of every project.
+
+    ``projects`` are the top-level packages to document, and are also what a
+    name has to come from to count as one of theirs: a name imported from
+    outside them is somebody else's and is linked rather than described.
+    ``entrypoints`` names the reference manifest to link entry points into;
+    ``None`` is a set with no reference pages beside it, where every entry
+    point is described on the module page instead.
 
     Returns the names written and the names that could not be documented.
     """
     report_configuration()
     os.makedirs(directory, exist_ok=True)
     roots = list(projects or PROJECTS)
+    owners = tuple(name.split('.')[0] for name in roots)
     skip = tuple(skip)
 
     names: list[str] = []
@@ -917,10 +969,10 @@ def render_projects(
     modules: list[PyModule] = []
     failed: list[str] = []
     for name in names:
-        module = PyModule(name)
+        module = PyModule(name, roots=owners)
         try:
             module.inspect()
-        except Exception as err:
+        except (Exception, SystemExit) as err:
             log.warning('could not document %s: %s', name, err)
             failed.append(name)
             continue
@@ -933,7 +985,8 @@ def render_projects(
     for module in modules:
         module.modules = child_names(module.name, found)
 
-    renderer = Renderer(load_entry_points(), claim_owners(modules))
+    entry_points = load_entry_points(entrypoints) if entrypoints else {}
+    renderer = Renderer(entry_points, claim_owners(modules))
     renderer.documented = {module.name for module in modules}
     rendered: list[str] = []
     for module in modules:
@@ -949,7 +1002,7 @@ def render_projects(
             fh.write(page)
         rendered.append(module.name)
 
-    write_index(roots, rendered, directory)
+    write_index(roots, rendered, directory, title, paragraphs)
     return rendered, failed
 
 
