@@ -72,4 +72,4 @@ The ES version depends on the ANGLE build and on what the Direct3D feature level
 Desktop GL on Windows
 ---------------------
 
-This platform is for ES. For desktop OpenGL on Windows, use WGL, which is the platform PyOpenGL selects there by default; for desktop OpenGL with nothing on screen, see :doc:`wgl-offscreen`, which renders into a pbuffer the display driver allocates.
+This platform is for ES. For desktop OpenGL on Windows, use WGL, which is the platform PyOpenGL selects there by default; for desktop OpenGL with nothing on screen, see :ref:`offscreen-wgl`, which renders into a pbuffer the display driver allocates. :doc:`platform-windows` covers the rest.
