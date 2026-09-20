@@ -135,6 +135,36 @@ class TestIncludes:
         assert 'four-six' in text
         assert 'two-oh' not in text
 
+    def test_an_include_with_no_xpointer_brings_the_whole_element(self, pages):
+        """A table included this way has to arrive as a table.
+
+        The format tables -- which buffer binding targets exist, which internal
+        formats are sized -- are included with no XPointer, and that means the
+        document element.  Taking its children instead drops the
+        `informaltable` and every cell renders as a paragraph.
+        """
+        write(
+            pages,
+            'bindings.xml',
+            '<?xml version="1.0"?>\n'
+            '<informaltable xmlns="%s"><tgroup><tbody>'
+            '<row><entry>GL_ARRAY_BUFFER</entry><entry>Vertex attributes</entry></row>'
+            '</tbody></tgroup></informaltable>' % (generate.DOCBOOK_NS,),
+        )
+        path = write(
+            pages,
+            'glThing.xml',
+            '<refentry xmlns="%s" xmlns:xi="%s" xml:id="glThing">'
+            '<para>one of:</para><xi:include href="bindings.xml"/>'
+            '</refentry>' % (generate.DOCBOOK_NS, generate.XINCLUDE_NS),
+        )
+        tree = generate.load_file(path)
+        tables = tree.xpath(
+            './/d:informaltable', namespaces={'d': generate.DOCBOOK_NS}
+        )
+        assert len(tables) == 1
+        assert 'GL_ARRAY_BUFFER' in ET.tostring(tables[0], encoding='unicode')
+
     def test_an_include_that_is_not_there_leaves_the_page_readable(self, pages):
         path = write(
             pages,
@@ -158,6 +188,154 @@ class TestPageNames:
         assert generate.page_name('glBeginQueryIndexed, glEndQueryIndexed') == (
             'glBeginQueryIndexed_glEndQueryIndexed'
         )
+
+
+class TestWhichApiAPageBelongsTo:
+    """The same file name is a different entry point in each directory.
+
+    ``glTexImage2D.xml`` is in the desktop pages and in three ES directories,
+    and they describe different calls -- the desktop one takes arguments ES has
+    never had.  Filing them all under GL, which is what reading only the name
+    prefix does, loses every ES page whose name a desktop page also uses.
+    """
+
+    @pytest.mark.parametrize(
+        'name,prefix',
+        [
+            ('glutInit', 'glut'),
+            ('gluOrtho2D', 'glu'),
+            ('glXCreateContext', 'glX'),
+            ('gleLathe', 'gle'),
+            ('glBegin', 'gl'),
+            ('eglInitialize', 'egl'),
+            ('wglCreateContext', 'wgl'),
+        ],
+    )
+    def test_the_longest_prefix_wins(self, name, prefix):
+        assert generate.entry_prefix(name) == prefix
+
+    def test_a_name_that_is_no_entry_point_has_no_prefix(self):
+        assert generate.entry_prefix('apiversion.xml') is None
+
+    @pytest.mark.parametrize(
+        'directory,name,key',
+        [
+            ('gl4', 'glBindTexture.xml', 'gl'),
+            ('gl2.1', 'glBegin.xml', 'gl'),
+            ('es1.1', 'glBindTexture.xml', 'gles1'),
+            ('es2.0', 'glBindTexture.xml', 'gles2'),
+            ('es3', 'glBindTexture.xml', 'gles3'),
+            ('es3.1', 'glDispatchCompute.xml', 'gles3'),
+            # These say which API they are whatever directory they sit in.
+            ('gl2.1', 'gluOrtho2D.xml', 'glu'),
+            ('gl2.1', 'glXCreateContext.xml', 'glx'),
+        ],
+    )
+    def test_the_directory_decides_for_a_gl_page(self, directory, name, key):
+        api = generate.api_of_page(directory, name)
+        assert api is not None and api.key == key
+
+    def test_a_file_that_is_not_a_reference_page_belongs_nowhere(self):
+        assert generate.api_of_page('gl4', 'apiversion.xml') is None
+
+
+class TestTheApiTable:
+    def test_every_key_is_used_once(self):
+        keys = [api.key for api in generate.APIS]
+        assert len(keys) == len(set(keys))
+
+    def test_every_api_names_a_package_of_its_own(self):
+        modules = [api.module for api in generate.APIS]
+        assert len(modules) == len(set(modules))
+
+    def test_the_gl_source_directories_are_all_declared(self):
+        """A directory the scan reads but no API claims writes no pages."""
+        unclaimed = set(generate.REFPAGE_SETS) - set(generate.GL_SOURCE_APIS)
+        assert not unclaimed
+
+    def test_egl_and_wgl_have_no_reference_pages(self):
+        """Khronos publishes none, so their indexes are built from the
+        packages instead."""
+        assert generate.BY_KEY['egl'].sources == ()
+        assert generate.BY_KEY['wgl'].sources == ()
+
+
+class TestCrossReferences:
+    """A see-also names an entry point; which page it means depends on who is
+    asking."""
+
+    def section(self, key, title):
+        section = generate.RefSect(generate.BY_KEY[key])
+        section.title = section.name = title
+        section.id = title
+        return section
+
+    def reference(self, *sections):
+        reference = generate.Reference()
+        for section in sections:
+            section.reference = reference
+            reference.append(section)
+        return reference
+
+    def test_the_asking_api_is_preferred(self):
+        desktop = self.section('gl', 'glBindTexture')
+        embedded = self.section('gles3', 'glBindTexture')
+        asking = self.section('gles3', 'glTexImage2D')
+        reference = self.reference(desktop, embedded, asking)
+        assert reference.get_crossref('glBindTexture', section=asking) is embedded
+
+    def test_another_api_will_do_where_the_asking_one_has_no_page(self):
+        desktop = self.section('gl', 'glBegin')
+        asking = self.section('glu', 'gluBeginCurve')
+        reference = self.reference(desktop, asking)
+        assert reference.get_crossref('glBegin', section=asking) is desktop
+
+    def test_a_name_nothing_has_resolves_to_nothing(self):
+        asking = self.section('gl', 'glBegin')
+        reference = self.reference(asking)
+        assert reference.get_crossref('wglCreateContext', section=asking) is None
+
+    def test_the_docname_carries_the_api(self):
+        section = self.section('gles3', 'glBindTexture')
+        reference = self.reference(section)
+        assert reference.docname(section) == '/reference/gles3/glBindTexture'
+
+
+class TestWhereAnEntryPointIsDeclared:
+    """An API index links every entry point Khronos publishes no page for.
+
+    The link has to name one target.  A bare name would be searched for, and
+    seventy-six of desktop OpenGL's extension entry points share a name with an
+    ES one, so the search finds two and links to neither.
+    """
+
+    def test_an_entry_point_names_the_module_it_came_from(self):
+        api = generate.BY_KEY['gl']
+        if generate.imported_package(api) is None:
+            pytest.skip('OpenGL.GL will not import here')
+        assert generate.declaring_module(api, 'glBegin') == (
+            'OpenGL.GL.VERSION.GL_1_0'
+        )
+
+    def test_a_decorated_form_names_the_package_that_has_it(self):
+        """`glColorPointerb` is built in `OpenGL.GL.pointers` and put into the
+        package, keeping the `__module__` of the entry point it decorates --
+        which is a module that does not have it."""
+        api = generate.BY_KEY['gl']
+        if generate.imported_package(api) is None:
+            pytest.skip('OpenGL.GL will not import here')
+        assert generate.declaring_module(api, 'glColorPointerb') == 'OpenGL.GL'
+
+    def test_a_name_the_package_does_not_have_falls_back_to_it(self):
+        api = generate.BY_KEY['gl']
+        if generate.imported_package(api) is None:
+            pytest.skip('OpenGL.GL will not import here')
+        assert generate.declaring_module(api, 'glNoSuchThing') == 'OpenGL.GL'
+
+    def test_a_package_that_will_not_import_still_answers(self, monkeypatch):
+        monkeypatch.setattr(generate, 'imported_package', lambda api: None)
+        api = generate.BY_KEY['wgl']
+        assert generate.declaring_module(api, 'wglCreateContext') == 'OpenGL.WGL'
 
 
 class TestRefpageSets:
