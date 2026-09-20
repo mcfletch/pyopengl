@@ -467,6 +467,10 @@ class Renderer:
         self.entry_points = entry_points
         #: What :func:`identity` returns -> the module and name declaring it.
         self.claims = claims
+        #: Module name -> the module whose page carries it; see
+        #: :func:`fold_generated_modules`.  Filled in after the claims are,
+        #: because what a module declares is what decides it.
+        self.folded: dict[str, str] = {}
 
     def reference_link(self, name: str) -> str | None:
         page = self.entry_points.get(name)
@@ -493,7 +497,29 @@ class Renderer:
         self.write_constants(module, writer)
         self.write_reexports(module, writer)
         self.write_imports(module, writer)
+        self.write_generated(module, writer)
         return writer.render()
+
+    def write_generated(self, module: PyModule, writer: Writer) -> None:
+        """Declare the generated modules this page is carrying.
+
+        Last on the page: ``py:module`` sets which module the directives after
+        it belong to, so anything following would be attributed to the wrong
+        one.
+        """
+        carried = sorted(
+            name for name, into in self.folded.items() if into == module.name
+        )
+        if not carried:
+            return
+        writer.heading('Generated declarations', 1)
+        writer.paragraph(
+            'The declarations this module is built from, which a program '
+            'wanting ctypes semantics rather than PyOpenGL\'s can import '
+            'directly.  They carry the same names, described above.'
+        )
+        for name in carried:
+            writer.directive('py:module', name)
 
     def write_reexports(self, module: PyModule, writer: Writer) -> None:
         """Say which modules this one passes on the names of.
@@ -533,15 +559,18 @@ class Renderer:
         several thousand times -- and the list says the same thing on the one
         page where it belongs.
         """
-        if not module.modules:
+        children = [
+            child for child in module.modules if child not in self.folded
+        ]
+        if not children:
             return
         writer.heading('Submodules', 1)
         writer.directive('toctree', options={'hidden': '', 'maxdepth': '1'})
         with writer.indent():
-            for child in module.modules:
+            for child in children:
                 writer.line(child)
         writer.blank()
-        for child in module.modules:
+        for child in children:
             writer.line('- :doc:`%s <%s>`' % (child, child))
         writer.blank()
 
@@ -727,6 +756,53 @@ def load_entry_points() -> dict[str, str]:
         return json.load(fh).get('entry_points', {})
 
 
+def declares_anything(module: PyModule, renderer: Renderer) -> bool:
+    """Whether this module is where any of its names is documented."""
+    for kind in ('functions', 'constants', 'classes'):
+        for name, value in getattr(module, kind):
+            if kind == 'functions' and renderer.reference_link(name):
+                continue
+            if not renderer.owner(module, name, value):
+                return True
+    return False
+
+
+def fold_generated_modules(
+    modules: list[PyModule], renderer: Renderer
+) -> dict[str, str]:
+    """Which ``OpenGL.raw`` modules to document on the module beside them.
+
+    Every extension exists twice: ``OpenGL.GL.ARB.foo``, which is what a
+    program imports, and ``OpenGL.raw.GL.ARB.foo``, the generated declarations
+    it is built from.  The pair shares its names, and one module declares each
+    -- so the raw half of nearly every pair has a page saying only that its
+    names are documented on the other one.  There are thirteen hundred of
+    those, at nineteen kilobytes of page furniture each.
+
+    A raw module is folded into its counterpart when it declares nothing, its
+    submodules are all folded too, and the counterpart is in the set.  The
+    counterpart's page then declares the raw module's name, so a reference to
+    it still resolves and the module index still lists it -- it leads to where
+    the content is rather than to a page that points at it.
+
+    Deepest first, so that a package is only folded once its children are.
+    """
+    present = {module.name: module for module in modules}
+    folded: dict[str, str] = {}
+    for module in sorted(modules, key=lambda m: -m.name.count('.')):
+        if not module.name.startswith('OpenGL.raw.') and module.name != 'OpenGL.raw':
+            continue
+        counterpart = module.name.replace('.raw', '', 1)
+        if counterpart not in present:
+            continue
+        if declares_anything(module, renderer):
+            continue
+        if any(child not in folded for child in module.modules):
+            continue
+        folded[module.name] = counterpart
+    return folded
+
+
 def child_names(name: str, every: Iterable[str]) -> list[str]:
     """The module names one level under ``name``."""
     prefix = name + '.'
@@ -809,8 +885,16 @@ def render_projects(
         module.modules = child_names(module.name, found)
 
     renderer = Renderer(load_entry_points(), claim_owners(modules))
+    renderer.folded = fold_generated_modules(modules, renderer)
+    if renderer.folded:
+        log.info(
+            '%d generated modules are documented on the module beside them',
+            len(renderer.folded),
+        )
     rendered: list[str] = []
     for module in modules:
+        if module.name in renderer.folded:
+            continue
         try:
             page = renderer.render(module)
         except Exception as err:

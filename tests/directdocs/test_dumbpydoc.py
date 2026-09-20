@@ -14,9 +14,17 @@ from directdocs import dumbpydoc
 
 
 class Fake:
-    """Stands in for something a module exports."""
+    """Stands in for something a module exports.
 
-    def __init__(self, module=None):
+    Enough of a :class:`directdocs.model.PyFunction` to be rendered: a name, a
+    parameter list and no docstring.
+    """
+
+    docstring = None
+    parameters = ()
+
+    def __init__(self, module=None, name='thing'):
+        self.name = name
         if module is not None:
             self.__module__ = module
 
@@ -178,6 +186,100 @@ class TestValues:
             name = 'OpenGL.arrays.vbo.VBO'
 
         assert dumbpydoc.base_name(Base()) == 'OpenGL.arrays.vbo.VBO'
+
+
+class TestFoldingTheGeneratedModules:
+    """Every extension exists twice, and only one of the pair has content.
+
+    ``OpenGL.GL.ARB.foo`` is what a program imports; ``OpenGL.raw.GL.ARB.foo``
+    is the generated declarations it is built from.  They share their names and
+    one module declares each, so the raw half of nearly every pair would have a
+    page saying only that its names are documented elsewhere -- thirteen
+    hundred of them.
+    """
+
+    def pair(self, declared_by_raw=()):
+        target = Fake('OpenGL.raw.GL.ARB.foo')
+        raw = FakeModule(
+            'OpenGL.raw.GL.ARB.foo',
+            functions=[('glFooARB', target)],
+            constants=[(name, Fake('OpenGL.raw.GL.ARB.foo')) for name in declared_by_raw],
+        )
+        friendly = FakeModule(
+            'OpenGL.GL.ARB.foo', functions=[('glFooARB', target)]
+        )
+        return raw, friendly
+
+    def folded_for(self, modules, entry_points=None):
+        renderer = dumbpydoc.Renderer(
+            entry_points or {}, dumbpydoc.claim_owners(modules)
+        )
+        return dumbpydoc.fold_generated_modules(modules, renderer), renderer
+
+    def test_a_raw_module_with_nothing_of_its_own_is_folded(self):
+        raw, friendly = self.pair()
+        folded, _ = self.folded_for([raw, friendly])
+        assert folded == {'OpenGL.raw.GL.ARB.foo': 'OpenGL.GL.ARB.foo'}
+
+    def test_a_raw_module_that_declares_something_keeps_its_page(self):
+        """`OpenGL.raw.GL._types` and its neighbours define names that exist
+        nowhere else."""
+        raw, friendly = self.pair(declared_by_raw=['GL_FOO_ARB'])
+        folded, _ = self.folded_for([raw, friendly])
+        assert folded == {}
+
+    def test_a_raw_module_with_no_counterpart_keeps_its_page(self):
+        raw, _friendly = self.pair()
+        folded, _ = self.folded_for([raw])
+        assert folded == {}
+
+    def test_a_package_waits_for_its_children(self):
+        """A raw package is only folded once everything under it is."""
+        raw, friendly = self.pair(declared_by_raw=['GL_FOO_ARB'])
+        raw_package = FakeModule('OpenGL.raw.GL.ARB')
+        raw_package.modules = ['OpenGL.raw.GL.ARB.foo']
+        friendly_package = FakeModule('OpenGL.GL.ARB')
+        folded, _ = self.folded_for([raw, friendly, raw_package, friendly_package])
+        assert 'OpenGL.raw.GL.ARB' not in folded
+
+    def test_a_package_whose_children_are_all_folded_goes_too(self):
+        raw, friendly = self.pair()
+        raw_package = FakeModule('OpenGL.raw.GL.ARB')
+        raw_package.modules = ['OpenGL.raw.GL.ARB.foo']
+        friendly_package = FakeModule('OpenGL.GL.ARB')
+        folded, _ = self.folded_for([raw, friendly, raw_package, friendly_package])
+        assert folded['OpenGL.raw.GL.ARB'] == 'OpenGL.GL.ARB'
+
+    def test_the_carrying_page_declares_the_folded_module(self):
+        """So a reference to it still resolves, and the module index still
+        lists it -- leading to where the content is."""
+        raw, friendly = self.pair()
+        folded, renderer = self.folded_for([raw, friendly])
+        renderer.folded = folded
+        page = renderer.render(friendly)
+        assert '.. py:module:: OpenGL.raw.GL.ARB.foo' in page
+        assert 'Generated declarations' in page
+
+    def test_the_declaration_comes_last(self):
+        """`py:module` sets which module the directives after it belong to."""
+        raw, friendly = self.pair()
+        folded, renderer = self.folded_for([raw, friendly])
+        renderer.folded = folded
+        page = renderer.render(friendly)
+        assert page.rstrip().endswith('.. py:module:: OpenGL.raw.GL.ARB.foo')
+
+    def test_a_folded_module_is_not_named_in_a_toctree(self):
+        """It has no page, so naming it would be a broken link."""
+        raw, friendly = self.pair()
+        raw_package = FakeModule('OpenGL.raw.GL.ARB')
+        raw_package.modules = ['OpenGL.raw.GL.ARB.foo']
+        friendly_package = FakeModule('OpenGL.GL.ARB')
+        folded, renderer = self.folded_for(
+            [raw, friendly, raw_package, friendly_package]
+        )
+        renderer.folded = folded
+        page = renderer.render(raw_package)
+        assert 'OpenGL.raw.GL.ARB.foo' not in page.split('Generated declarations')[0]
 
 
 class TestPrivateNames:
