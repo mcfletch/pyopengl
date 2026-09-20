@@ -11,6 +11,7 @@ import os
 import lxml.etree as ET
 import pytest
 
+from childenv import json_from_child
 from directdocs import generate
 
 
@@ -301,6 +302,38 @@ class TestCrossReferences:
         assert reference.docname(section) == '/reference/gles3/glBindTexture'
 
 
+#: What `generate.py` answers when it is the first thing in the process to
+#: import OpenGL, which is how it runs: `build-docs.py` starts it as a child.
+#: The module sets ``PYOPENGL_MODULE_ANNOTATIONS`` as it is imported, and that
+#: is read once, when OpenGL is first imported -- so a pytest process, which
+#: imported OpenGL long before reaching this file, is not where the question
+#: can be asked.
+DECLARED_IN = '''
+import json
+
+from directdocs import generate
+
+api = generate.BY_KEY['gl']
+print(json.dumps(
+    None
+    if generate.imported_package(api) is None
+    else {
+        name: generate.declaring_module(api, name)
+        for name in ('glBegin', 'glColorPointerb')
+    }
+))
+'''
+
+
+@pytest.fixture(scope='module')
+def declared():
+    """What a run of ``generate.py`` says each entry point was declared by."""
+    answered = json_from_child(DECLARED_IN)
+    if answered is None:
+        pytest.skip('OpenGL.GL will not import here')
+    return answered
+
+
 class TestWhereAnEntryPointIsDeclared:
     """An API index links every entry point Khronos publishes no page for.
 
@@ -309,22 +342,14 @@ class TestWhereAnEntryPointIsDeclared:
     ES one, so the search finds two and links to neither.
     """
 
-    def test_an_entry_point_names_the_module_it_came_from(self):
-        api = generate.BY_KEY['gl']
-        if generate.imported_package(api) is None:
-            pytest.skip('OpenGL.GL will not import here')
-        assert generate.declaring_module(api, 'glBegin') == (
-            'OpenGL.GL.VERSION.GL_1_0'
-        )
+    def test_an_entry_point_names_the_module_it_came_from(self, declared):
+        assert declared['glBegin'] == 'OpenGL.GL.VERSION.GL_1_0'
 
-    def test_a_decorated_form_names_the_package_that_has_it(self):
+    def test_a_decorated_form_names_the_package_that_has_it(self, declared):
         """`glColorPointerb` is built in `OpenGL.GL.pointers` and put into the
         package, keeping the `__module__` of the entry point it decorates --
         which is a module that does not have it."""
-        api = generate.BY_KEY['gl']
-        if generate.imported_package(api) is None:
-            pytest.skip('OpenGL.GL will not import here')
-        assert generate.declaring_module(api, 'glColorPointerb') == 'OpenGL.GL'
+        assert declared['glColorPointerb'] == 'OpenGL.GL'
 
     def test_a_name_the_package_does_not_have_falls_back_to_it(self):
         api = generate.BY_KEY['gl']

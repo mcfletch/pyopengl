@@ -91,15 +91,17 @@ CythonMethod = type(platform.PLATFORM.GL.glGetString)
 
 # The entry-point type the C dispatch builds.  A build that documents the C
 # implementation finds every gl* name to be one of these, so a page set without
-# it is a page set with no functions in it.  Where that implementation is not
-# installed there is nothing to match, and isinstance reads a nested empty
-# tuple as exactly that.
+# it is a page set with no functions in it.  The layer is compiled and ships in
+# PyOpenGL_accelerate; where that is not installed `OpenGL._dispatch` imports
+# and holds `_c` as None, so what says whether there is a type to match is
+# `AVAILABLE` rather than the import.  With nothing to match, isinstance reads
+# a nested empty tuple as exactly that.
 try:
-    from OpenGL._dispatch import _c as _dispatch_extension
+    from OpenGL import _dispatch
 except ImportError:
     GLProc: Any = ()
 else:
-    GLProc = _dispatch_extension.GLProc
+    GLProc = _dispatch._c.GLProc if _dispatch.AVAILABLE else ()
 
 #: Where the pages are written.
 OUTPUT_DIRECTORY = os.path.join(PACKAGE_ROOT, 'docs', 'api')

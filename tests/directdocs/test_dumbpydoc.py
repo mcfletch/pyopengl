@@ -10,6 +10,7 @@ are recognised as the same thing despite being two objects.
 
 import pytest
 
+from childenv import json_from_child
 from directdocs import dumbpydoc
 
 
@@ -306,6 +307,53 @@ class TestTheIndexPage:
         assert 'A page per module of the engine.' in page
         assert 'reference page' not in page
         assert '   OpenGLContext' in page
+
+
+#: What a user who installed PyOpenGL alone has: the compiled dispatch layer
+#: is in PyOpenGL_accelerate, and there is no extension to import.  The child
+#: is how this is asked on a machine that does have it installed.
+WITHOUT_THE_COMPILED_LAYER = '''
+import json
+import sys
+
+
+class Absent:
+    """Refuses `OpenGL_accelerate`, wherever the import is written."""
+
+    def find_spec(self, name, path=None, target=None):
+        if name.split('.')[0] == 'OpenGL_accelerate':
+            raise ImportError(name)
+        return None
+
+
+sys.meta_path.insert(0, Absent())
+
+from directdocs import dumbpydoc
+
+print(json.dumps({"GLProc": repr(dumbpydoc.GLProc)}))
+'''
+
+
+class TestTheCompiledEntryPointType:
+    """Which objects count as C entry points, in a build that has none.
+
+    `OpenGL._dispatch` imports whether or not the extension is installed and
+    holds it as None when it is not, so the module reads the flag that says
+    whether the layer is there rather than catching an ImportError that does
+    not happen.
+    """
+
+    def test_it_imports_where_the_layer_is_not_installed(self):
+        """Every page of the set is written by this module, so an import that
+        needs the extension is a documentation build that needs it too."""
+        assert json_from_child(WITHOUT_THE_COMPILED_LAYER)['GLProc'] == '()'
+
+    def test_it_is_the_type_the_layer_builds_where_it_is_installed(self):
+        from OpenGL import _dispatch
+
+        if not _dispatch.AVAILABLE:
+            pytest.skip('PyOpenGL_accelerate is not installed here')
+        assert dumbpydoc.GLProc is _dispatch._c.GLProc
 
 
 class TestPrivateNames:

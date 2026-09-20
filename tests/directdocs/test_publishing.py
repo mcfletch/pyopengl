@@ -59,6 +59,13 @@ def repository(tmp_path, build_docs, monkeypatch):
     root = tmp_path / 'repo'
     root.mkdir()
     git('init', '-q', '-b', 'main', '.', cwd=str(root))
+    # `publish` writes a commit through git's plumbing with the environment it
+    # was given, and a build machine has no identity configured -- which is
+    # what the documentation workflow names before it publishes.  The
+    # repository says who its own commits are by, so the cases answer the same
+    # question wherever they run.
+    git('config', 'user.name', 't', cwd=str(root))
+    git('config', 'user.email', 't@example.com', cwd=str(root))
     (root / 'source.txt').write_text('the working tree', encoding='utf-8')
     git('add', '-A', cwd=str(root))
     git('commit', '-q', '-m', 'first', cwd=str(root))
