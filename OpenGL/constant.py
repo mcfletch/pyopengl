@@ -70,6 +70,24 @@ class StringConstant( Constant, bytes ):
         """Return the value as a human-friendly string"""
         return '%s (%s)'%(self.name,super(Constant,self).__str__())
 
+def declared( name, value, module ):
+    """A constant that reports ``module`` as the module declaring it
+
+    ``Constant`` takes the module from the frame that built it, which is the
+    right answer only while each module builds its own constants.  The
+    declaration tables build them all from one place, so that guess would name
+    the loader for every constant in the library; this says which module the
+    declaration belongs to instead.
+
+    Under the default ``MODULE_ANNOTATIONS`` nothing is recorded at all, here
+    or in ``Constant``, and this is ``Constant`` with an argument it ignores.
+    """
+    constant = Constant( name, value )
+    if _configflags.MODULE_ANNOTATIONS:
+        constant.__module__ = module
+    return constant
+
+
 if __name__ == "__main__":
     x = IntConstant( 'testint', 3 )
     y = FloatConstant( 'testfloat', 3.0 )

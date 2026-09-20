@@ -172,10 +172,13 @@ class RawModuleFinder:
                             'cannot import name %r from %r' % (key, source)
                         ) from None
 
-        from OpenGL.constant import Constant
+        from OpenGL.constant import declared
 
         for key, value in contents['constants'].items():
-            namespace[key] = Constant(key, value)
+            # Named with the module rather than left to guess, for the same
+            # reason as register_module below: what a constant reports as its
+            # module should not depend on which loader filled the namespace.
+            namespace[key] = declared(key, value, name)
 
         api = _api_of(name)
         extension = contents['extension']
