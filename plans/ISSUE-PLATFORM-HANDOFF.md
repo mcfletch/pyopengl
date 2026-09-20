@@ -99,9 +99,11 @@ actually hands back on a Mac.
 
 ## What the CI matrix does not cover
 
-The matrix now covers x86-64 and arm64 Linux, Intel and Apple Silicon macOS,
-and x86-64 Windows. Two gaps remain, and they are the reason some tickets
-below cannot be answered by pushing a branch:
+The matrix now declares x86-64 and arm64 Linux, Intel and Apple Silicon macOS,
+and x86-64 Windows — declares, because the Intel macOS row is on `macos-13`
+and no run of it has been given a runner yet; see #139 below. Two further gaps
+remain, and they are the reason some tickets below cannot be answered by
+pushing a branch:
 
 - **No window server anywhere.** Every runner is headless: Linux renders
   through EGL's device platform, macOS through CGL, Windows through a WGL
@@ -264,9 +266,23 @@ The report is 3.1.8 segfaulting in the suite on Python 3.11 and 3.12, and
 `master` at the time failing a lot and then hanging. The suite has moved a
 long way since; the honest first move is to run it and see.
 
+**Runners for the label are scarce.** Across the runs of 2026-09-12 to
+2026-09-19 the two `macos-13` cells were never picked up: they sat queued
+until GitHub cancelled them at its twenty-four-hour limit, while the four
+Apple Silicon cells finished in two to four minutes each. A queued job's
+`timeout-minutes` has not started, so nothing in the workflow shortens that
+wait — what the workflow does instead is keep it from deciding the run. The
+row stays, because it is the only Intel Mac there is and this ticket needs
+one; the cost of it not running is a warning from the `macOS` gate job naming
+the cells that did not report.
+
 - **What settles it**: the whole suite on `macos-13`. The job already
   collects crash reports (`~/Library/Logs/DiagnosticReports`) and uploads them
   as an artifact, so a segfault arrives with its faulting frame.
+- **Read the gate first**: a green run means the cells that reported had no
+  failing area, so check that `macos-13` is among them before reading anything
+  into it. See *Reading a macOS run* in
+  [ISSUE-TRIAGE.md](ISSUE-TRIAGE.md#reading-a-macos-run).
 - **Branch**: `issue/139-intel-mac`
 
 ### #60 — no accelerated renderer, then a segfault
@@ -347,6 +363,27 @@ natively rather than under emulation.
   reporter's DGX Spark. A build is not the same as an install: the wheel
   should be tried on real hardware before the ticket is answered, and the job
   runs the test command cibuildwheel is given.
+- **The wheels were not reaching PyPI.** `pypi-publish-accel` fetched three
+  artifacts by name — `windows-latest`, `ubuntu-latest`, `macOS-latest` — so
+  the `ubuntu-24.04-arm` row was built on every run and published on none. It
+  now takes every artifact matching `accel-binary-*`, which is also what
+  carries the Intel macOS row below.
+
+### Intel macOS wheels
+
+`accelerate-manylinux.yml` builds on `macos-15-intel` as well as
+`macOS-latest`, so an Intel Mac gets a `macosx_*_x86_64` wheel of
+`PyOpenGL-accelerate` rather than a source build. `macOS-latest` is Apple
+silicon and produces the arm64 wheel alone, and Rosetta does not carry a
+Python extension module, so the platform is a row of the matrix or it is
+nothing. The Intel label the runner replaces, `macos-13`, is retired: a job
+asking for one waits out GitHub's queue limit and is cancelled.
+
+The same row is now in the wheel matrix of every project in the workspace that
+builds one: `omi_physics`, `opengl_decimate`, `opengl_extrusions` and
+`pyvrml97` were each building arm64 macOS alone. `simpleparse` already had it,
+and is where the label is known to work — four runs of it on 2026-09-12, each
+green in four to six minutes.
 
 ### #29 — `test_buffer_api_basic` on i586 and armv7l
 

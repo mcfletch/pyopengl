@@ -61,11 +61,19 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
+        # One row per architecture: cibuildwheel builds natively for whichever
+        # machine it is on, so a platform with no row here is a platform with
+        # no wheel.  `macOS-latest` is Apple silicon and builds arm64 alone;
+        # `macos-15-intel` is what an Intel Mac needs, since Rosetta does not
+        # carry a Python extension module.  `macos-13`, the Intel label it
+        # replaces, is retired -- a job asking for one waits out GitHub's
+        # twenty-four-hour queue limit and is cancelled.
         os:
           - ubuntu-latest
           - ubuntu-24.04-arm
           - windows-latest
           - macOS-latest
+          - macos-15-intel
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -179,24 +187,19 @@ jobs:
         with:
           name: accel
           path: dist
-      - name: Download Accelerate Binary Windows
+      - name: Download the Accelerate wheels
+        # Every row of the wheels matrix, by pattern rather than a step per
+        # name: a row whose artifact no step here asks for is a platform that
+        # is built on every run and published on none, and the name it goes
+        # under is the runner label, which is not something a reader of this
+        # job would think to keep in step.  `ubuntu-24.04-arm` had been in that
+        # position since aarch64 was added.
         uses: actions/download-artifact@v4.1.7
-        id: download-accelerate-bin-windows
+        id: download-accelerate-binaries
         with:
-          name: accel-binary-windows-latest
+          pattern: accel-binary-*
           path: dist
-      - name: Download Accelerate Binary Ubuntu
-        uses: actions/download-artifact@v4.1.7
-        id: download-accelerate-bin-ubuntu
-        with:
-          name: accel-binary-ubuntu-latest
-          path: dist
-      - name: Download Accelerate Binary MacOS
-        uses: actions/download-artifact@v4.1.7
-        id: download-accelerate-bin-macOS
-        with:
-          name: accel-binary-macOS-latest
-          path: dist
+          merge-multiple: true
 
       # retrieve your distributions here
       - name: Publish package distributions to PyPI
