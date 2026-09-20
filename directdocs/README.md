@@ -11,8 +11,8 @@ python build-docs.py
 
 which fetches the Khronos sources, runs both generators, and calls Sphinx. The
 result is in `docs/_build/html`. `python build-docs.py --help` covers the rest,
-including `--stage` for a copy to look at and `--publish` for the `htdocs`
-branch.
+including `--stage` for a copy to look at and `--publish` for `gh-pages`, which
+is what GitHub Pages serves.
 
 ## What each piece does
 
@@ -50,6 +50,13 @@ appears once in the index.
 Which module declares a name comes from the `__module__` the declaration
 tables record, which needs `MODULE_ANNOTATIONS`; `dumbpydoc.py` sets it before
 importing anything.
+
+A generated module that declares nothing of its own gets no page: every
+extension exists twice, `OpenGL.GL.ARB.foo` and the `OpenGL.raw.GL.ARB.foo` it
+is built from, and the raw half of nearly every pair would otherwise be a page
+saying its names are documented elsewhere. The module beside it declares its
+name instead, so the module index still lists it and a reference to it still
+resolves -- to the page with the content on it. See `plans/SPHINX-DOCS.md`.
 
 ## Sample code references
 

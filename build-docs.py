@@ -20,10 +20,17 @@ everything::
     python build-docs.py
 
 and leaves the site in ``docs/_build/html``.  ``--stage DIR`` puts a copy
-somewhere else to look at, and ``--publish`` commits it to the ``htdocs``
-branch, which is what the site is served from.  Publishing writes through git's
-plumbing rather than checking the branch out, so it never touches the working
-tree; nothing leaves this machine until ``--push`` is given as well.
+somewhere else to look at, and ``--publish`` puts it on ``gh-pages``, which is
+what GitHub Pages serves.
+
+Publishing writes through git's plumbing rather than checking the branch out,
+so it never touches the working tree, and it replaces the branch with a single
+commit that has no parent.  The repository therefore carries one copy of the
+site rather than one per release: a hundred megabytes of HTML that packs to
+eight, which would otherwise grow by a few megabytes every time a release
+changed the version line on every page.  ``--push`` forces the branch over,
+against a lease so that a publish from elsewhere is refused rather than lost;
+nothing leaves this machine without it.
 
 Run ``python build-docs.py --help`` for the rest.
 """
@@ -46,8 +53,8 @@ API = os.path.join(DOCS, 'api')
 HTML = os.path.join(DOCS, '_build', 'html')
 DOCTREES = os.path.join(DOCS, '_build', 'doctrees')
 
-#: The branch the built site is served from.
-PUBLISH_BRANCH = 'htdocs'
+#: The branch GitHub Pages serves the site from.
+PUBLISH_BRANCH = 'gh-pages'
 
 log = logging.getLogger('build-docs')
 
@@ -140,11 +147,31 @@ def nojekyll(directory: str) -> None:
 # publishing
 
 
-def publish(source: str, branch: str, message: str, push: str | None) -> str:
+def publish(
+    source: str,
+    branch: str,
+    message: str,
+    push: str | None,
+    keep_history: bool = False,
+    lease: str | None = None,
+) -> str:
     """Commit the contents of ``source`` onto ``branch``.
 
     Through git's plumbing, with an index of its own: the branch is never
     checked out, so whatever is in the working tree stays exactly as it is.
+
+    The commit has no parent.  Each publish replaces the branch with a single
+    disjoint commit rather than adding to a chain, so the repository carries
+    one generation of the site rather than one per release.  The site is about
+    a hundred megabytes of HTML that packs to eight, and a release changes a
+    line on every page, so a kept history costs a few megabytes a release --
+    which is nothing for a while and not nothing for a decade.  ``--push``
+    then has to force, and does it with a lease, so a publish from somewhere
+    else is a refusal rather than a loss.
+
+    ``keep_history`` chains onto the previous commit instead, for a branch
+    where the trail is wanted more than the size.
+
     Returns the new commit.
     """
     if not os.path.isdir(source):
@@ -174,26 +201,93 @@ def publish(source: str, branch: str, message: str, push: str | None) -> str:
         ).strip()
 
     parents = []
-    existing = subprocess.run(
+    existing = local_head(branch)
+    unchanged = bool(existing) and (
+        run(['git', 'rev-parse', '%s^{tree}' % (existing,)]).strip() == tree
+    )
+    if unchanged:
+        # A rebuild of the same sources.  Recommitting it would make a commit
+        # that says nothing; the push below still happens, because the branch
+        # being right here says nothing about whether it is right on the
+        # remote -- a push that failed last time is exactly when this runs
+        # again.
+        log.info('%s already has this content, at %s', branch, existing[:12])
+        commit = existing
+    else:
+        if existing and keep_history:
+            parents = ['-p', existing]
+        commit = run(['git', 'commit-tree', tree, '-m', message] + parents).strip()
+        git('update-ref', 'refs/heads/%s' % (branch,), commit)
+        log.info(
+            '%s is now %s (%s)',
+            branch,
+            commit[:12],
+            'on the previous commit' if parents else 'a new root commit',
+        )
+
+    if push:
+        push_branch(branch, push, forced=not parents, lease=lease)
+    return commit
+
+
+def local_head(branch: str) -> str:
+    """The commit ``branch`` is at here, or ``''`` if there is no such branch."""
+    return subprocess.run(
         ['git', 'rev-parse', '--verify', '--quiet', 'refs/heads/%s' % (branch,)],
         capture_output=True,
         text=True,
         cwd=HERE,
     ).stdout.strip()
-    if existing:
-        if run(['git', 'rev-parse', '%s^{tree}' % (existing,)]).strip() == tree:
-            log.info('%s already has this content; nothing to commit', branch)
-            return existing
-        parents = ['-p', existing]
 
-    commit = run(['git', 'commit-tree', tree, '-m', message] + parents).strip()
-    git('update-ref', 'refs/heads/%s' % (branch,), commit)
-    log.info('%s is now %s', branch, commit[:12])
 
-    if push:
-        log.info('pushing %s to %s', branch, push)
-        git('push', push, '%s:refs/heads/%s' % (branch, branch))
-    return commit
+def remote_head(remote: str, branch: str) -> str:
+    """The commit ``branch`` is at on ``remote``, or ``''`` if it has none."""
+    output = run(['git', 'ls-remote', remote, 'refs/heads/%s' % (branch,)])
+    return output.split()[0] if output.strip() else ''
+
+
+def push_branch(
+    branch: str, remote: str, forced: bool, lease: str | None = None
+) -> None:
+    """Send ``branch`` to ``remote``, forcing it only over what was there.
+
+    A disjoint commit shares no history with what the remote has, so the push
+    has to be forced.  Forced against a lease rather than outright, and the
+    lease is where the remote was when this run *started* -- read before the
+    build rather than after it, because the build is the ten minutes during
+    which somebody else could publish.  A lease read at push time would name
+    their commit and replace it, which is the thing worth not doing.
+
+    An empty lease means the branch was not there at all, which git reads as
+    "and must still not be".
+    """
+    refspec = '%s:refs/heads/%s' % (branch, branch)
+    if not forced:
+        log.info('pushing %s to %s', branch, remote)
+        git('push', remote, refspec)
+        return
+    if lease is None:
+        lease = remote_head(remote, branch)
+    log.info(
+        'replacing %s on %s (%s)',
+        branch,
+        remote,
+        'was %s' % (lease[:12],) if lease else 'which did not have it',
+    )
+    try:
+        git(
+            'push',
+            '--force-with-lease=refs/heads/%s:%s' % (branch, lease),
+            remote,
+            refspec,
+        )
+    except Failed as err:
+        raise Failed(
+            '%s on %s is not %s any more, so this did not replace it: '
+            'something else published while this was building. Look at what '
+            'is there, then build and publish again.\n%s'
+            % (branch, remote, lease[:12] if lease else '(absent)', err)
+        ) from err
 
 
 def stage(source: str, target: str) -> None:
@@ -264,7 +358,18 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         '--publish',
         action='store_true',
-        help='commit the built site to the %s branch' % (PUBLISH_BRANCH,),
+        help=(
+            'replace the %s branch with the built site, as a single commit '
+            'with no parent' % (PUBLISH_BRANCH,)
+        ),
+    )
+    parser.add_argument(
+        '--keep-history',
+        action='store_true',
+        help=(
+            'add to the published branch rather than replacing it, keeping '
+            'every release in its history at a few megabytes each'
+        ),
     )
     parser.add_argument(
         '--branch',
@@ -295,6 +400,12 @@ def main(argv: list[str] | None = None) -> int:
     if options.push and not options.publish:
         parser.error('--push publishes, so it needs --publish as well')
 
+    # Read before anything is built.  The build takes about ten minutes, and
+    # what this is for is noticing a publish that happened during them.
+    lease = None
+    if options.publish and options.push:
+        lease = remote_head(options.push, options.branch)
+
     try:
         if 'fetch' in steps:
             fetch(update=not options.no_fetch)
@@ -312,7 +423,14 @@ def main(argv: list[str] | None = None) -> int:
             message = 'Documentation built %s' % (
                 datetime.datetime.now().isoformat(timespec='seconds'),
             )
-            publish(options.output, options.branch, message, options.push)
+            publish(
+                options.output,
+                options.branch,
+                message,
+                options.push,
+                keep_history=options.keep_history,
+                lease=lease,
+            )
     except Failed as err:
         log.error('%s', err)
         return 1

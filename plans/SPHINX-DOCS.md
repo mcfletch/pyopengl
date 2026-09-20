@@ -26,7 +26,7 @@ OpenGLContext is a separate project with its own documentation to build.
   packages and looking at what they hold.
 
 The two generated directories are gitignored. `build-docs.py` at the top of the
-checkout runs the lot and can publish the result to the `htdocs` branch.
+checkout runs the lot and can publish the result to `gh-pages`.
 
 ## Cross-references
 
@@ -83,7 +83,7 @@ command, so two objects stand for one command and `id()` would declare both.
 
 ## Size
 
-The set is about 3,400 pages. That is enough for the theme's default sidebar --
+The set is about 2,100 pages. That is enough for the theme's default sidebar --
 the whole table of contents, expanded, on every page -- to be most of a
 megabyte per page: a first full build came to 2.6 GB of HTML in 51 minutes,
 almost all of it navigation.
@@ -104,14 +104,76 @@ external URLs are all 404 now and are dropped; the rest are in the source tree.
 The panel pauses on hover, on a hidden tab, off screen and under
 `prefers-reduced-motion`, and without JavaScript renders as a list of figures.
 
+## How many pages there should be
+
+There are three ways a name could get a page, and only two of them are worth
+one.
+
+A **reference page** is per Khronos reference entry, not per entry point:
+`glColor` is one page covering forty. 691 of them, which is what upstream has.
+
+A **module page** is per Python module. `OpenGL.GL.ARB.vertex_buffer_object`
+has content -- its constants, and links to the reference pages for its entry
+points.
+
+A **generated module** is the other half of every extension:
+`OpenGL.raw.GL.ARB.vertex_buffer_object`, the declarations the friendly module
+is built from. The pair shares its names, and one module declares each, so
+1,281 of the 1,300 raw pages said nothing but "documented on the module beside
+this one" -- 99% of them, at 19 KB of page furniture each.
+
+Those fold into the module beside them, which declares the raw module's name in
+a closing section. Nothing is lost: the module index still lists all 1,300, and
+`:py:mod:`OpenGL.raw.GL.ARB.vertex_buffer_object`` still resolves -- to the page
+with the content on it rather than to a page pointing at that page. A raw module
+that does declare something of its own, like `OpenGL.raw.GL._types`, keeps its
+page; 48 do.
+
+|                          | before | after |
+| ---                      | ---    | ---   |
+| pages                    | 3,388  | 2,137 |
+| built site               | 105 MB | 81 MB |
+| build                    | 10m50s | 5m22s |
+| cross-reference targets  | 21,241 | 21,241 |
+
+The repository cost barely moved -- 7.6 MB packed to 7.4 -- because git deltas
+1,281 near-identical pages down to nearly nothing. The fold is worth doing for
+the reader and for the build, not for the repository.
+
 ## Publishing
 
-`build-docs.py --publish` commits the built site to the `htdocs` branch through
-git's plumbing -- its own index, `commit-tree`, `update-ref` -- so the branch is
-never checked out and the working tree is untouched. `--push` sends it to the
-remote; without it nothing leaves the machine. A `.nojekyll` file goes in beside
-the site, since GitHub Pages otherwise drops every directory whose name starts
-with an underscore, which is `_static`.
+`build-docs.py --publish` puts the built site on `gh-pages`, which is what
+GitHub Pages serves. It writes through git's plumbing -- its own index,
+`commit-tree`, `update-ref` -- so the branch is never checked out and the
+working tree is untouched. `--push` sends it to the remote; without it nothing
+leaves the machine. A `.nojekyll` goes in beside the site, since Pages
+otherwise drops every directory whose name starts with an underscore, which is
+`_static`.
+
+**The commit has no parent.** Each publish replaces the branch with one
+disjoint commit rather than adding to a chain, so the repository carries one
+copy of the site however many releases there are. Kept history would cost about
+3 MB a release -- a release changes the version line on every page -- which is
+nothing for a while and not nothing for a decade. `--keep-history` is there for
+a branch where the trail matters more than the size.
+
+Replacing the branch means forcing the push, and it is forced against a lease:
+where the remote was when the run *started*, read before the build rather than
+after it, because the build is the ten minutes during which somebody else could
+publish. A lease read at push time would name their commit and replace it,
+which is the thing worth not doing.
+`tests/directdocs/test_publishing.py` holds all of that, against throwaway
+repositories.
+
+Git LFS is not an option for any of it: GitHub's own documentation says "Git
+LFS cannot be used with GitHub Pages sites", and a site whose files are LFS
+pointers serves the pointer text. It would also be the wrong shape -- LFS
+stores every version of every object whole, where git deltas this content to
+nearly nothing.
+
+`.github/workflows/documentation.yml` does the publish on a push to `master`,
+which is what is released. A manual run builds without publishing unless asked,
+and keeps the built site as an artifact either way.
 
 ## Still to do
 
@@ -124,5 +186,6 @@ with an underscore, which is `_static`.
   `OpenGL.osmesa` and `OpenGL.platform.win32` cannot be imported here, so they
   get no page. A release build should run somewhere they can be, or the build
   should be run once per platform and the results merged.
-- **`genindex.html` is 4.7 MB**, which is what an index of every name in the
-  library comes to. Splitting it per letter is a Sphinx option worth measuring.
+- **`genindex.html` is 4.2 MB and `searchindex.js` 5.9 MB**, which is what an
+  index of twenty-one thousand names comes to. Splitting the index per letter
+  is a Sphinx option worth measuring.
