@@ -20,17 +20,35 @@ which those are.
 
 Run it through ``build-docs.py``, which runs the reference generator first so
 that the manifest is there.
+
+Importing this module sets three ``PYOPENGL_*`` variables in the environment
+and takes them out again once PyOpenGL has read them, which is what chooses
+the configuration the pages are written from.  A variable the caller set is
+left alone, and :func:`report_configuration` says so when the configuration in
+front of a run is not the one the pages want.
 """
 
 from __future__ import annotations
 
 import os
 
-# Before anything imports OpenGL: the dispatch is chosen once, when
-# OpenGL._configflags is first read, and the pages want the Python entry points
-# with their argument names and docstrings.  setdefault, so that a build asking
-# for the C implementation on the command line still gets it.
-os.environ.setdefault('PYOPENGL_DISPATCH', 'ctypes')
+# Before anything imports OpenGL.  The configuration is read once, when
+# `OpenGL._configflags` is first touched, and these three are what the pages
+# are written from: the ctypes entry points, which carry the argument names and
+# the docstrings, and the annotation that says which module declares each name.
+#
+# Through the environment rather than by assignment, because assignment only
+# works when this module is imported first -- and a process that had already
+# imported OpenGL got a warning it could do nothing about rather than the
+# configuration it asked for.  Only where the caller set nothing, so a build
+# asking for something else on the command line still gets it.
+_CONFIGURATION = {
+    'PYOPENGL_DISPATCH': 'ctypes',
+    'PYOPENGL_USE_ACCELERATE': '0',
+    'PYOPENGL_MODULE_ANNOTATIONS': '1',
+}
+_SET_HERE = [name for name in _CONFIGURATION if name not in os.environ]
+os.environ.update({name: _CONFIGURATION[name] for name in _SET_HERE})
 
 import argparse  # noqa: E402
 import glob  # noqa: E402
@@ -48,11 +66,6 @@ PACKAGE_ROOT = os.path.dirname(HERE)
 if PACKAGE_ROOT not in sys.path:
     sys.path.insert(0, PACKAGE_ROOT)
 
-import OpenGL  # noqa: E402
-
-OpenGL.USE_ACCELERATE = False  # document the Python versions
-OpenGL.MODULE_ANNOTATIONS = True  # tell us where the constants/alternates are defined
-
 from directdocs import model, rst  # noqa: E402
 from directdocs.rst import Writer  # noqa: E402
 from OpenGL import platform  # noqa: E402
@@ -62,6 +75,13 @@ from OpenGL.GLUT.special import GLUTCallback  # noqa: E402
 from OpenGL.lazywrapper import _LazyWrapper as Lazy  # noqa: E402
 from OpenGL.platform.baseplatform import _NullFunctionPointer as NullFunc  # noqa: E402
 from OpenGL.wrapper import Wrapper  # noqa: E402
+
+for _name in _SET_HERE:
+    # PyOpenGL has read its configuration by now, so these have done their
+    # work.  Taken back out again because `os.environ` is inherited: a process
+    # that imports this module for one of its functions would otherwise hand
+    # every child it starts a PyOpenGL configured for writing documentation.
+    os.environ.pop(_name, None)
 
 log = logging.getLogger('dumbpydoc')
 
@@ -79,9 +99,6 @@ except ImportError:
 else:
     GLProc = _dispatch_extension.GLProc
 
-platform.PLATFORM.EGL = None
-platform.PLATFORM.WGL = None
-
 #: Where the pages are written.
 OUTPUT_DIRECTORY = os.path.join(PACKAGE_ROOT, 'docs', 'api')
 
@@ -95,6 +112,12 @@ PROJECTS = ['OpenGL', 'OpenGL_accelerate']
 
 #: Module-name fragments that are not part of a package's public surface.
 SKIP_FRAGMENTS = ('.tests.', '.tests', '.test_', '.__main__')
+
+#: The top-level packages a plain run documents.  A name that comes from
+#: outside them under its own name is somebody else's and is not described
+#: here; under one of ours it is ours, which is how `GLdouble = c_double` is
+#: documented and a bare `c_double` beside it is not.
+DEFAULT_ROOTS = tuple(name.split('.')[0] for name in PROJECTS)
 
 
 class PyModule(object):
@@ -125,9 +148,11 @@ class PyModule(object):
         ('classes', CLASS_TYPES),
     ]
 
-    def __init__(self, name):
+    def __init__(self, name, roots=None):
         self.name = name
         self.basename = name.split('.')[-1]
+        #: The packages being documented; see :func:`DEFAULT_ROOTS`.
+        self.roots = tuple(roots) if roots else DEFAULT_ROOTS
         self.functions = []
         self.constants = []
         self.classes = []
@@ -180,6 +205,8 @@ class PyModule(object):
         ):
             if key.startswith('_') or not self.interesting(value):
                 continue
+            if self.imported_from_elsewhere(key, value):
+                continue
             for attr, types_ in self.FT_MAP:
                 if not isinstance(value, types_):
                     continue
@@ -212,6 +239,21 @@ class PyModule(object):
         is no longer this function's job.
         """
         return isinstance(obj, self.INTERESTING_TYPES)
+
+    def imported_from_elsewhere(self, key, obj):
+        """Whether ``key`` is another package's name, imported under it.
+
+        ``from ctypes import *`` puts `c_double` and `CFunctionType` in a
+        module's namespace, and `int` arrives the same way.  Those belong to
+        whoever defines them.  A name PyOpenGL gives something of somebody
+        else's -- ``GLdouble = c_double`` -- is PyOpenGL's and stays.
+        """
+        if isinstance(obj, types.ModuleType):
+            return False
+        module = getattr(obj, '__module__', None)
+        if module is None or module.split('.')[0] in self.roots:
+            return False
+        return key == getattr(obj, '__name__', key)
 
     def owns(self, obj):
         """Whether ``obj`` looks defined here rather than imported.
@@ -540,10 +582,15 @@ class Renderer:
         if not declared:
             return
         writer.heading('Classes', 1)
-        for _name, cls in declared:
+        for name, cls in declared:
+            # Declared under the name the module binds it to, not under
+            # ``__name__``: ctypes builds a type per function signature and
+            # calls every one of them `CFunctionType`, so the module's own
+            # names -- `GLDEBUGPROC` and its neighbours -- are the ones a
+            # reader has and the only ones that are distinct.
             bases = ', '.join(base_name(base) for base in cls.bases)
             writer.directive(
-                'py:class', '%s(%s)' % (cls.basename, bases) if bases else cls.basename
+                'py:class', '%s(%s)' % (name, bases) if bases else name
             )
             with writer.indent():
                 write_docstring(docstring_lines(cls), writer)
@@ -594,6 +641,46 @@ class Renderer:
         writer.heading('Imported modules', 1)
         writer.paragraph(
             ', '.join(':py:mod:`%s`' % (name,) for name in dict.fromkeys(names))
+        )
+
+
+def quieten_absent_platforms() -> None:
+    """Stop the inspection reaching for libraries this machine has none of.
+
+    Touching ``PLATFORM.EGL`` or ``PLATFORM.WGL`` loads a library, and on a
+    machine without one that is an error raised from the middle of a module's
+    inspection rather than a module reported as absent.
+
+    Called from :func:`render_projects` rather than when this module is
+    imported: it mutates the platform object the whole process shares, and a
+    process that imported this module for one of its functions should find
+    PyOpenGL exactly as it left it.
+    """
+    platform.PLATFORM.EGL = None
+    platform.PLATFORM.WGL = None
+
+
+def report_configuration() -> None:
+    """Say so if the configuration is not the one the pages want.
+
+    The variables at the top of this module choose it, and they are read once
+    per process.  A process that had already built its entry points before
+    importing this keeps what it built, and the pages would then describe
+    something other than the Python entry points -- silently, since a compiled
+    entry point documents as a name with no arguments and no docstring.
+    """
+    from OpenGL import _configflags
+
+    if _configflags.USE_ACCELERATE:
+        log.warning(
+            'PyOpenGL was configured with the accelerators before this module '
+            'was imported, so the pages describe the compiled entry points '
+            'rather than the Python ones'
+        )
+    if not _configflags.MODULE_ANNOTATIONS:
+        log.warning(
+            'MODULE_ANNOTATIONS is off, so nothing says which module declares '
+            'each name and every re-export is documented as a declaration'
         )
 
 
@@ -687,6 +774,8 @@ def render_projects(
 
     Returns the names written and the names that could not be documented.
     """
+    report_configuration()
+    quieten_absent_platforms()
     os.makedirs(directory, exist_ok=True)
     roots = list(projects or PROJECTS)
     skip = tuple(skip)

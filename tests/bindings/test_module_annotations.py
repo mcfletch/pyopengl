@@ -22,8 +22,8 @@ from childenv import json_from_child
 
 REPORT = '''
 import json
-import OpenGL
-OpenGL.MODULE_ANNOTATIONS = True
+import os
+os.environ['PYOPENGL_MODULE_ANNOTATIONS'] = '1'
 from OpenGL import GL
 from OpenGL.GL.ARB import vertex_buffer_object as vbo
 import OpenGL.raw.GL.VERSION.GL_1_1 as raw11
@@ -76,6 +76,11 @@ def test_the_flag_is_off_by_default():
     answered = json_from_child(
         'import json\n'
         'from OpenGL import GL, _configflags\n'
-        'print(json.dumps({"flag": bool(_configflags.MODULE_ANNOTATIONS)}))\n'
+        'print(json.dumps({"flag": bool(_configflags.MODULE_ANNOTATIONS)}))\n',
+        # Cleared rather than left alone: `directdocs.dumbpydoc` sets it in
+        # `os.environ` when it is imported, which a child of this process
+        # would otherwise inherit -- and the question here is what a caller
+        # who set nothing gets.
+        PYOPENGL_MODULE_ANNOTATIONS=None,
     )
     assert answered['flag'] is False
