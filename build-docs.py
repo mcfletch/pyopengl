@@ -184,6 +184,22 @@ def build_html(output: str, builder: str, warnings_are_errors: bool) -> None:
     nojekyll(output)
 
 
+def write_redirects(output: str) -> None:
+    """Put a stub at each 3.x URL, pointing at the page that replaced it.
+
+    Written after Sphinx rather than as pages in the source: a stub per entry
+    point in the source tree is a second page for each of them in the search
+    index and in the table of contents.
+    """
+    sys.path.insert(0, HERE)
+    from directdocs import redirects
+
+    written = redirects.write_redirects(
+        output, manifest=os.path.join(REFERENCE, 'entrypoints.json')
+    )
+    log.info('Wrote %d redirects from the 3.x URLs into %s', written, output)
+
+
 def nojekyll(directory: str) -> None:
     """Put a ``.nojekyll`` marker in ``directory``.
 
@@ -470,6 +486,7 @@ def main(argv: list[str] | None = None) -> int:
             build_html(
                 options.output, options.builder, options.warnings_are_errors
             )
+            write_redirects(options.output)
         if options.stage:
             stage(options.output, options.stage)
         if options.publish:
