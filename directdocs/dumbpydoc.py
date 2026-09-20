@@ -68,7 +68,7 @@ PACKAGE_ROOT = os.path.dirname(HERE)
 if PACKAGE_ROOT not in sys.path:
     sys.path.insert(0, PACKAGE_ROOT)
 
-from directdocs import model, rst  # noqa: E402
+from directdocs import model, rst, stubs  # noqa: E402
 from directdocs.rst import Writer, write_docstring  # noqa: E402
 from OpenGL import platform  # noqa: E402
 from OpenGL.constant import Constant  # noqa: E402
@@ -673,8 +673,11 @@ class Renderer:
                 'These entry points wrap an OpenGL command and are described '
                 'on its reference page: ' + ', '.join(linked) + '.'
             )
-        for _name, func in described:
-            writer.directive('py:function', model.python_signature(func))
+        stubbed = stubs.signatures(module.name)
+        for name, func in described:
+            writer.directive(
+                'py:function', stubbed.get(name) or model.python_signature(func)
+            )
             with writer.indent():
                 for alias in sorted(getattr(func, 'aliases', []) or []):
                     writer.paragraph('Also exported as ``%s``.' % (alias,))
@@ -691,6 +694,7 @@ class Renderer:
         if not declared:
             return
         writer.heading('Classes', 1)
+        stubbed = stubs.signatures(module.name)
         for name, cls in declared:
             # Declared under the name the module binds it to, not under
             # ``__name__``: ctypes builds a type per function signature and
@@ -710,8 +714,12 @@ class Renderer:
                     )
                     with writer.indent():
                         write_docstring(docstring_lines(prop), writer, known)
-                for _key, func in cls.functions:
-                    writer.directive('py:method', model.python_signature(func))
+                for key, func in cls.functions:
+                    writer.directive(
+                        'py:method',
+                        stubbed.get('%s.%s' % (name, key))
+                        or model.python_signature(func),
+                    )
                     with writer.indent():
                         write_docstring(docstring_lines(func), writer, known)
 
