@@ -62,8 +62,8 @@ first.
 A finished frame is in the buffer the context draws to, which is not always
 ``GL_BACK``: a pbuffer is single-buffered unless one was asked for with a back
 buffer, and naming a buffer the framebuffer does not have is
-``GL_INVALID_OPERATION`` rather than a quiet fallback.  ``glGetIntegerv``
-with ``GL_DOUBLEBUFFER`` is the question to ask.
+``GL_INVALID_OPERATION`` rather than a quiet fallback.  ``glGetIntegerv`` with
+``GL_DOUBLEBUFFER`` reports which the framebuffer has.
 
 The frame need not come back to the application at all.  It is already in GPU
 memory, and the GPU can process it further before anything crosses the bus --
@@ -125,8 +125,8 @@ Which device is software
 
 The question is decided in two steps, in this order:
 
-#. ``EGL_MESA_device_software`` among the device's extensions.  Where it is
-   present it is definitive, which is why it is checked first.
+#. ``EGL_MESA_device_software`` among the device's extensions.  It is
+   definitive where present, so it is checked first.
 #. Otherwise the driver name, matched case-insensitively as a substring against
    ``SOFTWARE_DRIVER_NAMES``: ``llvmpipe``, ``swrast``, ``softpipe``, ``swr``,
    ``lavapipe``.  Substrings because drivers append versions and build details
@@ -137,21 +137,19 @@ software costs performance; the reverse can mean selecting a device that cannot
 do the work.
 
 Asking Mesa for a display on a *hardware* device while
-``LIBGL_ALWAYS_SOFTWARE`` demands software rendering is a contradiction it
-warns about and then crashes on, inside ``driCreateNewScreen3``.  A caller that
-can ask which devices are software avoids it; one that cannot, and takes device
-0, dumps core on any machine that has both a GPU and a software rasteriser.
+``LIBGL_ALWAYS_SOFTWARE`` demands software rendering is a contradiction: Mesa
+warns about it and then crashes, inside ``driCreateNewScreen3``.  A program
+that takes device 0 without asking which devices are software therefore dumps
+core on any machine with both a GPU and a software rasteriser.
 
-Choosing is the caller's
-~~~~~~~~~~~~~~~~~~~~~~~~
+Choosing a device
+~~~~~~~~~~~~~~~~~
 
-This module reports fact.  *Choosing* between the devices is policy and stays
-with the caller, because a renderer wanting speed and a test wanting
-reproducibility disagree about which device is right.
-
-A policy has one hard constraint, which is the crash above: where the
-environment demands software rendering, the device chosen has to be a software
-one.  Read the environment first and let it decide which kind to look for.
+The module reports what is available; the application chooses which of those
+devices to render on.  One constraint applies, which is the crash above: where
+``LIBGL_ALWAYS_SOFTWARE`` demands software rendering, the device chosen has to
+be a software one.  So read the environment first and let it decide which kind
+to look for.
 
 ::
 
@@ -178,17 +176,15 @@ one.  Read the environment first and let it decide which kind to look for.
        EGL_PLATFORM_DEVICE_EXT, chosen.handle, None
    )
 
-The fallback runs one way only.  Wanting a GPU and finding a CPU rasteriser is
-slow, so it renders; wanting software and finding a GPU is the pair that dumps
-core, so it stops.
+The fallback goes one way.  A program that wanted a GPU and found only a CPU
+rasteriser renders slowly; one that was told to render in software and found
+only a GPU stops, since that is the pair that crashes.
 
 `OpenGLContext <https://github.com/mcfletch/openglcontext>`__'s offscreen
-backend is a worked example of the policy half: it honours
-``LIBGL_ALWAYS_SOFTWARE`` and ``GALLIUM_DRIVER``, takes an explicit device
-index from an environment variable where a run has to be pinned to one GPU of
-several, and refuses the contradiction rather than serving it.  PyOpenGL's own
-headless test backend (``tests/glcontext_egl.py``) is the same policy at a
-smaller size.
+backend does this: it honours ``LIBGL_ALWAYS_SOFTWARE`` and ``GALLIUM_DRIVER``,
+and takes an explicit device index from an environment variable where a run has
+to be pinned to one GPU of several.  PyOpenGL's own headless test backend
+(``tests/glcontext_egl.py``) does the same.
 
 Render nodes, through GBM
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -265,10 +261,9 @@ Which renderer answers
 ~~~~~~~~~~~~~~~~~~~~~~
 
 A Mac with a GPU has an accelerated renderer.  A virtual machine, or a session
-with no window server, has only Apple's CPU renderer -- and asking for
-acceleration there *fails* rather than falling back, which is why a library
-that requires the accelerated attribute cannot get a context on such a machine
-at all.
+with no window server, has only Apple's CPU renderer, and asking for
+acceleration there *fails* rather than falling back, so a library that requires
+the accelerated attribute gets no context at all on such a machine.
 
 ``headless_context`` and ``choose_pixel_format`` therefore try three kinds in
 order and take the first the machine offers:
