@@ -12,8 +12,8 @@ that the GL can draw into it, and then some mechanism is used to read that
 surface back to the application.  The exact mechanisms differ by platform, but
 they all work in loosely the same way.
 
-Which route a machine has
--------------------------
+Platform implementations
+------------------------
 
 .. list-table::
    :widths: auto
