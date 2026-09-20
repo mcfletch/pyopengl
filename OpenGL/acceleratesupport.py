@@ -1,4 +1,4 @@
-"""Common code for accelerated modules"""
+"""Tests that OpenGL_accelerate is a compatible version, disables if not"""
 
 import logging
 
