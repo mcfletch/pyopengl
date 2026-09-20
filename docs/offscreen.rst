@@ -65,6 +65,13 @@ buffer, and naming a buffer the framebuffer does not have is
 ``GL_INVALID_OPERATION`` rather than a quiet fallback.  ``glGetIntegerv``
 with ``GL_DOUBLEBUFFER`` is the question to ask.
 
+The frame need not come back to the application at all.  It is already in GPU
+memory, and the GPU can process it further before anything crosses the bus --
+`pyopengl-video <https://github.com/mcfletch/pyopengl-video>`__ hands the
+colour buffer to the video encoder on the same die, so a texture goes in and an
+H.264 stream comes out.  A recorder, a streamer or a render farm node reading
+frames back only to compress them can hand them over instead.
+
 .. _offscreen-egl:
 
 EGL, on Linux and Android
