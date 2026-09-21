@@ -1,2 +1,10 @@
+# What building the extension needs, and nothing else.  _build-manylinux.sh
+# installs this into each manylinux interpreter before `pip wheel`, so a test
+# dependency named here lands in every wheel-build environment.
+#
+# The include runs one way: test-requirements.txt pulls this file in, and this
+# file pulls in nothing.  Two files that include each other are a loop pip
+# refuses to install and uv resolves without complaint, so it fails first for
+# whoever is not using uv.  tests/gates/test_requirements_files_resolve.py
+# holds the direction.
 cython>=0.28
--r ./test-requirements.txt

@@ -1,5 +1,8 @@
 pygame
 pytest
 -r ./requirements.txt
+# Cython as well, because the suite reads what it wrote: the cases in
+# tests/bindings/test_accelerate_generated_c.py skip where Cython is absent,
+# so a test environment without it checks the generated C not at all.
 -r ./dev-requirements.txt
 -e ../
