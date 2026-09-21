@@ -77,6 +77,26 @@ class TestEntities:
         tree = generate.load_file(path)
         assert '×' in ET.tostring(tree, encoding='unicode')
 
+    def test_a_set_the_entity_file_names_resolves_beside_it(self, pages):
+        """``math.ent`` declares the ISO sets by a system identifier of their
+        own, and each of those resolves against ``math.ent``'s URL rather than
+        the page's."""
+        (pages / 'isoamsr.ent').write_text(
+            '<!ENTITY ap "&#8776;">\n', encoding='utf-8'
+        )
+        (pages / 'math.ent').write_text(
+            '<!ENTITY % isoamsr SYSTEM "isoamsr.ent"> %isoamsr;\n',
+            encoding='utf-8',
+        )
+        path = write(
+            pages,
+            'glThing.xml',
+            '<refentry xmlns="%s" xml:id="glThing">'
+            '<para>two &ap; three</para></refentry>' % (generate.DOCBOOK_NS,),
+        )
+        tree = generate.load_file(path)
+        assert '≈' in ET.tostring(tree, encoding='unicode')
+
     def test_a_name_the_iso_sets_lack_is_supplied(self, pages):
         """`mdash` is used by the GLUT pages and is in none of the sets."""
         path = write(
@@ -346,6 +366,14 @@ class TestWhatAPagesReferencesResolveAgainst:
             generate.document_url(str(tmp_path / 'glThing.xml')), 'math.ent'
         )
         assert resolved == (tmp_path / 'math.ent').as_uri()
+
+    def test_the_entity_set_is_declared_as_a_url(self, tmp_path):
+        """The wrapper names the entity set by an absolute identifier, which
+        libxml2 reads as a URI wherever the base URL leaves it unresolved."""
+        entities = tmp_path / 'math.ent'
+        entities.write_text('', encoding='utf-8')
+        declaration = generate.wrap(b'<para/>', str(entities))
+        assert entities.as_uri().encode('ascii') in declaration
 
 
 @pytest.fixture(scope='module')

@@ -256,6 +256,18 @@ def entity_file(directory: str) -> str | None:
     return None
 
 
+def document_url(path: str) -> str:
+    """``path`` as the URL libxml2 reads it as.
+
+    Every filename that reaches the parser is a URI to libxml2: the base URL a
+    page's own references resolve against, and the system identifier naming the
+    entity set the wrapper declares.  A Windows path is not one:
+    ``C:\\pages\\math.ent`` gives ``C:`` a scheme of ``c`` and a separator no
+    URI holds, and the entity set resolves to something no opener accepts.
+    """
+    return pathlib.Path(os.path.abspath(path)).as_uri()
+
+
 def wrap(body: bytes, entities: str | None) -> bytes:
     """``body`` re-rooted in a ``book`` element that declares the namespaces.
 
@@ -264,11 +276,14 @@ def wrap(body: bytes, entities: str | None) -> bytes:
     declare the namespaces the page goes on to use.  The replacement declares
     the entity sets again, so that ``&times;`` and its neighbours arrive as
     the characters they stand for rather than as an error.
+
+    ``entities`` is the file holding them, named as a URL because that is what
+    a system identifier is.
     """
     declaration = b''
     if entities:
         declaration = b'    <!ENTITY %% mathent SYSTEM "%s"> %%mathent;\n' % (
-            as_8_bit(entities.replace('"', '%22')),
+            as_8_bit(document_url(entities)),
         )
     supplementary = b''.join(
         b'    <!ENTITY %s "&#%d;">\n' % (as_8_bit(name), point)
@@ -602,18 +617,6 @@ def strip_bad_header(data: bytes) -> bytes:
 def parser() -> Any:
     """A parser that resolves the entity sets the reference pages declare."""
     return ET.XMLParser(load_dtd=True, resolve_entities=True, no_network=True)
-
-
-def document_url(path: str) -> str:
-    """``path`` as the URL its own references resolve against.
-
-    A page declares its entity sets by a system identifier beside it --
-    ``math.ent`` -- and libxml2 resolves that against the base URL as a URI.
-    A Windows path is not one: ``C:\\pages\\glThing.xml`` gives ``C:\\pages``
-    a scheme of ``c`` and a backslash that no URI holds, and the entity set
-    resolves to something no opener accepts.
-    """
-    return pathlib.Path(os.path.abspath(path)).as_uri()
 
 
 def parse_fragment(path: str) -> Any:

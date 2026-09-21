@@ -64,6 +64,11 @@ command, so two objects stand for one command and `id()` would declare both.
   `&times;`, `&delta;` and the rest rendered as nothing. Each page is now
   parsed against the `math.ent` its own directory carries, with the nine names
   those ISO sets do not define supplied by the generator.
+- **The entity set was named to libxml2 as a filesystem path**, which it reads
+  as a URI: a POSIX path is one by coincidence and a Windows path never, so
+  `C:\...\math.ent` was an invalid URI and every page with mathematics in it
+  failed to parse there. Both filenames the parser is given -- the base URL and
+  that system identifier -- go through `document_url` now.
 - **The version-support tables never rendered.** They are assembled through
   XInclude with an XPointer lxml does not evaluate; the two forms the pages use
   are resolved directly now.
