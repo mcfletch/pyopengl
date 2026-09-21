@@ -336,6 +336,29 @@ class TestThePairIsPinnedBeforeItIsInstalled:
             'accelerate declares no dependency on PyOpenGL, so pip will '
             'assemble any pair of versions it is asked for')
 
+    def test_the_two_distributions_state_the_same_version(self):
+        """A release bumps both or neither.
+
+        The pin above is on accelerate's *own* version, so a release that
+        bumps PyOpenGL alone leaves accelerate asking for the version before
+        it -- which pip cannot satisfy against the checkout it was handed, and
+        which the runtime check refuses even where it can.
+        """
+        import re
+
+        source = os.path.join(paths.ROOT, 'accelerate', 'OpenGL_accelerate',
+                              '__init__.py')
+        if not os.path.exists(source):
+            pytest.skip('the accelerate source tree is not in this checkout')
+        with open(source, encoding='utf-8') as handle:
+            found = re.search(r"__version__\s*=\s*['\"]([^'\"]+)", handle.read())
+        assert found, 'accelerate states no __version__'
+        from OpenGL.version import __version__ as ours
+
+        assert found.group(1) == ours, (
+            'accelerate is %s and PyOpenGL is %s; they are released together'
+            % (found.group(1), ours))
+
     def test_the_declared_pin_is_the_version_it_was_built_from(self):
         sys.path.insert(0, os.path.join(
             paths.ROOT, 'accelerate'))

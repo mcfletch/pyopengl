@@ -4,8 +4,12 @@ name: Documentation
 # Pages serves.
 #
 # `master` is what is released, so that is what the published documentation
-# describes.  Work lands on `develop` and is documented from a checkout; only a
-# release moves the site.
+# describes.  Work lands on `develop` and is documented from a checkout.
+#
+# The site moves when somebody runs this, rather than on a push: a release
+# tags, publishes to PyPI and moves `master` at once, and a documentation
+# build that starts in the middle of that installs a pair of packages only
+# half of which is on PyPI yet.  Run it once the release has settled.
 #
 # The site is about a hundred megabytes of HTML.  It is published as a single
 # commit with no parent, replacing the branch rather than adding to it, so the
@@ -15,14 +19,13 @@ name: Documentation
 # that branch.
 
 on:
-  push:
-    branches: [master]
   workflow_dispatch:
     inputs:
       publish:
         description: >-
-          Whether to put the result on gh-pages. Off by default on a manual
-          run, which is then a build that says whether the set still builds.
+          Whether to put the result on gh-pages. Off by default, which makes a
+          run a build that says whether the set still builds; tick it to move
+          the published site.
         type: boolean
         default: false
 
@@ -78,12 +81,12 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Build the set
-        # `--publish` without `--push` on a manual run that did not ask for it:
-        # the build is the thing being checked, and the branch is left alone.
+        # `--publish` without `--push` on a run that did not ask for it: the
+        # build is the thing being checked, and the branch is left alone.
         run: |
           python build-docs.py \
             --stage site \
-            ${{ (github.event_name == 'push' || inputs.publish) && '--publish --push origin' || '' }}
+            ${{ inputs.publish && '--publish --push origin' || '' }}
 
       - name: Keep the built site with the run
         # So a build that was not published can still be looked at, and so a
