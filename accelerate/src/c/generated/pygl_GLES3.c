@@ -3174,10 +3174,10 @@ pygl_GLES3_glGetUniformIndices(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_SZ(1, uniformCount);
     PYGL_CONV_OK();
     PYGL_STRING_ARRAY(2, uniformNames);
-    PYGL_ARRAY_OUT_GLGET(3, uniformIndices, &pygl_elem_GLuint, uniformCount, pygl_glget_GLES3);
+    PYGL_ARRAY_OUT_N(3, uniformIndices, &pygl_elem_GLuint, (Py_ssize_t)(uniformCount), 1);
     PYGL_CALL_V((unsigned int, int, void *, void *), (program, uniformCount, uniformNames, uniformIndices));
     PYGL_CHECK();
-    PyObject *_value = pygl_output_value(&_bufs[uniformIndices_slot], &pygl_elem_GLuint, uniformIndices_count);
+    PyObject *_value = pygl_output_value(&_bufs[uniformIndices_slot], &pygl_elem_GLuint, (Py_ssize_t)(uniformCount));
     PYGL_CLEANUP();
     return _value;
 _argfail:

@@ -8407,8 +8407,8 @@ def glGetUniformBlockIndex(program: int, uniformBlockName: ByteArray) -> int:
 def glGetUniformBufferSizeEXT(program: int, location: int) -> int:
     """glGetUniformBufferSizeEXT(program: GLuint, location: GLint) -> GLint"""
 
-def glGetUniformIndices(program: int, uniformCount: int, uniformNames: AnyArray, uniformIndices: UIntArray | None = None) -> UIntArrayResult:
-    """glGetUniformIndices(program: GLuint, uniformCount: GLsizei, uniformNames: GLchar[][]) -> uniformIndices: GLuint[]"""
+def glGetUniformIndices(program: Any, uniformCount: Any, uniformNames: Any = ..., uniformIndices: Any = ...) -> Any:
+    """glGetUniformIndices(program, uniformCount, uniformNames, uniformIndices) -- the form the wrapper takes"""
 
 def glGetUniformLocation(program: int, name: ByteArray) -> int:
     """glGetUniformLocation(program: GLuint, name: GLchar[]) -> GLint"""

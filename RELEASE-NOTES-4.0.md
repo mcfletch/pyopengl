@@ -125,6 +125,21 @@ What changed since the 3.x series. The current development version is
 - `FormatHandler.dimensions` declared a `typeCode` parameter no handler accepts
   and no caller passes, so the interface a third party writing a handler reads
   described an argument every implementation would have refused.
+- `glGetUniformIndices(program, ['name', ...])` answers a `GLuint` array of one
+  index per name, on desktop GL as it already did on GLES3. Both
+  `OpenGL.GL` and `OpenGL.GL.ARB.uniform_buffer_object` offer that form, since
+  GL 3.1 adopted the extension and the two names are one entry point; the C
+  ordering, with the count and a prepared `GLchar *const *`, is accepted as it
+  stands.
+- Three entry points sized the array they allocate by looking a *count* up in
+  the table of `glGet` sizes, as though a byte count or a name count were an
+  enum: `glGetUniformIndices` in GL and in GLES3, and
+  `glGetNamedBufferSubDataEXT`. A count that table happens to hold gave an
+  array of one element for the driver to write every value into — which is a
+  heap overrun, and `glGetNamedBufferSubDataEXT(buffer, offset, 16)` aborted
+  the process on a real driver — and a count it does not hold raised
+  `KeyError` from inside the call. Each is sized from its count argument now,
+  and the suite holds every remaining `glGet`-table size to naming an enum.
 
 ## Type stubs and `py.typed`
 

@@ -4416,8 +4416,9 @@
    "data": {
     "out": true,
     "size": {
-     "kind": "glget-table",
-     "pname": "size"
+     "argument": "size",
+     "divisor": 1,
+     "kind": "from-argument"
     }
    }
   }
@@ -6311,12 +6312,14 @@
   }
  },
  "GL.glGetUniformIndices": {
+  "helper": "variadic",
   "parameters": {
    "uniformIndices": {
     "out": true,
     "size": {
-     "kind": "glget-table",
-     "pname": "uniformCount"
+     "argument": "uniformCount",
+     "divisor": 1,
+     "kind": "from-argument"
     }
    },
    "uniformNames": {
@@ -20688,8 +20691,9 @@
    "uniformIndices": {
     "out": true,
     "size": {
-     "kind": "glget-table",
-     "pname": "uniformCount"
+     "argument": "uniformCount",
+     "divisor": 1,
+     "kind": "from-argument"
     }
    },
    "uniformNames": {
