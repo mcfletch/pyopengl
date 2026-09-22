@@ -85,6 +85,17 @@ What changed since the 3.x series. The current development version is
 
 ## Binding fixes
 
+- With the C dispatch layer, `glColorPointerf(array)` and every other typed
+  client-array setter in `OpenGL.GL.pointers` converted its array with the
+  converter of the first setter built from the same entry point —
+  `glColorPointerd`'s, to doubles — while telling the driver the type its own
+  name gives, so a draw read float64 memory as float32 and took garbage
+  colours and positions. A derived function now carries the customisations its
+  own chain stated, and `glColorPointer` demoted by `errcheck` carries only
+  its own.
+- `glIndexPointerb` and `glTexCoordPointerb` passed `GL_BYTE`, which neither
+  entry point accepts, so every call raised `GL_INVALID_ENUM`. They pass their
+  bytes as `GL_SHORT`, as `glVertexPointerb` passes its own as `GL_INT`.
 - `gluUnproject4` had the wrong signature; GLU quadrics, NURBS and the
   tessellator had defects the new suites exposed.
 - `glGetTexImageCompressed` ignored the level it was given.

@@ -124,7 +124,9 @@ A few entry points are Python-coded wrappers rather than bindings — ``glutInit
 Demotion: when the C hands the call back
 ----------------------------------------
 
-The C implements the entry point, not the friendly module's whole chain. If a friendly module applies a customisation the C does not perform — anything that changes which arguments the function takes — the entry point *demotes*: the ctypes binding is built, every customisation swallowed earlier is replayed onto it, and the result is what you would have had with no C layer at all. Correctness before speed.
+The C implements the entry point, not the friendly module's whole chain. If a friendly module applies a customisation the C does not perform — anything that changes which arguments the function takes — the entry point *demotes*: the ctypes binding is built, every customisation that chain swallowed earlier is replayed onto it, and the result is what you would have had with no C layer at all. Correctness before speed.
+
+A chain begins at ``wrapper.wrapper(entry_point)``, and what it swallows belongs to it alone. ``OpenGL.GL.pointers`` builds ``glColorPointerd`` and ``glColorPointerf`` from the one ``glColorPointer``, each with its own array converter; each demotes to a wrapper carrying its own converter, and ``glColorPointer`` itself, demoted later by a client assigning ``errcheck``, carries only the customisations of the chain that bound it.
 
 This is why the ctypes binding still exists behind every C entry point. It is built on the first demotion that asks for it rather than at import, because a few dozen entry points out of nearly five thousand ever demote.
 

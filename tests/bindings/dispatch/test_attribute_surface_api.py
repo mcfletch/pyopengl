@@ -84,15 +84,18 @@ class TestLookupsKeyOnTheAPI:
         # a wrapper, and every later test in the process gets the raw binding
         # instead.  (Which is what happened -- as a failure in a different
         # file, in whichever suite happened to be collected afterwards.)
-        before = dict(support._swallowed)
-        support._swallowed.clear()
+        records = (support._swallowed, support._open_chains)
+        before = [dict(record) for record in records]
+        for record in records:
+            record.clear()
         try:
             support.record_custom(desktop, 'setStoreValues', ('mask',))
             assert support.swallowed_for(embedded) == {}
             assert support.swallowed_for(desktop) != {}
         finally:
-            support._swallowed.clear()
-            support._swallowed.update(before)
+            for record, saved in zip(records, before):
+                record.clear()
+                record.update(saved)
 
 
 class TestSignaturesAreBuiltNotCompiled:
