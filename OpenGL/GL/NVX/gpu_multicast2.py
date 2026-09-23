@@ -28,8 +28,6 @@ def glInitGpuMulticast2NVX():
     from OpenGL import extensions
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
-# INPUT glMulticastViewportArrayvNVX.v size not checked against 'count'
-# INPUT glMulticastScissorArrayvNVX.v size not checked against 'count'
 # INPUT glAsyncCopyBufferSubDataNVX.fenceValueArray size not checked against waitSemaphoreCount
 # INPUT glAsyncCopyBufferSubDataNVX.signalSemaphoreArray size not checked against signalSemaphoreCount
 # INPUT glAsyncCopyBufferSubDataNVX.signalValueArray size not checked against signalSemaphoreCount

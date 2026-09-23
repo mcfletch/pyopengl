@@ -292,8 +292,8 @@ extern PyTypeObject PyGLProc_Type;
  *
  * - Every PyObject * returned is a new reference, or NULL with an exception
  *   set.  Nothing here hands back a borrowed one.
- * - An acquire -- pygl_array_in, pygl_array_in_sized, pygl_array_out,
- *   pygl_array_out_glget, pygl_array_typed, pygl_image_in, pygl_image_out,
+ * - An acquire -- pygl_array_in, pygl_array_in_sized, pygl_array_in_min,
+ *   pygl_array_out, pygl_array_out_glget, pygl_array_typed, pygl_image_in, pygl_image_out,
  *   pygl_string_array -- fills a PyGLBuf the caller then owns and must hand to
  *   pygl_release.  On failure it leaves the slot holding nothing, which is what
  *   entitles PYGL_ARRAY_* to count a slot only once its acquire has returned:
@@ -439,6 +439,10 @@ int pygl_array_in(GLProc *self, PyObject *object, const PyGLElement *element,
 /* As above, and additionally check the element count. */
 int pygl_array_in_sized(GLProc *self, PyObject *object, const PyGLElement *element,
                         Py_ssize_t index, Py_ssize_t expected, PyGLBuf *out);
+/* As above, with `minimum` a lower bound: the driver reads that many elements,
+ * and a longer array is the caller's larger buffer. */
+int pygl_array_in_min(GLProc *self, PyObject *object, const PyGLElement *element,
+                      Py_ssize_t index, Py_ssize_t minimum, PyGLBuf *out);
 /* One pname's output size, from the generated _glgets table. */
 typedef struct {
     uint32_t pname;
@@ -633,6 +637,16 @@ PyObject *pygl_make_proc(const PyGLCommand *command, vectorcallfunc stub);
 #define PYGL_ARRAY_IN_SIZED(i, name, element, count)                           \
     if (PYGL_UNLIKELY(pygl_array_in_sized(self, _a[i], (element), (i), (count),      \
                                           &_bufs[_nb]) < 0))                   \
+        goto _fail;                                                            \
+    void *name = _bufs[_nb++].pointer
+
+/* An input read `per` elements for each of `count`, which is a scalar the stub
+ * has already converted.  Widened before the multiply, so a large GLsizei
+ * cannot overflow into a small minimum. */
+#define PYGL_ARRAY_IN_MIN(i, name, element, count, per)                        \
+    if (PYGL_UNLIKELY(pygl_array_in_min(self, _a[i], (element), (i),           \
+                                        (Py_ssize_t)(count) * (per),           \
+                                        &_bufs[_nb]) < 0))                     \
         goto _fail;                                                            \
     void *name = _bufs[_nb++].pointer
 

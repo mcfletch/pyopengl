@@ -92,10 +92,28 @@ def _size_expression(command, parameter):
         return str(size.count)
     if isinstance(size, model.FromArg):
         source = command.parameters[size.argument].c_name
+        if size.multiplier != 1:
+            # Widened first: a GLsizei times a multiplier can overflow an int.
+            source = '(Py_ssize_t)%s * %d' % (source, size.multiplier)
         if size.divisor == 1:
             return source
         return '%s / %d' % (source, size.divisor)
     raise ValueError('no C expression for %r' % (size,))
+
+
+def _input_multiplier(parameter):
+    """Values read per unit of the counting argument, for an input array.
+
+    The driver reads ``count * multiplier`` values.  A divisor would say it
+    reads fewer than it is told to, which no entry point does.
+    """
+    size = parameter.size
+    if size.divisor != 1:
+        raise ValueError(
+            'an input array sized with a divisor has no C form: %s %r'
+            % (parameter.name, size)
+        )
+    return size.multiplier
 
 
 def _outputs_are_trailing(command):
@@ -415,6 +433,17 @@ def emit_stub(command):
             lines.append(
                 '    PYGL_ARRAY_IN_SIZED(%d, %s, %s, %d);'
                 % (index, parameter.c_name, element, parameter.size.count)
+            )
+        elif isinstance(parameter.size, model.FromArg):
+            lines.append(
+                '    PYGL_ARRAY_IN_MIN(%d, %s, %s, %s, %d);'
+                % (
+                    index,
+                    parameter.c_name,
+                    element,
+                    command.parameters[parameter.size.argument].c_name,
+                    _input_multiplier(parameter),
+                )
             )
         else:
             lines.append(

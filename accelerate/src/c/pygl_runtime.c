@@ -963,22 +963,32 @@ int pygl_array_in(GLProc *self, PyObject *object, const PyGLElement *element,
     return pygl_array_acquire(object, element, out, 0);
 }
 
-int pygl_array_in_sized(GLProc *self, PyObject *object, const PyGLElement *element,
-                        Py_ssize_t index, Py_ssize_t expected, PyGLBuf *out)
+/* Acquire an input array and check its length against `expected` elements:
+ * exactly, or -- `at_least` -- as a minimum. */
+static int pygl_array_in_checked(GLProc *self, PyObject *object,
+                                 const PyGLElement *element, Py_ssize_t index,
+                                 Py_ssize_t expected, int at_least, PyGLBuf *out)
 {
     Py_ssize_t count;
     if (pygl_array_in(self, object, element, index, out) < 0) {
         return -1;
+    }
+    if (!pygl_array_size_checking) {
+        return 0;
     }
     if (out->owner == NULL && !out->have_view) {
         /* The argument was None, which is a null pointer rather than an array
          * of the wrong length.  A zero-length sequence is *not* this case: it
          * converts to an empty array whose data pointer is also null, and
          * skipping the check for it would hand the driver address zero to read
-         * from. */
-        return 0;
-    }
-    if (!pygl_array_size_checking) {
+         * from.  Where the caller's own count says how much is read, a null
+         * pointer is that read from address zero unless the count is zero. */
+        if (at_least && expected > 0) {
+            PyErr_Format(PyExc_ValueError,
+                         "Expected at least %zd byte array, got None",
+                         expected * element->itemsize);
+            return -1;
+        }
         return 0;
     }
     if (element->itemsize == 0) {
@@ -992,18 +1002,33 @@ int pygl_array_in_sized(GLProc *self, PyObject *object, const PyGLElement *eleme
          * ArrayDatatype declines to measure. */
         return 0;
     }
-    /* The check is on the byte count and it is exact, which is what
-     * arrayhelpers.asArrayTypeSize asserts today: an array of the wrong length
-     * in either direction is a caller error, not something to truncate. */
+    /* The check is on the byte count.  A fixed size is exact, which is what
+     * arrayhelpers.asArrayTypeSize asserts: an array of the wrong length in
+     * either direction is a caller error, not something to truncate.  A size
+     * taken from the caller's own count is how much the driver reads, so a
+     * longer array is a larger buffer and only a shorter one is refused. */
     expected *= element->itemsize;
-    if (count != expected) {
+    if (at_least ? count < expected : count != expected) {
         PyErr_Format(PyExc_ValueError,
-                     "Expected %zd byte array, got %zd byte array",
+                     at_least ? "Expected at least %zd byte array, got %zd byte array"
+                              : "Expected %zd byte array, got %zd byte array",
                      expected, count);
         pygl_release(out);
         return -1;
     }
     return 0;
+}
+
+int pygl_array_in_sized(GLProc *self, PyObject *object, const PyGLElement *element,
+                        Py_ssize_t index, Py_ssize_t expected, PyGLBuf *out)
+{
+    return pygl_array_in_checked(self, object, element, index, expected, 0, out);
+}
+
+int pygl_array_in_min(GLProc *self, PyObject *object, const PyGLElement *element,
+                      Py_ssize_t index, Py_ssize_t minimum, PyGLBuf *out)
+{
+    return pygl_array_in_checked(self, object, element, index, minimum, 1, out);
 }
 
 static PyObject *type_or_null(const PyGLElement *element)
@@ -2066,6 +2091,8 @@ static PyMethodDef GLProc_methods[] = {
     PYGL_METHOD("setOutput", GLProc_declarative,
                 "Already implemented by this entry point; returns it unchanged."),
     PYGL_METHOD("setInputArraySize", GLProc_declarative,
+                "Already implemented by this entry point; returns it unchanged."),
+    PYGL_METHOD("setInputArrayCount", GLProc_declarative,
                 "Already implemented by this entry point; returns it unchanged."),
     PYGL_METHOD("setPyConverter", GLProc_setPyConverter,
                 "Demote to the ctypes wrapper and apply the converter there."),

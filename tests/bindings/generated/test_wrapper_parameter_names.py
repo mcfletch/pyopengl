@@ -35,8 +35,8 @@ import pytest
 
 #: Wrapper methods whose first positional argument names a parameter.
 NAMES_A_PARAMETER = (
-    'setInputArraySize', 'setOutput', 'setPyConverter', 'setCConverter',
-    'setCResolver',
+    'setInputArraySize', 'setInputArrayCount', 'setOutput', 'setPyConverter',
+    'setCConverter', 'setCResolver',
 )
 
 #: Keyword arguments whose value names a parameter.

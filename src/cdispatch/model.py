@@ -5,7 +5,7 @@ The grammar, from ``plans/C-DISPATCH.md``::
     command   := name, feature, deprecated, return-kind, [parameter]
     parameter := name, c-type, direction, size-spec, retain?, element-type?
     direction := in | out | in-out
-    size-spec := none | fixed(N) | from-arg(index, divisor)
+    size-spec := none | fixed(N) | from-arg(index, divisor, multiplier)
                | glget-table(pname-arg) | image(format-arg, type-arg, dims)
                | string-array | computed(<helper>)
 
@@ -66,14 +66,21 @@ class Fixed(_SizeSpec):
 
 @dataclass(frozen=True)
 class FromArg(_SizeSpec):
-    """``count = argument // divisor``.
+    """``count = argument * multiplier // divisor``.
 
-    Covers both ``setInputArraySize(name, other)`` and the whole lambda space
-    of the friendly layer, which is three bodies differing only in ``divisor``.
+    Covers the whole lambda space of the friendly layer's outputs, which is
+    three bodies differing only in ``divisor``, and the input arrays read
+    ``multiplier`` values per item -- ``glViewportArrayv`` reads four floats
+    for each of ``count`` viewports.
+
+    For an output the count is how many the driver writes, and the caller's
+    array is checked against it.  For an input it is how many the driver reads,
+    so it is a minimum: a longer array is a caller's larger buffer.
     """
 
     argument: int
     divisor: int = 1
+    multiplier: int = 1
 
 
 @dataclass(frozen=True)

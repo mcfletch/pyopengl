@@ -32,6 +32,12 @@ class TestSizeSpec:
     def test_from_arg_divisor_defaults_to_one(self):
         assert model.FromArg(argument=0).divisor == 1
 
+    def test_from_arg_carries_a_multiplier(self):
+        """``glViewportArrayv`` reads four floats for each of ``count``."""
+        spec = model.FromArg(argument=1, multiplier=4)
+        assert spec.multiplier == 4
+        assert model.FromArg(argument=0).multiplier == 1
+
     def test_glget_table_names_the_pname_argument(self):
         spec = model.GLGetTable(pname_argument=0)
         assert spec.pname_argument == 0

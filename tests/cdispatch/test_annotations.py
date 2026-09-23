@@ -55,6 +55,16 @@ class TestWhatIsRecorded:
         size = table['GL.glAreProgramsResidentNV']['parameters']['residences']['size']
         assert size == {'kind': 'from-argument', 'argument': 'n', 'divisor': 1}
 
+    def test_a_size_scaled_from_another_argument_records_the_multiplier(self, table):
+        """Four floats per viewport; a multiplier of one is left unsaid."""
+        size = table['GL.glViewportArrayv']['parameters']['v']['size']
+        assert size == {
+            'kind': 'from-argument',
+            'argument': 'count',
+            'divisor': 1,
+            'multiplier': 4,
+        }
+
     def test_an_unchecked_array_is_still_an_annotation(self, table):
         """``setInputArraySize('value', None)`` states a conversion, not a size.
 

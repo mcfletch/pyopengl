@@ -290,7 +290,9 @@ def customise_entry(entry, api, name, declared):
 
     * a parameter takes an array conversion when the table says ``array``;
     * the length comes from the table where there is one, and there usually is
-      not -- ``setInputArraySize(x, None)`` states a conversion and no length.
+      not -- ``setInputArraySize(x, None)`` states a conversion and no length;
+    * a ``from-argument`` length is a minimum read off another argument,
+      ``count * multiplier`` elements, applied with ``setInputArrayCount``.
 
     The table says it rather than the declared type saying it, because the type
     cannot: ``glDrawElements`` and relatives declare their array
@@ -331,14 +333,16 @@ def customise_entry(entry, api, name, declared):
             continue          # rebuilt below, in the order the chain used
         if not bits.get('array'):
             continue
-        size = bits.get('size')
-        if size is not None and size.get('kind') == 'fixed':
-            length = size['count']
-        else:
-            length = None
+        size = bits.get('size') or {}
         if built is entry:
             built = wrapper.wrapper(entry)
-        built = built.setInputArraySize(parameter, length)
+        if size.get('kind') == 'from-argument':
+            built = built.setInputArrayCount(
+                parameter, size['argument'], size.get('multiplier', 1)
+            )
+        else:
+            length = size['count'] if size.get('kind') == 'fixed' else None
+            built = built.setInputArraySize(parameter, length)
 
     for __order, parameter, size in outputs:
         if built is entry:

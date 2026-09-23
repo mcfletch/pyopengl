@@ -1684,10 +1684,29 @@
    }
   }
  },
+ "GL.glDepthRangeArraydvNV": {
+  "parameters": {
+   "v": {
+    "array": true,
+    "size": {
+     "argument": "count",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 2
+    }
+   }
+  }
+ },
  "GL.glDepthRangeArrayv": {
   "parameters": {
    "v": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "count",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 2
+    }
    }
   }
  },
@@ -8619,14 +8638,26 @@
  "GL.glMulticastScissorArrayvNVX": {
   "parameters": {
    "v": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "count",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 4
+    }
    }
   }
  },
  "GL.glMulticastViewportArrayvNVX": {
   "parameters": {
    "v": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "count",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 4
+    }
    }
   }
  },
@@ -10809,14 +10840,26 @@
  "GL.glScissorArrayv": {
   "parameters": {
    "v": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "count",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 4
+    }
    }
   }
  },
  "GL.glScissorExclusiveArrayvNV": {
   "parameters": {
    "v": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "count",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 4
+    }
    }
   }
  },
@@ -14978,7 +15021,13 @@
  "GL.glViewportArrayv": {
   "parameters": {
    "v": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "count",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 4
+    }
    }
   }
  },
@@ -17406,6 +17455,32 @@
    }
   }
  },
+ "GLES2.glDepthRangeArrayfvNV": {
+  "parameters": {
+   "v": {
+    "array": true,
+    "size": {
+     "argument": "count",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 2
+    }
+   }
+  }
+ },
+ "GLES2.glDepthRangeArrayfvOES": {
+  "parameters": {
+   "v": {
+    "array": true,
+    "size": {
+     "argument": "count",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 2
+    }
+   }
+  }
+ },
  "GLES2.glDiscardFramebufferEXT": {
   "parameters": {
    "attachments": {
@@ -19555,21 +19630,39 @@
  "GLES2.glScissorArrayvNV": {
   "parameters": {
    "v": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "count",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 4
+    }
    }
   }
  },
  "GLES2.glScissorArrayvOES": {
   "parameters": {
    "v": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "count",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 4
+    }
    }
   }
  },
  "GLES2.glScissorExclusiveArrayvNV": {
   "parameters": {
    "v": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "count",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 4
+    }
    }
   }
  },
@@ -20063,14 +20156,26 @@
  "GLES2.glViewportArrayvNV": {
   "parameters": {
    "v": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "count",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 4
+    }
    }
   }
  },
  "GLES2.glViewportArrayvOES": {
   "parameters": {
    "v": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "count",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 4
+    }
    }
   }
  },

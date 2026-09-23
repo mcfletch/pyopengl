@@ -132,6 +132,42 @@ class TestArrays:
         )
         assert 'PYGL_ARRAY_IN_SIZED(0, c, &pygl_elem_GLubyte, 1);' in text
 
+    def test_input_sized_from_another_argument_is_a_minimum(self):
+        """``count`` items are read; a longer array is a caller's larger buffer."""
+        text = body(
+            command(
+                name='glViewportArrayv',
+                parameters=[
+                    ('first', 'GLuint', {}),
+                    ('count', 'GLsizei', {}),
+                    (
+                        'v',
+                        'const GLfloat *',
+                        {'size': model.FromArg(argument=1, multiplier=4)},
+                    ),
+                ],
+            )
+        )
+        assert 'PYGL_ARRAY_IN_MIN(2, v, &pygl_elem_GLfloat, count, 4);' in text
+
+    def test_an_input_divided_from_another_argument_has_no_c_form(self):
+        """Nothing reads fewer items than it is told to; a table saying so is
+        a mistake to report, not a stub to emit."""
+        with pytest.raises(ValueError, match='divisor'):
+            body(
+                command(
+                    name='glViewportArrayv',
+                    parameters=[
+                        ('count', 'GLsizei', {}),
+                        (
+                            'v',
+                            'const GLfloat *',
+                            {'size': model.FromArg(argument=0, divisor=2)},
+                        ),
+                    ],
+                )
+            )
+
     def test_void_pointer_accepts_any_buffer(self):
         text = body(
             command(
@@ -189,6 +225,25 @@ class TestOutputs:
             )
         )
         assert '(Py_ssize_t)(location / 4)' in text
+
+    def test_output_with_a_multiplier_is_widened_before_multiplying(self):
+        text = body(
+            command(
+                name='glGetPairs',
+                parameters=[
+                    ('n', 'GLsizei', {}),
+                    (
+                        'pairs',
+                        'GLfloat *',
+                        {
+                            'direction': model.OUT,
+                            'size': model.FromArg(argument=0, multiplier=2),
+                        },
+                    ),
+                ],
+            )
+        )
+        assert '(Py_ssize_t)((Py_ssize_t)n * 2)' in text
 
     def test_constant_size_output(self):
         text = body(

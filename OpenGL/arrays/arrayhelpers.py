@@ -158,6 +158,40 @@ else:
             return asArraySize
 
 
+class AsArrayTypedCountChecked(converters.PyConverter):
+    """Convert to ``arrayType``, refusing fewer than ``count * multiplier`` elements
+
+    For an input the driver reads a number of items the caller states in
+    another argument -- ``glViewportArrayv(first, count, v)`` reads four floats
+    for each of ``count`` viewports -- so an array shorter than that has the
+    driver read past its end.  A longer one is a caller's larger buffer and is
+    accepted.  ``None`` is refused unless the count asks for nothing, since
+    there it is a null pointer the driver would read from.
+    """
+
+    argNames = ('arrayType', 'countName', 'multiplier')
+    indexLookups = (('countIndex', 'countName', 'pyArgIndex'),)
+
+    def __init__(self, arrayType, countName, multiplier=1):
+        self.arrayType = arrayType
+        self.countName = countName
+        self.multiplier = multiplier
+        self.elementBytes = ctypes.sizeof(arrayType.baseType)
+
+    def __call__(self, incoming, function, arguments):
+        handler = self.arrayType.getHandler(incoming)
+        result = handler.asArray(incoming, self.arrayType.typeConstant)
+        expected = self.elementBytes * self.multiplier * arguments[self.countIndex]
+        byteSize = 0 if result is None else handler.arrayByteCount(result)
+        if byteSize < expected:
+            raise ValueError(
+                """Expected at least %r byte array, got %r byte array"""
+                % (expected, byteSize),
+                incoming,
+            )
+        return result
+
+
 if not _configflags.ERROR_ON_COPY:
 
     def asVoidArray():

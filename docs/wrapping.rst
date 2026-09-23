@@ -23,7 +23,7 @@ The four things that make an entry point
 The annotation table
 --------------------
 
-The customisations are written down as data, in ``src/cdispatch/annotations.json`` — 2,079 entries, keyed ``"<API>.<command>"``, with parameters keyed by name rather than by position, since a position moves when the registry adds an argument and a name does not:
+The customisations are written down as data, in ``src/cdispatch/annotations.json`` — 2,082 entries, keyed ``"<API>.<command>"``, with parameters keyed by name rather than by position, since a position moves when the registry adds an argument and a name does not:
 
 ::
 
@@ -32,7 +32,7 @@ The customisations are written down as data, in ``src/cdispatch/annotations.json
        "pixels": {"size": {"kind": "image", "format": "format",
                            "type": "type", "dimensions": ["width", "height"]}}}}
 
-Of 4,880 commands, 2,801 are plain pass-throughs whose every fact is in the registry; the other 2,079 carry an annotation, and what it states exists nowhere else in machine-readable form. That is what the table is for.
+Of 4,880 commands, 2,798 are plain pass-throughs whose every fact is in the registry; the other 2,082 carry an annotation, and what it states exists nowhere else in machine-readable form. That is what the table is for.
 
 Generation reads the registry, the declaration tables and this table. It does not read the friendly modules: a customisation chain is a second copy of what the table holds, and migrating a module deletes the chain, so anything only the chain held would go with it. ``tests/cdispatch/test_generation_is_data_driven.py`` holds generation to that, by emitting every stub from each source and comparing the C.
 
@@ -61,6 +61,8 @@ Under the ctypes implementation the difference between the C signature and the P
 | ``.setInputArraySize('v', 4)``                                     | The array must hold exactly four elements.                                                                             | ``Fixed(4)``.                                                                               |
 +--------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------+
 | ``.setInputArraySize('v', None)``                                  | Any length; the caller is trusted.                                                                                     | ``NO_SIZE``.                                                                                |
++--------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------+
+| ``.setInputArrayCount('v', 'count', 4)``                           | The array must hold at least ``count * 4`` elements, which is what the driver reads; a longer one is accepted.         | ``FromArg(index, multiplier=4)``; the C uses ``PYGL_ARRAY_IN_MIN``.                         |
 +--------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------+
 | ``.setPyConverter('count')`` then ``.setCConverter('count', ...)`` | The argument is dropped from the Python signature and computed from another one.                                       | ``FromArg(index, divisor)``.                                                                |
 +--------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------+

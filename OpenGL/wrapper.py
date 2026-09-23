@@ -1,7 +1,7 @@
 """The wrapping code for providing natural ctypes-based OpenGL interface"""
 
 import ctypes, logging
-from OpenGL import platform, error
+from OpenGL import platform, error, _configflags
 from OpenGL._configflags import STORE_POINTERS, ERROR_ON_COPY, SIZE_1_ARRAY_UNPACK
 from OpenGL import converters
 from OpenGL.converters import DefaultCConverter
@@ -376,6 +376,33 @@ class Wrapper(LateBind):
                 )
                 self.setCConverter(argName, converters.getPyArgsName(argName))
             return self
+
+    def setInputArrayCount(self, argName, countArg, multiplier=1):
+        """Convert an input array, refusing fewer than countArg * multiplier elements
+
+        argName -- the array argument
+        countArg -- the argument saying how many items the driver reads
+        multiplier -- elements per item: ``glViewportArrayv`` reads four
+            floats for each of ``count`` viewports
+
+        A longer array is accepted, since the driver reads the stated count
+        and no more.  With ``ARRAY_SIZE_CHECKING`` off this is
+        ``setInputArraySize(argName, None)``.
+        """
+        if not _configflags.ARRAY_SIZE_CHECKING:
+            return self.setInputArraySize(argName, None)
+        arrayType = self.typeOfArg(argName)
+        if not hasattr(arrayType, 'asArray'):
+            raise TypeError(
+                "%s.%s is declared %s, which has no array conversion to measure"
+                % (self.wrappedOperation.__name__, argName, arrayType)
+            )
+        self.setPyConverter(
+            argName,
+            arrayhelpers.AsArrayTypedCountChecked(arrayType, countArg, multiplier),
+        )
+        self.setCConverter(argName, converters.getPyArgsName(argName))
+        return self
 
     def setPyConverter(self, argName, function=NULL):
         """Set Python-argument converter for given argument

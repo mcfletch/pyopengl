@@ -144,9 +144,18 @@ import occurs the flags should no longer be changed.
         What this prevents is a heap overrun: glGenTextures(1024, a)
         with a sixteen-byte array writes 4096 bytes into it, and the
         bytes past the end belong to another live allocation, so the
-        damage surfaces somewhere else entirely. Switching the check
-        off trades that guard for the cost of measuring, which is a
-        few array attribute reads per call.
+        damage surfaces somewhere else entirely.
+
+        Input arrays are checked the same way.  One with a fixed size
+        must hold exactly that many elements: glVertex3dv takes three.
+        One the driver reads a count of items from must hold at least
+        that many: glViewportArrayv(first, count, v) reads four floats
+        per viewport, so v needs count * 4 of them, and a longer array
+        is accepted.  A short one would have the driver read past its
+        end.
+
+        Switching the check off trades these guards for the cost of
+        measuring, which is a few array attribute reads per call.
 
         Default: True
 

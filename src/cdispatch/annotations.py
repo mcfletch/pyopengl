@@ -43,8 +43,11 @@ def _size_to_data(size):
     if isinstance(size, model.Fixed):
         return {'kind': 'fixed', 'count': size.count}
     if isinstance(size, model.FromArg):
-        return {'kind': 'from-argument', 'argument': size.argument,
+        data = {'kind': 'from-argument', 'argument': size.argument,
                 'divisor': size.divisor}
+        if size.multiplier != 1:
+            data['multiplier'] = size.multiplier
+        return data
     if isinstance(size, model.GLGetTable):
         return {'kind': 'glget-table', 'pname': size.pname_argument}
     if isinstance(size, model.ImageSize):
@@ -132,7 +135,11 @@ def _size_from_data(data, names):
     if kind == 'fixed':
         return model.Fixed(data['count'])
     if kind == 'from-argument':
-        return model.FromArg(index_of(data['argument']), data['divisor'])
+        return model.FromArg(
+            index_of(data['argument']),
+            data['divisor'],
+            data.get('multiplier', 1),
+        )
     if kind == 'glget-table':
         return model.GLGetTable(index_of(data['pname']))
     if kind == 'image':

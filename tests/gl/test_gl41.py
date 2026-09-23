@@ -4,10 +4,20 @@ scissor/depth-range arrays, double vertex attribs, program binary, ES compat."""
 
 import unittest
 import ctypes
-from arraycompat import np, object_names, one
 
+import pytest
+
+from arraycompat import np, object_names, one
 from gltestcase import GLTestCase
+from OpenGL import _configflags
 from OpenGL.GL import *  # noqa: F401,F403
+
+#: The flag is fixed when the wrappers are built, and ``_configflags`` holds
+#: the value they were built with.
+needs_size_checking = pytest.mark.skipif(
+    not _configflags.ARRAY_SIZE_CHECKING,
+    reason='ARRAY_SIZE_CHECKING is off, so a short array is not refused',
+)
 
 FRAGMENT = '''#version 410 core
 uniform float uf; uniform vec2 uv2; uniform vec3 uv3; uniform vec4 uv4;
@@ -123,6 +133,58 @@ class TestGL41(GLTestCase):
         glGetFloati_v(GL_VIEWPORT, 0, np.zeros(4, 'f'))
         glGetDoublei_v(GL_DEPTH_RANGE, 0, np.zeros(2, 'd'))
         self.check_error('viewport/scissor/depth arrays')
+
+
+class TestViewportArraysAreMeasuredAgainstTheCount(GLTestCase):
+    """``glViewportArrayv(first, count, v)`` reads ``count`` rectangles from ``v``.
+
+    Nothing in the call ties the array to the count, so an array shorter than
+    it has the driver read past the end of the caller's buffer.  Four values
+    per viewport or scissor rectangle, two per depth range.
+    """
+
+    profile = 'core'
+    gl_version = (4, 5)
+
+    #: ``(entry point, values per item, element type)``
+    CALLS = (
+        (glViewportArrayv, 4, 'f'),
+        (glScissorArrayv, 4, 'i'),
+        (glDepthRangeArrayv, 2, 'd'),
+    )
+
+    @needs_size_checking
+    def test_an_array_shorter_than_the_count_is_refused(self):
+        for function, per, dtype in self.CALLS:
+            for label, short in (
+                ('one item short', np.zeros(per, dtype)),
+                ('one value short', np.zeros(2 * per - 1, dtype)),
+                ('empty', np.zeros(0, dtype)),
+            ):
+                with self.subTest(function=function.__name__, passing=label):
+                    with self.assertRaises(ValueError):
+                        function(0, 2, short)
+        self.check_error('refused before reaching the driver')
+
+    def test_an_array_of_exactly_count_items_is_accepted(self):
+        glViewportArrayv(0, 2, np.array([0, 0, 16, 16, 16, 0, 8, 8], 'f'))
+        glScissorArrayv(0, 2, np.array([0, 0, 16, 16, 16, 0, 8, 8], 'i'))
+        glDepthRangeArrayv(0, 2, np.array([0.0, 1.0, 0.25, 0.75], 'd'))
+        self.check_error('viewport arrays of exactly count items')
+        np.testing.assert_array_equal(
+            glGetFloati_v(GL_VIEWPORT, 1, np.zeros(4, 'f')), [16, 0, 8, 8]
+        )
+        np.testing.assert_array_equal(
+            glGetDoublei_v(GL_DEPTH_RANGE, 1, np.zeros(2, 'd')), [0.25, 0.75]
+        )
+
+    def test_a_longer_array_is_read_for_count_items(self):
+        """A larger buffer is a caller updating a prefix of one, which is ordinary."""
+        glViewportArrayv(0, 1, np.array([0, 0, 12, 12, 99, 99, 99, 99], 'f'))
+        self.check_error('glViewportArrayv from a longer array')
+        np.testing.assert_array_equal(
+            glGetFloati_v(GL_VIEWPORT, 0, np.zeros(4, 'f')), [0, 0, 12, 12]
+        )
 
     def test_double_attribs_and_es_compat(self):
         glVertexAttribL1d(2, 1.0)

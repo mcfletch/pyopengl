@@ -70,7 +70,7 @@ in it is not data, so it is marked hand-written and keeps its file.
 **1c. `annotations.py` — the customisations as data.** The registry gives
 every signature; what it does not give is the difference between that and the
 Python one, which people wrote over 28 years as `wrapper.wrapper(...)` chains.
-`annotations.json` holds those: 2,079 entries, parameters keyed by name, and it
+`annotations.json` holds those: 2,082 entries, parameters keyed by name, and it
 is what generation reads — `extract_tree(read_chains=False)`, no Python under
 `OpenGL/` parsed at all. The parse survives for the 28 modules whose chains the
 table cannot express, and for the tests that hold the two copies to each other:

@@ -4834,7 +4834,7 @@ pygl_GLES2_glDepthRangeArrayfvNV(PyObject *_self, PyObject *const *_a, size_t _n
     PYGL_U(0, first);
     PYGL_SZ(1, count);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(2, v, &pygl_elem_GLfloat);
+    PYGL_ARRAY_IN_MIN(2, v, &pygl_elem_GLfloat, count, 2);
     PYGL_CALL_V((unsigned int, int, void *), (first, count, v));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -4874,7 +4874,7 @@ pygl_GLES2_glDepthRangeArrayfvOES(PyObject *_self, PyObject *const *_a, size_t _
     PYGL_U(0, first);
     PYGL_SZ(1, count);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(2, v, &pygl_elem_GLfloat);
+    PYGL_ARRAY_IN_MIN(2, v, &pygl_elem_GLfloat, count, 2);
     PYGL_CALL_V((unsigned int, int, void *), (first, count, v));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -22568,7 +22568,7 @@ pygl_GLES2_glScissorArrayvNV(PyObject *_self, PyObject *const *_a, size_t _nargs
     PYGL_U(0, first);
     PYGL_SZ(1, count);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(2, v, &pygl_elem_GLint);
+    PYGL_ARRAY_IN_MIN(2, v, &pygl_elem_GLint, count, 4);
     PYGL_CALL_V((unsigned int, int, void *), (first, count, v));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -22608,7 +22608,7 @@ pygl_GLES2_glScissorArrayvOES(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_U(0, first);
     PYGL_SZ(1, count);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(2, v, &pygl_elem_GLint);
+    PYGL_ARRAY_IN_MIN(2, v, &pygl_elem_GLint, count, 4);
     PYGL_CALL_V((unsigned int, int, void *), (first, count, v));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -22648,7 +22648,7 @@ pygl_GLES2_glScissorExclusiveArrayvNV(PyObject *_self, PyObject *const *_a, size
     PYGL_U(0, first);
     PYGL_SZ(1, count);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(2, v, &pygl_elem_GLint);
+    PYGL_ARRAY_IN_MIN(2, v, &pygl_elem_GLint, count, 4);
     PYGL_CALL_V((unsigned int, int, void *), (first, count, v));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -28720,7 +28720,7 @@ pygl_GLES2_glViewportArrayvNV(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_U(0, first);
     PYGL_SZ(1, count);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(2, v, &pygl_elem_GLfloat);
+    PYGL_ARRAY_IN_MIN(2, v, &pygl_elem_GLfloat, count, 4);
     PYGL_CALL_V((unsigned int, int, void *), (first, count, v));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -28760,7 +28760,7 @@ pygl_GLES2_glViewportArrayvOES(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_U(0, first);
     PYGL_SZ(1, count);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(2, v, &pygl_elem_GLfloat);
+    PYGL_ARRAY_IN_MIN(2, v, &pygl_elem_GLfloat, count, 4);
     PYGL_CALL_V((unsigned int, int, void *), (first, count, v));
     PYGL_CHECK();
     PYGL_CLEANUP();
