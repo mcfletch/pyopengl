@@ -175,6 +175,16 @@ A ``str`` is encoded as UTF-8; ``bytes`` and ``bytearray`` are taken as the byte
 
 The same forms are accepted under both implementations, and by every entry point in the list. What counts as a string is decided in one place, ``OpenGL._string_array``, which the C layer calls back into and the ctypes bindings convert with; the two differ only in which exception carries a refusal, since ctypes wraps what a conversion raises in ``ctypes.ArgumentError``.
 
+``glGetUniformIndices`` takes the names the same way and reads the count from them, and the ``GLuint`` array it answers with is one index per name:
+
+::
+
+   indices = glGetUniformIndices(program, ['blockColor', 'blockEdge'])
+   glGetUniformIndices(program, names, indices)    # or into an array you own
+   glGetUniformIndices(program, 2, prepared_char_pp)   # or the C ordering
+
+A name the program does not declare, or one its compiler removed, answers ``GL_INVALID_INDEX``. The C ordering — the count, then the names — is accepted for a caller who has built the pointer array themselves, and allocates the answer from the count. ``OpenGL.GL`` and ``OpenGL.GL.ARB.uniform_buffer_object`` offer the same function: GL 3.1 adopted the extension, so both names are one entry point.
+
 Error checking
 --------------
 

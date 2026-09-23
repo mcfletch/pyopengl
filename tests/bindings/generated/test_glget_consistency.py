@@ -167,5 +167,116 @@ class TestTheSnapshotsAgreeWithTheTable(unittest.TestCase):
         )
 
 
+#: Entry points whose output is sized from an argument that is not an enum,
+#: and what the registry says their length really is.  Each is a ``COMPSIZE``
+#: over an object name: the count is held by the object and is read back with
+#: a query of its own, so there is no argument to size the array from and the
+#: caller passes one.  They are listed here so that the case below asks about
+#: the rest, and so that a new one is a failure rather than a nineteenth line
+#: nobody looked at.
+#:
+#: ``glGetVariantBooleanvEXT`` and its eight relatives are
+#: ``COMPSIZE(id)``: the length is the datatype the variant was declared with.
+#: ``glGetPathCommandsNV`` and its five are ``COMPSIZE(path)``: the length is
+#: ``GL_PATH_COMMAND_COUNT_NV`` for that path, from ``glGetPathParameterivNV``.
+UNSIZEABLE_OUTPUTS = {
+    ('GL', 'glGetInvariantBooleanvEXT'),
+    ('GL', 'glGetInvariantFloatvEXT'),
+    ('GL', 'glGetInvariantIntegervEXT'),
+    ('GL', 'glGetLocalConstantBooleanvEXT'),
+    ('GL', 'glGetLocalConstantFloatvEXT'),
+    ('GL', 'glGetLocalConstantIntegervEXT'),
+    ('GL', 'glGetVariantBooleanvEXT'),
+    ('GL', 'glGetVariantFloatvEXT'),
+    ('GL', 'glGetVariantIntegervEXT'),
+    ('GL', 'glGetVariantPointervEXT'),
+    ('GL', 'glGetPathCommandsNV'),
+    ('GL', 'glGetPathCoordsNV'),
+    ('GL', 'glGetPathDashArrayNV'),
+    ('GLES2', 'glGetPathCommandsNV'),
+    ('GLES2', 'glGetPathCoordsNV'),
+    ('GLES2', 'glGetPathDashArrayNV'),
+}
+
+
+class TestWhatIsSizedFromTheGLGetTable(unittest.TestCase):
+    """An output sized from the table has to name an enum to look up.
+
+    ``setOutput(size=_glget_size_mapping, pnameArg='pname')`` allocates the
+    answer by looking the value of ``pname`` up among the ``glGet`` sizes.
+    Where that argument is a count or an object name rather than an enum, the
+    lookup asks what size the enum ``3`` is: a value the table happens to hold
+    answers one element for the driver to write every value into, and a value
+    it does not raises ``KeyError`` from inside the call.
+
+    Read from the shipped tables, which is what a user's installation has.
+    """
+
+    def annotations_and_declarations(self):
+        import marshal
+
+        from OpenGL import _declarations
+
+        declared = {}
+        for api in _declarations.APIS:
+            for _module_name, blob in _declarations._data_source(api).items():
+                _name, _constants, commands, _reexports = marshal.loads(blob)
+                for command, arguments, types in commands:
+                    declared.setdefault(
+                        (api, command),
+                        (
+                            [name for name in
+                             _declarations.as_sequence(arguments) if name],
+                            _declarations.as_sequence(types),
+                        ),
+                    )
+        return _declarations.annotations(), declared
+
+    def test_every_one_names_an_enum(self):
+        table, declared = self.annotations_and_declarations()
+        offenders = []
+        for key, entry in sorted(table.items()):
+            api, name = key.split('.', 1)
+            for parameter, bits in sorted(entry.get('parameters', {}).items()):
+                size = bits.get('size') or {}
+                if size.get('kind') != 'glget-table':
+                    continue
+                if (api, name) in UNSIZEABLE_OUTPUTS:
+                    continue
+                arguments, types = declared.get((api, name), ([], []))
+                pname = size['pname']
+                if pname not in arguments:
+                    offenders.append(
+                        '  %s.%s sizes %s from %r, which is not an argument'
+                        % (api, name, parameter, pname)
+                    )
+                    continue
+                # types is the result type followed by one per argument.
+                stated = types[arguments.index(pname) + 1]
+                if 'GLenum' not in stated:
+                    offenders.append(
+                        '  %s.%s sizes %s by looking %s up among the glGet '
+                        'sizes, and %s is %s rather than an enum'
+                        % (api, name, parameter, pname, pname, stated)
+                    )
+        self.assertEqual(
+            offenders, [],
+            'an output is sized by looking a non-enum argument up in the '
+            'glGet size table:\n' + '\n'.join(offenders),
+        )
+
+    def test_the_unsizeable_ones_are_still_there(self):
+        """A stale exception would make the case above vacuous for them."""
+        table, _declared = self.annotations_and_declarations()
+        for api, name in sorted(UNSIZEABLE_OUTPUTS):
+            entry = table.get('%s.%s' % (api, name))
+            self.assertIsNotNone(entry, (api, name))
+            kinds = {
+                (bits.get('size') or {}).get('kind')
+                for bits in entry.get('parameters', {}).values()
+            }
+            self.assertIn('glget-table', kinds, (api, name))
+
+
 if __name__ == '__main__':
     unittest.main()

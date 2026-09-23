@@ -157,7 +157,7 @@ glClearBufferfv=wrapper.wrapper(glClearBufferfv).setInputArraySize(
 )
 # INPUT glGetUniformIndices.uniformNames size not checked against 'uniformCount'
 glGetUniformIndices=wrapper.wrapper(glGetUniformIndices).setOutput(
-    'uniformIndices',size=_glgets._glget_size_mapping,pnameArg='uniformCount',orPassIn=True
+    'uniformIndices',size=lambda x:(x,),pnameArg='uniformCount',orPassIn=True
 ).setInputArraySize(
     'uniformNames', None
 )

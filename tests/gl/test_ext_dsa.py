@@ -95,6 +95,27 @@ class TestEXTDSA(GLTestCase):
             glUnmapNamedBufferEXT(buf)
         self.check_error('dsa named buffer')
 
+    def test_named_buffer_sub_data_allocates_the_bytes_asked_for(self):
+        """The byte count is the length of the answer.
+
+        ``data`` used to be sized by looking ``size`` up in the table of
+        ``glGet`` sizes, as though a byte count were an enum: a count that
+        table holds answered an array of one element for the driver to write
+        every byte into, and a count it does not holds raised ``KeyError``.
+        Three bytes is one of the counts it does not hold.
+        """
+        self.require()
+        buf = one(glGenBuffers(1))
+        glNamedBufferDataEXT(buf, 64, np.arange(16, dtype='f'), GL_STATIC_DRAW)
+        given = np.zeros(3, 'B')
+        glGetNamedBufferSubDataEXT(buf, 0, 3, given)
+        answered = glGetNamedBufferSubDataEXT(buf, 0, 3)
+        self.assertEqual(nbytes(answered), 3)
+        self.assertEqual(
+            [int(value) for value in answered], [int(value) for value in given]
+        )
+        self.check_error('dsa buffer read-back')
+
     def test_texture(self):
         self.require()
         with self.allow_missing():
