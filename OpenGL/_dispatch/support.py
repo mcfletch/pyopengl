@@ -357,12 +357,18 @@ def module_for(name, api=None):
     return 'OpenGL'
 
 
-#: Customisation calls swallowed because the C already performs them, kept per
-#: entry point so that a demotion later in the same chain can replay them.
-#: Keyed by (api, name) for the same reason :func:`ctypes_callable` takes an
-#: api: two APIs declare ``glClear``, and they are different entry points with
-#: different customisations.
+#: Customisation calls swallowed because the C already performs them, from the
+#: chains whose result is the entry point itself.  :func:`demoted_callable`
+#: replays them.  Keyed by (api, name) for the same reason
+#: :func:`ctypes_callable` takes an api: two APIs declare ``glClear``, and they
+#: are different entry points with different customisations.
 _swallowed = {}
+
+#: The same, for the chain still being built on each entry point.  A chain
+#: begins at ``wrapper.wrapper(entry_point)``; one that demotes replays only
+#: what it swallowed itself, since the wrapper it becomes is a function of its
+#: own.
+_open_chains = {}
 
 
 def _key_for(proc):
@@ -376,8 +382,28 @@ def _key_for(proc):
 
 
 def swallowed_for(proc):
-    """The customisations swallowed for this entry point, as a mapping."""
-    return _swallowed.get(_key_for(proc), {})
+    """The customisations swallowed for this entry point, as a mapping.
+
+    Those of every chain whose result is the entry point itself, the one still
+    being built included.
+    """
+    key = _key_for(proc)
+    return {**_swallowed.get(key, {}), **_open_chains.get(key, {})}
+
+
+def begin_chain(proc):
+    """Start a new chain of customisations on an entry point.
+
+    Called by ``wrapper.wrapper``, where every chain in a friendly module
+    starts.  The chain before it did not demote, or it would not still be open,
+    so its result is the entry point and what it swallowed belongs to the entry
+    point's own record.
+    """
+    key = _key_for(proc)
+    finished = _open_chains.pop(key, None)
+    if finished:
+        _swallowed.setdefault(key, {}).update(finished)
+    _open_chains[key] = {}
 
 
 def record_custom(proc, method, args):
@@ -386,25 +412,25 @@ def record_custom(proc, method, args):
     A friendly module may build a *derived* function from the same entry point
     -- glVertexPointerd(array) out of glVertexPointer(size, type, stride,
     pointer) -- by continuing the chain with a call that changes the arity.
-    That one has to demote, and the wrapper it demotes to needs whatever was
-    swallowed before it.
+    That one has to demote, and the wrapper it demotes to needs whatever its
+    chain swallowed before it.  Each derived function states its own
+    customisations -- glVertexPointerf converts to float where
+    glVertexPointerd converts to double -- so they are kept per chain.
     """
-    remembered = _swallowed.setdefault(_key_for(proc), {})
-    # Keyed by what it customises, not by call order: a module builds several
-    # derived functions from one entry point and restates the same
-    # customisation for each, and applying it twice is an error.
-    key = (method, args[0] if args else None)
-    remembered.setdefault(key, tuple(args))
+    chain = _open_chains.setdefault(_key_for(proc), {})
+    # Keyed by what it customises.  Of two converters a chain gives one
+    # argument, the second is the one used, as on a wrapper.
+    chain[(method, args[0] if args else None)] = tuple(args)
     return None
 
 
-def _replayed(proc):
-    """The ctypes wrapper for `proc`, carrying what the C swallowed."""
+def _replayed(proc, customisations):
+    """The ctypes wrapper for `proc`, carrying `customisations`."""
     from OpenGL import wrapper
 
     binding = ctypes_callable(proc.__name__, getattr(proc, 'api', None))
     built = wrapper.wrapper(binding)
-    for (earlier, __which), earlier_args in swallowed_for(proc).items():
+    for (earlier, __which), earlier_args in customisations.items():
         built = getattr(built, earlier)(*earlier_args)
     return built
 
@@ -413,11 +439,14 @@ def demote_and_call(proc, method, args, keywords):
     """A customisation the C does not implement falls back to the wrapper.
 
     Correctness before speed: a call the C cannot perform -- one that changes
-    which arguments the entry point takes -- rebuilds the whole wrapper over
-    the ctypes binding, replaying what was swallowed first so the result is
-    what it would have been without this layer at all.
+    which arguments the entry point takes -- rebuilds the chain's wrapper over
+    the ctypes binding, replaying what the chain swallowed first so the result
+    is what it would have been without this layer at all.  The chain's result
+    is then that wrapper rather than the entry point, so what it swallowed is
+    not the entry point's to replay.
     """
-    return getattr(_replayed(proc), method)(*args, **keywords)
+    chain = _open_chains.pop(_key_for(proc), {})
+    return getattr(_replayed(proc, chain), method)(*args, **keywords)
 
 
 def demoted_callable(proc):
@@ -434,9 +463,10 @@ def demoted_callable(proc):
     declaratively or not at all -- demotes to the binding itself, as it always
     has, so ``argtypes``, ``DLL`` and the rest are read straight off it.
     """
-    if not swallowed_for(proc):
+    customisations = swallowed_for(proc)
+    if not customisations:
         return ctypes_callable(proc.__name__, getattr(proc, 'api', None))
-    return _replayed(proc)
+    return _replayed(proc, customisations)
 
 
 def array_type_map():
