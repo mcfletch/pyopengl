@@ -145,7 +145,7 @@ def _context_is_current():
         from OpenGL import platform
 
         return bool(platform.PLATFORM.GetCurrentContext())
-    except Exception:
+    except Exception:  # noqa: BLE001 builds an error message, and must not replace the error
         return None
 
 

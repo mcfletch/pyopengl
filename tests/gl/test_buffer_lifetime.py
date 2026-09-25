@@ -42,7 +42,7 @@ pytestmark = pytest.mark.skipif(
 
 from arraycompat import np, object_names, one
 from gltestcase import GLTestCase
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 from OpenGL import _configflags
 from OpenGL import _dispatch
 

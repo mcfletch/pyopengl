@@ -6,7 +6,7 @@ import ctypes
 from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 
 VERTEX = '''#version 150 core
 in vec2 position;

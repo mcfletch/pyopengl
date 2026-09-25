@@ -21,7 +21,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 
-from cdispatch import eglgen  # noqa: E402
+from cdispatch import eglgen
 
 EGL_XML = os.path.join(HERE, 'eglapi', 'api', 'egl.xml')
 

@@ -19,7 +19,7 @@ import pytest
 # of whether it is installed.  A package will not do -- those are real files,
 # and the finder is never consulted about them.
 import OpenGL.raw.GL.ARB
-import OpenGL.raw.GL.VERSION.GL_1_1  # noqa: F401 - installs the finder
+import OpenGL.raw.GL.VERSION.GL_1_1  # installs the finder
 from OpenGL._dispatch import finder
 
 pytestmark = pytest.mark.skipif(

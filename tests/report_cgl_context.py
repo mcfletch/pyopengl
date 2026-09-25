@@ -85,7 +85,7 @@ def main():
                     target.release()
         except CGLError as err:
             print('%-7s unavailable: %s' % (profile, err))
-        except Exception as err:                       # a driver-specific refusal
+        except Exception as err:  # noqa: BLE001 a manual report script: a driver's refusal of one profile is printed and the next is tried
             print('%-7s unavailable: %s' % (profile, err))
     return 0
 

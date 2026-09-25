@@ -10,6 +10,7 @@ The directories the suites import their helpers from are named by
 """
 
 import os
+import sys
 
 import pytest
 
@@ -69,10 +70,9 @@ def pytest_configure(config):
 
 def pytest_terminal_summary(terminalreporter):
     """Say what ``exercise()`` swallowed, so the number is not invisible."""
-    try:
-        from glcontext import FORGIVEN
-    except Exception:
-        return
+    # Only from a glcontext some case imported: a run that imported none
+    # forgave nothing, and importing it here would load GL to say so.
+    FORGIVEN = getattr(sys.modules.get('glcontext'), 'FORGIVEN', None)
     if not FORGIVEN:
         return
     cases = {entry[0] for entry in FORGIVEN}

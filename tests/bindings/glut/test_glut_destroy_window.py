@@ -71,3 +71,11 @@ def test_a_machine_with_no_glut_is_reported_too(monkeypatch, caplog):
     with caplog.at_level(logging.ERROR, logger=special._log.name):
         assert special.cleanupWindowContext(7) is False
     assert 'window 7' in caplog.text
+
+
+def test_the_report_carries_the_traceback(store, monkeypatch, caplog):
+    """The failure is raised somewhere under the cleanup, not in it."""
+    _fails(monkeypatch)
+    with caplog.at_level(logging.ERROR, logger=special._log.name):
+        special.cleanupWindowContext(7)
+    assert caplog.records[-1].exc_info is not None

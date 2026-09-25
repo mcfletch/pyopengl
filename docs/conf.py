@@ -25,7 +25,7 @@ sys.path.insert(0, os.path.join(HERE, '_ext'))
 if PACKAGE_ROOT not in sys.path:
     sys.path.insert(0, PACKAGE_ROOT)
 
-from OpenGL.version import __version__  # noqa: E402
+from OpenGL.version import __version__
 
 project = 'PyOpenGL'
 author = 'Mike C. Fletcher and Contributors'

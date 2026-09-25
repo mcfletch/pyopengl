@@ -28,7 +28,7 @@ from gltestcase import GLTestCase
 from glget_check import GLGetCheckMixin, feature_glgets
 
 from OpenGL.arrays.arraydatatype import ArrayDatatype
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 
 EXT = 'GL_ARB_compute_shader'
 

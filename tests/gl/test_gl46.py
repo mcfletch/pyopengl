@@ -9,7 +9,7 @@ import ctypes
 from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 
 VS = '#version 460 core\nin vec2 position; void main(){ gl_Position = vec4(position,0,1); }'
 FS = '#version 460 core\nout vec4 c; void main(){ c = vec4(1.0); }'

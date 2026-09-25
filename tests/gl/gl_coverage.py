@@ -64,7 +64,7 @@ def provided_by_driver():
     makes, so the answer is "what a program running here could call" rather
     than "what the registry describes".  Needs a current GL context.
     """
-    import OpenGL.GL                                # noqa: F401 - installs dispatch
+    import OpenGL.GL  # installs dispatch
     from OpenGL import _dispatch
 
     return {

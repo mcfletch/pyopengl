@@ -275,8 +275,8 @@ class TestAFlagThatSaysItHasNoEffect:
         and nothing imports it.  If something starts marking them, this fails
         and the flag's paragraph is wrong.
         """
-        import OpenGL.GL                                    # noqa: F401
-        import OpenGL.GLU                                   # noqa: F401
+        import OpenGL.GL
+        import OpenGL.GLU
         from OpenGL import _declarations
 
         annotations = _declarations.annotations()

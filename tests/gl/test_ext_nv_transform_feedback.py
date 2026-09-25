@@ -12,7 +12,7 @@ from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is abs
 
 from gltestcase import GLTestCase
 
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 
 VS = '#version 150\nout float v; void main(){ v = 1.0; gl_Position = vec4(0.0); }'
 FS = '#version 150\nout vec4 c; void main(){ c = vec4(1.0); }'

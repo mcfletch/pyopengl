@@ -12,6 +12,7 @@ with none, the call raises NullFunctionError from inside a cleanup handler,
 where a test can neither see it coming nor do anything about it.
 """
 
+import pytest
 from arraycompat import object_names, one
 from gltestcase import GLTestCase
 
@@ -87,3 +88,27 @@ class TestPuttingTheFramebufferBack(GLTestCase):
             except RuntimeError:
                 pass
             assert self.draw_framebuffer() == outer
+
+
+class _CleanupFailed(Exception):
+    pass
+
+
+class TestAFailingCleanup(GLTestCase):
+    """A deferred cleanup that raises fails its case, after the others ran."""
+
+    profile = 'core'
+    gl_version = (3, 3)
+
+    def test_the_error_is_raised_from_teardown(self):
+        ran = []
+
+        def fails():
+            ran.append('fails')
+            raise _CleanupFailed('the cleanup went wrong')
+
+        self.defer_cleanup(lambda: ran.append('older'))
+        self.defer_cleanup(fails)
+        with pytest.raises(_CleanupFailed):
+            self.tearDown()
+        assert ran == ['fails', 'older']

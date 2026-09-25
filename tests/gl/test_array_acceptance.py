@@ -19,7 +19,7 @@ from arraycompat import HAVE_NUMPY, as_bytes, np, object_names, one
 from gltestcase import GLTestCase
 import OpenGL
 from OpenGL import acceleratesupport, arrays, error, _configflags
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 
 #: ``ARRAY_SIZE_CHECKING`` is what makes a wrongly sized array an exception
 #: rather than a short read the driver performs.  A run that has switched it

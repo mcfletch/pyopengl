@@ -21,7 +21,7 @@ import pytest
 from arraycompat import np
 from gltestcase import GLTestCase
 from OpenGL.arrays import vbo
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 
 #: A closed outline, as doubles.
 POINTS = [

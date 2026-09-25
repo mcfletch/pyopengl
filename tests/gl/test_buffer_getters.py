@@ -22,7 +22,7 @@ import pytest
 from arraycompat import np, object_names, one
 from gltestcase import GLTestCase
 from OpenGL import _configflags
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 
 #: Every parameter here is one value, and what a freshly named but never-sized
 #: buffer answers for it.

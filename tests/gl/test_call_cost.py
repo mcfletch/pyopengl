@@ -30,7 +30,7 @@ import unittest
 import pytest
 
 from gltestcase import GLTestCase
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 
 #: Microseconds a state-setting call may take on average.  A ctypes call with
 #: no conversion is well under one; the C dispatch layer is under a tenth.

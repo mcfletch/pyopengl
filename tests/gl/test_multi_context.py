@@ -19,7 +19,7 @@ from OpenGL import platform
 # Importing the API is what installs the dispatch implementation, since it is
 # the first thing to build an entry point.  These cases ask which one is in
 # use, so the import has to have happened first.
-import OpenGL.GL  # noqa: F401
+import OpenGL.GL
 from glcontext import Context
 
 pytestmark = pytest.mark.skipif(

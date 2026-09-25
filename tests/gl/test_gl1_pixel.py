@@ -5,7 +5,7 @@ import unittest
 from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 
 
 class TestGL1Pixel(GLTestCase):

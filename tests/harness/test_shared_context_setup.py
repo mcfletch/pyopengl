@@ -155,10 +155,7 @@ class TestTheDecoratorFinishesTheFrame:
             def draw():
                 return None
 
-            try:
-                draw()
-            except Exception as error:          # no GL here at all
-                pytest.skip(str(error))
+            draw()      # a machine with no GL raises SkipTest from setUp
         finally:
             setattr(testdecorator._DecoratorCase, hook, real)
         return calls
@@ -204,8 +201,6 @@ class TestAContextThatGoesIsForgotten:
             handles.append(int(platform.PLATFORM.GetCurrentContext() or 0))
             case.tearDown()
             case.doCleanups()
-        except Exception as error:
-            pytest.skip('no GL context here: %s' % (error,))
         finally:
             _dispatch.forget_context = real
             # The spy stood in for the real one, so this context is still in

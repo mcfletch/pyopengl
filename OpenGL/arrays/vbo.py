@@ -139,7 +139,7 @@ class Implementation(object):
             # context they belong to.
             try:
                 deletable = owner is not None and current_identity() is owner
-            except Exception:
+            except Exception:  # noqa: BLE001 at interpreter shutdown any global it reads may already be None
                 # Asked during interpreter shutdown, where what it needs may
                 # already be gone. Nothing can be freed then either.
                 deletable = False

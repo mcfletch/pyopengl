@@ -135,11 +135,11 @@ class TestES2Program(ESTestCase):
         fmt = fmt[0] if isinstance(fmt, list) else fmt
         shader = glCreateShader(GL_VERTEX_SHADER)
         blob = (ctypes.c_ubyte * 4)()
-        # we cannot synthesise a valid binary; just confirm the call is reachable
-        try:
+        with self.exercise(
+            'no valid shader binary can be synthesised, so the driver refuses '
+            'this one; the call still drives the wrapper'
+        ):
             glShaderBinary(1, [shader], fmt, blob, 4)
-        except Exception:
-            pass
         glDeleteShader(shader)
 
 

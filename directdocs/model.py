@@ -304,21 +304,14 @@ class PyFunction(Function):
             # depends on them not being in that list.
             args = args + list(spec.kwonlyargs)
             default_dict.update(spec.kwonlydefaults or {})
-            try:
-                parameters = []
-                for name in args:
-                    if isinstance(name, list):
-                        name = tuple(name)
-                    parameters.append(
-                        Parameter(
-                            name,
-                            default=default_dict.get(name, NOT_DEFINED),
-                            function=self,
-                        )
-                    )
-            except Exception as err:
-                log.warning('could not describe parameters of %s: %s', target, err)
-                parameters = []
+            parameters = [
+                Parameter(
+                    name,
+                    default=default_dict.get(name, NOT_DEFINED),
+                    function=self,
+                )
+                for name in args
+            ]
             if varargs:
                 parameters.append(
                     Parameter(

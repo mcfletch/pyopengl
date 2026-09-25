@@ -12,7 +12,7 @@ from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is abs
 
 from gltestcase import GLTestCase
 
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 from OpenGL.GL.ARB.vertex_program import (
     glGenProgramsARB, glBindProgramARB, glProgramStringARB, glDeleteProgramsARB,
     GL_VERTEX_PROGRAM_ARB, GL_PROGRAM_FORMAT_ASCII_ARB,

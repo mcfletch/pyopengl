@@ -21,7 +21,7 @@ from OpenGL.raw.GL._types import GL_FLOAT, GL_UNSIGNED_INT
 #: Every output handler PyOpenGL can pick, by the name it is known as.
 HANDLERS = {'ctypes array': CtypesArrayHandler}
 try:
-    import numpy  # noqa: F401
+    import numpy
 except ImportError:                             # pragma: no cover - no numpy
     pass
 else:

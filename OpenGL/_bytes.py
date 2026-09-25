@@ -103,7 +103,7 @@ def short_repr(value, limit=ARGUMENT_REPR_LIMIT):
     """
     try:
         text = repr(value)
-    except Exception:                  # pragma: no cover - a hostile __repr__
+    except Exception:  # noqa: BLE001 a __repr__ may raise anything  # pragma: no cover
         return '<%s, whose repr raised>' % (type(value).__name__,)
     if len(text) <= limit:
         return text

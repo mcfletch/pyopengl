@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 # Mirror conftest.py: the headless EGL-device backend loads GL entry points
 # through EGL, so PYOPENGL_PLATFORM must be set before anything imports OpenGL.
-import backends  # noqa: E402 -- needs the sys.path entry above
+import backends  # needs the sys.path entry above
 
 if backends.requested() == 'egl':
     os.environ.setdefault('PYOPENGL_PLATFORM', 'egl')

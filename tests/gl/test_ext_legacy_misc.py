@@ -8,35 +8,35 @@ import ctypes
 from arraycompat import np, object_names, one
 
 from gltestcase import GLTestCase
-from OpenGL.GL import *  # noqa: F401,F403
-from OpenGL.GL.ARB.vertex_buffer_object import *  # noqa: F401,F403
-from OpenGL.GL.EXT.vertex_array import *  # noqa: F401,F403
-from OpenGL.GL.ARB.occlusion_query import *  # noqa: F401,F403
-from OpenGL.GL.ARB.texture_compression import *  # noqa: F401,F403
-from OpenGL.GL.EXT.texture_object import *  # noqa: F401,F403
-from OpenGL.GL.EXT.fog_coord import *  # noqa: F401,F403
-from OpenGL.GL.EXT.copy_texture import *  # noqa: F401,F403
-from OpenGL.GL.ARB.transpose_matrix import *  # noqa: F401,F403
-from OpenGL.GL.EXT.point_parameters import *  # noqa: F401,F403
-from OpenGL.GL.ARB.point_parameters import glPointParameterfARB, glPointParameterfvARB  # noqa: F401
-from OpenGL.GL.EXT.multi_draw_arrays import *  # noqa: F401,F403
-from OpenGL.GL.IBM.multimode_draw_arrays import *  # noqa: F401,F403
-from OpenGL.GL.EXT.texture3D import *  # noqa: F401,F403
-from OpenGL.GL.EXT.subtexture import *  # noqa: F401,F403
-from OpenGL.GL.NV.primitive_restart import *  # noqa: F401,F403
-from OpenGL.GL.EXT.gpu_program_parameters import *  # noqa: F401,F403
-from OpenGL.GL.EXT.compiled_vertex_array import *  # noqa: F401,F403
-from OpenGL.GL.ATI.separate_stencil import *  # noqa: F401,F403
-from OpenGL.GL.ARB.color_buffer_float import *  # noqa: F401,F403
-from OpenGL.GL.ARB.multisample import *  # noqa: F401,F403
-from OpenGL.GL.ATI.draw_buffers import *  # noqa: F401,F403
-from OpenGL.GL.EXT.blend_color import *  # noqa: F401,F403
-from OpenGL.GL.EXT.blend_func_separate import *  # noqa: F401,F403
-from OpenGL.GL.EXT.blend_minmax import *  # noqa: F401,F403
-from OpenGL.GL.EXT.draw_range_elements import *  # noqa: F401,F403
-from OpenGL.GL.EXT.stencil_two_side import *  # noqa: F401,F403
-from OpenGL.GL.EXT.texture_buffer_object import *  # noqa: F401,F403
-from OpenGL.GL.INGR.blend_func_separate import *  # noqa: F401,F403
+from OpenGL.GL import *
+from OpenGL.GL.ARB.vertex_buffer_object import *
+from OpenGL.GL.EXT.vertex_array import *
+from OpenGL.GL.ARB.occlusion_query import *
+from OpenGL.GL.ARB.texture_compression import *
+from OpenGL.GL.EXT.texture_object import *
+from OpenGL.GL.EXT.fog_coord import *
+from OpenGL.GL.EXT.copy_texture import *
+from OpenGL.GL.ARB.transpose_matrix import *
+from OpenGL.GL.EXT.point_parameters import *
+from OpenGL.GL.ARB.point_parameters import glPointParameterfARB, glPointParameterfvARB
+from OpenGL.GL.EXT.multi_draw_arrays import *
+from OpenGL.GL.IBM.multimode_draw_arrays import *
+from OpenGL.GL.EXT.texture3D import *
+from OpenGL.GL.EXT.subtexture import *
+from OpenGL.GL.NV.primitive_restart import *
+from OpenGL.GL.EXT.gpu_program_parameters import *
+from OpenGL.GL.EXT.compiled_vertex_array import *
+from OpenGL.GL.ATI.separate_stencil import *
+from OpenGL.GL.ARB.color_buffer_float import *
+from OpenGL.GL.ARB.multisample import *
+from OpenGL.GL.ATI.draw_buffers import *
+from OpenGL.GL.EXT.blend_color import *
+from OpenGL.GL.EXT.blend_func_separate import *
+from OpenGL.GL.EXT.blend_minmax import *
+from OpenGL.GL.EXT.draw_range_elements import *
+from OpenGL.GL.EXT.stencil_two_side import *
+from OpenGL.GL.EXT.texture_buffer_object import *
+from OpenGL.GL.INGR.blend_func_separate import *
 
 
 class TestLegacyCompat(GLTestCase):

@@ -35,7 +35,7 @@ from OpenGL import _configflags, error, platform
 
 # Importing the API installs the dispatch implementation, and these cases ask
 # which one is in use.
-import OpenGL.GL  # noqa: F401
+import OpenGL.GL
 from OpenGL.GL import GL_NO_ERROR, GL_POINTS, glBegin, glEnable, glEnd, glGetError
 from glcontext import Context
 

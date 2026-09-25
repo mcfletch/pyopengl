@@ -12,7 +12,7 @@ from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is abs
 
 from egltestcase import ESTestCase
 
-from OpenGL.GLES3 import *  # noqa: F401,F403
+from OpenGL.GLES3 import *
 
 I64 = '''#version 320 es
 #extension GL_NV_gpu_shader5 : require

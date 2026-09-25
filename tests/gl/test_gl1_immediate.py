@@ -11,7 +11,7 @@ from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
 from OpenGL import _configflags
-from OpenGL.GL import *  # noqa: F401,F403  (legacy suite touches hundreds of names)
+from OpenGL.GL import *  # legacy suite touches hundreds of names
 
 
 class TestGL1Immediate(GLTestCase):

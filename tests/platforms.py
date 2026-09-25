@@ -57,7 +57,7 @@ def supplies(library):
 
     try:
         return getattr(platform.PLATFORM, library, None) is not None
-    except Exception:
+    except Exception:  # noqa: BLE001 each platform plugin loads its libraries on first read, and fails as its loader does
         return False
 
 

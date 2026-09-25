@@ -21,7 +21,7 @@ from arraycompat import np, object_names, one
 from gltestcase import GLTestCase
 from OpenGL import _configflags
 from OpenGL.arrays import arraydatatype
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 # After the star import, which binds `images` to OpenGL.GL.images.
 from OpenGL import images as toplevel_images
 from OpenGL.GL.ARB import texture_rg

@@ -6,7 +6,7 @@ import ctypes
 from arraycompat import np, object_names, one
 
 from gltestcase import GLTestCase
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 
 
 class TestGL15(GLTestCase):

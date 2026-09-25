@@ -60,7 +60,7 @@ def test_an_empty_alternate_list_is_not_an_extension():
 )
 def test_the_shipped_table_records_the_alias(name):
     """The generated table has to carry it for the rule to have anything to use."""
-    import OpenGL.GL  # noqa: F401 -- installs the dispatch layer
+    import OpenGL.GL  # installs the dispatch layer
     from OpenGL import _dispatch
 
     proc = _dispatch.entry_points.get(('GL', name))

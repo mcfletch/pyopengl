@@ -18,7 +18,7 @@ import unittest
 from gltestcase import GLTestCase
 from OpenGL import error, platform
 from OpenGL._dispatch import support
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 
 #: An extension no driver has, for asking what the gate does with one.
 ABSENT = 'GL_NOT_AN_EXTENSION_ANY_DRIVER_HAS'

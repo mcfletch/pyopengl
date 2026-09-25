@@ -290,7 +290,7 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
                 self.module = name[3:-4]
                 self.sentinelConstant = '%s%s' % (self.module, self.owner)
             else:
-                log.error("""Unable to parse module name: %s""", name)
+                log.error("""Unable to parse module name: %s""", name)  # noqa: TRY400 re-raised, so the traceback is reported once, by whoever catches it
                 raise
         self.dll = '_p.PLATFORM.%s' % (self.prefix,)
         if self.module[0].isdigit():
@@ -403,101 +403,95 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
     @property
     def output_wrapping(self):
         """Generate output wrapping statements for our various functions"""
-        try:
-            statements = []
-            for function in self.registry.commands():
-                dependencies = function.size_dependencies
-                if dependencies:  # temporarily just do single-output functions...
-                    base = []
-                    for param, dependency in sorted(dependencies.items()):
-                        param = as_str(param)
-                        if isinstance(dependency, xmlreg.Output):
-                            statements.append(
-                                '# %s.%s is OUTPUT without known output size'
-                                % (
-                                    function.name,
-                                    param,
-                                )
+        statements = []
+        for function in self.registry.commands():
+            dependencies = function.size_dependencies
+            if dependencies:  # temporarily just do single-output functions...
+                base = []
+                for param, dependency in sorted(dependencies.items()):
+                    param = as_str(param)
+                    if isinstance(dependency, xmlreg.Output):
+                        statements.append(
+                            '# %s.%s is OUTPUT without known output size'
+                            % (
+                                function.name,
+                                param,
                             )
-                        if isinstance(dependency, xmlreg.Staticsize):
-                            base.append(
-                                '.setOutput(\n    %(param)r,size=(%(dependency)r,),orPassIn=True\n)'
-                                % locals()
-                            )
-                        elif isinstance(dependency, xmlreg.Dynamicsize):
-                            if '/' in dependency:
-                                fragments = [x.strip() for x in dependency.split('/')]
-                                functor = 'lambda x: (x//%s)' % (fragments[1])
-                                dependency = fragments[0]
-                            elif '*' in dependency:
-                                fragments = [x.strip() for x in dependency.split('/')]
-                                functor = 'lambda x: (x*%s)' % (fragments[1])
-                                dependency = fragments[0]
-                            else:
-                                functor = 'lambda x:(x,)'
-
-                            base.append(
-                                '.setOutput(\n    %(param)r,size=%(functor)s,pnameArg=%(dependency)r,orPassIn=True\n)'
-                                % locals()
-                            )
-                        elif isinstance(dependency, xmlreg.Multiple):
-                            pname, multiple = dependency
-                            base.append(
-                                '.setOutput(\n    %(param)r,size=lambda x:(x,%(multiple)s),pnameArg=%(pname)r,orPassIn=True\n)'
-                                % locals()
-                            )
-                        elif isinstance(dependency, xmlreg.Compsize):
-                            # `COMPSIZE()` with no argument in it: the registry
-                            # says the size is computed and names nothing to
-                            # compute it from, so there is no pname to size the
-                            # output by.  Emitting one anyway wrote
-                            # `pnameArg=''`, and a name no parameter has is not
-                            # refused -- the wrapper is built, the module
-                            # imports, and the call dies inside the converter
-                            # machinery naming none of this.  Falls through to
-                            # the comment below, which is what every other
-                            # unsizeable output gets.
-                            # See https://github.com/mcfletch/pyopengl/issues/38
-                            if len(dependency) == 1 and dependency[0]:
-                                pname = dependency[0]
-                                base.append(
-                                    '.setOutput(\n    %(param)r,size=_glgets._glget_size_mapping,pnameArg=%(pname)r,orPassIn=True\n)'
-                                    % locals()
-                                )
-                            else:
-                                statements.append(
-                                    '# OUTPUT %s.%s COMPSIZE(%s) '
-                                    % (function.name, param, ', '.join(dependency))
-                                )
-                        elif isinstance(dependency, xmlreg.StaticInput):
-                            base.append(
-                                '.setInputArraySize(\n    %(param)r, %(dependency)s\n)'
-                                % locals()
-                            )
-                        elif isinstance(
-                            dependency,
-                            (xmlreg.DynamicInput, xmlreg.MultiplyInput, xmlreg.Input),
-                        ):
-                            if dependency is None:
-                                continue
-                            statements.append(
-                                '# INPUT %s.%s size not checked against %s'
-                                % (function.name, param, dependency)
-                            )
-                            base.append(
-                                '.setInputArraySize(\n    %(param)r, None\n)' % locals()
-                            )
-                    if base:
-                        base.insert(
-                            0, '%s=wrapper.wrapper(%s)' % (function.name, function.name)
                         )
-                        statements.append(''.join(base))
-            return '\n'.join(statements)
-        except Exception as err:
-            traceback.print_exc()
-            import pdb
+                    if isinstance(dependency, xmlreg.Staticsize):
+                        base.append(
+                            '.setOutput(\n    %(param)r,size=(%(dependency)r,),orPassIn=True\n)'
+                            % locals()
+                        )
+                    elif isinstance(dependency, xmlreg.Dynamicsize):
+                        if '/' in dependency:
+                            fragments = [x.strip() for x in dependency.split('/')]
+                            functor = 'lambda x: (x//%s)' % (fragments[1])
+                            dependency = fragments[0]
+                        elif '*' in dependency:
+                            fragments = [x.strip() for x in dependency.split('*')]
+                            functor = 'lambda x: (x*%s)' % (fragments[1])
+                            dependency = fragments[0]
+                        else:
+                            functor = 'lambda x:(x,)'
 
-            pdb.set_trace()
+                        base.append(
+                            '.setOutput(\n    %(param)r,size=%(functor)s,pnameArg=%(dependency)r,orPassIn=True\n)'
+                            % locals()
+                        )
+                    elif isinstance(dependency, xmlreg.Multiple):
+                        pname, multiple = dependency
+                        base.append(
+                            '.setOutput(\n    %(param)r,size=lambda x:(x,%(multiple)s),pnameArg=%(pname)r,orPassIn=True\n)'
+                            % locals()
+                        )
+                    elif isinstance(dependency, xmlreg.Compsize):
+                        # `COMPSIZE()` with no argument in it: the registry
+                        # says the size is computed and names nothing to
+                        # compute it from, so there is no pname to size the
+                        # output by.  Emitting one anyway wrote
+                        # `pnameArg=''`, and a name no parameter has is not
+                        # refused -- the wrapper is built, the module
+                        # imports, and the call dies inside the converter
+                        # machinery naming none of this.  Falls through to
+                        # the comment below, which is what every other
+                        # unsizeable output gets.
+                        # See https://github.com/mcfletch/pyopengl/issues/38
+                        if len(dependency) == 1 and dependency[0]:
+                            pname = dependency[0]
+                            base.append(
+                                '.setOutput(\n    %(param)r,size=_glgets._glget_size_mapping,pnameArg=%(pname)r,orPassIn=True\n)'
+                                % locals()
+                            )
+                        else:
+                            statements.append(
+                                '# OUTPUT %s.%s COMPSIZE(%s) '
+                                % (function.name, param, ', '.join(dependency))
+                            )
+                    elif isinstance(dependency, xmlreg.StaticInput):
+                        base.append(
+                            '.setInputArraySize(\n    %(param)r, %(dependency)s\n)'
+                            % locals()
+                        )
+                    elif isinstance(
+                        dependency,
+                        (xmlreg.DynamicInput, xmlreg.MultiplyInput, xmlreg.Input),
+                    ):
+                        if dependency is None:
+                            continue
+                        statements.append(
+                            '# INPUT %s.%s size not checked against %s'
+                            % (function.name, param, dependency)
+                        )
+                        base.append(
+                            '.setInputArraySize(\n    %(param)r, None\n)' % locals()
+                        )
+                if base:
+                    base.insert(
+                        0, '%s=wrapper.wrapper(%s)' % (function.name, function.name)
+                    )
+                    statements.append(''.join(base))
+        return '\n'.join(statements)
 
     def get_constants(self):
         functions = self.registry.enums()
@@ -593,9 +587,10 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
         current = ''
         toWrite = self.RAW_MODULE_TEMPLATE % self
         try:
-            current = open(self.rawPathName, 'r').read()
-        except Exception as err:
-            pass
+            with open(self.rawPathName, 'r') as handle:
+                current = handle.read()
+        except FileNotFoundError:
+            pass  # a module generated for the first time
         if current.strip() != toWrite.strip():
             fh = open(self.rawPathName, 'w')
             fh.write(toWrite)
@@ -611,9 +606,10 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
             toWrite = self.FINAL_MODULE_TEMPLATE % self
             current = ''
             try:
-                current = open(self.pathName, 'r').read()
-            except Exception as err:
-                pass
+                with open(self.pathName, 'r') as handle:
+                    current = handle.read()
+            except FileNotFoundError:
+                pass  # a module generated for the first time
             else:
                 found = current.rfind('\n' + AUTOGENERATION_SENTINEL_END)
                 if found >= -1:

@@ -27,7 +27,7 @@ def display():
         matrix = glGetDoublev(GL_PROJECTION_MATRIX)
         print('matrix', type(matrix), matrix[:][:])
         glutSwapBuffers()
-    except Exception:
+    except Exception:  # noqa: BLE001 a GLUT display callback: the traceback is printed and the script ends
         traceback.print_exc()
         sys.exit(0)
 

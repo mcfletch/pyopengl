@@ -15,11 +15,11 @@ import os
 
 os.environ.setdefault('PYOPENGL_PLATFORM', 'angle')
 
-import suitepath  # noqa: F401,E402  -- the suite's modules, by bare name
-import checkutils  # noqa: E402  -- after the platform is pinned
+import suitepath  # the suite's modules, by bare name
+import checkutils  # after the platform is pinned
 
-from OpenGL import platform  # noqa: E402
-from OpenGL.EGL import (  # noqa: E402
+from OpenGL import platform
+from OpenGL.EGL import (
     EGL_ALPHA_SIZE, EGL_BLUE_SIZE, EGL_CONTEXT_CLIENT_VERSION, EGL_DEFAULT_DISPLAY,
     EGL_DEPTH_SIZE, EGL_GREEN_SIZE, EGL_HEIGHT, EGL_NONE, EGL_NO_CONTEXT,
     EGL_OPENGL_ES2_BIT, EGL_OPENGL_ES_API, EGL_PBUFFER_BIT, EGL_RED_SIZE,
@@ -27,7 +27,7 @@ from OpenGL.EGL import (  # noqa: E402
     eglBindAPI, eglChooseConfig, eglCreateContext, eglCreatePbufferSurface,
     eglGetDisplay, eglInitialize, eglMakeCurrent,
 )
-from OpenGL.GLES2 import (  # noqa: E402
+from OpenGL.GLES2 import (
     GL_COLOR_BUFFER_BIT, GL_RGBA, GL_UNSIGNED_BYTE, GL_VERSION,
     glClear, glClearColor, glFinish, glGetString, glReadPixels, glViewport,
 )

@@ -23,7 +23,7 @@ import unittest
 from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 from OpenGL.GL.NV.vdpau_interop import (
     GL_SURFACE_STATE_NV,
     GL_WRITE_DISCARD_NV,

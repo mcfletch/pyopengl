@@ -531,7 +531,7 @@ def _has_current_context():
 
     try:
         return bool(platform.PLATFORM.CurrentContextIsValid())
-    except Exception:  # pragma: no cover - a platform with no way to ask
+    except Exception:  # noqa: BLE001 a platform with no way to ask fails in its own way  # pragma: no cover
         return True
 
 
@@ -553,7 +553,7 @@ def _current_context():
 
     try:
         return _as_address(platform.PLATFORM.GetCurrentContext())
-    except Exception:
+    except Exception:  # noqa: BLE001 each platform plugin fails in its own way where it cannot say
         return None
 
 
@@ -938,7 +938,7 @@ def _foreign_callback_installed(key, ours):
 
     try:
         address = _as_address(glGetPointerv(_DEBUG_CALLBACK_FUNCTION))
-    except Exception:  # pragma: no cover - a context that will not answer
+    except Exception:  # noqa: BLE001 a context that will not answer fails in its own way  # pragma: no cover
         # An answer is what would let us decline; without one, declining every
         # time would mean no context ever got the cheaper check.
         return False

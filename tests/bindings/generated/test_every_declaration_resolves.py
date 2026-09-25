@@ -113,7 +113,7 @@ def test_every_declared_type_resolves():
     for declaration in filter(reachable, DECLARATIONS):
         try:
             declaration._resolve_types()
-        except Exception as error:
+        except Exception as error:  # noqa: BLE001 every failure is collected, so one run reports them all
             unresolved.append(
                 '%s.%s: %s' % (declaration.module, declaration.name, error))
     assert unresolved == [], unresolved[:20]

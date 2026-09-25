@@ -457,7 +457,7 @@ class ContextTestCase(unittest.TestCase):
 
             self._make_current()
             return platform.PLATFORM.GetCurrentContext()
-        except Exception:              # pragma: no cover - a context already gone
+        except Exception:  # noqa: BLE001 a context already gone fails as its platform does  # pragma: no cover
             return None
 
     def _release_context(self):
@@ -514,17 +514,25 @@ class ContextTestCase(unittest.TestCase):
         """Hook for API-specific post-context setup (e.g. a core-profile VAO)."""
 
     def tearDown(self):
-        for fn in reversed(getattr(self, '_cleanup', [])):
+        cleanups = getattr(self, '_cleanup', [])
+        failed = None
+        while cleanups:
             try:
-                fn()
-            except Exception:
-                pass
+                cleanups.pop()()
+            except Exception as err:  # noqa: BLE001 every cleanup runs; the first failure is raised after them
+                failed = failed or err
         self._swap()  # present, so a visible run shows the frame
         if self.visible and self.dwell:
             time.sleep(self.dwell)
+        if failed is not None:
+            raise failed
 
     def defer_cleanup(self, fn):
-        """Register ``fn`` to run (best-effort) at teardown, newest first."""
+        """Register ``fn`` to run at teardown, newest first.
+
+        Every registered cleanup runs; the first one to raise fails the case,
+        once the others have run.
+        """
         self._cleanup.append(fn)
 
     # --- introspection helpers -------------------------------------------
@@ -775,14 +783,16 @@ class ContextTestCase(unittest.TestCase):
         ``GLES3`` namespaces do not carry it.  ``''`` where the driver reports
         no reset.
         """
+        from OpenGL import error
+
         for holder, name in self._reset_queries():
             query = getattr(holder, name, None)
             if query is None or not bool(query):
                 continue
             try:
                 status = query()
-            except Exception:
-                continue
+            except error.GLError:
+                continue    # advertised, and refused by this context
             if not status:
                 return ''
             return self._RESET_STATUS.get(status, 'reset status 0x%x' % (status,))

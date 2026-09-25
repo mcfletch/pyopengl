@@ -25,11 +25,11 @@ import os
 
 os.environ['PYOPENGL_PLATFORM'] = 'osmesa'
 
-import ctypes  # noqa: E402
-import faulthandler  # noqa: E402
+import ctypes
+import faulthandler
 
-import suitepath  # noqa: F401,E402  -- the suite's modules, by bare name
-import checkutils  # noqa: E402
+import suitepath  # the suite's modules, by bare name
+import checkutils
 
 faulthandler.enable()
 

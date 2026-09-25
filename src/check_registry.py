@@ -19,7 +19,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 
-from cdispatch import upstream  # noqa: E402
+from cdispatch import upstream
 
 
 def main(argv=None):

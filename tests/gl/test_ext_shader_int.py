@@ -8,11 +8,11 @@ import ctypes
 from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
-from OpenGL.GL import *  # noqa: F401,F403
-from OpenGL.GL.ARB.gpu_shader_int64 import *  # noqa: F401,F403
-from OpenGL.GL.AMD.gpu_shader_int64 import *  # noqa: F401,F403
-from OpenGL.GL.EXT.vertex_attrib_64bit import *  # noqa: F401,F403
-from OpenGL.GL.EXT.gpu_shader4 import *  # noqa: F401,F403
+from OpenGL.GL import *
+from OpenGL.GL.ARB.gpu_shader_int64 import *
+from OpenGL.GL.AMD.gpu_shader_int64 import *
+from OpenGL.GL.EXT.vertex_attrib_64bit import *
+from OpenGL.GL.EXT.gpu_shader4 import *
 
 VS = '#version 150\nin vec4 p; void main(){ gl_Position = p; }'
 

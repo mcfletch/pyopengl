@@ -22,7 +22,7 @@ import pytest
 from arraycompat import np
 from gltestcase import GLTestCase
 from OpenGL import GLE
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 
 #: A four-segment path.  GLE reads the first and last points as direction hints
 #: and draws the segments between the rest, so a path needs at least four.

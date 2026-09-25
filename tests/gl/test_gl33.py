@@ -6,7 +6,7 @@ import unittest
 from arraycompat import np, object_names, one
 
 from gltestcase import GLTestCase
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 
 P = GL_UNSIGNED_INT_2_10_10_10_REV
 

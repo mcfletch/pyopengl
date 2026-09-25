@@ -11,4 +11,4 @@ wglUseFontBitmaps = wglUseFontBitmapsW
 # imported the package can reach it as ``WGL.offscreen.headless_context()``;
 # the module imports ctypes and nothing else at import time, and loads the
 # Win32 entry points and the WGL extensions it needs on the first call.
-from OpenGL.WGL import offscreen      # noqa: E402,F401 -- after the declarations
+from OpenGL.WGL import offscreen  # after the declarations

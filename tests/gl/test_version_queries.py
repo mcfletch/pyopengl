@@ -23,7 +23,7 @@ from checkutils import SKIP_EXIT_CODE
 from childenv import run_in_child
 from gltestcase import GLTestCase
 from OpenGL.extensions import GLQuerier, hasGLExtension
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 from OpenGL.raw.GL import _lookupint
 
 

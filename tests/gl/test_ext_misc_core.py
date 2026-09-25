@@ -8,49 +8,49 @@ import ctypes
 from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
-from OpenGL.GL import *  # noqa: F401,F403
-from OpenGL.GL.EXT.transform_feedback import *  # noqa: F401,F403
-from OpenGL.GL.EXT.texture_integer import *  # noqa: F401,F403
-from OpenGL.GL.ARB.shading_language_include import *  # noqa: F401,F403
-from OpenGL.GL.ARB.debug_output import *  # noqa: F401,F403
-from OpenGL.GL.ARB.draw_buffers_blend import *  # noqa: F401,F403
-from OpenGL.GL.AMD.draw_buffers_blend import *  # noqa: F401,F403
-from OpenGL.GL.NV.conditional_render import *  # noqa: F401,F403
-from OpenGL.GL.EXT.timer_query import *  # noqa: F401,F403
-from OpenGL.GL.EXT.draw_instanced import *  # noqa: F401,F403
+from OpenGL.GL import *
+from OpenGL.GL.EXT.transform_feedback import *
+from OpenGL.GL.EXT.texture_integer import *
+from OpenGL.GL.ARB.shading_language_include import *
+from OpenGL.GL.ARB.debug_output import *
+from OpenGL.GL.ARB.draw_buffers_blend import *
+from OpenGL.GL.AMD.draw_buffers_blend import *
+from OpenGL.GL.NV.conditional_render import *
+from OpenGL.GL.EXT.timer_query import *
+from OpenGL.GL.EXT.draw_instanced import *
 from OpenGL.GL.ARB.draw_instanced import (
     glDrawArraysInstancedARB,
     glDrawElementsInstancedARB,
-)  # noqa: F401
-from OpenGL.GL.EXT.debug_label import *  # noqa: F401,F403
-from OpenGL.GL.KHR.debug import *  # noqa: F401,F403
-from OpenGL.GL.MESA.framebuffer_flip_y import *  # noqa: F401,F403
-from OpenGL.GL.OVR.multiview import *  # noqa: F401,F403
-from OpenGL.GL.AMD.multi_draw_indirect import *  # noqa: F401,F403
-from OpenGL.GL.ARB.indirect_parameters import *  # noqa: F401,F403
-from OpenGL.GL.ARB.instanced_arrays import *  # noqa: F401,F403
-from OpenGL.GL.ARB.draw_buffers import *  # noqa: F401,F403
-from OpenGL.GL.EXT.draw_buffers2 import *  # noqa: F401,F403
-from OpenGL.GL.EXT.blend_equation_separate import *  # noqa: F401,F403
-from OpenGL.GL.KHR.blend_equation_advanced import *  # noqa: F401,F403
-from OpenGL.GL.NV.alpha_to_coverage_dither_control import *  # noqa: F401,F403
-from OpenGL.GL.ARB.texture_buffer_object import *  # noqa: F401,F403
-from OpenGL.GL.EXT.texture_storage import *  # noqa: F401,F403
-from OpenGL.GL.EXT.EGL_image_storage import *  # noqa: F401,F403
-from OpenGL.GL.NV.copy_image import *  # noqa: F401,F403
-from OpenGL.GL.NV.texture_barrier import *  # noqa: F401,F403
-from OpenGL.GL.ARB.parallel_shader_compile import *  # noqa: F401,F403
-from OpenGL.GL.KHR.parallel_shader_compile import *  # noqa: F401,F403
-from OpenGL.GL.ARB.gl_spirv import *  # noqa: F401,F403
-from OpenGL.GL.EXT.shader_framebuffer_fetch_non_coherent import *  # noqa: F401,F403
-from OpenGL.GL.ARB.sample_shading import *  # noqa: F401,F403
-from OpenGL.GL.EXT.provoking_vertex import *  # noqa: F401,F403
-from OpenGL.GL.EXT.polygon_offset_clamp import *  # noqa: F401,F403
-from OpenGL.GL.ARB.ES3_2_compatibility import *  # noqa: F401,F403
+)
+from OpenGL.GL.EXT.debug_label import *
+from OpenGL.GL.KHR.debug import *
+from OpenGL.GL.MESA.framebuffer_flip_y import *
+from OpenGL.GL.OVR.multiview import *
+from OpenGL.GL.AMD.multi_draw_indirect import *
+from OpenGL.GL.ARB.indirect_parameters import *
+from OpenGL.GL.ARB.instanced_arrays import *
+from OpenGL.GL.ARB.draw_buffers import *
+from OpenGL.GL.EXT.draw_buffers2 import *
+from OpenGL.GL.EXT.blend_equation_separate import *
+from OpenGL.GL.KHR.blend_equation_advanced import *
+from OpenGL.GL.NV.alpha_to_coverage_dither_control import *
+from OpenGL.GL.ARB.texture_buffer_object import *
+from OpenGL.GL.EXT.texture_storage import *
+from OpenGL.GL.EXT.EGL_image_storage import *
+from OpenGL.GL.NV.copy_image import *
+from OpenGL.GL.NV.texture_barrier import *
+from OpenGL.GL.ARB.parallel_shader_compile import *
+from OpenGL.GL.KHR.parallel_shader_compile import *
+from OpenGL.GL.ARB.gl_spirv import *
+from OpenGL.GL.EXT.shader_framebuffer_fetch_non_coherent import *
+from OpenGL.GL.ARB.sample_shading import *
+from OpenGL.GL.EXT.provoking_vertex import *
+from OpenGL.GL.EXT.polygon_offset_clamp import *
+from OpenGL.GL.ARB.ES3_2_compatibility import *
 from OpenGL.GL.ARB.viewport_array import (
     glDepthRangeArraydvNV,
     glDepthRangeIndexeddNV,
-)  # noqa: F401
+)
 
 VS = '#version 150\nin vec4 p; out float v; void main(){ v = p.x; gl_Position = p; }'
 FS = '#version 150\nout vec4 c; void main(){ c = vec4(1.0); }'

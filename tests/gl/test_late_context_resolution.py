@@ -10,9 +10,9 @@ first real call, under a real context, has to resolve properly.
 import unittest
 
 from gltestcase import GLTestCase
-from OpenGL.GL import *  # noqa: F401,F403
-from OpenGL.GL.ARB.shader_objects import *  # noqa: F401,F403
-from OpenGL.GL.ARB.vertex_shader import *  # noqa: F401,F403
+from OpenGL.GL import *
+from OpenGL.GL.ARB.shader_objects import *
+from OpenGL.GL.ARB.vertex_shader import *
 
 
 class TestLateContextResolution(GLTestCase):

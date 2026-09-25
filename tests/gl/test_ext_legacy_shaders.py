@@ -6,9 +6,9 @@ import unittest
 from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
-from OpenGL.GL import *  # noqa: F401,F403
-from OpenGL.GL.ARB.shader_objects import *  # noqa: F401,F403
-from OpenGL.GL.ARB.vertex_shader import *  # noqa: F401,F403
+from OpenGL.GL import *
+from OpenGL.GL.ARB.shader_objects import *
+from OpenGL.GL.ARB.vertex_shader import *
 
 VS = '''attribute vec4 pos;
 void main(){ gl_Position = pos; }'''

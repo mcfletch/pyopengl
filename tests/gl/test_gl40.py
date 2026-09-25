@@ -7,7 +7,7 @@ import ctypes
 from arraycompat import np, object_names, one
 
 from gltestcase import GLTestCase
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 
 VS = '#version 400 core\nin vec4 position; void main(){ gl_Position = position; }'
 FS = '''#version 400 core

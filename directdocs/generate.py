@@ -49,22 +49,22 @@ if PACKAGE_ROOT not in sys.path:
     # cached samples unpickle as directdocs.model.Sample.
     sys.path.insert(0, PACKAGE_ROOT)
 
-from directdocs import model, references, rst, stubs  # noqa: E402
-from directdocs.model import (  # noqa: E402
+from directdocs import model, references, rst, stubs
+from directdocs.model import (
     Function,
     Parameter,
     ParameterReference,
     c_prototype,
     python_signature,
 )
-from directdocs.rst import (  # noqa: E402
+from directdocs.rst import (
     DOCBOOK_NS,
     MML_NS,
     Writer,
     write_docstring,
 )
-from OpenGL import __version__  # noqa: E402
-from OpenGL._bytes import as_8_bit  # noqa: E402
+from OpenGL import __version__
+from OpenGL._bytes import as_8_bit
 
 if _ANNOTATIONS_SET_HERE:
     os.environ.pop('PYOPENGL_MODULE_ANNOTATIONS', None)
@@ -702,7 +702,7 @@ def load_file(filename: str) -> Any:
     try:
         tree = parse_fragment(filename)
     except Exception:
-        log.error("Failure loading file: %r", filename)
+        log.error("Failure loading file: %r", filename)  # noqa: TRY400 re-raised, so the traceback is reported once, by whoever catches it
         raise
     resolve_includes(tree, os.path.dirname(os.path.abspath(filename)))
     return tree
@@ -758,7 +758,7 @@ def imported_package(api: Api) -> Any:
     if api.module not in _IMPORTED:
         try:
             _IMPORTED[api.module] = importlib.import_module(api.module)
-        except Exception as err:
+        except Exception as err:  # noqa: BLE001 a platform's module fails to import in whatever way its missing library does
             log.warning('%s will not import here: %s', api.module, err)
             _IMPORTED[api.module] = None
     return _IMPORTED[api.module]
@@ -807,7 +807,7 @@ def parameter_label(section: RefSect, name: str) -> str:
 def docstring_of(function: Any) -> str:
     try:
         text = function.docstring
-    except Exception as err:  # a wrapper whose __doc__ is built lazily
+    except Exception as err:  # noqa: BLE001 a wrapper's __doc__ is built on demand, by code that may raise anything
         log.debug('no docstring for %s: %s', function, err)
         return ''
     if not isinstance(text, str):
@@ -1024,7 +1024,7 @@ def declaring_module(api: Api, name: str) -> str:
     # the same question.
     try:
         candidate = importlib.import_module(module)
-    except Exception as err:
+    except Exception as err:  # noqa: BLE001 a platform's module fails to import in whatever way its missing library does
         log.debug('cannot check %s for %s: %s', module, name, err)
         return api.module
     return module if hasattr(candidate, name) else api.module
@@ -1044,7 +1044,7 @@ def extension_modules(api: Api) -> list[tuple[str, list[str]]]:
         vendor = '%s.%s' % (api.module, entry.name)
         try:
             loaded = importlib.import_module(vendor)
-        except Exception as err:
+        except Exception as err:  # noqa: BLE001 a platform's module fails to import in whatever way its missing library does
             log.debug('cannot list %s: %s', vendor, err)
             continue
         names = sorted(

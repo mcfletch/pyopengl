@@ -5,7 +5,7 @@ import unittest
 from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 
 VERTEX = '''#version 120
 uniform mat2x3 m23; uniform mat3x2 m32; uniform mat2x4 m24;

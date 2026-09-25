@@ -18,7 +18,7 @@ import unittest
 from gltestcase import GLTestCase
 from glget_check import GLGetCheckMixin, expected_count
 
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 
 _VS = '#version 330 core\nvoid main(){ gl_Position = vec4(0.0); }\n'
 _GS = ('#version 330 core\nlayout(triangles) in;\n'

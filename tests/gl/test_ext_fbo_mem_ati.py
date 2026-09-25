@@ -9,14 +9,14 @@ from OpenGL import acceleratesupport
 from arraycompat import np, object_names, one
 
 from gltestcase import GLTestCase
-from OpenGL.GL import *  # noqa: F401,F403
-from OpenGL.GL.EXT.framebuffer_object import *  # noqa: F401,F403
-from OpenGL.GL.EXT.framebuffer_blit import *  # noqa: F401,F403
-from OpenGL.GL.EXT.framebuffer_multisample import *  # noqa: F401,F403
-from OpenGL.GL.EXT.texture_array import *  # noqa: F401,F403
-from OpenGL.GL.EXT.memory_object import *  # noqa: F401,F403
-from OpenGL.GL.EXT.memory_object_fd import *  # noqa: F401,F403
-from OpenGL.GL.ATI.fragment_shader import *  # noqa: F401,F403
+from OpenGL.GL import *
+from OpenGL.GL.EXT.framebuffer_object import *
+from OpenGL.GL.EXT.framebuffer_blit import *
+from OpenGL.GL.EXT.framebuffer_multisample import *
+from OpenGL.GL.EXT.texture_array import *
+from OpenGL.GL.EXT.memory_object import *
+from OpenGL.GL.EXT.memory_object_fd import *
+from OpenGL.GL.ATI.fragment_shader import *
 
 
 class TestEXTFramebufferObject(GLTestCase):

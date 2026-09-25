@@ -22,7 +22,7 @@ import unittest
 from gltestcase import GLTestCase
 from glget_check import GLGetCheckMixin
 
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 
 
 class TestExtensionGLGets(GLGetCheckMixin, GLTestCase):

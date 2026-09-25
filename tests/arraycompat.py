@@ -38,7 +38,7 @@ from OpenGL._configflags import ERROR_ON_COPY
 HAVE_NUMPY = True
 
 try:
-    import numpy as np  # noqa: F401  (re-exported)
+    import numpy as np  # re-exported
 except ImportError:
     HAVE_NUMPY = False
 

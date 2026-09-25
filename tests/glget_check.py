@@ -305,16 +305,4 @@ class GLGetCheckMixin:
             return name in self.extensions()
         # features are GL_VERSION_M_m / GL_ES_VERSION_M_m -- gate on context version
         digits = [int(p) for p in name.split('_') if p.isdigit()]
-        return len(digits) >= 2 and tuple(digits[-2:]) <= self._context_version()
-
-    def _context_version(self):
-        """Context (major, minor); falls back to the declared ``gl_version``.
-
-        ``self.version()`` queries ``GL_MAJOR_VERSION``, which the GLES2 module
-        doesn't export, so the live query raises for ES -- use the requested
-        version there.
-        """
-        try:
-            return self.version()
-        except Exception:
-            return tuple(self.gl_version)
+        return len(digits) >= 2 and tuple(digits[-2:]) <= self.version()

@@ -5,7 +5,7 @@ import unittest
 from arraycompat import np, astype  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 
 CTRL = np.array([[-1, -1, 0], [1, 1, 0]], 'f')
 CTRL2 = np.array([[[-1, -1, 0], [1, -1, 0]], [[-1, 1, 0], [1, 1, 0]]], 'f')

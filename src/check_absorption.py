@@ -59,7 +59,7 @@ def _shape(value):
         # only thing about it that matters.
         try:
             return ('callable', tuple(value(n) for n in (1, 2, 8, 64)))
-        except Exception:
+        except Exception:  # noqa: BLE001 a size callable may refuse the probe in any way; it is then compared by name
             return ('callable', type(value).__name__, getattr(value, '__name__', ''))
     return (type(value).__name__, repr(value))
 
@@ -107,7 +107,7 @@ def main(argv=None):
             module_name = module_name[:-3].replace(os.sep, '.')
             try:
                 from_chain = importlib.import_module(module_name)
-            except Exception as error:  # a module needing a live context
+            except Exception as error:  # noqa: BLE001 a module needing a live context or an absent platform library; counted as skipped
                 skipped += 1
                 if options.verbose:
                     print('  skipped %s: %s' % (module_name, error))
@@ -174,7 +174,7 @@ def _rebound_by_star_imports(text, module):
             continue
         try:
             source = importlib.import_module(node.module)
-        except Exception:
+        except Exception:  # noqa: BLE001, S112 a module that will not import here has no names to compare
             continue
         for name in dir(source):
             if name.startswith(('gl', 'egl', 'wgl', 'glX')):

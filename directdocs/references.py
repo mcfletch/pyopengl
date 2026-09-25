@@ -48,17 +48,21 @@ def glProcess( filename, tokenType, tokenString, sourceStart, sourceEnd, lineTex
     
 
 def generate_tokens_file( filename, filterFunction=glName, processFunction=glProcess ):
-    """Generate a set of tokens for the given filename"""
-    file = open(filename)
-    try:
-        generator = tokenize.generate_tokens( file.readline )
-        for (tokenType,tokenString,(sourceRow,sourceCol),(endRow,endCol),lineText) in generator:
-    ##      print (tokenType,tokenString,(sourceRow,sourceCol),(endRow,endCol),lineText)
-            if tokenType == token.NAME and filterFunction and filterFunction(tokenString):
-                if processFunction:
-                    processFunction( filename, tokenType, tokenString, (sourceRow,sourceCol),(endRow,endCol),lineText )
-    except Exception as err:
-        pass
+    """Generate a set of tokens for the given filename
+
+    A file that does not tokenize as Python 3 -- a Python 2 sample, one in a
+    legacy encoding -- is named in the log, and the names found before the
+    point it failed at are kept.
+    """
+    with open(filename, encoding='utf-8') as file:
+        try:
+            generator = tokenize.generate_tokens( file.readline )
+            for (tokenType,tokenString,(sourceRow,sourceCol),(endRow,endCol),lineText) in generator:
+                if tokenType == token.NAME and filterFunction and filterFunction(tokenString):
+                    if processFunction:
+                        processFunction( filename, tokenType, tokenString, (sourceRow,sourceCol),(endRow,endCol),lineText )
+        except (tokenize.TokenError, SyntaxError, UnicodeDecodeError) as err:
+            log.warning( """Not scanned past the failure in %s: %s""", filename, err )
 
 #: Directories that hold no source anybody wrote.  `.git` is the expensive one:
 #: it is most of a checkout by file count, and every object in it is scanned as

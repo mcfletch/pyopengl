@@ -120,7 +120,7 @@ class GLError( Error ):
             try:
                 from OpenGL.GLU import gluErrorString
                 self.description = value = gluErrorString( self.err )
-            except Exception as err:
+            except Exception as err:  # noqa: BLE001 formats an error already being raised, and must not replace it
                 return None
         if value is None:
             return None
@@ -248,7 +248,7 @@ def _close_block_in_gl( ):
         if not PLATFORM.GetCurrentContext( ):
             return
         end = getattr( PLATFORM.GL, 'glEnd', None )
-    except Exception:          # pragma: no cover - no GL library to ask at all
+    except Exception:  # noqa: BLE001 with no GL library to ask, each platform fails in its own way  # pragma: no cover
         return
     if end is not None:
         end( )

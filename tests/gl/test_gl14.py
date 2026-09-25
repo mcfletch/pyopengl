@@ -9,7 +9,7 @@ from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is abs
 from arraycompat import copy_safe
 from gltestcase import GLTestCase
 from OpenGL import arrays
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 
 
 class TestGL14(GLTestCase):

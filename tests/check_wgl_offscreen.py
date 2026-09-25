@@ -54,7 +54,7 @@ def main():
 
     try:
         extensions = offscreen.wgl_extensions()
-    except Exception as err:                   # no GL library, no bootstrap
+    except Exception as err:  # noqa: BLE001 a manual check script: no GL library or no bootstrap context, reported and exits 1
         print('no WGL here: %s' % (err,))
         return 1
     print('%d WGL extensions' % (len(extensions),))
@@ -75,7 +75,7 @@ def main():
             context = offscreen.OffscreenContext(
                 width=64, height=64, profile=profile, version=version,
             )
-        except Exception as err:               # a driver-specific refusal
+        except Exception as err:  # noqa: BLE001 a manual check script: a driver's refusal of one profile is printed and the next is tried
             print('%-13s unavailable: %s' % (profile, err))
             continue
         try:

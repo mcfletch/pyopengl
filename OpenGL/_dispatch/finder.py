@@ -44,7 +44,7 @@ import pkgutil
 import sys
 
 from OpenGL import _declarations
-from OpenGL._declarations import Declaration, resolve_type  # noqa: F401
+from OpenGL._declarations import Declaration, resolve_type
 from OpenGL._dispatch import support
 
 #: One reader, one declaration class, for both routes into the same

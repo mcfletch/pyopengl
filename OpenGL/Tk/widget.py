@@ -276,7 +276,7 @@ class GLFrame(tkinter.Frame):
             return
         try:
             self.createContext()
-        except Exception as error:
+        except Exception as error:  # noqa: BLE001 kept as contextError and raised by waitForMap and makeCurrent
             # Not raised: a Tk binding's exception surfaces as a callback error
             # with nothing to connect it to the code that built the widget.
             # waitForMap and makeCurrent raise it where a caller is listening.
@@ -286,7 +286,7 @@ class GLFrame(tkinter.Frame):
             # otherwise keep this widget, and through it the Tk root, alive for
             # as long as it keeps the record, and let the root go on whichever
             # thread drops the record last.
-            log.error('could not make a GL context for %s: %s',
+            log.error('could not make a GL context for %s: %s',  # noqa: TRY400 a record holding the traceback would hold its frames, and through them this widget
                       str(self), str(error))
             return
         self._ensureInitialised()

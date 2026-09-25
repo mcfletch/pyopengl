@@ -14,7 +14,7 @@ import unittest
 from arraycompat import one
 from gltestcase import GLTestCase
 from OpenGL._scalar import as_int
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 from OpenGL.GL.ARB.shader_objects import glGetActiveUniformARB
 from OpenGL.GL.shaders import compileProgram, compileShader
 

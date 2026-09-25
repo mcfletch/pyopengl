@@ -7,7 +7,7 @@ from arraycompat import nbytes, np, object_names, one
 
 from arraycompat import copy_safe
 from gltestcase import GLTestCase
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 
 
 def _one(x):

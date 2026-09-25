@@ -37,9 +37,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 
-import fetch_registries  # noqa: E402
-from cdispatch import generate  # noqa: E402
-from cdispatch.emit_handwritten import emit_handwritten  # noqa: E402
+import fetch_registries
+from cdispatch import generate
+from cdispatch.emit_handwritten import emit_handwritten
 
 
 def main(argv=None):

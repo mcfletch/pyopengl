@@ -12,8 +12,8 @@ from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
 
-from OpenGL.GL import *  # noqa: F401,F403
-from OpenGL.GL.NV.vertex_program import *  # noqa: F401,F403
+from OpenGL.GL import *
+from OpenGL.GL.NV.vertex_program import *
 
 VP = b'''!!VP1.0
 MOV o[HPOS], v[OPOS];

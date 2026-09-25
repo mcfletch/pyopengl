@@ -149,7 +149,7 @@ class GLUTCallback( object ):
                     if not CurrentContextIsValid():
                         raise RuntimeError( """No valid context!""" )
                     return function( *args, **named )
-                except Exception as err:
+                except Exception as err:  # noqa: BLE001 a GUI callback that raises ends the program, after printing its traceback
                     traceback.print_exc()
                     sys.stderr.write( """GLUT %s callback %s with %s,%s failed: returning None %s\n"""%(
                         self.typeName, function, args, named, err, 
@@ -372,8 +372,8 @@ def cleanupWindowContext( window ):
     try:
         GLUT.glutSetWindow(window)
         result = contextdata.cleanupContext( contextdata.getContext() )
-    except Exception as err:
-        _log.error(
+    except Exception as err:  # noqa: BLE001 the window is destroyed whatever the cleanup raised, and the report carries its traceback
+        _log.exception(
             """Error attempting to clean up context data for GLUT window %s: %s""",
             window, err,
         )

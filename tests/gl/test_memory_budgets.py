@@ -24,7 +24,7 @@ from gltestcase import GLTestCase
 from OpenGL import arrays
 from OpenGL.arrays import vbo
 from OpenGL.arrays.arraydatatype import ArrayDatatype
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 
 psutil = pytest.importorskip('psutil', reason='psutil measures the resident set')
 

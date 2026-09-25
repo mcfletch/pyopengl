@@ -8,9 +8,9 @@ import ctypes
 from arraycompat import np, object_names, one
 
 from gltestcase import GLTestCase
-from OpenGL.GL import *  # noqa: F401,F403
-from OpenGL.GL.ARB.vertex_program import *  # noqa: F401,F403
-from OpenGL.GL.ARB.fragment_program import *  # noqa: F401,F403
+from OpenGL.GL import *
+from OpenGL.GL.ARB.vertex_program import *
+from OpenGL.GL.ARB.fragment_program import *
 
 VP = b'''!!ARBvp1.0
 MOV result.position, vertex.position;

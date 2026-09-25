@@ -17,7 +17,7 @@ import unittest
 
 from gltestcase import GLTestCase
 from OpenGL import GL
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 from OpenGL.GL import shaders
 
 VERTEX = '#version 330 core\nvoid main(){ gl_Position = vec4(0.0); }'

@@ -62,7 +62,7 @@ _HEADER_LINES = 40
 
 def _numpy_installed():
     try:
-        import numpy  # noqa: F401
+        import numpy
     except ImportError:
         return False
     return True

@@ -31,6 +31,7 @@ import importlib
 import pathlib
 
 import paths
+import platforms
 import pytest
 
 #: Wrapper methods whose first positional argument names a parameter.
@@ -91,6 +92,11 @@ def _friendly_modules():
             '.'.join(relative.with_suffix('').parts),)
 
 
+def _names_the_module_or_a_parent(missing, rawname):
+    """Whether the module found missing is `rawname` or a package holding it."""
+    return rawname == missing or rawname.startswith('%s.' % (missing,))
+
+
 def _findings():
     findings, checked, modules = [], 0, 0
     for path, rawname in _friendly_modules():
@@ -103,9 +109,14 @@ def _findings():
             continue
         try:
             raw = importlib.import_module(rawname)
-        except Exception:
-            # An API this platform cannot bind; covered elsewhere.
-            continue
+        except ModuleNotFoundError as error:
+            if not _names_the_module_or_a_parent(error.name, rawname):
+                raise
+            continue    # a module with no raw counterpart
+        except ImportError:
+            if platforms.bindable(rawname.split('.')[2]):
+                raise
+            continue    # an API this platform cannot bind; covered elsewhere
         modules += 1
         for entry, names in sorted(wanted.items()):
             declared = getattr(getattr(raw, entry, None), 'argNames', None)

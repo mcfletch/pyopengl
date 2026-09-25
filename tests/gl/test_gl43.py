@@ -7,7 +7,7 @@ import ctypes
 from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 
 COMPUTE = '''#version 430 core
 layout(local_size_x=1) in;

@@ -85,10 +85,7 @@ class TestES32Debug(ESTestCase):
         glGetPointerv(GL_DEBUG_CALLBACK_FUNCTION, ctypes.byref(ptr))
 
         # draining the log is a no-op now (synchronous callback consumed it)
-        try:
-            glGetDebugMessageLog(1, 256)
-        except Exception:
-            pass
+        glGetDebugMessageLog(1, 256)
 
     def test_groups_and_labels(self):
         glPushDebugGroup(GL_DEBUG_SOURCE_APPLICATION, 0, -1, b'group')

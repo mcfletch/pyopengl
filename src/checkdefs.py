@@ -22,7 +22,7 @@ def main():
                 try:
                     subprocess.check_call( ['python', os.path.join( path, file )],env=running_env )
                 except subprocess.CalledProcessError:
-                    log.error( 'Failure loading: %s/%s', path, file )
+                    log.error( 'Failure loading: %s/%s', path, file )  # noqa: TRY400 the child printed its own traceback; this one would only name check_call
 
 if __name__ == "__main__":
     logging.basicConfig( level = logging.INFO )

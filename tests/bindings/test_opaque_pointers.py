@@ -55,7 +55,7 @@ def _handle_classes():
     for module_name, name in _REAL_HANDLES:
         try:
             found[name] = getattr(importlib.import_module(module_name), name)
-        except Exception:      # this run's platform has no such binding
+        except ImportError:    # this run's platform has no such binding
             continue
     # One made here as well, because `opaque_pointer_cls` is public and a
     # binding for a new API calls it -- so the behaviour has to belong to the

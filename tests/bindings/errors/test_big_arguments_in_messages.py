@@ -24,7 +24,7 @@ import pytest
 
 from arraycompat import np, one
 from gltestcase import GLTestCase
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 
 #: Big enough that formatting it would be unmistakable -- 32 MB is about 100
 #: million characters as decimal digits -- and small enough to allocate
@@ -54,7 +54,7 @@ class TestAWrongCallWithALargeArgument(GLTestCase):
         started = time.time()
         try:
             call()
-        except Exception as error:
+        except Exception as error:  # noqa: BLE001 the case is the message of whatever the wrong call raises
             text = str(error)
         else:
             pytest.fail('the wrong call was accepted')

@@ -50,33 +50,33 @@ _CONFIGURATION = {
 _SET_HERE = [name for name in _CONFIGURATION if name not in os.environ]
 os.environ.update({name: _CONFIGURATION[name] for name in _SET_HERE})
 
-import argparse  # noqa: E402
-import glob  # noqa: E402
-import json  # noqa: E402
-import logging  # noqa: E402
-import inspect  # noqa: E402
-import pkgutil  # noqa: E402
-import re  # noqa: E402
-import sys  # noqa: E402
-import textwrap  # noqa: E402
-import types  # noqa: E402
-from ctypes import _CFuncPtr as CFunctionType  # noqa: E402
-from typing import Any, Iterable  # noqa: E402
+import argparse
+import glob
+import json
+import logging
+import inspect
+import pkgutil
+import re
+import sys
+import textwrap
+import types
+from ctypes import _CFuncPtr as CFunctionType
+from typing import Any, Iterable
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PACKAGE_ROOT = os.path.dirname(HERE)
 if PACKAGE_ROOT not in sys.path:
     sys.path.insert(0, PACKAGE_ROOT)
 
-from directdocs import model, rst, stubs  # noqa: E402
-from directdocs.rst import Writer, write_docstring  # noqa: E402
-from OpenGL import platform  # noqa: E402
-from OpenGL.constant import Constant  # noqa: E402
-from OpenGL.extensions import _Alternate as Alternate  # noqa: E402
-from OpenGL.GLUT.special import GLUTCallback  # noqa: E402
-from OpenGL.lazywrapper import _LazyWrapper as Lazy  # noqa: E402
-from OpenGL.platform.baseplatform import _NullFunctionPointer as NullFunc  # noqa: E402
-from OpenGL.wrapper import Wrapper  # noqa: E402
+from directdocs import model, rst, stubs
+from directdocs.rst import Writer, write_docstring
+from OpenGL import platform
+from OpenGL.constant import Constant
+from OpenGL.extensions import _Alternate as Alternate
+from OpenGL.GLUT.special import GLUTCallback
+from OpenGL.lazywrapper import _LazyWrapper as Lazy
+from OpenGL.platform.baseplatform import _NullFunctionPointer as NullFunc
+from OpenGL.wrapper import Wrapper
 
 for _name in _SET_HERE:
     # PyOpenGL has read its configuration by now, so these have done their
@@ -432,7 +432,7 @@ def docstring_lines(obj: Any) -> str:
     """``obj``'s docstring, or ``''`` where it has none that can be read."""
     try:
         text = obj.docstring
-    except Exception as err:  # a wrapper whose __doc__ is built on demand
+    except Exception as err:  # noqa: BLE001 a wrapper's __doc__ is built on demand, by code that may raise anything
         log.debug('no docstring for %r: %s', obj, err)
         return ''
     if not isinstance(text, str):
@@ -448,7 +448,7 @@ def attribute_options(prop: Any) -> dict[str, str]:
     if prop.default is not NOT_SET:
         try:
             options['value'] = repr(prop.default)
-        except Exception as err:
+        except Exception as err:  # noqa: BLE001 a __repr__ may raise anything
             log.debug('cannot show the default of %s: %s', prop.name, err)
     return options
 
@@ -491,7 +491,7 @@ def constant_value(constant: Any) -> str:
             return repr(float(constant))
         if isinstance(constant, bytes):
             return repr(constant)
-    except Exception as err:
+    except Exception as err:  # noqa: BLE001 a constant is an int subclass whose comparison and conversion may be overridden
         log.debug('cannot read the value of %r: %s', constant, err)
     return ''
 
@@ -974,7 +974,7 @@ def render_projects(
         module = PyModule(name, roots=owners)
         try:
             module.inspect()
-        except (Exception, SystemExit) as err:
+        except (Exception, SystemExit) as err:  # noqa: BLE001 a module that will not import on this machine costs its own page, and is listed as failed
             log.warning('could not document %s: %s', name, err)
             failed.append(name)
             continue
@@ -994,8 +994,10 @@ def render_projects(
     for module in modules:
         try:
             page = renderer.render(module)
-        except Exception as err:
-            log.warning('could not write the page for %s: %s', module.name, err)
+        except Exception as err:  # one page that fails costs only itself
+            log.warning(
+                'could not write the page for %s: %s', module.name, err, exc_info=True
+            )
             failed.append(module.name)
             continue
         with open(

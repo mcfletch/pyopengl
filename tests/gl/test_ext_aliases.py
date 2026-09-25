@@ -7,12 +7,12 @@ import unittest
 from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
-from OpenGL.GL import *  # noqa: F401,F403
-from OpenGL.GL.ARB.multitexture import *  # noqa: F401,F403
-from OpenGL.GL.ARB.window_pos import *  # noqa: F401,F403
-from OpenGL.GL.MESA.window_pos import *  # noqa: F401,F403
-from OpenGL.GL.EXT.secondary_color import *  # noqa: F401,F403
-from OpenGL.GL.NV.half_float import *  # noqa: F401,F403
+from OpenGL.GL import *
+from OpenGL.GL.ARB.multitexture import *
+from OpenGL.GL.ARB.window_pos import *
+from OpenGL.GL.MESA.window_pos import *
+from OpenGL.GL.EXT.secondary_color import *
+from OpenGL.GL.NV.half_float import *
 
 
 class TestMultitextureARB(GLTestCase):

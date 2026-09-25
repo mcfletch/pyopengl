@@ -177,7 +177,7 @@ def _loadLibraryPosix(dllType, name, mode):
             result = dllType(filename, mode)
             _log.debug( 'Loaded %s => %s %s', base_name, filename, result)
             return result
-        except Exception as current_err:
+        except OSError as current_err:
             err = current_err
     
     _log.info('''Failed to load library ( %r ): %s''', filename, err or 'No filenames available to guess?')
@@ -207,7 +207,7 @@ def _loadLibraryWindows(dllType, name, mode):
     else:
         try:
             fullName = util.find_library( name )
-        except Exception as err:
+        except Exception as err:  # noqa: BLE001 find_library runs the platform's own tools, whose failures are not a documented set
             _log.info( '''Failed on util.find_library( %r ): %s''', name, err )
             # Should the call fail, we just try to load the base filename...
         if fullName is not None:
@@ -230,7 +230,7 @@ def _loadLibraryWindows(dllType, name, mode):
     for candidate in candidates:
         try:
             return dllType( candidate, mode )
-        except Exception as current:
+        except OSError as current:
             err = current
     err.args += (name,fullName)
     raise err

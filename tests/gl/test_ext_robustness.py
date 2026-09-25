@@ -6,9 +6,9 @@ import unittest
 from arraycompat import nbytes, np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
-from OpenGL.GL import *  # noqa: F401,F403
-from OpenGL.GL.ARB.robustness import *  # noqa: F401,F403
-from OpenGL.GL.KHR.robustness import *  # noqa: F401,F403
+from OpenGL.GL import *
+from OpenGL.GL.ARB.robustness import *
+from OpenGL.GL.KHR.robustness import *
 
 FS = 'uniform float uf; uniform int ui; void main(){ gl_FragColor = vec4(uf+float(ui)); }'
 VS = 'void main(){ gl_Position = gl_Vertex; }'

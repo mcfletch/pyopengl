@@ -137,7 +137,7 @@ class ExtensionQuerier(object):
 
         try:
             context = platform.PLATFORM.GetCurrentContext()
-        except Exception:
+        except Exception:  # noqa: BLE001 each platform plugin fails in its own way where it cannot say
             context = None
         if not context:
             value = getattr(self, kind)

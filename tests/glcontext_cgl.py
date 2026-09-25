@@ -31,6 +31,7 @@ import logging
 import os
 
 from OpenGL import CGL
+from OpenGL.error import GLError
 
 log = logging.getLogger(__name__)
 
@@ -112,7 +113,7 @@ class CGLBackend(object):
         self._cgl_context = context
         try:
             self._target = CGL.OffscreenTarget(self.width, self.height)
-        except Exception as err:
+        except (CGL.CGLError, GLError) as err:
             self._destroy_context()
             self.skipTest('no %dx%d offscreen target: %s'
                           % (self.width, self.height, err))

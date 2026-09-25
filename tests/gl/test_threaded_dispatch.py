@@ -20,7 +20,7 @@ import threading
 import unittest
 
 import OpenGL._dispatch as dispatch
-import OpenGL.GL  # noqa: F401  -- installs the implementation under test
+import OpenGL.GL  # installs the implementation under test
 from OpenGL import platform
 from glcontext import Context
 

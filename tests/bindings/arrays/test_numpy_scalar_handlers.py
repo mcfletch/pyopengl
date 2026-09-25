@@ -18,7 +18,7 @@ import pytest
 
 numpy = pytest.importorskip('numpy')
 
-from OpenGL.arrays import ArrayDatatype  # noqa: E402
+from OpenGL.arrays import ArrayDatatype
 
 
 def _ctypes_refuses_a_float():

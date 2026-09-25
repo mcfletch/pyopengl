@@ -289,7 +289,7 @@ class OffscreenContext(object):
         """
         try:
             self.release()
-        except Exception:
+        except Exception:  # noqa: BLE001, S110 a finaliser has nobody to raise to
             pass
 
     def __enter__(self):

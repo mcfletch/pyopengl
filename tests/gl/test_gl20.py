@@ -6,7 +6,7 @@ from arraycompat import np, object_names, one
 
 from gltestcase import GLTestCase
 from OpenGL import error
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 
 #: The smallest legal 3.30 vertex shader, for the case about `glShaderSource`
 #: taking a `str` rather than about what the shader does.

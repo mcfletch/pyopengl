@@ -153,7 +153,7 @@ class TestRebuildingFromTheTable:
         is one -- from the table.  Reading the table alone would drop the
         conversion and hand the driver a list.
         """
-        import OpenGL.GL  # noqa: F401 -- installs the layer
+        import OpenGL.GL  # installs the layer
         from OpenGL.raw.GL.VERSION import GL_2_0
 
         declared = dict(

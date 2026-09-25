@@ -16,7 +16,7 @@ import pytest
 
 from gltestcase import GLTestCase
 from OpenGL import error
-from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.GL import *
 
 import OpenGL._dispatch as dispatch
 

@@ -250,7 +250,7 @@ if CallFuncPyConverter is None:
                 try:
                     rbytes = self.arrayType.arrayByteCount(result)
                     vbytes = self.arrayType.arrayByteCount(value)
-                except Exception:
+                except Exception:  # noqa: BLE001 each format handler refuses an unmeasurable value in its own way
                     # Not measurable -- a list has no byte count of its own --
                     # so there is no shrinking coercion to detect here.  The
                     # size the call will write is still checked below.
@@ -276,7 +276,7 @@ if CallFuncPyConverter is None:
             """
             try:
                 shape = self.getSize(pyArgs)
-            except Exception:
+            except Exception:  # noqa: BLE001 a size is worked out by a callable the wrapper declared, whose failures are its own
                 return None
             if isinstance(shape, int):
                 return shape
@@ -333,7 +333,7 @@ if CallFuncPyConverter is None:
             try:
                 wanted_bytes = wanted * ctypes.sizeof(self.arrayType.baseType)
                 held_bytes = self.arrayType.arrayByteCount(array)
-            except Exception:
+            except Exception:  # noqa: BLE001 each format handler refuses an unmeasurable value in its own way
                 return          # not measurable; nothing to compare against
             if held_bytes < wanted_bytes:
                 raise ValueError(
