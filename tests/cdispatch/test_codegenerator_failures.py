@@ -21,7 +21,7 @@ def test_a_failure_in_the_output_wrapping_is_raised(monkeypatch):
     def commands():
         raise _Broken('a registry that cannot list its commands')
 
-    def set_trace(*args, **named):
+    def set_trace(*_args, **_named):
         raise AssertionError('the generator entered the debugger')
 
     monkeypatch.setattr(pdb, 'set_trace', set_trace)

@@ -15,7 +15,7 @@ def _names(path):
     found = []
     references.generate_tokens_file(
         str(path),
-        processFunction=lambda filename, kind, name, *rest: found.append(name),
+        processFunction=lambda *token: found.append(token[2]),
     )
     return found
 
