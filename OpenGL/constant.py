@@ -87,14 +87,3 @@ def declared( name, value, module ):
         constant.__module__ = module
     return constant
 
-
-if __name__ == "__main__":
-    x = IntConstant( 'testint', 3 )
-    y = FloatConstant( 'testfloat', 3.0 )
-    z = StringConstant( 'teststr', 'some testing string' )
-
-    import pickle
-    for val in x,y,z:
-        restored = pickle.loads( pickle.dumps( val ))
-        assert restored == val, (str(restored),str(val))
-        assert restored.name == val.name, (restored.name,val.name)

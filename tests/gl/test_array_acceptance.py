@@ -20,6 +20,7 @@ from gltestcase import GLTestCase
 import OpenGL
 from OpenGL import acceleratesupport, arrays, error, _configflags
 from OpenGL.GL import *
+from typing import ClassVar
 
 #: ``ARRAY_SIZE_CHECKING`` is what makes a wrongly sized array an exception
 #: rather than a short read the driver performs.  A run that has switched it
@@ -499,8 +500,8 @@ class TestAnOffsetIntoABoundBuffer(GLTestCase):
     gl_version = (3, 3)
 
     #: Enough vertices for one triangle, and indices naming them.
-    VERTICES = [0.0, 0.0, 1.0, 0.0, 0.0, 1.0]
-    INDICES = [0, 1, 2]
+    VERTICES: ClassVar[list] = [0.0, 0.0, 1.0, 0.0, 0.0, 1.0]
+    INDICES: ClassVar[list] = [0, 1, 2]
 
     #: The program every draw below runs.  A core profile has no
     #: fixed-function pipeline to fall back on, so a draw with no program in

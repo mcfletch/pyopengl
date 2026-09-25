@@ -5,6 +5,7 @@ Data-type handlers are specified using OpenGL.plugins module
 
 import ctypes
 from OpenGL import plugins
+from typing import ClassVar
 
 
 class FormatHandler(object):
@@ -15,15 +16,15 @@ class FormatHandler(object):
     it represents.
     """
 
-    LAZY_TYPE_REGISTRY = {}  # more registrations
-    HANDLER_REGISTRY = {}
+    LAZY_TYPE_REGISTRY: ClassVar[dict] = {}  # more registrations
+    HANDLER_REGISTRY: ClassVar[dict] = {}
     baseType = None
     typeConstant = None
     HANDLED_TYPES = ()
     preferredOutput = None
     isOutput = False
-    GENERIC_OUTPUT_PREFERENCES = ['numpy', 'ctypesarrays']
-    ALL_OUTPUT_HANDLERS = []
+    GENERIC_OUTPUT_PREFERENCES = ('numpy', 'ctypesarrays')
+    ALL_OUTPUT_HANDLERS: ClassVar[list] = []
 
     def loadAll(cls):
         """Load all OpenGL.plugins-registered FormatHandler classes"""

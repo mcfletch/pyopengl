@@ -212,7 +212,7 @@ class GLUTMenuCallback( object ):
         menu = _simple.glutCreateMenu( cCallback )
         contextdata.setValue( ('menucallback',menu), (cCallback,func) )
         return menu
-    glutCreateMenu.argNames = [ 'func' ]
+    glutCreateMenu.argNames = ('func',)
     glutCreateMenu = classmethod( glutCreateMenu )
     def glutDestroyMenu( cls, menu ):
         """Destroy (cleanup) the given menu
@@ -224,7 +224,7 @@ class GLUTMenuCallback( object ):
         result = _simple.glutDestroyMenu( menu )
         contextdata.delValue( ('menucallback',menu) )
         return result
-    glutDestroyMenu.argNames = [ 'menu' ]
+    glutDestroyMenu.argNames = ('menu',)
     glutDestroyMenu = classmethod( glutDestroyMenu )
 
 glutCreateMenu = GLUTMenuCallback.glutCreateMenu

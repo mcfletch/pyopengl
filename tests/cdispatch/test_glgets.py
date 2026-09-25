@@ -61,7 +61,7 @@ class TestReading:
         ) as handle:
             source = handle.read()
         namespace = {}
-        exec(compile(source, '_glgets.py', 'exec'), namespace)
+        exec(compile(source, '_glgets.py', 'exec'), namespace)  # noqa: S102 runs the shipped table, which is what this case is about
         assert len(table) == len(namespace['_glget_size_mapping'])
 
     def test_every_api_has_a_table(self):

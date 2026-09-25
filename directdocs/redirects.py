@@ -20,7 +20,8 @@ from __future__ import annotations
 
 import html
 import os
-from typing import Iterable, Mapping, Optional
+from typing import Optional
+from collections.abc import Iterable, Mapping
 
 __all__ = (
     'LEGACY_PAGES',

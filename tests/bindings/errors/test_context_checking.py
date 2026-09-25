@@ -22,6 +22,7 @@ import sys
 
 import paths
 import pytest
+from typing import ClassVar
 
 ROOT = paths.ROOT
 
@@ -90,7 +91,7 @@ class TestTheCheckerKnowsWhichApiItIsFor:
     #: compiled one gates on, and PyOpenGL is supported with and without the
     #: compiled one -- so a checker that answers only in one of the two builds
     #: is a difference a program would meet and this file would not.
-    IMPLEMENTATIONS = [True, False]
+    IMPLEMENTATIONS: ClassVar[list] = [True, False]
 
     @pytest.mark.parametrize('accelerate', IMPLEMENTATIONS)
     def test_the_gl_checker_asks_about_a_context(self, accelerate):

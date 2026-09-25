@@ -23,6 +23,7 @@ importing, since importing is what needs the platform already chosen.
 import ctypes.util
 import json
 import textwrap
+from typing import ClassVar
 
 import pytest
 
@@ -660,7 +661,7 @@ class TestTheQueriesReadTheAnswerTheyWereGiven:
     #: Private because the caller-facing function of the same name is Python --
     #: these answer through pointer arguments -- so the declaration cannot
     #: carry the public name.
-    DECLARED = {
+    DECLARED: ClassVar[dict] = {
         '_OSMesaGetDepthBuffer': 5,
         '_OSMesaGetColorBuffer': 5,
         '_OSMesaGetIntegerv': 2,

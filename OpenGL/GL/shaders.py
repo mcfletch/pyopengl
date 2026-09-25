@@ -9,7 +9,8 @@ There are also two utility methods compileProgram and compileShader
 which make it easy to create demos which are shader-using.
 """
 import logging
-from typing import Any, Sequence, Tuple, Union
+from typing import Any, Union
+from collections.abc import Sequence
 log = logging.getLogger( __name__ )
 from OpenGL import GL
 from OpenGL.GL.ARB import (
@@ -229,7 +230,7 @@ class ShaderProgram( int ):
             ))
         return self
 
-    def retrieve( self ) -> Tuple[int, Any]:
+    def retrieve( self ) -> tuple[int, Any]:
         """Attempt to retrieve binary for this compiled shader
 
         Note that binaries for a program are *not* generally portable,

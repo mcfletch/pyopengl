@@ -10,6 +10,7 @@ if PACKAGE_ROOT not in sys.path:
     # samples must pickle as directdocs.model.Sample for generate.py to load
     sys.path.insert(0, PACKAGE_ROOT)
 from directdocs.model import Sample
+from typing import ClassVar
 
 try:
     import logging
@@ -106,7 +107,7 @@ BITBUCKET = '%(baseURL)s/src/tip/%(deltaPath)s#lines-%(sourceRow)s'
 
 class SampleSource( object ):
     """A source from which samples may be generated"""
-    nameMapping = {}
+    nameMapping: ClassVar[dict] = {}
     def __init__(
         self, localDir,
         baseURL = '',

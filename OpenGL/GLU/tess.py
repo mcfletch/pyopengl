@@ -9,6 +9,7 @@ from OpenGL.platform import PLATFORM
 GLU = PLATFORM.GLU
 from OpenGL.lazywrapper import lazy as _lazy
 import ctypes
+from typing import ClassVar
 
 # Type the OOR user-data arguments as a bare void* so the integer handle from
 # GLUStruct.noteObject passes straight through (ctypes converts int -> void*);
@@ -25,7 +26,7 @@ class GLUtesselator(glustruct.GLUStruct, _simple.GLUtesselator):
     """Implementation class for GLUTessellator structures in OpenGL-ctypes"""
 
     FUNCTION_TYPE = PLATFORM.functionTypeFor(PLATFORM.GLU)
-    CALLBACK_TYPES = {
+    CALLBACK_TYPES: ClassVar[dict] = {
         # mapping from "which" GLU enumeration to a ctypes function type
         _simple.GLU_TESS_BEGIN: FUNCTION_TYPE(None, _simple.GLenum),
         _simple.GLU_TESS_BEGIN_DATA: FUNCTION_TYPE(
@@ -62,7 +63,7 @@ class GLUtesselator(glustruct.GLUStruct, _simple.GLUtesselator):
         ),
         _simple.GLU_ERROR: FUNCTION_TYPE(None, _simple.GLenum),
     }
-    WRAPPER_METHODS = {
+    WRAPPER_METHODS: ClassVar[dict] = {
         _simple.GLU_TESS_BEGIN_DATA: 'dataWrapper',
         _simple.GLU_TESS_EDGE_FLAG_DATA: 'dataWrapper',
         _simple.GLU_TESS_VERTEX: 'vertexWrapper',

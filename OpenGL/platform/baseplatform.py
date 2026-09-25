@@ -7,6 +7,7 @@ from OpenGL._bytes import as_8_bit
 import sys, logging
 from OpenGL import _configflags
 from OpenGL import logs, MODULE_ANNOTATIONS
+from typing import ClassVar
 
 log = logging.getLogger(__name__)
 
@@ -261,7 +262,7 @@ class BasePlatform(object):
             function pointers.
     """
 
-    EXPORTED_NAMES = [
+    EXPORTED_NAMES: ClassVar[list] = [
         'GetCurrentContext',
         'CurrentContextIsValid',
         'createBaseFunction',
@@ -305,7 +306,7 @@ class BasePlatform(object):
     #: machine missing a library, it is a program that has not said which
     #: platform it wants -- and the answer is a setting, so the refusal names
     #: it.  See https://github.com/mcfletch/pyopengl/issues/129
-    PLATFORM_SPECIFIC_APIS = {
+    PLATFORM_SPECIFIC_APIS: ClassVar[dict] = {
         'OSMesa': 'osmesa',
     }
 

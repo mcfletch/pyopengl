@@ -10,6 +10,7 @@ every old URL gets a stub that sends a reader to the new one.
 import os
 
 from directdocs import redirects
+from typing import ClassVar
 
 
 class TestResolvingAnOldName:
@@ -24,7 +25,7 @@ class TestResolvingAnOldName:
             'gles3/glBlendBarrier',
         }
     )
-    ENTRY_POINTS = {'glBeginTransformFeedback': 'gl/glBeginTransformFeedback'}
+    ENTRY_POINTS: ClassVar[dict] = {'glBeginTransformFeedback': 'gl/glBeginTransformFeedback'}
 
     def resolve(self, name):
         return redirects.resolve(name, self.ENTRY_POINTS, self.PAGES)

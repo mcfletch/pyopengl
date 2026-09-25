@@ -21,7 +21,7 @@ from __future__ import annotations
 
 import ctypes
 import logging
-from typing import Any, List, Optional
+from typing import Any, Optional
 
 from OpenGL import GL, GLX
 from OpenGL.GLX.ARB import create_context as _create_context
@@ -45,7 +45,7 @@ create_context_profile: Any = _create_context_profile
 __all__ = ['GLXContext', 'configAttributes', 'contextAttributes']
 
 
-def configAttributes(attributes: ContextAttributes) -> List[int]:
+def configAttributes(attributes: ContextAttributes) -> list[int]:
     """The ``glXChooseFBConfig`` attribute list a request asks for
 
     Terminated with ``GL_NONE``, as that call requires.  What is *not* in the
@@ -74,14 +74,14 @@ def configAttributes(attributes: ContextAttributes) -> List[int]:
     return wanted + [GL.GL_NONE]
 
 
-def contextAttributes(attributes: ContextAttributes) -> List[int]:
+def contextAttributes(attributes: ContextAttributes) -> list[int]:
     """The ``glXCreateContextAttribsARB`` attribute list a request asks for
 
     Terminated with 0.  A ``legacy`` request has nothing to say here -- no
     version and no profile -- and is created through ``glXCreateNewContext``
     instead; see :meth:`GLXContext._create`.
     """
-    wanted: List[int] = []
+    wanted: list[int] = []
     if attributes.version:
         wanted += [
             create_context.GLX_CONTEXT_MAJOR_VERSION_ARB, attributes.version[0],
@@ -163,7 +163,7 @@ class collectedXErrors(object):
     def __init__(self, library: Any, display: Any) -> None:
         self.library = library
         self.display = display
-        self.errors: List[str] = []
+        self.errors: list[str] = []
         self._previous = None
         self._handler = ERROR_HANDLER(self._collect)
 

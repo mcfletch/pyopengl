@@ -1,6 +1,7 @@
 """The plug-in registry, and the module list a freezer builds from it."""
 
 from OpenGL import plugins
+from typing import ClassVar
 
 
 def test_registered_modules_drops_the_attribute():
@@ -27,7 +28,7 @@ def test_registered_modules_reads_the_registry_rather_than_a_list():
     """A plug-in registered by a third party is reported like any other."""
 
     class Sample(plugins.Plugin):
-        registry = []
+        registry: ClassVar[list] = []
 
     Sample('sample', 'sample_package.sample_module.SampleEntry')
     try:
@@ -40,7 +41,7 @@ def test_registered_modules_prefix_selects_one_package():
     """The prefix matches whole dotted components, not bare characters."""
 
     class Sample(plugins.Plugin):
-        registry = []
+        registry: ClassVar[list] = []
 
     Sample('near-miss', 'OpenGLContextish.module.Entry')
     try:

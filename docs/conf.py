@@ -32,7 +32,7 @@ author = 'Mike C. Fletcher and Contributors'
 #: 2005 is where ``license.txt`` starts, this being one work with it.  The end
 #: is the year the set is built, so a rebuild keeps it current and nobody has
 #: to remember to.
-copyright = '2005-%s, %s' % (datetime.date.today().year, author)
+copyright = '2005-%s, %s' % (datetime.datetime.now(datetime.timezone.utc).year, author)
 release = __version__
 version = '.'.join(__version__.split('.')[:2])
 

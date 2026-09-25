@@ -128,7 +128,7 @@ def write_lock(commits, path=LOCK):
             'Written by src/regenerate_c.py --update-registries; '
             'src/fetch_registries.py explains why.'
         ),
-        'generated': datetime.date.today().isoformat(),
+        'generated': datetime.datetime.now(datetime.timezone.utc).date().isoformat(),
         'registries': {
             directory: {'url': urls[directory], 'commit': commit}
             for directory, commit in sorted(commits.items())

@@ -190,9 +190,9 @@ if CallFuncPyConverter is None:
         """
 
         argNames = ('name',)
-        indexLookups = [
+        indexLookups = (
             ('index', 'name', 'pyArgIndex'),
-        ]
+        )
         __slots__ = ('index', 'name')
 
         def __call__(self, pyArgs, index, baseOperation):
@@ -220,9 +220,9 @@ if CallFuncPyConverter is None:
         """
 
         argNames = ('name', 'size', 'arrayType')
-        indexLookups = [
+        indexLookups = (
             ('outIndex', 'name', 'cArgIndex'),
-        ]
+        )
         __slots__ = ('index', 'size', 'arrayType', 'outIndex', 'inIndex')
 
         def __call__(self, pyArgs, index, baseOperation):
@@ -396,10 +396,10 @@ if CallFuncPyConverter is None:
             return not isinstance(getattr(self.lookup, '__self__', None), dict)
 
         argNames = ('name', 'specifier', 'lookup', 'arrayType')
-        indexLookups = [
+        indexLookups = (
             ('outIndex', 'name', 'cArgIndex'),
             ('index', 'specifier', 'pyArgIndex'),
-        ]
+        )
         __slots__ = ('index', 'outIndex', 'specifier', 'lookup', 'arrayType')
 
         def getSize(self, pyArgs):
@@ -431,9 +431,9 @@ if CallFuncPyConverter is None:
         """ReturnValues returning the named cArgs value"""
 
         argNames = ('name',)
-        indexLookups = [
+        indexLookups = (
             ('index', 'name', 'cArgIndex'),
-        ]
+        )
         __slots__ = ('index', 'name')
 
         def __call__(self, result, baseOperation, pyArgs, cArgs):
@@ -444,9 +444,9 @@ if CallFuncPyConverter is None:
         """ReturnValues returning the named pyArgs value"""
 
         argNames = ('name',)
-        indexLookups = [
+        indexLookups = (
             ('index', 'name', 'pyArgIndex'),
-        ]
+        )
         __slots__ = ('index', 'name')
 
         def __call__(self, result, baseOperation, pyArgs, cArgs):
@@ -466,9 +466,9 @@ class getPyArgsPointer(CConverter):
     """
 
     argNames = ('name', 'arrayType')
-    indexLookups = [
+    indexLookups = (
         ('index', 'name', 'pyArgIndex'),
-    ]
+    )
     __slots__ = ('index', 'name', 'arrayType')
 
     def __call__(self, pyArgs, index, baseOperation):
@@ -501,9 +501,9 @@ class StringLengths(CConverter):
     """
 
     argNames = ('name',)
-    indexLookups = [
+    indexLookups = (
         ('index', 'name', 'pyArgIndex'),
-    ]
+    )
     __slots__ = ()
 
     def __call__(self, pyArgs, index, baseOperation):

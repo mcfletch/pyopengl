@@ -38,6 +38,7 @@ import backends
 import unittest
 import contextlib
 import importlib.util
+from typing import ClassVar
 
 log = logging.getLogger(__name__)
 
@@ -171,7 +172,7 @@ class Context(object):
     """
 
     #: the entry-point module each API's version string is read through.
-    _API_MODULES = {'gl': 'OpenGL.GL', 'gles': 'OpenGL.GLES2', 'es': 'OpenGL.GLES2'}
+    _API_MODULES: ClassVar[dict] = {'gl': 'OpenGL.GL', 'gles': 'OpenGL.GLES2', 'es': 'OpenGL.GLES2'}
 
     def __init__(self, **requirements):
         namespace = dict(requirements, runTest=lambda self: None)
@@ -708,7 +709,7 @@ class ContextTestCase(unittest.TestCase):
             self.skipTest('entry point %s did not resolve in this process' % (name,))
 
     #: dtype code -> ctypes scalar, for get_checked's canary buffer.
-    _CANARY_CTYPES = {
+    _CANARY_CTYPES: ClassVar[dict] = {
         'i': ctypes.c_int, 'i4': ctypes.c_int,
         'I': ctypes.c_uint, 'u4': ctypes.c_uint,
         'f': ctypes.c_float, 'f4': ctypes.c_float,
@@ -768,7 +769,7 @@ class ContextTestCase(unittest.TestCase):
     #: What ``glGetGraphicsResetStatus`` answers, by the value it returns.  A
     #: context that has been reset keeps accepting calls and drawing nothing,
     #: so this is the only place the difference is visible.
-    _RESET_STATUS = {
+    _RESET_STATUS: ClassVar[dict] = {
         0x8253: 'GL_GUILTY_CONTEXT_RESET -- this context caused a reset',
         0x8254: 'GL_INNOCENT_CONTEXT_RESET -- another context caused a reset',
         0x8255: 'GL_UNKNOWN_CONTEXT_RESET -- a reset of unattributed cause',

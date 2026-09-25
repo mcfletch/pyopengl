@@ -10,7 +10,7 @@ import OpenGL as root
 import sys
 import logging
 import re
-from typing import Any
+from typing import Any, ClassVar
 
 _log = logging.getLogger('OpenGL.extensions')
 VERSION_PREFIX = as_8_bit('GL_VERSION_GL_')
@@ -109,14 +109,14 @@ VERSION_EXTENSIONS = [
 class ExtensionQuerier(object):
     prefix = None
     version_prefix = None
-    assumed_version = [1, 0]
+    assumed_version = (1, 0)
 
     #: process-level fallback cache, used only when no context is current; with
     #: a context the version/extension list is cached per-context (see below).
     version = extensions = None
     version_string = extensions_string = None
 
-    registered = []
+    registered: ClassVar[list['ExtensionQuerier']] = []
 
     def __init__(self):
         self.registered.append(self)
@@ -173,7 +173,7 @@ class ExtensionQuerier(object):
                 int(x)
                 for x in specifier[len(self.version_prefix) :].split(as_8_bit('_'))
             ]
-            if specifier[:2] <= self.assumed_version:
+            if tuple(specifier[:2]) <= self.assumed_version:
                 return True
             version = self.getVersion()
             if not version:
@@ -193,7 +193,7 @@ class ExtensionQuerier(object):
 class _GLQuerier(ExtensionQuerier):
     prefix = as_8_bit('GL_')
     version_prefix = as_8_bit('GL_VERSION_GL_')
-    assumed_version = [1, 1]
+    assumed_version = (1, 1)
 
     # If you call OpenGL's glGetString for a context which is
     # an ES context, you get an ES-style string, here we're going

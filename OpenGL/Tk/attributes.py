@@ -12,7 +12,7 @@ other evidence, so the lists are worth being able to look at without one.
 
 from __future__ import annotations
 
-from typing import Optional, Tuple
+from typing import Optional
 
 __all__ = ['PROFILES', 'ContextAttributes']
 
@@ -83,7 +83,7 @@ class ContextAttributes(object):
     def __init__(
         self,
         profile: str = 'core',
-        version: Optional[Tuple[int, int]] = DEFAULT_VERSION,
+        version: Optional[tuple[int, int]] = DEFAULT_VERSION,
         doubleBuffer: bool = True,
         redSize: int = DEFAULT_COLOUR_SIZE,
         greenSize: int = DEFAULT_COLOUR_SIZE,

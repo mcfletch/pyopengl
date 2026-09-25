@@ -26,7 +26,7 @@ from __future__ import annotations
 
 import ctypes
 import logging
-from typing import Any, Dict, List, Tuple
+from typing import Any
 
 from OpenGL.error import end_abandoned_block
 from OpenGL.Tk.attributes import ContextAttributes
@@ -67,7 +67,7 @@ PFD_TYPE_RGBA = 0
 PFD_MAIN_PLANE = 0
 
 
-def pixelFormatAttributes(attributes: ContextAttributes) -> List[int]:
+def pixelFormatAttributes(attributes: ContextAttributes) -> list[int]:
     """The ``wglChoosePixelFormatARB`` attribute list a request asks for
 
     Terminated with 0, as that call requires.
@@ -97,7 +97,7 @@ def pixelFormatAttributes(attributes: ContextAttributes) -> List[int]:
     return wanted + [0]
 
 
-def contextAttributes(attributes: ContextAttributes) -> List[int]:
+def contextAttributes(attributes: ContextAttributes) -> list[int]:
     """The ``wglCreateContextAttribsARB`` attribute list a request asks for
 
     Terminated with 0.  A ``legacy`` request has nothing to say here and is
@@ -106,7 +106,7 @@ def contextAttributes(attributes: ContextAttributes) -> List[int]:
     create_context = _arb('create_context')
     create_context_profile = _arb('create_context_profile')
 
-    wanted: List[int] = []
+    wanted: list[int] = []
     if attributes.version:
         wanted += [
             create_context.WGL_CONTEXT_MAJOR_VERSION_ARB, attributes.version[0],
@@ -216,7 +216,7 @@ PPIXELFORMATDESCRIPTOR = ctypes.POINTER(PIXELFORMATDESCRIPTOR)
 #: Which half of the handle a window happens to land in decides whether any of
 #: this shows, so the same program makes a context on one window and not the
 #: next.
-SIGNATURES: Dict[Tuple[str, str], Tuple[Any, List[Any]]] = {
+SIGNATURES: dict[tuple[str, str], tuple[Any, list[Any]]] = {
     ('gdi32', 'ChoosePixelFormat'): (
         ctypes.c_int, [HDC, PPIXELFORMATDESCRIPTOR]),
     ('gdi32', 'SetPixelFormat'): (
@@ -233,7 +233,7 @@ SIGNATURES: Dict[Tuple[str, str], Tuple[Any, List[Any]]] = {
 }
 
 #: The libraries :func:`windowsLibrary` has loaded, by name.
-_LIBRARIES: Dict[str, Any] = {}
+_LIBRARIES: dict[str, Any] = {}
 
 
 def windowsLibrary(name: str) -> Any:

@@ -63,7 +63,7 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
 if ADT is None:
     # Python-coded version
     class HandlerRegistry(dict):
-        GENERIC_OUTPUT_PREFERENCES = ["numpy", "ctypesarrays"]
+        GENERIC_OUTPUT_PREFERENCES = ("numpy", "ctypesarrays")
 
         def __init__(self, plugin_match):
             self.match = plugin_match

@@ -2,17 +2,18 @@
 from OpenGL.raw import GLU as _simple
 from OpenGL.platform import createBaseFunction, PLATFORM
 import ctypes
+from typing import ClassVar
 
 class GLUQuadric( _simple.GLUquadric ):
     """Implementation class for GLUQuadric classes in PyOpenGL"""
     FUNCTION_TYPE = PLATFORM.functionTypeFor(PLATFORM.GLU)
-    CALLBACK_TYPES = {
+    CALLBACK_TYPES: ClassVar[dict] = {
         # mapping from "which" GLU enumeration to a ctypes function type
         _simple.GLU_ERROR : FUNCTION_TYPE( None, _simple.GLenum )
     }
     #: mapping from "which" to a registrar with the proper callback argtype;
     #: filled in below once the class (and so POINTER(GLUQuadric)) exists.
-    CALLBACK_FUNCTION_REGISTRARS = {}
+    CALLBACK_FUNCTION_REGISTRARS: ClassVar[dict] = {}
     def getAsParam( self ):
         """Pass instances by pointer; gluNewQuadric returns the dereferenced struct"""
         return ctypes.pointer( self )

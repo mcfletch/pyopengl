@@ -43,7 +43,7 @@ _log = logging.getLogger('OpenGL.arrays.vbo')
 from OpenGL._bytes import long, integer_types
 
 import weakref
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, ClassVar
 
 __all__ = ('VBO', 'VBOHandler', 'mapVBO')
 
@@ -51,7 +51,7 @@ __all__ = ('VBO', 'VBOHandler', 'mapVBO')
 class Implementation(object):
     """Abstraction point for the various implementations that can be used"""
 
-    IMPLEMENTATION_CLASSES = []
+    IMPLEMENTATION_CLASSES: ClassVar[list] = []
     CHOSEN = None
 
     @classmethod
@@ -165,7 +165,7 @@ class Implementation(object):
 
         return doBufferDeletion
 
-    _DELETERS_ = {}
+    _DELETERS_: ClassVar[dict] = {}
 
 
 get_implementation = Implementation.get_implementation

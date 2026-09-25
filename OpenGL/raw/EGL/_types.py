@@ -11,7 +11,7 @@ from OpenGL._bytes import as_8_bit
 
 class _EGLQuerier( extensions.ExtensionQuerier ):
     prefix = as_8_bit('EGL_')
-    assumed_version = [1,0]
+    assumed_version = (1,0)
     version_prefix = as_8_bit('EGL_VERSION_EGL_')
     def getDisplay( self ):
         """Retrieve the currently-bound, or the default, display"""

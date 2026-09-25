@@ -14,6 +14,7 @@ import pytest
 
 from childenv import json_from_child
 from directdocs import dumbpydoc
+from typing import ClassVar
 
 
 class Fake:
@@ -122,7 +123,7 @@ class TestOwnership:
 
 
 class TestReferenceLinks:
-    MANIFEST = {
+    MANIFEST: ClassVar[dict] = {
         'OpenGL.GL': {'glBegin': 'gl/glBegin', 'glColor3f': 'gl/glColor',
                       'glBindTexture': 'gl/glBindTexture'},
         'OpenGL.GLES3': {'glBindTexture': 'gles3/glBindTexture'},

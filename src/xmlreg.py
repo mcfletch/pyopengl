@@ -3,6 +3,7 @@
 from lxml import etree as ET
 import os, sys, json, logging
 from OpenGL._bytes import as_8_bit, unicode, as_str
+from typing import ClassVar
 
 log = logging.getLogger(__name__)
 HERE = os.path.dirname(__file__)
@@ -404,7 +405,7 @@ class Module(list):
 
 class Feature(Module):
     feature = True
-    NORMALIZERS = {
+    NORMALIZERS: ClassVar[dict] = {
         'GL_VERSION_ES_CM_1_0': 'GLES_VERSION_1_0',
         'GL_ES_VERSION_2_0': 'GLES_VERSION_2_0',
         'GL_ES_VERSION_3_0': 'GLES_VERSION_3_0',

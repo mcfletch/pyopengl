@@ -1,5 +1,6 @@
 import logging, os, urllib, traceback, textwrap, keyword
 import xmlreg
+from typing import ClassVar
 from OpenGL._bytes import as_8_bit, as_str, unicode, as_unicode
 
 HERE = os.path.join(os.path.dirname(__file__))
@@ -44,7 +45,7 @@ class Generator(object):
             gen.generate()
         return gen
 
-    GLGET_PARAM_GROUPS = [
+    GLGET_PARAM_GROUPS: ClassVar[list] = [
         #'MaterialParameter',
         #'PixelMap',
         #'LightParameter',
@@ -203,7 +204,7 @@ def %(name)s(%(argNames)s):pass"""
     #: returns garbage and crashes some drivers (llvmpipe segfaults on
     #: GL_DEVICE_LUID_EXT).  The registry can't distinguish them (glGetUnsignedBytev
     #: shares the GetPName group), so they are listed explicitly.
-    NON_GLGET = {
+    NON_GLGET: ClassVar[dict] = {
         'GL_DEVICE_UUID_EXT',
         'GL_DRIVER_UUID_EXT',
         'GL_DEVICE_LUID_EXT',

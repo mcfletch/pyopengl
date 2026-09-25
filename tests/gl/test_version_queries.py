@@ -15,6 +15,7 @@ known until there is a context, deferred until something asks for it.
 import unittest
 
 import json
+from typing import ClassVar
 
 import pytest
 
@@ -134,7 +135,7 @@ class TestTheVersionStringIsParsed(unittest.TestCase):
     """
 
     #: (what the driver said, the version in it, whether it is an ES string).
-    REPORTED = [
+    REPORTED: ClassVar[list] = [
         ('4.6 (Core Profile) Mesa 24.0.9', '4.6', False),
         ('3.0 Mesa 18.3.6', '3.0', False),
         ('2.1 INTEL-10.6.33', '2.1', False),

@@ -3,6 +3,7 @@ import ctypes
 import platform
 from OpenGL.platform import ctypesloader, baseplatform
 import sys
+from typing import ClassVar
 
 if sys.hexversion < 0x2070000:
     vc = 'vc7'
@@ -163,7 +164,7 @@ class Win32Platform( baseplatform.SplitEntryPointPlatform ):
 
         return getExtensionProcedure
 
-    GLUT_FONT_CONSTANTS = {
+    GLUT_FONT_CONSTANTS: ClassVar[dict] = {
         'GLUT_STROKE_ROMAN': ctypes.c_void_p( 0),
         'GLUT_STROKE_MONO_ROMAN': ctypes.c_void_p( 1),
         'GLUT_BITMAP_9_BY_15': ctypes.c_void_p( 2),

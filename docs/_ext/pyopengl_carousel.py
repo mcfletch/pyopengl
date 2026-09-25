@@ -28,7 +28,7 @@ from __future__ import annotations
 import json
 import os
 import posixpath
-from typing import Any
+from typing import Any, ClassVar
 
 from docutils import nodes
 from docutils.parsers.rst import Directive, directives
@@ -54,7 +54,7 @@ def _is_external(url: str) -> bool:
 
 class CarouselDirective(Directive):
     has_content = True
-    option_spec = {
+    option_spec: ClassVar[dict] = {
         'source': directives.unchanged,
         'interval': directives.positive_int,
         'height': directives.positive_int,

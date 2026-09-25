@@ -19,6 +19,7 @@ log = logging.getLogger('openglgenerator')
 import ctypes
 from OpenGL.platform import GL, GLU, GLUT, GLE
 from OpenGL import constant
+from typing import ClassVar
 
 
 def indent(code, indentation='\t'):
@@ -164,7 +165,7 @@ class OpenGLFunction(codegenerator.Function):
             )
         )
 
-    SUFFIX_TO_ARRAY_DATATYPE = [
+    SUFFIX_TO_ARRAY_DATATYPE: ClassVar[list] = [
         ('ub', 'GLGL_1_0.GL_UNSIGNED_BYTE'),
         ('us', 'GLGL_1_0.GL_UNSIGNED_SHORT'),
         ('ui', 'GLGL_1_0.GL_UNSIGNED_INT'),
@@ -174,7 +175,7 @@ class OpenGLFunction(codegenerator.Function):
         ('s', 'GLGL_1_0.GL_SHORT'),
         ('b', 'GLGL_1_0.GL_BYTE'),
     ]
-    CTYPE_TO_ARRAY_TYPE = {
+    CTYPE_TO_ARRAY_TYPE: ClassVar[dict] = {
         'GLfloat': 'GLfloatArray',
         'float': 'GLfloatArray',
         'GLclampf': 'GLclampfArray',

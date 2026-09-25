@@ -12,7 +12,7 @@ c_void = None
 
 class _WGLQuerier( extensions.ExtensionQuerier ):
     prefix = b'WGL_'
-    assumed_version = [1,0]
+    assumed_version = (1,0)
     version_prefix = b'WGL_VERSION_WGL_'
     def pullVersion( self ):
         # only one version...
@@ -244,20 +244,20 @@ class struct__GPU_DEVICE(Structure):
     The name lengths are the registry's: 32 for the device, 128 for its
     description.
     """
-    _fields_ = [
+    _fields_ = (
         ('cb', DWORD),
         ('DeviceName', CHAR * 32),
         ('DeviceString', CHAR * 128),
         ('Flags', DWORD),
         ('rcVirtualScreen', RECT),
-    ]
+    )
 
 _GPU_DEVICE = struct__GPU_DEVICE
 GPU_DEVICE = struct__GPU_DEVICE
 PGPU_DEVICE = POINTER(struct__GPU_DEVICE)
 
 class PIXELFORMATDESCRIPTOR(Structure):
-    _fields_ = [
+    _fields_ = (
         ('nSize',WORD),
         ('nVersion',WORD),
         ('dwFlags',DWORD),
@@ -284,7 +284,7 @@ class PIXELFORMATDESCRIPTOR(Structure):
         ('dwLayerMask',DWORD),
         ('dwVisibleMask',DWORD),
         ('dwDamageMask',DWORD),
-    ]
+    )
 
 # TODO: This is *not* a working definition, calling any function with this will segfault
 HENHMETAFILE = _opaque_pointer_cls( 'HENHMETAFILE' )

@@ -61,7 +61,8 @@ import sys
 import textwrap
 import types
 from ctypes import _CFuncPtr as CFunctionType
-from typing import Any, Iterable
+from typing import Any, ClassVar
+from collections.abc import Iterable
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PACKAGE_ROOT = os.path.dirname(HERE)
@@ -154,7 +155,7 @@ class PyModule(object):
     CLASS_TYPES = (type,)
     CONSTANT_TYPES = (Constant,)
     MODULE_TYPES = (types.ModuleType,)
-    FT_MAP = [
+    FT_MAP: ClassVar[list] = [
         ('functions', FUNCTIONAL_TYPES),
         ('constants', CONSTANT_TYPES),
         ('imports', MODULE_TYPES),

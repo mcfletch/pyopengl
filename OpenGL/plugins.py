@@ -1,5 +1,6 @@
 """Simple plug-in mechanism to provide replacement for setuptools plugins"""
 import logging 
+from typing import ClassVar
 log = logging.getLogger(__name__)
 
 class Plugin( object ):
@@ -90,7 +91,7 @@ def registered_modules( prefix=None ):
 
 class PlatformPlugin( Plugin ):
     """Platform-level plugin registration"""
-    registry: "list[PlatformPlugin]" = []
+    registry: ClassVar[list["PlatformPlugin"]] = []
     @classmethod
     def match( cls, key ):
         """Determine what platform module to load
@@ -106,7 +107,7 @@ class PlatformPlugin( Plugin ):
 
 class FormatHandler( Plugin ):
     """Data-type storage-format handler"""
-    registry: "list[FormatHandler]" = []
+    registry: ClassVar[list["FormatHandler"]] = []
     @classmethod
     def match( cls, value ):
         """Lookup appropriate handler based on value (a type)"""

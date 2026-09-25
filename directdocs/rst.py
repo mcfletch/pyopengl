@@ -17,7 +17,8 @@ import contextlib
 import inspect
 import re
 import textwrap
-from typing import Any, Callable, Iterator, Protocol
+from typing import Any, Callable, ClassVar, Protocol
+from collections.abc import Iterator
 
 __all__ = [
     'Writer',
@@ -481,7 +482,7 @@ class DocBookRenderer:
 
     #: What ``<trademark class="...">`` stands for.  The element is often
     #: empty, the class being the whole of its content.
-    TRADEMARK_SYMBOLS = {
+    TRADEMARK_SYMBOLS: ClassVar[dict] = {
         'copyright': '©',
         'registered': '®',
         'service': '℠',

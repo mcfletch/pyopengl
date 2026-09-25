@@ -29,7 +29,8 @@ import pathlib
 import pickle
 import re
 import sys
-from typing import Any, Iterable, NamedTuple
+from typing import Any, ClassVar, NamedTuple
+from collections.abc import Iterable
 
 import lxml.etree as ET
 
@@ -427,7 +428,7 @@ def section_kind(id: str | None) -> str | None:
 
 
 class RefSect(model.RefSect):
-    query_namespace = {
+    query_namespace: ClassVar[dict] = {
         'd': DOCBOOK_NS,
         'm': MML_NS,
     }
@@ -1269,7 +1270,7 @@ def load_samples() -> dict[str, Any]:
     cache = os.path.join(HERE, references.CACHE_FILE)
     if os.path.isfile(cache):
         with open(cache, 'rb') as fh:
-            return pickle.loads(fh.read())
+            return pickle.loads(fh.read())  # noqa: S301 the index references.py writes on this machine, not a downloaded file
     log.info('no sample index at %s; pages omit their sample sections', cache)
     return {}
 
@@ -1355,7 +1356,9 @@ def main(argv: list[str] | None = None) -> int:
         json.dump(
             {
                 'version': __version__,
-                'generated': datetime.datetime.now().isoformat(timespec='seconds'),
+                'generated': datetime.datetime.now(datetime.timezone.utc).isoformat(
+                    timespec='seconds'
+                ),
                 'entry_points': declared,
             },
             fh,

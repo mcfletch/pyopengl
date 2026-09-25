@@ -14,6 +14,7 @@ import weakref
 from OpenGL.platform import PLATFORM
 import OpenGL
 from OpenGL import _configflags
+from typing import ClassVar
 
 __all__ = (
     'GLUnurbs',
@@ -39,11 +40,11 @@ class GLUnurbs(glustruct.GLUStruct, _simple.GLUnurbs):
     with the size of data you expect.
     """
     FUNCTION_TYPE = PLATFORM.functionTypeFor(PLATFORM.GLU)
-    CALLBACK_FUNCTION_REGISTRARS = {
+    CALLBACK_FUNCTION_REGISTRARS: ClassVar[dict] = {
         # mapping from "which" to a function that should take 3 parameters,
         # the nurb, the which and the function pointer...
     }
-    CALLBACK_TYPES = {
+    CALLBACK_TYPES: ClassVar[dict] = {
         # mapping from "which" GLU enumeration to a ctypes function type
         _simple.GLU_NURBS_BEGIN: FUNCTION_TYPE(
             None, _simple.GLenum
@@ -85,7 +86,7 @@ class GLUnurbs(glustruct.GLUStruct, _simple.GLUnurbs):
             None, _simple.GLenum,
         ),
     }
-    WRAPPER_METHODS = {
+    WRAPPER_METHODS: ClassVar[dict] = {
         _simple.GLU_NURBS_BEGIN: None,
         _simple.GLU_NURBS_BEGIN_DATA: '_justOOR',
         _simple.GLU_NURBS_VERTEX: '_vec3',
