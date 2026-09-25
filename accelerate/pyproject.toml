@@ -70,3 +70,9 @@ cache-keys = [
     { file = "setup.py" },
     { file = "OpenGL_accelerate/__init__.py" },
 ]
+
+[tool.openglcontext-checks]
+# The OGC rules (openglcontext-checks) this project is held to by the
+# workspace preflight: every rule there is, each named, so a rule added
+# later joins when the project is clean of it.
+select = ["OGC131", "OGC141", "OGC161", "OGC201", "OGC221", "OGC222", "OGC223"]

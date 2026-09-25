@@ -244,6 +244,12 @@ warn_unused_ignores = true
 [tool.black]
 skip-string-normalization=true
 
+[tool.openglcontext-checks]
+# The OGC rules (openglcontext-checks) this project is clean of, held by
+# the workspace preflight. The others join as the project reaches zero of
+# each; the counts are in openglcontext/plans/DEFECT-PREVENTION.md.
+select = ["OGC131", "OGC141"]
+
 [tool.ruff.lint]
 # Named explicitly. With `select` unset ruff applies its own default, and that
 # default has widened between releases -- the same checkout went from a few
