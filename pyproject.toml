@@ -250,7 +250,7 @@ skip-string-normalization=true
 # hundred findings to five thousand without a line changing. A gate whose
 # meaning moves when a tool is upgraded is not a gate, so this says what the
 # project holds itself to.
-select = ["E", "W", "F", "B"]
+select = ["E", "W", "F", "B", "PGH003", "PGH004", "PLE0604", "PLE0605"]
 # `_`, `err`, and the conventional `_name`: an underscore prefix is how Python
 # says a name is bound but deliberately unused, and a loop target that must be
 # unpacked to reach the one beside it reads better as `_feet` than as `_`.
