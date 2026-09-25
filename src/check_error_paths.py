@@ -219,7 +219,7 @@ def recorded(path=RECORD):
 def write(entries, path=RECORD):
     """Rewrite the record from `entries`, keeping the reasons already given."""
     known = recorded(path)
-    with open(path, 'w', encoding='utf-8') as handle:
+    with open(path + '.partial', 'w', encoding='utf-8') as handle:
         handle.write(
             '# Error paths in OpenGL/ that a run of the suite does not enter.\n'
             '# An `except` clause or a `finally` block nothing reaches is one\n'
@@ -252,6 +252,7 @@ def write(entries, path=RECORD):
             handle.write(
                 '%s  # %s\n' % (key, known.get(key) or 'not reached by any case')
             )
+    os.replace(path + '.partial', path)
     return len(entries)
 
 

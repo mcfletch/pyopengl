@@ -1112,8 +1112,9 @@ def write_reference_index(reference: Reference, directory: str) -> None:
             writer.line(description)
         writer.blank()
 
-    with open(os.path.join(directory, 'index.rst'), 'w', encoding='utf-8') as fh:
+    with open(os.path.join(directory, 'index.rst') + '.partial', 'w', encoding='utf-8') as fh:
         fh.write(writer.render())
+    os.replace(os.path.join(directory, 'index.rst') + '.partial', os.path.join(directory, 'index.rst'))
 
 
 def write_api_index(
@@ -1211,9 +1212,10 @@ def write_api_index(
     api_directory = os.path.join(directory, api.key)
     os.makedirs(api_directory, exist_ok=True)
     with open(
-        os.path.join(api_directory, 'index.rst'), 'w', encoding='utf-8'
+        os.path.join(api_directory, 'index.rst') + '.partial', 'w', encoding='utf-8'
     ) as fh:
         fh.write(writer.render())
+    os.replace(os.path.join(api_directory, 'index.rst') + '.partial', os.path.join(api_directory, 'index.rst'))
 
 
 def refpage_files(limit_to: list[str]) -> list[tuple[Api, str]]:
@@ -1337,8 +1339,9 @@ def main(argv: list[str] | None = None) -> int:
             target = os.path.join(
                 api_directory, '%s.rst' % (page_name(section.title),)
             )
-            with open(target, 'w', encoding='utf-8') as fh:
+            with open(target + '.partial', 'w', encoding='utf-8') as fh:
                 fh.write(pages.render(section))
+            os.replace(target + '.partial', target)
             written += 1
         write_api_index(api, sections, options.output)
         log.info(
@@ -1352,7 +1355,7 @@ def main(argv: list[str] | None = None) -> int:
     write_reference_index(reference, options.output)
 
     manifest = os.path.join(options.output, 'entrypoints.json')
-    with open(manifest, 'w', encoding='utf-8') as fh:
+    with open(manifest + '.partial', 'w', encoding='utf-8') as fh:
         json.dump(
             {
                 'version': __version__,
@@ -1365,6 +1368,7 @@ def main(argv: list[str] | None = None) -> int:
             indent=1,
             sort_keys=True,
         )
+    os.replace(manifest + '.partial', manifest)
     log.info(
         '%d pages, %d entry points declared; manifest in %s',
         written,

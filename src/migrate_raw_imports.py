@@ -96,8 +96,9 @@ def main(argv=None):
             continue
         changed.append(path)
         if options.write:
-            with open(path, 'w', encoding='utf-8') as handle:
+            with open(path + '.partial', 'w', encoding='utf-8') as handle:
                 handle.write(result)
+            os.replace(path + '.partial', path)
     print('%s %d modules' % ('rewrote' if options.write else 'would rewrite', len(changed)))
     for path in skipped:
         print('  needs a person: %s' % (os.path.relpath(path, options.root),))

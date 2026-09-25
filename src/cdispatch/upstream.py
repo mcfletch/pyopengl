@@ -239,7 +239,8 @@ def write_baseline(report, path=BASELINE):
             'names': sorted(report.missing_enums),
         },
     }
-    with open(path, 'w', encoding='utf-8') as handle:
+    with open(path + '.partial', 'w', encoding='utf-8') as handle:
         json.dump(baseline, handle, indent=2)
         handle.write('\n')
+    os.replace(path + '.partial', path)
     return baseline

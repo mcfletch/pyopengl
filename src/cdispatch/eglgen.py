@@ -397,7 +397,9 @@ def _write(path, text):
     os.makedirs(directory, exist_ok=True)
     package = os.path.join(directory, '__init__.py')
     if not os.path.exists(package):
-        with open(package, 'w', encoding='utf-8') as handle:
+        with open(package + '.partial', 'w', encoding='utf-8') as handle:
             handle.write('')
-    with open(path, 'w', encoding='utf-8') as handle:
+        os.replace(package + '.partial', package)
+    with open(path + '.partial', 'w', encoding='utf-8') as handle:
         handle.write(text)
+    os.replace(path + '.partial', path)

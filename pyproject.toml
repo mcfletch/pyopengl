@@ -248,7 +248,10 @@ skip-string-normalization=true
 # The OGC rules (openglcontext-checks) this project is clean of, held by
 # the workspace preflight. The others join as the project reaches zero of
 # each; the counts are in openglcontext/plans/DEFECT-PREVENTION.md.
-select = ["OGC131", "OGC141"]
+select = ["OGC121", "OGC131", "OGC141"]
+# Upstream checkouts the code generators and the documentation build fetch:
+# not this project's code, and not in version control here.
+exclude = ["src/khronosapi", "src/eglapi", "directdocs/OpenGL-Refpages"]
 
 [tool.ruff.lint]
 # Named explicitly. With `select` unset ruff applies its own default, and that

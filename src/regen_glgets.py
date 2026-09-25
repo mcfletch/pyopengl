@@ -167,7 +167,9 @@ def main(argv):
         if check:
             stale.append(api)
         else:
-            open(target, 'w').write(body)
+            with open(target + '.partial', 'w') as handle:
+                handle.write(body)
+            os.replace(target + '.partial', target)
             extra = ' (%d csv names had no known value)' % len(missing) if missing else ''
             print('updated %s%s' % (os.path.relpath(target, ROOT), extra))
     if check and stale:

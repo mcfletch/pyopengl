@@ -308,8 +308,9 @@ def _write(path, text):
             existing = handle.read()
     if existing == text:
         return False
-    with open(path, 'w', encoding='utf-8') as handle:
+    with open(path + '.partial', 'w', encoding='utf-8') as handle:
         handle.write(text)
+    os.replace(path + '.partial', path)
     return True
 
 

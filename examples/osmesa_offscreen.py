@@ -111,8 +111,8 @@ def render_image():
 
 
 def write_ppm(buf, filename):
-    f = open(filename, "w")
-    if f:
+    # Written beside the file and renamed over it, so a viewer never opens half a picture.
+    with open(filename + '.partial', "w") as f:
         h, w, c = buf.shape
         print( "P3", file=f)
         print( "# ascii ppm file created by osmesa",file=f)
@@ -124,6 +124,7 @@ def write_ppm(buf, filename):
                 l = " %3d %3d %3d" % (pixel[0], pixel[1], pixel[2])
                 f.write(l)
             f.write("\n")
+    os.replace(filename + '.partial', filename)
 
 if __name__ == '__main__':
     from OpenGL import arrays

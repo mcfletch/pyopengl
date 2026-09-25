@@ -931,8 +931,9 @@ def write_index(
     writer.paragraph(
         ':ref:`The module index <modindex>` lists every page of this section.'
     )
-    with open(os.path.join(directory, 'index.rst'), 'w', encoding='utf-8') as fh:
+    with open(os.path.join(directory, 'index.rst') + '.partial', 'w', encoding='utf-8') as fh:
         fh.write(writer.render())
+    os.replace(os.path.join(directory, 'index.rst') + '.partial', os.path.join(directory, 'index.rst'))
 
 
 def render_projects(
@@ -1002,9 +1003,10 @@ def render_projects(
             failed.append(module.name)
             continue
         with open(
-            os.path.join(directory, '%s.rst' % (module.name,)), 'w', encoding='utf-8'
+            os.path.join(directory, '%s.rst' % (module.name,)) + '.partial', 'w', encoding='utf-8'
         ) as fh:
             fh.write(page)
+        os.replace(os.path.join(directory, '%s.rst' % (module.name,)) + '.partial', os.path.join(directory, '%s.rst' % (module.name,)))
         rendered.append(module.name)
 
     write_index(roots, rendered, directory, title, paragraphs)

@@ -394,10 +394,11 @@ def emit_api(package_root, api):
     body.append('')
     body += [lines[name] for name in functions]
     path = os.path.join(package_root, api, '__init__.pyi')
-    with open(path, 'w', encoding='utf-8') as handle:
+    with open(path + '.partial', 'w', encoding='utf-8') as handle:
         handle.write(_PREAMBLE % {'api': api})
         handle.write('\n'.join(body))
         handle.write(_EPILOGUE)
+    os.replace(path + '.partial', path)
     return len(lines)
 
 

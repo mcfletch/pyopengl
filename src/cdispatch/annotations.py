@@ -227,6 +227,7 @@ def load(path=PATH):
 
 def store(table, path=PATH):
     """Write the table, sorted, so that a diff shows what a change did."""
-    with open(path, 'w', encoding='utf-8') as handle:
+    with open(path + '.partial', 'w', encoding='utf-8') as handle:
         json.dump(table, handle, indent=1, sort_keys=True)
         handle.write('\n')
+    os.replace(path + '.partial', path)

@@ -398,12 +398,14 @@ def write_declarations(package_root, modules, annotations=None):
     written = {}
     for api, contents in sorted(emit_declarations(modules).items()):
         path = os.path.join(directory, '%s.dat' % (api,))
-        with open(path, 'wb') as handle:
+        with open(path + '.partial', 'wb') as handle:
             marshal.dump(contents, handle, 4)
+        os.replace(path + '.partial', path)
         written[api] = os.path.getsize(path)
     if annotations is not None:
         path = os.path.join(directory, '_annotations.dat')
-        with open(path, 'wb') as handle:
+        with open(path + '.partial', 'wb') as handle:
             marshal.dump(annotations, handle, 4)
+        os.replace(path + '.partial', path)
         written['_annotations'] = os.path.getsize(path)
     return written

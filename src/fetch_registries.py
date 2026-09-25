@@ -134,9 +134,10 @@ def write_lock(commits, path=LOCK):
             for directory, commit in sorted(commits.items())
         },
     }
-    with open(path, 'w', encoding='utf-8') as handle:
+    with open(path + '.partial', 'w', encoding='utf-8') as handle:
         json.dump(recorded, handle, indent=2, sort_keys=True)
         handle.write('\n')
+    os.replace(path + '.partial', path)
     return recorded
 
 

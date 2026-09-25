@@ -217,7 +217,18 @@ def %(name)s(%(argNames)s):pass"""
         items = list(self.glGetSizes.items())
         items.sort()
         data = "\n".join(['%s\t%s' % (key, "\t".join(value)) for (key, value) in items])
-        open(os.path.join(HERE, 'glgetsizes.csv'), 'w').write(data)
+        _write_whole(os.path.join(HERE, 'glgetsizes.csv'), data)
+
+
+def _write_whole(path, text):
+    """Replace the file at ``path`` with ``text``, renamed into place once written.
+
+    A generated module cut short would import as half a module, so it is
+    written beside itself and moved over the old one in one step.
+    """
+    with open(path + '.partial', 'w') as handle:
+        handle.write(text)
+    os.replace(path + '.partial', path)
 
 
 class ModuleGenerator(object):
@@ -578,8 +589,9 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
             walked = os.path.join(walked, part)
             initialiser = os.path.join(walked, '__init__.py')
             if not os.path.isfile(initialiser):
-                with open(initialiser, 'w') as fh:
+                with open(initialiser + '.partial', 'w') as fh:
                     fh.write('''"""OpenGL Extensions"""''')
+                os.replace(initialiser + '.partial', initialiser)
 
     def generate(self):
         self._make_packages(self.rawPathName, self.overall.rawTargetDirectory)
@@ -593,15 +605,13 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
         except FileNotFoundError:
             pass  # a module generated for the first time
         if current.strip() != toWrite.strip():
-            fh = open(self.rawPathName, 'w')
-            fh.write(toWrite)
-            fh.close()
+            _write_whole(self.rawPathName, toWrite)
         if isinstance(self.registry, xmlreg.Feature):
             # this is a core feature...
             target = os.path.join(
                 self.overall.rawTargetDirectory, self.prefix, '_glgets.py'
             )
-            open(target, 'w').write(self.overall.group_sizes())
+            _write_whole(target, self.overall.group_sizes())
         if self.shouldReplace():
             # now the final module with any included custom code...
             toWrite = self.FINAL_MODULE_TEMPLATE % self
@@ -622,16 +632,11 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
                 else:
                     current = ''
             try:
-                fh = open(self.pathName, 'w')
+                _write_whole(self.pathName, toWrite + AUTOGENERATION_SENTINEL_END + current)
             except IOError as err:
                 log.warning("Unable to create module for %r %s", self.name, err)
                 return False
-            else:
-                fh.write(toWrite)
-                fh.write(AUTOGENERATION_SENTINEL_END)
-                fh.write(current)
-                fh.close()
-                return True
+            return True
         return False
 
 

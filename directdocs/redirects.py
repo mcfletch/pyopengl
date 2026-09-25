@@ -159,16 +159,18 @@ def write_redirects(
         found = resolve(name, entry_points, pages)
         page = 'reference/%s' % (found,) if found else FALLBACK
         path = os.path.join(directory, name + '.html')
-        with open(path, 'w', encoding='utf-8') as handle:
+        with open(path + '.partial', 'w', encoding='utf-8') as handle:
             handle.write(stub(name, _relative(depth, page)))
+        os.replace(path + '.partial', path)
         written += 1
 
     for url, page in narrative.items():
         parts = url.split('/')
         path = os.path.join(output, *parts)
         os.makedirs(os.path.dirname(path), exist_ok=True)
-        with open(path, 'w', encoding='utf-8') as handle:
+        with open(path + '.partial', 'w', encoding='utf-8') as handle:
             handle.write(stub(parts[-1], _relative(len(parts) - 1, page)))
+        os.replace(path + '.partial', path)
         written += 1
     return written
 

@@ -113,9 +113,10 @@ def main(argv=None):
     # say about them; their stubs are read from the hand-maintained
     # declarations instead.
     report['handwritten_names'] = emit_handwritten(arguments.package)
-    with open(arguments.manifest, 'w', encoding='utf-8') as handle:
+    with open(arguments.manifest + '.partial', 'w', encoding='utf-8') as handle:
         json.dump(report, handle, indent=2, sort_keys=True)
         handle.write('\n')
+    os.replace(arguments.manifest + '.partial', arguments.manifest)
 
     print(
         'bindings %d, emitted %d (%.1f%%), apis %s; hand-maintained stubs %s'

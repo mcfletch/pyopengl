@@ -68,8 +68,9 @@ def main(argv=None):
                 continue
             marked += 1
             if options.write:
-                with open(path, 'w', encoding='utf-8') as handle:
+                with open(path + '.partial', 'w', encoding='utf-8') as handle:
                     handle.write(MARKER + REASON + text)
+                os.replace(path + '.partial', path)
     print('%s %d generated modules' % ('marked' if options.write else 'would mark', marked))
     return 0
 

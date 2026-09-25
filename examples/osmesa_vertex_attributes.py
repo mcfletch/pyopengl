@@ -16,7 +16,7 @@ import contextlib
 
 def write_ppm(buf, filename):
     """Write traditional ASCII PPM file from buffer"""
-    with open(filename, "w") as f:
+    with open(filename + '.partial', "w") as f:
         h, w, c = buf.shape
         print( "P3", file=f)
         print( "# ascii ppm file created by osmesa",file=f)
@@ -28,6 +28,7 @@ def write_ppm(buf, filename):
                 l = " %3d %3d %3d" % (pixel[0], pixel[1], pixel[2])
                 f.write(l)
             f.write("\n")
+    os.replace(filename + '.partial', filename)
 
 @contextlib.contextmanager
 def osmesa_context(width=400, height=400, output='output.ppm'):

@@ -80,13 +80,13 @@ def open_device(path):
     if isinstance(path,int):
         try:
             devices = enumerate_devices()
-            path = devices[int]
+            path = devices[path]
         except IndexError:
             raise RuntimeError('Only %s devices available, cannot use 0-index %s'%(len(devices),path)) from None
     else:
         path = os.path.join('/dev/dri',path) # allow for specifying "renderD128"
     log.debug("Final device path: %s", path)
-    fh = open(path,'w')
+    fh = open(path,'w')  # noqa: OGC121 a DRM device node, opened for its descriptor; nothing is written to it
     dev = gbm.gbm_create_device(fh.fileno())
     if dev == 0:
         fh.close()

@@ -315,9 +315,9 @@ CACHE_FILE = '.reference_cache.pkl'
 if __name__ == "__main__":
     import pickle
     items = loadData()
-    open( CACHE_FILE, 'wb').write(
-        pickle.dumps( items )
-    )
+    with open( CACHE_FILE + '.partial', 'wb') as handle:
+        handle.write( pickle.dumps( items ) )
+    os.replace( CACHE_FILE + '.partial', CACHE_FILE )
     items = list(items.items())
     items.sort()
     for name, itemset in items:

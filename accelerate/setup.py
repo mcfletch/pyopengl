@@ -84,8 +84,9 @@ def write_version_header():
     except OSError:
         pass
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, 'w', encoding='utf-8') as handle:
+    with open(path + '.partial', 'w', encoding='utf-8') as handle:
         handle.write(contents)
+    os.replace(path + '.partial', path)
     return VERSION_HEADER
 
 
@@ -203,8 +204,9 @@ def drop_c_from_another_toolchain():
         pass
     for path in glob.glob(os.path.join(HERE, 'src', '*.c')):
         os.unlink(path)
-    with open(TOOLCHAIN_STAMP, 'w', encoding='utf-8') as handle:
+    with open(TOOLCHAIN_STAMP + '.partial', 'w', encoding='utf-8') as handle:
         handle.write(wanted)
+    os.replace(TOOLCHAIN_STAMP + '.partial', TOOLCHAIN_STAMP)
 
 
 def cython_extension(

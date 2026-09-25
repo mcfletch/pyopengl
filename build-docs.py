@@ -207,7 +207,9 @@ def nojekyll(directory: str) -> None:
     every directory whose name starts with an underscore -- which is
     ``_static``, so the site would come out with no stylesheet and no search.
     """
-    open(os.path.join(directory, '.nojekyll'), 'w').close()
+    marker = os.path.join(directory, '.nojekyll')
+    open(marker + '.partial', 'w').close()
+    os.replace(marker + '.partial', marker)
 
 
 # ----------------------------------------------------------------------
@@ -363,8 +365,15 @@ def stage(source: str, target: str) -> None:
     if os.path.exists(target):
         if not os.path.isdir(target):
             raise Failed('%s exists and is not a directory' % (target,))
+    # Copied beside the target and renamed over it, so an interrupted copy
+    # leaves the site that was staged before rather than part of this one.
+    partial = target + '.partial'
+    if os.path.exists(partial):
+        shutil.rmtree(partial)
+    shutil.copytree(source, partial)
+    if os.path.exists(target):
         shutil.rmtree(target)
-    shutil.copytree(source, target)
+    os.replace(partial, target)
     log.info('Staged the site in %s', target)
 
 

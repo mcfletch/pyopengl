@@ -2,6 +2,7 @@
 
 from OpenGL.EGL import *
 import itertools
+import os
 
 
 def eglErrorName(value):
@@ -35,7 +36,7 @@ def write_ppm(buf, filename):
     using any libraries that can be viewed on most
     linux workstations.
     """
-    with open(filename, "w") as f:
+    with open(filename + '.partial', "w") as f:
         (h, w, c) = buf.shape
         f.write("P3\n")
         f.write("# ascii ppm file created by pyopengl\n")
@@ -47,6 +48,7 @@ def write_ppm(buf, filename):
                 l = " %3d %3d %3d" % (pixel[0], pixel[1], pixel[2])
                 f.write(l)
             f.write("\n")
+    os.replace(filename + '.partial', filename)
 
 
 def debug_config(display, config):

@@ -203,9 +203,10 @@ def main(argv):
         dest_dir = os.path.join(ROOT, 'tests', suite)
         os.makedirs(dest_dir, exist_ok=True)
         dest = os.path.join(dest_dir, 'glget_groups.json')
-        with open(dest, 'w') as fh:
+        with open(dest + '.partial', 'w') as fh:
             json.dump(data, fh, indent=1, sort_keys=True)
             fh.write('\n')
+        os.replace(dest + '.partial', dest)
         nfeat = sum(len(v['glgets']) for v in data['features'].values())
         next_ = sum(len(v['glgets']) for v in data['extensions'].values())
         nmiss = sum(len(v['missing_size']) for v in

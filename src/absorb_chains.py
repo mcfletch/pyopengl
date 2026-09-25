@@ -172,8 +172,9 @@ def main(argv=None):
                 continue
             changed.append(path)
             if options.write:
-                with open(path, 'w', encoding='utf-8') as handle:
+                with open(path + '.partial', 'w', encoding='utf-8') as handle:
                     handle.write(rewrite(text, chain_lines))
+                os.replace(path + '.partial', path)
 
     for verdict, count in sorted(counts.items(), key=lambda item: -item[1]):
         print('  %-32s %5d' % (verdict, count))
