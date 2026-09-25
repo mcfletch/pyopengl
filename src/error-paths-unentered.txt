@@ -140,7 +140,6 @@ arrays/numpymodule.py::dataPointer::AttributeError::0  # not reached by any case
 arrays/numpymodule.py::dataPointer::AttributeError::1  # not reached by any case
 arrays/numpymodule.py::dataPointer::AttributeError::2  # not reached by any case
 arrays/numpymodule.py::dataPointer::AttributeError::3  # not reached by any case
-arrays/vbo.py::<module>::ImportError::0  # not reached by any case
 arrays/vbo.py::Implementation.deleter.doBufferDeletion::AttributeError,nfe,TypeError::0  # not reached by any case
 arrays/vbo.py::Implementation.deleter.doBufferDeletion::Exception::0  # not reached by any case
 arrays/vbo.py::Implementation.deleter.doBufferDeletion::IndexError::0  # not reached by any case
