@@ -43,6 +43,7 @@ _log = logging.getLogger('OpenGL.arrays.vbo')
 from OpenGL._bytes import long, integer_types
 
 import weakref
+from typing import TYPE_CHECKING
 
 __all__ = ('VBO', 'VBOHandler', 'mapVBO')
 
@@ -171,18 +172,23 @@ get_implementation = Implementation.get_implementation
 
 from OpenGL import acceleratesupport
 
-VBO = None
-if acceleratesupport.ACCELERATE_AVAILABLE:
+
+def _accelerated():
+    """OpenGL_accelerate's ``vbo`` module, or None where it is not available"""
+    if not acceleratesupport.ACCELERATE_AVAILABLE:
+        return None
     try:
-        from OpenGL_accelerate.vbo import (
-            VBO,
-            VBOOffset,
-            VBOHandler,
-            VBOOffsetHandler,
-        )
-    except ImportError as err:
+        from OpenGL_accelerate import vbo
+    except ImportError:
         _log.warning("Unable to load VBO accelerator from OpenGL_accelerate")
-if VBO is None:
+        return None
+    return vbo
+
+
+_ACCELERATED = _accelerated()
+# A type checker reads the Python classes: OpenGL_accelerate's have the same
+# interface and ship no declarations of their own.
+if TYPE_CHECKING or _ACCELERATED is None:
 
     class VBO(object):
         """Instances can be passed into array-handling routines
@@ -537,6 +543,12 @@ if VBO is None:
         def from_param(self, instance, typeCode=None):
             """Returns a c_void_p( instance.offset )"""
             return ctypes.c_void_p(instance.offset)
+
+else:
+    VBO = _ACCELERATED.VBO
+    VBOOffset = _ACCELERATED.VBOOffset
+    VBOHandler = _ACCELERATED.VBOHandler
+    VBOOffsetHandler = _ACCELERATED.VBOOffsetHandler
 
 
 _cleaners = {}
