@@ -175,15 +175,18 @@ A ``str`` is encoded as UTF-8; ``bytes`` and ``bytearray`` are taken as the byte
 
 The same forms are accepted under both implementations, and by every entry point in the list. What counts as a string is decided in one place, ``OpenGL._string_array``, which the C layer calls back into and the ctypes bindings convert with; the two differ only in which exception carries a refusal, since ctypes wraps what a conversion raises in ``ctypes.ArgumentError``.
 
+Where the entry point also takes the count — ``glTransformFeedbackVaryings(program, count, varyings, bufferMode)`` — the driver reads ``count`` pointers, so fewer strings than that, or ``None`` for a positive count, raises ``ValueError`` before the call. More strings than the count is accepted, and a pointer array you built is passed as it is, since only you know its length. ``OpenGL.ARRAY_SIZE_CHECKING = False`` switches the check off along with the other array-length checks.
+
 ``glGetUniformIndices`` takes the names the same way and reads the count from them, and the ``GLuint`` array it answers with is one index per name:
 
 ::
 
    indices = glGetUniformIndices(program, ['blockColor', 'blockEdge'])
    glGetUniformIndices(program, names, indices)    # or into an array you own
+   glGetUniformIndices(program, uniformNames=names)    # by keyword
    glGetUniformIndices(program, 2, prepared_char_pp)   # or the C ordering
 
-A name the program does not declare, or one its compiler removed, answers ``GL_INVALID_INDEX``. The C ordering — the count, then the names — is accepted for a caller who has built the pointer array themselves, and allocates the answer from the count. ``OpenGL.GL`` and ``OpenGL.GL.ARB.uniform_buffer_object`` offer the same function: GL 3.1 adopted the extension, so both names are one entry point.
+A name the program does not declare, or one its compiler removed, answers ``GL_INVALID_INDEX``. The C ordering — the count, then the names — is recognised by its second argument being a count, is accepted for a caller who has built the pointer array themselves, and allocates the answer from the count. The names are required in either form. ``OpenGL.GL``, ``OpenGL.GL.ARB.uniform_buffer_object`` and ``OpenGL.GLES3`` offer the same function: GL 3.1 adopted the extension and OpenGL ES 3.0 declares the same entry point.
 
 Error checking
 --------------

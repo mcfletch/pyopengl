@@ -29,9 +29,8 @@ glGetBooleani_v=wrapper.wrapper(glGetBooleani_v).setOutput(
 glGetIntegeri_v=wrapper.wrapper(glGetIntegeri_v).setOutput(
     'data',size=_glgets._glget_size_mapping,pnameArg='target',orPassIn=True
 )
-# INPUT glTransformFeedbackVaryings.varyings size not checked against count
-glTransformFeedbackVaryings=wrapper.wrapper(glTransformFeedbackVaryings).setInputArraySize(
-    'varyings', None
+glTransformFeedbackVaryings=wrapper.wrapper(glTransformFeedbackVaryings).setInputArrayCount(
+    'varyings', 'count'
 )
 glGetTransformFeedbackVarying=wrapper.wrapper(glGetTransformFeedbackVarying).setOutput(
     'length',size=(1,),orPassIn=True

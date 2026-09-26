@@ -168,6 +168,50 @@ class TestArrays:
                 )
             )
 
+    def test_strings_counted_by_another_argument_are_a_minimum(self):
+        """``count`` pointers are read; more strings than that are not."""
+        text = body(
+            command(
+                name='glTransformFeedbackVaryings',
+                parameters=[
+                    ('program', 'GLuint', {}),
+                    ('count', 'GLsizei', {}),
+                    (
+                        'varyings',
+                        'const GLchar *const*',
+                        {'size': model.FromArg(argument=1)},
+                    ),
+                    ('bufferMode', 'GLenum', {}),
+                ],
+            )
+        )
+        assert 'PYGL_STRING_ARRAY_MIN(2, varyings, count);' in text
+
+    def test_strings_with_no_count_are_passed_as_they_are(self):
+        text = body(
+            command(
+                name='glShaderSourceLike',
+                parameters=[('string', 'const GLchar *const*', {})],
+            )
+        )
+        assert 'PYGL_STRING_ARRAY(0, string);' in text
+
+    def test_strings_scaled_from_another_argument_have_no_c_form(self):
+        with pytest.raises(ValueError, match='one string per item'):
+            body(
+                command(
+                    name='glStrings',
+                    parameters=[
+                        ('count', 'GLsizei', {}),
+                        (
+                            'strings',
+                            'const GLchar *const*',
+                            {'size': model.FromArg(argument=0, multiplier=2)},
+                        ),
+                    ],
+                )
+            )
+
     def test_void_pointer_accepts_any_buffer(self):
         text = body(
             command(
@@ -202,7 +246,7 @@ class TestOutputs:
         # 1: the count is the caller's own argument, so it is exact and the
         # array they passed can be checked against it.
         assert (
-            'PYGL_ARRAY_OUT_N(1, textures, &pygl_elem_GLuint, (Py_ssize_t)(n), 1);'
+            'PYGL_ARRAY_OUT_N(1, textures, &pygl_elem_GLuint, (Py_ssize_t)n, 1);'
             in text
         )
         assert 'pygl_output_value' in text
@@ -224,7 +268,7 @@ class TestOutputs:
                 ],
             )
         )
-        assert '(Py_ssize_t)(location / 4)' in text
+        assert '(Py_ssize_t)location / 4' in text
 
     def test_output_with_a_multiplier_is_widened_before_multiplying(self):
         text = body(
@@ -243,7 +287,7 @@ class TestOutputs:
                 ],
             )
         )
-        assert '(Py_ssize_t)((Py_ssize_t)n * 2)' in text
+        assert 'PYGL_ARRAY_OUT_N(1, pairs, &pygl_elem_GLfloat, (Py_ssize_t)n * 2, 1);' in text
 
     def test_constant_size_output(self):
         text = body(
@@ -261,7 +305,7 @@ class TestOutputs:
         )
         # 0: a fixed size is an upper bound, not a promise.
         assert (
-            'PYGL_ARRAY_OUT_N(1, length, &pygl_elem_GLsizei, (Py_ssize_t)(1), 0);'
+            'PYGL_ARRAY_OUT_N(1, length, &pygl_elem_GLsizei, 1, 0);'
             in text
         )
 
@@ -386,7 +430,7 @@ def test_pointer_array_output_uses_the_voidp_array_type():
         )
     )
     assert (
-    'PYGL_ARRAY_OUT_N(2, pointer, &pygl_elem_voidp, (Py_ssize_t)(1), 0);' in text
+    'PYGL_ARRAY_OUT_N(2, pointer, &pygl_elem_voidp, 1, 0);' in text
 )
 
 

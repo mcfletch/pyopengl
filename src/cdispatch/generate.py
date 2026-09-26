@@ -239,10 +239,46 @@ def _write_submodule_stubs(package_root, stubs_root, commands):
                 constants=sorted(module.constants),
                 extras=_module_definitions(source, tabulated),
                 reexports=module.reexports,
+                wrappers=_module_wrappers(source, api, selected),
             ),
         )
         written += 1
     return written
+
+
+def _module_wrappers(path, api, commands):
+    """``{name: (row, lazy)}`` for the entry points a friendly module rebinds to a wrapper.
+
+    A ``lazy`` wrapper the module defines is read from its ``def``.  A wrapper
+    one of :mod:`cdispatch.exceptional`'s rows describes counts where the
+    module binds the name itself -- ``glGetUniformIndices =
+    _uniform_indices.wrap(glGetUniformIndices)``, or an import of another
+    module's -- and the row's wrapper is one friendly modules bind rather than
+    ``OpenGL/GL/exceptional.py``'s, which only ``OpenGL.GL`` exports.
+    """
+    import ast
+
+    from . import exceptional, lazy_wrappers
+
+    lazy = lazy_wrappers.discover_in(path)
+    with open(path, 'r', encoding='utf-8') as handle:
+        tree = ast.parse(handle.read(), filename=path)
+    bound = set()
+    for node in tree.body:
+        if isinstance(node, ast.Assign):
+            bound.update(t.id for t in node.targets if isinstance(t, ast.Name))
+        elif isinstance(node, ast.ImportFrom):
+            bound.update(alias.asname or alias.name for alias in node.names)
+    wrappers = {}
+    for command in commands:
+        row = exceptional.lookup(api, command.name)
+        if row is not None and (
+            row.module == exceptional.GL_EXCEPTIONAL or command.name not in bound
+        ):
+            row = None
+        if row is not None or command.name in lazy:
+            wrappers[command.name] = (row, lazy.get(command.name))
+    return wrappers
 
 
 def _module_definitions(path, tabulated):

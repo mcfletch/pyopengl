@@ -353,6 +353,8 @@ def extract_friendly(path):
                         annotations.append(('output', call))
                     elif method == 'setInputArraySize':
                         annotations.append(('input', call))
+                    elif method == 'setInputArrayCount':
+                        annotations.append(('input-count', call))
                 record(
                     name,
                     {
@@ -402,6 +404,20 @@ def _apply_annotations(command, entry):
         if name is _UNKNOWN or name not in by_name:
             continue
         parameter = command.parameters[by_name[name]]
+        if kind == 'input-count':
+            # setInputArrayCount(name, countArg, multiplier=1): the driver reads
+            # countArg * multiplier elements.
+            parameter.converts = True
+            count = _literal(positional[1]) if len(positional) > 1 else _UNKNOWN
+            multiplier_node = (
+                positional[2] if len(positional) > 2 else arguments.get('multiplier')
+            )
+            multiplier = _literal(multiplier_node) if multiplier_node is not None else 1
+            if count in by_name and isinstance(multiplier, int):
+                parameter.size = model.FromArg(by_name[count], 1, multiplier)
+            else:
+                command.helper = command.helper or 'converter'
+            continue
         if kind == 'input':
             # The call itself is the fact: this parameter is converted.  Its
             # size is a separate question, and usually unanswered.
@@ -896,17 +912,15 @@ def _customisation_chain(node):
         if not isinstance(function, ast.Attribute):
             break
         if function.attr.startswith('set'):
-            calls.append((function.attr, tuple(_literal(a) for a in node.args)))
+            calls.append((function.attr, tuple(_literal_or_none(a) for a in node.args)))
         node = function.value
     return calls
 
 
-def _literal(node):
+def _literal_or_none(node):
     """The value of an argument where it is a literal, else None."""
-    try:
-        return ast.literal_eval(node)
-    except (ValueError, TypeError, SyntaxError):
-        return None
+    value = _literal(node)
+    return None if value is _UNKNOWN else value
 
 
 def _apply_annotation_table(commands):

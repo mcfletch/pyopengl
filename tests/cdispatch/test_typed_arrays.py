@@ -144,6 +144,7 @@ class TestStringArrays:
         ):
             assert emit_c.is_emittable(commands[('GL', name)]), name
 
-    def test_the_macro_names_it(self, commands):
+    def test_the_macro_names_it_and_its_count(self, commands):
+        """The driver reads ``count`` pointers, so the strings are measured against it."""
         text = emit_c.emit_stub(commands[('GL', 'glTransformFeedbackVaryings')])
-        assert 'PYGL_STRING_ARRAY(2, varyings);' in text
+        assert 'PYGL_STRING_ARRAY_MIN(2, varyings, count);' in text

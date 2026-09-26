@@ -91,11 +91,13 @@ What changed since the 3.x series. The current development version is
   `glColorPointerd`'s, to doubles — while telling the driver the type its own
   name gives, so a draw read float64 memory as float32 and took garbage
   colours and positions. A derived function now carries the customisations its
-  own chain stated, and `glColorPointer` demoted by `errcheck` carries only
-  its own.
+  own chain stated, whatever order the chains are built in: the record is kept
+  on the chain, a `GLProc` of its own that dispatches through the entry
+  point's slot. `glColorPointer` demoted by `errcheck` carries only its own,
+  and the entry point `OpenGL.raw` exports carries none.
 - `glIndexPointerb` and `glTexCoordPointerb` passed `GL_BYTE`, which neither
   entry point accepts, so every call raised `GL_INVALID_ENUM`. They pass their
-  bytes as `GL_SHORT`, as `glVertexPointerb` passes its own as `GL_INT`.
+  bytes widened to `GL_INT`, as `glVertexPointerb` does.
 - `gluUnproject4` had the wrong signature; GLU quadrics, NURBS and the
   tessellator had defects the new suites exposed.
 - `glGetTexImageCompressed` ignored the level it was given.
@@ -137,11 +139,23 @@ What changed since the 3.x series. The current development version is
   and no caller passes, so the interface a third party writing a handler reads
   described an argument every implementation would have refused.
 - `glGetUniformIndices(program, ['name', ...])` answers a `GLuint` array of one
-  index per name, on desktop GL as it already did on GLES3. Both
-  `OpenGL.GL` and `OpenGL.GL.ARB.uniform_buffer_object` offer that form, since
-  GL 3.1 adopted the extension and the two names are one entry point; the C
-  ordering, with the count and a prepared `GLchar *const *`, is accepted as it
-  stands.
+  index per name. `OpenGL.GL`, `OpenGL.GL.ARB.uniform_buffer_object` and
+  `OpenGL.GLES3` share one implementation, which also takes the C ordering,
+  `(program, uniformCount, uniformNames[, uniformIndices])`, told apart by the
+  second argument being a count; `uniformNames=` works by keyword. The names
+  are required in either form, so `glGetUniformIndices(program, 3)` raises
+  `TypeError` rather than handing the driver a null array to read three names
+  from. GLES3 did not accept the C ordering before.
+- An input array the driver reads a caller's count of items from is measured
+  against that count, on both dispatch paths, where `ARRAY_SIZE_CHECKING` is
+  on. `glViewportArrayv(first, count, v)` needs `count * 4` floats, and the
+  scissor, depth-range and multicast arrays their own multiples; an array of
+  strings -- `glTransformFeedbackVaryings`, `glCreateShaderProgramv`,
+  `glCompileShaderIncludeARB`, `glGetUniformIndices` -- needs at least `count`
+  of them. A shorter array, or `None` for a positive count, raises
+  `ValueError` where the driver would have read past the array or from
+  address zero. A longer array is accepted, and a `GLchar *const *` the caller
+  built is passed unmeasured.
 - Three entry points sized the array they allocate by looking a *count* up in
   the table of `glGet` sizes, as though a byte count or a name count were an
   enum: `glGetUniformIndices` in GL and in GLES3, and
@@ -178,6 +192,12 @@ What changed since the 3.x series. The current development version is
   off the arrays passed with them, and `gluProject(objX, objY, objZ)` fills in
   the three matrices from the current GL state. The stub says what each wrapper
   takes.
+- A friendly module's own stub describes the wrappers that module binds, as
+  the namespace stub does: `from OpenGL.GL.VERSION.GL_1_5 import glBufferData`
+  admits `glBufferData(target, data)`, and `glGetUniformIndices` from
+  `OpenGL.GL.VERSION.GL_3_1`, `OpenGL.GL.ARB.uniform_buffer_object` or
+  `OpenGL.GLES3.VERSION.GLES3_3_0` takes the names and answers `GLuint`
+  indices.
 - The stubs are checked, and a defect in them fails the build. `mypy` runs over
   all 1,310 of them in CI, and the suite holds each one against the object it
   describes — including holding every GLU, GLUT and GLE entry point to the

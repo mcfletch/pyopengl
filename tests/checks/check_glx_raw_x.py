@@ -20,8 +20,6 @@ from OpenGL.GL import *
 from OpenGL.GLX import *
 from OpenGL.GLX.EXT.texture_from_pixmap import *
 
-import os
-
 attributes = [
     #    GLX_BIND_TO_TEXTURE_RGBA_EXT, 1,
     #    GLX_DRAWABLE_TYPE, GLX_PIXMAP_BIT,

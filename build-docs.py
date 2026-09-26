@@ -40,6 +40,7 @@ from __future__ import annotations
 import argparse
 import datetime
 import glob
+import locale
 import logging
 import os
 import shutil
@@ -164,6 +165,27 @@ def check_prose() -> None:
     )
 
 
+#: The locale Sphinx runs under where the one it inherits is not installed.
+#: Sphinx calls ``setlocale(LC_ALL, '')`` at start-up and exits on the
+#: ``locale.Error`` that raises, which a container inheriting the host's
+#: ``LANG`` or ``LC_ALL`` meets.  C.UTF-8 ships with glibc and keeps Sphinx in
+#: UTF-8.
+SPHINX_LOCALE = 'C.UTF-8'
+
+
+def sphinx_environment() -> dict[str, str]:
+    """This process's environment, with ``LC_ALL`` set to :data:`SPHINX_LOCALE` where its locale is not installed."""
+    environment = dict(os.environ)
+    current = locale.setlocale(locale.LC_ALL)
+    try:
+        locale.setlocale(locale.LC_ALL, '')
+    except locale.Error:
+        environment['LC_ALL'] = SPHINX_LOCALE
+    finally:
+        locale.setlocale(locale.LC_ALL, current)
+    return environment
+
+
 def build_html(output: str, builder: str, warnings_are_errors: bool) -> None:
     log.info('Building %s into %s', builder, output)
     command = [
@@ -180,7 +202,7 @@ def build_html(output: str, builder: str, warnings_are_errors: bool) -> None:
     if warnings_are_errors:
         command.append('-W')
     command.extend([DOCS, output])
-    subprocess.check_call(command, cwd=HERE)
+    subprocess.check_call(command, cwd=HERE, env=sphinx_environment())
     nojekyll(output)
 
 

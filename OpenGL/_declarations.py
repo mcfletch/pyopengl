@@ -29,6 +29,8 @@ import os
 __all__ = [
     'define',
     'contents_for',
+    'declared_commands',
+    'ctypes_entry_point',
     'clear_caches',
     'table_path',
     'Declaration',
@@ -257,6 +259,11 @@ def contents_for(module_name):
     blob = _data_source(api_of(module_name)).get(module_name)
     if blob is None:
         return None
+    return _decoded(module_name, blob)
+
+
+def _decoded(module_name, blob):
+    """One module's marshalled table entry, in the shape :func:`contents_for` answers."""
     import marshal
 
     try:
@@ -273,6 +280,48 @@ def contents_for(module_name):
         'commands': commands,
         'reexports': reexports,
     }
+
+
+def declared_commands(api):
+    """``(module name, command, argument names, types)`` for each command ``api``'s table declares.
+
+    Read from the shipped table, which is what an installation has whether or
+    not the C extension was built.  ``types`` is the result type followed by
+    one per argument, as the declaration wrote them.  A command declared by
+    two modules appears once for each.
+    """
+    for module_name, blob in sorted(_data_source(api).items()):
+        for command, arguments, types in _decoded(module_name, blob)['commands']:
+            yield (
+                module_name,
+                command,
+                tuple(name for name in as_sequence(arguments) if name),
+                tuple(as_sequence(types)),
+            )
+
+
+def ctypes_entry_point(module_name, name):
+    """The ctypes path's binding for ``name`` from ``module_name``, customised from the table.
+
+    What a friendly module that calls ``define(..., customise=True)`` holds for
+    that command when the ctypes path is the implementation, built whichever
+    implementation this process is running.
+    """
+    contents = contents_for(module_name)
+    if contents is None:
+        raise KeyError('no table describes %s' % (module_name,))
+    declared = {
+        command: (arguments, types)
+        for command, arguments, types in contents['commands']
+    }
+    if name not in declared:
+        raise KeyError('%s declares no %s' % (module_name, name))
+    arguments, types = declared[name]
+    api = api_of(module_name)
+    binding = Declaration(
+        api, name, contents['extension'], module_name, arguments, types
+    )()
+    return customise_entry(binding, api, name, _array_parameters(arguments, types))
 
 
 def annotations():
@@ -338,7 +387,7 @@ def customise_entry(entry, api, name, declared):
             built = wrapper.wrapper(entry)
         if size.get('kind') == 'from-argument':
             built = built.setInputArrayCount(
-                parameter, size['argument'], size.get('multiplier', 1)
+                parameter, size['argument'], size['multiplier']
             )
         else:
             length = size['count'] if size.get('kind') == 'fixed' else None
@@ -355,7 +404,7 @@ def customise_entry(entry, api, name, declared):
         elif kind == 'from-argument':
             built = built.setOutput(
                 parameter,
-                size=_scaled_by(size.get('divisor', 1)),
+                size=_scaled_by(size['divisor'], size['multiplier']),
                 pnameArg=size['argument'],
                 orPassIn=True,
             )
@@ -395,11 +444,11 @@ def _output_parameters(parameters):
     return outputs
 
 
-def _scaled_by(divisor):
-    """``setOutput``'s size function: the named argument's value, over N."""
-    if divisor == 1:
+def _scaled_by(divisor, multiplier):
+    """``setOutput``'s size function: the named argument's value, times M over N."""
+    if divisor == 1 and multiplier == 1:
         return lambda value: (value,)
-    return lambda value: (value // divisor,)
+    return lambda value: (value * multiplier // divisor,)
 
 
 def _import(name):

@@ -98,7 +98,6 @@ def glInitSeparateShaderObjectsARB():
     from OpenGL import extensions
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
-# INPUT glCreateShaderProgramv.strings size not checked against count
 # INPUT glDeleteProgramPipelines.pipelines size not checked against n
 # INPUT glProgramUniform1iv.value size not checked against count
 # INPUT glProgramUniform1fv.value size not checked against count

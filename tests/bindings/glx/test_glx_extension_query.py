@@ -49,8 +49,14 @@ class TestNamingTheDisplay:
         assert displayName() is None
 
 
-@pytest.mark.skipif(not xdisplay.answers(),
-                    reason='no X server answers $DISPLAY to query GLX on')
+@pytest.fixture
+def x_server():
+    """Skip where no X server answers ``$DISPLAY``, asked once the case is running."""
+    if not xdisplay.answers():
+        pytest.skip('no X server answers $DISPLAY to query GLX on')
+
+
+@pytest.mark.usefixtures('x_server')
 @platforms.needs('GLX')
 class TestAgainstARealServer:
     def test_the_version_is_reported(self):

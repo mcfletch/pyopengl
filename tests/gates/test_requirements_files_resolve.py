@@ -13,17 +13,19 @@ dependency scanner.  Which of ``test`` and ``dev`` includes the other is a
 decision, and this is where it stays recorded.
 
 A ``-r`` naming a file that is not there stops pip the same way, and is checked
-with it.
+with it.  ``-c`` names a constraints file, which pip follows the same way and
+which is held to the same two rules.
 """
 
 import os
 import re
+import subprocess
 
 import paths
 import pytest
 
-#: Directories holding somebody else's checkout or a build's output.  The
-#: requirements files under these are not this project's to keep resolvable.
+#: Directories holding somebody else's checkout or a build's output, skipped
+#: where there is no git to ask what the project tracks.
 SKIP = frozenset(
     [
         '.git',
@@ -38,9 +40,14 @@ SKIP = frozenset(
     ]
 )
 
-#: ``-r ./requirements.txt`` at the start of a line, in either spelling.  A
-#: ``-r`` anywhere else is part of a requirement or a comment, not an include.
-INCLUDE = re.compile(r'^[ \t]*(?:--requirement|-r)[ \t=]+(\S+)', re.M)
+#: ``-r ./requirements.txt`` or ``-c ./constraints.txt`` at the start of a line,
+#: in each spelling pip accepts: long or short, with a space, an ``=``, or
+#: nothing between option and file.  Anywhere else it is part of a requirement
+#: or a comment, not an include.
+INCLUDE = re.compile(
+    r'^[ \t]*(?:--requirement|--constraint|-r|-c)(?:[ \t=]+|(?=[^\s=-]))(\S+)',
+    re.M,
+)
 
 #: The files whose includes have to resolve, whatever else the walk turns up.
 #: Named so a scan that reaches none of them fails rather than passing empty.
@@ -51,10 +58,28 @@ EXPECTED = (
 )
 
 
-def requirements_files():
-    """Every requirements file in the checkout, as absolute paths."""
+def requirements_files(root=paths.ROOT):
+    """Every requirements file the checkout at `root` tracks, as absolute paths.
+
+    Where `root` is not a git checkout -- an unpacked sdist -- every one under
+    it outside :data:`SKIP`.
+    """
+    try:
+        listed = subprocess.run(
+            ['git', 'ls-files', '-z', '--', '*requirements*.txt'],
+            cwd=root, capture_output=True, check=True,
+        ).stdout.decode('utf-8')
+    except (OSError, subprocess.CalledProcessError):
+        return _walked(root)
+    return sorted(
+        os.path.join(root, name) for name in listed.split('\0') if name
+    )
+
+
+def _walked(root):
+    """Every requirements file under `root` outside :data:`SKIP`."""
     found = []
-    for directory, subdirectories, names in os.walk(paths.ROOT):
+    for directory, subdirectories, names in os.walk(root):
         subdirectories[:] = [
             name for name in subdirectories if name not in SKIP
         ]
@@ -65,7 +90,7 @@ def requirements_files():
 
 
 def includes(path):
-    """The files ``path``'s ``-r`` lines name, resolved against its directory."""
+    """The files ``path``'s ``-r`` and ``-c`` lines name, resolved against its directory."""
     with open(path, encoding='utf-8') as handle:
         text = handle.read()
     directory = os.path.dirname(path)
@@ -129,7 +154,7 @@ class TestEveryIncludeResolves:
             if not os.path.isfile(target)
         )
         assert not absent, (
-            '%s includes these with -r and they are not in the checkout, so '
+            '%s includes these with -r or -c and they are not in the checkout, so '
             'pip stops before installing anything: %s'
             % (relative(path), absent)
         )
@@ -138,12 +163,49 @@ class TestEveryIncludeResolves:
     def test_no_file_includes_itself_through_any_chain(self, path):
         found = cycle_from(path, GRAPH)
         assert found is None, (
-            'these -r lines make a loop, which pip refuses and uv does not, '
+            'these -r and -c lines make a loop, which pip refuses and uv does not, '
             'so it installs here and fails wherever pip is what runs.  One '
             'of the includes has to go -- decide which of the files is the '
             'superset and let it be the only one that includes the other: %s'
             % ' -> '.join(relative(step) for step in found or [])
         )
+
+
+class TestTheReading:
+    """What counts as a requirements file, and what counts as an include."""
+
+    @pytest.mark.parametrize(
+        'line,target',
+        [
+            ('-r other.txt', 'other.txt'),
+            ('--requirement=other.txt', 'other.txt'),
+            ('-rother.txt', 'other.txt'),
+            ('-c constraints.txt', 'constraints.txt'),
+            ('--constraint constraints.txt', 'constraints.txt'),
+        ],
+    )
+    def test_an_include_in_each_spelling(self, line, target):
+        assert INCLUDE.findall(line + '\n') == [target]
+
+    def test_a_requirement_is_not_an_include(self):
+        assert INCLUDE.findall('pytest-rerunfailures\nnumpy  # -r not.txt\n') == []
+
+    def test_the_files_are_the_ones_git_tracks(self, tmp_path):
+        import subprocess
+
+        def git(*arguments):
+            subprocess.run(['git', *arguments], cwd=tmp_path, check=True,
+                           capture_output=True)
+
+        git('init', '-q')
+        (tmp_path / 'requirements.txt').write_text('-r sub/requirements.txt\n')
+        (tmp_path / 'sub').mkdir()
+        (tmp_path / 'sub' / 'requirements.txt').write_text('pytest\n')
+        (tmp_path / 'scratch-requirements.txt').write_text('-r missing.txt\n')
+        git('add', 'requirements.txt', 'sub/requirements.txt')
+        found = [os.path.relpath(path, tmp_path)
+                 for path in requirements_files(str(tmp_path))]
+        assert found == ['requirements.txt', os.path.join('sub', 'requirements.txt')]
 
 
 if __name__ == '__main__':

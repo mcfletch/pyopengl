@@ -279,7 +279,6 @@ ignore = [
     'F401', # Unused imports from autogeneration are everywhere
     'F403', # Standard usage is to use star imports
     'F405', # Standard usage is to use star imports
-    'F811', # Redefinition of function from autogen in the higher-level wrappers is common
 
     # 'F821', # Undefined variables due to start imports, again
     'E741', # Variables from the underlying api are often e.g. `l`
@@ -301,6 +300,12 @@ ignore = [
     'E101', # indentation mixes spaces and tabs
 ]
 [tool.ruff.lint.per-file-ignores]
+# The friendly modules rebind what the generated declarations defined --
+# `def glFoo` over the imported glFoo, `glFoo = wrapper.wrapper(glFoo)` -- which
+# is F811's whole subject.  Everywhere else a second definition hides the first.
+"OpenGL/**/*.py" = [
+    "F811",
+]
 "OpenGL/_bytes.py" = [
     "F821",
 ]

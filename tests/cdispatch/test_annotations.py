@@ -52,11 +52,27 @@ class TestWhatIsRecorded:
         assert size == {'kind': 'fixed', 'count': 3}
 
     def test_a_size_taken_from_another_argument_names_it(self, table):
+        """Divisor and multiplier are written at one as at any other value."""
         size = table['GL.glAreProgramsResidentNV']['parameters']['residences']['size']
-        assert size == {'kind': 'from-argument', 'argument': 'n', 'divisor': 1}
+        assert size == {
+            'kind': 'from-argument',
+            'argument': 'n',
+            'divisor': 1,
+            'multiplier': 1,
+        }
+
+    def test_every_size_from_another_argument_states_both_scales(self, table):
+        partial = [
+            '%s.%s' % (key, parameter)
+            for key, entry in table.items()
+            for parameter, bits in entry.get('parameters', {}).items()
+            if (bits.get('size') or {}).get('kind') == 'from-argument'
+            and not {'divisor', 'multiplier'} <= set(bits['size'])
+        ]
+        assert partial == []
 
     def test_a_size_scaled_from_another_argument_records_the_multiplier(self, table):
-        """Four floats per viewport; a multiplier of one is left unsaid."""
+        """Four floats per viewport."""
         size = table['GL.glViewportArrayv']['parameters']['v']['size']
         assert size == {
             'kind': 'from-argument',

@@ -78,24 +78,10 @@ class TestLookupsKeyOnTheAPI:
         desktop = dispatch.entry_points[('GL', 'glClear')]
         embedded = dispatch.entry_points[('GLES2', 'glClear')]
 
-        # Saved and put back, not cleared.  The record is the process's, and
-        # the friendly modules fill it while they are being imported: a test
-        # that empties it takes away what `demoted_callable` needs to rebuild
-        # a wrapper, and every later test in the process gets the raw binding
-        # instead.  (Which is what happened -- as a failure in a different
-        # file, in whichever suite happened to be collected afterwards.)
-        records = (support._swallowed, support._open_chains)
-        before = [dict(record) for record in records]
-        for record in records:
-            record.clear()
-        try:
-            support.record_custom(desktop, 'setStoreValues', ('mask',))
-            assert support.swallowed_for(embedded) == {}
-            assert support.swallowed_for(desktop) != {}
-        finally:
-            for record, saved in zip(records, before):
-                record.clear()
-                record.update(saved)
+        chain = support.record_custom(desktop, 'setStoreValues', ('mask',))
+        assert chain.api == desktop.api
+        assert support.swallowed_for(chain) != {}
+        assert support.swallowed_for(embedded) == {}
 
 
 class TestSignaturesAreBuiltNotCompiled:

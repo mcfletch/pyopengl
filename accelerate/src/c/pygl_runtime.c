@@ -1538,6 +1538,35 @@ int pygl_string_array(GLProc *self, PyObject *object, Py_ssize_t index,
     return 0;
 }
 
+int pygl_string_array_min(GLProc *self, PyObject *object, Py_ssize_t index,
+                          Py_ssize_t minimum, PyGLBuf *out)
+{
+    int is_null = object == NULL || object == Py_None;
+    int is_strings = !is_null && pygl_is_strings(object);
+    Py_ssize_t count;
+
+    if (pygl_string_array(self, object, index, out) < 0) {
+        return -1;
+    }
+    if (!pygl_array_size_checking || minimum <= 0 || !(is_null || is_strings)) {
+        return 0;
+    }
+    if (is_null) {
+        PyErr_Format(PyExc_ValueError, "Expected at least %zd strings, got None",
+                     minimum);
+        pygl_release(out);
+        return -1;
+    }
+    count = PyList_GET_SIZE(out->owner);
+    if (count < minimum) {
+        PyErr_Format(PyExc_ValueError, "Expected at least %zd strings, got %zd",
+                     minimum, count);
+        pygl_release(out);
+        return -1;
+    }
+    return 0;
+}
+
 /* The value an output parameter contributes to the return.  A one-element
  * result is unpacked to a scalar, which is what the friendly API does today. */
 PyObject *pygl_output_value(PyGLBuf *buffer, const PyGLElement *element,
@@ -1628,6 +1657,7 @@ static int GLProc_traverse(GLProc *self, visitproc visit, void *arg)
     Py_VISIT(self->doc_override);
     Py_VISIT(self->extension_override);
     Py_VISIT(self->dict);
+    Py_VISIT(self->swallowed);
     return 0;
 }
 
@@ -1638,6 +1668,7 @@ static int GLProc_clear(GLProc *self)
     Py_CLEAR(self->doc_override);
     Py_CLEAR(self->extension_override);
     Py_CLEAR(self->dict);
+    Py_CLEAR(self->swallowed);
     return 0;
 }
 
@@ -1652,6 +1683,7 @@ static void GLProc_dealloc(GLProc *self)
     Py_XDECREF(self->doc_override);
     Py_XDECREF(self->extension_override);
     Py_XDECREF(self->dict);
+    Py_XDECREF(self->swallowed);
     PyObject_GC_Del(self);
 }
 
@@ -1949,8 +1981,9 @@ static PyObject *pygl_demoted_call(GLProc *self, PyObject *const *args,
 
 /* The friendly modules restate each entry point's customisations as a chain of
  * setter calls.  Where the C already implements what the call describes, the
- * call is a no-op returning the entry point itself, so the chain still ends in
- * the GLProc that the module binds.
+ * call returns a GLProc that dispatches exactly as the entry point does: the
+ * entry point itself for a declarative call, which records nothing, and the
+ * chain's own GLProc for a call a later demotion would have to replay.
  *
  * Where it describes something the C does not implement, correctness comes
  * before speed: the call falls back to wrapper.wrapper over the ctypes
@@ -1960,6 +1993,43 @@ static PyObject *GLProc_declarative(GLProc *self, PyObject *args, PyObject *kwds
     (void)args;
     (void)kwds;
     return Py_NewRef((PyObject *)self);
+}
+
+/* The GLProc a customisation chain continues on: this one where it already is
+ * a chain, otherwise a new one for the same command with an empty record.
+ *
+ * Every chain on an entry point starts from the one object, so the entry
+ * point cannot say which chain a call belongs to; the object the call returns
+ * can.  The new GLProc shares the command, the stub and so the slot, and takes
+ * the attributes a friendly module may have set on the entry point. */
+static PyObject *GLProc_chained(GLProc *self, PyObject *Py_UNUSED(ignored))
+{
+    GLProc *chain;
+    if (self->swallowed != NULL) {
+        return Py_NewRef((PyObject *)self);
+    }
+    chain = (GLProc *)pygl_make_proc(self->info, self->stub);
+    if (chain == NULL) {
+        return NULL;
+    }
+    chain->swallowed = PyDict_New();
+    if (chain->swallowed == NULL) {
+        Py_DECREF(chain);
+        return NULL;
+    }
+    chain->doc_override = Py_XNewRef(self->doc_override);
+    chain->extension_override = Py_XNewRef(self->extension_override);
+    chain->has_extension_override = self->has_extension_override;
+    return (PyObject *)chain;
+}
+
+static PyObject *GLProc_get_swallowed(GLProc *self, void *closure)
+{
+    (void)closure;
+    if (self->swallowed == NULL) {
+        Py_RETURN_NONE;
+    }
+    return Py_NewRef(self->swallowed);
 }
 
 /* Whether `signature` -- a __text_signature__, "($module, shader, string, /)"
@@ -2041,18 +2111,14 @@ static PyObject *GLProc_fallback(GLProc *self, PyObject *args, PyObject *kwds,
             (dropped == NULL ||
              pygl_signature_takes(self->info->text_signature, dropped));
         if (!drops_argument) {
-            /* Remember it.  A module that builds a *derived* function from
-             * the same entry point -- glVertexPointerd(array) out of
-             * glVertexPointer(size, type, stride, pointer) -- continues the
-             * chain with a call that does change the arity, and the wrapper
-             * it demotes to needs the customisations swallowed before it. */
-            PyObject *record = PyObject_CallMethod(pygl_support, "record_custom",
-                                                   "OsO", self, method, args);
-            if (record == NULL) {
-                return NULL;
-            }
-            Py_DECREF(record);
-            return Py_NewRef((PyObject *)self);
+            /* Remember it, on the chain.  A module that builds a *derived*
+             * function from the same entry point -- glVertexPointerd(array)
+             * out of glVertexPointer(size, type, stride, pointer) --
+             * continues the chain with a call that does change the arity, and
+             * the wrapper it demotes to needs the customisations that chain
+             * swallowed.  support answers the chain the call continues on. */
+            return PyObject_CallMethod(pygl_support, "record_custom", "OsO",
+                                       self, method, args);
         }
     }
     keywords = kwds ? kwds : PyDict_New();
@@ -2108,6 +2174,9 @@ static PyMethodDef GLProc_methods[] = {
                 "Demote to the ctypes wrapper and size the image there."),
     PYGL_METHOD("setDimensionsAsInts", GLProc_setDimensionsAsInts,
                 "Demote to the ctypes wrapper and coerce dimensions there."),
+    {"_chained", (PyCFunction)GLProc_chained, METH_NOARGS,
+     "The GLProc a customisation chain continues on: this one if it is a "
+     "chain, else a new one for the same command."},
     {NULL}};
 
 static PyGetSetDef GLProc_getset[] = {
@@ -2128,6 +2197,9 @@ static PyGetSetDef GLProc_getset[] = {
     {"deprecated", (getter)GLProc_get_deprecated, NULL, NULL, NULL},
     {"api", (getter)GLProc_get_api, NULL,
      "Which API this entry point belongs to: GL, GLES2, EGL and so on.", NULL},
+    {"_swallowed", (getter)GLProc_get_swallowed, NULL,
+     "The customisation calls of this chain that the C performs itself, as a "
+     "dict; None on the entry point.", NULL},
     {"errcheck", (getter)GLProc_get_errcheck, (setter)GLProc_set_errcheck, NULL,
      NULL},
     {NULL}};
@@ -2191,6 +2263,7 @@ PyObject *pygl_make_proc(const PyGLCommand *command, vectorcallfunc stub)
         return NULL;
     }
     proc->vectorcall = stub;
+    proc->stub = stub;
     proc->info = command;
     proc->ctypes_callable = NULL;
     proc->errcheck = NULL;
@@ -2199,6 +2272,7 @@ PyObject *pygl_make_proc(const PyGLCommand *command, vectorcallfunc stub)
     proc->extension_override = NULL;
     proc->has_extension_override = 0;
     proc->dict = NULL;
+    proc->swallowed = NULL;
     PyObject_GC_Track(proc);
     return (PyObject *)proc;
 }

@@ -104,6 +104,21 @@ class TestES3Misc(ESTestCase):
         glGetActiveUniformsiv(program, 1, indices, GL_UNIFORM_TYPE, types)
         self.check_error('uniform indices')
 
+    def test_uniform_indices_take_the_forms_desktop_gl_takes(self):
+        """GLES3 and GL export one friendly glGetUniformIndices."""
+        from OpenGL import _uniform_indices
+
+        assert glGetUniformIndices.__doc__ == _uniform_indices._get_uniform_indices.__doc__
+        program = self.compile_program(VERTEX, FRAGMENT)
+        expected = int(glGetUniformIndices(program, ['uf'])[0])
+        given = np.zeros(1, 'I')
+        glGetUniformIndices(program, 1, ['uf'], given)
+        self.assertEqual(int(given[0]), expected)
+        self.assertEqual(int(glGetUniformIndices(program, uniformNames='uf')[0]), expected)
+        with self.assertRaises(TypeError):
+            glGetUniformIndices(program, 1)
+        self.check_error('uniform indices, both forms')
+
     def test_program_binary(self):
         vs = glCreateShader(GL_VERTEX_SHADER)
         glShaderSource(vs, VERTEX)

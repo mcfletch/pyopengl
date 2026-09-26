@@ -781,8 +781,8 @@ def glGetUniformBlockIndex(program: int, uniformBlockName: ByteArray) -> int:
     """glGetUniformBlockIndex(program: GLuint, uniformBlockName: GLchar[]) -> GLuint"""
 
 @overload
-def glGetUniformIndices(program: Any, uniformNames: Any, uniformIndices: Any = ...) -> Any:
-    """glGetUniformIndices(program, uniformNames, uniformIndices) -- the form the wrapper takes"""
+def glGetUniformIndices(program: int, uniformNames: str | bytes | Sequence[str | bytes], uniformIndices: UIntArray | None = None) -> UIntArrayResult:
+    """glGetUniformIndices(program, uniformNames) -> uniformIndices: GLuint[]"""
 
 @overload
 def glGetUniformIndices(program: int, uniformCount: int, uniformNames: AnyArray, uniformIndices: UIntArray | None = None) -> UIntArrayResult:

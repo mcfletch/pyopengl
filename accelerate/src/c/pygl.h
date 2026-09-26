@@ -208,9 +208,11 @@ extern const Py_ssize_t pygl_module_count;
  * per-context dispatch
  *
  * N contexts live in one process, each holding its own function pointer for
- * every entry point.  One GLProc object exists per command process-wide and
- * holds a slot index, never an address, so a binding a client hoisted into a
- * local before a context switch still dispatches correctly after it.
+ * every entry point.  A GLProc holds a slot index, never an address, so a
+ * binding a client hoisted into a local before a context switch still
+ * dispatches correctly after it.  One GLProc per command is the entry point
+ * itself; a friendly module's customisation chain may hold another for the same
+ * command (see `swallowed` below), which dispatches through the same slot.
  * ------------------------------------------------------------------ */
 enum {
     PYGL_SLOT_UNRESOLVED = 0, /* never looked up in this context */
@@ -261,6 +263,8 @@ extern PYGL_THREAD_LOCAL PyGLDispatch *pygl_current;
 typedef struct {
     PyObject_HEAD vectorcallfunc vectorcall;
     const PyGLCommand *info;
+    /* The generated stub, which `vectorcall` stops being once demoted. */
+    vectorcallfunc stub;
     /* Every PyObject * below is a strong reference, dropped in GLProc_clear
      * and GLProc_dealloc; each is also visited by GLProc_traverse, since any
      * of them can close a cycle back to the entry point.
@@ -280,6 +284,11 @@ typedef struct {
     PyObject *extension_override;
     int has_extension_override;
     PyObject *dict;
+    /* NULL on the entry point.  On a chain -- the GLProc a friendly module's
+     * customisation chain holds once the C has swallowed a call of it -- the
+     * dict of what that chain swallowed, which a demotion of the chain
+     * replays.  OpenGL._dispatch.support reads and fills it. */
+    PyObject *swallowed;
 } GLProc;
 
 extern PyTypeObject PyGLProc_Type;
@@ -293,10 +302,11 @@ extern PyTypeObject PyGLProc_Type;
  * - Every PyObject * returned is a new reference, or NULL with an exception
  *   set.  Nothing here hands back a borrowed one.
  * - An acquire -- pygl_array_in, pygl_array_in_sized, pygl_array_in_min,
- *   pygl_array_out, pygl_array_out_glget, pygl_array_typed, pygl_image_in, pygl_image_out,
- *   pygl_string_array -- fills a PyGLBuf the caller then owns and must hand to
- *   pygl_release.  On failure it leaves the slot holding nothing, which is what
- *   entitles PYGL_ARRAY_* to count a slot only once its acquire has returned:
+ *   pygl_array_out, pygl_array_out_glget, pygl_array_typed, pygl_image_in,
+ *   pygl_image_out, pygl_string_array, pygl_string_array_min -- fills a
+ *   PyGLBuf the caller then owns and must hand to pygl_release.  On failure
+ *   it leaves the slot holding nothing, which is what entitles PYGL_ARRAY_*
+ *   to count a slot only once its acquire has returned:
  *   a failed acquire that kept a reference would leak it, since the frame never
  *   learns the slot exists.
  * ------------------------------------------------------------------ */
@@ -504,6 +514,11 @@ PyObject *pygl_retained_value(PyGLBuf *buffer);
  * string on its own is a list of one, which is what callers pass. */
 int pygl_string_array(GLProc *self, PyObject *object, Py_ssize_t index,
                       PyGLBuf *out);
+/* As above, with `minimum` the count of pointers the driver reads: fewer
+ * strings than that, or None for a positive count, is refused.  A char ** the
+ * caller built is taken as it is, since only its builder knows its length. */
+int pygl_string_array_min(GLProc *self, PyObject *object, Py_ssize_t index,
+                          Py_ssize_t minimum, PyGLBuf *out);
 
 /* The caller's strings as a list of bytes objects, for an entry point that
  * needs them rather than the char ** built over them -- glShaderSource wants
@@ -664,6 +679,15 @@ PyObject *pygl_make_proc(const PyGLCommand *command, vectorcallfunc stub);
 #define PYGL_STRING_ARRAY(i, name)                                             \
     if (PYGL_UNLIKELY(pygl_string_array(self, (i) < _nargs ? _a[i] : NULL, (i),       \
                                         &_bufs[_nb]) < 0))                     \
+        goto _fail;                                                            \
+    void *name = _bufs[_nb++].pointer
+
+/* A char ** the driver reads `count` pointers from, `count` being a scalar the
+ * stub has already converted. */
+#define PYGL_STRING_ARRAY_MIN(i, name, count)                                  \
+    if (PYGL_UNLIKELY(pygl_string_array_min(self, (i) < _nargs ? _a[i] : NULL,  \
+                                            (i), (Py_ssize_t)(count),          \
+                                            &_bufs[_nb]) < 0))                 \
         goto _fail;                                                            \
     void *name = _bufs[_nb++].pointer
 

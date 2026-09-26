@@ -135,6 +135,57 @@ class TestGL41(GLTestCase):
         self.check_error('viewport/scissor/depth arrays')
 
 
+    def test_double_attribs_and_es_compat(self):
+        glVertexAttribL1d(2, 1.0)
+        glVertexAttribL2d(2, 1, 2)
+        glVertexAttribL3d(2, 1, 2, 3)
+        glVertexAttribL4d(2, 1, 2, 3, 4)
+        glVertexAttribL1dv(2, np.zeros(1, 'd'))
+        glVertexAttribL2dv(2, np.zeros(2, 'd'))
+        glVertexAttribL3dv(2, np.zeros(3, 'd'))
+        glVertexAttribL4dv(2, np.zeros(4, 'd'))
+        buf = one(glGenBuffers(1))
+        glBindBuffer(GL_ARRAY_BUFFER, buf)
+        glBufferData(GL_ARRAY_BUFFER, np.zeros(8, 'd'), GL_STATIC_DRAW)
+        glVertexAttribLPointer(2, 4, GL_DOUBLE, 0, None)
+        glGetVertexAttribLdv(2, GL_CURRENT_VERTEX_ATTRIB, np.zeros(4, 'd'))
+        glClearDepthf(1.0)
+        glDepthRangef(0.0, 1.0)
+        rng = np.zeros(2, 'i')
+        prec = np.zeros(1, 'i')
+        glGetShaderPrecisionFormat(GL_FRAGMENT_SHADER, GL_HIGH_FLOAT, rng, prec)
+        glReleaseShaderCompiler()
+        self.assertGreaterEqual(self.getInteger(GL_NUM_SHADER_BINARY_FORMATS), 0)
+        with self.exercise(
+            'no portable binary format/blob here, so the load is expected to '
+            'fail; the call still drives the wrapper'
+        ):
+            sh = glCreateShader(GL_VERTEX_SHADER)
+            glShaderBinary(
+                1,
+                np.array([sh], 'I'),
+                GL_SHADER_BINARY_FORMAT_SPIR_V,
+                np.zeros(4, 'B'),
+                4,
+            )
+        self.check_error('double attribs / es compat')
+
+    def test_program_binary(self):
+        p = glCreateShaderProgramv(GL_FRAGMENT_SHADER, 1, _char_pp([FRAGMENT]))
+        glProgramParameteri(p, GL_PROGRAM_BINARY_RETRIEVABLE_HINT, GL_TRUE)
+        glLinkProgram(p)
+        length = one(glGetProgramiv(p, GL_PROGRAM_BINARY_LENGTH))
+        if length < 1:
+            self.skipTest('no retrievable binary')
+        out_len = (ctypes.c_int * 1)()
+        fmt = (ctypes.c_uint * 1)()
+        binary = (ctypes.c_ubyte * length)()
+        glGetProgramBinary(p, length, out_len, fmt, binary)
+        p2 = glCreateProgram()
+        glProgramBinary(p2, fmt[0], binary, out_len[0])
+        self.check_error('program binary')
+
+
 class TestViewportArraysAreMeasuredAgainstTheCount(GLTestCase):
     """``glViewportArrayv(first, count, v)`` reads ``count`` rectangles from ``v``.
 
@@ -185,56 +236,6 @@ class TestViewportArraysAreMeasuredAgainstTheCount(GLTestCase):
         np.testing.assert_array_equal(
             glGetFloati_v(GL_VIEWPORT, 0, np.zeros(4, 'f')), [0, 0, 12, 12]
         )
-
-    def test_double_attribs_and_es_compat(self):
-        glVertexAttribL1d(2, 1.0)
-        glVertexAttribL2d(2, 1, 2)
-        glVertexAttribL3d(2, 1, 2, 3)
-        glVertexAttribL4d(2, 1, 2, 3, 4)
-        glVertexAttribL1dv(2, np.zeros(1, 'd'))
-        glVertexAttribL2dv(2, np.zeros(2, 'd'))
-        glVertexAttribL3dv(2, np.zeros(3, 'd'))
-        glVertexAttribL4dv(2, np.zeros(4, 'd'))
-        buf = one(glGenBuffers(1))
-        glBindBuffer(GL_ARRAY_BUFFER, buf)
-        glBufferData(GL_ARRAY_BUFFER, np.zeros(8, 'd'), GL_STATIC_DRAW)
-        glVertexAttribLPointer(2, 4, GL_DOUBLE, 0, None)
-        glGetVertexAttribLdv(2, GL_CURRENT_VERTEX_ATTRIB, np.zeros(4, 'd'))
-        glClearDepthf(1.0)
-        glDepthRangef(0.0, 1.0)
-        rng = np.zeros(2, 'i')
-        prec = np.zeros(1, 'i')
-        glGetShaderPrecisionFormat(GL_FRAGMENT_SHADER, GL_HIGH_FLOAT, rng, prec)
-        glReleaseShaderCompiler()
-        self.assertGreaterEqual(self.getInteger(GL_NUM_SHADER_BINARY_FORMATS), 0)
-        with self.exercise(
-            'no portable binary format/blob here, so the load is expected to '
-            'fail; the call still drives the wrapper'
-        ):
-            sh = glCreateShader(GL_VERTEX_SHADER)
-            glShaderBinary(
-                1,
-                np.array([sh], 'I'),
-                GL_SHADER_BINARY_FORMAT_SPIR_V,
-                np.zeros(4, 'B'),
-                4,
-            )
-        self.check_error('double attribs / es compat')
-
-    def test_program_binary(self):
-        p = glCreateShaderProgramv(GL_FRAGMENT_SHADER, 1, _char_pp([FRAGMENT]))
-        glProgramParameteri(p, GL_PROGRAM_BINARY_RETRIEVABLE_HINT, GL_TRUE)
-        glLinkProgram(p)
-        length = one(glGetProgramiv(p, GL_PROGRAM_BINARY_LENGTH))
-        if length < 1:
-            self.skipTest('no retrievable binary')
-        out_len = (ctypes.c_int * 1)()
-        fmt = (ctypes.c_uint * 1)()
-        binary = (ctypes.c_ubyte * length)()
-        glGetProgramBinary(p, length, out_len, fmt, binary)
-        p2 = glCreateProgram()
-        glProgramBinary(p2, fmt[0], binary, out_len[0])
-        self.check_error('program binary')
 
 
 if __name__ == '__main__':

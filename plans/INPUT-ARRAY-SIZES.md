@@ -1,6 +1,6 @@
 # Input arrays measured against their count
 
-Status: 🟡 Partial (2026-09-22)
+Status: 🟡 Partial (2026-09-24)
 
 ## The defect
 
@@ -44,9 +44,37 @@ depends on.
   `tests/gl/test_gl41.py::TestViewportArraysAreMeasuredAgainstTheCount`
   (against a driver), and the generator cases in `tests/cdispatch/`.
 
+### Arrays of strings (2026-09-24)
+
+A `GLchar *const *` the driver reads `count` pointers from is the same defect
+with worse consequences: `None` for a positive count had the driver read from
+address zero, and `glGetUniformIndices(program, 3)` in the friendly form did
+exactly that and dumped core (`plans/CODE-REVIEW-2026-09-24.md`, finding 1).
+
+- The table records the count as `from-argument` on the string parameter of
+  `glCompileShaderIncludeARB.path`, `glCreateShaderProgramv(EXT).strings`,
+  `glTransformFeedbackVaryings(EXT).varyings` and
+  `glGetUniformIndices.uniformNames`, across GL, GLES2 and GLES3.
+  `glShaderSource` is not annotated: its friendly form counts the strings
+  itself, so its count cannot disagree with them.
+- The C emits `PYGL_STRING_ARRAY_MIN(i, name, count)`, and
+  `pygl_string_array_min` refuses fewer strings than `count`, or `None` for a
+  positive count. A pointer array the caller built is passed unmeasured.
+- The ctypes path applies `arrayhelpers.StringArrayCountChecked` through
+  `Wrapper.setInputArrayCount`, which recognises a `StringArray` argument.
+  `GL_3_0`, `GLES3_3_0` and `GLES3_3_1` are not customised from the table, so
+  their chains state `setInputArrayCount` themselves, and
+  `cdispatch.extract` reads that call from a chain.
+- The annotation table writes `divisor` and `multiplier` on every
+  `from-argument` size, and the ctypes path sizes an output
+  `count * multiplier // divisor`, as the C does.
+- Tests: `tests/bindings/arrays/test_input_array_counts.py` (`STRINGS`, both
+  implementations, no context), `tests/gl/test_uniform_indices.py` against a
+  driver.
+
 ## Still open
 
-The rest of the 1,333 comments, in three groups by what the registry says:
+The rest of the 1,321 comments, in three groups by what the registry says:
 
 1. `count*N` with a literal `N` (300 comments): `glUniform4fv`,
    `glProgramUniformMatrix4fv` and the rest of the uniform and program-uniform

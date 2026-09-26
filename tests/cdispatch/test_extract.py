@@ -140,6 +140,50 @@ class TestFriendlyAnnotations:
         assert command.parameters[-1].retain
 
 
+class TestReadingAChain:
+    """What a chain's arguments say, where they are literals and where not."""
+
+    @staticmethod
+    def expression(text):
+        import ast
+
+        return ast.parse(text, mode='eval').body
+
+    def test_a_literal_is_its_value(self):
+        assert extract._literal(self.expression("('v', 4)")) == ('v', 4)
+
+    def test_an_expression_is_unknown_not_none(self):
+        """``None`` is a literal a chain passes -- ``setInputArraySize('v', None)``."""
+        assert extract._literal(self.expression('computed_size')) is extract._UNKNOWN
+        assert extract._literal(self.expression('None')) is None
+
+    def test_the_customisation_listing_answers_none_for_an_expression(self):
+        calls = extract._customisation_chain(
+            self.expression("wrapper.wrapper(f).setInputArraySize('v', computed)")
+        )
+        assert calls == [('setInputArraySize', ('v', None))]
+
+    def _annotated(self, commands, tmp_path, size):
+        import copy
+
+        (tmp_path / 'module.py').write_text(
+            'glUniform4fv = wrapper.wrapper(glUniform4fv).setInputArraySize('
+            "'value', %s)\n" % (size,)
+        )
+        command = copy.deepcopy(commands[('GL', 'glUniform4fv')])
+        command.helper = ''
+        entry = extract.extract_friendly(str(tmp_path / 'module.py'))['glUniform4fv']
+        extract._apply_annotations(command, entry)
+        return command
+
+    def test_a_computed_input_size_is_the_python_layers(self, commands, tmp_path):
+        """A size a chain computes is not one the table or the C can state."""
+        assert self._annotated(commands, tmp_path, 'len(x)').helper == 'converter'
+
+    def test_an_unchecked_input_size_is_not(self, commands, tmp_path):
+        assert self._annotated(commands, tmp_path, 'None').helper == ''
+
+
 class TestTierCensus:
     """The census the plan's design rests on, asserted rather than recalled."""
 

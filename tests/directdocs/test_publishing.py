@@ -233,3 +233,23 @@ class TestPushing:
 class TestTheDefaults:
     def test_the_branch_is_the_one_github_pages_serves(self, build_docs):
         assert build_docs.PUBLISH_BRANCH == 'gh-pages'
+
+
+class TestTheLocaleSphinxRunsUnder:
+    """Sphinx exits where ``setlocale(LC_ALL, '')`` raises, and runs where it does not."""
+
+    def test_an_installed_locale_is_left_alone(self, build_docs, monkeypatch):
+        monkeypatch.setenv('LC_ALL', 'C')
+        assert build_docs.sphinx_environment()['LC_ALL'] == 'C'
+
+    def test_a_locale_that_is_not_installed_is_replaced(self, build_docs, monkeypatch):
+        monkeypatch.setenv('LC_ALL', 'xx_NOWHERE.UTF-8')
+        assert build_docs.sphinx_environment()['LC_ALL'] == build_docs.SPHINX_LOCALE
+
+    def test_the_probe_leaves_this_process_as_it_was(self, build_docs, monkeypatch):
+        import locale
+
+        before = locale.setlocale(locale.LC_ALL)
+        monkeypatch.setenv('LC_ALL', 'xx_NOWHERE.UTF-8')
+        build_docs.sphinx_environment()
+        assert locale.setlocale(locale.LC_ALL) == before

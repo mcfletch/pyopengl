@@ -79,8 +79,9 @@ POINTER_FUNCTION_DATA = [
     ('glIndexPointerub', _simple.glIndexPointer, _simple.GL_UNSIGNED_BYTE, _simple.GL_INDEX_ARRAY_POINTER, 1, None),
     ('glIndexPointers',  _simple.glIndexPointer, _simple.GL_SHORT, _simple.GL_INDEX_ARRAY_POINTER, 1, None),
     # glIndexPointer, glTexCoordPointer and glVertexPointer take no GL_BYTE, so
-    # their `b` variants pass signed bytes widened to a type the entry point takes.
-    ('glIndexPointerb',  _simple.glIndexPointer, _simple.GL_SHORT, _simple.GL_INDEX_ARRAY_POINTER, 1, None),
+    # their `b` variants pass signed bytes widened to GL_INT, as
+    # glVertexPointerb always has.
+    ('glIndexPointerb',  _simple.glIndexPointer, _simple.GL_INT, _simple.GL_INDEX_ARRAY_POINTER, 1, None),
 
     ('glNormalPointerd',  _simple.glNormalPointer, _simple.GL_DOUBLE, _simple.GL_NORMAL_ARRAY_POINTER, 1, None),
     ('glNormalPointerf',  _simple.glNormalPointer, _simple.GL_FLOAT, _simple.GL_NORMAL_ARRAY_POINTER, 1, None),
@@ -91,7 +92,7 @@ POINTER_FUNCTION_DATA = [
     ('glTexCoordPointerd',  _simple.glTexCoordPointer, _simple.GL_DOUBLE, _simple.GL_TEXTURE_COORD_ARRAY_POINTER, 0, 2),
     ('glTexCoordPointerf',  _simple.glTexCoordPointer, _simple.GL_FLOAT, _simple.GL_TEXTURE_COORD_ARRAY_POINTER, 0, 2),
     ('glTexCoordPointeri',  _simple.glTexCoordPointer, _simple.GL_INT, _simple.GL_TEXTURE_COORD_ARRAY_POINTER, 0, 2),
-    ('glTexCoordPointerb',  _simple.glTexCoordPointer, _simple.GL_SHORT, _simple.GL_TEXTURE_COORD_ARRAY_POINTER, 0, 2),
+    ('glTexCoordPointerb',  _simple.glTexCoordPointer, _simple.GL_INT, _simple.GL_TEXTURE_COORD_ARRAY_POINTER, 0, 2),
     ('glTexCoordPointers',  _simple.glTexCoordPointer, _simple.GL_SHORT, _simple.GL_TEXTURE_COORD_ARRAY_POINTER, 0, 2),
 
     ('glVertexPointerd', _simple.glVertexPointer, _simple.GL_DOUBLE, _simple.GL_VERTEX_ARRAY_POINTER, 0, 3),

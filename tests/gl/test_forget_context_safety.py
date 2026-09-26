@@ -112,7 +112,6 @@ class TestRetiredTablesCanBeReclaimed:
     holding one now"."""
 
     def test_reclaim_reports_how_many_it_freed(self):
-        dispatch = pytest.importorskip('OpenGL._dispatch')
         if not dispatch.AVAILABLE:
             pytest.skip('the C dispatch extension is not built')
         c = dispatch._c
@@ -130,7 +129,6 @@ class TestRetiredTablesCanBeReclaimed:
         c.make_current(0)
 
     def test_reclaiming_does_not_touch_a_live_table(self):
-        dispatch = pytest.importorskip('OpenGL._dispatch')
         if not dispatch.AVAILABLE:
             pytest.skip('the C dispatch extension is not built')
         c = dispatch._c

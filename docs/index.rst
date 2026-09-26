@@ -12,7 +12,7 @@ under a BSD-style licence.
 
 .. code-block:: console
 
-   $ pip install PyOpenGL PyOpenGL_accelerate
+   $ uv run --pre --with 'pyopengl>=4.0.0a4'
 
 :doc:`installation` covers the rest, including what Windows needs for GLUT and
 GLE.

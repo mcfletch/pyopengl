@@ -213,23 +213,12 @@ class TestWhatIsSizedFromTheGLGetTable(unittest.TestCase):
     """
 
     def annotations_and_declarations(self):
-        import marshal
-
         from OpenGL import _declarations
 
         declared = {}
         for api in _declarations.APIS:
-            for _module_name, blob in _declarations._data_source(api).items():
-                _name, _constants, commands, _reexports = marshal.loads(blob)
-                for command, arguments, types in commands:
-                    declared.setdefault(
-                        (api, command),
-                        (
-                            [name for name in
-                             _declarations.as_sequence(arguments) if name],
-                            _declarations.as_sequence(types),
-                        ),
-                    )
+            for _module, command, arguments, types in _declarations.declared_commands(api):
+                declared.setdefault((api, command), (arguments, types))
         return _declarations.annotations(), declared
 
     def test_every_one_names_an_enum(self):
@@ -276,6 +265,17 @@ class TestWhatIsSizedFromTheGLGetTable(unittest.TestCase):
                 for bits in entry.get('parameters', {}).values()
             }
             self.assertIn('glget-table', kinds, (api, name))
+
+
+
+class TestADamagedTable(unittest.TestCase):
+    """A table entry that will not unmarshal is a broken installation, said so."""
+
+    def test_it_raises_import_error_naming_the_module(self):
+        from OpenGL import _declarations
+
+        with self.assertRaisesRegex(ImportError, 'OpenGL.raw.GL.damaged'):
+            _declarations._decoded('OpenGL.raw.GL.damaged', b'not marshal data')
 
 
 if __name__ == '__main__':

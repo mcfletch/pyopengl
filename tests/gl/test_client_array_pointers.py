@@ -78,6 +78,14 @@ class TestTypedSetters(GLTestCase):
                 assert driver_bytes(query, expected.nbytes) == expected.tobytes()
         self.check_error('byte client-array setters')
 
+    def test_the_byte_setters_that_take_no_bytes_widen_alike(self):
+        """glIndexPointer, glTexCoordPointer and glVertexPointer take no GL_BYTE."""
+        widened = {
+            TYPED_SETTERS[name][0]
+            for name in ('glIndexPointerb', 'glTexCoordPointerb', 'glVertexPointerb')
+        }
+        assert widened == {GL_INT}
+
     def test_a_float64_array_is_converted_to_the_setters_type(self):
         data = np.array([[0.15, 0.17, 0.2]] * 4, 'd')
         result = pointers.glColorPointerf(data)
@@ -99,15 +107,13 @@ class TestDemotedUntypedSetter(GLTestCase):
     gl_version = (2, 1)
 
     def test_it_converts_to_the_type_it_is_given(self):
-        dispatch = pytest.importorskip('OpenGL._dispatch')
+        pytest.importorskip('OpenGL._dispatch')
         from OpenGL import dispatch as dispatch_api
         from OpenGL._dispatch import support
 
         if dispatch_api.settle() != 'c':  # pragma: no cover - depends on the axis
             pytest.skip('the C dispatch layer is not the implementation running')
-        demoted = support.demoted_callable(
-            dispatch.entry_points[('GL', 'glColorPointer')]
-        )
+        demoted = support.demoted_callable(pointers.glColorPointer)
         data = values_for(GL_FLOAT, 3)
         demoted(3, GL_FLOAT, 0, data)
         assert driver_bytes(GL_COLOR_ARRAY_POINTER, data.nbytes) == data.tobytes()

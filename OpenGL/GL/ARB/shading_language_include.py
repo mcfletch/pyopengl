@@ -35,7 +35,6 @@ def glInitShadingLanguageIncludeARB():
 # INPUT glNamedStringARB.string size not checked against stringlen
 # INPUT glDeleteNamedStringARB.name size not checked against namelen
 # INPUT glCompileShaderIncludeARB.length size not checked against count
-# INPUT glCompileShaderIncludeARB.path size not checked against count
 # INPUT glIsNamedStringARB.name size not checked against namelen
 # INPUT glGetNamedStringARB.name size not checked against namelen
 # INPUT glGetNamedStringivARB.name size not checked against namelen

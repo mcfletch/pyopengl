@@ -294,7 +294,6 @@ def install():
     configure()
 
     from OpenGL import platform, wrapper
-    from OpenGL._dispatch import support
 
     _base_wrapper = wrapper.wrapper
     # The platform installs its bound methods into the module namespace at
@@ -305,7 +304,6 @@ def install():
     def wrapper_(base):
         """A C entry point already implements what the wrapper would add."""
         if isinstance(base, _c.GLProc):
-            support.begin_chain(base)
             return base
         return _base_wrapper(base)
 
@@ -321,6 +319,8 @@ def install():
         proc = _handwritten_for(functionName, dll)
         if proc is None:
             return binding
+        from OpenGL._dispatch import support
+
         support.register_ctypes_binding(_api_of_dll(dll), functionName, binding)
         return proc
 

@@ -23,6 +23,7 @@ https://github.com/mcfletch/pyopengl/issues/125
 """
 
 import os
+import shutil
 import subprocess
 import sys
 import zipfile
@@ -32,53 +33,49 @@ import pytest
 import tomlread
 
 
-def _refuse_a_stale_build_tree():
-    """Fail on a `build/lib` older than the source, naming it.
+def _source_tree(into):
+    """Copy what this checkout would build from into `into`; return `into`.
 
-    ``pip wheel`` runs setuptools in the checkout, and setuptools copies into
-    ``build/lib`` and reuses whatever is already there.  So a tree built
-    before a file was *removed* from the package still holds that file, and
-    the wheel carries it -- which is how a release ships what a commit took
-    out, and it is exactly what the cases below are here to refuse.
-
-    Without this the report is the one those cases give: "Windows binaries are
-    back in the pure-Python wheel", which sends the reader to `setup.py`.  The
-    tree is not deleted from here: it is somebody's checkout, and a test that
-    removes things in it races with every other test that builds.
+    Every file git tracks, and every untracked one it does not ignore, so a
+    change not yet committed is examined too.  Copied rather than built in
+    place because setuptools builds by copying into ``build/lib`` and reuses
+    whatever is there: a tree built before a file was *removed* from the
+    package still holds it, and a wheel built in the checkout would carry it.
+    Without git there is no way to tell source from output, and the case
+    skips.
     """
-    built = os.path.join(paths.ROOT, 'build', 'lib')
-    if not os.path.isdir(built):
-        return
-    newest = max(
-        (os.path.getmtime(os.path.join(directory, name))
-         for directory, _sub, names in os.walk(os.path.join(paths.ROOT, 'OpenGL'))
-         for name in names if name.endswith(('.py', '.pyi'))),
-        default=0,
-    )
-    if os.path.getmtime(built) < newest:
-        pytest.fail(
-            'build/lib is older than the package, and setuptools builds the '
-            'wheel by copying into it -- so the wheel this would examine is '
-            'partly a tree from before whatever changed since. A file removed '
-            'from the package is still in there. Remove it and run again:\n'
-            '    rm -rf build PyOpenGL.egg-info'
-        )
+    try:
+        listed = subprocess.run(
+            ['git', 'ls-files', '-z', '--cached', '--others', '--exclude-standard'],
+            cwd=paths.ROOT, capture_output=True, check=True,
+        ).stdout.decode('utf-8')
+    except (OSError, subprocess.CalledProcessError) as error:
+        pytest.skip('this checkout has no git to say what it ships: %s' % (error,))
+    for name in listed.split('\0'):
+        source = os.path.join(paths.ROOT, name)
+        if not name or not os.path.isfile(source):
+            continue
+        target = os.path.join(into, name)
+        os.makedirs(os.path.dirname(target), exist_ok=True)
+        shutil.copy2(source, target)
+    return into
 
 
 @pytest.fixture(scope='module')
 def wheel(tmp_path_factory):
     """The wheel this checkout produces, as a list of member names.
 
-    Built once for the module.  ``--no-build-isolation`` because the point is
-    what *this* tree produces with the tools already here, and a fresh build
-    environment would be several minutes rather than a couple of seconds.
+    Built once for the module, from a copy of the source.
+    ``--no-build-isolation`` because the point is what *this* tree produces
+    with the tools already here, and a fresh build environment would be
+    several minutes rather than a couple of seconds.
     """
-    _refuse_a_stale_build_tree()
+    source = _source_tree(tmp_path_factory.mktemp('source'))
     into = tmp_path_factory.mktemp('wheel')
     completed = subprocess.run(
         [sys.executable, '-m', 'pip', 'wheel', '--no-deps',
          '--no-build-isolation', '--wheel-dir', str(into), '.'],
-        cwd=paths.ROOT, capture_output=True, text=True, timeout=600,
+        cwd=str(source), capture_output=True, text=True, timeout=600,
     )
     if completed.returncode != 0:
         pytest.skip('this checkout does not build a wheel here: %s'

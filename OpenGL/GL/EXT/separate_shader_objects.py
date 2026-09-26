@@ -23,7 +23,6 @@ def glInitSeparateShaderObjectsEXT():
     from OpenGL import extensions
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
-# INPUT glCreateShaderProgramvEXT.strings size not checked against count
 # INPUT glDeleteProgramPipelinesEXT.pipelines size not checked against n
 # INPUT glGenProgramPipelinesEXT.pipelines size not checked against n
 # INPUT glGetProgramPipelineInfoLogEXT.infoLog size not checked against bufSize

@@ -50,9 +50,8 @@ glGetProgramResourceiv=wrapper.wrapper(glGetProgramResourceiv).setOutput(
 glGetProgramResourceLocation=wrapper.wrapper(glGetProgramResourceLocation).setInputArraySize(
     'name', None
 )
-# INPUT glCreateShaderProgramv.strings size not checked against count
-glCreateShaderProgramv=wrapper.wrapper(glCreateShaderProgramv).setInputArraySize(
-    'strings', None
+glCreateShaderProgramv=wrapper.wrapper(glCreateShaderProgramv).setInputArrayCount(
+    'strings', 'count'
 )
 # INPUT glDeleteProgramPipelines.pipelines size not checked against n
 glDeleteProgramPipelines=wrapper.wrapper(glDeleteProgramPipelines).setInputArraySize(

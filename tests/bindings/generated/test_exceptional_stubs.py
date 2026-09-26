@@ -30,19 +30,28 @@ from OpenGL.GL import exceptional
 API_STUB = os.path.join(paths.ROOT, 'OpenGL', 'GL', '__init__.pyi')
 
 
-#: Where the wrappers are written.
+#: Where most of the wrappers are written.
 SOURCE = os.path.join(paths.ROOT, 'OpenGL', 'GL', 'exceptional.py')
 
 
-def _wrapper_definitions():
-    """Every ``def`` in ``exceptional.py``, by name.
+def _api_stub(api):
+    return os.path.join(paths.ROOT, 'OpenGL', api, '__init__.pyi')
+
+
+def _source_of(module):
+    """The file a dotted module name is read from."""
+    return os.path.join(paths.ROOT, *module.split('.')) + '.py'
+
+
+def _wrapper_definitions(source=SOURCE):
+    """Every ``def`` in `source`, by name.
 
     Not only the top-level ones: ``glBegin`` and ``glEnd`` are defined inside
     the branch that error checking selects, and are wrappers there just the
     same.
     """
-    with open(SOURCE, encoding='utf-8') as handle:
-        tree = ast.parse(handle.read(), filename=SOURCE)
+    with open(source, encoding='utf-8') as handle:
+        tree = ast.parse(handle.read(), filename=source)
     return {
         node.name: node
         for node in ast.walk(tree)
@@ -63,7 +72,7 @@ def _is_lazy(definition):
     return False
 
 
-def _wrapper_parameters(name):
+def _wrapper_parameters(name, source=SOURCE, bound=False):
     """The wrapper's own parameter list: (required, most, takes_var_args).
 
     Read from the source rather than from the callable.  ``lazy`` returns a
@@ -73,7 +82,7 @@ def _wrapper_parameters(name):
     answer differently depending on whether PyOpenGL-accelerate is installed,
     while the parameter list itself is the same either way.
     """
-    definition = _wrapper_definitions().get(name)
+    definition = _wrapper_definitions(source).get(name)
     if definition is None:
         # Built by a factory -- glMap1d and its kin -- so the closure is what
         # a caller reaches and it introspects cleanly.
@@ -90,21 +99,21 @@ def _wrapper_parameters(name):
     positional = arguments.posonlyargs + arguments.args
     required = len(positional) - len(arguments.defaults)
     most = len(positional)
-    if _is_lazy(definition):
+    if bound or _is_lazy(definition):
         # The bound entry point is not an argument a caller supplies.
         required -= 1
         most -= 1
     return required, most, arguments.vararg is not None
 
 
-def _stub_definitions():
-    """Every ``def`` at the top level of the API stub, by name.
+def _stub_definitions(stub=API_STUB):
+    """Every ``def`` at the top level of an API stub, by name.
 
     A name may have several: an overload set is how a stub says a wrapper takes
     more than one shape of call.
     """
-    with open(API_STUB, encoding='utf-8') as handle:
-        tree = ast.parse(handle.read(), filename=API_STUB)
+    with open(stub, encoding='utf-8') as handle:
+        tree = ast.parse(handle.read(), filename=stub)
     definitions = {}
     for node in tree.body:
         if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
@@ -167,7 +176,9 @@ def test_the_registry_claims_a_call_the_wrapper_can_take(entry):
     the wrapper itself, so it is what keeps the row honest.
     """
     wanted = len(entry.parameters)
-    required, most, variadic = _wrapper_parameters(entry.name)
+    required, most, variadic = _wrapper_parameters(
+        entry.function or entry.name, _source_of(entry.module), entry.bound
+    )
     assert required <= wanted, (
         '%s: the registry offers %d argument(s), the wrapper requires %d'
         % (entry.name, wanted, required)
@@ -187,8 +198,21 @@ def test_the_c_form_is_offered_only_where_the_wrapper_passes_it_through(entry):
     strides and takes the short call alone, so the C form is not a call that
     exists and the stub replaces it rather than adding to it.
     """
-    definitions = _stub_definitions()[entry.name]
-    assert len(definitions) == (2 if entry.keeps_c_form else 1), (
-        '%s: %d stub definition(s) for keeps_c_form=%r'
-        % (entry.name, len(definitions), entry.keeps_c_form)
-    )
+    for api in entry.apis:
+        definitions = _stub_definitions(_api_stub(api))[entry.name]
+        assert len(definitions) == (2 if entry.keeps_c_form else 1), (
+            '%s.%s: %d stub definition(s) for keeps_c_form=%r'
+            % (api, entry.name, len(definitions), entry.keeps_c_form)
+        )
+
+
+def test_a_typed_row_types_the_stub():
+    """``glGetUniformIndices`` answers GLuint indices on both APIs that share it."""
+    for api in ('GL', 'GLES3'):
+        pythonic = _stub_definitions(_api_stub(api))['glGetUniformIndices'][0]
+        assert ast.unparse(pythonic.returns) == 'UIntArrayResult', api
+        assert [a.arg for a in pythonic.args.args] == [
+            'program',
+            'uniformNames',
+            'uniformIndices',
+        ], api

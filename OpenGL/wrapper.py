@@ -10,6 +10,7 @@ from OpenGL.latebind import LateBind
 from OpenGL.arrays import arrayhelpers, arraydatatype
 from OpenGL._bytes import short_repr_tuple
 from OpenGL._null import NULL
+from OpenGL._string_array import StringArray
 
 from OpenGL import acceleratesupport
 
@@ -386,12 +387,21 @@ class Wrapper(LateBind):
             floats for each of ``count`` viewports
 
         A longer array is accepted, since the driver reads the stated count
-        and no more.  With ``ARRAY_SIZE_CHECKING`` off this is
+        and no more.  A ``GLchar *const *`` argument is counted in strings, with
+        a multiplier of one, and one the caller built as a pointer array is
+        passed unmeasured.  With ``ARRAY_SIZE_CHECKING`` off this is
         ``setInputArraySize(argName, None)``.
         """
         if not _configflags.ARRAY_SIZE_CHECKING:
             return self.setInputArraySize(argName, None)
         arrayType = self.typeOfArg(argName)
+        if isinstance(arrayType, type) and issubclass(arrayType, StringArray):
+            # A list of strings counts itself; the argument type converts it.
+            self.setPyConverter(
+                argName, arrayhelpers.StringArrayCountChecked(countArg)
+            )
+            self.setCConverter(argName, converters.getPyArgsName(argName))
+            return self
         if not hasattr(arrayType, 'asArray'):
             raise TypeError(
                 "%s.%s is declared %s, which has no array conversion to measure"

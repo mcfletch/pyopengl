@@ -182,7 +182,14 @@ class AsArrayTypedCountChecked(converters.PyConverter):
         handler = self.arrayType.getHandler(incoming)
         result = handler.asArray(incoming, self.arrayType.typeConstant)
         expected = self.elementBytes * self.multiplier * arguments[self.countIndex]
-        byteSize = 0 if result is None else handler.arrayByteCount(result)
+        if result is None:
+            if expected > 0:
+                raise ValueError(
+                    'Expected at least %r byte array, got None' % (expected,),
+                    incoming,
+                )
+            return result
+        byteSize = handler.arrayByteCount(result)
         if byteSize < expected:
             raise ValueError(
                 """Expected at least %r byte array, got %r byte array"""
@@ -190,6 +197,42 @@ class AsArrayTypedCountChecked(converters.PyConverter):
                 incoming,
             )
         return result
+
+
+class StringArrayCountChecked(converters.PyConverter):
+    """Pass a ``GLchar *const *`` argument, refusing fewer strings than ``countName`` says
+
+    The driver reads ``count`` pointers from the array, so fewer strings than
+    that has it read past the array's end, and ``None`` is a null pointer it
+    reads from unless the count asks for nothing.  A pointer array the caller
+    built is passed as it is: only its builder knows its length.  What counts
+    as a string is :func:`OpenGL._string_array.as_bytes_list`'s to say, and the
+    argument type converts what is passed.
+    """
+
+    argNames = ('countName',)
+    indexLookups = (('countIndex', 'countName', 'pyArgIndex'),)
+
+    def __init__(self, countName):
+        self.countName = countName
+
+    def __call__(self, incoming, function, arguments):
+        from OpenGL._string_array import as_bytes_list
+
+        expected = arguments[self.countIndex]
+        if incoming is None:
+            if expected > 0:
+                raise ValueError(
+                    'Expected at least %r strings, got None' % (expected,), incoming
+                )
+            return incoming
+        strings = as_bytes_list(incoming)
+        if strings is not None and len(strings) < expected:
+            raise ValueError(
+                'Expected at least %r strings, got %r' % (expected, len(strings)),
+                incoming,
+            )
+        return incoming
 
 
 if not _configflags.ERROR_ON_COPY:

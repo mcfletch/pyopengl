@@ -16,7 +16,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -29,7 +30,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "textures": {
@@ -44,7 +46,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "textures": {
@@ -964,7 +967,13 @@
     "array": true
    },
    "path": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "count",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
@@ -1340,14 +1349,26 @@
  "GL.glCreateShaderProgramv": {
   "parameters": {
    "strings": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "count",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GL.glCreateShaderProgramvEXT": {
   "parameters": {
    "strings": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "count",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
@@ -1550,7 +1571,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2017,7 +2039,8 @@
     "size": {
      "argument": "size",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2047,7 +2070,8 @@
     "size": {
      "argument": "length",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2224,7 +2248,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2236,7 +2261,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2248,7 +2274,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2260,7 +2287,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2272,7 +2300,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2284,7 +2313,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2296,7 +2326,8 @@
     "size": {
      "argument": "num",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2308,7 +2339,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2320,7 +2352,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2332,7 +2365,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2351,7 +2385,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2363,7 +2398,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2376,7 +2412,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2388,7 +2425,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2407,7 +2445,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2419,7 +2458,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2431,7 +2471,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2450,7 +2491,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2462,7 +2504,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2474,7 +2517,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2486,7 +2530,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2498,7 +2543,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2510,7 +2556,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2542,7 +2589,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "size": {
@@ -2579,7 +2627,8 @@
     "size": {
      "argument": "maxLength",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "size": {
@@ -2615,7 +2664,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2635,7 +2685,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2667,7 +2718,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "size": {
@@ -2704,7 +2756,8 @@
     "size": {
      "argument": "maxLength",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "size": {
@@ -2740,7 +2793,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2760,7 +2814,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2787,7 +2842,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "size": {
@@ -2846,7 +2902,8 @@
     "size": {
      "argument": "maxCount",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2979,7 +3036,8 @@
     "size": {
      "argument": "size",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -2991,7 +3049,8 @@
     "size": {
      "argument": "size",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -3291,7 +3350,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "lengths": {
@@ -3300,7 +3360,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "messageLog": {
@@ -3309,7 +3370,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "severities": {
@@ -3318,7 +3380,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "sources": {
@@ -3327,7 +3390,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "types": {
@@ -3336,7 +3400,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -3348,7 +3413,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "ids": {
@@ -3357,7 +3423,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "lengths": {
@@ -3366,7 +3433,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "message": {
@@ -3375,7 +3443,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "severities": {
@@ -3384,7 +3453,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -3396,7 +3466,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "lengths": {
@@ -3405,7 +3476,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "messageLog": {
@@ -3414,7 +3486,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "severities": {
@@ -3423,7 +3496,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "sources": {
@@ -3432,7 +3506,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "types": {
@@ -3441,7 +3516,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -3831,7 +3907,8 @@
     "size": {
      "argument": "maxLength",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "length": {
@@ -3935,7 +4012,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -3947,7 +4025,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -4437,7 +4516,8 @@
     "size": {
      "argument": "size",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -4540,7 +4620,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "stringlen": {
@@ -4596,7 +4677,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "length": {
@@ -4677,7 +4759,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "length": {
@@ -4864,7 +4947,8 @@
     "size": {
      "argument": "dataSize",
      "divisor": 4,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -4887,7 +4971,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "length": {
@@ -4907,7 +4992,8 @@
     "size": {
      "argument": "counterSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "maxActiveCounters": {
@@ -4935,7 +5021,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "length": {
@@ -4955,7 +5042,8 @@
     "size": {
      "argument": "groupsSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "numGroups": {
@@ -5015,7 +5103,8 @@
     "size": {
      "argument": "size",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -5137,7 +5226,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "binaryFormat": {
@@ -5210,7 +5300,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "length": {
@@ -5335,7 +5426,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "length": {
@@ -5409,7 +5501,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -5443,7 +5536,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "props": {
@@ -5763,7 +5857,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "length": {
@@ -5812,7 +5907,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -5833,7 +5929,8 @@
     "size": {
      "argument": "maxLength",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -5898,7 +5995,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -6255,7 +6353,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "size": {
@@ -6291,7 +6390,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "size": {
@@ -6338,11 +6438,18 @@
     "size": {
      "argument": "uniformCount",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "uniformNames": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "uniformCount",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
@@ -6837,7 +6944,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -6856,7 +6964,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -6875,7 +6984,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -6894,7 +7004,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -6913,7 +7024,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 8,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -6925,7 +7037,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -6937,7 +7050,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -6956,7 +7070,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -6975,7 +7090,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 4,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -6987,7 +7103,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -6999,7 +7116,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -7018,7 +7136,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -7047,7 +7166,8 @@
     "size": {
      "argument": "columnBufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "row": {
@@ -7056,7 +7176,8 @@
     "size": {
      "argument": "rowBufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "span": {
@@ -7083,7 +7204,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -7095,7 +7217,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 8,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -7107,7 +7230,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 4,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -7119,7 +7243,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 4,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -7131,7 +7256,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 4,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -7265,7 +7391,8 @@
     "size": {
      "argument": "size",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -10439,7 +10566,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -11115,7 +11243,8 @@
     "size": {
      "argument": "size",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -11127,7 +11256,8 @@
     "size": {
      "argument": "numCounters",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -12507,14 +12637,26 @@
  "GL.glTransformFeedbackVaryings": {
   "parameters": {
    "varyings": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "count",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GL.glTransformFeedbackVaryingsEXT": {
   "parameters": {
    "varyings": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "count",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
@@ -13029,7 +13171,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -13374,7 +13517,8 @@
     "size": {
      "argument": "length",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -15864,7 +16008,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -15876,7 +16021,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -15902,7 +16048,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -16009,7 +16156,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "lengths": {
@@ -16018,7 +16166,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "messageLog": {
@@ -16027,7 +16176,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "severities": {
@@ -16036,7 +16186,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "sources": {
@@ -16045,7 +16196,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "types": {
@@ -16054,7 +16206,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -16236,7 +16389,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "length": {
@@ -16270,7 +16424,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "length": {
@@ -16304,7 +16459,8 @@
     "size": {
      "argument": "size",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -17351,7 +17507,13 @@
  "GLES2.glCreateShaderProgramvEXT": {
   "parameters": {
    "strings": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "count",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
@@ -17404,7 +17566,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -17779,7 +17942,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -17791,7 +17955,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -17803,7 +17968,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -17815,7 +17981,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -17841,7 +18008,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -17853,7 +18021,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -17872,7 +18041,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -17900,7 +18070,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "size": {
@@ -17937,7 +18108,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "size": {
@@ -18016,7 +18188,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "lengths": {
@@ -18025,7 +18198,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "messageLog": {
@@ -18034,7 +18208,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "severities": {
@@ -18043,7 +18218,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "sources": {
@@ -18052,7 +18228,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "types": {
@@ -18061,7 +18238,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -18202,7 +18380,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "length": {
@@ -18250,7 +18429,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "length": {
@@ -18415,7 +18595,8 @@
     "size": {
      "argument": "dataSize",
      "divisor": 4,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -18438,7 +18619,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "length": {
@@ -18458,7 +18640,8 @@
     "size": {
      "argument": "counterSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "maxActiveCounters": {
@@ -18486,7 +18669,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "length": {
@@ -18506,7 +18690,8 @@
     "size": {
      "argument": "groupsSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "numGroups": {
@@ -18577,7 +18762,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "length": {
@@ -18770,7 +18956,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "length": {
@@ -18818,7 +19005,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -19698,7 +19886,8 @@
     "size": {
      "argument": "numCounters",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -20272,7 +20461,13 @@
  "GLES3.glCreateShaderProgramv": {
   "parameters": {
    "strings": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "count",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
@@ -20347,7 +20542,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -20359,7 +20555,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -20371,7 +20568,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -20383,7 +20581,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -20395,7 +20594,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -20415,7 +20615,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -20518,7 +20719,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -20541,7 +20743,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "binaryFormat": {
@@ -20580,7 +20783,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "length": {
@@ -20633,7 +20837,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -20653,7 +20858,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "props": {
@@ -20720,7 +20926,8 @@
     "size": {
      "argument": "count",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -20762,7 +20969,8 @@
     "size": {
      "argument": "bufSize",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "size": {
@@ -20798,11 +21006,18 @@
     "size": {
      "argument": "uniformCount",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    },
    "uniformNames": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "uniformCount",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
@@ -21048,7 +21263,13 @@
   "helper": "variadic",
   "parameters": {
    "varyings": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "count",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
@@ -21183,7 +21404,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -21195,7 +21417,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -21207,7 +21430,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }
@@ -21219,7 +21443,8 @@
     "size": {
      "argument": "n",
      "divisor": 1,
-     "kind": "from-argument"
+     "kind": "from-argument",
+     "multiplier": 1
     }
    }
   }

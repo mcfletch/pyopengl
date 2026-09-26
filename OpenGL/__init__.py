@@ -152,7 +152,10 @@ import occurs the flags should no longer be changed.
         that many: glViewportArrayv(first, count, v) reads four floats
         per viewport, so v needs count * 4 of them, and a longer array
         is accepted.  A short one would have the driver read past its
-        end.
+        end.  An array of strings the driver reads count of --
+        glTransformFeedbackVaryings(program, count, varyings, mode) --
+        must hold at least that many, and None for a positive count is
+        refused rather than read from address zero.
 
         Switching the check off trades these guards for the cost of
         measuring, which is a few array attribute reads per call.

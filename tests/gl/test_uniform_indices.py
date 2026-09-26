@@ -5,9 +5,10 @@ The entry point takes a count, an array of ``GLchar *`` and a ``GLuint`` array
 to write into.  The friendly form takes the names alone: the count is their
 number and the answer is the array it returns.
 
-The C ordering is still accepted, for a caller who has built the pointer array
-themselves, and the output is allocated for that form too -- which is what the
-count is for.
+The C ordering is accepted as well: a second argument that is a count rather
+than names is read as ``(program, uniformCount, uniformNames[, uniformIndices])``.
+The names are required in either form, and there have to be at least as many
+as the count says, since the driver reads that many pointers.
 """
 
 import ctypes
@@ -83,11 +84,9 @@ class TestUniformIndices(GLTestCase):
     def test_a_count_the_glget_table_does_not_hold(self):
         """Three names is three indices.
 
-        The output used to be sized by looking the *count* up in the table of
-        ``glGet`` sizes, so a count that was not one of those enum values
-        raised ``KeyError`` and a count that happened to be one allocated
-        whatever that enum's size is -- an array of one, for the driver to
-        write three indices into.
+        The count is not a ``glGet`` enum, and three is a value the table of
+        ``glGet`` sizes does not hold, so an answer of three is sized from the
+        names rather than looked up.
         """
         found = self.indices(*NAMES)
         self.assertEqual(len(found), 3)
@@ -118,6 +117,25 @@ class TestUniformIndices(GLTestCase):
         self.assertNotEqual(int(found[0]), GL_INVALID_INDEX)
         self.assertEqual(int(found[1]), GL_INVALID_INDEX)
         self.check_error('unknown name')
+
+    def test_names_by_keyword(self):
+        found = glGetUniformIndices(self.program, uniformNames=NAMES)
+        self.assertEqual([int(value) for value in found], self.indices(*NAMES))
+        self.check_error('names by keyword')
+
+    def test_a_count_with_no_names_is_refused(self):
+        """The driver would read three pointers from address zero."""
+        with self.assertRaises(TypeError):
+            glGetUniformIndices(self.program, 3)
+        with self.assertRaises(TypeError):
+            glGetUniformIndices(self.program, 3, None)
+        self.check_error('count with no names')
+
+    def test_fewer_names_than_the_count_is_refused(self):
+        """The driver would read past the end of the pointer array."""
+        with self.assertRaises(ValueError):
+            glGetUniformIndices(self.program, 3, ['blockColor'])
+        self.check_error('count longer than the names')
 
     def test_the_indices_describe_the_block(self):
         """The answers are usable: each names a uniform with a block offset.
@@ -154,6 +172,25 @@ class TestUniformIndices(GLTestCase):
         self.check_error('C ordering, allocated')
 
 
+class TestTheRawEntryPoint(GLTestCase):
+    """``OpenGL.raw`` takes the C arguments, measured against the count."""
+
+    profile = 'core'
+    gl_version = (3, 3)
+
+    def test_it_takes_a_prepared_pointer_array(self):
+        from OpenGL.raw.GL.VERSION import GL_3_1 as raw
+
+        program = self.compile_program(VERTEX, FRAGMENT)
+        given = np.zeros(len(NAMES), 'I')
+        raw.glGetUniformIndices(program, len(NAMES), _char_pp(NAMES), given)
+        self.assertEqual(
+            [int(value) for value in given],
+            [int(value) for value in glGetUniformIndices(program, NAMES)],
+        )
+        self.check_error('raw C ordering')
+
+
 class TestBothImportPaths(GLTestCase):
     """GL 3.1 and ARB_uniform_buffer_object are one entry point.
 
@@ -171,6 +208,13 @@ class TestBothImportPaths(GLTestCase):
 
         self.assertIs(arb, core)
         self.assertIs(arb, glGetUniformIndices)
+
+    def test_it_is_the_implementation_gles3_exports_too(self):
+        from OpenGL import _uniform_indices
+
+        self.assertEqual(
+            glGetUniformIndices.__doc__, _uniform_indices._get_uniform_indices.__doc__
+        )
 
     def test_the_extension_import_takes_the_friendly_call(self):
         from OpenGL.GL.ARB.uniform_buffer_object import glGetUniformIndices as arb

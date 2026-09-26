@@ -102,7 +102,6 @@ _bytes.py::as_unicode::UnicodeDecodeError::0  # not reached by any case
 _bytes.py::short_repr::Exception::0  # not reached by any case
 _declarations.py::_c_source::ImportError::0  # not reached by any case
 _declarations.py::_evaluate::KeyError::0  # not reached by any case
-_declarations.py::contents_for::EOFError,ValueError,TypeError::0  # not reached by any case
 _dispatch/__init__.py::_current_context_getter::Exception::0  # not reached by any case
 _dispatch/__init__.py::_current_context_getter::Exception::1  # not reached by any case
 _dispatch/finder.py::uninstall::ValueError::0  # not reached by any case

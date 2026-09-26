@@ -316,6 +316,22 @@ print(json.dumps(report))
         assert answered['available'] is False
 
 
+@pytest.fixture
+def accelerate_setup():
+    """``accelerate/setup.py``, imported without running a build."""
+    sys.path.insert(0, os.path.join(paths.ROOT, 'accelerate'))
+    try:
+        import setup
+    except ImportError as err:              # pragma: no cover - no source tree
+        # ImportError alone, and with the reason: a bare `except Exception`
+        # here turned anything at all -- including a warning the run had
+        # asked to be an error -- into a skip that named the source tree.
+        pytest.skip('accelerate/setup.py is not importable here: %s' % (err,))
+    finally:
+        sys.path.pop(0)
+    return setup
+
+
 class TestThePairIsPinnedBeforeItIsInstalled:
     """The runtime check refuses a mismatched pair; the metadata stops one
     being assembled. Both are wanted: an ImportError at the first entry point
@@ -336,13 +352,26 @@ class TestThePairIsPinnedBeforeItIsInstalled:
             'accelerate declares no dependency on PyOpenGL, so pip will '
             'assemble any pair of versions it is asked for')
 
-    def test_the_two_distributions_state_the_same_version(self):
+    def test_the_two_distributions_state_the_same_version(self, accelerate_setup):
         """A release bumps both or neither.
 
         The pin above is on accelerate's *own* version, so a release that
         bumps PyOpenGL alone leaves accelerate asking for the version before
         it -- which pip cannot satisfy against the checkout it was handed, and
         which the runtime check refuses even where it can.
+        """
+        from OpenGL.version import __version__ as ours
+
+        theirs = accelerate_setup._our_version()
+        assert theirs == ours, (
+            'accelerate is %s and PyOpenGL is %s; they are released together'
+            % (theirs, ours))
+
+    def test_the_version_tuple_follows_the_version(self):
+        """A bump rewrites ``__version__`` alone, and the tuple has to move with it.
+
+        ``OpenGL.acceleratesupport`` compares ``__version_tuple__`` with its
+        floor, so it is the numeric release ``__version__`` names.
         """
         import re
 
@@ -351,26 +380,16 @@ class TestThePairIsPinnedBeforeItIsInstalled:
         if not os.path.exists(source):
             pytest.skip('the accelerate source tree is not in this checkout')
         with open(source, encoding='utf-8') as handle:
-            found = re.search(r"__version__\s*=\s*['\"]([^'\"]+)", handle.read())
-        assert found, 'accelerate states no __version__'
-        from OpenGL.version import __version__ as ours
+            text = handle.read()
+        bumped, count = re.subn(
+            r'^__version__\s*=\s*["\'][^"\']+["\']', '__version__ = "5.1.2b3"',
+            text, flags=re.M)
+        assert count == 1
+        namespace = {}
+        exec(compile(bumped, source, 'exec'), namespace)
+        assert namespace['__version_tuple__'] == (5, 1, 2)
 
-        assert found.group(1) == ours, (
-            'accelerate is %s and PyOpenGL is %s; they are released together'
-            % (found.group(1), ours))
-
-    def test_the_declared_pin_is_the_version_it_was_built_from(self):
-        sys.path.insert(0, os.path.join(
-            paths.ROOT, 'accelerate'))
-        try:
-            import setup as accelerate_setup
-        except ImportError as err:              # pragma: no cover - no source tree
-            # ImportError alone, and with the reason: a bare `except Exception`
-            # here turned anything at all -- including a warning the run had
-            # asked to be an error -- into a skip that named the source tree.
-            pytest.skip('accelerate/setup.py is not importable here: %s' % (err,))
-        finally:
-            sys.path.pop(0)
+    def test_the_declared_pin_is_the_version_it_was_built_from(self, accelerate_setup):
         requirements = accelerate_setup.pyopengl_requirement()
         assert requirements == 'PyOpenGL==%s' % (accelerate_setup._our_version(),)
 

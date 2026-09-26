@@ -108,3 +108,59 @@ def test_a_stub_does_not_demand_more_than_the_wrapper_needs(name, required, api,
         'wrapper documents is an error to a checker.'
         % (name, path, required, fewest[name])
     )
+
+
+def _module_stub(path):
+    """The generated stub beside a friendly module, relative to the package."""
+    return os.path.relpath(
+        os.path.join(paths.ROOT, os.path.splitext(path)[0] + '.pyi'), PACKAGE
+    )
+
+
+#: The wrappers defined in a module that has a generated stub.  The rest --
+#: ``OpenGL/GL/exceptional.py``, GLU's and GLUT's hand-written modules -- are
+#: read from their source by a checker, so there is no stub to contradict them.
+MODULE_WRAPPERS = [
+    wrapper for wrapper in WRAPPERS
+    if os.path.exists(os.path.join(PACKAGE, _module_stub(wrapper[3])))
+]
+
+
+def test_most_wrappers_have_a_module_stub():
+    assert len(MODULE_WRAPPERS) > 30
+
+
+@pytest.mark.parametrize('name,required,api,path', MODULE_WRAPPERS,
+                         ids=['%s (%s)' % (n, p) for n, _r, _a, p in MODULE_WRAPPERS])
+def test_the_modules_own_stub_admits_the_wrappers_call(name, required, api, path):
+    """``from OpenGL.GL.VERSION.GL_1_5 import glBufferData`` is the wrapper too."""
+    fewest = {}
+    for stubbed, node in stubs.every_function(_module_stub(path)):
+        demanded = len(stubs.parameters(node)) - len(node.args.defaults)
+        fewest[stubbed] = min(fewest.get(stubbed, demanded), demanded)
+    assert name in fewest, '%s does not describe %s' % (_module_stub(path), name)
+    assert fewest[name] <= required, (
+        '%s takes %d argument(s); %s demands %d'
+        % (name, required, _module_stub(path), fewest[name])
+    )
+
+
+@pytest.mark.parametrize(
+    'module',
+    ['GL/VERSION/GL_3_1', 'GL/ARB/uniform_buffer_object', 'GLES3/VERSION/GLES3_3_0'],
+)
+def test_a_shared_wrapper_is_typed_in_each_module_that_binds_it(module):
+    """``glGetUniformIndices`` takes names and answers GLuint indices wherever it is bound."""
+    import ast
+
+    forms = [
+        node for name, node in stubs.every_function(module + '.pyi')
+        if name == 'glGetUniformIndices'
+    ]
+    assert any(
+        [argument.arg for argument in node.args.args]
+        == ['program', 'uniformNames', 'uniformIndices']
+        and ast.unparse(node.returns) == 'UIntArrayResult'
+        for node in forms
+    ), [ast.unparse(node) for node in forms]
+

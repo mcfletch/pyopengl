@@ -127,7 +127,6 @@ def glInitUniformBufferObjectARB():
     from OpenGL import extensions
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
-# INPUT glGetUniformIndices.uniformNames size not checked against 'uniformCount'
 # OUTPUT glGetActiveUniformsiv.params COMPSIZE(uniformCount, pname) 
 # INPUT glGetActiveUniformsiv.uniformIndices size not checked against uniformCount
 # INPUT glGetUniformBlockIndex.uniformBlockName size not checked against ''

@@ -7,7 +7,11 @@ for ``pointer`` and then dropping ``size``, ``type`` and ``stride``.  The C
 performs the converter call, so it is swallowed; dropping an argument is not
 something the C can do, so the chain demotes to a wrapper over the ctypes
 binding and replays what it swallowed.  What it replays has to be its own
-chain's, not the first chain's to reach that entry point.
+chain's, whatever order the chains were built in.
+
+The record is kept on the chain: the first swallowed call answers a GLProc of
+the chain's own, which carries what the chain swallowed, and the entry point
+itself carries nothing.
 """
 
 import pytest
@@ -40,28 +44,26 @@ class Converter:
 
 @pytest.fixture
 def entry_point():
-    """``glColorPointer``, with the process's records put back afterwards.
+    """``glColorPointer``, the entry point ``OpenGL.GL.pointers`` derives from."""
+    return dispatch.entry_points[('GL', 'glColorPointer')]
 
-    The friendly modules fill the records at import, and ``demoted_callable``
-    reads them for the rest of the process.
-    """
-    records = (support._swallowed, support._open_chains)
-    saved = [dict(record) for record in records]
-    try:
-        yield dispatch.entry_points[('GL', 'glColorPointer')]
-    finally:
-        for record, before in zip(records, saved):
-            record.clear()
-            record.update(before)
+
+def converted(proc, label):
+    """`proc`'s chain as far as its swallowed converter calls."""
+    function = wrapper.wrapper(proc).setPyConverter('pointer', Converter(label))
+    return function.setCConverter('pointer', converters.getPyArgsName('pointer'))
+
+
+def dropping_arguments(function):
+    """The rest of a derived chain: the calls that demote it."""
+    for dropped in ('size', 'type', 'stride'):
+        function = function.setPyConverter(dropped)
+    return function
 
 
 def derived(proc, label):
     """A one-argument setter built from `proc`, as ``pointers`` builds them."""
-    function = wrapper.wrapper(proc).setPyConverter('pointer', Converter(label))
-    function = function.setCConverter('pointer', converters.getPyArgsName('pointer'))
-    for dropped in ('size', 'type', 'stride'):
-        function = function.setPyConverter(dropped)
-    return function
+    return dropping_arguments(converted(proc, label))
 
 
 def pointer_label(function):
@@ -77,8 +79,42 @@ def test_each_derived_function_keeps_its_own_converter(entry_point):
     assert pointer_label(second) == 'float'
 
 
-def test_a_derived_chain_is_not_replayed_onto_the_entry_point(entry_point):
+def test_chains_built_side_by_side_keep_their_own_converters(entry_point):
+    """Neither chain's calls land on the other, in whatever order they come."""
+    first = converted(entry_point, 'double')
+    second = converted(entry_point, 'float')
+    second = dropping_arguments(second)
+    first = dropping_arguments(first)
+    assert pointer_label(first) == 'double'
+    assert pointer_label(second) == 'float'
+
+
+def test_a_swallowed_call_answers_a_chain_of_its_own(entry_point):
+    """The chain is a GLProc for the same entry point; the entry point is untouched."""
+    chain = converted(entry_point, 'double')
+    assert chain is not entry_point
+    assert type(chain) is type(entry_point)
+    assert chain.__name__ == entry_point.__name__
+    assert chain.api == entry_point.api
+    assert support.swallowed_for(entry_point) == {}
+    assert support.swallowed_for(chain) != {}
+
+
+def test_a_chain_continues_on_the_same_object(entry_point):
+    chain = converted(entry_point, 'double')
+    assert chain.setStoreValues(None) is chain
+
+
+def test_a_demoted_chain_replays_only_its_own_calls(entry_point):
     derived(entry_point, 'double')
-    wrapper.wrapper(entry_point).setPyConverter('pointer', Converter('untyped'))
+    untyped = wrapper.wrapper(entry_point).setPyConverter(
+        'pointer', Converter('untyped')
+    )
+    assert pointer_label(support.demoted_callable(untyped)) == 'untyped'
+
+
+def test_the_entry_point_itself_demotes_to_the_binding(entry_point):
+    """What the raw modules export carries no friendly customisation."""
+    derived(entry_point, 'double')
     demoted = support.demoted_callable(entry_point)
-    assert pointer_label(demoted) == 'untyped'
+    assert demoted is support.ctypes_callable(entry_point.__name__, entry_point.api)

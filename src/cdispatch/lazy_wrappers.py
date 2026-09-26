@@ -15,7 +15,7 @@ the wrapper changes, and whether the C form still works.
 import ast
 import os
 
-__all__ = ['discover']
+__all__ = ['discover', 'discover_in']
 
 
 def _required_and_names(definition):
@@ -30,12 +30,39 @@ def _required_and_names(definition):
     return required, [a.arg for a in positional]
 
 
-def discover(package_root, api):
-    """``{name: [parameter, ...]}`` for the wrappers ``OpenGL.<api>`` exports.
+def discover_in(path):
+    """``{name: (required, parameters)}`` for the wrappers one module defines.
 
     Read from the source: the decorated function's own parameter list is the
-    call it takes, and nothing else records it.
+    call it takes, and nothing else records it.  A module that will not parse
+    defines none this can read.
     """
+    found = {}
+    try:
+        with open(path, encoding='utf-8') as handle:
+            tree = ast.parse(handle.read())
+    except (SyntaxError, UnicodeDecodeError):
+        return found
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.FunctionDef):
+            continue
+        for decorator in node.decorator_list:
+            function = (decorator.func if isinstance(decorator, ast.Call)
+                        else decorator)
+            if isinstance(function, ast.Name) and function.id in ('_lazy', 'lazy'):
+                # A `*args` wrapper -- glGetActiveAttrib takes one -- still has
+                # a smallest call, and that is the number the stub has to
+                # admit.  Both lists: the optional parameters are part of the
+                # call too -- `glDrawBuffers(bufs)` passes one of two that both
+                # default -- so the stub carries them with defaults rather than
+                # stopping at the required ones.
+                found.setdefault(node.name, _required_and_names(node))
+                break
+    return found
+
+
+def discover(package_root, api):
+    """``{name: (required, parameters)}`` for the wrappers ``OpenGL.<api>`` exports."""
     found = {}
     api_root = os.path.join(package_root, api)
     if not os.path.isdir(api_root):
@@ -43,28 +70,7 @@ def discover(package_root, api):
     for directory, folders, files in os.walk(api_root):
         folders[:] = [f for f in folders if f not in ('__pycache__', 'raw')]
         for name in sorted(files):
-            if not name.endswith('.py'):
-                continue
-            try:
-                with open(os.path.join(directory, name), encoding='utf-8') as handle:
-                    tree = ast.parse(handle.read())
-            except (SyntaxError, UnicodeDecodeError):
-                continue
-            for node in ast.walk(tree):
-                if not isinstance(node, ast.FunctionDef):
-                    continue
-                for decorator in node.decorator_list:
-                    function = (decorator.func if isinstance(decorator, ast.Call)
-                                else decorator)
-                    if isinstance(function, ast.Name) and function.id in ('_lazy', 'lazy'):
-                        # A `*args` wrapper -- glGetActiveAttrib takes one --
-                        # still has a smallest call, and that is the number
-                        # the stub has to admit.
-                        # Both lists: the optional parameters are part of the
-                        # call too -- `glDrawBuffers(bufs)` passes one of two
-                        # that both default -- so the stub carries them with
-                        # defaults rather than stopping at the required ones.
-                        required, names = _required_and_names(node)
-                        found.setdefault(node.name, (required, names))
-                        break
+            if name.endswith('.py'):
+                for wrapped, form in discover_in(os.path.join(directory, name)).items():
+                    found.setdefault(wrapped, form)
     return found

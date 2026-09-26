@@ -98,11 +98,9 @@ class TestEXTDSA(GLTestCase):
     def test_named_buffer_sub_data_allocates_the_bytes_asked_for(self):
         """The byte count is the length of the answer.
 
-        ``data`` used to be sized by looking ``size`` up in the table of
-        ``glGet`` sizes, as though a byte count were an enum: a count that
-        table holds answered an array of one element for the driver to write
-        every byte into, and a count it does not holds raised ``KeyError``.
-        Three bytes is one of the counts it does not hold.
+        ``size`` is a byte count rather than a ``glGet`` enum, so the answer is
+        sized from it rather than looked up in the table of ``glGet`` sizes.
+        Three is a value that table does not hold.
         """
         self.require()
         buf = one(glGenBuffers(1))

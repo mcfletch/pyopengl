@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 """Builds accelleration functions for PyOpenGL
 """
-import sys
 from setuptools import setup, Extension
 
 try:

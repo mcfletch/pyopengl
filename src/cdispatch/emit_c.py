@@ -82,22 +82,25 @@ def _output_size(command, parameter):
     if isinstance(parameter.size, model.GLGetTable):
         # Not known until the pname table has been consulted at run time.
         return '%s_count' % (parameter.c_name,)
-    return '(Py_ssize_t)(%s)' % (_size_expression(command, parameter),)
+    return _size_expression(command, parameter)
 
 
 def _size_expression(command, parameter):
-    """The element count for a sized parameter, as a C expression."""
+    """The element count for a sized parameter, as a ``Py_ssize_t`` C expression.
+
+    An argument is widened before anything multiplies it, since a GLsizei times
+    a multiplier can overflow an int.
+    """
     size = parameter.size
     if isinstance(size, model.Fixed):
         return str(size.count)
     if isinstance(size, model.FromArg):
-        source = command.parameters[size.argument].c_name
+        expression = '(Py_ssize_t)%s' % (command.parameters[size.argument].c_name,)
         if size.multiplier != 1:
-            # Widened first: a GLsizei times a multiplier can overflow an int.
-            source = '(Py_ssize_t)%s * %d' % (source, size.multiplier)
-        if size.divisor == 1:
-            return source
-        return '%s / %d' % (source, size.divisor)
+            expression = '%s * %d' % (expression, size.multiplier)
+        if size.divisor != 1:
+            expression = '%s / %d' % (expression, size.divisor)
+        return expression
     raise ValueError('no C expression for %r' % (size,))
 
 
@@ -114,6 +117,21 @@ def _input_multiplier(parameter):
             % (parameter.name, size)
         )
     return size.multiplier
+
+
+def _string_count(command, parameter):
+    """The argument saying how many pointers the driver reads from a ``char **``.
+
+    One string per unit of the count: a table stating otherwise describes an
+    entry point no registry declares, and is reported rather than emitted.
+    """
+    size = parameter.size
+    if size.divisor != 1 or size.multiplier != 1:
+        raise ValueError(
+            'an array of strings is counted one string per item: %s %r'
+            % (parameter.name, size)
+        )
+    return command.parameters[size.argument].c_name
 
 
 def _outputs_are_trailing(command):
@@ -375,7 +393,12 @@ def emit_stub(command):
         if not (parameter.is_array or parameter.is_string_pointer):
             continue
         element = element_symbol(parameter)
-        if parameter.is_string_pointer:
+        if parameter.is_string_pointer and isinstance(parameter.size, model.FromArg):
+            lines.append(
+                '    PYGL_STRING_ARRAY_MIN(%d, %s, %s);'
+                % (index, parameter.c_name, _string_count(command, parameter))
+            )
+        elif parameter.is_string_pointer:
             lines.append(
                 '    PYGL_STRING_ARRAY(%d, %s);' % (index, parameter.c_name)
             )
@@ -420,7 +443,7 @@ def emit_stub(command):
             # first can be checked against the array they passed.
             exact = 1 if isinstance(parameter.size, model.FromArg) else 0
             lines.append(
-                '    PYGL_ARRAY_OUT_N(%d, %s, %s, (Py_ssize_t)(%s), %d);'
+                '    PYGL_ARRAY_OUT_N(%d, %s, %s, %s, %d);'
                 % (
                     index,
                     parameter.c_name,

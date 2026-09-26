@@ -467,7 +467,7 @@ from and says which classes a parser cannot answer.
 | `test_declared_gates_run.py` | a tox factor, a marker or a test path nothing runs |
 | `test_parallel_implementations_agree.py` | a format handler that does less than the interface, or a registry that answers one implementation's questions and not the other's |
 | `test_glget_sizes_agree.py` | the two shipped glGet size tables disagreeing |
-| `test_requirements_files_resolve.py` | a `-r` naming a file that is not there, or a pair of requirements files including each other |
+| `test_requirements_files_resolve.py` | a `-r` or `-c` naming a file that is not there, or a pair of requirements files including each other |
 
 Three more are somebody else's tool, run from tox because they need one:
 

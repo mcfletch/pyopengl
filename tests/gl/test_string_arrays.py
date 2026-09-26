@@ -152,20 +152,19 @@ class TestTheHandWrittenEntryPointsAreUsed(GLTestCase):
     def test_demoting_it_keeps_the_arguments_a_caller_passes(self):
         """Assigning errcheck or argtypes moves one entry point to ctypes.
 
-        What it moves to has to be the function the friendly module would have
-        built, not the four-argument binding underneath it: the customisations
-        the C performs were swallowed rather than applied, and demotion is
-        where they have to be applied after all.
+        What the binding ``OpenGL.GL`` exports moves to has to be the function
+        the friendly module would have built, not the four-argument binding
+        underneath it: the customisations the C performs were swallowed rather
+        than applied, and demotion is where they have to be applied after all.
 
-        Asked of what demotion installs rather than by demoting the live entry
-        point, which is a decision for the life of the process and would leave
-        every later test calling a different implementation than it meant to.
+        Asked of what demotion installs rather than by demoting the live
+        binding, which is a decision for the life of the process and would
+        leave every later test calling a different implementation than it meant
+        to.
         """
         from OpenGL._dispatch import support
 
-        demoted = support.demoted_callable(
-            _dispatch.entry_points[('GL', 'glShaderSource')]
-        )
+        demoted = support.demoted_callable(glShaderSource)
         shader = glCreateShader(GL_VERTEX_SHADER)
         self.addCleanup(glDeleteShader, shader)
         demoted(shader, VERTEX_120)

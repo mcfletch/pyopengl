@@ -26,7 +26,6 @@ def glInitGl41VERSION():
 # INPUT glShaderBinary.binary size not checked against length
 # INPUT glShaderBinary.shaders size not checked against count
 # INPUT glProgramBinary.binary size not checked against length
-# INPUT glCreateShaderProgramv.strings size not checked against count
 # INPUT glDeleteProgramPipelines.pipelines size not checked against n
 # INPUT glProgramUniform1iv.value size not checked against count
 # INPUT glProgramUniform1fv.value size not checked against count

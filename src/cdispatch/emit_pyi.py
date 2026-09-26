@@ -9,6 +9,7 @@ out of the size and direction annotations.
 
 import importlib
 import keyword
+import re
 import os
 from pathlib import Path
 
@@ -67,8 +68,8 @@ ARRAY_ALIASES = {
 TYPING_STUB = 'OpenGL/_typing.pyi'
 
 _SUBMODULE_PREAMBLE = '''"""%(title)s -- generated; regenerate with src/regenerate_c.py."""
-
-from typing import Any%(aliases)s
+%(sequence)s
+from typing import Any%(overload)s%(aliases)s
 '''
 
 
@@ -129,6 +130,12 @@ def __getattr__(name: str) -> Any:
     libraries -- is described by the modules themselves.
     """
 '''
+
+
+def _alias_names():
+    """Every alias ``OpenGL._typing`` declares: the arrays, then their results."""
+    arrays = sorted(set(ARRAY_ALIASES.values())) + ['AnyArray']
+    return arrays + ['%sResult' % (alias,) for alias in arrays]
 
 
 def _alias_declarations():
@@ -284,7 +291,8 @@ def _star_exports(reexports):
     return provided
 
 
-def emit_submodule(name, commands, constants=(), extras=(), reexports=()):
+def emit_submodule(name, commands, constants=(), extras=(), reexports=(),
+                   wrappers=None):
     """One friendly module's stub: what a program can import from it.
 
     ``OpenGL.GL.ARB.vertex_array_object`` fills its namespace from the
@@ -293,19 +301,36 @@ def emit_submodule(name, commands, constants=(), extras=(), reexports=()):
     every name in it as ``Any`` -- which is what the generated modules used to
     provide by being files.  This is that, without the files.
 
+    `wrappers` is ``{name: (row, lazy)}`` for the entry points the module
+    rebinds to a wrapper -- a row of :mod:`cdispatch.exceptional`, the
+    parameters of a ``lazy`` wrapper it defines, either None -- and those are
+    stubbed as the wrapper, as the API stub stubs them.
+
     Signatures rather than docstrings: the API-level stub beside the package
     carries the prose, and 1,300 copies of it would be most of the wheel.
     """
+    wrappers = wrappers or {}
+    lines = {}
+    for command in commands:
+        if command.name not in lines:
+            row, shorter = wrappers.get(command.name, (None, None))
+            lines[command.name] = _wrapped_lines(command, row, shorter, None) or [
+                emit_signature(command)
+            ]
+    written = '\n'.join(line for block in lines.values() for line in block)
     aliases = sorted(
         {_array_annotation(p) for command in commands for p in command.parameters
          if p.is_array or p.is_string_pointer}
         | {alias for command in commands
            for alias in _returned_aliases(command)}
+        | {alias for alias in _alias_names() if re.search(r'\b%s\b' % alias, written)}
     )
     parts = [
         _SUBMODULE_PREAMBLE
         % {
             'title': name,
+            'sequence': '\nfrom collections.abc import Sequence' if 'Sequence[' in written else '',
+            'overload': ', overload' if '@overload' in written else '',
             # By name rather than ``import *``: a stub re-exports what it
             # imports only when asked to, so naming them keeps the aliases out
             # of what ``from this import *`` means.
@@ -339,12 +364,8 @@ def emit_submodule(name, commands, constants=(), extras=(), reexports=()):
     if constants:
         parts.append('')
 
-    seen = set()
-    for command in sorted(commands, key=lambda item: item.name):
-        if command.name in seen:
-            continue
-        seen.add(command.name)
-        parts.append(emit_signature(command))
+    for command_name in sorted(lines):
+        parts.extend(line for line in lines[command_name] if line)
     if commands:
         parts.append('')
 
@@ -379,32 +400,37 @@ def _returned_aliases(command):
     ]
 
 
+def _definition(signature, doc):
+    """A stub ``def`` from its ``def ...:`` line: with `doc` as its body, or ``...``."""
+    if doc is None:
+        return [signature + ' ...']
+    return [signature, '    """%s"""' % (_safe_docstring(doc),)]
+
+
 def _exceptional_lines(command, wrapper, generated_doc):
-    """The stub lines for an entry point ``exceptional.py`` wraps.
+    """The stub lines for an entry point a row of ``exceptional.py`` describes.
 
     The wrapper's own form comes first, so a checker resolving an ambiguous
     call picks the one the docstring gives.  Where the wrapper also passes the
     C form through, the generated line follows it as a second overload; where
     it does not, the wrapper's form is the only one, and a plain ``def`` says
-    so more clearly than an overload set of one.
+    so more clearly than an overload set of one.  A `generated_doc` of None
+    writes bodies of ``...``, as a module's own stub does.
     """
     pythonic = 'def %s(%s) -> %s:' % (
         command.name,
         ', '.join(wrapper.parameters),
         wrapper.returns,
     )
+    wrapper_doc = None if generated_doc is None else wrapper.signature
     if not wrapper.keeps_c_form:
-        return [pythonic, '    """%s"""' % (_safe_docstring(wrapper.signature),), '']
-    return [
-        '@overload',
-        pythonic,
-        '    """%s"""' % (_safe_docstring(wrapper.signature),),
-        '',
-        '@overload',
-        emit_signature(command).replace(': ...', ':', 1),
-        '    """%s"""' % (_safe_docstring(generated_doc),),
-        '',
-    ]
+        return _definition(pythonic, wrapper_doc) + ['']
+    return (
+        ['@overload'] + _definition(pythonic, wrapper_doc) + ['']
+        + ['@overload']
+        + _definition(emit_signature(command).replace(': ...', ':', 1), generated_doc)
+        + ['']
+    )
 
 
 def _required_arguments(command):
@@ -424,7 +450,8 @@ def _lazy_lines(command, wrapper, generated_doc):
     three values where the C form fills four buffers. So the short form is
     typed ``Any``, which admits the documented call without claiming to know
     more than the source says, and the generated line follows it for callers
-    passing the C arguments.
+    passing the C arguments.  A `generated_doc` of None writes bodies of
+    ``...``, as a module's own stub does.
     """
     required, names = wrapper
     declared = [
@@ -433,23 +460,32 @@ def _lazy_lines(command, wrapper, generated_doc):
         for name in names
     ]
     short = 'def %s(%s) -> Any:' % (command.name, ', '.join(declared))
-    prose = '    """%s"""' % (_safe_docstring(
-        '%s(%s) -- the form the wrapper takes' % (command.name, ', '.join(names))),)
+    prose = None if generated_doc is None else (
+        '%s(%s) -- the form the wrapper takes' % (command.name, ', '.join(names)))
     if len(names) >= len(command.parameters):
         # The wrapper's own list already spans every call the C form does --
         # its trailing parameters default -- so a second overload for the C
         # form would be one a checker can never reach.
-        return [short, prose, '']
-    return [
-        '@overload',
-        short,
-        prose,
-        '',
-        '@overload',
-        emit_signature(command).replace(': ...', ':', 1),
-        '    """%s"""' % (_safe_docstring(generated_doc),),
-        '',
-    ]
+        return _definition(short, prose) + ['']
+    return (
+        ['@overload'] + _definition(short, prose) + ['']
+        + ['@overload']
+        + _definition(emit_signature(command).replace(': ...', ':', 1), generated_doc)
+        + ['']
+    )
+
+
+def _wrapped_lines(command, wrapper, shorter, doc):
+    """The stub lines for `command` where a wrapper stands in front of it, else None.
+
+    `wrapper` is its row in :mod:`cdispatch.exceptional`, `shorter` the
+    ``lazy`` wrapper's parameters, either None where there is none.
+    """
+    if wrapper is not None:
+        return _exceptional_lines(command, wrapper, doc)
+    if shorter is not None and len(shorter[0]) < _required_arguments(command):
+        return _lazy_lines(command, shorter, doc)
+    return None
 
 
 def emit_module(api, commands, constants=(), package_root=None):
@@ -496,13 +532,14 @@ def emit_module(api, commands, constants=(), package_root=None):
         doc = hand.signature if hand is not None else command.signature_line()
         if command.purpose:
             doc = '%s\n\n    %s' % (doc, command.purpose)
-        wrapper = exceptional.lookup(api, command.name)
-        if wrapper is not None:
-            parts.extend(_exceptional_lines(command, wrapper, doc))
-            continue
-        shorter = discovered.get(command.name)
-        if shorter is not None and len(shorter[0]) < _required_arguments(command):
-            parts.extend(_lazy_lines(command, shorter, doc))
+        wrapped = _wrapped_lines(
+            command,
+            exceptional.lookup(api, command.name),
+            discovered.get(command.name),
+            doc,
+        )
+        if wrapped is not None:
+            parts.extend(wrapped)
             continue
         # The docstring is the body.  A def cannot carry both an ellipsis body
         # and a docstring, and the docstring is the more useful of the two --
