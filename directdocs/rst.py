@@ -69,6 +69,11 @@ def literal(text: str) -> str:
     return '``%s``' % (text,)
 
 
+def one_line(text: str) -> str:
+    """``text`` with each line break, and the space around it, as one space."""
+    return re.sub(r'\s*\n\s*', ' ', text)
+
+
 def heading(text: str, level: int = 0) -> str:
     """``text`` underlined as a section title at ``level``."""
     char = UNDERLINES[min(level, len(UNDERLINES) - 1)]
@@ -150,9 +155,14 @@ class Writer:
     def directive(
         self, name: str, argument: str = '', options: dict[str, str] | None = None
     ) -> None:
+        # The argument and each option are one line apiece.  A signature
+        # carries each default's ``repr``, and some -- a node, an array --
+        # span several lines.
+        argument = one_line(argument)
+        options = {key: one_line(value) for key, value in (options or {}).items()}
         self.blank()
         self.line('.. %s:: %s' % (name, argument) if argument else '.. %s::' % (name,))
-        for key, value in (options or {}).items():
+        for key, value in options.items():
             self.line('   :%s: %s' % (key, value) if value else '   :%s:' % (key,))
         self.blank()
 
@@ -563,6 +573,17 @@ _RST_DIRECTIVE = re.compile(r'^\s*\.\.\s+[\w-]+::', re.M)
 #: visible on the page.
 _RST_LITERAL = re.compile(r'``[^`\n]+``')
 
+#: A docstring that describes its arguments as Sphinx info fields --
+#: ``:param name:``, ``:raises Error:`` -- wrote itself as reStructuredText
+#: too.  Only the field names Sphinx gives a meaning: the specification's prose
+#: has colons at the start of a line that are not markup.
+_RST_FIELD = re.compile(
+    r'^\s*:(?:param|parameter|arg|argument|key|keyword|type|raises?|except|'
+    r'exception|var|ivar|cvar|vartype|returns?|rtype|yields?|meta)\b[^:\n]*:'
+    r'(?:\s|$)',
+    re.M,
+)
+
 #: Inline markup a substitution must not reach inside: an entry point already
 #: written as a literal or as a cross-reference is already saying what it is.
 _PROTECTED = re.compile(r'``.*?``|:[a-z:]+:`[^`]*`|`[^`]*`_{0,2}', re.S)
@@ -598,6 +619,7 @@ def write_docstring(
         _RST_DIRECTIVE.search(text)
         or _RST_ROLE.search(text)
         or _RST_LITERAL.search(text)
+        or _RST_FIELD.search(text)
     ):
         # Written as reStructuredText, so it is written through: splitting it
         # by indent would take its structure apart -- a list item and the line
@@ -605,9 +627,10 @@ def write_docstring(
         # rewritten, those being the one thing in a docstring that reST reads
         # as something else.
         #
-        # A role, a directive or a literal, and not a bullet: the generated
-        # modules carry the specification's own prose as their docstring, and
-        # that is full of asterisks and indentation that were never markup.
+        # A role, a directive, a literal or a field, and not a bullet: the
+        # generated modules carry the specification's own prose as their
+        # docstring, and that is full of asterisks and indentation that were
+        # never markup.
         writer.blank()
         for line in convert_argument_lists(text).split('\n'):
             # An indented line in a docstring is a sample or a literal block,
@@ -631,21 +654,84 @@ def write_docstring(
 
     for indented, lines in docstring_blocks(text):
         entries = argument_list(lines)
-        if entries is None:
-            if indented or looks_like_a_list(lines):
-                # Indented, so its layout is the point; or a list this could
-                # not read as one, which joining into a paragraph would run
-                # together into nonsense.
-                writer.literal_block('\n'.join(lines))
-            else:
-                writer.paragraph(prose(lines))
-            continue
-        writer.blank()
-        for term, description in entries:
-            writer.line(escape(term))
-            with writer.indent():
-                writer.line(textwrap.fill(prose(description), 72))
+        items = None if entries or indented else bullet_list(lines)
+        if entries:
+            write_entries(entries, writer, prose)
+        elif items:
             writer.blank()
+            for item in items:
+                writer.line(
+                    textwrap.fill(
+                        prose(item),
+                        72,
+                        initial_indent='- ',
+                        subsequent_indent='  ',
+                        break_long_words=False,
+                        break_on_hyphens=False,
+                    )
+                )
+            writer.blank()
+        elif indented or looks_like_a_list(lines):
+            # Indented, so its layout is the point; or a list this could not
+            # read as one, which joining into a paragraph would run together
+            # into nonsense.
+            writer.literal_block('\n'.join(lines))
+        else:
+            writer.paragraph(prose(without_literal_marker(lines)))
+
+
+def write_entries(
+    entries: list[tuple[str, list[str]]],
+    writer: Writer,
+    prose: Callable[[list[str]], str],
+) -> None:
+    """``entries`` as a definition list, ``prose`` writing each description.
+
+    A description that goes on to list entries of its own -- the values an
+    argument takes, each with what it means -- has them as a definition list
+    under it.
+    """
+    writer.blank()
+    for term, description in entries:
+        writer.line(escape(term))
+        with writer.indent():
+            text, nested = nested_entries(description)
+            writer.line(textwrap.fill(prose(text), 72))
+            if nested:
+                write_entries(nested, writer, prose)
+        writer.blank()
+
+
+def nested_entries(
+    description: list[str],
+) -> tuple[list[str], list[tuple[str, list[str]]] | None]:
+    """``description`` split where a list of entries under it starts.
+
+    The lines before the list, and the list; or all of ``description`` and
+    ``None`` where no list starts in it, or what follows is not one.
+    """
+    for at, line in enumerate(description[1:], 1):
+        if argument_entry(line):
+            nested = argument_list(description[at:])
+            if nested:
+                return description[:at], nested
+            break
+    return description, None
+
+
+def without_literal_marker(lines: list[str]) -> list[str]:
+    """``lines`` with the ``::`` that introduces a sample taken off the end.
+
+    The sample is written as a ``code-block`` directive, which says what it is
+    by itself; the marker left in front of it asks for a second literal block
+    that is not there.  As in reST, ``Example::`` reads ``Example:`` and
+    ``Example ::`` reads ``Example``.
+    """
+    last = lines[-1].rstrip()
+    if not last.endswith('::'):
+        return lines
+    last = last[:-2].rstrip() if last[-3:-2].isspace() or last == '::' else last[:-1]
+    return lines[:-1] + [last]
 
 
 #: ``name -- what it is``, which is how every PyOpenGL docstring writes an
@@ -654,8 +740,57 @@ _ARGUMENT = re.compile(r'^(\S[^-]*?)\s+--\s+(.*)$')
 
 #: What the left of a ``--`` has to look like to be argument names rather than
 #: a sentence with a dash in it: identifiers, possibly several, possibly
-#: starred.
-_ARGUMENT_NAMES = re.compile(r'^\*{0,2}\w+(?:\s*,\s*\*{0,2}\w+)*$')
+#: starred, possibly with a note in brackets: ``separable (keyword only)``.
+_ARGUMENT_NAMES = re.compile(
+    r'^\*{0,2}\w+(?:\s*[,/]\s*\*{0,2}\w+)*(?:\s+\([^()]*\))?$'
+)
+
+#: A bulleted list item, in a docstring that is otherwise plain text.
+_BULLET = re.compile(r'^([-*+])\s+(\S.*)$')
+
+
+def argument_entry(line: str) -> tuple[str, str] | None:
+    """``line``'s names and the start of their description, or ``None``.
+
+    ``None`` where ``line`` is not an argument entry: the left of its ``--``
+    does not read as names, or it has no ``--``.
+    """
+    match = _ARGUMENT.match(line.strip())
+    if not match or not _ARGUMENT_NAMES.match(match.group(1).strip()):
+        return None
+    return match.group(1).strip(), match.group(2).strip()
+
+
+def opens_an_entry(line: str) -> bool:
+    """Whether ``line`` starts an argument entry or a list item.
+
+    An indented line directly under one continues it, where under any other
+    line it starts a sample.
+    """
+    return bool(_BULLET.match(line) or argument_entry(line))
+
+
+def bullet_list(lines: list[str]) -> list[list[str]] | None:
+    """``lines`` as the lines of each list item, or ``None``.
+
+    ``None`` where the run is not a list from its first line to its last, all
+    with the same bullet -- a paragraph with a dash at the start of one line
+    is a paragraph.
+    """
+    items: list[list[str]] = []
+    marker = None
+    for line in lines:
+        if line[:1].isspace():
+            if not items:
+                return None
+            items[-1].append(line.strip())
+            continue
+        match = _BULLET.match(line)
+        if not match or match.group(1) != (marker or match.group(1)):
+            return None
+        marker = match.group(1)
+        items.append([match.group(2)])
+    return items or None
 
 
 def looks_like_a_list(lines: list[str]) -> bool:
@@ -664,11 +799,7 @@ def looks_like_a_list(lines: list[str]) -> bool:
     Such a run is left exactly as it is.  Joining it into a paragraph, which
     is what prose gets, would run its entries together into one sentence.
     """
-    for line in lines:
-        match = _ARGUMENT.match(line.strip())
-        if match and _ARGUMENT_NAMES.match(match.group(1).strip()):
-            return True
-    return False
+    return any(argument_entry(line) for line in lines)
 
 
 def argument_list(lines: list[str]) -> list[tuple[str, list[str]]] | None:
@@ -678,6 +809,9 @@ def argument_list(lines: list[str]) -> list[tuple[str, list[str]]] | None:
     table, a quoted message -- and should be left exactly as it is.  The names
     have to look like names: a sentence with a dash in the middle of it is a
     sentence.
+
+    A description's continuation lines keep their indent, which is what says
+    where a list of entries under it starts.
     """
     body = textwrap.dedent('\n'.join(lines)).split('\n')
     entries: list[tuple[str, list[str]]] = []
@@ -687,12 +821,13 @@ def argument_list(lines: list[str]) -> list[tuple[str, list[str]]] | None:
         if line[:1].isspace():
             if not entries:
                 return None
-            entries[-1][1].append(line.strip())
+            entries[-1][1].append(line)
             continue
-        match = _ARGUMENT.match(line)
-        if not match or not _ARGUMENT_NAMES.match(match.group(1).strip()):
+        entry = argument_entry(line)
+        if entry is None:
             return None
-        entries.append((match.group(1).strip(), [match.group(2).strip()]))
+        names, start = entry
+        entries.append((names, [start]))
     return entries or None
 
 
@@ -731,8 +866,7 @@ def _argument_run(lines: list[str], at: int) -> tuple[list[str] | None, int]:
     above = lines[at - 1].strip() if at else ''
     if above and not above.endswith(':'):
         return None, at
-    first = _ARGUMENT.match(lines[at].strip())
-    if not first or not _ARGUMENT_NAMES.match(first.group(1).strip()):
+    if not argument_entry(lines[at]):
         return None, at
     indent = ' ' * (len(lines[at]) - len(lines[at].lstrip()))
     entries: list[tuple[str, list[str]]] = []
@@ -744,19 +878,16 @@ def _argument_run(lines: list[str], at: int) -> tuple[list[str] | None, int]:
             ahead = index + 1
             while ahead < len(lines) and not lines[ahead].strip():
                 ahead += 1
-            nxt = _ARGUMENT.match(lines[ahead].strip()) if ahead < len(lines) else None
-            if not (nxt and _ARGUMENT_NAMES.match(nxt.group(1).strip())):
+            if ahead == len(lines) or not argument_entry(lines[ahead]):
                 break
             index = ahead
             continue
         here = len(line) - len(line.lstrip())
         if here < len(indent):
             break
-        match = _ARGUMENT.match(line.strip())
-        if here == len(indent) and match and _ARGUMENT_NAMES.match(
-            match.group(1).strip()
-        ):
-            entries.append((match.group(1).strip(), [match.group(2).strip()]))
+        entry = argument_entry(line)
+        if here == len(indent) and entry:
+            entries.append((entry[0], [entry[1]]))
         elif here > len(indent) and entries:
             entries[-1][1].append(line.strip())
         else:
@@ -781,14 +912,23 @@ def docstring_blocks(text: str) -> list[tuple[bool, list[str]]]:
     A blank line inside a run of indented lines is part of it -- an argument
     list with a paragraph between its halves is one block, not three -- and
     between unindented lines it starts a new paragraph.
+
+    An indented line directly under an argument entry or a list item is that
+    entry wrapping, and stays in its block.
     """
     blocks: list[tuple[bool, list[str]]] = []
     blank = False
+    hanging = False
     for line in inspect.cleandoc(text).split('\n'):
         if not line.strip():
             blank = True
+            hanging = False
             continue
         indented = line[:1].isspace()
+        if indented and hanging:
+            blocks[-1][1].append(line)
+            continue
+        hanging = not indented and opens_an_entry(line)
         if blocks and blocks[-1][0] == indented and not (blank and not indented):
             if blank:
                 blocks[-1][1].append('')

@@ -51,6 +51,29 @@ Which module declares a name comes from the `__module__` the declaration
 tables record, which needs `MODULE_ANNOTATIONS`; `dumbpydoc.py` sets it before
 importing anything.
 
+### How a docstring is read
+
+A docstring that uses a role (`:class:`), a literal (` ``name`` `), a
+directive, or a Sphinx info field (`:param name:`, `:raises Error:`) is
+reStructuredText, and is written into the page as it stands. The one thing
+rewritten in it is a run of `name -- description` lines, which becomes a
+definition list. So a code sample in such a docstring is introduced with `::`,
+and `|` needs a literal around it.
+
+Any other docstring is plain text. Its prose is escaped, so an asterisk is an
+asterisk, and it is read as:
+
+- `name -- description` lines, as a definition list. Several names share an
+  entry as `a, b` or `a/b`, and a note in brackets stays with them:
+  `separable (keyword only) -- ...`. A description wraps onto indented lines,
+  and entries indented under one are a list of their own.
+- Lines starting `- `, `* ` or `+ `, as a bulleted list.
+- An indented block, as a literal block, with the `::` introducing it taken
+  off the paragraph above.
+
+`tests/directdocs/test_rst.py` holds each of these to reStructuredText that
+docutils reads without a warning.
+
 `OpenGL.raw` gets no pages at all. There are no source files under it, only
 declaration tables a finder turns into namespaces on demand, and every name in
 it is exported by the module beside it -- which is where it is declared.

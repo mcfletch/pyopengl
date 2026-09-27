@@ -8,6 +8,9 @@ reads in a build of three thousand pages.  These hold the cases that behave
 that way.
 """
 
+import io
+
+import docutils.core
 import lxml.etree as ET
 import pytest
 
@@ -268,6 +271,22 @@ class TestWriter:
         writer.directive('toctree', options={'hidden': ''})
         assert '   :hidden:' in writer.render()
 
+    def test_a_directive_argument_spanning_lines_is_written_on_one(self):
+        """A default whose ``repr`` spans lines -- a node, an array -- lands
+        in a signature, and the directive ends at the first line break."""
+        writer = rst.Writer()
+        writer.directive(
+            'py:method',
+            "__init__(self, style=WaterStyle(\n\tname = 'lake',\n"
+            '\tspeed = 0.8\n), name=None)',
+            {'value': 'array([1., 0.],\n      dtype=float32)'},
+        )
+        assert writer.render() == (
+            ".. py:method:: __init__(self, style=WaterStyle( name = 'lake',"
+            ' speed = 0.8 ), name=None)\n'
+            '   :value: array([1., 0.], dtype=float32)\n'
+        )
+
 
 class TestEscaping:
     @pytest.mark.parametrize('character', ['*', '`', '|', '_', '\\'])
@@ -395,6 +414,187 @@ class TestDocstrings:
         )
         assert '.. code-block:: python' in out
         assert 'glBegin(GL_TRIANGLES)' in out
+
+
+class TestDocstringsParse:
+    """What a docstring becomes is reStructuredText that parses cleanly.
+
+    Each of these is a shape the packages' docstrings are written in.  A
+    warning from docutils is a page that renders as something other than what
+    its author wrote: a sample run into the paragraph above it, a list joined
+    into one sentence, the rest of an argument's description set as code.
+    """
+
+    def render(self, text):
+        writer = rst.Writer()
+        rst.write_docstring(text, writer)
+        return writer.render()
+
+    def assert_parses(self, text):
+        """``text`` as a page, which docutils reads with nothing to report."""
+        out = self.render(text)
+        stream = io.StringIO()
+        docutils.core.publish_doctree(
+            out,
+            settings_overrides={
+                'warning_stream': stream,
+                'report_level': 2,
+                'halt_level': 5,
+            },
+        )
+        assert stream.getvalue() == '', out
+        return out
+
+    def test_a_literal_block_marker_is_not_left_before_the_block(self):
+        """``::`` says the indented block after it is a sample.
+
+        The block is written as a ``code-block`` directive, so the marker has
+        said its piece: left in, it asks for a second literal block that is
+        not there.  ``Example::`` reads ``Example:``, as it would in reST.
+        """
+        out = self.assert_parses(
+            'Keep the returned source::\n'
+            '\n'
+            '    previous = setTimeSource(myClock)\n'
+            '    setTimeSource(previous)\n'
+            '\n'
+            'A closure will *not* survive::\n'
+            '\n'
+            '    handler = lambda event: step(+1)\n'
+        )
+        assert 'Keep the returned source:\n' in out
+        assert '::\n' not in out.replace('.. code-block::', '')
+
+    def test_a_marker_on_its_own_word_is_dropped(self):
+        """``Example ::`` is reST for a paragraph that shows no colon."""
+        out = self.assert_parses('Like this ::\n\n    f(x)\n')
+        assert 'Like this\n' in out
+
+    def test_a_continuation_line_in_plain_text_joins_its_entry(self):
+        """An argument's description wraps onto an indented line.
+
+        The docstring is otherwise unindented, so the continuation is the only
+        indented line in it; it belongs to the entry above, not in a sample
+        of its own.
+        """
+        out = self.assert_parses(
+            'Install the clock.\n'
+            '\n'
+            'source -- a callable returning seconds, or None\n'
+            '    to go back to the wall clock\n'
+            '\n'
+            'A source should never go backwards.\n'
+        )
+        assert 'code-block' not in out
+        assert 'or None to go back to the wall clock' in out
+
+    def test_a_sample_directly_under_a_line_stays_a_sample(self):
+        """Only an argument or a list item continues onto an indented line.
+
+        ``Usage:`` with the call indented under it is a label and a sample.
+        """
+        out = self.assert_parses(
+            'Run it.\n\nUsage:\n    run(the, thing)\n\nThen stop.\n'
+        )
+        assert '.. code-block:: text' in out
+        assert '   run(the, thing)' in out
+
+    def test_a_bulleted_list_is_a_list(self):
+        """Joined into prose, its items run into one sentence."""
+        out = self.assert_parses(
+            'Testing utilities:\n'
+            '\n'
+            '- framebuffer_comparison: compare rendered output between paths\n'
+            '    or against saved reference images\n'
+            '- subprocess_runner: run tests in isolated subprocesses\n'
+            '- event_injector: inject keyboard and mouse events\n'
+        )
+        assert 'code-block' not in out
+        items = out.split('\n\n')[1].split('\n- ')
+        assert [' '.join(item.split()) for item in items] == [
+            '- framebuffer\\_comparison: compare rendered output between paths'
+            ' or against saved reference images',
+            'subprocess\\_runner: run tests in isolated subprocesses',
+            'event\\_injector: inject keyboard and mouse events',
+        ]
+
+    def test_a_field_list_is_written_through(self):
+        """``:param name:`` is reST, and a paragraph when it is not read as it.
+
+        Escaped and joined, every field runs into the one before; and a
+        field's continuation line, indented under it, is split off as a
+        sample.
+        """
+        out = self.assert_parses(
+            'A square elevation grid.\n'
+            '\n'
+            ':param grid: (res, res) array of normalised heights in [0, 1].\n'
+            ':param extent: side length of the terrain in world units\n'
+            '    (centred on the origin).\n'
+            ':raises ValueError: for a grid that is not square.\n'
+        )
+        assert 'code-block' not in out
+        assert '\n:param extent: side length' in out
+        assert '\n:raises ValueError:' in out
+
+    def test_a_qualified_name_is_a_name(self):
+        """``separable (keyword only) -- ...`` is an argument with a note."""
+        out = self.assert_parses(
+            'Create a program\n'
+            '\n'
+            'shaders -- the shaders to attach to the\n'
+            '    generated program.\n'
+            'separable (keyword only) -- set the separable flag to allow\n'
+            '    partial installation\n'
+        )
+        assert 'code-block' not in out
+        assert 'separable (keyword only)\n   set the separable flag' in out
+        assert 'to allow partial installation' in out
+
+    def test_entries_under_an_entry_are_a_list_of_their_own(self):
+        """The values an argument takes, each with what it means."""
+        out = self.assert_parses(
+            'Bind the buffer\n'
+            '\n'
+            'target -- VBO target to which to bind (array or indices)\n'
+            '    GL_ARRAY_BUFFER -- array-data binding\n'
+            '    GL_ELEMENT_ARRAY_BUFFER -- index-data binding, for\n'
+            '        indexed draws\n'
+            '\n'
+            'size -- the count in bytes\n'
+        )
+        assert (
+            'target\n'
+            '   VBO target to which to bind (array or indices)\n'
+            '\n'
+            '   GL\\_ARRAY\\_BUFFER\n'
+            '      array-data binding\n'
+            '\n'
+            '   GL\\_ELEMENT\\_ARRAY\\_BUFFER\n'
+            '      index-data binding, for indexed draws\n'
+        ) in out
+        assert '\nsize\n   the count in bytes' in out
+
+    @pytest.mark.parametrize('shape', ['written through', 'plain'])
+    def test_names_separated_by_a_slash_share_an_entry(self, shape):
+        """``width/height -- the frame size`` documents two arguments at once.
+
+        Not read as names, it ends the definition list, and every entry after
+        it is a block quote with unannounced indents.
+        """
+        literal = ' See ``encoders()``.' if shape == 'written through' else ''
+        out = self.assert_parses(
+            'An encoder.%s\n'
+            '\n'
+            'width/height -- frame size; H.264 reaches 4096 each way\n'
+            'fps -- frames per second, as a number or a pair.\n'
+            '    It sets the declared frame rate; it paces nothing.\n'
+            'framebuffer/owns_texture -- set when the encoder made the\n'
+            '    texture itself\n' % (literal,)
+        )
+        assert 'width/height\n   frame size' in out
+        assert 'fps\n   frames per second, as a number or a pair. It sets' in out
+        assert '\n   set when the encoder made the texture itself' in out
 
 
 class TestLinkingEntryPoints:

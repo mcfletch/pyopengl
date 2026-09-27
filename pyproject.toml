@@ -73,6 +73,9 @@ test = [
     "glfw",
     # tests/cdispatch reads the Khronos registry XML through src/xmlreg.py.
     "lxml",
+    # tests/directdocs parses what a docstring becomes, and holds it to
+    # reStructuredText that docutils reads without a warning.
+    "docutils",
     # `tomllib` is the standard library's TOML reader from 3.11; `tomli` is
     # the same API under its original name, and is what the two interpreters
     # below that floor have.  The suite reads accelerate's pyproject.toml to

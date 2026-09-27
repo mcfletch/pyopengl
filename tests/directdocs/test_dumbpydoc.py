@@ -9,6 +9,8 @@ are recognised as the same thing despite being two objects.
 """
 
 import decimal
+import sys
+import types
 
 import pytest
 
@@ -224,6 +226,63 @@ class TestValues:
             name = 'OpenGL.arrays.vbo.VBO'
 
         assert dumbpydoc.base_name(Base()) == 'OpenGL.arrays.vbo.VBO'
+
+
+class TestAnnotations:
+    """An attribute's type is written as a name Sphinx can find one class by.
+
+    A module using ``from __future__ import annotations`` has its annotations
+    as the text they were written as, ``BoundingBox`` rather than a class.
+    Sphinx looks a bare name up in the page's module first and then by suffix
+    across the whole set, where two packages with a ``BoundingBox`` each make
+    the reference ambiguous.  A name the module binds to one of the packages'
+    classes is written qualified; the set shows it unqualified
+    (``python_use_unqualified_type_names``).
+    """
+
+    def described(self, monkeypatch, annotations, parameters=''):
+        """The attribute types of a class whose module binds ``Box``, a class
+        declared in another of the packages' modules."""
+        home = types.ModuleType('OpenGL._annotated')
+        home.Box = type('Box', (), {'__module__': 'OpenGL._boxes'})
+        home.Decimal = decimal.Decimal
+        monkeypatch.setitem(sys.modules, home.__name__, home)
+        namespace = {}
+        exec(
+            'class Holder:\n'
+            '    def __init__(self%s): pass\n' % (parameters,),
+            vars(home),
+            namespace,
+        )
+        cls = namespace['Holder']
+        cls.__module__ = home.__name__
+        cls.__annotations__ = annotations
+        described = dumbpydoc.Class(cls, dumbpydoc.PyModule(home.__name__))
+        return {
+            name: annotation
+            for name, (annotation, _) in described.described_attributes().items()
+        }
+
+    def test_a_class_of_the_packages_is_qualified(self, monkeypatch):
+        described = self.described(monkeypatch, {'box': 'Box | None'})
+        assert described['box'] == 'OpenGL._boxes.Box | None'
+
+    def test_a_parameter_annotation_is_qualified(self, monkeypatch):
+        described = self.described(monkeypatch, {}, ", box: 'list[Box]'")
+        assert described['box'] == 'list[OpenGL._boxes.Box]'
+
+    def test_an_annotation_that_is_the_class_itself_is_qualified(self, monkeypatch):
+        """A module without ``from __future__ import annotations``."""
+        described = self.described(monkeypatch, {}, ', box: Box')
+        assert described['box'] == 'OpenGL._boxes.Box'
+
+    def test_other_names_are_left_as_written(self, monkeypatch):
+        """A builtin, a name the module does not bind, and a class from
+        outside the packages, whose page is not in this set."""
+        described = self.described(
+            monkeypatch, {'count': 'int', 'mystery': 'Unknown', 'price': 'Decimal'}
+        )
+        assert described == {'count': 'int', 'mystery': 'Unknown', 'price': 'Decimal'}
 
 
 class TestTheGeneratedHierarchy:

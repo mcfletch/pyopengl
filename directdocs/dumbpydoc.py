@@ -364,22 +364,28 @@ class Class(object):
         ``__init__`` that sets it -- which for a class written this way is the
         only place they are written down at all.
         """
+        roots = self.module.roots
         described = {}
         for base in reversed(getattr(self.cls, '__mro__', [self.cls])):
+            namespace = getattr(sys.modules.get(base.__module__), '__dict__', {})
             for name, annotation in (
                 getattr(base, '__annotations__', None) or {}
             ).items():
-                described[name] = (annotation_text(annotation), NOT_SET)
+                described[name] = (
+                    annotation_text(annotation, namespace, roots),
+                    NOT_SET,
+                )
         try:
             signature = inspect.signature(self.cls.__init__)
         except (TypeError, ValueError):
             return described
+        namespace = getattr(self.cls.__init__, '__globals__', {})
         for name, parameter in signature.parameters.items():
             if name == 'self' or name.startswith('*'):
                 continue
             annotation = described.get(name, (None, NOT_SET))[0]
             if parameter.annotation is not inspect.Parameter.empty:
-                annotation = annotation_text(parameter.annotation)
+                annotation = annotation_text(parameter.annotation, namespace, roots)
             default = (
                 NOT_SET
                 if parameter.default is inspect.Parameter.empty
@@ -393,16 +399,48 @@ class Class(object):
 NOT_SET = object()
 
 
-def annotation_text(annotation):
+#: A name in an annotation, dotted or not, not itself the tail of one.
+_ANNOTATION_NAME = re.compile(r'(?<![\w.])([A-Za-z_]\w*)((?:\.\w+)*)')
+
+
+def annotation_text(
+    annotation: Any, namespace: dict[str, Any] | None = None, roots: Iterable[str] = ()
+) -> str:
     """An annotation as it should read in the page.
 
     A module using ``from __future__ import annotations`` has these already as
     the strings they were written as, which is what a reader wants; anything
     else is turned into one.
+
+    A name ``namespace`` binds to a class of the packages in ``roots`` is
+    written as that class's full name, since Sphinx finds a bare one by suffix
+    across the whole set, and a second class of that name elsewhere makes the
+    reference ambiguous.  The set shows it unqualified.
     """
-    if isinstance(annotation, str):
+    owners = tuple(roots)
+    if not isinstance(annotation, str):
+        return (
+            qualified_name(annotation, owners)
+            or getattr(annotation, '__name__', None)
+            or str(annotation)
+        )
+    if not namespace:
         return annotation
-    return getattr(annotation, '__name__', None) or str(annotation)
+
+    def qualify(match: re.Match) -> str:
+        name = qualified_name(namespace.get(match.group(1)), owners)
+        return name + match.group(2) if name else match.group(0)
+
+    return _ANNOTATION_NAME.sub(qualify, annotation)
+
+
+def qualified_name(value: Any, roots: tuple[str, ...]) -> str | None:
+    """``value``'s full dotted name, where it is a class of the packages in
+    ``roots``; ``None`` for anything else."""
+    home = getattr(value, '__module__', None) or ''
+    if not inspect.isclass(value) or home.split('.')[0] not in roots:
+        return None
+    return '%s.%s' % (home, value.__qualname__)
 
 
 class Property(object):
