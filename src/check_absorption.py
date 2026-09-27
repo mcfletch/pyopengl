@@ -2,7 +2,7 @@
 """Compare the wrapper a chain builds against the one the table rebuilds.
 
 ``absorb_chains.py`` deletes a module's customisation chain and asks
-``define(customise=True)`` to rebuild it from ``annotations.json``.  That is
+``define()`` to rebuild it from ``annotations.json``.  That is
 only safe if the two produce the same wrapper, and "the table records what the
 chain said" -- which ``tests/cdispatch/test_annotation_wrapping.py`` checks --
 is a weaker statement than "the wrapper comes out the same".
@@ -119,7 +119,7 @@ def main(argv=None):
                 continue
             contents = _declarations.contents_for(raw_name) or {}
             rebuilt = {}
-            _declarations.define(rebuilt, raw_name, customise=True)
+            _declarations.define(rebuilt, raw_name)
 
             rebound = _rebound_by_star_imports(text, from_chain)
             for command, __arguments, __types in contents.get('commands', ()):

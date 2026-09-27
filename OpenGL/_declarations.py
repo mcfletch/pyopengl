@@ -303,7 +303,7 @@ def declared_commands(api):
 def ctypes_entry_point(module_name, name):
     """The ctypes path's binding for ``name`` from ``module_name``, customised from the table.
 
-    What a friendly module that calls ``define(..., customise=True)`` holds for
+    What a friendly module that calls ``define(...)`` holds for
     that command when the ctypes path is the implementation, built whichever
     implementation this process is running.
     """
@@ -492,15 +492,17 @@ def also(namespace, *modules):
             namespace.setdefault(key, getattr(module, key))
 
 
-def define(namespace, module_name, customise=False):
+def define(namespace, module_name):
     """Define, in ``namespace``, everything ``module_name`` declared.
 
-    ``customise`` says that the friendly module has handed its customisation
-    chain over to the annotation table and no longer applies it itself.  It is
-    per module because applying a customisation twice is an error, not a
-    no-op -- ``wrapper`` raises ``Double wrapping of output parameter`` -- so
-    the modules can only be migrated one at a time if each says whether it has
-    been.  When they all have, the flag goes.
+    Each command is customised from the annotation table as it is defined:
+    the array conversions and output parameters that make its Python
+    signature differ from the C one.  A friendly module therefore carries no
+    ``wrapper.wrapper(...).setInputArraySize(...)`` chain of its own, and must
+    not, because applying a customisation twice is an error rather than a
+    no-op -- ``wrapper`` raises ``Double wrapping of output parameter``.
+    Hand-written code in the module that follows this call sees the
+    customised entry points.
 
     Called from a friendly module in place of the ``import *`` that used to
     reach the generated module::
@@ -512,18 +514,17 @@ def define(namespace, module_name, customise=False):
     """
     built, extension = _build(module_name)
     namespace.update(built)
-    if customise:
-        api = api_of(module_name)
-        contents = contents_for(module_name) or {}
-        for command, arguments, types in contents.get('commands', ()):
-            entry = namespace.get(command)
-            if entry is None:
-                continue
-            replacement = customise_entry(
-                entry, api, command, _array_parameters(arguments, types)
-            )
-            if replacement is not entry:
-                namespace[command] = replacement
+    api = api_of(module_name)
+    contents = contents_for(module_name) or {}
+    for command, arguments, types in contents.get('commands', ()):
+        entry = namespace.get(command)
+        if entry is None:
+            continue
+        replacement = customise_entry(
+            entry, api, command, _array_parameters(arguments, types)
+        )
+        if replacement is not entry:
+            namespace[command] = replacement
     return extension
 
 

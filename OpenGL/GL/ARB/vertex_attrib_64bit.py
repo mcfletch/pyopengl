@@ -59,7 +59,7 @@ from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GL import _types, _glgets
 from OpenGL._declarations import define as _define
-_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GL.ARB.vertex_attrib_64bit', customise=True)
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GL.ARB.vertex_attrib_64bit')
 
 def glInitVertexAttrib64BitARB():
     '''Return boolean indicating whether this extension is available'''

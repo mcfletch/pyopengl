@@ -220,9 +220,6 @@ glutWireSierpinskiSponge = platform.createBaseFunction(
     argNames=('num_levels', 'offset', 'scale'),
 )
 
-glutWireSierpinskiSponge = _wrapper.wrapper( glutWireSierpinskiSponge ).setInputArraySize(
-    'offset',
-)
 
 # /usr/include/GL/freeglut_ext.h 99
 glutSolidSierpinskiSponge = platform.createBaseFunction( 
@@ -232,9 +229,6 @@ glutSolidSierpinskiSponge = platform.createBaseFunction(
     argNames=('num_levels', 'offset', 'scale'),
 )
 
-glutSolidSierpinskiSponge = _wrapper.wrapper( glutSolidSierpinskiSponge ).setInputArraySize(
-    'offset',
-)
 
 # /usr/include/GL/freeglut_ext.h 100
 glutWireCylinder = platform.createBaseFunction( 

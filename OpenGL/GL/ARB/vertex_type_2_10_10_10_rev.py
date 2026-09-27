@@ -28,7 +28,7 @@ from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GL import _types, _glgets
 from OpenGL._declarations import define as _define
-_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GL.ARB.vertex_type_2_10_10_10_rev', customise=True)
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GL.ARB.vertex_type_2_10_10_10_rev')
 
 def glInitVertexType2101010RevARB():
     '''Return boolean indicating whether this extension is available'''

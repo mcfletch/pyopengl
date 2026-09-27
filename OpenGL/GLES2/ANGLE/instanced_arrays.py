@@ -39,7 +39,7 @@ from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GLES2 import _types, _glgets
 from OpenGL._declarations import define as _define
-_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GLES2.ANGLE.instanced_arrays', customise=True)
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GLES2.ANGLE.instanced_arrays')
 
 def glInitInstancedArraysANGLE():
     '''Return boolean indicating whether this extension is available'''

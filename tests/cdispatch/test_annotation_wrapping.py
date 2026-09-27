@@ -94,13 +94,44 @@ class TestTheChainsAreASecondCopy:
         )
         assert completed.returncode == 0, completed.stderr
         assert 'would rewrite 0 modules' in completed.stdout, completed.stdout
+        assert 'repeats a customisation' not in completed.stdout, completed.stdout
+
+    def test_a_chain_repeating_the_table_is_reported(self):
+        """``define()`` customises every command, so a second chain doubles it."""
+        import importlib.util
+
+        spec = importlib.util.spec_from_file_location(
+            'absorb_chains', os.path.join(paths.ROOT, 'src', 'absorb_chains.py')
+        )
+        absorb_chains = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(absorb_chains)
+        head = "_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GL.VERSION.GL_2_0')\n"
+        top_level = head + (
+            "glUniform4fv = wrapper.wrapper(glUniform4fv)"
+            ".setInputArraySize('value', None)\n"
+        )
+        nested = head + (
+            "def build():\n"
+            "    return wrapper.wrapper(glUniform4fv)"
+            ".setInputArraySize('value', None)\n"
+        )
+        layered = head + (
+            "glUniform4fv = wrapper.wrapper(glUniform4fv)"
+            ".setPyConverter('count')\n"
+        )
+        assert absorb_chains.classify(top_level)[0] == 'absorbable'
+        assert absorb_chains.classify(nested)[0] == (
+            'repeats a customisation the table makes'
+        )
+        assert absorb_chains.classify(layered)[0] == 'nothing to absorb'
 
     def test_what_still_carries_a_chain_is_what_the_table_cannot_say(self, chains):
         """The remaining calls are the hand-written ones, plus their company.
 
-        A module is absorbed whole or not at all, so a ``setInputArraySize``
-        sitting beside a ``setPyConverter`` stays where it is.  What must not
-        appear is a module of nothing but mechanical calls.
+        ``define()`` applies the table's array conversions and outputs to every
+        command, so what the modules still wrap is what the table cannot say:
+        ``setPyConverter`` and relatives, layered over the customised entry
+        point.
         """
         import collections
 

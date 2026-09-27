@@ -24,189 +24,23 @@ def glInitGl20VERSION():
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
 # INPUT glDrawBuffers.bufs size not checked against n
-glDrawBuffers=wrapper.wrapper(glDrawBuffers).setInputArraySize(
-    'bufs', None
-)
-glGetActiveAttrib=wrapper.wrapper(glGetActiveAttrib).setOutput(
-    'length',size=(1,),orPassIn=True
-).setOutput(
-    'name',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
-).setOutput(
-    'size',size=(1,),orPassIn=True
-).setOutput(
-    'type',size=(1,),orPassIn=True
-)
-glGetActiveUniform=wrapper.wrapper(glGetActiveUniform).setOutput(
-    'length',size=(1,),orPassIn=True
-).setOutput(
-    'name',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
-).setOutput(
-    'size',size=(1,),orPassIn=True
-).setOutput(
-    'type',size=(1,),orPassIn=True
-)
 # glGetAttachedShaders.obj is OUTPUT without known output size
 # INPUT glGetAttachedShaders.shaders size not checked against maxCount
-glGetAttachedShaders=wrapper.wrapper(glGetAttachedShaders).setOutput(
-    'count',size=(1,),orPassIn=True
-).setInputArraySize(
-    'shaders', None
-)
-glGetProgramiv=wrapper.wrapper(glGetProgramiv).setOutput(
-    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
-)
-glGetProgramInfoLog=wrapper.wrapper(glGetProgramInfoLog).setOutput(
-    'infoLog',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
-).setOutput(
-    'length',size=(1,),orPassIn=True
-)
-glGetShaderiv=wrapper.wrapper(glGetShaderiv).setOutput(
-    'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
-)
-glGetShaderInfoLog=wrapper.wrapper(glGetShaderInfoLog).setOutput(
-    'infoLog',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
-).setOutput(
-    'length',size=(1,),orPassIn=True
-)
-glGetShaderSource=wrapper.wrapper(glGetShaderSource).setOutput(
-    'length',size=(1,),orPassIn=True
-).setOutput(
-    'source',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
-)
 # glGetUniformfv.params is OUTPUT without known output size
 # glGetUniformiv.params is OUTPUT without known output size
-glGetVertexAttribdv=wrapper.wrapper(glGetVertexAttribdv).setOutput(
-    'params',size=(4,),orPassIn=True
-)
-glGetVertexAttribfv=wrapper.wrapper(glGetVertexAttribfv).setOutput(
-    'params',size=(4,),orPassIn=True
-)
-glGetVertexAttribiv=wrapper.wrapper(glGetVertexAttribiv).setOutput(
-    'params',size=(4,),orPassIn=True
-)
-glGetVertexAttribPointerv=wrapper.wrapper(glGetVertexAttribPointerv).setOutput(
-    'pointer',size=(1,),orPassIn=True
-)
 # INPUT glShaderSource.length size not checked against count
 # INPUT glShaderSource.string size not checked against count
-glShaderSource=wrapper.wrapper(glShaderSource).setInputArraySize(
-    'length', None
-).setInputArraySize(
-    'string', None
-)
 # INPUT glUniform1fv.value size not checked against count
-glUniform1fv=wrapper.wrapper(glUniform1fv).setInputArraySize(
-    'value', None
-)
 # INPUT glUniform2fv.value size not checked against count*2
-glUniform2fv=wrapper.wrapper(glUniform2fv).setInputArraySize(
-    'value', None
-)
 # INPUT glUniform3fv.value size not checked against count*3
-glUniform3fv=wrapper.wrapper(glUniform3fv).setInputArraySize(
-    'value', None
-)
 # INPUT glUniform4fv.value size not checked against count*4
-glUniform4fv=wrapper.wrapper(glUniform4fv).setInputArraySize(
-    'value', None
-)
 # INPUT glUniform1iv.value size not checked against count
-glUniform1iv=wrapper.wrapper(glUniform1iv).setInputArraySize(
-    'value', None
-)
 # INPUT glUniform2iv.value size not checked against count*2
-glUniform2iv=wrapper.wrapper(glUniform2iv).setInputArraySize(
-    'value', None
-)
 # INPUT glUniform3iv.value size not checked against count*3
-glUniform3iv=wrapper.wrapper(glUniform3iv).setInputArraySize(
-    'value', None
-)
 # INPUT glUniform4iv.value size not checked against count*4
-glUniform4iv=wrapper.wrapper(glUniform4iv).setInputArraySize(
-    'value', None
-)
 # INPUT glUniformMatrix2fv.value size not checked against count*4
-glUniformMatrix2fv=wrapper.wrapper(glUniformMatrix2fv).setInputArraySize(
-    'value', None
-)
 # INPUT glUniformMatrix3fv.value size not checked against count*9
-glUniformMatrix3fv=wrapper.wrapper(glUniformMatrix3fv).setInputArraySize(
-    'value', None
-)
 # INPUT glUniformMatrix4fv.value size not checked against count*16
-glUniformMatrix4fv=wrapper.wrapper(glUniformMatrix4fv).setInputArraySize(
-    'value', None
-)
-glVertexAttrib1dv=wrapper.wrapper(glVertexAttrib1dv).setInputArraySize(
-    'v', 1
-)
-glVertexAttrib1fv=wrapper.wrapper(glVertexAttrib1fv).setInputArraySize(
-    'v', 1
-)
-glVertexAttrib1sv=wrapper.wrapper(glVertexAttrib1sv).setInputArraySize(
-    'v', 1
-)
-glVertexAttrib2dv=wrapper.wrapper(glVertexAttrib2dv).setInputArraySize(
-    'v', 2
-)
-glVertexAttrib2fv=wrapper.wrapper(glVertexAttrib2fv).setInputArraySize(
-    'v', 2
-)
-glVertexAttrib2sv=wrapper.wrapper(glVertexAttrib2sv).setInputArraySize(
-    'v', 2
-)
-glVertexAttrib3dv=wrapper.wrapper(glVertexAttrib3dv).setInputArraySize(
-    'v', 3
-)
-glVertexAttrib3fv=wrapper.wrapper(glVertexAttrib3fv).setInputArraySize(
-    'v', 3
-)
-glVertexAttrib3sv=wrapper.wrapper(glVertexAttrib3sv).setInputArraySize(
-    'v', 3
-)
-glVertexAttrib4Nbv=wrapper.wrapper(glVertexAttrib4Nbv).setInputArraySize(
-    'v', 4
-)
-glVertexAttrib4Niv=wrapper.wrapper(glVertexAttrib4Niv).setInputArraySize(
-    'v', 4
-)
-glVertexAttrib4Nsv=wrapper.wrapper(glVertexAttrib4Nsv).setInputArraySize(
-    'v', 4
-)
-glVertexAttrib4Nubv=wrapper.wrapper(glVertexAttrib4Nubv).setInputArraySize(
-    'v', 4
-)
-glVertexAttrib4Nuiv=wrapper.wrapper(glVertexAttrib4Nuiv).setInputArraySize(
-    'v', 4
-)
-glVertexAttrib4Nusv=wrapper.wrapper(glVertexAttrib4Nusv).setInputArraySize(
-    'v', 4
-)
-glVertexAttrib4bv=wrapper.wrapper(glVertexAttrib4bv).setInputArraySize(
-    'v', 4
-)
-glVertexAttrib4dv=wrapper.wrapper(glVertexAttrib4dv).setInputArraySize(
-    'v', 4
-)
-glVertexAttrib4fv=wrapper.wrapper(glVertexAttrib4fv).setInputArraySize(
-    'v', 4
-)
-glVertexAttrib4iv=wrapper.wrapper(glVertexAttrib4iv).setInputArraySize(
-    'v', 4
-)
-glVertexAttrib4sv=wrapper.wrapper(glVertexAttrib4sv).setInputArraySize(
-    'v', 4
-)
-glVertexAttrib4ubv=wrapper.wrapper(glVertexAttrib4ubv).setInputArraySize(
-    'v', 4
-)
-glVertexAttrib4uiv=wrapper.wrapper(glVertexAttrib4uiv).setInputArraySize(
-    'v', 4
-)
-glVertexAttrib4usv=wrapper.wrapper(glVertexAttrib4usv).setInputArraySize(
-    'v', 4
-)
 ### END AUTOGENERATED SECTION
 import OpenGL
 from OpenGL._scalar import as_int

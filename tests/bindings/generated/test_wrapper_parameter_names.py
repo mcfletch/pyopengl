@@ -138,9 +138,15 @@ FINDINGS, CHECKED, MODULES = _findings()
 
 
 def test_the_sweep_found_wrappers_to_check():
-    """A sweep that matched nothing would pass while checking nothing."""
-    assert MODULES > 10, MODULES
-    assert CHECKED > 100, CHECKED
+    """A sweep that matched nothing would pass while checking nothing.
+
+    The chains the annotation table expresses are gone from the modules, and
+    the table sweep below checks those; what this one finds is the
+    hand-written chains, such as ``glShaderSource``'s and
+    ``glDrawRangeElements``'s ``setPyConverter`` calls.
+    """
+    assert MODULES >= 5, MODULES
+    assert CHECKED >= 10, CHECKED
 
 
 def test_no_wrapper_names_a_parameter_that_is_not_there():

@@ -73,7 +73,7 @@ from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GLES2 import _types, _glgets
 from OpenGL._declarations import define as _define
-_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GLES2.OES.draw_elements_base_vertex', customise=True)
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GLES2.OES.draw_elements_base_vertex')
 
 def glInitDrawElementsBaseVertexOES():
     '''Return boolean indicating whether this extension is available'''

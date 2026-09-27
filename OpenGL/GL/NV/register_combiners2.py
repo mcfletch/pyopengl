@@ -45,7 +45,7 @@ from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GL import _types, _glgets
 from OpenGL._declarations import define as _define
-_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GL.NV.register_combiners2', customise=True)
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GL.NV.register_combiners2')
 
 def glInitRegisterCombiners2NV():
     '''Return boolean indicating whether this extension is available'''

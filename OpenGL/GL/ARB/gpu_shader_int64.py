@@ -37,7 +37,7 @@ from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GL import _types, _glgets
 from OpenGL._declarations import define as _define
-_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GL.ARB.gpu_shader_int64', customise=True)
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GL.ARB.gpu_shader_int64')
 
 def glInitGpuShaderInt64ARB():
     '''Return boolean indicating whether this extension is available'''

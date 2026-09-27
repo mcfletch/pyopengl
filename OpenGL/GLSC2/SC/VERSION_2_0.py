@@ -16,7 +16,7 @@ from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GLSC2 import _types, _glgets
 from OpenGL._declarations import define as _define
-_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GLSC2.SC.VERSION_2_0', customise=True)
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GLSC2.SC.VERSION_2_0')
 
 def glInitVersion20SC():
     '''Return boolean indicating whether this extension is available'''

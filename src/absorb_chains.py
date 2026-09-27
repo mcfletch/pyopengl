@@ -6,22 +6,14 @@ the C one as a chain of calls::
 
     glUniform4fv = wrapper.wrapper(glUniform4fv).setInputArraySize('value', None)
 
-Every one of those is already in ``src/cdispatch/annotations.json``, because
-the table was extracted from these very chains -- checked across the whole tree
-by ``tests/cdispatch/test_annotation_wrapping.py``.  So the chain is a second
-copy, and the module can stop carrying it::
-
-    _EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GL.VERSION.GL_2_0',
-                              customise=True)
-
-``customise=True`` is per module rather than global because applying a
-customisation twice raises rather than doing nothing, so the tree can only be
-migrated a module at a time.  When every mechanical module has been migrated
-the flag becomes the default and goes.
-
-Only modules whose chains are *entirely* absorbable are touched.  A module with
-hand-written code, or one using a call the table does not express, is left
-exactly as it is and reported::
+Every one of those is in ``src/cdispatch/annotations.json``, because the table
+was extracted from these very chains, and ``define()`` applies the table to
+every command it defines.  So a chain is a second copy, and applying it on top
+of the table's is an error.  This finds any module still carrying one and drops
+it, leaving the module's hand-written code where it is.  A chain using a call
+the table does not express, or an output size it cannot state, stays.  A module
+whose remaining code wraps a command the table also customises is reported,
+since that code applies the conversion a second time::
 
     python src/absorb_chains.py            # say what would change
     python src/absorb_chains.py --write
@@ -30,7 +22,6 @@ exactly as it is and reported::
 import argparse
 import ast
 import os
-import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -43,13 +34,6 @@ ROOT = os.path.dirname(HERE)
 #: rule to *every* command in it, including ones whose chain said nothing, and
 #: on 123 of 2,273 that adds an array conversion the file did not have.
 ABSORBABLE = frozenset(['setInputArraySize', 'setInputArrayCount', 'setOutput'])
-
-_DEFINE = re.compile(
-    r"^(?P<head>_?E?X?T?E?N?S?I?O?N?_?N?A?M?E? ?=? ?)?"
-    r"_define\(globals\(\), (?P<name>'[^']+')\)$",
-    re.M,
-)
-
 
 def _chain_calls(node):
     """The ``.setFoo(...)`` names in a ``wrapper.wrapper(x).setFoo()`` chain."""
@@ -82,64 +66,107 @@ def _statable(name, chain_names):
     return _declarations._output_parameters(entry.get('parameters', {})) is not None
 
 
+def _customised(name):
+    """Whether ``define()`` replaces this command.
+
+    ``customise_entry`` wraps a command when the table gives one of its
+    parameters an array conversion or an output, and leaves it alone when an
+    output has a size the rule cannot state.
+    """
+    from OpenGL import _declarations
+
+    parameters = _declarations.annotations().get(name, {}).get('parameters', {})
+    if not any(bits.get('array') or bits.get('out') for bits in parameters.values()):
+        return False
+    return _declarations._output_parameters(parameters) is not None
+
+
+def _table_setters_applied(node):
+    """The names ``node`` wraps with a call the table also makes.
+
+    ``wrapper.wrapper(name).setInputArraySize(...)`` inside a function, or one
+    the table cannot state and so was not dropped: on a command ``define()``
+    has customised, that applies the conversion a second time.  A wrapper that
+    only adds ``setPyConverter`` or ``setReturnValues`` over the customised
+    entry point is layering on it, not repeating it.
+    """
+    names = set()
+    for inner in ast.walk(node):
+        if not (
+            isinstance(inner, ast.Call)
+            and isinstance(inner.func, ast.Attribute)
+            and inner.func.attr in ABSORBABLE
+        ):
+            continue
+        base = inner.func.value
+        while (
+            isinstance(base, ast.Call)
+            and isinstance(base.func, ast.Attribute)
+            and base.func.attr != 'wrapper'
+        ):
+            base = base.func.value
+        if (
+            isinstance(base, ast.Call)
+            and base.args
+            and isinstance(base.args[0], ast.Name)
+        ):
+            names.add(base.args[0].id)
+    return names
+
+
 def classify(text, api='GL'):
-    """``('absorbable', lines)``, or a reason the module is left alone."""
+    """``('absorbable', lines)``, or a reason the module is left alone.
+
+    The absorbable chains are dropped and everything else in the module is
+    kept, hand-written code included: ``define()`` has put the customised entry
+    point in the namespace before that code runs, so a ``@lazy`` override or an
+    alias takes the customised one.  What cannot be kept is code that applies
+    one of the table's own calls to a command the table customises, because
+    the conversion would then be applied twice.
+    """
     if '_define(globals()' not in text:
         return 'not a generated friendly module', ()
-    if 'customise=True' in text:
-        return 'already migrated', ()
     try:
         tree = ast.parse(text)
     except SyntaxError:
         return 'will not parse', ()
 
-    chain_lines, calls, other = [], set(), 0
+    chain_lines, kept = [], []
     for node in tree.body:
-        if isinstance(node, (ast.Import, ast.ImportFrom, ast.Expr, ast.Pass)):
-            continue
-        if isinstance(node, ast.FunctionDef):
-            if node.name.startswith(('glInit', 'eglInit')):
-                continue
-            other += 1
-            continue
         if isinstance(node, ast.Assign):
             dumped = ast.dump(node)
             if '_define' in dumped or '_EXTENSION_NAME' in dumped:
                 continue
-            names = set(_chain_calls(node.value))
-            setters = {name for name in names if name.startswith('set')}
-            target = node.targets[0]
-            command = getattr(target, 'id', None)
-            if setters and setters <= ABSORBABLE and command:
-                if not _statable('%s.%s' % (api, command), setters):
-                    return 'has a size the table cannot state', ()
+            setters = {
+                name for name in _chain_calls(node.value) if name.startswith('set')
+            }
+            command = getattr(node.targets[0], 'id', None)
+            if (
+                setters
+                and setters <= ABSORBABLE
+                and command
+                and _statable('%s.%s' % (api, command), setters)
+            ):
                 chain_lines.append((node.lineno, node.end_lineno))
-                calls |= setters
                 continue
-            other += 1
-            continue
-        other += 1
+        kept.append(node)
 
-    if other:
-        return 'has hand-written code', ()
+    for node in kept:
+        for name in _table_setters_applied(node):
+            if _customised('%s.%s' % (api, name)):
+                return 'repeats a customisation the table makes', ()
     if not chain_lines:
         return 'nothing to absorb', ()
     return 'absorbable', tuple(chain_lines)
 
 
 def rewrite(text, chain_lines):
-    """Drop the chain statements and ask define() to apply the table."""
+    """Drop the chain statements; define() applies the table."""
     lines = text.splitlines(keepends=True)
     drop = set()
     for start, end in chain_lines:
         drop.update(range(start - 1, end))
-    kept = [line for index, line in enumerate(lines) if index not in drop]
-    result = ''.join(kept)
-    return _DEFINE.sub(
-        lambda match: '%s_define(globals(), %s, customise=True)'
-        % (match.group('head') or '', match.group('name')),
-        result,
-    )
+    return ''.join(line for index, line in enumerate(lines) if index not in drop)
 
 
 def _api_of(path, root):

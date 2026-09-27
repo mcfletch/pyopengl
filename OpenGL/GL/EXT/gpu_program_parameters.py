@@ -30,7 +30,7 @@ from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GL import _types, _glgets
 from OpenGL._declarations import define as _define
-_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GL.EXT.gpu_program_parameters', customise=True)
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GL.EXT.gpu_program_parameters')
 
 def glInitGpuProgramParametersEXT():
     '''Return boolean indicating whether this extension is available'''

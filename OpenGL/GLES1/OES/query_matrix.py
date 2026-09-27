@@ -29,7 +29,7 @@ from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GLES1 import _types, _glgets
 from OpenGL._declarations import define as _define
-_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GLES1.OES.query_matrix', customise=True)
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GLES1.OES.query_matrix')
 
 def glInitQueryMatrixOES():
     '''Return boolean indicating whether this extension is available'''

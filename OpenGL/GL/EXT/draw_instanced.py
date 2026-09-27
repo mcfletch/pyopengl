@@ -23,7 +23,7 @@ from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GL import _types, _glgets
 from OpenGL._declarations import define as _define
-_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GL.EXT.draw_instanced', customise=True)
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GL.EXT.draw_instanced')
 
 def glInitDrawInstancedEXT():
     '''Return boolean indicating whether this extension is available'''
