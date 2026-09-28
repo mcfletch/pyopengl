@@ -91,7 +91,13 @@ cdef class MemoryviewHandler(FormatHandler):
     cdef c_arraySize( self, object instance, object typeCode ):
         """Retrieve array size reference"""
         cdef Py_buffer * buffer
-        buffer = PyMemoryView_GET_BUFFER( self.c_as_memoryview( instance ) )
+        # `view` holds the memoryview for as long as `buffer` points into it.
+        # `c_as_memoryview` builds one where the instance is not already a
+        # memoryview, and a temporary of it lives only to the end of the
+        # statement that made it -- so reading through `buffer` on the next
+        # line reads a Py_buffer inside a freed object.
+        view = self.c_as_memoryview( instance )
+        buffer = PyMemoryView_GET_BUFFER( view )
         return buffer.len//buffer.itemsize
     cdef c_arrayByteCount( self, object instance ):
         """Given a data-value, calculate number of bytes required to represent"""
@@ -100,7 +106,9 @@ cdef class MemoryviewHandler(FormatHandler):
     cdef c_arrayToGLType( self, object instance ):
         """Given a value, guess OpenGL type of the corresponding pointer"""
         cdef Py_buffer * buffer
-        buffer = PyMemoryView_GET_BUFFER( self.c_as_memoryview( instance ) )
+        # `view` keeps the memoryview alive; see `c_arraySize`.
+        view = self.c_as_memoryview( instance )
+        buffer = PyMemoryView_GET_BUFFER( view )
         cdef object constant = self.array_to_gl_constant.get( buffer.format )
         if constant is None:
             if isinstance(buffer.format,bytes):
@@ -133,10 +141,14 @@ cdef class MemoryviewHandler(FormatHandler):
     cdef c_dimensions( self, object instance ):
         """Retrieve full set of dimensions for the array as tuple"""
         cdef Py_buffer * buffer
-        buffer = PyMemoryView_GET_BUFFER( self.c_as_memoryview( instance ) )
+        # `view` keeps the memoryview alive; see `c_arraySize`.
+        view = self.c_as_memoryview( instance )
+        buffer = PyMemoryView_GET_BUFFER( view )
         cdef dim = 0
         cdef list result
         result = []
         for dim in range(buffer.ndim):
             result.append( buffer.shape[dim] )
-        return result
+        # A tuple, as the shape of an array is everywhere else here and as
+        # `OpenGL.arrays.buffers.BufferHandler.dimensions` answers.
+        return tuple( result )

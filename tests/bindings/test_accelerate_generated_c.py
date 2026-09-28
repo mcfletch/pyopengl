@@ -323,9 +323,9 @@ class TestTheSourcesCompileWithTheCythonInstalled:
         root = os.path.join(paths.ROOT, 'accelerate', 'src')
         if not os.path.isdir(root):
             pytest.skip('the accelerate source tree is not in this checkout')
-        found = sorted(
+        found = without_the_numpy_module(sorted(
             name for name in os.listdir(root) if name.endswith('.pyx')
-        )
+        ))
         assert found, root
         return root, found
 

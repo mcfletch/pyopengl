@@ -67,6 +67,16 @@ What changed since the 3.x series. The current development version is
   context. A program that holds GL names of its own can do the same.
 - Output arrays that are too short for what the call was told to write are
   refused rather than handed to the driver.
+- The accelerator's buffer-protocol handler read a `Py_buffer` belonging to a
+  memoryview it had already let go of. `MemoryviewHandler` builds a
+  memoryview for anything that is not already one, and
+  `arraySize`, `dimensions` and `arrayToGLType` each kept a pointer into it
+  past the statement that made it. What came back was whatever the allocator
+  had since put there: `arraySize` answered 1 for a six-element array,
+  `dimensions` answered `()`, and `arrayToGLType` read a freed `format`
+  string and took the process down. Each holds the memoryview for as long as
+  it reads through it now, as `unitSize` already did, and `dimensions`
+  answers a tuple as every other shape here does.
 - An `OpenGL.osmesa.offscreen.OffscreenContext` the program dropped without
   releasing left Mesa holding a live context whose framebuffer Python had
   freed — OSMesa rasterises into an array the caller owns, and keeps the
