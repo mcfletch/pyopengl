@@ -2,10 +2,11 @@
 """Array constructors for the test suite, with a no-numpy fallback.
 
 Many tests build their vertex / matrix / pixel / index data with a handful of
-numpy constructors (``array``, ``zeros``, ``ones``, ``eye``, ``identity``) and
-dtype objects (``uint8`` and friends).  numpy is optional for PyOpenGL, and the
-tox ``num0`` environments install the suite deliberately *without* numpy to
-exercise the pure-ctypes code paths -- so the tests must not hard-depend on it.
+numpy constructors (``array``, ``zeros``, ``ones``, ``arange``, ``eye``,
+``identity``) and dtype objects (``uint8`` and friends).  numpy is optional
+for PyOpenGL, and the tox ``num0`` environments install the suite deliberately
+*without* numpy to exercise the pure-ctypes code paths -- so the tests must not
+hard-depend on it.
 
 Tests therefore do::
 
@@ -126,6 +127,14 @@ except ImportError:
         def array(data, dtype='d'):
             arr = _handler.zeros(_shape_of(data), _typecode(dtype))
             _assign(arr, data)
+            return arr
+
+        @staticmethod
+        def arange(stop, dtype='d'):
+            """``0`` up to ``stop``, as numpy's one-argument form gives them."""
+            arr = _handler.zeros((stop,), _typecode(dtype))
+            for i in range(stop):
+                arr[i] = i
             return arr
 
         @staticmethod

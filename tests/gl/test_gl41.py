@@ -222,19 +222,25 @@ class TestViewportArraysAreMeasuredAgainstTheCount(GLTestCase):
         glScissorArrayv(0, 2, np.array([0, 0, 16, 16, 16, 0, 8, 8], 'i'))
         glDepthRangeArrayv(0, 2, np.array([0.0, 1.0, 0.25, 0.75], 'd'))
         self.check_error('viewport arrays of exactly count items')
-        np.testing.assert_array_equal(
-            glGetFloati_v(GL_VIEWPORT, 1, np.zeros(4, 'f')), [16, 0, 8, 8]
+        self.assertEqual(
+            [float(value) for value in glGetFloati_v(GL_VIEWPORT, 1, np.zeros(4, 'f'))],
+            [16, 0, 8, 8],
         )
-        np.testing.assert_array_equal(
-            glGetDoublei_v(GL_DEPTH_RANGE, 1, np.zeros(2, 'd')), [0.25, 0.75]
+        self.assertEqual(
+            [
+                float(value)
+                for value in glGetDoublei_v(GL_DEPTH_RANGE, 1, np.zeros(2, 'd'))
+            ],
+            [0.25, 0.75],
         )
 
     def test_a_longer_array_is_read_for_count_items(self):
         """A larger buffer is a caller updating a prefix of one, which is ordinary."""
         glViewportArrayv(0, 1, np.array([0, 0, 12, 12, 99, 99, 99, 99], 'f'))
         self.check_error('glViewportArrayv from a longer array')
-        np.testing.assert_array_equal(
-            glGetFloati_v(GL_VIEWPORT, 0, np.zeros(4, 'f')), [0, 0, 12, 12]
+        self.assertEqual(
+            [float(value) for value in glGetFloati_v(GL_VIEWPORT, 0, np.zeros(4, 'f'))],
+            [0, 0, 12, 12],
         )
 
 

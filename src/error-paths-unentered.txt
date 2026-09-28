@@ -33,7 +33,6 @@ EGL/devices.py::_clear_egl_error::Exception::0  # not reached by any case
 EGL/devices.py::_query_handles::Exception::0  # not reached by any case
 EGL/gbmdevice.py::<module>::OSError::0  # not reached by any case
 EGL/gbmdevice.py::close_device::KeyError::0  # not reached by any case
-EGL/gbmdevice.py::open_device::IndexError::0  # not reached by any case
 GL/ARB/imaging.py::_get_scalar::IndexError,TypeError::0  # not reached by any case
 GL/ARB/shader_objects.py::<module>::NameError::0  # not reached by any case
 GL/ARB/texture_compression.py::<module>::NameError::0  # not reached by any case
@@ -81,7 +80,6 @@ GLUT/fonts.py::<module>::ValueError,AttributeError::0  # not reached by any case
 GLUT/special.py::GLUTCallback.__call__.safeCall::Exception::0  # not reached by any case
 GLUT/special.py::GLUTCallback.__init__::AttributeError::0  # not reached by any case
 GLUT/special.py::GLUTTimerCallback.__call__.deregister::<finally>::0  # not reached by any case
-GLUT/special.py::glutInit::<finally>::0  # not reached by any case
 Tk/glx.py::GLXContext.setSwapInterval::Exception::0  # not reached by any case
 Tk/togl.py::loadTogl::TclError::0  # not reached by any case
 Tk/togl.py::toglLibraryPath::NameError::0  # not reached by any case

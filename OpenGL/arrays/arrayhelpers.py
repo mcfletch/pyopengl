@@ -44,9 +44,10 @@ if AsArrayTypedSizeChecked is None:
     class AsArrayOfType(converters.PyConverter):
         """Given arrayName and typeName coerce arrayName to array of type typeName
 
-        TODO: It should be possible to drop this if ERROR_ON_COPY,
-        as array inputs always have to be the final objects in that
-        case.
+        Installed under ``ERROR_ON_COPY`` as well: the type the driver is
+        told comes from another argument, so this is the only thing that
+        compares the array against it, and ``asArray`` is what refuses the
+        copy where they differ.
         """
 
         argNames = ('arrayName', 'typeName')
@@ -76,9 +77,9 @@ if AsArrayTypedSizeChecked is None:
     class AsArrayTyped(converters.PyConverter):
         """Given arrayName and arrayType, convert arrayName to array of type
 
-        TODO: It should be possible to drop this if ERROR_ON_COPY,
-        as array inputs always have to be the final objects in that
-        case.
+        Installed under ``ERROR_ON_COPY`` as well, for the same reason as
+        :class:`AsArrayOfType`: the element type is the wrapper's rather
+        than the caller's.
         """
 
         argNames = ('arrayName', 'arrayType')
@@ -109,17 +110,19 @@ if AsArrayTypedSizeChecked is None:
 else:
     returnPointer = returnPyArgumentIndex(0)
 
-if not _configflags.ERROR_ON_COPY:
 
-    def asArrayType(typ, size=None):
-        """Create PyConverter to get first argument as array of type"""
-        return converters.CallFuncPyConverter(typ.asArray)
+def asArrayType(typ, size=None):
+    """Create PyConverter to get first argument as array of type
 
-else:
-
-    def asArrayType(typ, size=None):
-        """No converter required"""
-        return None
+    Installed regardless of ``ERROR_ON_COPY``.  It is used where the element
+    type is the wrapper's rather than the caller's -- ``glVertexPointerb``
+    passes GL_INT whatever array it was handed, and a parameter declared as a
+    bare pointer has no array class for ctypes to reach for -- so nothing
+    downstream compares the array against the type the driver is told, and
+    without this the driver is handed an array of one width having been told
+    another.  Under the flag it is ``asArray`` that refuses the copy.
+    """
+    return converters.CallFuncPyConverter(typ.asArray)
 
 
 if not _configflags.ARRAY_SIZE_CHECKING:

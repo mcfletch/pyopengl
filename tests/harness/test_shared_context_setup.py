@@ -198,7 +198,11 @@ class TestAContextThatGoesIsForgotten:
             _dispatch.forget_context = forgotten.append
             case = Case()
             case.setUp()
-            handles.append(int(platform.PLATFORM.GetCurrentContext() or 0))
+            # As the platform gives it, which is what the fixture passes on:
+            # an address on the platforms whose handle is one, and an opaque
+            # pointer on OSMesa's, which compares and hashes by address for
+            # exactly this.  ``int()`` reads a ctypes pointer as its bytes.
+            handles.append(platform.PLATFORM.GetCurrentContext())
             case.tearDown()
             case.doCleanups()
         finally:

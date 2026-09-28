@@ -203,6 +203,14 @@ happens, ask for an error instead:
 which raises :py:exc:`OpenGL.error.CopyError`, naming the condition and the
 reason for the copy.
 
+A typed client-array setter converts to one element type, the one it tells the
+driver: usually the type its suffix names, except that
+``glVertexPointerb``, ``glIndexPointerb`` and ``glTexCoordPointerb`` widen
+signed bytes to ``GL_INT``, which those entry points take in place of
+``GL_BYTE``.  An array of any other type is a copy on every call and raises
+under the flag, so pass an array of the type the setter converts to -- or, for
+the three that widen, widen the data once and keep the wider array.
+
 The flag is about array *data*.  A string parameter -- a uniform or attribute
 name, a debug label, GLSL source -- still takes a :py:class:`str` and is
 encoded for you, since it is encoded once and read before the call returns.

@@ -155,7 +155,10 @@ What changed since the 3.x series. The current development version is
   of them. A shorter array, or `None` for a positive count, raises
   `ValueError` where the driver would have read past the array or from
   address zero. A longer array is accepted, and a `GLchar *const *` the caller
-  built is passed unmeasured.
+  built is passed unmeasured. The strings are counted regardless of
+  `ARRAY_SIZE_CHECKING`: the pointer array the driver reads is one
+  PyOpenGL allocates from the sequence given and sizes by its length, so a
+  larger count reads past the end of PyOpenGL's own buffer.
 - Three entry points sized the array they allocate by looking a *count* up in
   the table of `glGet` sizes, as though a byte count or a name count were an
   enum: `glGetUniformIndices` in GL and in GLES3, and
@@ -227,6 +230,13 @@ well as with the defaults.
   it, the one whose memory the call wanted included. Such a parameter resolves
   to the array class for its element type, and that class refuses a copy the
   same way, so the flag still means what it did.
+- With `PYOPENGL_ERROR_ON_COPY=1`, a typed client-array setter handed the
+  driver the array it was given without converting it. `glVertexPointerb`
+  passes GL_INT whatever it was handed, so an array of bytes was passed as one
+  of ints and read four times its length; `glColorPointerf` given float64 was
+  read as float32. The setters convert under the flag as they do without it,
+  which for an array of another type is the `CopyError` the flag is set to
+  raise.
 - With `PYOPENGL_ERROR_ON_COPY=1`, `VBO.delete()` could not delete a buffer: it
   passed the buffer name as an int, which the wrapper copies into an array. It
   builds a `GLuint`, as the deleter that runs at collection already did.

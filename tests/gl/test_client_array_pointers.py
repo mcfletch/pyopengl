@@ -10,6 +10,11 @@ draw from it produces garbage rather than an error.
 The typed setters are derived from the same entry points as the untyped ones,
 so each is checked on its own, and so is the untyped entry point once the typed
 ones have been built from it.
+
+The element type is the setter's rather than the caller's, so an array of
+another type is converted.  ``ERROR_ON_COPY`` is a caller refusing that
+conversion, and there it is a ``CopyError`` instead: the pairs of cases below
+say which run is which.
 """
 
 import ctypes
@@ -19,10 +24,23 @@ import pytest
 np = pytest.importorskip('numpy')
 
 from gltestcase import GLTestCase  # noqa: E402
+from OpenGL import _configflags  # noqa: E402
 from OpenGL.arrays import arraydatatype  # noqa: E402
+from OpenGL.error import CopyError  # noqa: E402
 from OpenGL.GL import pointers  # noqa: E402
 from OpenGL.GL import *  # noqa: F401,F403,E402
 from OpenGL.raw.GL.VERSION import GL_1_1 as raw  # noqa: E402
+
+#: The flag is fixed when the wrappers are built, and ``_configflags`` holds
+#: the value they were built with.
+converts = pytest.mark.skipif(
+    _configflags.ERROR_ON_COPY,
+    reason='ERROR_ON_COPY refuses the conversion this case is about',
+)
+refuses_the_copy = pytest.mark.skipif(
+    not _configflags.ERROR_ON_COPY,
+    reason='the conversion this case expects to be refused is made here',
+)
 
 #: name -> (element type, the array state's pointer query, components per element)
 TYPED_SETTERS = {
@@ -68,6 +86,7 @@ class TestTypedSetters(GLTestCase):
                 assert driver_bytes(query, data.nbytes) == data.tobytes()
         self.check_error('typed client-array setters')
 
+    @converts
     def test_a_byte_setter_takes_signed_bytes(self):
         data = np.array([[-128, -1, 0], [1, 64, 127]], 'b')
         for name in ('glIndexPointerb', 'glTexCoordPointerb', 'glVertexPointerb'):
@@ -78,6 +97,21 @@ class TestTypedSetters(GLTestCase):
                 assert driver_bytes(query, expected.nbytes) == expected.tobytes()
         self.check_error('byte client-array setters')
 
+    @refuses_the_copy
+    def test_a_byte_setter_will_not_widen_where_copies_are_refused(self):
+        """Widening the bytes to GL_INT is the copy the flag is set to find.
+
+        The driver is told GL_INT whatever array the setter was handed, so
+        passing the bytes through unwidened would have it read four times
+        their length.
+        """
+        data = np.array([[-128, -1, 0], [1, 64, 127]], 'b')
+        for name in ('glIndexPointerb', 'glTexCoordPointerb', 'glVertexPointerb'):
+            with self.subTest(setter=name):
+                with self.assertRaises(CopyError):
+                    getattr(pointers, name)(data)
+        self.check_error('byte client-array setters under ERROR_ON_COPY')
+
     def test_the_byte_setters_that_take_no_bytes_widen_alike(self):
         """glIndexPointer, glTexCoordPointer and glVertexPointer take no GL_BYTE."""
         widened = {
@@ -86,6 +120,7 @@ class TestTypedSetters(GLTestCase):
         }
         assert widened == {GL_INT}
 
+    @converts
     def test_a_float64_array_is_converted_to_the_setters_type(self):
         data = np.array([[0.15, 0.17, 0.2]] * 4, 'd')
         result = pointers.glColorPointerf(data)
@@ -94,6 +129,12 @@ class TestTypedSetters(GLTestCase):
         assert (
             driver_bytes(GL_COLOR_ARRAY_POINTER, expected.nbytes) == expected.tobytes()
         )
+
+    @refuses_the_copy
+    def test_a_float64_array_is_refused_where_copies_are_refused(self):
+        data = np.array([[0.15, 0.17, 0.2]] * 4, 'd')
+        with self.assertRaises(CopyError):
+            pointers.glColorPointerf(data)
 
 
 class TestDemotedUntypedSetter(GLTestCase):

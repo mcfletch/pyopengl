@@ -1538,6 +1538,11 @@ int pygl_string_array(GLProc *self, PyObject *object, Py_ssize_t index,
     return 0;
 }
 
+/* Unlike the numeric input arrays, this measures regardless of
+ * `pygl_array_size_checking`: the pointer array the driver reads is one
+ * this layer allocates from the caller's sequence and sizes by its length, so
+ * a larger count is a read past the end of a buffer built here.  A pointer
+ * array the caller built is theirs, and goes unmeasured. */
 int pygl_string_array_min(GLProc *self, PyObject *object, Py_ssize_t index,
                           Py_ssize_t minimum, PyGLBuf *out)
 {
@@ -1548,7 +1553,7 @@ int pygl_string_array_min(GLProc *self, PyObject *object, Py_ssize_t index,
     if (pygl_string_array(self, object, index, out) < 0) {
         return -1;
     }
-    if (!pygl_array_size_checking || minimum <= 0 || !(is_null || is_strings)) {
+    if (minimum <= 0 || !(is_null || is_strings)) {
         return 0;
     }
     if (is_null) {

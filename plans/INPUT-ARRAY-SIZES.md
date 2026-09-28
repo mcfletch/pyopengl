@@ -31,7 +31,8 @@ depends on.
   and `arrayhelpers.AsArrayTypedCountChecked`, applied by
   `_declarations.customise_entry` from the same table entry. `GLProc` answers
   `setInputArrayCount` as already implemented.
-- Both honour `ARRAY_SIZE_CHECKING`.
+- Both honour `ARRAY_SIZE_CHECKING` for a numeric array, which is a buffer the
+  caller owns.
 - Annotated: `glViewportArrayv`, `glScissorArrayv`, `glDepthRangeArrayv`,
   `glDepthRangeArraydvNV`, `glMulticastViewportArrayvNVX`,
   `glMulticastScissorArrayvNVX`, `glScissorExclusiveArrayvNV` (GL and GLES2),
@@ -65,6 +66,12 @@ exactly that and dumped core (`plans/CODE-REVIEW-2026-09-24.md`, finding 1).
   `GL_3_0`, `GLES3_3_0` and `GLES3_3_1` are not customised from the table, so
   their chains state `setInputArrayCount` themselves, and
   `cdispatch.extract` reads that call from a chain.
+- Counted regardless of `ARRAY_SIZE_CHECKING` (2026-09-27). The pointer array
+  the driver reads is one PyOpenGL allocates from the sequence given and sizes
+  by its length, so a larger count reads past the end of PyOpenGL's own
+  buffer; the flag is about measuring buffers the caller owns. Turning it off
+  had `glGetUniformIndices(program, 3, ['blockColor'])` dump core again in
+  both implementations.
 - The annotation table writes `divisor` and `multiplier` on every
   `from-argument` size, and the ctypes path sizes an output
   `count * multiplier // divisor`, as the C does.

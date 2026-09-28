@@ -152,13 +152,21 @@ import occurs the flags should no longer be changed.
         that many: glViewportArrayv(first, count, v) reads four floats
         per viewport, so v needs count * 4 of them, and a longer array
         is accepted.  A short one would have the driver read past its
-        end.  An array of strings the driver reads count of --
-        glTransformFeedbackVaryings(program, count, varyings, mode) --
-        must hold at least that many, and None for a positive count is
-        refused rather than read from address zero.
+        end.
 
         Switching the check off trades these guards for the cost of
-        measuring, which is a few array attribute reads per call.
+        measuring, which is a few array attribute reads per call.  It
+        applies to the arrays a caller passes in.
+
+        An array of strings the driver reads count of --
+        glTransformFeedbackVaryings(program, count, varyings, mode) --
+        must hold at least that many regardless of this flag, and None
+        for a positive count is refused rather than read from address
+        zero.  The pointer array the driver reads there is one PyOpenGL
+        allocates from the sequence given and sizes by its length, so a
+        larger count is a read past the end of PyOpenGL's own buffer.
+        A GLchar *const * the caller built for themselves is passed
+        unmeasured: only its builder knows how long it is.
 
         Default: True
 

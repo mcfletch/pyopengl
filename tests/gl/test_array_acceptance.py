@@ -164,8 +164,13 @@ class TestArraysReachingTheEntryPoints(GLTestCase):
         glVertexPointer(4, GL_INT, 0, s)
 
     @pytest.mark.skipif(not HAVE_NUMPY, reason='needs numpy itself, not the shim')
+    @converts_by_copying
     def test_numpyConversion(self):
-        """Test that we can run a numpy conversion from double to float for glColorArray"""
+        """Test that we can run a numpy conversion from double to float for glColorArray
+
+        The refusal the flag makes of the same call is
+        ``tests/gl/test_client_array_pointers.py``.
+        """
         a = np.arange(0, 1.2, 0.1, 'd').reshape((-1, 3))
         glEnableClientState(GL_VERTEX_ARRAY)
         try:

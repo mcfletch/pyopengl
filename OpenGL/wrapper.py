@@ -389,19 +389,26 @@ class Wrapper(LateBind):
         A longer array is accepted, since the driver reads the stated count
         and no more.  A ``GLchar *const *`` argument is counted in strings, with
         a multiplier of one, and one the caller built as a pointer array is
-        passed unmeasured.  With ``ARRAY_SIZE_CHECKING`` off this is
-        ``setInputArraySize(argName, None)``.
+        passed unmeasured.  With ``ARRAY_SIZE_CHECKING`` off a numeric array is
+        converted and not measured, which is ``setInputArraySize(argName,
+        None)``; the strings are counted either way, for the reason below.
         """
-        if not _configflags.ARRAY_SIZE_CHECKING:
-            return self.setInputArraySize(argName, None)
         arrayType = self.typeOfArg(argName)
         if isinstance(arrayType, type) and issubclass(arrayType, StringArray):
             # A list of strings counts itself; the argument type converts it.
+            #
+            # Measured regardless of ``ARRAY_SIZE_CHECKING``, because the
+            # pointer array the driver reads is one PyOpenGL allocates from
+            # that list and sizes by its length.  The flag is about arrays the
+            # caller owns and vouches for; a count larger than the list is a
+            # read past the end of a buffer built here.
             self.setPyConverter(
                 argName, arrayhelpers.StringArrayCountChecked(countArg)
             )
             self.setCConverter(argName, converters.getPyArgsName(argName))
             return self
+        if not _configflags.ARRAY_SIZE_CHECKING:
+            return self.setInputArraySize(argName, None)
         if not hasattr(arrayType, 'asArray'):
             raise TypeError(
                 "%s.%s is declared %s, which has no array conversion to measure"

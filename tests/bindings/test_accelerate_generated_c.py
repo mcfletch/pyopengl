@@ -13,6 +13,12 @@ internal, naming nothing in this package.
 
 ``accelerate/setup.py`` records which Cython and numpy wrote the C, and drops
 it where either has moved.
+
+That drop happens when a build runs, and a test run is not a build.  So the
+cases here read the C beside the ``.pyx`` only where the stamp says this
+toolchain wrote it, and write it again where it does not: a compiler asked
+about C from a numpy that is no longer installed answers about a toolchain
+already gone, and reports it against this package.
 """
 
 import importlib.metadata
@@ -48,6 +54,85 @@ def accelerate_setup():
 needs_cython = pytest.mark.skipif(
     importlib.util.find_spec('Cython') is None,
     reason='Cython writes the generated C; there is none to write here')
+
+#: The module whose declarations come from numpy rather than from this
+#: package.  Where numpy is absent, ``accelerate/setup.py`` builds every module
+#: but this one and says so, and numpy's headers are not there to read its C
+#: with either -- so a checkout carrying the C from an earlier build has one
+#: file in it that no compiler on this machine can be asked about.
+NEEDS_NUMPY = 'numpy_formathandler'
+
+
+def without_the_numpy_module(names):
+    """``names`` minus the numpy module, where there is no numpy here."""
+    if importlib.util.find_spec('numpy') is not None:
+        return names
+    return [name for name in names
+            if os.path.splitext(name)[0] != NEEDS_NUMPY]
+
+
+def run_cython(root, names, into):
+    """The installed Cython over ``names`` in ``root``, writing C into ``into``.
+
+    Through the command line, which is the interface a build uses: Cython's
+    Python API has moved between the releases this has to run under, and
+    ``python -m cython`` has not.  One file per call, so a failure names the
+    file it is in rather than the first of nine.  Returns a report for each
+    source it refused, and nothing at all where it wrote them all.
+    """
+    import subprocess
+
+    refused = []
+    for name in names:
+        completed = subprocess.run(
+            [sys.executable, '-m', 'cython', '-3',
+             '-I', root, '-I', os.path.join(paths.ROOT, 'accelerate'),
+             os.path.join(root, name),
+             '-o', os.path.join(into, os.path.splitext(name)[0] + '.c')],
+            capture_output=True, text=True, timeout=300,
+        )
+        if completed.returncode:
+            refused.append(f'--- {name} ---\n{completed.stderr.strip()}')
+    return refused
+
+
+def c_from_another_toolchain(root):
+    """Whether the C in ``root`` is not the C this toolchain would write.
+
+    ``accelerate/setup.py`` drops the generated C when Cython or numpy has
+    moved and records which wrote it in ``src/.cython-toolchain``, because what
+    ``cimport numpy`` expands to is numpy's own declarations.  That drop happens
+    when a build runs, and a test run is not a build -- so the C in a checkout
+    can be from a numpy whose accessors no longer exist, and a compiler asked
+    about it reports undeclared numpy functions in code no toolchain here would
+    write.
+
+    The stamp is the first half of the question and ``cythonize``'s own rule is
+    the second: C older than the ``.pyx`` beside it is rewritten by the next
+    build, so it is not what a compiler here will be given either.
+
+    Without Cython there is nothing to write the C again with, so what is there
+    is what gets compiled, whatever wrote it.
+    """
+    setup = accelerate_setup()
+    if not setup.have_cython:
+        return False
+    try:
+        with open(os.path.join(root, os.path.basename(setup.TOOLCHAIN_STAMP)),
+                  encoding='utf-8') as handle:
+            if handle.read() != setup._toolchain():
+                return True
+    except OSError:
+        return True
+    for name in os.listdir(root):
+        if not name.endswith('.pyx'):
+            continue
+        generated = os.path.join(root, os.path.splitext(name)[0] + '.c')
+        if (os.path.exists(generated)
+                and os.path.getmtime(generated)
+                < os.path.getmtime(os.path.join(root, name))):
+            return True
+    return False
 
 
 class TestTheToolchainIsRecorded:
@@ -160,6 +245,60 @@ class TestWhatIsDroppedAndWhatIsKept:
         assert (source / 'wrapper.c').exists()
 
 
+class TestWhichGeneratedCIsRead:
+    """What ``c_from_another_toolchain`` reads a ``src`` directory for.
+
+    Driven against a directory of this test's own, because a checkout is only
+    ever in one of the states it has to tell apart.
+    """
+
+    @pytest.fixture
+    def source(self, tmp_path):
+        """A ``src`` holding one ``.pyx``, the C from it, and the stamp."""
+        setup = accelerate_setup()
+        directory = tmp_path / 'src'
+        directory.mkdir()
+        (directory / 'wrapper.pyx').write_text('# the source\n')
+        (directory / 'wrapper.c').write_text('/* generated */\n')
+        (directory / os.path.basename(setup.TOOLCHAIN_STAMP)).write_text(
+            setup._toolchain())
+        return directory
+
+    @needs_cython
+    def test_the_c_this_toolchain_wrote_is_read(self, source):
+        assert not c_from_another_toolchain(str(source))
+
+    @needs_cython
+    def test_c_written_against_another_numpy_is_not_read(self, source):
+        """The case that reaches a compiler as an undeclared numpy accessor in
+        a file naming nothing in this package."""
+        setup = accelerate_setup()
+        (source / os.path.basename(setup.TOOLCHAIN_STAMP)).write_text(
+            'cython 3.0.11\nnumpy 1.26.4\n')
+        assert c_from_another_toolchain(str(source))
+
+    @needs_cython
+    def test_c_from_before_the_stamp_existed_is_not_read(self, source):
+        setup = accelerate_setup()
+        (source / os.path.basename(setup.TOOLCHAIN_STAMP)).unlink()
+        assert c_from_another_toolchain(str(source))
+
+    @needs_cython
+    def test_c_older_than_the_source_it_came_from_is_not_read(self, source):
+        """What ``cythonize`` compares, so the next build rewrites this C and
+        the file beside the ``.pyx`` is not what a compiler will be given."""
+        os.utime(source / 'wrapper.c', (0, 0))
+        assert c_from_another_toolchain(str(source))
+
+    def test_without_cython_the_shipped_c_is_read(self, source, monkeypatch):
+        """An install from an sdist without Cython has the C and no way to
+        make more of it, so that C is what its compiler is given."""
+        setup = accelerate_setup()
+        monkeypatch.setattr(setup, 'have_cython', False)
+        (source / os.path.basename(setup.TOOLCHAIN_STAMP)).unlink()
+        assert not c_from_another_toolchain(str(source))
+
+
 class TestTheSourcesCompileWithTheCythonInstalled:
     """Every ``.pyx`` in the accelerator turns into C with the Cython here.
 
@@ -193,26 +332,8 @@ class TestTheSourcesCompileWithTheCythonInstalled:
     @needs_cython
     @pytest.mark.slow
     def test_every_pyx_cythonizes(self, tmp_path):
-        """Through the command line, which is the interface a build uses.
-
-        Cython's Python API has moved between the releases this has to run
-        under; ``python -m cython`` has not. One file per call, so a failure
-        names the file it is in rather than the first of nine.
-        """
-        import subprocess
-
         root, found = self.sources()
-        failed = []
-        for name in found:
-            completed = subprocess.run(
-                [sys.executable, '-m', 'cython', '-3',
-                 '-I', root, '-I', os.path.join(paths.ROOT, 'accelerate'),
-                 os.path.join(root, name),
-                 '-o', str(tmp_path / (name[:-4] + '.c'))],
-                capture_output=True, text=True, timeout=300,
-            )
-            if completed.returncode:
-                failed.append(f'--- {name} ---\n{completed.stderr.strip()}')
+        failed = run_cython(root, found, str(tmp_path))
         assert not failed, (
             'Cython %s refuses these sources:\n%s'
             % (importlib.metadata.version('cython'), '\n\n'.join(failed))
@@ -241,6 +362,8 @@ class TestTheGeneratedCSatisfiesClangToo:
     Syntax-only, so this costs about a second for the whole set: what is being
     asked is whether the compiler accepts the code, not whether the object
     file it would emit is any good.  The build itself is what produces those.
+    A few seconds where the C has to be written first, which is the checkout
+    that has not built the accelerator against the toolchain installed now.
 
     https://github.com/mcfletch/pyopengl/issues/107
     https://github.com/mcfletch/pyopengl/issues/117
@@ -252,29 +375,47 @@ class TestTheGeneratedCSatisfiesClangToo:
             pytest.skip('no clang here; gcc is exercised by every build')
         return found
 
-    #: The generated module written against numpy's own declarations.  Where
-    #: numpy is absent, ``accelerate/setup.py`` builds every module but this
-    #: one and says so, and its headers are not there to read it with either
-    #: -- so a checkout carrying the C from an earlier build has one file here
-    #: that no compiler on this machine can be asked about.
-    NEEDS_NUMPY_HEADERS = ('numpy_formathandler.c',)
+    def generated(self, tmp_path):
+        """Where the C to read is, and what it is called.
 
-    def generated(self):
+        The checkout's own, where that is the C this toolchain writes, because
+        it is then what a build here compiles and it costs nothing to read.
+        Where it is not -- numpy or Cython has moved since, or the accelerator
+        has never been built in this checkout -- the C is written again into
+        ``tmp_path``, which is what a source install of this package compiles.
+        """
         root = os.path.join(paths.ROOT, 'accelerate', 'src')
         if not os.path.isdir(root):
             pytest.skip('the accelerate source tree is not in this checkout')
-        found = sorted(name for name in os.listdir(root) if name.endswith('.c'))
-        if importlib.util.find_spec('numpy') is None:
-            found = [name for name in found
-                     if name not in self.NEEDS_NUMPY_HEADERS]
-        if not found:
+        found = without_the_numpy_module(
+            sorted(name for name in os.listdir(root) if name.endswith('.c')))
+        if found and not c_from_another_toolchain(root):
+            return root, found
+        if not accelerate_setup().have_cython:
             pytest.skip(
-                'no generated C to read -- this is an environment with the '
-                'accelerator not built, and there is nothing yet to compile')
-        return root, found
+                'no generated C to read and no Cython to write it -- this is '
+                'an environment with the accelerator not built, and there is '
+                'nothing yet to compile')
+        sources = without_the_numpy_module(
+            sorted(name for name in os.listdir(root) if name.endswith('.pyx')))
+        refused = run_cython(root, sources, str(tmp_path))
+        assert not refused, (
+            'Cython %s refuses these sources:\n%s'
+            % (importlib.metadata.version('cython'), '\n\n'.join(refused))
+        )
+        return str(tmp_path), [os.path.splitext(name)[0] + '.c'
+                               for name in sources]
 
-    def includes(self, root):
-        paths_ = ['-I' + root, '-I' + os.path.join(paths.ROOT, 'accelerate'),
+    def includes(self, where):
+        """What the compiler reads the C at ``where`` against.
+
+        ``accelerate/src`` and ``accelerate`` are the include path
+        ``accelerate/setup.py`` compiles these modules with, and they are named
+        here wherever the C itself sits.
+        """
+        paths_ = ['-I' + where,
+                  '-I' + os.path.join(paths.ROOT, 'accelerate', 'src'),
+                  '-I' + os.path.join(paths.ROOT, 'accelerate'),
                   '-I' + sysconfig.get_paths()['include']]
         try:
             import numpy
@@ -283,11 +424,11 @@ class TestTheGeneratedCSatisfiesClangToo:
         return paths_ + ['-I' + numpy.get_include(),
                          '-DNPY_NO_DEPRECATED_API=NPY_1_7_API_VERSION']
 
-    def test_clang_accepts_every_generated_module(self):
+    def test_clang_accepts_every_generated_module(self, tmp_path):
         import subprocess
 
         clang = self.clang()
-        root, found = self.generated()
+        root, found = self.generated(tmp_path)
         includes = self.includes(root)
         refused = []
         for name in found:
@@ -301,6 +442,40 @@ class TestTheGeneratedCSatisfiesClangToo:
                           if 'error:' in line]
                 refused.append('--- %s ---\n%s' % (name, '\n'.join(errors[:6])))
         assert not refused, 'clang refuses:\n' + '\n\n'.join(refused)
+
+    @needs_cython
+    def test_c_from_another_toolchain_is_written_again_rather_than_read(
+            self, tmp_path, monkeypatch):
+        """A checkout whose C was written against a numpy that has since moved.
+
+        What a compiler here is given is what this Cython writes: the file
+        beside the ``.pyx`` is dropped by the next build, and asking clang
+        about it reports a toolchain that is already gone as a defect in this
+        package.
+        """
+        checkout = tmp_path / 'checkout'
+        source = checkout / 'accelerate' / 'src'
+        source.mkdir(parents=True)
+        # What the build declares is read from the checkout named by
+        # `paths.ROOT`, so this one carries the same file rather than a
+        # stand-in -- without it the decision below is never reached and this
+        # passes as a skip.
+        shutil.copyfile(os.path.join(paths.ROOT, 'accelerate', 'setup.py'),
+                        source.parent / 'setup.py')
+        (source / 'wrapper.pyx').write_text(
+            'def total(int first, int second):\n    return first + second\n')
+        (source / 'wrapper.c').write_text(
+            '/* written by a toolchain that has since moved */\n')
+        written = tmp_path / 'written'
+        written.mkdir()
+        monkeypatch.setattr(paths, 'ROOT', str(checkout))
+
+        where, found = self.generated(written)
+
+        assert found == ['wrapper.c']
+        assert where == str(written), 'the stale C in the checkout was read'
+        with open(os.path.join(where, 'wrapper.c'), encoding='utf-8') as handle:
+            assert 'has since moved' not in handle.read()
 
 
 @pytest.fixture(scope='module')

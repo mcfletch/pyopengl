@@ -17,6 +17,12 @@ count, has the driver read past the array or from address zero.  A
 ``GLchar *const *`` the caller built is passed as it is, since only its builder
 knows its length.
 
+``ARRAY_SIZE_CHECKING`` off is a caller saying their own buffers need no
+measuring, so the numeric arrays go unchecked there.  The strings are counted
+whatever it says: the pointer array the driver reads is one PyOpenGL allocates
+from the caller's sequence, and sizing that one correctly is PyOpenGL's own
+job.
+
 The refusal happens before a function pointer is resolved, so these run with no
 context and cover the GLES2 and vendor entry points a desktop driver does not
 offer.  ``tests/gl/test_gl41.py`` drives the core ones against a real context.
@@ -29,7 +35,7 @@ from OpenGL._dispatch import entry_points
 
 np = pytest.importorskip('numpy')
 
-pytestmark = pytest.mark.skipif(
+needs_size_checking = pytest.mark.skipif(
     not _configflags.ARRAY_SIZE_CHECKING,
     reason='ARRAY_SIZE_CHECKING is off, so a short array is not refused',
 )
@@ -96,6 +102,7 @@ class TestTheTableStatesTheSize:
         }
 
 
+@needs_size_checking
 @IMPLEMENTATIONS
 class TestAShortArrayIsRefused:
     @pytest.mark.parametrize('module,name,per,dtype', FAMILY, ids=IDS)
@@ -208,6 +215,7 @@ class TestTooFewStringsAreRefused:
             string_call(function, around, 3, None)
 
 
+@needs_size_checking
 @IMPLEMENTATIONS
 class TestTheMessagesAgree:
     def test_none_is_named_as_none(self, implementation):
