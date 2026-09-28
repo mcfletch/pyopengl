@@ -26,7 +26,7 @@ needs_local_sockets = pytest.mark.skipif(
 )
 
 needs_libx11 = pytest.mark.skipif(
-    ctypes.util.find_library('X11') is None, reason='no libX11 to open a display with'
+    ctypes.util.find_library('X11') is None or sys.platform == 'win32', reason='no libX11 to open a display with'
 )
 
 
