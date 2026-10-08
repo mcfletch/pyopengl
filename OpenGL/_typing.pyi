@@ -18,19 +18,20 @@ else:  # PEP 688 arrived in 3.12; before it there is no way to say "buffer".
 # `Any | X` is `Any` to a type checker, and a union containing it
 # checks nothing while looking as though it does.  Buffer (PEP 688)
 # is what admits a numpy array, which is neither a Sequence nor a
-# memoryview to a checker.  None is a null pointer where one is
+# memoryview to a checker.  A bald number is an array of one, as
+# OpenGL.arrays.numbers makes it.  None is a null pointer where one is
 # meaningful.
-ByteArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | None
-DoubleArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | None
-FloatArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | None
-Int64Array: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | None
-IntArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | None
-ShortArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | None
-UByteArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | None
-UInt64Array: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | None
-UIntArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | None
-UShortArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | None
-AnyArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | None
+ByteArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | int | float | None
+DoubleArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | int | float | None
+FloatArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | int | float | None
+Int64Array: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | int | float | None
+IntArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | int | float | None
+ShortArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | int | float | None
+UByteArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | int | float | None
+UInt64Array: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | int | float | None
+UIntArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | int | float | None
+UShortArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | int | float | None
+AnyArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | int | float | None
 
 # What is *returned*.  Any, because the shape of the result
 # follows the *value* of an argument rather than its type:

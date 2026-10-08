@@ -79,6 +79,20 @@ exactly that and dumped core (`plans/CODE-REVIEW-2026-09-24.md`, finding 1).
   implementations, no context), `tests/gl/test_uniform_indices.py` against a
   driver.
 
+### The delete family (2026-10-02)
+
+`glDeleteVertexArrays(1, None)` handed the driver address zero and dumped core;
+an application that passes one name as a scalar, to keep `ERROR_ON_COPY` happy,
+reaches it with a name that was never set.
+
+- The table records `from-argument` on the array of every `glDelete*` entry
+  point that deletes `n` names (buffers, queries, textures, vertex arrays,
+  framebuffers, renderbuffers, samplers, transform feedbacks, program pipelines,
+  fences, programs, occlusion queries and the extension spellings, in GL, GLES1,
+  GLES2 and GLES3), the count being `n` or `count`.
+- Tests: `TestTheTableStatesTheDeleteCount` and `TestDeletingNamesNeedsThemAll`
+  in `test_input_array_counts.py`, both implementations.
+
 ## Still open
 
 The rest of the 1,321 comments, in three groups by what the registry says:

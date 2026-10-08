@@ -893,7 +893,7 @@ pygl_GLES3_glDeleteProgramPipelines(PyObject *_self, PyObject *const *_a, size_t
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, pipelines, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, pipelines, &pygl_elem_GLuint, n, 1);
     PYGL_CALL_V((int, void *), (n, pipelines));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -932,7 +932,7 @@ pygl_GLES3_glDeleteQueries(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, ids, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, ids, &pygl_elem_GLuint, n, 1);
     PYGL_CALL_V((int, void *), (n, ids));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -971,7 +971,7 @@ pygl_GLES3_glDeleteSamplers(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_FRAME(1);
     PYGL_SZ(0, count);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, samplers, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, samplers, &pygl_elem_GLuint, count, 1);
     PYGL_CALL_V((int, void *), (count, samplers));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -1045,7 +1045,7 @@ pygl_GLES3_glDeleteTransformFeedbacks(PyObject *_self, PyObject *const *_a, size
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, ids, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, ids, &pygl_elem_GLuint, n, 1);
     PYGL_CALL_V((int, void *), (n, ids));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -1084,7 +1084,7 @@ pygl_GLES3_glDeleteVertexArrays(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, arrays, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, arrays, &pygl_elem_GLuint, n, 1);
     PYGL_CALL_V((int, void *), (n, arrays));
     PYGL_CHECK();
     PYGL_CLEANUP();

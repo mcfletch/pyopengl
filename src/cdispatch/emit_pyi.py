@@ -144,16 +144,17 @@ def _alias_declarations():
         '# `Any | X` is `Any` to a type checker, and a union containing it',
         '# checks nothing while looking as though it does.  Buffer (PEP 688)',
         '# is what admits a numpy array, which is neither a Sequence nor a',
-        '# memoryview to a checker.  None is a null pointer where one is',
+        '# memoryview to a checker.  A bald number is an array of one, as',
+        '# OpenGL.arrays.numbers makes it.  None is a null pointer where one is',
         '# meaningful.',
     ]
     for alias in sorted(set(ARRAY_ALIASES.values())):
         lines.append(
-            '%s: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | None'
+            '%s: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | int | float | None'
             % (alias,)
         )
     lines.append(
-        'AnyArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | None'
+        'AnyArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | int | float | None'
     )
     lines.append('')
     lines.append('# What is *returned*.  Any, because the shape of the result')

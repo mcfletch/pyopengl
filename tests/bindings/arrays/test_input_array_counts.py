@@ -137,6 +137,61 @@ class TestAShortArrayIsRefused:
             function(0, 2, np.zeros(4, 'f'))
 
 
+#: ``(declaring module, entry point, array parameter, count parameter)``: the
+#: ``glDelete*`` family, which reads ``count`` names from the array.
+DELETES = [
+    ('OpenGL.raw.GL.VERSION.GL_1_5', 'glDeleteBuffers', 'buffers', 'n'),
+    ('OpenGL.raw.GL.VERSION.GL_1_5', 'glDeleteQueries', 'ids', 'n'),
+    ('OpenGL.raw.GL.VERSION.GL_1_1', 'glDeleteTextures', 'textures', 'n'),
+    ('OpenGL.raw.GL.VERSION.GL_3_0', 'glDeleteVertexArrays', 'arrays', 'n'),
+    ('OpenGL.raw.GL.VERSION.GL_3_0', 'glDeleteFramebuffers', 'framebuffers', 'n'),
+    ('OpenGL.raw.GL.VERSION.GL_3_0', 'glDeleteRenderbuffers', 'renderbuffers', 'n'),
+    ('OpenGL.raw.GL.VERSION.GL_3_3', 'glDeleteSamplers', 'samplers', 'count'),
+    ('OpenGL.raw.GL.VERSION.GL_4_0', 'glDeleteTransformFeedbacks', 'ids', 'n'),
+]
+
+DELETE_IDS = [name for _module, name, _array, _count in DELETES]
+
+
+class TestTheTableStatesTheDeleteCount:
+    @pytest.mark.parametrize('module,name,array,count', DELETES, ids=DELETE_IDS)
+    def test_the_count_is_an_argument(self, module, name, array, count):
+        api = _declarations.api_of(module)
+        bits = _declarations.annotations()['%s.%s' % (api, name)]['parameters'][array]
+        assert bits['size'] == {
+            'kind': 'from-argument', 'argument': count,
+            'divisor': 1, 'multiplier': 1,
+        }
+
+
+@IMPLEMENTATIONS
+class TestDeletingNamesNeedsThemAll:
+    @pytest.mark.parametrize('module,name,array,count', DELETES, ids=DELETE_IDS)
+    def test_none_is_a_null_pointer_the_driver_would_read(
+            self, implementation, module, name, array, count):
+        """``glDeleteVertexArrays(1, None)`` handed the driver address zero
+        to read a name from, and dumped core."""
+        function = implementation(module, name)
+        with pytest.raises(ValueError):
+            function(1, None)
+
+    @pytest.mark.parametrize('module,name,array,count', DELETES, ids=DELETE_IDS)
+    def test_a_bald_number_is_one_name_and_is_measured(
+            self, implementation, module, name, array, count):
+        """``glDeleteTextures(1, 7)``: the scalar is an array of one, which
+        satisfies a count of one and not a count of two.  A name no context
+        made is refused by the driver or the entry point, never measured away."""
+        function = implementation(module, name)
+        with pytest.raises(ValueError):
+            function(2, 7)
+
+    @pytest.mark.parametrize('module,name,array,count', DELETES, ids=DELETE_IDS)
+    def test_one_name_short(self, implementation, module, name, array, count):
+        function = implementation(module, name)
+        with pytest.raises(ValueError):
+            function(2, np.zeros(1, 'I'))
+
+
 #: ``(declaring module, entry point, string-array parameter, count parameter,
 #: the call's arguments around the two)``.  ``glShaderSource`` is not here: its
 #: friendly form takes the strings alone and counts them itself.

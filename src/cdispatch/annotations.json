@@ -1488,14 +1488,26 @@
  "GL.glDeleteBuffers": {
   "parameters": {
    "buffers": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GL.glDeleteBuffersARB": {
   "parameters": {
    "buffers": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
@@ -1509,14 +1521,26 @@
  "GL.glDeleteFencesAPPLE": {
   "parameters": {
    "fences": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GL.glDeleteFencesNV": {
   "parameters": {
    "fences": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
@@ -1524,7 +1548,13 @@
   "helper": "variadic",
   "parameters": {
    "framebuffers": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
@@ -1532,7 +1562,13 @@
   "helper": "variadic",
   "parameters": {
    "framebuffers": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
@@ -1553,14 +1589,26 @@
  "GL.glDeleteNamesAMD": {
   "parameters": {
    "names": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "num",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GL.glDeleteOcclusionQueriesNV": {
   "parameters": {
    "ids": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
@@ -1580,28 +1628,52 @@
  "GL.glDeleteProgramPipelines": {
   "parameters": {
    "pipelines": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GL.glDeleteProgramPipelinesEXT": {
   "parameters": {
    "pipelines": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GL.glDeleteProgramsARB": {
   "parameters": {
    "programs": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GL.glDeleteProgramsNV": {
   "parameters": {
    "programs": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
@@ -1609,7 +1681,13 @@
   "helper": "variadic",
   "parameters": {
    "ids": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
@@ -1617,7 +1695,13 @@
   "helper": "variadic",
   "parameters": {
    "ids": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
@@ -1631,21 +1715,39 @@
  "GL.glDeleteRenderbuffers": {
   "parameters": {
    "renderbuffers": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GL.glDeleteRenderbuffersEXT": {
   "parameters": {
    "renderbuffers": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GL.glDeleteSamplers": {
   "parameters": {
    "samplers": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "count",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
@@ -1667,42 +1769,78 @@
   "helper": "variadic",
   "parameters": {
    "textures": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GL.glDeleteTexturesEXT": {
   "parameters": {
    "textures": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GL.glDeleteTransformFeedbacks": {
   "parameters": {
    "ids": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GL.glDeleteTransformFeedbacksNV": {
   "parameters": {
    "ids": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GL.glDeleteVertexArrays": {
   "parameters": {
    "arrays": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GL.glDeleteVertexArraysAPPLE": {
   "parameters": {
    "arrays": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
@@ -15762,42 +15900,78 @@
  "GLES1.glDeleteBuffers": {
   "parameters": {
    "buffers": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GLES1.glDeleteFencesNV": {
   "parameters": {
    "fences": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GLES1.glDeleteFramebuffersOES": {
   "parameters": {
    "framebuffers": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GLES1.glDeleteRenderbuffersOES": {
   "parameters": {
    "renderbuffers": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GLES1.glDeleteTextures": {
   "parameters": {
    "textures": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GLES1.glDeleteVertexArraysOES": {
   "parameters": {
    "arrays": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
@@ -17534,21 +17708,39 @@
  "GLES2.glDeleteBuffers": {
   "parameters": {
    "buffers": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GLES2.glDeleteFencesNV": {
   "parameters": {
    "fences": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GLES2.glDeleteFramebuffers": {
   "parameters": {
    "framebuffers": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
@@ -17575,28 +17767,52 @@
  "GLES2.glDeleteProgramPipelinesEXT": {
   "parameters": {
    "pipelines": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GLES2.glDeleteQueriesEXT": {
   "parameters": {
    "ids": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GLES2.glDeleteRenderbuffers": {
   "parameters": {
    "renderbuffers": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GLES2.glDeleteSamplers": {
   "parameters": {
    "samplers": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "count",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
@@ -17610,14 +17826,26 @@
  "GLES2.glDeleteTextures": {
   "parameters": {
    "textures": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GLES2.glDeleteVertexArraysOES": {
   "parameters": {
    "arrays": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
@@ -20474,35 +20702,65 @@
  "GLES3.glDeleteProgramPipelines": {
   "parameters": {
    "pipelines": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GLES3.glDeleteQueries": {
   "parameters": {
    "ids": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GLES3.glDeleteSamplers": {
   "parameters": {
    "samplers": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "count",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GLES3.glDeleteTransformFeedbacks": {
   "parameters": {
    "ids": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },
  "GLES3.glDeleteVertexArrays": {
   "parameters": {
    "arrays": {
-    "array": true
+    "array": true,
+    "size": {
+     "argument": "n",
+     "divisor": 1,
+     "kind": "from-argument",
+     "multiplier": 1
+    }
    }
   }
  },

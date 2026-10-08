@@ -16290,7 +16290,7 @@ pygl_GL_glDeleteBuffers(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, buffers, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, buffers, &pygl_elem_GLuint, n, 1);
     PYGL_CALL_V((int, void *), (n, buffers));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -16329,7 +16329,7 @@ pygl_GL_glDeleteBuffersARB(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, buffers, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, buffers, &pygl_elem_GLuint, n, 1);
     PYGL_CALL_V((int, void *), (n, buffers));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -16407,7 +16407,7 @@ pygl_GL_glDeleteFencesAPPLE(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, fences, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, fences, &pygl_elem_GLuint, n, 1);
     PYGL_CALL_V((int, void *), (n, fences));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -16446,7 +16446,7 @@ pygl_GL_glDeleteFencesNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, fences, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, fences, &pygl_elem_GLuint, n, 1);
     PYGL_CALL_V((int, void *), (n, fences));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -16520,7 +16520,7 @@ pygl_GL_glDeleteFramebuffers(PyObject *_self, PyObject *const *_a, size_t _nargs
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, framebuffers, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, framebuffers, &pygl_elem_GLuint, n, 1);
     PYGL_CALL_V((int, void *), (n, framebuffers));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -16559,7 +16559,7 @@ pygl_GL_glDeleteFramebuffersEXT(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, framebuffers, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, framebuffers, &pygl_elem_GLuint, n, 1);
     PYGL_CALL_V((int, void *), (n, framebuffers));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -16713,7 +16713,7 @@ pygl_GL_glDeleteNamesAMD(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PYGL_U(0, identifier);
     PYGL_U(1, num);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(2, names, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(2, names, &pygl_elem_GLuint, num, 1);
     PYGL_CALL_V((unsigned int, unsigned int, void *), (identifier, num, names));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -16787,7 +16787,7 @@ pygl_GL_glDeleteOcclusionQueriesNV(PyObject *_self, PyObject *const *_a, size_t 
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, ids, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, ids, &pygl_elem_GLuint, n, 1);
     PYGL_CALL_V((int, void *), (n, ids));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -16972,7 +16972,7 @@ pygl_GL_glDeleteProgramPipelines(PyObject *_self, PyObject *const *_a, size_t _n
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, pipelines, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, pipelines, &pygl_elem_GLuint, n, 1);
     PYGL_CALL_V((int, void *), (n, pipelines));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -17011,7 +17011,7 @@ pygl_GL_glDeleteProgramPipelinesEXT(PyObject *_self, PyObject *const *_a, size_t
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, pipelines, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, pipelines, &pygl_elem_GLuint, n, 1);
     PYGL_CALL_V((int, void *), (n, pipelines));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -17050,7 +17050,7 @@ pygl_GL_glDeleteProgramsARB(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, programs, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, programs, &pygl_elem_GLuint, n, 1);
     PYGL_CALL_V((int, void *), (n, programs));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -17089,7 +17089,7 @@ pygl_GL_glDeleteProgramsNV(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, programs, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, programs, &pygl_elem_GLuint, n, 1);
     PYGL_CALL_V((int, void *), (n, programs));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -17128,7 +17128,7 @@ pygl_GL_glDeleteQueries(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, ids, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, ids, &pygl_elem_GLuint, n, 1);
     PYGL_CALL_V((int, void *), (n, ids));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -17167,7 +17167,7 @@ pygl_GL_glDeleteQueriesARB(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, ids, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, ids, &pygl_elem_GLuint, n, 1);
     PYGL_CALL_V((int, void *), (n, ids));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -17245,7 +17245,7 @@ pygl_GL_glDeleteRenderbuffers(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, renderbuffers, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, renderbuffers, &pygl_elem_GLuint, n, 1);
     PYGL_CALL_V((int, void *), (n, renderbuffers));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -17284,7 +17284,7 @@ pygl_GL_glDeleteRenderbuffersEXT(PyObject *_self, PyObject *const *_a, size_t _n
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, renderbuffers, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, renderbuffers, &pygl_elem_GLuint, n, 1);
     PYGL_CALL_V((int, void *), (n, renderbuffers));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -17323,7 +17323,7 @@ pygl_GL_glDeleteSamplers(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PYGL_FRAME(1);
     PYGL_SZ(0, count);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, samplers, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, samplers, &pygl_elem_GLuint, count, 1);
     PYGL_CALL_V((int, void *), (count, samplers));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -17510,7 +17510,7 @@ pygl_GL_glDeleteTextures(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, textures, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, textures, &pygl_elem_GLuint, n, 1);
     PYGL_CALL_V((int, void *), (n, textures));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -17549,7 +17549,7 @@ pygl_GL_glDeleteTexturesEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, textures, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, textures, &pygl_elem_GLuint, n, 1);
     PYGL_CALL_V((int, void *), (n, textures));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -17588,7 +17588,7 @@ pygl_GL_glDeleteTransformFeedbacks(PyObject *_self, PyObject *const *_a, size_t 
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, ids, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, ids, &pygl_elem_GLuint, n, 1);
     PYGL_CALL_V((int, void *), (n, ids));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -17627,7 +17627,7 @@ pygl_GL_glDeleteTransformFeedbacksNV(PyObject *_self, PyObject *const *_a, size_
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, ids, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, ids, &pygl_elem_GLuint, n, 1);
     PYGL_CALL_V((int, void *), (n, ids));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -17666,7 +17666,7 @@ pygl_GL_glDeleteVertexArrays(PyObject *_self, PyObject *const *_a, size_t _nargs
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, arrays, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, arrays, &pygl_elem_GLuint, n, 1);
     PYGL_CALL_V((int, void *), (n, arrays));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -17705,7 +17705,7 @@ pygl_GL_glDeleteVertexArraysAPPLE(PyObject *_self, PyObject *const *_a, size_t _
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, arrays, &pygl_elem_GLuint);
+    PYGL_ARRAY_IN_MIN(1, arrays, &pygl_elem_GLuint, n, 1);
     PYGL_CALL_V((int, void *), (n, arrays));
     PYGL_CHECK();
     PYGL_CLEANUP();

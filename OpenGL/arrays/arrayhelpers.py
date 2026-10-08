@@ -192,7 +192,10 @@ class AsArrayTypedCountChecked(converters.PyConverter):
                     incoming,
                 )
             return result
-        byteSize = handler.arrayByteCount(result)
+        counter = getattr(handler, 'arrayByteCount', None)
+        # A bald number converts to a ctypes scalar, an array of one, which
+        # its handler cannot measure.
+        byteSize = counter(result) if counter is not None else ctypes.sizeof(result)
         if byteSize < expected:
             raise ValueError(
                 """Expected at least %r byte array, got %r byte array"""
