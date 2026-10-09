@@ -38,6 +38,8 @@ images.COMPONENT_COUNTS.update( {
     GL_3_0.GL_ALPHA_INTEGER : 1,
     GL_1_1.GL_LUMINANCE : 1,
     GL_1_1.GL_LUMINANCE_ALPHA : 2,
+    GL_3_0.GL_RG : 2,
+    GL_3_0.GL_RG_INTEGER : 2,
     GL_1_1.GL_COLOR_INDEX : 1,
     GL_1_1.GL_STENCIL_INDEX : 1,
     GL_1_1.GL_DEPTH_COMPONENT : 1,
@@ -54,6 +56,7 @@ images.COMPONENT_COUNTS.update( {
     GL_3_0.GL_RGB8UI : 3,
     GL_3_0.GL_RGB9_E5 : 3,
     GL_3_0.GL_RGB_INTEGER : 3,
+    GL_3_0.GL_BGR_INTEGER : 3,
 
     GL_1_1.GL_RGBA : 4,
     GL_1_2.GL_BGRA : 4,
@@ -66,6 +69,7 @@ images.COMPONENT_COUNTS.update( {
     GL_3_0.GL_RGBA8I : 4,
     GL_3_0.GL_RGBA8UI : 4,
     GL_3_0.GL_RGBA_INTEGER : 4,
+    GL_3_0.GL_BGRA_INTEGER : 4,
 } )
 
 images.TYPE_TO_ARRAYTYPE.update( {

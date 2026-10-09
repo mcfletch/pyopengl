@@ -18,6 +18,7 @@ import unittest
 import pytest
 
 from arraycompat import np, object_names, one
+from childenv import json_from_child
 from gltestcase import GLTestCase
 from OpenGL import _configflags
 from OpenGL.arrays import arraydatatype
@@ -184,6 +185,29 @@ class TestDrawingPixels(GLTestCase):
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, 512, 512, 0, GL_RGB, GL_INT, None)
         self.check_error('glTexImage2D with no data')
         glDeleteTextures(1, object_names(texture))
+
+
+class TestCoreFormatsAreKnownWithoutTheirExtensions:
+    """GL 3.0's pixel formats are sized by ``OpenGL.GL`` itself.
+
+    ``GL_RG`` and the integer forms are core from 3.0. A program that imports
+    ``OpenGL.GL`` and reads a two-channel texture back never imports
+    ``OpenGL.GL.ARB.texture_rg``, and this module does, so the question is
+    asked of a fresh interpreter.
+    """
+
+    FORMATS = {'GL_RG': 2, 'GL_RG_INTEGER': 2, 'GL_BGR_INTEGER': 3,
+               'GL_BGRA_INTEGER': 4}
+
+    def test_each_has_its_component_count(self):
+        found = json_from_child(
+            'import json, sys\n'
+            'import OpenGL.GL as GL\n'
+            'from OpenGL import images\n'
+            'assert "OpenGL.GL.ARB.texture_rg" not in sys.modules\n'
+            'print(json.dumps({name: images.COMPONENT_COUNTS.get(getattr(GL, name))\n'
+            '                  for name in %r}))' % (sorted(self.FORMATS),))
+        assert found == self.FORMATS
 
 
 class TestTwoComponentTextures(GLTestCase):

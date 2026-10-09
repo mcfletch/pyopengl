@@ -111,6 +111,11 @@ What changed since the 3.x series. The current development version is
 - `gluUnproject4` had the wrong signature; GLU quadrics, NURBS and the
   tessellator had defects the new suites exposed.
 - `glGetTexImageCompressed` ignored the level it was given.
+- `glGetTexImage`, `glReadPixels` and the other calls that size their result
+  from a format raised `Unrecognised image format` for `GL_RG`,
+  `GL_RG_INTEGER`, `GL_BGR_INTEGER` and `GL_BGRA_INTEGER`, which are core
+  from GL 3.0, unless `OpenGL.GL.ARB.texture_rg` had been imported. They are
+  sized by `OpenGL.GL` itself.
 - `glDrawBuffersEXT` was being wrapped to `glDrawBuffers`.
 - Constants larger than `sys.maxint` converted incorrectly.
 - GLES image functions had wrong sizing, and now have size checks.
