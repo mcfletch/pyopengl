@@ -86,8 +86,11 @@ def _local_addresses(directory, number):
 
     On Linux libxcb tries the abstract socket first, so a server reachable only
     there -- a container sharing the host's network but not its ``/tmp`` -- is
-    still a server.
+    still a server.  Nowhere on a platform whose Python has no ``AF_UNIX``,
+    which is Windows.
     """
+    if not hasattr(socket, 'AF_UNIX'):
+        return []
     path = os.path.join(directory, 'X%d' % (number,))
     if sys.platform.startswith('linux'):
         return ['\0' + path, path]

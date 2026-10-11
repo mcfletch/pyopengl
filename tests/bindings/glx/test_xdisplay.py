@@ -8,8 +8,10 @@ else listening where one used to be.
 Headless: sockets, a subprocess and a string.
 """
 import ctypes.util
+import pathlib
 import socket
 import sys
+import tempfile
 import threading
 
 import pytest
@@ -19,9 +21,24 @@ import xdisplay
 #: A display number nothing is expected to be serving.
 NOBODY = 79
 
+needs_local_sockets = pytest.mark.skipif(
+    not hasattr(socket, 'AF_UNIX'), reason='no local sockets on this platform'
+)
+
 needs_libx11 = pytest.mark.skipif(
     ctypes.util.find_library('X11') is None, reason='no libX11 to open a display with'
 )
+
+
+@pytest.fixture
+def sockets():
+    """A directory whose path leaves room for a socket's name.
+
+    A socket address holds about a hundred bytes (104 on macOS, 108 on Linux),
+    and ``tmp_path`` on macOS is longer than that before the file is named.
+    """
+    with tempfile.TemporaryDirectory(dir='/tmp', prefix='x11-') as directory:
+        yield pathlib.Path(directory)
 
 
 def test_no_display_named_is_no_display():
@@ -38,17 +55,23 @@ def test_a_name_that_is_not_a_display():
     assert not xdisplay.answers(':what')
 
 
-def test_a_socket_left_behind_by_a_server_that_has_gone(tmp_path):
-    path = tmp_path / ('X%d' % NOBODY)
-    closed = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-    closed.bind(str(path))
-    closed.close()
+def test_a_platform_without_local_sockets(monkeypatch):
+    """Windows: a local display is one nothing there can be listening on."""
+    monkeypatch.delattr(socket, 'AF_UNIX', raising=False)
+    assert not xdisplay.listens(':%d' % NOBODY)
+
+
+@needs_local_sockets
+def test_a_socket_left_behind_by_a_server_that_has_gone(sockets):
+    path = sockets / ('X%d' % NOBODY)
+    with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as closed:
+        closed.bind(str(path))
     assert path.exists()
-    assert not xdisplay.listens(':%d' % NOBODY, directory=str(tmp_path))
+    assert not xdisplay.listens(':%d' % NOBODY, directory=str(sockets))
 
 
 @pytest.mark.skipif(not sys.platform.startswith('linux'), reason='abstract sockets are Linux')
-def test_a_server_on_the_abstract_socket_alone(tmp_path):
+def test_a_server_on_the_abstract_socket_alone(sockets):
     """libxcb connects to ``@/tmp/.X11-unix/X<n>`` before the path.
 
     A container sharing the host's network namespace reaches the server there
@@ -56,10 +79,10 @@ def test_a_server_on_the_abstract_socket_alone(tmp_path):
     """
     listening = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
     try:
-        listening.bind('\0' + str(tmp_path / ('X%d' % NOBODY)))
+        listening.bind('\0' + str(sockets / ('X%d' % NOBODY)))
         listening.listen(1)
-        assert not (tmp_path / ('X%d' % NOBODY)).exists()
-        assert xdisplay.listens(':%d' % NOBODY, directory=str(tmp_path))
+        assert not (sockets / ('X%d' % NOBODY)).exists()
+        assert xdisplay.listens(':%d' % NOBODY, directory=str(sockets))
     finally:
         listening.close()
 

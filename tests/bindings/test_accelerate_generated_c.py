@@ -253,16 +253,21 @@ class TestWhichGeneratedCIsRead:
     """
 
     @pytest.fixture
-    def source(self, tmp_path):
-        """A ``src`` holding one ``.pyx``, the C from it, and the stamp."""
-        setup = accelerate_setup()
+    def unstamped(self, tmp_path):
+        """A ``src`` holding one ``.pyx`` and the C from it."""
         directory = tmp_path / 'src'
         directory.mkdir()
         (directory / 'wrapper.pyx').write_text('# the source\n')
         (directory / 'wrapper.c').write_text('/* generated */\n')
-        (directory / os.path.basename(setup.TOOLCHAIN_STAMP)).write_text(
-            setup._toolchain())
         return directory
+
+    @pytest.fixture
+    def source(self, unstamped):
+        """``unstamped`` with the stamp of the toolchain installed here."""
+        setup = accelerate_setup()
+        (unstamped / os.path.basename(setup.TOOLCHAIN_STAMP)).write_text(
+            setup._toolchain())
+        return unstamped
 
     @needs_cython
     def test_the_c_this_toolchain_wrote_is_read(self, source):
@@ -278,10 +283,8 @@ class TestWhichGeneratedCIsRead:
         assert c_from_another_toolchain(str(source))
 
     @needs_cython
-    def test_c_from_before_the_stamp_existed_is_not_read(self, source):
-        setup = accelerate_setup()
-        (source / os.path.basename(setup.TOOLCHAIN_STAMP)).unlink()
-        assert c_from_another_toolchain(str(source))
+    def test_c_from_before_the_stamp_existed_is_not_read(self, unstamped):
+        assert c_from_another_toolchain(str(unstamped))
 
     @needs_cython
     def test_c_older_than_the_source_it_came_from_is_not_read(self, source):
@@ -290,13 +293,11 @@ class TestWhichGeneratedCIsRead:
         os.utime(source / 'wrapper.c', (0, 0))
         assert c_from_another_toolchain(str(source))
 
-    def test_without_cython_the_shipped_c_is_read(self, source, monkeypatch):
+    def test_without_cython_the_shipped_c_is_read(self, unstamped, monkeypatch):
         """An install from an sdist without Cython has the C and no way to
         make more of it, so that C is what its compiler is given."""
-        setup = accelerate_setup()
-        monkeypatch.setattr(setup, 'have_cython', False)
-        (source / os.path.basename(setup.TOOLCHAIN_STAMP)).unlink()
-        assert not c_from_another_toolchain(str(source))
+        monkeypatch.setattr(accelerate_setup(), 'have_cython', False)
+        assert not c_from_another_toolchain(str(unstamped))
 
 
 class TestTheSourcesCompileWithTheCythonInstalled:

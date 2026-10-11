@@ -13,6 +13,7 @@ being checked is git's behaviour and not a description of it.
 import importlib.util
 import os
 import subprocess
+import sys
 
 import pytest
 
@@ -235,6 +236,14 @@ class TestTheDefaults:
         assert build_docs.PUBLISH_BRANCH == 'gh-pages'
 
 
+#: Windows takes the locale ``setlocale(LC_ALL, '')`` selects from the user's
+#: settings rather than from ``LC_ALL``, so no value of the variable makes that
+#: call raise there.
+in_the_environment = pytest.mark.skipif(
+    sys.platform == 'win32', reason='the locale is not read from LC_ALL on Windows'
+)
+
+
 class TestTheLocaleSphinxRunsUnder:
     """Sphinx exits where ``setlocale(LC_ALL, '')`` raises, and runs where it does not."""
 
@@ -242,6 +251,7 @@ class TestTheLocaleSphinxRunsUnder:
         monkeypatch.setenv('LC_ALL', 'C')
         assert build_docs.sphinx_environment()['LC_ALL'] == 'C'
 
+    @in_the_environment
     def test_a_locale_that_is_not_installed_is_replaced(self, build_docs, monkeypatch):
         monkeypatch.setenv('LC_ALL', 'xx_NOWHERE.UTF-8')
         assert build_docs.sphinx_environment()['LC_ALL'] == build_docs.SPHINX_LOCALE

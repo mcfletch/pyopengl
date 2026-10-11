@@ -34,6 +34,7 @@ import sys
 import pytest
 
 import backends
+import nativestacks
 from checkutils import SKIP_EXIT_CODE
 from childenv import child_environment
 
@@ -285,16 +286,20 @@ def run_check(filename):
     try:
         stdout, stderr = pipe.communicate(timeout=CHECK_TIMEOUT)
     except subprocess.TimeoutExpired:
+        # Read before the kill: a script that printed its result and is still
+        # there is waiting below Python, and this is what names where.
+        stacks = nativestacks.of(pipe.pid)
         pipe.kill()
         stdout, stderr = pipe.communicate()
         raise AssertionError(
             '%s did not finish within %d seconds, and was killed.\n'
-            'stdout: %s\nstderr: %s'
+            'stdout: %s\nstderr: %s\nnative stacks: %s'
             % (
                 filename,
                 CHECK_TIMEOUT,
                 stdout.decode('utf-8', errors='ignore').strip(),
                 stderr.decode('utf-8', errors='ignore').strip(),
+                stacks,
             )
         ) from None
     return (

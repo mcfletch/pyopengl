@@ -587,6 +587,12 @@ dies on an import or a null entry point prints nothing, and no output is a
 *failure*, since that is how the harness tells a working check from a broken
 one. On success it prints `OK`.
 
+A script still running after `TEST_CHECK_TIMEOUT` seconds (120 by default) is
+killed and the case fails. Before the kill, `nativestacks.of(pid)` attaches the
+platform's debugger — `cdb` on Windows, `lldb` on macOS, `gdb` elsewhere — and
+the failure carries every thread's native stack, or the debugger's reason for
+not giving one. Linux with `ptrace_scope` 1 refuses the attach.
+
 Two things a GLUT check script has to ask about, both of which classic GLUT
 (macOS's) answers differently from freeglut:
 
