@@ -164,6 +164,7 @@ class TestTheTableStatesTheDeleteCount:
         }
 
 
+@needs_size_checking
 @IMPLEMENTATIONS
 class TestDeletingNamesNeedsThemAll:
     @pytest.mark.parametrize('module,name,array,count', DELETES, ids=DELETE_IDS)
