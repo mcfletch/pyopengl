@@ -422,18 +422,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # macos-13 is the last Intel runner GitHub offers; 14 and 15 are both
-        # Apple Silicon.  #139 is a segfault on an Intel Mac, and without this
-        # row nothing in the matrix could ever see it.  No run has picked one
-        # of these two cells up yet -- each has waited out GitHub's queue limit
-        # or been cancelled by the next push -- so they are the cells the gate
-        # reports as never having reported.
-        os: [macos-13, macos-14, macos-15]
-        # Both implementations, because the compiled one is the release's
-        # substance and Linux is otherwise the only platform it is ever run on.
-        # The wheel job compiles it for macOS already; nothing there loads what
-        # it built, and a wrong table or a missing symbol is a load-time
-        # failure.  CGL needs no window server for either.
+        # One each of intel and apple silicon
+        os: [macos-15, macos15-intel]
         toxenv:
           - py312-num1-accel0-dispctypes
           - py312-num1-accel1-dispc
