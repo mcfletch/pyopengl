@@ -13,7 +13,7 @@ import re as _re
 #: the two share generated tables, the dependency is pinned to this number,
 #: and the extension refuses a PyOpenGL stating another.  A release bumps
 #: both this and ``OpenGL/version.py``.
-__version__ = "4.0.0a6"
+__version__ = "4.0.0a7"
 #: The numeric release ``__version__`` names, without a pre-release marker,
 #: which ``OpenGL.acceleratesupport`` compares with its floor.
 __version_tuple__ = tuple(
