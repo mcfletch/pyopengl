@@ -1,9 +1,5 @@
 # Tracker issues closed in 4.0.0b1
 
-What the first 4.0 beta answers from <https://github.com/mcfletch/pyopengl/issues>,
-one entry per ticket: what was actually wrong, the case that holds it fixed, the
-commit, and a comment ready to post on the ticket.
-
 The pass that produced this is described in
 [plans/ISSUE-TRIAGE.md](plans/ISSUE-TRIAGE.md), which carries a verdict for
 every open issue including the ones no release can close.

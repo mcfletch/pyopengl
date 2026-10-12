@@ -222,8 +222,8 @@ by default -- shaders and vertex array objects, in a Tk application::
 
 ``examples/tk_shader.py`` is a longer one.  See `OpenGL in a Tkinter widget`_
 for what the context can be asked for, when it arrives, what happens when a
-driver refuses one, and what became of the Togl-based widgets (they keep their
-names and no longer need Togl).
+driver refuses one, and which of the older widgets still need Togl
+(``RawOpengl`` and ``Opengl`` do not; ``Togl`` does).
 
 .. _`OpenGL in a Tkinter widget`: https://mcfletch.github.io/pyopengl/tk-widget.html
 

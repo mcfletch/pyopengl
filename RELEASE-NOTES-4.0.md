@@ -3,6 +3,11 @@
 What changed since the 3.x series. The current development version is
 `4.0.0a5`.
 
+## Python 3.9+ Only
+
+- Support for Python 2.7 and 3.6 through 3.8 is removed entirely
+- Type declarations are included throughout
+
 ## C dispatch layer in PyOpenGL_accelerate
 
 - A C dispatch layer, generated from the Khronos registry, ships in
@@ -27,7 +32,8 @@ What changed since the 3.x series. The current development version is
 - Under ctypes, whichever context resolves an entry point first determines the
   binding for the whole process. Where two contexts differ — a discrete-GPU
   context beside a software one, core beside compatibility, GLES beside desktop
-  GL — that is wrong for one of them.
+  GL — that is wrong for one of them. This has always been the case for the
+  ctypes imlementation, and hasn't changed, but it may be fixed in the future.
 - Under the C implementation each context has its own table, so `bool(glFoo)`
   and `glInitXxx()` answer for the context that is current, and a binding held
   across a context switch still dispatches correctly.
@@ -288,13 +294,14 @@ well as with the defaults.
 - **macOS without a window server.** `OpenGL.CGL` creates a context with no
   window and no window server, with `headless_context()` and `OffscreenTarget`
   for drawing into.
-- **Tkinter.** `OpenGL.Tk.GLFrame` is an ordinary `tkinter.Frame` that owns an
-  OpenGL context on its own native window. It is an OpenGL 3.3 core profile by
-  default, so shaders and vertex array objects are available, and it needs
-  nothing installed beyond Python — the Togl-based widgets keep their names and
-  no longer need Togl.
+- Tkinter: new class `OpenGL.Tk.GLFrame` is a direct GLX/WGL context without
+  the use of Togl
+- `OpenGL.Tk.RawOpengl` and `OpenGL.Tk.Opengl` are now `GLFrame` sub-classes
+  that do not need Togl
+- `OpenGL.Tk.Togl` remains a Togl-using widget, but loads the library when
+  first instantiated rather than when first imported
 - **Wayland.** On Linux the GLX/EGL choice is a context-level probe, so GLUT
-  runs under Wayland and XWayland.
+  runs under Wayland with XWayland.
 - **Windows.** ES and EGL are not part of Windows, and ANGLE is how a machine
   has either. `PYOPENGL_PLATFORM=angle` binds them to an installed ANGLE, and
   `PYOPENGL_ANGLE_PATH` says which copy to use, since ANGLE travels inside
@@ -379,8 +386,8 @@ well as with the defaults.
   imported from Vulkan or Direct3D.
 - CI runs on every push, on three platforms and their software renderers: Linux
   on llvmpipe through an EGL device and through OSMesa, Windows on Mesa through
-  a WGL pbuffer, and macOS through CGL on macOS 13, 14 and 15 — the first
-  Intel, the other two Apple Silicon. A Linux cell runs on arm64, and the
+  a WGL pbuffer, and macOS through CGL on macOS 15 — both
+  Intel, Apple Silicon. A Linux cell runs on arm64, and the
   `PyOpenGL_accelerate` wheels are built for aarch64 on an arm64 machine rather
   than under emulation.
 - The interpreter sweep runs 3.9, 3.10, 3.12, 3.13 and 3.14. 3.9 is the
