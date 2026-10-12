@@ -33,3 +33,4 @@ uv.lock
 .coverage
 .coverage.*
 htmlcov/
+/.claude
