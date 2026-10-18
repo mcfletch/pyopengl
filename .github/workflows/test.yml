@@ -504,6 +504,11 @@ jobs:
           python -m tox exec -e ${{ matrix.toxenv }} --
           python tests/report_tk_aqua.py test-logs/tk-aqua.png
 
+      # The thread timeout method rather than the signal one the project
+      # configures: a call into the window system that never returns also never
+      # gets back to Python to run a signal handler, and the step then runs to
+      # the job's limit with nothing in the log.  The thread method dumps every
+      # thread's stack and ends the process.
       - name: Run the tests -- tk
         if: inputs.tests == ''
         continue-on-error: true
@@ -511,6 +516,8 @@ jobs:
         run: >
           .github/scripts/run-test-area.sh tk
           python -m tox -e ${{ matrix.toxenv }} -- tests/bindings/tk
+          -x --timeout=120 --timeout-method=thread
+          -o log_cli=true -o log_cli_level=DEBUG
 
       # The GL suite itself, with every context made by the widget rather than
       # by CGL directly.  The widget is held to the same behaviour as
@@ -524,6 +531,7 @@ jobs:
         run: >
           .github/scripts/run-test-area.sh tkgl
           python -m tox -e ${{ matrix.toxenv }} -- tests/gl
+          --timeout=120 --timeout-method=thread
 
       - name: Run the tests -- cdispatch
         if: inputs.tests == ''

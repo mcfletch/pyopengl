@@ -29,6 +29,9 @@ import os
 import subprocess
 import sys
 
+#: Seconds without finishing after which the probe dumps where it is and exits.
+HANG_AFTER = 90
+
 PROBE = (
     'import tkinter\n'
     'root = tkinter.Tk()\n'
@@ -70,7 +73,18 @@ def windows(objc):
 
 
 def main():
+    import faulthandler
+    import logging
     import tkinter
+
+    # A call into the window system that never returns shows as nothing at all
+    # in a CI log until the job is killed, so a stall is turned into the Python
+    # stack it stopped in, and the log lines before it say how far it got.
+    faulthandler.dump_traceback_later(HANG_AFTER, exit=True)
+    logging.basicConfig(
+        level=logging.DEBUG, stream=sys.stdout,
+        format='%(relativeCreated)7d %(name)s: %(message)s')
+    logging.getLogger('OpenGL.Tk').setLevel(logging.DEBUG)
 
     say('python  %s' % (sys.version.split()[0],))
     say('exe     %s' % (sys.executable,))
@@ -109,6 +123,7 @@ def main():
     for profile, version in (('legacy', None), ('core', (3, 3)),
                              ('core', (4, 1))):
         label = '%s %s' % (profile, version or '')
+        say("-- %s" % (label,))
         frame = GLFrame(root, width=200, height=150, profile=profile,
                         version=version)
         frame.pack()
@@ -142,6 +157,7 @@ def main():
         root.update()
 
     root.destroy()
+    faulthandler.cancel_dump_traceback_later()
     return 1 if failed else 0
 
 

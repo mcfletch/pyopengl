@@ -221,6 +221,8 @@ class AquaContext(object):
         objc = self.objc
         share = self._shareContext()
         format_ = self._pixelFormat(profile)
+        log.debug('pixel format %#x (%s renderer); making the context',
+                  format_, self.renderer)
         try:
             made = objc.send(
                 objc.send(objc.cls('NSOpenGLContext'), 'alloc'),
@@ -233,6 +235,7 @@ class AquaContext(object):
                 'The driver would not create a context for %s'
                 % (self.attributes.describe(),))
         self._context = made
+        log.debug('NSOpenGLContext %#x', made)
         cgl = objc.send(made, 'CGLContextObj')
         if not cgl:
             raise TkContextError('NSOpenGLContext has no CGL context')
@@ -274,6 +277,7 @@ class AquaContext(object):
         """The ``NSView`` added to the toplevel's content view, still empty"""
         objc = self.objc
         host = self._hostView()
+        log.debug('host view %#x (%s)', host, objc.className(host))
         view = objc.new('NSView')
         self._view = view
         self._host = host
@@ -286,8 +290,10 @@ class AquaContext(object):
     def _attach(self) -> None:
         """Point the context at the view and make it the size of the widget"""
         objc = self.objc
+        log.debug('setView:')
         objc.send(self._context, 'setView:', self._view,
                   argtypes=(cocoa.ID,), restype=None)
+        log.debug('resize')
         self.resize()
 
     def _checkVersion(self) -> None:
@@ -300,8 +306,10 @@ class AquaContext(object):
         """
         from OpenGL.GL import GL_VERSION, glGetString
 
+        log.debug('makeCurrent')
         if not self.makeCurrent():
             raise TkContextError('The new context would not become current')
+        log.debug('glGetString')
         reported = glGetString(GL_VERSION)
         if isinstance(reported, bytes):
             reported = reported.decode('ascii', 'replace')
@@ -427,8 +435,10 @@ class AquaContext(object):
     def swapBuffers(self) -> None:
         """Show what has been drawn"""
         if self._context is not None:
+            log.debug('flushBuffer')
             with self.objc.pool():
                 self.objc.send(self._context, 'flushBuffer', restype=None)
+            log.debug('flushed')
 
     def setSwapInterval(self, interval: int) -> bool:
         """Wait ``interval`` refreshes between swaps; False if it cannot"""
