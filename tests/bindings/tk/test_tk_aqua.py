@@ -158,6 +158,75 @@ class TestWhichWindowIsTheToplevel:
         assert aqua.chooseWindow([], lambda w: True) is None
 
 
+class TestWhenTheContextIsTold:
+    """`-[NSOpenGLContext update]` is for a view that has moved or resized.  On
+    a CI runner with no display it does not return when called on a view that
+    has only just been attached, so it is sent when the view's frame is
+    different and not otherwise."""
+
+    class Recorder:
+        def __init__(self):
+            self.sent = []
+
+        def pool(self):
+            import contextlib
+
+            return contextlib.nullcontext()
+
+        def send(self, receiver, name, *arguments, **named):
+            self.sent.append(name)
+            return 0
+
+    class Widget:
+        def __init__(self, width, height):
+            self.size = (width, height)
+            self.master = None
+
+        def winfo_width(self):
+            return self.size[0]
+
+        def winfo_height(self):
+            return self.size[1]
+
+        def winfo_x(self):
+            return 0
+
+        def winfo_y(self):
+            return 0
+
+    def context(self, widget):
+        made = aqua.AquaContext.__new__(aqua.AquaContext)
+        made.objc = self.Recorder()
+        made.widget = made.toplevel = widget
+        made._view, made._context, made._host = 1, 2, 3
+        return made
+
+    def told(self, made):
+        return made.objc.sent.count('update')
+
+    def test_attaching_does_not_tell_it(self):
+        made = self.context(self.Widget(100, 80))
+        made.resize(update=False)
+        assert self.told(made) == 0
+        assert 'setFrame:' in made.objc.sent
+
+    def test_a_new_size_does(self):
+        widget = self.Widget(100, 80)
+        made = self.context(widget)
+        made.resize(update=False)
+        widget.size = (120, 80)
+        made.resize()
+        assert self.told(made) == 1
+
+    def test_the_same_frame_again_does_not(self):
+        made = self.context(self.Widget(100, 80))
+        made.resize()
+        made.resize()
+        made.resize()
+        assert self.told(made) == 1
+        assert made.objc.sent.count('setFrame:') == 1
+
+
 class FakeObjc:
     """Stands in for libobjc with a message sender of this process's own
 
@@ -308,9 +377,12 @@ def mac():
 def _glframe(master, **options):
     from OpenGL.Tk import GLFrame
 
+    from stalls import sample_if_stalled
+
     made = GLFrame(master, width=120, height=90, **options)
     made.pack()
-    made.waitForMap()
+    with sample_if_stalled(30):
+        made.waitForMap()
     return made
 
 

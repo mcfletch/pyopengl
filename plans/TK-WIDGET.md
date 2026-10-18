@@ -228,6 +228,18 @@ The `macos` job gains three areas, each recorded for the gate:
 `tests/bindings/tk` is ignored by the `root` area so a crash in Tk does not take
 the other suites with it.
 
+### First CI results (2026-10-18)
+
+- The runner has python.org's Python 3.12 with Aqua Tk 8.6 and a window server;
+  the pure tests and the `root` area pass.
+- The first context hung in `-[NSOpenGLContext update]`, sent straight after
+  `setView:` (Python stack: `AquaContext.resize`, under Tk's `<Map>` binding).
+  The renderer was `any` -- no accelerated one -- and the machine has no
+  display. A context is now placed before it is attached and told with `update`
+  only when the view's frame changes.
+- `tests/stalls.py` runs macOS's `sample` from a watchdog thread when a context
+  takes more than 20-30 s, so a further stall arrives with its native stack.
+
 ### What CI will say
 
 - **Does the runner have Tk, a window server, the Aqua build?** The probe says,

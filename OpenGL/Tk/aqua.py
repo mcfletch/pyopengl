@@ -199,6 +199,7 @@ class AquaContext(object):
     profile: Optional[str] = None
     renderer: Optional[str] = None
     _host: Optional[int] = None
+    _frame: Optional[tuple[float, float, float, float]] = None
 
     def __init__(self, widget: Any, attributes: ContextAttributes) -> None:
         try:
@@ -302,11 +303,13 @@ class AquaContext(object):
     def _attach(self) -> None:
         """Point the context at the view and make it the size of the widget"""
         objc = self.objc
+        # Placed before it is attached: a context is told about a view that
+        # moves or resizes with ``update``, and a view that is attached where
+        # it is going to stay has nothing to be told.
+        self.resize(update=False)
         log.debug('setView:')
         objc.send(self._context, 'setView:', self._view,
                   argtypes=(cocoa.ID,), restype=None)
-        log.debug('resize')
-        self.resize()
 
     def _checkVersion(self) -> None:
         """Refuse a context that is lower than the profile it was made with
@@ -410,11 +413,13 @@ class AquaContext(object):
             self.objc.send(self._view, 'setHidden:', int(not shown),
                            argtypes=(cocoa.BOOL,), restype=None)
 
-    def resize(self) -> None:
+    def resize(self, update: bool = True) -> None:
         """Put the view over the widget again and tell the context its size
 
-        Called for you as the widget and its toplevel change.  A no-op once the
-        context is gone.
+        Called for you as the widget and its toplevel change.  The context is
+        told only when the view's frame is different from the last one it was
+        given, and only if ``update`` is true.  A no-op once the context is
+        gone.
         """
         if self._view is None or self._context is None:
             return
@@ -427,9 +432,15 @@ class AquaContext(object):
             x, y, w, h = viewFrame(
                 widgetOffset(self.widget, self.toplevel), (width, height),
                 int(self.toplevel.winfo_height()), flipped)
+            frame = (x, y, w, h)
+            if frame == self._frame:
+                return
+            self._frame = frame
             objc.send(self._view, 'setFrame:', cocoa.CGRect(x, y, w, h),
                       argtypes=(cocoa.CGRect,), restype=None)
-            objc.send(self._context, 'update', restype=None)
+            if update:
+                log.debug('update')
+                objc.send(self._context, 'update', restype=None)
 
     ### the context protocol
     def makeCurrent(self) -> bool:

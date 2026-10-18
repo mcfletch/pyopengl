@@ -95,6 +95,7 @@ def main():
 
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     from backends import macos_gui_session
+    from stalls import sample_if_stalled
 
     say('session %s' % (macos_gui_session(),))
 
@@ -128,7 +129,8 @@ def main():
                         version=version)
         frame.pack()
         try:
-            frame.waitForMap()
+            with sample_if_stalled(20):
+                frame.waitForMap()
         except TkContextError as error:
             say('%-14s unavailable: %s' % (label, error))
             failed = failed or profile == 'legacy'
