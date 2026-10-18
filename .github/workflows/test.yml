@@ -520,7 +520,7 @@ jobs:
         run: >
           .github/scripts/run-test-area.sh tk
           python -m tox -e ${{ matrix.toxenv }} -- tests/bindings/tk
-          -x --timeout=120 --timeout-method=thread
+          --timeout=120 --timeout-method=thread
           -o log_cli=true -o log_cli_level=DEBUG
 
       # The GL suite itself, with every context made by the widget rather than

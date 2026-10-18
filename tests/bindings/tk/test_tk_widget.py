@@ -36,6 +36,20 @@ pytestmark = platforms.needs(
     {'darwin': 'CGL', 'win32': 'WGL'}.get(sys.platform, 'GLX'))
 
 
+def has_profile_mask(reported):
+    """Whether a context reporting ``reported`` as ``GL_VERSION`` has profiles
+
+    ``GL_CONTEXT_PROFILE_MASK`` is a GL 3.2 query.  Below that a context has no
+    profile to name, and asking raises ``GL_INVALID_ENUM`` -- which is what the
+    2.1 context macOS gives for a fixed-function request does.  A version that
+    cannot be read is taken to have one, since that is the question being put.
+    """
+    from OpenGL.CGL import parse_gl_version
+
+    found = parse_gl_version(reported)
+    return found is None or found >= (3, 2)
+
+
 def assert_the_old_pipeline_is_there():
     """The current context has fixed function in it, and does not say it is core.
 
@@ -44,7 +58,8 @@ def assert_the_old_pipeline_is_there():
     NVIDIA answers 0 there where Mesa answers the compatibility bit.  Both are
     within the specification, so the mask is held only to *not* naming the core
     profile -- which a core context always does name, and which the case above
-    asserts of one.
+    asserts of one.  Where the context is below 3.2 there is no mask to read
+    (see :func:`has_profile_mask`) and nothing to hold.
 
     What a compatibility request is actually asking for is the fixed-function
     pipeline, so that is asked directly: ``glMatrixMode`` exists in no core
@@ -52,18 +67,40 @@ def assert_the_old_pipeline_is_there():
     """
     from OpenGL.GL import (
         GL_CONTEXT_CORE_PROFILE_BIT, GL_CONTEXT_PROFILE_MASK, GL_MODELVIEW,
-        GL_NO_ERROR, glGetError, glGetIntegerv, glMatrixMode,
+        GL_NO_ERROR, GL_VERSION, glGetError, glGetIntegerv, glGetString,
+        glMatrixMode,
     )
 
-    mask = one(glGetIntegerv(GL_CONTEXT_PROFILE_MASK))
-    assert not mask & GL_CONTEXT_CORE_PROFILE_BIT, (
-        'asked for compatibility and the context says it is core (mask 0x%x)'
-        % (mask,)
-    )
+    reported = glGetString(GL_VERSION)
+    if isinstance(reported, bytes):
+        reported = reported.decode('ascii', 'replace')
+    if has_profile_mask(reported):
+        mask = one(glGetIntegerv(GL_CONTEXT_PROFILE_MASK))
+        assert not mask & GL_CONTEXT_CORE_PROFILE_BIT, (
+            'asked for compatibility and the context says it is core '
+            '(mask 0x%x)' % (mask,)
+        )
     while glGetError() != GL_NO_ERROR:
         pass
     glMatrixMode(GL_MODELVIEW)
     assert glGetError() == GL_NO_ERROR, 'glMatrixMode is not available here'
+
+
+class TestWhichContextsHaveAProfileMask:
+    @pytest.mark.parametrize('reported', [
+        '3.2 Mesa 25.2', '4.5 (Compatibility Profile) Mesa', '4.1 APPLE-21.1.1',
+    ])
+    def test_from_three_two(self, reported):
+        assert has_profile_mask(reported)
+
+    @pytest.mark.parametrize('reported', [
+        '2.1 APPLE-21.1.1', '3.1 Mesa', '1.4 Mesa',
+    ])
+    def test_not_below_it(self, reported):
+        assert not has_profile_mask(reported)
+
+    def test_a_string_nobody_can_read_is_asked_anyway(self):
+        assert has_profile_mask('') and has_profile_mask('unknown driver')
 
 
 class TestImportingItDoesNothing:
