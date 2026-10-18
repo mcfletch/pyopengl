@@ -15,12 +15,19 @@ import weakref
 
 import pytest
 
+import platforms
 from backends import has_window_server
 
 pytest.importorskip('tkinter')
 
-pytestmark = pytest.mark.skipif(
-    not has_window_server(), reason='no window server to open a Tk window on')
+pytestmark = [
+    pytest.mark.skipif(
+        not has_window_server(),
+        reason='no window server to open a Tk window on'),
+    # A run on the OSMesa platform has no window-system binding at all, and
+    # every entry point a widget's context is made through is null.
+    platforms.needs(platforms.window_system_library()),
+]
 
 
 class Case(object):

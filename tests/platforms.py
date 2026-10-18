@@ -45,6 +45,21 @@ def selected():
 #: thing worth testing.  "Raises" is a platform that cannot be asked at all.
 
 
+#: The window-system binding a Tk widget's context is made through, by
+#: ``sys.platform``.  Anything that is neither is X11 and GLX.
+WINDOW_SYSTEM_LIBRARIES = {'darwin': 'CGL', 'win32': 'WGL'}
+
+
+def window_system_library(platform=None):
+    """The library a widget's context comes through on ``platform``
+
+    GLX on X11, WGL on Windows, CGL on macOS; this machine's by default.
+    """
+    import sys
+
+    return WINDOW_SYSTEM_LIBRARIES.get(platform or sys.platform, 'GLX')
+
+
 def supplies(library):
     """Whether the selected platform has a usable `library` behind it.
 

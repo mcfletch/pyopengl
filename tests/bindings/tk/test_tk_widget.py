@@ -32,8 +32,7 @@ needs_display = pytest.mark.skipif(
 #: WGL on Windows, CGL on macOS.  A run that selected a platform without it --
 #: the OSMesa one, which has no window system at all -- has no path to a
 #: widget's context and every entry point the widget reaches for is null.
-pytestmark = platforms.needs(
-    {'darwin': 'CGL', 'win32': 'WGL'}.get(sys.platform, 'GLX'))
+pytestmark = platforms.needs(platforms.window_system_library())
 
 
 def has_profile_mask(reported):
