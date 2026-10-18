@@ -114,6 +114,7 @@ jobs:
           - {python: '3.12', toxenv: py312-num1-accel0-dispctypes}
           - {python: '3.13', toxenv: py313-num1-accel0-dispctypes}
           - {python: '3.14', toxenv: py314-num1-accel0-dispctypes}
+          - {python: '3.15', toxenv: py315-num1-accel0-dispctypes}
           # The compiled configuration: PyOpenGL_accelerate built, and the C
           # dispatch layer it carries actually selected.  conftest refuses this
           # combination if the extension did not build, so the axis cannot pass
