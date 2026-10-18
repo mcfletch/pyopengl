@@ -81,10 +81,22 @@ Which platforms
 +---------------------+-------------------------------------------------------------------+------------------------------+
 | ``win32``           | ``wglCreateContextAttribsARB`` on that window's device context    | Implemented                  |
 +---------------------+-------------------------------------------------------------------+------------------------------+
-| ``aqua``            | ``NSOpenGLContext.setView:`` on the ``NSView`` Tk owns            | Raises, naming what it needs |
+| ``aqua``            | ``NSOpenGLContext.setView:`` on a view over the widget            | Implemented                  |
 +---------------------+-------------------------------------------------------------------+------------------------------+
 
 The choice is made from Tk's own ``tk windowingsystem`` rather than from ``sys.platform``, so an X11 build of Tk on macOS gets GLX and is right.
+
+Tk on macOS
+-----------
+
+Tk's Aqua widgets are rectangles drawn into the one ``NSView`` that fills each toplevel, so there is no window id to make a context against. ``GLFrame`` adds an ``NSView`` of its own to the toplevel's content view, keeps it over the widget's rectangle as the widget and its toplevel move and resize, hides it while the widget is unmapped, and attaches an ``NSOpenGLContext`` to it. The pixel format and the profile are chosen through ``OpenGL.CGL``, a GPU renderer first and Apple's CPU renderer where a machine has none.
+
+* The view is drawn above Tk's own widgets. A Tk widget placed over a ``GLFrame`` is covered by it.
+* The surface is the widget's size in points. On a Retina display the system scales it up, which keeps ``glViewport(0, 0, winfo_width(), winfo_height())`` correct.
+* macOS provides OpenGL up to 4.1. A core profile is 3.2 to 4.1; fixed-function drawing is ``profile='legacy'``, or ``profile='compatibility'`` with ``version=None``, and is a 2.1 context. ``profile='compatibility'`` with a version above 2.1, and a version above 4.1 raise ``TkContextError``. A pixel format has no debug attribute, so ``debug=True`` makes an ordinary context there, with no ``GL_KHR_debug`` to report through.
+* A context that is lower than its profile promises -- a machine whose only renderer implements 2.1 -- raises ``TkContextError`` rather than being handed back, since the first 3.x call on it would end the process.
+* ``frame.context.profile`` and ``frame.context.renderer`` say which CGL profile and renderer kind (``accelerated``, ``any`` or ``software``) were used.
+* The Objective-C calls are made through ``ctypes``; no package is installed for them.
 
 More than one context
 ---------------------

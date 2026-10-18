@@ -1,9 +1,9 @@
 # The Tk widget makes its own context
 
 **Status:** X11 landed and verified (2026-09-06). Windows landed and verified
-(2026-09-07) -- see [What Windows turned up](#what-windows-turned-up). macOS is
-the one platform still to land, and it is wanted for the next release -- see
-[Still to land](#still-to-land).
+(2026-09-07) -- see [What Windows turned up](#what-windows-turned-up). macOS
+written 2026-10-18 and **not yet run on a Mac**: the only place there is to run
+it is CI -- see [macOS](#macos-aqua).
 
 ## What was there
 
@@ -73,12 +73,10 @@ root.mainloop()
 | --- | --- | --- |
 | `x11` | `glXCreateContextAttribsARB` on the window `winfo_id()` names | Implemented, verified against Mesa |
 | `win32` | `wglCreateContextAttribsARB` on the DC of that `HWND` | Implemented, verified against Intel UHD 630 |
-| `aqua` | `NSOpenGLContext.setView:` on the `NSView` Tk owns | Raises, naming what it needs |
+| `aqua` | `NSOpenGLContext.setView:` on an `NSView` added over the widget | Implemented, awaiting its first CI run |
 
-macOS is the one that needs a language binding rather than a call: the context
-is attached to a view through Objective-C, and Tk's Aqua windows are `NSView`s
-that `winfo_id()` does not hand out as such. What it raises says so, and says
-that Togl and `pyopengltk` are what there is meanwhile.
+macOS is the one that needs a language binding rather than a call: see
+[macOS](#macos-aqua).
 
 ## What Windows turned up
 
@@ -176,28 +174,75 @@ The two cases that used to skip with "driver did not provide the requested
 context" now run, because that refusal was the driver declining to make a
 context inside the open block.
 
-## Still to land
+## macOS (Aqua)
 
-**macOS (Aqua).** Not implemented. Tk's Aqua windows are `NSView`s, and a
-context is attached to one through Objective-C -- `NSOpenGLContext` over the CGL
-layer `OpenGL/CGL` already binds. `AGL` is the Carbon-era API and is gone from
-current SDKs, so it is not the way in. The work is `objc_msgSend` through
-`ctypes`: get the `NSView` behind `winfo_id()`, build an `NSOpenGLPixelFormat`
-from the same `ContextAttributes` the other two platforms translate, make the
-context, and answer `makeCurrent` / `swapBuffers` / `setSwapInterval` from it.
-`OpenGL/Tk/context.py` already dispatches on `tk windowingsystem`, so an `aqua`
-implementation registers beside the other two and nothing else moves.
+**Status: written, unrun.** There is no Mac in the container, so the first
+verification is the `macos` job in `.github/workflows/test.yml`, which has three
+areas for it (below). Expect the first runs to find defects; the places to look
+are listed under [What CI will say](#what-ci-will-say).
 
-Until it does, the widget's own suite skips there rather than failing: the
-`root` fixture asks `tk windowingsystem` and skips where
-`context.IMPLEMENTATIONS` has nothing for it, naming the system. Asked of Tk
-rather than of `sys.platform`, because an X11 build of Tk on macOS is served by
-the GLX implementation and should run the whole suite. What Aqua *does*
-promise is asserted from everywhere instead —
-`TestAWindowingSystemWithNoImplementation` holds `createContext` to raising a
-`TkContextError` that says which system it is and names Togl and `pyopengltk`,
-rather than letting a caller find out from a `NullFunctionError` inside a
-context that was never made.
+Tk's Aqua widgets are rectangles drawn into the single `NSView` that fills each
+toplevel, so `winfo_id()` names nothing a context can be attached to. The
+implementation therefore adds a view of its own:
+
+- `OpenGL/Tk/cocoa.py` -- `Runtime`, the few Objective-C messages needed, sent
+  through `ctypes` with `objc_msgSend` cast to the shape of each message. Struct
+  results are not used (Intel returns them through `objc_msgSend_stret`).
+- `OpenGL/Tk/aqua.py` -- `AquaContext`. The pixel format and profile come from
+  `OpenGL.CGL`, shared with the headless test backend: `profile_for`,
+  `pixel_format_candidates` (a GPU renderer first, the CPU one where a machine
+  has none), `PROFILE_VERSIONS`, `version_shortfall`, `set_swap_interval`. They
+  moved there from `tests/glcontext_cgl.py` and `tests/glcontext.py`, which
+  import them back.
+- The decisions are plain functions -- `cglProfile`, `pixelFormatSizes`,
+  `widgetOffset`, `viewFrame`, `chooseWindow` -- tested on every platform in
+  `tests/bindings/tk/test_tk_aqua.py`; the Mac-only cases are `TestOnAqua`.
+
+How a context is made: `NSOpenGLPixelFormat` from the CGL attribute list, an
+`NSOpenGLContext` from that, a plain `NSView` added to the toplevel's content
+view and made the size of the widget, `setView:`. The context's
+`CGLContextObj` is the handle PyOpenGL keys its dispatch tables by, so
+`CGLGetCurrentContext` agrees with it. A context lower than its profile
+promises (a renderer that only implements 2.1) is refused after creation,
+because the first 3.x call on it ends the process.
+
+Which `NSWindow` is the toplevel's: Tk keeps no handle a script can read, so a
+single Tk window is taken as it is, and with several the toplevel is given a
+unique title for the length of the question and the window wearing it is the
+one.
+
+Limits, stated in `docs/tk-widget.rst`: the view is above Tk's own drawing; the
+surface is in points, not Retina pixels; OpenGL up to 4.1; compatibility only
+as the 2.1 legacy profile.
+
+### CI
+
+The `macos` job gains three areas, each recorded for the gate:
+
+| area | runs |
+| --- | --- |
+| `tkprobe` | `tests/report_tk_aqua.py`: interpreter, Tk version, GUI session, Tk opened in a child process, a context for each profile, a clear colour read back, a screenshot (`test-logs/tk-aqua.png`) |
+| `tk` | `tests/bindings/tk` |
+| `tkgl` | `tests/gl` with `TEST_WINDOWING=tk`, every context made by the widget |
+
+`tests/bindings/tk` is ignored by the `root` area so a crash in Tk does not take
+the other suites with it.
+
+### What CI will say
+
+- **Does the runner have Tk, a window server, the Aqua build?** The probe says,
+  and exits non-zero where not. Without it the widget suite skips every case and
+  reports green. The workflow uses `actions/setup-python` (python.org's build,
+  with Tcl/Tk 8.6) but runs the suite in `tox-uv` environments, whose
+  interpreter is not pinned.
+- `has_window_server()` answers False when `CGSessionCopyCurrentDictionary`
+  returns NULL, which an earlier job reported for a runner; every windowed case
+  skips then. The probe prints the session answer beside whether Tk opened.
+- Whether the GL view composites above Tk's content view: the screenshot.
+- Whether `winfo_x/winfo_y`, the host's `isFlipped` and the toplevel height give
+  the right frame: the screenshot again; `TestOnAqua` does not read a frame.
+- Whether a withdrawn toplevel (`TEST_VISIBLE=0`) keeps a working context.
+- The `NSWindow` match by title, on Tk 8.6 and on Tk 9.
 
 ## Five defects X11 turned up
 

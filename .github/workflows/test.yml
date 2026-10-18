@@ -11,7 +11,8 @@ name: Tests
 # through whatever its own layer offers without one, and each names it:
 #
 #   Linux    Mesa's llvmpipe through EGL's device platform (TEST_WINDOWING=egl)
-#   macOS    CGL, which hands out a context with no window server (=cgl)
+#   macOS    CGL, which hands out a context with no window server (=cgl); the
+#            Tk widget, which needs the window server, has areas of its own
 #   Windows  a WGL pbuffer, on the llvmpipe this job installs (=wgl)
 #
 # One Linux row renders through OSMesa instead (=osmesa), which is a PyOpenGL
@@ -483,7 +484,45 @@ jobs:
         run: >
           .github/scripts/run-test-area.sh root
           python -m tox -e ${{ matrix.toxenv }} --
-          ${{ inputs.tests || 'tests/bindings tests/harness tests/checks tests/directdocs' }}
+          ${{ inputs.tests || 'tests/bindings tests/harness tests/checks tests/directdocs --ignore=tests/bindings/tk' }}
+
+      # The Tk widget makes its context on a view it adds to the toplevel's
+      # window, which needs a window server and Tk's Aqua build -- neither of
+      # which the headless CGL context above uses -- so it has areas of its
+      # own.  `tkprobe` is the question "does this runner have them": which
+      # interpreter and Tk the tox environment holds, whether Tk can open a
+      # window, and what a context on a widget reports.  It exits non-zero
+      # where the answer is no, because the suite below would otherwise skip
+      # every case and report green.
+      - name: Report the Tk under test
+        if: inputs.tests == ''
+        continue-on-error: true
+        timeout-minutes: 8
+        run: >
+          .github/scripts/run-test-area.sh tkprobe
+          python -m tox exec -e ${{ matrix.toxenv }} --
+          python tests/report_tk_aqua.py test-logs/tk-aqua.png
+
+      - name: Run the tests -- tk
+        if: inputs.tests == ''
+        continue-on-error: true
+        timeout-minutes: 8
+        run: >
+          .github/scripts/run-test-area.sh tk
+          python -m tox -e ${{ matrix.toxenv }} -- tests/bindings/tk
+
+      # The GL suite itself, with every context made by the widget rather than
+      # by CGL directly.  The widget is held to the same behaviour as
+      # everything else here, which is the only way it is held to anything.
+      - name: Run the tests -- gl on the Tk widget
+        if: inputs.tests == ''
+        continue-on-error: true
+        timeout-minutes: 8
+        env:
+          TEST_WINDOWING: tk
+        run: >
+          .github/scripts/run-test-area.sh tkgl
+          python -m tox -e ${{ matrix.toxenv }} -- tests/gl
 
       - name: Run the tests -- cdispatch
         if: inputs.tests == ''
@@ -531,7 +570,7 @@ jobs:
         env:
           CELL: macOS ${{ matrix.os }} / CGL / ${{ matrix.toxenv }}
           TOTAL: ${{ strategy.job-total }}
-        run: .github/scripts/record-test-areas.sh root cdispatch gl glu gles
+        run: .github/scripts/record-test-areas.sh root tkprobe tk tkgl cdispatch gl glu gles
 
       # A crash on a machine none of us can log into is only as debuggable as
       # what the run took away with it.  faulthandler prints the Python frame;

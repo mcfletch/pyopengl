@@ -27,19 +27,27 @@ Constant values are from Apple's ``CGLTypes.h`` and ``CGLRenderers.h``.
 
 import contextlib
 import ctypes
+import re
 
 __all__ = (
     'CGL_ERROR_NAMES',
+    'MAX_VERSION',
     'PROFILES',
     'PROFILE_VERSIONS',
     'RENDERER_KINDS',
+    'RENDERER_ORDER',
     'CGLError',
     'OffscreenTarget',
     'RendererInfo',
     'choose_pixel_format',
     'headless_context',
+    'parse_gl_version',
     'pixel_format_attributes',
+    'pixel_format_candidates',
+    'profile_for',
     'renderers',
+    'set_swap_interval',
+    'version_shortfall',
 )
 
 # -- types -----------------------------------------------------------------
@@ -84,6 +92,10 @@ kCGLPFAOpenGLProfile = 99
 kCGLPFASupportsAutomaticGraphicsSwitching = 101
 kCGLPFAVirtualScreenCount = 128
 
+# -- context parameters (CGLTypes.h) -----------------------------------------
+
+kCGLCPSwapInterval = 222
+
 # -- OpenGL profiles (CGLTypes.h) ------------------------------------------
 
 kCGLOGLPVersion_Legacy = 0x1000
@@ -112,6 +124,99 @@ PROFILE_VERSIONS = {
     'core3': (3, 2),
     'core4': (4, 1),
 }
+
+#: The highest GL version macOS provides.  A pixel format naming the 4.1 core
+#: profile is the most it can be asked for; there is no 4.2 to ask for.
+MAX_VERSION = (4, 1)
+
+#: The lowest GL version each CGL profile provides, highest first.  macOS
+#: answers a request for 3.2 or above with a core profile and has no
+#: compatibility one there; the legacy profile is 2.1 and is the only one with
+#: fixed function in it.
+_PROFILE_FLOORS = (
+    ((4, 1), 'core4'),
+    ((3, 2), 'core3'),
+    ((0, 0), 'legacy'),
+)
+
+_ES_APIS = ('gles', 'es')
+
+
+def profile_for(api, profile, gl_version):
+    """The CGL profile serving this request, or ``None`` with the reason why.
+
+    Returns ``(profile_name, None)`` or ``(None, reason)``, ``profile_name``
+    being a key of :data:`PROFILES`.  ``api`` is ``'gl'`` or ``'gles'``,
+    ``profile`` is ``'core'`` or ``'compatibility'`` and ``gl_version`` is a
+    ``(major, minor)`` pair.  Pure, so what macOS will and will not serve is
+    readable without a Mac: the two refusals are OpenGL-ES, which CGL does not
+    provide at all, and a compatibility profile above 2.1, which macOS does
+    not have.
+    """
+    if (api or 'gl').lower() in _ES_APIS:
+        return None, 'CGL provides no OpenGL-ES contexts'
+    major, minor = gl_version
+    wants_core = (profile or 'compatibility').lower() == 'core'
+    if not wants_core and (major, minor) > (2, 1):
+        return None, (
+            'macOS has no compatibility profile above 2.1; %d.%d was asked for'
+            % (major, minor))
+    if not wants_core:
+        return 'legacy', None
+    for floor, name in _PROFILE_FLOORS:
+        if (major, minor) >= floor:
+            if name == 'legacy':
+                return None, (
+                    'a core profile below 3.2 does not exist; %d.%d was asked '
+                    'for' % (major, minor))
+            return name, None
+    return None, 'no CGL profile for %d.%d' % (major, minor)   # pragma: no cover
+
+
+#: The leading ``major.minor`` of a ``GL_VERSION`` string, past any API name.
+#: Desktop GL starts with the number; OpenGL-ES puts "OpenGL ES" (or
+#: "OpenGL ES-CM") in front of it.
+_VERSION = re.compile(r'(?:OpenGL\s+ES(?:-CM|-SC)?\s+)?(\d+)\.(\d+)')
+
+
+def parse_gl_version(reported):
+    """``(major, minor)`` from a ``GL_VERSION`` string, or ``None``.
+
+    Everything after the number is the driver describing itself and differs by
+    vendor, so only the front is read.
+    """
+    if not reported:
+        return None
+    found = _VERSION.match(reported.strip())
+    if not found:
+        return None
+    return (int(found.group(1)), int(found.group(2)))
+
+
+def version_shortfall(reported, wanted):
+    """Why ``reported`` does not meet ``wanted``, or ``None`` where it does.
+
+    Asking for a version is not getting it.  GLFW refuses a request its driver
+    cannot meet, so a window either has the version or was never made; CGL
+    accepts a pixel format naming the 3.2 core profile on a renderer that
+    implements 2.1 and hands back a 2.1 context.
+
+    That gap is not a failed test but a dead process: macOS exports every entry
+    point from the framework whether or not the current context implements it,
+    so a GL 3.1 call on a 2.1 context resolves, is called, and segfaults.
+
+    A version this cannot read is let through.  Refusing there would turn one
+    unrecognised driver string into a skip on every test it runs, and the entry
+    points still answer for themselves.
+    """
+    if not wanted:
+        return None
+    found = parse_gl_version(reported)
+    if found is None or found >= tuple(wanted):
+        return None
+    return ('the context provides GL %d.%d, short of the %d.%d asked for'
+            % (found + tuple(wanted)))
+
 
 # -- renderer ids (CGLRenderers.h) -----------------------------------------
 
@@ -315,6 +420,10 @@ def library():
         cgl.CGLSetCurrentContext.restype = ctypes.c_int32
         cgl.CGLGetCurrentContext.argtypes = []
         cgl.CGLGetCurrentContext.restype = CGLContextObj
+        cgl.CGLSetParameter.argtypes = [
+            CGLContextObj, ctypes.c_int32, ctypes.POINTER(GLint),
+        ]
+        cgl.CGLSetParameter.restype = ctypes.c_int32
         cgl.CGLDescribePixelFormat.argtypes = [
             CGLPixelFormatObj, GLint, CGLPixelFormatAttribute,
             ctypes.POINTER(GLint),
@@ -345,13 +454,15 @@ def _check(operation, code):
 
 def pixel_format_attributes(profile='legacy', renderer='accelerated',
                             color_size=24, alpha_size=8, depth_size=24,
-                            stencil_size=8, samples=0, double_buffer=False):
+                            stencil_size=8, samples=0, double_buffer=False,
+                            stereo=False):
     """The attribute list ``CGLChoosePixelFormat`` takes, as plain integers.
 
     Pure, so what a caller asked for can be read off without a Mac to ask.
     ``profile`` is a key of :data:`PROFILES` and ``renderer`` one of
     :data:`RENDERER_KINDS`; the sizes are bits per buffer, ``color_size``
-    counting the three colour channels together as CGL does.
+    counting the three colour channels together as CGL does.  ``stereo`` asks
+    for a stereo pair of colour buffers, which few renderers offer.
 
     The list is terminated with a zero, which is how CGL knows where it ends.
     """
@@ -371,6 +482,8 @@ def pixel_format_attributes(profile='legacy', renderer='accelerated',
     # 'any' names neither, and lets CGL answer with whatever it has.
     if double_buffer:
         attributes.append(kCGLPFADoubleBuffer)
+    if stereo:
+        attributes.append(kCGLPFAStereo)
     attributes += [
         kCGLPFAColorSize, color_size,
         kCGLPFAAlphaSize, alpha_size,
@@ -383,31 +496,43 @@ def pixel_format_attributes(profile='legacy', renderer='accelerated',
     return attributes
 
 
-#: The renderer kinds :func:`choose_pixel_format` tries, in order.  A GPU is
-#: worth having where there is one; 'any' is what answers on a machine whose
-#: only renderer is Apple's CPU one but which does not advertise it under the
-#: generic-float id; naming that id is the last resort.
-_RENDERER_ORDER = ('accelerated', 'any', 'software')
+#: The renderer kinds tried in turn when none is named.  A GPU is worth having
+#: where there is one; 'any' is what answers on a machine whose only renderer
+#: is Apple's CPU one but which does not advertise it under the generic-float
+#: id; naming that id is the last resort.
+RENDERER_ORDER = ('accelerated', 'any', 'software')
+
+
+def pixel_format_candidates(profile='legacy', renderer=None, **sizes):
+    """The pixel formats to try, as ``(renderer_kind, attribute_array)`` pairs.
+
+    With ``renderer`` given, that kind is the only one offered.  Without, the
+    kinds in :data:`RENDERER_ORDER` are, so the first that the machine can
+    serve is the one to take.  Each array is a ctypes array of
+    ``CGLPixelFormatAttribute`` ending in zero, which is what both
+    ``CGLChoosePixelFormat`` and ``NSOpenGLPixelFormat`` take; ``sizes`` are
+    :func:`pixel_format_attributes`'.
+    """
+    kinds = (renderer,) if renderer is not None else RENDERER_ORDER
+    for kind in kinds:
+        attributes = pixel_format_attributes(
+            profile=profile, renderer=kind, **sizes)
+        yield kind, (CGLPixelFormatAttribute * len(attributes))(*attributes)
 
 
 def choose_pixel_format(profile='legacy', renderer=None, **sizes):
     """A pixel format for this machine, and the renderer kind it came from.
 
-    Returns ``(pixel_format, renderer_kind)``.  With ``renderer`` given, that
-    kind is the only one tried.  Without, the kinds in :data:`_RENDERER_ORDER`
-    are tried in turn and the first the machine offers is taken -- so a Mac
-    with a GPU renders on it, and a virtual machine or a session with no window
-    server still gets a context instead of an error.
+    Returns ``(pixel_format, renderer_kind)``, taking the first of
+    :func:`pixel_format_candidates` the machine offers -- so a Mac with a GPU
+    renders on it, and a virtual machine or a session with no window server
+    still gets a context instead of an error.
 
     Raises :class:`CGLError` if none of them is available.
     """
     cgl = library()
-    kinds = (renderer,) if renderer is not None else _RENDERER_ORDER
     failure = None
-    for kind in kinds:
-        attributes = pixel_format_attributes(
-            profile=profile, renderer=kind, **sizes)
-        array = (CGLPixelFormatAttribute * len(attributes))(*attributes)
+    for kind, array in pixel_format_candidates(profile, renderer, **sizes):
         pixel_format = CGLPixelFormatObj()
         count = GLint()
         code = cgl.CGLChoosePixelFormat(
@@ -416,6 +541,18 @@ def choose_pixel_format(profile='legacy', renderer=None, **sizes):
             return pixel_format, kind
         failure = failure or CGLError('CGLChoosePixelFormat', code or 10002)
     raise failure
+
+
+def set_swap_interval(context, interval):
+    """Wait ``interval`` display refreshes between buffer swaps; True if set.
+
+    ``context`` is a ``CGLContextObj``.  Zero swaps as fast as the renderer
+    will, which is what a benchmark wants.  False where the renderer refuses
+    the parameter.
+    """
+    value = GLint(int(interval))
+    return library().CGLSetParameter(
+        context, kCGLCPSwapInterval, ctypes.byref(value)) == 0
 
 
 # -- a context ---------------------------------------------------------------

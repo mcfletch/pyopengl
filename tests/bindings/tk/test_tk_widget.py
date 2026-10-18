@@ -28,11 +28,12 @@ pytest.importorskip('tkinter')
 needs_display = pytest.mark.skipif(
     not has_window_server(), reason='no window server to open a Tk window on')
 
-#: `OpenGL.Tk` makes its context with `glXChooseFBConfig`, so a run that
-#: selected a platform without GLX -- the OSMesa one, which has no window
-#: system at all -- has no path to a widget's context and every entry point
-#: the widget reaches for is null.
-pytestmark = platforms.needs('GLX')
+#: The library a widget's context is made through on this machine: GLX on X11,
+#: WGL on Windows, CGL on macOS.  A run that selected a platform without it --
+#: the OSMesa one, which has no window system at all -- has no path to a
+#: widget's context and every entry point the widget reaches for is null.
+pytestmark = platforms.needs(
+    {'darwin': 'CGL', 'win32': 'WGL'}.get(sys.platform, 'GLX'))
 
 
 def assert_the_old_pipeline_is_there():
@@ -197,18 +198,12 @@ def scene(root):
     return made
 
 
-class TestAWindowingSystemWithNoImplementation:
-    """What a platform `OpenGL.Tk` does not serve is promised instead.
+class TestWhatServesEachWindowingSystem:
+    """`createContext` chooses by Tk's own `tk windowingsystem`.
 
-    Aqua is the one: a context is attached to an NSView there, through
-    Objective-C, rather than made against a window id, and `plans/TK-WIDGET.md`
-    has it as still to land.  So the promise is a `TkContextError` that says
-    so and names what does work -- not a `NullFunctionError` from somewhere
-    inside a context that was never made.
-
-    Asked with a stub rather than on Aqua, so the promise is held to from
-    wherever the suite runs; `tk windowingsystem` is all `createContext`
-    reads to decide.
+    Asked with a stub rather than on the platform in question, so the choice is
+    held to from wherever the suite runs; `tk windowingsystem` is all
+    `createContext` reads to decide.
     """
 
     class Widget:
@@ -222,18 +217,23 @@ class TestAWindowingSystemWithNoImplementation:
             assert arguments == ('tk', 'windowingsystem'), arguments
             return self.system
 
-    def test_aqua_says_so_and_says_what_does_work(self):
-        from OpenGL.Tk.context import createContext
-        from OpenGL.Tk.errors import TkContextError
+    @pytest.mark.parametrize('system,module,name', [
+        ('x11', 'OpenGL.Tk.glx', 'GLXContext'),
+        ('win32', 'OpenGL.Tk.win32', 'WGLContext'),
+        ('aqua', 'OpenGL.Tk.aqua', 'AquaContext'),
+    ])
+    def test_each_system_has_an_implementation(self, system, module, name):
+        from OpenGL.Tk.context import IMPLEMENTATIONS
 
-        with pytest.raises(TkContextError) as raised:
-            createContext(self.Widget('aqua'))
-        message = str(raised.value)
-        assert 'Aqua' in message, message
-        # The two that do serve it, so the reader has somewhere to go.
-        assert 'togl' in message.lower() and 'pyopengltk' in message, message
+        assert IMPLEMENTATIONS[system] == (module, name)
 
-    def test_and_so_does_one_nobody_has_heard_of(self):
+    def test_aqua_is_importable_where_there_is_no_mac(self):
+        """What it decides is plain functions, so a Linux run can read them."""
+        import OpenGL.Tk.aqua as aqua
+
+        assert aqua.AquaContext
+
+    def test_one_nobody_has_heard_of_is_refused_by_name(self):
         """A Tk built for something neither this nor the message knows."""
         from OpenGL.Tk.context import createContext
         from OpenGL.Tk.errors import TkContextError

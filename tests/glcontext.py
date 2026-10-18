@@ -32,13 +32,14 @@ import sys
 import time
 import ctypes
 import logging
-import re
 
 import backends
 import unittest
 import contextlib
 import importlib.util
 from typing import ClassVar
+
+from OpenGL.CGL import parse_gl_version, version_shortfall  # noqa: F401 re-exported; the backends and checks import them from here
 
 log = logging.getLogger(__name__)
 
@@ -140,12 +141,6 @@ def pick_backend():
         from glcontext_tk import TkBackend
         return TkBackend
     raise RuntimeError('Unhandled backend: %s' % (backend,))
-
-
-#: The leading ``major.minor`` of a GL_VERSION string, past any API name.
-#: Desktop GL starts with the number; OpenGL-ES puts "OpenGL ES" (or
-#: "OpenGL ES-CM") in front of it.
-_VERSION = re.compile(r'(?:OpenGL\s+ES(?:-CM|-SC)?\s+)?(\d+)\.(\d+)')
 
 
 class Context(object):
@@ -319,45 +314,6 @@ def forget_context(handle):
     except ImportError:                    # pragma: no cover - ctypes-only build
         return
     _dispatch.forget_context(handle)
-
-
-def parse_gl_version(reported):
-    """``(major, minor)`` from a GL_VERSION string, or ``None``.
-
-    Everything after the number is the driver describing itself and differs by
-    vendor, so only the front is read.
-    """
-    if not reported:
-        return None
-    found = _VERSION.match(reported.strip())
-    if not found:
-        return None
-    return (int(found.group(1)), int(found.group(2)))
-
-
-def version_shortfall(reported, wanted):
-    """Why ``reported`` does not meet ``wanted``, or ``None`` where it does.
-
-    Asking for a version is not getting it.  GLFW refuses a request its driver
-    cannot meet, so a window either has the version or was never made; CGL
-    accepts a pixel format naming the 3.2 core profile on a renderer that
-    implements 2.1 and hands back a 2.1 context.
-
-    That gap is not a failed test but a dead process: macOS exports every entry
-    point from the framework whether or not the current context implements it,
-    so a GL 3.1 call on a 2.1 context resolves, is called, and segfaults.
-
-    A version this cannot read is let through.  Refusing there would turn one
-    unrecognised driver string into a skip on every test it runs, and the entry
-    points still answer for themselves.
-    """
-    if not wanted:
-        return None
-    found = parse_gl_version(reported)
-    if found is None or found >= tuple(wanted):
-        return None
-    return ('the context provides GL %d.%d, short of the %d.%d asked for'
-            % (found + tuple(wanted)))
 
 
 # ---------------------------------------------------------------------------

@@ -31,49 +31,12 @@ import logging
 import os
 
 from OpenGL import CGL
+from OpenGL.CGL import profile_for
 from OpenGL.error import GLError
 
 log = logging.getLogger(__name__)
 
-_ES_APIS = ('gles', 'es')
-
-#: The lowest GL version each CGL profile provides.  macOS answers a request
-#: for 3.2 or above with a core profile and has no compatibility one there; the
-#: legacy profile is 2.1 and is the only one with fixed function in it.
-_PROFILE_FLOORS = (
-    ((4, 1), 'core4'),
-    ((3, 2), 'core3'),
-    ((0, 0), 'legacy'),
-)
-
-
-def profile_for(api, profile, gl_version):
-    """The CGL profile serving this request, or ``None`` with the reason why.
-
-    Returns ``(profile_name, None)`` or ``(None, reason)``.  Pure, so what this
-    backend will and will not serve is readable without a Mac: the two refusals
-    are OpenGL-ES, which CGL does not provide at all, and a compatibility
-    profile above 2.1, which macOS does not have.
-    """
-    if (api or 'gl').lower() in _ES_APIS:
-        return None, 'CGL provides no OpenGL-ES contexts'
-    major, minor = gl_version
-    wants_core = (profile or 'compatibility').lower() == 'core'
-    if not wants_core and (major, minor) > (2, 1):
-        return None, (
-            'macOS has no compatibility profile above 2.1; %d.%d was asked for'
-            % (major, minor))
-    if not wants_core:
-        return 'legacy', None
-    for floor, name in _PROFILE_FLOORS:
-        if (major, minor) >= floor:
-            if name == 'legacy':
-                return None, (
-                    'a core profile below 3.2 does not exist; %d.%d was asked '
-                    'for' % (major, minor))
-            return name, None
-    return None, 'no CGL profile for %d.%d' % (major, minor)   # pragma: no cover
-
+__all__ = ['CGLBackend', 'profile_for']
 
 class CGLBackend(object):
     """Mixin supplying headless CGL context creation."""

@@ -67,22 +67,12 @@ def gone(handle: object) -> None:
 
     _dispatch.forget_context(handle)
 
-#: What each of Tk's windowing systems is served by.  ``aqua`` is absent, and
-#: :func:`createContext` says what that costs.
+#: What each of Tk's windowing systems is served by.
 IMPLEMENTATIONS = {
     'x11': ('OpenGL.Tk.glx', 'GLXContext'),
     'win32': ('OpenGL.Tk.win32', 'WGLContext'),
+    'aqua': ('OpenGL.Tk.aqua', 'AquaContext'),
 }
-
-#: What to tell somebody on macOS, where a context is attached to a view
-#: through Objective-C rather than by a call taking a window id.
-AQUA_MESSAGE = (
-    'OpenGL.Tk has no context implementation for Tk on Aqua yet: a context is '
-    'attached to an NSView there, through Objective-C, rather than made '
-    'against a window id. Togl (OpenGL.Tk.togl) and the pyopengltk package '
-    'both cover it meanwhile, and an X11 build of Tk on macOS is served by the '
-    'GLX implementation here.'
-)
 
 
 def windowingSystem(widget: Any) -> str:
@@ -105,8 +95,6 @@ def createContext(
     """
     attributes = attributes or ContextAttributes()
     system = windowingSystem(widget)
-    if system == 'aqua':
-        raise TkContextError(AQUA_MESSAGE)
     named = IMPLEMENTATIONS.get(system)
     if named is None:
         raise TkContextError(

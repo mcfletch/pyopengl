@@ -24,10 +24,9 @@ What the context is asked for -- profile, version, buffer sizes, multisampling
 widget or as a ready-made object.  The default is a core profile, so a Tk
 application can use shaders and vertex array objects.
 
-X11 and Windows are implemented; Tk on Aqua raises
-:class:`~OpenGL.Tk.errors.TkContextError` saying what it needs, and
-:mod:`OpenGL.Tk.togl` is the Togl-based widget for anybody who has Togl.  See
-``plans/TK-WIDGET.md``.
+X11, Windows and macOS (Aqua) are implemented: GLX, WGL, and an
+``NSOpenGLContext`` on a view over the widget.  :mod:`OpenGL.Tk.togl` is the
+Togl-based widget for anybody who has Togl.  See ``plans/TK-WIDGET.md``.
 
 Importing this module opens no window, needs no display and loads no Tcl
 package: it is a question with an answer rather than an action.  The tkinter

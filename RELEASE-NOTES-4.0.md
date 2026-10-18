@@ -295,7 +295,8 @@ well as with the defaults.
   window and no window server, with `headless_context()` and `OffscreenTarget`
   for drawing into.
 - Tkinter: new class `OpenGL.Tk.GLFrame` is a direct GLX/WGL context without
-  the use of Togl
+  the use of Togl, and on macOS an `NSOpenGLContext` on a view over the widget
+  (profiles through `OpenGL.CGL`; core 3.2 to 4.1, or the 2.1 legacy profile)
 - `OpenGL.Tk.RawOpengl` and `OpenGL.Tk.Opengl` are now `GLFrame` sub-classes
   that do not need Togl
 - `OpenGL.Tk.Togl` remains a Togl-using widget, but loads the library when
