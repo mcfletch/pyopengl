@@ -4,10 +4,15 @@ import ctypes, weakref
 from OpenGL_accelerate.formathandler cimport FormatHandler
 from OpenGL import dispatch, error
 from OpenGL._bytes import bytes,unicode
-try:
-    long = long
-except NameError as err:
-    long = int
+import sys
+
+# check for long type for Python 2/3 compatibility
+if sys.version_info[0] < 3:
+    import __builtin__ as _builtins
+else:
+    import builtins as _builtins
+
+_py_long = getattr(_builtins, 'long', int)
 
 cdef extern from "Python.h":
     cdef void Py_XINCREF( object )
@@ -192,7 +197,7 @@ cdef class VBO:
         assert not self.created, """Already created the buffer"""
         buffers = self.get_implementation().glGenBuffers(1)
         try:
-            self.buffer = long( buffers )
+            self.buffer = _py_long( buffers )
         except (TypeError,ValueError) as err:
             self.buffer = buffers[0]
         self.target = self.c_resolve( self.target_spec )
@@ -250,7 +255,7 @@ cdef class VBO:
         """Add an integer to this VBO (offset)"""
         if hasattr( other, 'offset' ):
             other = other.offset
-        assert isinstance( other, (int,long) ), """Only know how to add integer/long offsets"""
+        assert isinstance( other, (int,_py_long) ), """Only know how to add integer/long offsets"""
         return VBOOffset( self, other )
     cdef int check_live( self ):
         if self.data is _NULL:
