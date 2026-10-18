@@ -46,18 +46,38 @@ def selected():
 
 
 #: The window-system binding a Tk widget's context is made through, by
-#: ``sys.platform``.  Anything that is neither is X11 and GLX.
-WINDOW_SYSTEM_LIBRARIES = {'darwin': 'CGL', 'win32': 'WGL'}
+#: ``sys.platform``: the three `OpenGL.Tk` has an implementation for, GLX being
+#: the one for the Unix platforms that run an X11 Tk.  This is the usual case
+#: and not a certainty: `OpenGL.Tk.context` decides from Tk's own
+#: ``windowingsystem`` at run time, which differs for an X11 Tk on macOS.
+WINDOW_SYSTEM_LIBRARIES = {
+    'darwin': 'CGL',
+    'win32': 'WGL',
+    'linux': 'GLX',
+    'freebsd': 'GLX',
+    'openbsd': 'GLX',
+    'netbsd': 'GLX',
+    'dragonfly': 'GLX',
+}
 
 
 def window_system_library(platform=None):
-    """The library a widget's context comes through on ``platform``
+    """The library a widget's context comes through on ``platform``, or None
 
-    GLX on X11, WGL on Windows, CGL on macOS; this machine's by default.
+    GLX on X11, WGL on Windows, CGL on macOS; this machine's by default.  None
+    for a platform `OpenGL.Tk` has no implementation for (Android, iOS,
+    WebAssembly): there is no binding to ask whether it is present.  ``sys.platform``
+    carries a version on the BSDs (``freebsd14``), which is not part of the name.
     """
     import sys
 
-    return WINDOW_SYSTEM_LIBRARIES.get(platform or sys.platform, 'GLX')
+    name = platform or sys.platform
+    if name in WINDOW_SYSTEM_LIBRARIES:
+        return WINDOW_SYSTEM_LIBRARIES[name]
+    for known, library in WINDOW_SYSTEM_LIBRARIES.items():
+        if name.startswith(known) and name[len(known):].replace('.', '').isdigit():
+            return library
+    return None
 
 
 def supplies(library):
@@ -102,7 +122,15 @@ def bindable(api):
 
 
 def needs(library):
-    """Skip unless the selected platform has a usable `library`."""
+    """Skip unless the selected platform has a usable `library`.
+
+    A `library` of None is a case that asked for a binding there is none of --
+    :func:`window_system_library` on a platform `OpenGL.Tk` does not serve --
+    and always skips.
+    """
+    if library is None:
+        return pytest.mark.skip(
+            reason='this platform has no window-system binding to test through')
     return pytest.mark.skipif(
         not supplies(library),
         reason='the %s platform supplies no %s, so nothing in this process '
