@@ -504,6 +504,7 @@ class AquaContext(object):
                 self._view = None
         self._host = None
         self.widget = None
+        self.toplevel = None
 
     def describe(self) -> str:
         """A one-line description of what this context is, for a log line"""

@@ -13,6 +13,7 @@ one skips rather than being given a desktop context under the name.
 
 from __future__ import print_function
 
+import gc
 import tkinter
 
 from OpenGL.Tk import ContextAttributes, GLFrame, TkContextError
@@ -107,3 +108,10 @@ class TkBackend(object):
             except tkinter.TclError:
                 pass
             self._root = None
+        # Tcl requires an interpreter to be deleted by the thread that made it,
+        # and it goes with the last reference to its Tk object.  A widget's
+        # bindings close over the widget, so a destroyed root is held by a
+        # cycle until a collection finds it -- on whichever thread triggers one,
+        # which under pytest-timeout's thread method can be the timer's, and
+        # Tcl aborts the process.  Collected here, on this thread.
+        gc.collect()
