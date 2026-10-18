@@ -227,6 +227,222 @@ class TestWhenTheContextIsTold:
         assert made.objc.sent.count('setFrame:') == 1
 
 
+class RecordingRuntime:
+    """A `cocoa.Runtime` that answers nil to everything and keeps what it was
+    sent, for the paths of `AquaContext` that run before and around a message
+    and that a Mac is not needed to enter."""
+
+    def __init__(self, title=''):
+        self.sent = []
+        self.released = []
+        self.title = title
+
+    def pool(self):
+        import contextlib
+
+        return contextlib.nullcontext()
+
+    def send(self, receiver, name, *arguments, **named):
+        self.sent.append(name)
+        return 0
+
+    def release(self, receiver):
+        self.released.append(receiver)
+
+    def cls(self, name):
+        return 0x1000
+
+    def text(self, string):
+        return self.title
+
+
+class StubToplevel:
+    """As much of a toplevel as asking which window is its own reads"""
+
+    def __init__(self):
+        self.titles = ['kept']
+
+    def wm_title(self, title=None):
+        if title is not None:
+            self.titles.append(title)
+        return self.titles[-1]
+
+    def update_idletasks(self):
+        pass
+
+
+class TestWhenSomethingGoesWrongMakingAContext:
+    @pytest.mark.skipif(sys.platform == 'darwin',
+                        reason='this is the answer where there is no Mac')
+    def test_no_objective_c_is_a_context_error(self):
+        """What `GLFrame` keeps and `waitForMap` raises, rather than a
+        `CocoaError` out of a `<Map>` binding."""
+        class Widget:
+            def winfo_toplevel(self):
+                return self
+
+        with pytest.raises(TkContextError, match='macOS'):
+            aqua.AquaContext(Widget(), ContextAttributes())
+
+    def test_a_context_that_fails_part_way_is_given_back(self, monkeypatch):
+        """Nothing it had made is left behind, and the failure is the caller's."""
+        monkeypatch.setattr(aqua.cocoa, 'runtime', RecordingRuntime)
+
+        def refuse(self, profile):
+            self.handle = 0x1234          # as if the driver had made one
+            raise TkContextError('no pixel format')
+
+        monkeypatch.setattr(aqua.AquaContext, '_createContext', refuse)
+        monkeypatch.setattr(aqua, 'gone', lambda handle: None)
+        monkeypatch.setattr(aqua, 'end_abandoned_block', lambda: False)
+        monkeypatch.setattr(
+            aqua.CGL, 'library',
+            lambda: type('Library', (), {
+                'CGLGetCurrentContext': staticmethod(lambda: 0),
+                'CGLSetCurrentContext': staticmethod(lambda context: 0),
+            }))
+        made = []
+        original = aqua.AquaContext.destroy
+        monkeypatch.setattr(
+            aqua.AquaContext, 'destroy',
+            lambda self: (made.append(self), original(self))[1])
+
+        class Widget:
+            def winfo_toplevel(self):
+                return self
+
+        with pytest.raises(TkContextError, match='no pixel format'):
+            aqua.AquaContext(Widget(), ContextAttributes())
+        assert len(made) == 1 and made[0].handle is None
+
+    def test_the_pixel_format_is_given_back_when_no_context_comes(
+            self, monkeypatch):
+        runtime = RecordingRuntime()
+        made = aqua.AquaContext.__new__(aqua.AquaContext)
+        made.objc = runtime
+        made.attributes = ContextAttributes()
+        monkeypatch.setattr(aqua.AquaContext, '_pixelFormat',
+                            lambda self, profile: 0x77)
+        with pytest.raises(TkContextError, match='would not create'):
+            made._createContext('core3')
+        assert runtime.released == [0x77]
+
+
+class TestAskingWhichWindowIsOurs:
+    def test_the_title_is_put_back_whatever_was_found(self):
+        toplevel = StubToplevel()
+        made = aqua.AquaContext.__new__(aqua.AquaContext)
+        made.objc = RecordingRuntime(title='something else')
+        made.toplevel = toplevel
+        assert made._isOurToplevel(window=1) is False
+        assert toplevel.wm_title() == 'kept'
+
+    def test_the_title_is_put_back_when_asking_failed(self):
+        toplevel = StubToplevel()
+        made = aqua.AquaContext.__new__(aqua.AquaContext)
+        made.toplevel = toplevel
+
+        class Failing(RecordingRuntime):
+            def send(self, receiver, name, *arguments, **named):
+                raise cocoa.CocoaError('no such window')
+
+        made.objc = Failing()
+        with pytest.raises(cocoa.CocoaError):
+            made._isOurToplevel(window=1)
+        assert toplevel.wm_title() == 'kept'
+
+    def test_the_window_wearing_the_title_it_was_given_is_the_one(self):
+        toplevel = StubToplevel()
+        made = aqua.AquaContext.__new__(aqua.AquaContext)
+        made.toplevel = toplevel
+
+        class Reading(RecordingRuntime):
+            def text(self, string):
+                return toplevel.wm_title()
+
+        made.objc = Reading()
+        assert made._isOurToplevel(window=1) is True
+
+
+class TestRemovingOneBinding:
+    """`Misc.unbind(sequence, funcid)` removes every binding of the sequence on
+    the Pythons before 3.12, which would take the widget's own with it."""
+
+    def test_a_widget_that_is_gone_has_nothing_to_unbind(self):
+        import tkinter
+
+        class Gone:
+            _w = '.gone'
+
+            class tk:
+                @staticmethod
+                def call(*arguments):
+                    raise tkinter.TclError('bad window path name ".gone"')
+
+        aqua.unbind(Gone(), '<Configure>', 'f1')       # no exception
+
+    def test_the_other_bindings_on_the_sequence_stay(self):
+        import tkinter
+
+        from backends import has_window_server
+
+        if not has_window_server():
+            pytest.skip('no window server to open a Tk window on')
+        try:
+            root = tkinter.Tk()
+        except tkinter.TclError as error:
+            pytest.skip('Tk could not open a window here: %s' % (error,))
+        try:
+            calls = []
+            keep = root.bind('<Configure>', lambda event: calls.append('keep'))
+            drop = root.bind('<Configure>', lambda event: calls.append('drop'),
+                             add='+')
+            aqua.unbind(root, '<Configure>', drop)
+            root.geometry('210x130')
+            root.update()
+            assert 'keep' in calls and 'drop' not in calls
+            assert keep
+        finally:
+            root.destroy()
+
+
+class TestThePoolIsDrained:
+    def test_it_is_pushed_and_popped_around_the_block(self):
+        events = []
+        objc = FakeObjc(msgSend=None)
+        objc.objc_autoreleasePoolPush = FakeObjc.Function(
+            lambda: events.append('push') or 0x99)
+        objc.objc_autoreleasePoolPop = FakeObjc.Function(
+            lambda token: events.append(('pop', token)))
+        runtime = cocoa.Runtime(objc)
+        with runtime.pool():
+            events.append('body')
+        assert events == ['push', 'body', ('pop', 0x99)]
+
+    def test_and_popped_when_the_block_raises(self):
+        events = []
+        objc = FakeObjc(msgSend=None)
+        objc.objc_autoreleasePoolPop = FakeObjc.Function(
+            lambda token: events.append('pop'))
+        runtime = cocoa.Runtime(objc)
+        with pytest.raises(ValueError), runtime.pool():
+            raise ValueError('in the block')
+        assert events == ['pop']
+
+
+class TestLoadingTheLibraries:
+    def test_a_library_that_will_not_load_is_a_cocoa_error(self, monkeypatch):
+        monkeypatch.setattr(cocoa, '_runtime', None)
+        monkeypatch.setattr(cocoa.sys, 'platform', 'darwin')
+
+        def refuse(name):
+            raise OSError('image not found: %s' % (name,))
+
+        monkeypatch.setattr(cocoa.ctypes.cdll, 'LoadLibrary', refuse)
+        with pytest.raises(cocoa.CocoaError, match='Could not load'):
+            cocoa.runtime()
+
+
 class FakeObjc:
     """Stands in for libobjc with a message sender of this process's own
 
