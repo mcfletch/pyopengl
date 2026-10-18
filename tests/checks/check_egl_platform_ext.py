@@ -38,7 +38,7 @@ def main():
         raise RuntimeError("Need a /dev/dri/renderD* device to do rendering")
     if len(cards) > 1:
         print("Note, using first card: %s" % (cards[0]))
-    with open(cards[0], "w") as f:
+    with open(cards[0], "r+b", buffering=0) as f:
         gbm = ctypes.CDLL("libgbm.so.1")  # On Ubuntu, package libgbm1
         dev = gbm.gbm_create_device(f.fileno())
         dpy = platform_base.eglGetPlatformDisplayEXT(

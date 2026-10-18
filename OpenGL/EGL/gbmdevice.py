@@ -86,7 +86,10 @@ def open_device(path):
     else:
         path = os.path.join('/dev/dri',path) # allow for specifying "renderD128"
     log.debug("Final device path: %s", path)
-    fh = open(path,'w')  # noqa: OGC121 a DRM device node, opened for its descriptor; nothing is written to it
+    # Read-write, because the driver maps buffers through this descriptor and a
+    # write-only one refuses a readable mapping.  Not 'w', which creates a file
+    # where there is none and truncates one where there is.
+    fh = open(path,'r+b',buffering=0)  # noqa: OGC121 a DRM device node, opened for its descriptor; nothing is read or written through the file object
     dev = gbm.gbm_create_device(fh.fileno())
     if dev == 0:
         fh.close()
