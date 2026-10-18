@@ -101,11 +101,11 @@ def main():
 
     system = tk_in_a_child()
     if system is None:
-        return 1
+        return verdict(['Tk could not open a window in a child process'])
     say('Tk windowing system (child process): %s' % (system,))
     if system != 'aqua':
-        say('this is not the Aqua Tk, so there is nothing for this to report')
-        return 1
+        return verdict(['Tk reports the %r windowing system, not aqua'
+                        % (system,)])
 
     from OpenGL.GL import (
         GL_COLOR_BUFFER_BIT, GL_RENDERER, GL_RGB, GL_UNSIGNED_BYTE, GL_VENDOR,
@@ -120,7 +120,7 @@ def main():
     root.update()
     say('windows before the widget: %s' % (windows(objc),))
 
-    failed = False
+    failures = []
     for profile, version in (('legacy', None), ('core', (3, 3)),
                              ('core', (4, 1))):
         label = '%s %s' % (profile, version or '')
@@ -133,7 +133,8 @@ def main():
                 frame.waitForMap()
         except TkContextError as error:
             say('%-14s unavailable: %s' % (label, error))
-            failed = failed or profile == 'legacy'
+            if profile == 'legacy':
+                failures.append('no %s context: %s' % (label.strip(), error))
             frame.destroy()
             root.update()
             continue
@@ -149,7 +150,9 @@ def main():
         glClear(GL_COLOR_BUFFER_BIT)
         pixel = list(bytes(glReadPixels(2, 2, 1, 1, GL_RGB, GL_UNSIGNED_BYTE)))
         say('%-14s clear colour reads back %s' % ('', pixel))
-        failed = failed or pixel[0] < 250
+        if pixel[0] < 250:
+            failures.append('%s: the clear colour read back as %s, not red'
+                            % (label.strip(), pixel))
         frame.swapBuffers()
         root.update()
         say('%-14s windows with the widget: %s' % ('', windows(objc)))
@@ -160,7 +163,20 @@ def main():
 
     root.destroy()
     faulthandler.cancel_dump_traceback_later()
-    return 1 if failed else 0
+    return verdict(failures)
+
+
+def verdict(failures):
+    """Print the last line of the report and answer the exit status
+
+    One line saying what the probe decided and why, so a log that ends in a
+    failed step does not need to be read from the top to find the cause.
+    """
+    if failures:
+        say('probe FAILED: %s' % ('; '.join(failures),))
+        return 1
+    say('probe passed')
+    return 0
 
 
 def screenshot(path, root):
