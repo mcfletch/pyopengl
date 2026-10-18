@@ -2,8 +2,9 @@
 
 **Status:** X11 landed and verified (2026-09-06). Windows landed and verified
 (2026-09-07) -- see [What Windows turned up](#what-windows-turned-up). macOS
-written 2026-10-18 and **not yet run on a Mac**: the only place there is to run
-it is CI -- see [macOS](#macos-aqua).
+written 2026-10-18 and green on the Apple-silicon CI runner (`macos-15`),
+which is the only place there is to run it; the Intel runner is not recorded
+here -- see [macOS](#macos-aqua).
 
 ## What was there
 
@@ -73,7 +74,7 @@ root.mainloop()
 | --- | --- | --- |
 | `x11` | `glXCreateContextAttribsARB` on the window `winfo_id()` names | Implemented, verified against Mesa |
 | `win32` | `wglCreateContextAttribsARB` on the DC of that `HWND` | Implemented, verified against Intel UHD 630 |
-| `aqua` | `NSOpenGLContext.setView:` on an `NSView` added over the widget | Implemented, awaiting its first CI run |
+| `aqua` | `NSOpenGLContext.setView:` on an `NSView` added over the widget | Implemented, green on the Apple-silicon CI runner |
 
 macOS is the one that needs a language binding rather than a call: see
 [macOS](#macos-aqua).
@@ -176,10 +177,12 @@ context inside the open block.
 
 ## macOS (Aqua)
 
-**Status: written, unrun.** There is no Mac in the container, so the first
-verification is the `macos` job in `.github/workflows/test.yml`, which has three
-areas for it (below). Expect the first runs to find defects; the places to look
-are listed under [What CI will say](#what-ci-will-say).
+**Status: green on Apple silicon (`macos-15`).** There is no Mac in the
+container, so verification is the `macos` job in `.github/workflows/test.yml`,
+which has three areas for it (below). The Intel runner's result is not
+recorded here. What the first runs found is under
+[First CI results](#first-ci-results-2026-10-18); the remaining places to look
+are under [What CI will say](#what-ci-will-say).
 
 Tk's Aqua widgets are rectangles drawn into the single `NSView` that fills each
 toplevel, so `winfo_id()` names nothing a context can be attached to. The
@@ -239,6 +242,13 @@ the other suites with it.
   only when the view's frame changes.
 - `tests/stalls.py` runs macOS's `sample` from a watchdog thread when a context
   takes more than 20-30 s, so a further stall arrives with its native stack.
+- The runner's renderer is Apple's software one (`any`, "Apple Software
+  Renderer"): a `legacy` request is a 2.1 context, and a core 3.3 or 4.1
+  request is a 4.1 context.
+- The widget suite asked `GL_CONTEXT_PROFILE_MASK` of a 2.1 context, which has
+  no such query (`GL_INVALID_ENUM`); it reads the mask from 3.2 up.
+- The suite's Tk backend collects on the creating thread after each case, since
+  Tcl aborts a process whose interpreter is deleted on another thread.
 
 ### What CI will say
 
