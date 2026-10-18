@@ -39,11 +39,6 @@ GL_HALF_NV: int = Constant( 'GL_HALF_NV', 0x1401 )
 GL_FIXED: int = Constant('GL_FIXED',0x140C)
 GL_VOID_P = object()
 
-def _get_ctypes_version():
-    return [int(i) for i in ctypes.__version__.split('.')[:3]]
-ctypes_version = _get_ctypes_version()
-
-
 # Basic OpenGL data-types as ctypes declarations...
 def _defineType(name, baseType, convertFunc=long):
     """Name a GL scalar type after the ctypes type that carries it.

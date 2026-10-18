@@ -6,9 +6,6 @@ so let's just localise the changes here...
 import ctypes, logging, os, posixpath, sys
 _log = logging.getLogger( 'OpenGL.platform.ctypesloader' )
 #_log.setLevel( logging.DEBUG )
-ctypes_version = [
-    int(x) for x in ctypes.__version__.split('.')
-]
 from ctypes import util
 import OpenGL
 
