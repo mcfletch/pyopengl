@@ -60,6 +60,22 @@ class TestTheProfileNames:
         assert ContextAttributes(profile='legacy').version is None
 
 
+class TestTheSwapInterval:
+    """How many display refreshes a swap waits for.  A swap that waits for a
+    refresh on a machine with no display to provide one never returns, so the
+    interval is something a request can say as well as something a widget can
+    be told later."""
+
+    def test_nothing_is_asked_unless_it_is_said(self):
+        assert ContextAttributes().swapInterval is None
+
+    def test_zero_is_something_to_ask_for(self):
+        assert ContextAttributes(swapInterval=0).swapInterval == 0
+
+    def test_a_widget_takes_it_among_its_keywords(self):
+        assert 'swapInterval' in ContextAttributes.KEYWORDS
+
+
 class TestWhenAProfileIsAThingToAskFor:
     """**A profile is a GL 3.2 idea.**  Asked for a version below that, a
     driver refuses the whole request rather than ignoring the part of it that

@@ -238,6 +238,13 @@ the other suites with it.
 - `has_window_server()` answers False when `CGSessionCopyCurrentDictionary`
   returns NULL, which an earlier job reported for a runner; every windowed case
   skips then. The probe prints the session answer beside whether Tk opened.
+- The first runs hung in the first context creation, with no output after the
+  widget was built. A swap that waits for a display refresh is the suspect (the
+  EGL work needed the display sync turned off for the same reason), so
+  `ContextAttributes.swapInterval` exists, applied by `GLFrame` before the first
+  frame on every platform, and Aqua defaults it to 0. Each stage of creating a
+  context is logged at DEBUG, and the probe and the `tk` area dump the stack of
+  a stall (`faulthandler`, `--timeout-method=thread`).
 - Whether the GL view composites above Tk's content view: the screenshot.
 - Whether `winfo_x/winfo_y`, the host's `isFlipped` and the toplevel height give
   the right frame: the screenshot again; `TestOnAqua` does not read a frame.

@@ -85,6 +85,21 @@ class TestTheSizesAskedOf:
         assert CGL.kCGLPFADoubleBuffer in listed
 
 
+class TestTheSwapIntervalOnAqua:
+    """Windowed contexts are composited and synchronised to the display by the
+    window server, and an interval of one on top of that waits for a refresh
+    that a machine without a display never delivers.  So the interval is zero
+    unless the request names one."""
+
+    def test_the_default_is_not_to_wait(self):
+        assert aqua.swapIntervalFor(ContextAttributes()) == 0
+
+    @pytest.mark.parametrize('interval', [0, 1, 2])
+    def test_a_request_outranks_the_default(self, interval):
+        assert aqua.swapIntervalFor(
+            ContextAttributes(swapInterval=interval)) == interval
+
+
 class TestWhereTheViewGoes:
     class Widget:
         def __init__(self, x, y, master=None):

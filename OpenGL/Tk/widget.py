@@ -154,6 +154,9 @@ class GLFrame(tkinter.Frame):
         self.update_idletasks()         # so winfo_id() names a real window
         self.context = createContext(self, self.attributes)
         self.contextError = None
+        interval = self.attributes.swapInterval
+        if interval is not None and self.context.makeCurrent():
+            self.context.setSwapInterval(interval)
         log.debug('created %s', self.context.describe())
         return self.context
 

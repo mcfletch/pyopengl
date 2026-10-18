@@ -95,6 +95,7 @@ Tk's Aqua widgets are rectangles drawn into the one ``NSView`` that fills each t
 * The surface is the widget's size in points. On a Retina display the system scales it up, which keeps ``glViewport(0, 0, winfo_width(), winfo_height())`` correct.
 * macOS provides OpenGL up to 4.1. A core profile is 3.2 to 4.1; fixed-function drawing is ``profile='legacy'``, or ``profile='compatibility'`` with ``version=None``, and is a 2.1 context. ``profile='compatibility'`` with a version above 2.1, and a version above 4.1 raise ``TkContextError``. A pixel format has no debug attribute, so ``debug=True`` makes an ordinary context there, with no ``GL_KHR_debug`` to report through.
 * A context that is lower than its profile promises -- a machine whose only renderer implements 2.1 -- raises ``TkContextError`` rather than being handed back, since the first 3.x call on it would end the process.
+* The swap interval is 0 unless ``swapInterval`` says otherwise. The window server composites and synchronises a windowed context to the display itself, and an interval of 1 on top of that waits for a refresh that a machine without a display never delivers.
 * ``frame.context.profile`` and ``frame.context.renderer`` say which CGL profile and renderer kind (``accelerated``, ``any`` or ``software``) were used.
 * The Objective-C calls are made through ``ctypes``; no package is installed for them.
 

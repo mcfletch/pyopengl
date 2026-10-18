@@ -71,13 +71,19 @@ class ContextAttributes(object):
         each of those means; naming it outranks the default.
     share -- a context to share display lists, textures and buffers with, or
         None
+    swapInterval -- display refreshes a buffer swap waits for, or None to leave
+        it to the platform.  Zero swaps at once, which is what a benchmark
+        wants and what a machine with no display needs: a swap that waits for a
+        refresh nothing delivers does not return.  Applied before the first
+        frame is drawn; :meth:`~OpenGL.Tk.widget.GLFrame.setSwapInterval`
+        changes it afterwards.
     """
 
     __slots__ = (
         'profile', 'version', 'doubleBuffer',
         'redSize', 'greenSize', 'blueSize', 'alphaSize',
         'depthSize', 'stencilSize', 'samples', 'stereo', 'debug',
-        'forwardCompatible', 'share',
+        'forwardCompatible', 'share', 'swapInterval',
     )
 
     def __init__(
@@ -96,6 +102,7 @@ class ContextAttributes(object):
         debug: bool = False,
         forwardCompatible: Optional[bool] = None,
         share: object = None,
+        swapInterval: Optional[int] = None,
     ) -> None:
         if profile not in PROFILES:
             raise ValueError(
@@ -119,6 +126,7 @@ class ContextAttributes(object):
             profile == 'core' if forwardCompatible is None
             else bool(forwardCompatible))
         self.share = share
+        self.swapInterval = None if swapInterval is None else int(swapInterval)
 
     #: The constructor's own parameters, so a widget can take them among its
     #: Tk options and hand the right ones on; see

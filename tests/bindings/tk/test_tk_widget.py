@@ -302,6 +302,52 @@ class TestTheContext:
 
 
 @needs_display
+class TestTheSwapIntervalRequest:
+    """``swapInterval`` is applied once, before the first frame is drawn: the
+    first swap is made by the ``<Map>`` binding, before any code of the
+    caller's can say anything."""
+
+    def recorded(self, root, **options):
+        import importlib
+
+        from OpenGL.Tk import GLFrame
+        from OpenGL.Tk.context import IMPLEMENTATIONS, windowingSystem
+
+        module, name = IMPLEMENTATIONS[windowingSystem(root)]
+        implementation = getattr(importlib.import_module(module), name)
+        calls = []
+        original = implementation.setSwapInterval
+
+        def record(self, interval):
+            calls.append(interval)
+            return original(self, interval)
+
+        implementation.setSwapInterval = record
+        try:
+            made = GLFrame(root, width=64, height=64, **options)
+            made.pack()
+            made.waitForMap()
+        finally:
+            implementation.setSwapInterval = original
+        return calls
+
+    def test_a_named_interval_is_set(self, root):
+        assert self.recorded(root, swapInterval=1)[:1] == [1]
+
+    def test_zero_is_named_too(self, root):
+        assert self.recorded(root, swapInterval=0)[:1] == [0]
+
+    def test_an_unnamed_one_is_left_to_the_platform(self, root):
+        from OpenGL.Tk.context import windowingSystem
+
+        calls = self.recorded(root)
+        if windowingSystem(root) == 'aqua':
+            assert calls[:1] == [0]
+        else:
+            assert calls == []
+
+
+@needs_display
 class TestWhatADestroyedWidgetLeaves:
     """Nothing for the garbage collector to find.
 

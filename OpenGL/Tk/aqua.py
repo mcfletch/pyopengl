@@ -48,7 +48,8 @@ from OpenGL.Tk.errors import TkContextError
 log = logging.getLogger(__name__)
 
 __all__ = [
-    'AquaContext', 'chooseWindow', 'cglProfile', 'viewFrame', 'widgetOffset',
+    'AquaContext', 'chooseWindow', 'cglProfile', 'swapIntervalFor', 'viewFrame',
+    'widgetOffset',
 ]
 
 #: ``NSOpenGLPixelFormatAttribute`` is an unsigned 32-bit integer.
@@ -82,6 +83,17 @@ def cglProfile(attributes: ContextAttributes) -> str:
                 'fixed-function context, or profile="core" for shaders')
         raise TkContextError('%s%s' % (refusal, hint))
     return name
+
+
+def swapIntervalFor(attributes: ContextAttributes) -> int:
+    """The swap interval a new context is given: the request's, or zero
+
+    A windowed context is composited and synchronised to the display by the
+    window server.  An interval of one on top of that waits for a refresh that
+    a machine without a display never delivers, and the swap does not return.
+    """
+    interval = attributes.swapInterval
+    return 0 if interval is None else interval
 
 
 def pixelFormatSizes(attributes: ContextAttributes) -> dict[str, Any]:
@@ -313,6 +325,10 @@ class AquaContext(object):
         reported = glGetString(GL_VERSION)
         if isinstance(reported, bytes):
             reported = reported.decode('ascii', 'replace')
+        interval = swapIntervalFor(self.attributes)
+        log.debug('swap interval %d', interval)
+        if not self.setSwapInterval(interval):
+            log.debug('the renderer would not take a swap interval')
         shortfall = CGL.version_shortfall(
             reported, CGL.PROFILE_VERSIONS[self.profile or 'legacy'])
         if shortfall:
