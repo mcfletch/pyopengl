@@ -436,6 +436,10 @@ jobs:
       # underneath and will hand out a context with no window server.
       TEST_WINDOWING: cgl
       TEST_VISIBLE: '0'
+      # Output reaches the log as it is written: these areas can end in a call
+      # that never returns, and a buffered pipe is lost with the process.
+      PYTHONUNBUFFERED: '1'
+      PYTHONFAULTHANDLER: '1'
     steps:
       - uses: actions/checkout@v4
 
