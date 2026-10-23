@@ -28,8 +28,17 @@ MAN_SOURCES = [
 ]
 
 #: The history is of no use here and the checkout is large, so only the tip is
-#: fetched.  A shallow checkout still updates with ``git pull``.
+#: fetched.
 CLONE_ARGS = ['--depth', '1']
+
+#: An update fetches the new tip alone and moves the checkout to it.  A merge
+#: or fast-forward needs the old tip among the new one's ancestors, and a
+#: depth-1 fetch has none of them.  ``--keep`` refuses rather than discard a
+#: local edit to a file the new tip changes.
+UPDATE_COMMANDS = [
+    ['git', 'fetch', '--depth', '1'],
+    ['git', 'reset', '--keep', '@{upstream}'],
+]
 
 
 def ensure_sources(directory: str = HERE, update: bool = True) -> list[str]:
@@ -42,9 +51,8 @@ def ensure_sources(directory: str = HERE, update: bool = True) -> list[str]:
             subprocess.check_call(['git', 'clone'] + CLONE_ARGS + [source, target])
         elif update:
             log.info('updating %s', target)
-            subprocess.check_call(
-                ['git', 'pull', '--ff-only', '--depth', '1'], cwd=target
-            )
+            for command in UPDATE_COMMANDS:
+                subprocess.check_call(command, cwd=target)
         paths.append(target)
     return paths
 
