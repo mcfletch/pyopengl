@@ -200,6 +200,113 @@ class TestIncludes:
         assert 'before' in text and 'after' in text
 
 
+#: The notice the EGL pages include: an untitled ``refsect3`` inside a
+#: ``para``, with the Khronos logo before the text.
+NOTICE = (
+    '<?xml version="1.0" encoding="UTF-8"?>\n'
+    '<para xmlns="%s" version="5.0"><refsect3 xml:id="copyright">'
+    '<imageobject><imagedata fileref="KhronosLogo.jpg" format="jpg"/>'
+    '</imageobject><para>Permission is hereby granted.</para>'
+    '</refsect3></para>' % (generate.DOCBOOK_NS,)
+)
+
+
+class TestCopyright:
+    """Every page carries its copyright notice as a section titled Copyright.
+
+    The OpenGL pages write theirs out as a ``refsect1``.  The EGL pages include
+    an untitled ``refsect3`` from ``copyright.xml``, which is not a section the
+    page renders, and some EGL pages leave the include out; their licence asks
+    for the notice on every copy.
+    """
+
+    def copyright_sections(self, tree):
+        return [
+            section
+            for section in tree.xpath(
+                './/d:refsect1', namespaces={'d': generate.DOCBOOK_NS}
+            )
+            if generate.section_kind(
+                section.get('{%s}id' % (generate.XML_NS,))
+            )
+            == 'copyright'
+        ]
+
+    def title_and_text(self, section):
+        titles = section.xpath('./d:title', namespaces={'d': generate.DOCBOOK_NS})
+        return (
+            titles[0].text if titles else None,
+            ET.tostring(section, encoding='unicode', method='text'),
+        )
+
+    def test_an_included_notice_becomes_a_titled_section(self, pages):
+        write(pages, 'copyright.xml', NOTICE)
+        path = write(
+            pages,
+            'eglThing.xml',
+            '<refentry xmlns="%s" xmlns:xi="%s" xml:id="eglThing">'
+            '<refsect1 xml:id="description"><para>does things</para></refsect1>'
+            '<xi:include href="copyright.xml"/></refentry>'
+            % (generate.DOCBOOK_NS, generate.XINCLUDE_NS),
+        )
+        (section,) = self.copyright_sections(generate.load_file(path))
+        title, text = self.title_and_text(section)
+        assert title == 'Copyright'
+        assert 'Permission is hereby granted.' in text
+
+    def test_a_page_that_leaves_the_notice_out_gets_its_sets(self, pages):
+        write(pages, 'copyright.xml', NOTICE)
+        path = write(
+            pages,
+            'eglThing.xml',
+            '<refentry xmlns="%s" xml:id="eglThing">'
+            '<refsect1 xml:id="description"><para>does things</para></refsect1>'
+            '</refentry>' % (generate.DOCBOOK_NS,),
+        )
+        (section,) = self.copyright_sections(generate.load_file(path))
+        assert 'Permission is hereby granted.' in self.title_and_text(section)[1]
+
+    def test_a_page_with_a_notice_of_its_own_keeps_it(self, pages):
+        write(pages, 'copyright.xml', NOTICE)
+        path = write(
+            pages,
+            'glThing.xml',
+            '<refentry xmlns="%s" xml:id="glThing">'
+            '<refsect1 xml:id="Copyright"><title>Copyright</title>'
+            '<para>Open Publication License.</para></refsect1></refentry>'
+            % (generate.DOCBOOK_NS,),
+        )
+        (section,) = self.copyright_sections(generate.load_file(path))
+        assert 'Open Publication License.' in self.title_and_text(section)[1]
+
+    def test_a_set_with_no_notice_adds_none(self, pages):
+        path = write(
+            pages,
+            'glutThing.xml',
+            '<refentry xmlns="%s" xml:id="glutThing">'
+            '<para>a thing</para></refentry>' % (generate.DOCBOOK_NS,),
+        )
+        assert self.copyright_sections(generate.load_file(path)) == []
+
+
+class TestPurpose:
+    def test_marked_up_words_are_part_of_it(self, pages):
+        """``eglCreateContext``'s reads "create a new EGL rendering context",
+        with EGL in an ``acronym``."""
+        path = write(
+            pages,
+            'eglThing.xml',
+            '<refentry xmlns="%s" xml:id="eglThing"><refmeta>'
+            '<refentrytitle>eglThing</refentrytitle></refmeta><refnamediv>'
+            '<refname>eglThing</refname><refpurpose>make an '
+            '<acronym>EGL</acronym> thing</refpurpose></refnamediv></refentry>'
+            % (generate.DOCBOOK_NS,),
+        )
+        section = generate.RefSect(generate.BY_KEY['egl'])
+        section.process(generate.load_file(path))
+        assert section.purpose == 'make an EGL thing'
+
+
 class TestPageNames:
     """A page name has to work as a filename and as part of a URL."""
 
@@ -270,15 +377,24 @@ class TestTheApiTable:
         modules = [api.module for api in generate.APIS]
         assert len(modules) == len(set(modules))
 
-    def test_the_gl_source_directories_are_all_declared(self):
-        """A directory the scan reads but no API claims writes no pages."""
-        unclaimed = set(generate.REFPAGE_SETS) - set(generate.GL_SOURCE_APIS)
-        assert not unclaimed
+    def test_every_set_is_the_source_of_an_api(self):
+        """A set the scan reads but no API names as a source writes pages
+        nobody indexes."""
+        named = {source for api in generate.APIS for source in api.sources}
+        assert set(generate.REFPAGE_SETS) == named
 
-    def test_egl_and_wgl_have_no_reference_pages(self):
-        """Khronos publishes none, so their indexes are built from the
-        packages instead."""
-        assert generate.BY_KEY['egl'].sources == ()
+    def test_the_gl_source_directories_are_sets(self):
+        assert set(generate.GL_SOURCE_APIS) <= set(generate.REFPAGE_SETS)
+
+    def test_egl_pages_come_from_the_egl_registry(self):
+        assert generate.BY_KEY['egl'].sources == ('egl',)
+        assert generate.REFPAGE_SETS['egl'] == os.path.join(
+            generate.EGL_REGISTRY, 'sdk', 'docs', 'man'
+        )
+
+    def test_wgl_has_no_reference_pages(self):
+        """Khronos publishes none, so its index is built from the package
+        instead."""
         assert generate.BY_KEY['wgl'].sources == ()
 
 
@@ -420,11 +536,34 @@ class TestRefpageSets:
     went unscanned behind a typo."""
 
     def test_every_named_set_exists_in_the_checkout(self):
-        if not os.path.isdir(generate.REFPAGES):
-            pytest.skip('no OpenGL-Refpages checkout; run acquireoriginal.py')
+        for checkout in (generate.REFPAGES, generate.EGL_REGISTRY):
+            if not os.path.isdir(checkout):
+                pytest.skip('no %s checkout; run acquireoriginal.py' % (checkout,))
         missing = [
             name
-            for name in generate.REFPAGE_SETS
-            if not os.path.isdir(os.path.join(generate.REFPAGES, name))
+            for name, directory in generate.REFPAGE_SETS.items()
+            if not os.path.isdir(directory)
         ]
         assert not missing, 'named but absent: %s' % (', '.join(missing),)
+
+    def test_every_page_in_a_set_is_found(self, tmp_path, monkeypatch):
+        """Reference pages only: the book that collects the EGL pages and the
+        notice they include are not entry points."""
+        gl4 = tmp_path / 'OpenGL-Refpages' / 'gl4'
+        egl = tmp_path / 'EGL-Registry' / 'sdk' / 'docs' / 'man'
+        for directory, names in (
+            (gl4, ['glBindBuffer.xml', 'apiversion.xml']),
+            (egl, ['eglCreateContext.xml', 'copyright.xml', 'reference.xml']),
+        ):
+            directory.mkdir(parents=True)
+            for name in names:
+                (directory / name).write_text('', encoding='utf-8')
+        monkeypatch.setattr(
+            generate, 'REFPAGE_SETS', {'gl4': str(gl4), 'egl': str(egl)}
+        )
+        monkeypatch.setattr(generate, 'HERE', str(tmp_path))
+        found = [
+            (api.key, os.path.basename(path))
+            for api, path in generate.refpage_files([])
+        ]
+        assert found == [('gl', 'glBindBuffer.xml'), ('egl', 'eglCreateContext.xml')]

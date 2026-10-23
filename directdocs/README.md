@@ -18,7 +18,7 @@ is what GitHub Pages serves.
 
 | File | Writes | From |
 | --- | --- | --- |
-| `acquireoriginal.py` | `OpenGL-Refpages/` | the Khronos reference-page repository |
+| `acquireoriginal.py` | `OpenGL-Refpages/`, `EGL-Registry/` | the two Khronos repositories the reference pages are in |
 | `generate.py` | `docs/reference/` | those DocBook sources, plus the installed packages |
 | `dumbpydoc.py` | `docs/api/` | the installed packages |
 | `rst.py` | -- | the DocBook-to-reStructuredText renderer both use |
@@ -81,9 +81,10 @@ it is exported by the module beside it -- which is where it is declared.
 The reference is one directory and one index per API: `gl`, `gles1`, `gles2`,
 `gles3`, `glu`, `glut`, `gle`, `glx`, `egl`, `wgl`. The same entry point can be
 in several and mean something different in each, so each gets its own page, and
-`entrypoints.json` is keyed by API package for the same reason. Khronos
-publishes no reference pages for EGL or WGL, so those two indexes are built
-from the packages instead. See `plans/SPHINX-DOCS.md`.
+`entrypoints.json` is keyed by API package for the same reason. The EGL pages
+are the EGL 1.5 set in EGL-Registry's `sdk/docs/man`; every other Khronos page
+is from OpenGL-Refpages. Khronos publishes no reference pages for WGL, so its
+index is built from the package instead. See `plans/SPHINX-DOCS.md`.
 
 ## Sample code references
 

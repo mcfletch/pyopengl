@@ -22,7 +22,15 @@ Three parts, two of them generated:
 ``docs/reference/``
     The :doc:`reference pages <reference/index>`, written by
     ``directdocs/generate.py`` from the Khronos DocBook sources, with
-    PyOpenGL's call signatures added to them.
+    PyOpenGL's call signatures added to them.  The sources are two Khronos
+    repositories, fetched into ``directdocs/`` by the build:
+    `OpenGL-Refpages <https://github.com/KhronosGroup/OpenGL-Refpages>`__ for
+    OpenGL, OpenGL ES, GLU and GLX, and the ``sdk/docs/man`` directory of
+    `EGL-Registry <https://github.com/KhronosGroup/EGL-Registry>`__ for EGL.
+    Khronos builds its own HTML from the same sources with the DocBook XSL
+    toolchain its `README
+    <https://github.com/KhronosGroup/OpenGL-Refpages/blob/main/README.adoc>`__
+    lists; ``generate.py`` reads the DocBook with lxml and needs none of it.
 
 ``docs/api/``
     The :doc:`API pages <api/index>`, written by ``directdocs/dumbpydoc.py`` by

@@ -1,10 +1,12 @@
 #! /usr/bin/env python3
 """Fetches the Khronos reference-page sources the manual is generated from.
 
-The pages are DocBook in a repository of their own.  They land in
-``directdocs/OpenGL-Refpages``, which is not in version control: it is somebody
-else's repository, and a copy of it checked in here would be a snapshot going
-stale in the diff.
+The pages are DocBook in two Khronos repositories: OpenGL-Refpages for OpenGL,
+OpenGL ES, GLU and GLX, and EGL-Registry, whose ``sdk/docs/man`` holds the EGL
+pages.  They land in ``directdocs/OpenGL-Refpages`` and
+``directdocs/EGL-Registry``, which are not in version control: they are
+somebody else's repositories, and a copy checked in here would be a snapshot
+going stale in the diff.
 
 ``build-docs.py`` calls this before generating, so a checkout needs no separate
 step; running it directly updates the sources without building anything.
@@ -25,6 +27,7 @@ log = logging.getLogger('acquireoriginal')
 #: Where the DocBook sources come from and what they are checked out as.
 MAN_SOURCES = [
     ('https://github.com/KhronosGroup/OpenGL-Refpages', 'OpenGL-Refpages'),
+    ('https://github.com/KhronosGroup/EGL-Registry', 'EGL-Registry'),
 ]
 
 #: The history is of no use here and the checkout is large, so only the tip is

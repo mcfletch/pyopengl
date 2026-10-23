@@ -254,7 +254,7 @@ skip-string-normalization=true
 select = ["OGC121", "OGC131", "OGC141"]
 # Upstream checkouts the code generators and the documentation build fetch:
 # not this project's code, and not in version control here.
-exclude = ["src/khronosapi", "src/eglapi", "directdocs/OpenGL-Refpages"]
+exclude = ["src/khronosapi", "src/eglapi", "directdocs/OpenGL-Refpages", "directdocs/EGL-Registry"]
 
 [tool.ruff.lint]
 # Named explicitly. With `select` unset ruff applies its own default, and that

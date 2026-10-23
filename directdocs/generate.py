@@ -75,17 +75,25 @@ log = logging.getLogger('generate')
 #: Where the pages are written, relative to the package root.
 OUTPUT_DIRECTORY = os.path.join(PACKAGE_ROOT, 'docs', 'reference')
 
-#: The checkout of https://github.com/KhronosGroup/OpenGL-Refpages, which
-#: ``acquireoriginal.py`` makes.
+#: The checkouts of https://github.com/KhronosGroup/OpenGL-Refpages and
+#: https://github.com/KhronosGroup/EGL-Registry, which ``acquireoriginal.py``
+#: makes.
 REFPAGES = os.path.join(HERE, 'OpenGL-Refpages')
+EGL_REGISTRY = os.path.join(HERE, 'EGL-Registry')
 
-#: The API directories of that checkout, best first: an entry point declared in
-#: more than one takes its page from the first that has it.  ES 3.2 has no
-#: directory of its own; its pages are in ``es3``, which carries the ES 3.x
-#: pages together.  ``tests/directdocs/test_generate.py`` holds every name
-#: here to being a directory that exists, since one that is not reads as an
+#: The reference-page sets, by name, and the directory each is in, best first:
+#: an entry point declared in more than one takes its page from the first that
+#: has it.  ES 3.2 has no directory of its own; its pages are in ``es3``, which
+#: carries the ES 3.x pages together.  ``tests/directdocs/test_generate.py``
+#: holds every directory here to existing, since one that does not reads as an
 #: API with no pages rather than as a mistake.
-REFPAGE_SETS = ['gl4', 'gl2.1', 'es3.1', 'es3.0', 'es3', 'es2.0', 'es1.1']
+REFPAGE_SETS = {
+    **{
+        name: os.path.join(REFPAGES, name)
+        for name in ['gl4', 'gl2.1', 'es3.1', 'es3.0', 'es3', 'es2.0', 'es1.1']
+    },
+    'egl': os.path.join(EGL_REGISTRY, 'sdk', 'docs', 'man'),
+}
 
 
 class Api(NamedTuple):
@@ -106,9 +114,9 @@ class Api(NamedTuple):
     #: ``py:function`` declarations name it, so ``OpenGL.GLES3.glBindTexture``
     #: and ``OpenGL.GL.glBindTexture`` are the two different things they are.
     module: str
-    #: The reference-page directories its pages come from, best first.  Empty
-    #: where Khronos publishes no reference pages for it, which is EGL, WGL and
-    #: the two this project carries its own copies of.
+    #: The :data:`REFPAGE_SETS` its pages come from, best first.  Empty where
+    #: Khronos publishes no reference pages for it, which is WGL and the two
+    #: this project carries its own copies of.
     sources: tuple[str, ...]
     #: One line for the index.
     blurb: str
@@ -187,7 +195,7 @@ APIS = [
         'egl',
         'EGL',
         'OpenGL.EGL',
-        (),
+        ('egl',),
         'Contexts and surfaces on Linux, Android and anywhere without a '
         'display server.  See :ref:`offscreen rendering on EGL <offscreen-egl>`.',
     ),
@@ -250,8 +258,8 @@ def entity_file(directory: str) -> str | None:
     local = os.path.join(directory, ENTITY_FILE)
     if os.path.isfile(local):
         return local
-    for package in REFPAGE_SETS:
-        shared = os.path.join(REFPAGES, package, ENTITY_FILE)
+    for package in REFPAGE_SETS.values():
+        shared = os.path.join(package, ENTITY_FILE)
         if os.path.isfile(shared):
             return shared
     return None
@@ -502,9 +510,13 @@ class RefSect(model.RefSect):
                 )
             ]
         )
-        self.purpose = tree[0].xpath(
-            './/d:refnamediv/d:refpurpose', namespaces=self.query_namespace
-        )[0].text
+        self.purpose = rst.collapse(
+            rst.all_text(
+                tree[0].xpath(
+                    './/d:refnamediv/d:refpurpose', namespaces=self.query_namespace
+                )[0]
+            )
+        ).strip()
         for func_prototype in tree[0].xpath(
             './/d:refsynopsisdiv/d:funcsynopsis/d:funcprototype',
             namespaces=self.query_namespace,
@@ -705,8 +717,59 @@ def load_file(filename: str) -> Any:
     except Exception:
         log.error("Failure loading file: %r", filename)  # noqa: TRY400 re-raised, so the traceback is reported once, by whoever catches it
         raise
-    resolve_includes(tree, os.path.dirname(os.path.abspath(filename)))
+    directory = os.path.dirname(os.path.abspath(filename))
+    resolve_includes(tree, directory)
+    add_copyright(tree, directory)
     return tree
+
+
+#: The file a reference-page set keeps its copyright notice in, where its pages
+#: include the notice rather than writing it out.
+COPYRIGHT_FILE = 'copyright.xml'
+
+
+def add_copyright(tree: Any, directory: str) -> None:
+    """Give the page in ``tree`` a ``refsect1`` titled Copyright.
+
+    The OpenGL pages write theirs out as one, and are left alone.  The EGL
+    pages include an untitled ``refsect3`` from :data:`COPYRIGHT_FILE`, which
+    is moved into a section of that form; a page that leaves the include out
+    is given the notice from the file, since the licence asks for it on every
+    copy.  A page with neither, in a directory with no such file, is left
+    without one.
+    """
+    entry = tree[0]
+    if copyright_notices(entry, './d:refsect1'):
+        return
+    included = copyright_notices(entry, './d:para/d:refsect3')
+    if included:
+        notice = included[0]
+        entry.remove(notice.getparent())
+    else:
+        path = os.path.join(directory, COPYRIGHT_FILE)
+        if not os.path.isfile(path):
+            return
+        found = copyright_notices(parse_fragment(path), './d:para/d:refsect3')
+        if not found:
+            return
+        notice = found[0]
+    section = ET.SubElement(entry, '{%s}refsect1' % (DOCBOOK_NS,))
+    section.set('{%s}id' % (XML_NS,), 'Copyright')
+    ET.SubElement(section, '{%s}title' % (DOCBOOK_NS,)).text = 'Copyright'
+    # The logo is an image file the set carries and the pages here do not.
+    for child in notice:
+        if child.tag != '{%s}imageobject' % (DOCBOOK_NS,):
+            section.append(child)
+
+
+def copyright_notices(element: Any, path: str) -> list[Any]:
+    """The sections at ``path`` under ``element`` whose id says copyright."""
+    return [
+        section
+        for section in element.xpath(path, namespaces={'d': DOCBOOK_NS})
+        if section_kind(section.get('{%s}id' % (XML_NS,)) or section.get('id'))
+        == 'copyright'
+    ]
 
 
 def filter_comments(tree: Any) -> Any:
@@ -978,8 +1041,8 @@ def entry_points_of(api: Api) -> list[str]:
     """The entry points ``api``'s package exports, in name order.
 
     Read from the package rather than from the reference pages, because that
-    is what PyOpenGL actually offers: EGL and WGL have no Khronos reference
-    pages at all, and every API has extension entry points that never got one.
+    is what PyOpenGL actually offers: WGL has no Khronos reference pages at
+    all, and every API has extension entry points that never got one.
     """
     package = imported_package(api)
     if package is None:
@@ -1233,11 +1296,11 @@ def refpage_files(limit_to: list[str]) -> list[tuple[Api, str]]:
     def wanted(base: str) -> bool:
         return not limit_to or any(filter in base for filter in limit_to)
 
-    for directory in REFPAGE_SETS:
-        pattern = os.path.join(REFPAGES, directory, '*.xml')
+    for name, directory in REFPAGE_SETS.items():
+        pattern = os.path.join(directory, '*.xml')
         for filename in sorted(glob.glob(pattern)):
             base = os.path.basename(filename)
-            api = api_of_page(directory, base)
+            api = api_of_page(name, base)
             if api is None or not wanted(base):
                 continue
             if (api.key, base) in seen:
@@ -1301,10 +1364,11 @@ def main(argv: list[str] | None = None) -> int:
         logging.DEBUG if options.verbose else logging.INFO
     )
 
-    if not os.path.isdir(REFPAGES):
+    missing = [path for path in REFPAGE_SETS.values() if not os.path.isdir(path)]
+    if missing:
         parser.error(
             'no DocBook sources at %s; run directdocs/acquireoriginal.py first'
-            % (REFPAGES,)
+            % (', '.join(missing),)
         )
     os.makedirs(options.output, exist_ok=True)
 

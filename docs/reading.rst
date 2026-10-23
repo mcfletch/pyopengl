@@ -112,6 +112,9 @@ Specifications and registries
 - `Khronos' OpenGL reference pages
   <https://registry.khronos.org/OpenGL-Refpages/>`__ -- the upstream of the
   :doc:`reference pages <reference/index>` here.
+- `The EGL registry <https://registry.khronos.org/EGL/>`__ -- the EGL
+  specifications, extensions and reference pages, the upstream of the
+  :doc:`EGL reference <reference/egl/index>` here.
 - `MSDN's OpenGL documentation
   <https://learn.microsoft.com/en-us/windows/win32/opengl/opengl>`__, for WGL.
 

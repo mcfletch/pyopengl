@@ -117,7 +117,7 @@ One directory and one index per API, under `docs/reference/`:
 | `glut` | 85 | 142 | -- |
 | `gle` | 13 | 15 | -- |
 | `glx` | 44 | 44 | 74 |
-| `egl` | -- | 51 | 119 |
+| `egl` | 45 | 51 | 119 |
 | `wgl` | -- | 20 | 58 |
 
 `reference/index` is the list of those, and each API's index carries its
@@ -126,9 +126,19 @@ extension modules grouped by vendor. That is what makes it navigable: a reader
 who wants EGL should not have to know that `eglInitialize` sorts between
 `glEnable` and `glutMainLoop`.
 
-Khronos publishes no reference pages for EGL or WGL, so those two indexes are
-built from the packages instead -- every entry point the package exports,
-linked to its declaration on the API pages.
+Khronos publishes no reference pages for WGL, so that index is built from the
+package instead -- every entry point the package exports, linked to its
+declaration on the API pages.
+
+The EGL pages are not in OpenGL-Refpages but in EGL-Registry, under
+`sdk/docs/man`: the EGL 1.5 set, DocBook 5 like the `gl4` pages. Until
+2026-10-23 the EGL index was built from the package the way WGL's still is;
+`acquireoriginal.py` now fetches EGL-Registry beside OpenGL-Refpages and
+`REFPAGE_SETS` names its directory. Those pages include their copyright notice
+from `copyright.xml` as an untitled `refsect3`, and one leaves the include out;
+`generate.add_copyright` gives every page of a set carrying that file a
+Copyright section, since the MIT-style licence asks for the notice on every
+copy.
 
 ### What was wrong before
 
