@@ -1,13 +1,21 @@
-"""CGL, the interface that gives macOS an OpenGL context with no window.
+"""CGL, the macOS interface that creates OpenGL contexts without a window.
 
-CGL is the layer NSGL is built on, and the only one of the two that will hand
-out a context without a window server to put a window on.  That makes
-it what an offscreen renderer, a batch tool or a CI job on macOS needs::
+CGL (Core OpenGL) is the lowest-level OpenGL interface on macOS.  NSGL is built
+on it: `NSOpenGLContext
+<https://developer.apple.com/documentation/appkit/nsopenglcontext>`__ and
+``NSOpenGLPixelFormat`` in AppKit, the Cocoa framework macOS applications make
+their windows with, and the interface GUI toolkits use to give a window an
+OpenGL context.  CGL creates a context with no window and no window server, for
+offscreen rendering::
 
     from OpenGL.CGL import headless_context
 
     with headless_context() as context:
         ...                                 # the context is current here
+
+PyOpenGL's test suite renders into a context made here on macOS
+(``TEST_WINDOWING=cgl``).  :mod:`OpenGL.Tk` on Aqua makes its context through
+NSGL, with the pixel format and profile chosen by this module.
 
 **There is no default framebuffer.**  Framebuffer zero belongs to a drawable,
 and a context created this way has none: a ``glClear`` or a ``glReadPixels``

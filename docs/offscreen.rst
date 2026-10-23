@@ -210,8 +210,9 @@ CGL, on macOS
 -------------
 
 :py:mod:`OpenGL.CGL` creates an OpenGL context on macOS with no window and no
-window server.  CGL is the layer NSGL is built on, and the only one of the two
-that will do this.
+window server.  CGL is the lowest-level OpenGL interface on macOS; NSGL, the
+AppKit interface GUI toolkits use, is built on it and creates a context only for
+a window.  :doc:`platform-macos` describes the two.
 
 ::
 

@@ -15,14 +15,18 @@ Two interfaces get a context on a current macOS, and PyOpenGL binds one of
 them:
 
 ``CGL``
-    Core OpenGL, the layer NSGL is built on.  It knows nothing about windows,
-    and is the one that will create a context with no window server running.  :py:mod:`OpenGL.CGL` binds it: pixel formats, contexts, renderer
-    queries and the offscreen path.
+    Core OpenGL, the lowest-level OpenGL interface on macOS.  It has no
+    windows, and creates a context with no window server running.
+    :py:mod:`OpenGL.CGL` binds it: pixel formats, contexts, renderer queries
+    and the offscreen path.  The test suite's macOS context is made with it.
 ``NSGL``
-    The Cocoa interface, reached through ``NSOpenGLContext``.  A Cocoa toolkit
-    -- PyQt, PySide, wxPython, pygame -- makes its context through this, and
-    PyOpenGL draws into whatever it made current.  PyOpenGL does not bind NSGL;
-    the toolkit does.
+    The AppKit interface, built on CGL: `NSOpenGLContext
+    <https://developer.apple.com/documentation/appkit/nsopenglcontext>`__ and
+    ``NSOpenGLPixelFormat``.  A Cocoa toolkit -- PyQt, PySide, wxPython,
+    pygame -- makes its context through this, and PyOpenGL draws into whatever
+    it made current.  PyOpenGL does not bind NSGL.  :doc:`OpenGL.Tk
+    <tk-widget>` on Aqua makes an ``NSOpenGLContext``, choosing its pixel
+    format and profile with :py:mod:`OpenGL.CGL`.
 
 Releasing a context works for both, because CGL is underneath: a context made
 through NSGL is one ``OpenGL.platform.PLATFORM.releaseCurrentContext()`` can
