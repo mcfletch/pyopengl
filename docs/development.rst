@@ -85,8 +85,24 @@ Each platform has its own
          doc=None, argNames=(),
      ):
 
-Platform implementations are registered as entry points; ``sys.platform`` and
-then ``os.name`` decide which one is loaded.
+Each platform implementation is registered under one or more names as a
+``PlatformPlugin`` in ``OpenGL/__init__.py``; one of your own is a
+``PlatformPlugin`` created before ``OpenGL.platform`` is imported.  Importing
+``OpenGL.platform`` loads the first plugin whose name matches one of these, in
+order:
+
+#. ``PYOPENGL_PLATFORM``, from the environment;
+#. ``XDG_SESSION_TYPE``, lower-cased (``x11`` and ``wayland`` are registered);
+#. on Linux with ``PYOPENGL_PLATFORM`` unset, ``wayland`` where
+   ``WAYLAND_DISPLAY`` is set, otherwise ``linux`` where ``DISPLAY`` is;
+#. ``sys.platform``;
+#. ``os.name``.
+
+A value that names no plugin is skipped, so a misspelt ``PYOPENGL_PLATFORM``
+gets the platform PyOpenGL would have chosen without it.  A plugin whose import
+fails raises ``ImportError`` naming the plugin, with the reason in the
+``OpenGL.plugins`` logger.  The values each platform accepts are in
+:doc:`platform-linux`, :doc:`platform-macos` and :doc:`platform-windows`.
 
 Generated bindings
 ------------------

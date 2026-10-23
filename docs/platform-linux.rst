@@ -201,6 +201,8 @@ Naming the platform yourself
     Mesa's off-screen interface, which is a different library and a different
     set of entry points.  See :ref:`offscreen-osmesa`.
 
-A value naming no plugin, or one whose import fails, raises ``ImportError``
-naming the plugin and the variable; the reason goes to the ``OpenGL.plugins``
-logger.
+A value naming no plugin is skipped, and PyOpenGL selects the platform as it
+would with the variable unset.  A plugin whose import fails raises
+``ImportError`` naming the plugin and the variable; the reason goes to the
+``OpenGL.plugins`` logger.  :doc:`development` lists the full order of what is
+consulted.
