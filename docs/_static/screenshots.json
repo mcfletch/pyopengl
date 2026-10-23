@@ -76,7 +76,7 @@
   },
   {
     "url": "_static/screenshots/context/glelathe.jpg",
-    "description": "OpenGLContext GLE tubing and extrusion demo"
+    "description": "OpenGLContext lathe, screw and spiral, swept by opengl_extrusions"
   },
   {
     "url": "_static/screenshots/context/shader_instanced.py-screen-0001.png",
