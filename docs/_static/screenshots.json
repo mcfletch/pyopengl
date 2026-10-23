@@ -1,5 +1,15 @@
 [
   {
+    "url": "_static/screenshots/demos/hill-runner-forest.jpg",
+    "link": "https://github.com/mcfletch/openglcontext-hill-runner",
+    "description": "Hill Runner, an endless runner on OpenGLContext, in the woods. Assets: CC0 by Quaternius, Poly Haven and ambientCG; CC-BY 4.0 by Georgeous, 3D Error 404 and LOLIPOP"
+  },
+  {
+    "url": "_static/screenshots/demos/hill-runner-tunnel.jpg",
+    "link": "https://github.com/mcfletch/openglcontext-hill-runner",
+    "description": "Hill Runner approaching a tunnel bored through the hill. Assets: CC0 by Quaternius, Poly Haven and ambientCG; CC-BY 4.0 by Georgeous, 3D Error 404 and LOLIPOP"
+  },
+  {
     "url": "_static/screenshots/gltf/flight-helmet.jpg",
     "link": "https://github.com/KhronosGroup/glTF-Sample-Assets",
     "description": "FlightHelmet, a Khronos glTF sample model (CC0), rendered by OpenGLContext's PBR pipeline"
