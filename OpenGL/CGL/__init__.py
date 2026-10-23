@@ -1,34 +1,32 @@
 """CGL, the macOS interface that creates OpenGL contexts without a window.
 
-CGL (Core OpenGL) is the lowest-level OpenGL interface on macOS.  NSGL is built
-on it: `NSOpenGLContext
+CGL (Core OpenGL) is the lowest-level OpenGL interface on macOS.  NSGL, the
+OpenGL interface in Apple's AppKit framework (`NSOpenGLContext
 <https://developer.apple.com/documentation/appkit/nsopenglcontext>`__ and
-``NSOpenGLPixelFormat`` in AppKit, the Cocoa framework macOS applications make
-their windows with, and the interface GUI toolkits use to give a window an
-OpenGL context.  CGL creates a context with no window and no window server, for
-offscreen rendering::
+``NSOpenGLPixelFormat``), is built on it.  GUI toolkits use NSGL to create an
+OpenGL context for a window.  CGL can create a context with no window and no
+window server, for offscreen rendering::
 
     from OpenGL.CGL import headless_context
 
     with headless_context() as context:
         ...                                 # the context is current here
 
-PyOpenGL's test suite renders into a context made here on macOS
-(``TEST_WINDOWING=cgl``).  :mod:`OpenGL.Tk` on Aqua makes its context through
-NSGL, with the pixel format and profile chosen by this module.
+PyOpenGL's test suite uses this module for its offscreen contexts on macOS
+(``TEST_WINDOWING=cgl``).  :mod:`OpenGL.Tk` on Aqua creates its context with
+NSGL, and uses this module to choose the pixel format and profile.
 
-**There is no default framebuffer.**  Framebuffer zero belongs to a drawable,
-and a context created this way has none: a ``glClear`` or a ``glReadPixels``
-against it draws nowhere and reads nothing.  Render into a framebuffer object
-instead -- :func:`headless_context` is the context alone, and
-:class:`OffscreenTarget` is a colour/depth/stencil target to bind to it.
+An offscreen context created with CGL does not have a default framebuffer, so
+rendering must target a framebuffer object.  :func:`headless_context` creates
+only the context; :class:`OffscreenTarget` is a framebuffer object with colour,
+depth and stencil attachments to bind to it.
 
-**Which renderer answers is a choice.**  A machine with no accelerated renderer
-available -- a virtual machine, or a session with no window server -- has only
-Apple's CPU renderer, and asking for acceleration there fails rather than
-falling back.  :func:`pixel_format_attributes` builds the attribute list for
-either, and :func:`choose_pixel_format` tries acceleration first and settles for
-what is on offer, reporting which it got.
+A machine with no accelerated renderer, such as a virtual machine or a session
+with no window server, has only Apple's software renderer, and a pixel format
+that requires acceleration fails there.  :func:`pixel_format_attributes` builds
+the attribute list for either kind of renderer.  :func:`choose_pixel_format`
+tries an accelerated renderer first, falls back to the software renderer, and
+reports which one it chose.
 
 Constant values are from Apple's ``CGLTypes.h`` and ``CGLRenderers.h``.
 """
