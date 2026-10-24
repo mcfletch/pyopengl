@@ -1,8 +1,10 @@
 """A rotating screenshot display for the documentation set.
 
 ``.. carousel::`` puts a panel on the page that shows one picture at a time,
-with its caption, and moves to the next every few seconds.  The records come
-either from the directive's own body or from a JSON file:
+with its caption, and moves to the next every few seconds.  The reader steps
+back and forward with the buttons under the caption, by clicking the left or
+right half of the picture, or with the arrow keys once the panel has focus.
+The records come either from the directive's own body or from a JSON file:
 
 .. code-block:: rst
 

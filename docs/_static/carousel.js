@@ -4,6 +4,10 @@
  * the current one is showing, so the change is a fade rather than a gap, and
  * a picture that fails to load is dropped from the rotation instead of
  * leaving the panel blank.
+ *
+ * The reader steps through the pictures with the previous and next buttons,
+ * by clicking the left or right half of the picture, or with the arrow keys
+ * once the panel has focus.  Any of these restarts the rotation's timer.
  */
 (function () {
   'use strict';
@@ -33,28 +37,72 @@
     var noscript = panel.querySelector('noscript');
     if (noscript) { noscript.remove(); }
 
+    // A reader who has asked for less motion gets the pictures without the
+    // rotation; the controls still step through them.
+    var still = window.matchMedia('(prefers-reduced-motion: reduce)');
     var interval = parseInt(panel.dataset.interval, 10) || 5000;
-    var index = -1;
+    // The picture last asked for, which a step moves on from even while that
+    // picture is still loading, so two quick clicks go two pictures on.
+    var position = -1;
     var timer = null;
+    var held = false;          // the pointer or the focus is on the panel
+    // Each step is numbered, so a picture that arrives after a later step
+    // was asked for is not shown over the later one.
+    var requested = 0;
+
+    var controls = document.createElement('div');
+    controls.className = 'carousel-controls';
+    var counter = document.createElement('span');
+    counter.className = 'carousel-counter';
+
+    function button(label, title, delta) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = label;
+      b.title = title;
+      b.setAttribute('aria-label', title);
+      b.addEventListener('click', function () { navigate(delta); });
+      return b;
+    }
+
+    controls.append(
+      button('‹', 'Previous picture', -1),
+      counter,
+      button('›', 'Next picture', 1)
+    );
+    caption.after(controls);
+    panel.setAttribute('role', 'region');
+    panel.setAttribute('aria-label', 'Screenshots of programs using PyOpenGL');
+    panel.tabIndex = 0;
 
     function step(delta) {
       if (!records.length) { return Promise.resolve(); }
-      index = (index + delta + records.length) % records.length;
-      var record = records[index];
+      var target = (position + delta + records.length) % records.length;
+      position = target;
+      var record = records[target];
+      var ticket = ++requested;
       return preload(record.url).then(function (img) {
+        if (ticket !== requested) { return; }
         img.alt = record.description || '';
         img.className = 'carousel-image';
         frame.replaceChildren(img);
         // Force the transition to run on the freshly inserted element.
         requestAnimationFrame(function () { img.classList.add('shown'); });
         caption.replaceChildren(captionFor(record));
+        counter.textContent = (target + 1) + ' / ' + records.length;
+        controls.hidden = records.length < 2;
         if (records.length > 1) {
-          preload(records[(index + 1) % records.length].url).catch(function () {});
+          preload(records[(target + delta + records.length) % records.length].url)
+            .catch(function () {});
         }
       }, function () {
-        // A picture that will not load is not worth trying again.
-        records.splice(index, 1);
-        index -= 1;
+        if (ticket !== requested) { return; }
+        // A picture that will not load is not worth trying again.  Going
+        // forward, the picture after it has taken its place, so the next
+        // step starts from one place earlier and lands there.
+        records.splice(target, 1);
+        if (delta > 0) { position = target - 1; }
+        if (!records.length) { panel.remove(); return; }
         return step(delta);
       });
     }
@@ -71,13 +119,15 @@
       return document.createTextNode(text);
     }
 
-    function advance() {
-      step(1);
+    function navigate(delta) {
+      pause();
+      step(delta);
+      resume();
     }
 
     function resume() {
-      if (timer === null && records.length > 1) {
-        timer = window.setInterval(advance, interval);
+      if (timer === null && !held && !still.matches && records.length > 1) {
+        timer = window.setInterval(function () { step(1); }, interval);
       }
     }
 
@@ -88,18 +138,29 @@
       }
     }
 
-    panel.addEventListener('mouseenter', pause);
-    panel.addEventListener('mouseleave', resume);
-    panel.addEventListener('focusin', pause);
-    panel.addEventListener('focusout', resume);
-    frame.addEventListener('click', function () { pause(); advance(); resume(); });
+    function hold() { held = true; pause(); }
+    function release() { held = false; resume(); }
 
-    // A reader who has asked for less motion gets the pictures without the
-    // rotation; the panel still advances when they click it.
-    var still = window.matchMedia('(prefers-reduced-motion: reduce)');
-    step(1).then(function () {
-      if (!still.matches) { resume(); }
+    panel.addEventListener('mouseenter', hold);
+    panel.addEventListener('mouseleave', release);
+    panel.addEventListener('focusin', hold);
+    panel.addEventListener('focusout', release);
+    // The left half of the picture goes back and the right half forward.
+    frame.addEventListener('click', function (event) {
+      var box = frame.getBoundingClientRect();
+      navigate(event.clientX < box.left + box.width / 2 ? -1 : 1);
     });
+    panel.addEventListener('keydown', function (event) {
+      if (event.key === 'ArrowLeft') {
+        navigate(-1);
+        event.preventDefault();
+      } else if (event.key === 'ArrowRight') {
+        navigate(1);
+        event.preventDefault();
+      }
+    });
+
+    step(1).then(resume);
     still.addEventListener('change', function (event) {
       if (event.matches) { pause(); } else { resume(); }
     });
@@ -109,12 +170,12 @@
     if (typeof IntersectionObserver !== 'undefined') {
       new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
-          if (entry.isIntersecting && !still.matches) { resume(); } else { pause(); }
+          if (entry.isIntersecting) { resume(); } else { pause(); }
         });
       }).observe(panel);
     }
     document.addEventListener('visibilitychange', function () {
-      if (document.hidden) { pause(); } else if (!still.matches) { resume(); }
+      if (document.hidden) { pause(); } else { resume(); }
     });
   }
 

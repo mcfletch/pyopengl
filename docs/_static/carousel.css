@@ -37,6 +37,46 @@
   color: var(--color-foreground-secondary, #555);
 }
 
+/* Clicking the left half of the picture goes back, the right half forward. */
+.pyopengl-carousel:focus-visible {
+  outline: 2px solid var(--color-brand-primary, #2962ff);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+.pyopengl-carousel .carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 0.3rem;
+}
+
+.pyopengl-carousel .carousel-controls button {
+  font: inherit;
+  font-size: 1.1em;
+  line-height: 1;
+  color: var(--color-foreground-primary, #222);
+  background: var(--color-background-secondary, #f4f4f4);
+  border: none;
+  border-radius: 0.3em;
+  padding: 0.3em 0.65em;
+  cursor: pointer;
+}
+
+.pyopengl-carousel .carousel-controls button:hover,
+.pyopengl-carousel .carousel-controls button:focus-visible {
+  background: var(--color-background-hover, #e4e4e4);
+}
+
+.pyopengl-carousel .carousel-counter {
+  font-size: 0.8em;
+  color: var(--color-foreground-secondary, #555);
+  min-width: 4.5em;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
 /* Without JavaScript the pictures stack, each under its own caption. */
 .pyopengl-carousel noscript figure {
   margin: 0 0 1rem 0;
