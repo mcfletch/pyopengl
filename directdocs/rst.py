@@ -734,11 +734,11 @@ def without_literal_marker(lines: list[str]) -> list[str]:
     return lines[:-1] + [last]
 
 
-#: ``name -- what it is``, which is how every PyOpenGL docstring writes an
-#: argument.  Several names may share one description.
-_ARGUMENT = re.compile(r'^(\S[^-]*?)\s+--\s+(.*)$')
+#: ``name - what it is`` or ``name -- what it is``, which is how PyOpenGL
+#: docstrings write an argument.  Several names may share one description.
+_ARGUMENT = re.compile(r'^(\S[^-]*?)\s+--?\s+(.*)$')
 
-#: What the left of a ``--`` has to look like to be argument names rather than
+#: What the left of the dash has to look like to be argument names rather than
 #: a sentence with a dash in it: identifiers, possibly several, possibly
 #: starred, possibly with a note in brackets: ``separable (keyword only)``.
 _ARGUMENT_NAMES = re.compile(
@@ -752,8 +752,8 @@ _BULLET = re.compile(r'^([-*+])\s+(\S.*)$')
 def argument_entry(line: str) -> tuple[str, str] | None:
     """``line``'s names and the start of their description, or ``None``.
 
-    ``None`` where ``line`` is not an argument entry: the left of its ``--``
-    does not read as names, or it has no ``--``.
+    ``None`` where ``line`` is not an argument entry: the left of its dash
+    does not read as names, or it has no spaced ``-`` or ``--``.
     """
     match = _ARGUMENT.match(line.strip())
     if not match or not _ARGUMENT_NAMES.match(match.group(1).strip()):
@@ -832,7 +832,7 @@ def argument_list(lines: list[str]) -> list[tuple[str, list[str]]] | None:
 
 
 def convert_argument_lists(text: str) -> str:
-    """``name -- what it is`` runs in ``text``, as definition lists.
+    """``name - what it is`` runs in ``text``, as definition lists.
 
     In place, at whatever indent they sit: everything around them is left
     exactly as it was.  As reStructuredText such a run is a block quote whose

@@ -334,6 +334,23 @@ class TestDocstrings:
         assert 'size\n   the count in bytes' in out
         assert 'code-block' not in out
 
+    def test_a_single_hyphen_separates_an_argument_too(self):
+        out = self.render(
+            'Copy data into the bound buffer\n'
+            '\n'
+            '    target - which buffer type is intended\n'
+            '    size - the count in bytes, which may\n'
+            '        be zero\n'
+        )
+        assert 'target\n   which buffer type is intended' in out
+        assert 'size\n   the count in bytes, which may be zero' in out
+        assert 'code-block' not in out
+
+    def test_a_sentence_with_a_hyphen_in_it_is_a_sentence(self):
+        out = self.render('Copy the given data - the fast path where it fits')
+        assert 'code-block' not in out
+        assert 'Copy the given data - the fast path where it fits' in out
+
     def test_a_continuation_joins_its_entry(self):
         out = self.render(
             'Do a thing\n'
