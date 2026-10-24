@@ -9,11 +9,12 @@ Accessing OpenGL functionality
 
 The OpenGL library is a single instance per process, shared by all in-process
 code that issues OpenGL commands.  PyOpenGL draws into a context that another
-library creates.  `GLFW <https://pypi.org/project/glfw/>`__ is the usual
+library creates.  `GLFW <https://pypi.org/project/glfw/>`__ is a good
 choice, and PyOpenGL's own test suite uses it.  A program that already uses a
 GUI toolkit (PyGame, PyQt or PySide, wxPython, PyGTK, or Tkinter through
-:py:mod:`OpenGL.Tk`) uses that toolkit's OpenGL widget instead.  A program
-with no toolkit can use GLUT, which PyOpenGL also wraps.
+:py:mod:`OpenGL.Tk`) uses that toolkit's OpenGL widget instead. GLUT is also 
+available from PyOpenGL (:mod:`OpenGL.GLUT`) and can be used, but note that 
+it does not work natively on modern Linux Wayland machines.
 
 The GUI package creates an OpenGL "window" and makes it current.  PyOpenGL
 commands then draw into it, as do commands issued from another language in the
@@ -181,9 +182,11 @@ Batch by state
     Sort draws so that programs, textures and buffers are bound as few times
     as possible.  Each bind is a call, and calls are the main cost.
 
-Display lists are not recommended.  They are fixed-function OpenGL, removed
-from the core profile.  Drivers that still offer them do so through a
-compatibility path that is slower than a buffer object.
+Avoid legacy APIs
+    glBegin/glEnd and display lists are not recommended.  
+    They are fixed-function OpenGL, removed from the core profile.
+    Drivers that still offer them do so through a
+    compatibility path that is slower than a buffer object.
 
 Avoiding array copies
 ~~~~~~~~~~~~~~~~~~~~~
@@ -194,7 +197,7 @@ The largest avoidable cost in array-based PyOpenGL code comes from passing
 - a non-contiguous array, which has no single data pointer.
 
 Either one makes PyOpenGL copy the array on every call.  The copy happens in
-C, but for data passed every frame it is still the largest cost.
+C, but for data passed every frame it is still a large cost.
 
 PyOpenGL copies by default so that a mismatch between ``float`` and
 ``double`` still runs, instead of raising a confusing error.  To find where
@@ -255,7 +258,7 @@ storage, or every array it ever passed stays reachable.  Set the values to
        return callback
 
 Register the callback to run *after* the context is destroyed.  Rendering into
-a context whose storage has been cleaned up reads freed memory.
+a context whose storage has been cleaned up reads freed memory (segfaults).
 
 Tkinter
 -------

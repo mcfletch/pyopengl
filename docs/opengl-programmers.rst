@@ -9,7 +9,7 @@ What a call costs
 -----------------
 
 By default PyOpenGL favours helpfulness and strictness over speed.  It checks
-for errors after every call, converts array data that does not match what the
+for errors on every call, converts array data that does not match what the
 driver expects, and accepts many argument types.  Each of these has a cost,
 and this page says how to turn each one off where a program needs the speed.
 

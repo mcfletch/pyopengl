@@ -1,5 +1,5 @@
-PyOpenGL
-========
+PyOpenGL 4.x
+============
 
 PyOpenGL is the cross-platform `Python <https://www.python.org/>`__ binding to
 `OpenGL <https://www.opengl.org/>`__ and related APIs.  The binding is built on
@@ -12,10 +12,15 @@ under a BSD-style licence.
 
 .. code-block:: console
 
-   $ uv run --pre --with 'pyopengl>=4.0.0a4'
+   $ uv run --pre --with 'pyopengl>=4.0.0a8'
 
-:doc:`installation` covers the rest, including what Windows needs for GLUT and
-GLE.
+if you are on Windows and need GLUT or GLE:
+
+.. code-block:: console
+
+   $ uv run --pre --with 'pyopengl[glut]>=4.0.0a8'
+
+:doc:`installation` covers other details
 
 The APIs
 --------
@@ -44,11 +49,11 @@ PyOpenGL includes bindings for these APIs:
    * - :doc:`OpenGL.GLE <reference/gle/index>`
      - Extrusion and tubing library
    * - :doc:`OpenGL.EGL <reference/egl/index>`
-     - Embedded (modern) GL interfaces
+     - "Embedded" (modern Linux and Android) GL interfaces
    * - :doc:`OpenGL.WGL <reference/wgl/index>`
      - Windows GL interfaces
    * - :doc:`OpenGL.GLX <reference/glx/index>`
-     - X Window System GL interfaces
+     - Tranditional Linux X Window System GL interfaces
    * - :py:mod:`OpenGL.CGL`
      - macOS GL interfaces, with or without a window
    * - :py:mod:`OpenGL.Tk`
@@ -65,13 +70,13 @@ The packages
 
 `PyOpenGL_accelerate <https://github.com/mcfletch/pyopengl>`__
     Cython-coded accelerators and the C dispatch layer.  Optional, and worth
-    having: a call reaches the driver several times faster through it.  Its
-    source is in the PyOpenGL repository and it releases at the same version.
-    See :doc:`c-dispatch`.
+    having: a call reaches the driver several times faster through it except
+    under the PyPy runtime.  Its source is in the PyOpenGL repository and it
+    releases at the same version. See :doc:`c-dispatch`.
 
 `PyOpenGL-glut-binaries <https://github.com/mcfletch/pyopengl-glut-binaries>`__
     Windows builds of freeglut and GLE, pulled in by
-    ``pip install PyOpenGL[glut]``.
+    ``(uv) pip install PyOpenGL[glut]``.
 
 `OpenGLContext <https://github.com/mcfletch/openglcontext>`__
     A game engine and 3D viewer built on PyOpenGL, and the suite PyOpenGL is
@@ -84,7 +89,8 @@ Getting a window
 PyOpenGL draws into a context; something else has to create one.  If you want
 something simple and cross-platform, `GLFW <https://pypi.org/project/glfw/>`__
 is a strong choice: its portability and feature coverage are wide, including on
-modern Wayland Linux systems, and it is what PyOpenGL's own test suite uses.
+modern Wayland Linux systems, and it is what PyOpenGL 4.x's own test suite uses
+by default.
 
 .. code-block:: console
 
@@ -92,14 +98,17 @@ modern Wayland Linux systems, and it is what PyOpenGL's own test suite uses.
 
 Any of these works as well, and PyOpenGL draws into whatever is current:
 
+- `GLFW <https://github.com/FlorianRhiem/pyGLFW>`__ pyGLFW
 - `PyGame <https://www.pygame.org/>`__
 - `PyQt <https://riverbankcomputing.com/software/pyqt/>`__ and
   `PySide <https://doc.qt.io/qtforpython/>`__
 - `wxPython <https://wxpython.org/>`__
-- PyGTK
 - Tkinter, through :py:mod:`OpenGL.Tk`
 - GLUT through :doc:`OpenGL.GLUT <reference/glut/index>`
-- raw Xlib
+- PyGTK
+- MacOS
+- Win32
+- raw Xlib on Linux
 
 Or no window at all, using :doc:`offscreen`.
 
