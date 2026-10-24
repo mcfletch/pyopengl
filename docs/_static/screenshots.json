@@ -10,11 +10,6 @@
     "description": "\"Minimalistic Modern Bedroom\" by dylanheyes (CC-BY 4.0), an interior rendered by OpenGLContext's PBR pipeline"
   },
   {
-    "url": "_static/screenshots/scenes/lamborghini-revuelto.jpg",
-    "link": "https://www.cgtrader.com/designers/anatolianstudios",
-    "description": "Lamborghini Revuelto in a Venice square, lit by the square's own panorama; model © AnatolianStudios"
-  },
-  {
     "url": "_static/screenshots/gltf/car-concept.jpg",
     "link": "https://github.com/KhronosGroup/glTF-Sample-Assets",
     "description": "CarConcept, a Khronos glTF sample model, in a Venice square: clearcoat paint, iridescence and transmissive glass; model by Eric Chadwick (CC-BY 4.0)"
