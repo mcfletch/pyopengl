@@ -1,5 +1,105 @@
 [
   {
+    "url": "_static/screenshots/scenes/old-church.jpg",
+    "link": "https://skfb.ly/STIp",
+    "description": "\"Old church modeling - Interior Scene\" by Aurélien Martel (CC-BY 4.0), the nave vaults and stained glass lit by an outdoor sky"
+  },
+  {
+    "url": "_static/screenshots/scenes/modern-bedroom.jpg",
+    "link": "https://skfb.ly/oCnNx",
+    "description": "\"Minimalistic Modern Bedroom\" by dylanheyes (CC-BY 4.0), an interior rendered by OpenGLContext's PBR pipeline"
+  },
+  {
+    "url": "_static/screenshots/scenes/lamborghini-revuelto.jpg",
+    "link": "https://www.cgtrader.com/designers/anatolianstudios",
+    "description": "Lamborghini Revuelto against a photo-studio environment; model © AnatolianStudios"
+  },
+  {
+    "url": "_static/screenshots/gltf/car-concept.jpg",
+    "link": "https://github.com/KhronosGroup/glTF-Sample-Assets",
+    "description": "CarConcept, a Khronos glTF sample model: clearcoat paint, iridescence and transmissive glass; model by Eric Chadwick (CC-BY 4.0)"
+  },
+  {
+    "url": "_static/screenshots/gltf/toy-car.jpg",
+    "link": "https://github.com/KhronosGroup/glTF-Sample-Assets",
+    "description": "ToyCar, a Khronos glTF sample model: clearcoat, transmission and a sheen cloth; by Guido Odendahl and Eric Chadwick (CC0)"
+  },
+  {
+    "url": "_static/screenshots/gltf/stained-glass-lamp.jpg",
+    "link": "https://github.com/KhronosGroup/glTF-Sample-Assets",
+    "description": "StainedGlassLamp, a Khronos glTF sample model: transmission, volume and IOR in the glass shade; model by Eric Chadwick (CC-BY 4.0)"
+  },
+  {
+    "url": "_static/screenshots/gltf/iridescent-dish-with-olives.jpg",
+    "link": "https://github.com/KhronosGroup/glTF-Sample-Assets",
+    "description": "IridescentDishWithOlives, a Khronos glTF sample model: KHR_materials_iridescence on a transmissive dish; model by Eric Chadwick (CC-BY 4.0)"
+  },
+  {
+    "url": "_static/screenshots/gltf/anisotropy-barn-lamp.jpg",
+    "link": "https://github.com/KhronosGroup/glTF-Sample-Assets",
+    "description": "AnisotropyBarnLamp, a Khronos glTF sample model: KHR_materials_anisotropy on brushed copper; model by Eric Chadwick (CC-BY 4.0)"
+  },
+  {
+    "url": "_static/screenshots/gltf/chronograph-watch.jpg",
+    "link": "https://github.com/KhronosGroup/glTF-Sample-Assets",
+    "description": "ChronographWatch, a Khronos glTF sample model: metals and a transmissive crystal; model by Eric Chadwick (CC-BY 4.0)"
+  },
+  {
+    "url": "_static/screenshots/gltf/commercial-refrigerator.jpg",
+    "link": "https://github.com/KhronosGroup/glTF-Sample-Assets",
+    "description": "CommercialRefrigerator, a Khronos glTF sample model: clearcoat and transmissive glass; by Eric Chadwick, after \"Commercial Fridge\" by Sean Thomas (CC-BY 4.0)"
+  },
+  {
+    "url": "_static/screenshots/gltf/glam-velvet-sofa.jpg",
+    "link": "https://github.com/KhronosGroup/glTF-Sample-Assets",
+    "description": "GlamVelvetSofa, a Khronos glTF sample model: KHR_materials_sheen velvet; model by Eric Chadwick (CC-BY 4.0)"
+  },
+  {
+    "url": "_static/screenshots/gltf/chair-damask-purplegold.jpg",
+    "link": "https://github.com/KhronosGroup/glTF-Sample-Assets",
+    "description": "ChairDamaskPurplegold, a Khronos glTF sample model: sheen and specular on damask fabric; model by Eric Chadwick (CC-BY 4.0)"
+  },
+  {
+    "url": "_static/screenshots/gltf/sheen-wood-leather-sofa.jpg",
+    "link": "https://github.com/KhronosGroup/glTF-Sample-Assets",
+    "description": "SheenWoodLeatherSofa, a Khronos glTF sample model: sheen and specular on leather and wood; by Eric Chadwick (CC-BY 4.0), from an original by Fran Calvente (CC0)"
+  },
+  {
+    "url": "_static/screenshots/gltf/sheen-cloth.jpg",
+    "link": "https://github.com/KhronosGroup/glTF-Sample-Assets",
+    "description": "SheenCloth, a Khronos glTF sample model (CC0): KHR_materials_sheen on a draped fabric"
+  },
+  {
+    "url": "_static/screenshots/gltf/lights-punctual-lamp.jpg",
+    "link": "https://github.com/KhronosGroup/glTF-Sample-Assets",
+    "description": "LightsPunctualLamp, a Khronos glTF sample model: a KHR_lights_punctual light inside a transmissive shade; model by DGG (CC-BY 4.0)"
+  },
+  {
+    "url": "_static/screenshots/gltf/boom-box.jpg",
+    "link": "https://github.com/KhronosGroup/glTF-Sample-Assets",
+    "description": "BoomBox, a Khronos glTF sample model (CC0): base colour, metal-roughness, normal and emissive maps"
+  },
+  {
+    "url": "_static/screenshots/gltf/antique-camera.jpg",
+    "link": "https://github.com/KhronosGroup/glTF-Sample-Assets",
+    "description": "AntiqueCamera, a Khronos glTF sample model by Maximillan Kamps (CC0)"
+  },
+  {
+    "url": "_static/screenshots/gltf/barramundi-fish.jpg",
+    "link": "https://github.com/KhronosGroup/glTF-Sample-Assets",
+    "description": "BarramundiFish, a Khronos glTF sample model (CC0), rendered by OpenGLContext's PBR pipeline"
+  },
+  {
+    "url": "_static/screenshots/gltf/corset.jpg",
+    "link": "https://github.com/KhronosGroup/glTF-Sample-Assets",
+    "description": "Corset, a Khronos glTF sample model (CC0): normal, roughness and occlusion maps on fabric and leather"
+  },
+  {
+    "url": "_static/screenshots/gltf/lantern.jpg",
+    "link": "https://github.com/KhronosGroup/glTF-Sample-Assets",
+    "description": "Lantern, a Khronos glTF sample model by sbtron (CC0)"
+  },
+  {
     "url": "_static/screenshots/demos/hill-runner-forest.jpg",
     "link": "https://github.com/mcfletch/openglcontext-hill-runner",
     "description": "Hill Runner, an endless runner on OpenGLContext, in the woods. Assets: CC0 by Quaternius, Poly Haven and ambientCG; CC-BY 4.0 by Georgeous, 3D Error 404 and LOLIPOP"
@@ -27,7 +127,7 @@
   {
     "url": "_static/screenshots/gltf/a-beautiful-game.jpg",
     "link": "https://github.com/KhronosGroup/glTF-Sample-Assets",
-    "description": "A Beautiful Game: transmission and clearcoat materials; model by the MaterialX Project and Ed Mackey (CC-BY 4.0)"
+    "description": "A Beautiful Game, a Khronos glTF sample model: transmission and volume in the glass pieces; model by the MaterialX Project and Ed Mackey (CC-BY 4.0)"
   },
   {
     "url": "_static/screenshots/twig-bb/oa_shine.jpg",
