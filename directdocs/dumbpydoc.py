@@ -52,11 +52,13 @@ os.environ.update({name: _CONFIGURATION[name] for name in _SET_HERE})
 
 import argparse
 import glob
+import importlib
 import json
 import logging
 import inspect
 import pkgutil
 import re
+import subprocess
 import sys
 import textwrap
 import types
@@ -126,6 +128,13 @@ SKIP_FRAGMENTS = ('.tests.', '.tests', '.test_', '.__main__')
 #: with no such counterpart, `GLfloat` and its neighbours from
 #: `OpenGL.raw.GL._types`, is declared by the package that exports it.
 SKIP_PACKAGES = ('OpenGL.raw',)
+
+#: Packages that import only under a platform of their own, with the
+#: ``PYOPENGL_PLATFORM`` value that selects it.  ``OpenGL.osmesa`` binds the
+#: OSMesa library, which only the ``osmesa`` platform loads.  A run on any
+#: other platform documents each of these in a child process on its platform
+#: (:func:`document_on_platform`) and links to the pages the child writes.
+PLATFORM_PACKAGES = {'OpenGL.osmesa': 'osmesa'}
 
 #: The top-level packages a plain run documents.  A name that comes from
 #: outside them under its own name is somebody else's and is not described
@@ -870,7 +879,7 @@ def package_modules(root: str) -> list[str]:
     """
     names = [root]
     try:
-        package = __import__(root, {}, {}, [root])
+        package = importlib.import_module(root)
     except ImportError as err:
         log.warning('cannot import %s: %s', root, err)
         return []
@@ -974,6 +983,38 @@ def write_index(
     os.replace(os.path.join(directory, 'index.rst') + '.partial', os.path.join(directory, 'index.rst'))
 
 
+def document_on_platform(
+    package: str, platform_name: str, directory: str
+) -> list[str]:
+    """Return the modules of ``package`` a child process wrote into ``directory``.
+
+    The child runs this script with ``PYOPENGL_PLATFORM=platform_name`` and
+    writes no index page.  An empty list means the child could not import the
+    package, for example because the platform's library is not installed; the
+    reason is logged.
+    """
+    command = [
+        sys.executable, os.path.abspath(__file__), package,
+        '--output', directory, '--no-index', '--json',
+    ]
+    completed = subprocess.run(
+        command,
+        capture_output=True,
+        text=True,
+        cwd=PACKAGE_ROOT,
+        env=dict(os.environ, PYOPENGL_PLATFORM=platform_name),
+        check=False,
+    )
+    lines = completed.stdout.strip().splitlines()
+    if completed.returncode or not lines:
+        log.warning(
+            'could not document %s on the %s platform:\n%s',
+            package, platform_name, completed.stderr[-2000:],
+        )
+        return []
+    return list(json.loads(lines[-1]))
+
+
 def render_projects(
     projects: list[str] | None = None,
     directory: str = OUTPUT_DIRECTORY,
@@ -981,6 +1022,8 @@ def render_projects(
     entrypoints: str | None = ENTRYPOINTS,
     title: str = 'API reference',
     paragraphs: Iterable[str] | None = None,
+    elsewhere: Iterable[str] = (),
+    index: bool = True,
 ) -> tuple[list[str], list[str]]:
     """Write a page for every module of every project.
 
@@ -991,6 +1034,12 @@ def render_projects(
     ``None`` is a set with no reference pages beside it, where every entry
     point is described on the module page instead.
 
+    ``elsewhere`` names modules whose pages another run wrote into
+    ``directory``.  They are listed under their parent and linked to, and are
+    not imported.  The :data:`PLATFORM_PACKAGES` under ``projects`` are added
+    to them, from a child process on each one's platform.  ``index=False``
+    writes no ``index.rst``.
+
     Returns the names written and the names that could not be documented.
     """
     report_configuration()
@@ -998,6 +1047,14 @@ def render_projects(
     roots = list(projects or PROJECTS)
     owners = tuple(name.split('.')[0] for name in roots)
     skip = tuple(skip)
+    elsewhere = list(elsewhere)
+    for package, platform_name in PLATFORM_PACKAGES.items():
+        if os.environ.get('PYOPENGL_PLATFORM') == platform_name:
+            continue
+        if not any(package == root or package.startswith(root + '.') for root in roots):
+            continue
+        skip += (package,)
+        elsewhere += document_on_platform(package, platform_name, directory)
 
     names: list[str] = []
     for root in roots:
@@ -1023,13 +1080,13 @@ def render_projects(
     # The children a page lists are the ones that got a page: a module that
     # could not be imported here -- a platform's, on another platform -- has
     # none, and naming it in a toctree is a broken link rather than a gap.
-    found = {module.name for module in modules}
+    found = {module.name for module in modules} | set(elsewhere)
     for module in modules:
         module.modules = child_names(module.name, found)
 
     entry_points = load_entry_points(entrypoints) if entrypoints else {}
     renderer = Renderer(entry_points, claim_owners(modules))
-    renderer.documented = {module.name for module in modules}
+    renderer.documented = set(found)
     rendered: list[str] = []
     for module in modules:
         try:
@@ -1047,7 +1104,9 @@ def render_projects(
         os.replace(os.path.join(directory, '%s.rst' % (module.name,)) + '.partial', os.path.join(directory, '%s.rst' % (module.name,)))
         rendered.append(module.name)
 
-    write_index(roots, rendered, directory, title, paragraphs)
+    rendered.extend(elsewhere)
+    if index:
+        write_index(roots, rendered, directory, title, paragraphs)
     return rendered, failed
 
 
@@ -1075,14 +1134,27 @@ def main(argv: list[str] | None = None) -> int:
         ),
     )
     parser.add_argument(
+        '--no-index', action='store_true', help='write no index.rst'
+    )
+    parser.add_argument(
+        '--json',
+        action='store_true',
+        help='print the names of the modules written, as a JSON list',
+    )
+    parser.add_argument(
         '-v', '--verbose', action='store_true', help='report every module skipped'
     )
     options = parser.parse_args(argv)
     logging.basicConfig(level=logging.DEBUG if options.verbose else logging.INFO)
 
     rendered, failed = render_projects(
-        options.projects or None, options.output, options.skip
+        options.projects or None,
+        options.output,
+        options.skip,
+        index=not options.no_index,
     )
+    if options.json:
+        print(json.dumps(rendered))
     log.info(
         '%d modules documented, %d could not be imported', len(rendered), len(failed)
     )

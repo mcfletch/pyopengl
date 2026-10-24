@@ -37,6 +37,10 @@ Three parts, two of them generated:
     It imports the packages and inspects their contents.  Most of PyOpenGL's
     exports have no ``def`` in the source.  They are built at import time from
     the declaration tables, so importing is the only way to list them.
+    ``OpenGL.osmesa`` imports only under ``PYOPENGL_PLATFORM=osmesa``, so a
+    second process on that platform writes its pages.  That process needs the
+    OSMesa library (``libosmesa6`` on Debian and Ubuntu).  Without it the
+    ``OpenGL.osmesa`` pages are missing and the build logs why.
 
 The two generated directories are not in version control.  ``directdocs/README.md``
 describes each generator, and ``plans/SPHINX-DOCS.md`` records how the set is
@@ -53,7 +57,9 @@ Running one part at a time
 
 ``--skip OpenGL.raw`` (and the same flag with other packages) leaves a subtree
 out of the API pages, so a change can be previewed without building the whole
-set.  ``-W`` turns Sphinx's warnings into errors, as CI requires.
+set.  ``-W`` turns Sphinx's warnings into errors, as CI requires.  Sphinx
+reads every page on each run, so a page that links to a generated page always
+has the current set of targets.
 
 The usage references
 --------------------

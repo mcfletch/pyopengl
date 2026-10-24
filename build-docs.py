@@ -188,10 +188,15 @@ def sphinx_environment() -> dict[str, str]:
 
 def build_html(output: str, builder: str, warnings_are_errors: bool) -> None:
     log.info('Building %s into %s', builder, output)
+    # `-E` reads every page again.  Sphinx otherwise rewrites only the pages
+    # whose source changed, and an unchanged page keeps the references it
+    # could not resolve last time, though the generated pages now declare
+    # their targets.
     command = [
         sys.executable,
         '-m',
         'sphinx',
+        '-E',
         '-b',
         builder,
         '-j',

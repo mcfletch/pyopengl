@@ -430,3 +430,39 @@ class TestPrivateNames:
 
     def test_the_test_suites_are_not_part_of_the_surface(self):
         assert '.tests' in dumbpydoc.SKIP_FRAGMENTS
+
+
+class TestASubpackageAsTheRoot:
+    def test_its_modules_are_found(self):
+        names = dumbpydoc.package_modules('xml.dom')
+        assert names[0] == 'xml.dom'
+        assert 'xml.dom.minidom' in names
+
+
+class TestPackagesOfAnotherPlatform:
+    """``OpenGL.osmesa`` imports only under ``PYOPENGL_PLATFORM=osmesa``.
+
+    Its pages are written by a child process on that platform, and the rest of
+    the set links to them.
+    """
+
+    def test_osmesa_is_one(self):
+        assert dumbpydoc.PLATFORM_PACKAGES['OpenGL.osmesa'] == 'osmesa'
+
+    def test_a_child_on_that_platform_writes_its_pages(self, tmp_path):
+        written = dumbpydoc.document_on_platform(
+            'OpenGL.osmesa', 'osmesa', str(tmp_path)
+        )
+        if not written:
+            pytest.skip('OpenGL.osmesa will not import here: no OSMesa library')
+        assert 'OpenGL.osmesa.offscreen' in written
+        assert (tmp_path / 'OpenGL.osmesa.offscreen.rst').is_file()
+        assert not (tmp_path / 'index.rst').exists()
+
+    def test_pages_written_elsewhere_are_listed_under_their_parent(self, tmp_path):
+        rendered, _failed = dumbpydoc.render_projects(
+            ['json'], str(tmp_path), entrypoints=None, elsewhere=['json.extra']
+        )
+        assert 'json.extra' in rendered
+        page = (tmp_path / 'json.rst').read_text(encoding='utf-8')
+        assert 'json.extra' in page

@@ -263,3 +263,16 @@ class TestTheLocaleSphinxRunsUnder:
         monkeypatch.setenv('LC_ALL', 'xx_NOWHERE.UTF-8')
         build_docs.sphinx_environment()
         assert locale.setlocale(locale.LC_ALL) == before
+
+
+class TestTheSphinxRun:
+    def test_every_page_is_read_again(self, build_docs, monkeypatch, tmp_path):
+        """A page whose source did not change still links to targets that
+        did: the API pages are regenerated on each build, and a page kept from
+        the last run keeps that run's unresolved references."""
+        ran = []
+        monkeypatch.setattr(
+            build_docs.subprocess, 'check_call', lambda command, **kw: ran.append(command)
+        )
+        build_docs.build_html(str(tmp_path), 'html', False)
+        assert '-E' in ran[0]
