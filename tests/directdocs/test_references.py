@@ -7,6 +7,7 @@ named in the log; the files around it are still scanned.
 """
 
 import logging
+import os
 
 from directdocs import references
 
@@ -41,3 +42,25 @@ def test_a_file_that_is_not_text_is_named_in_the_log(tmp_path, caplog):
     with caplog.at_level(logging.WARNING, logger=references.log.name):
         _names(source)
     assert str(source) in caplog.text
+
+
+class TestWhereItReadsAndWrites:
+    """The scan is run from anywhere; ``generate.py`` reads the cache from
+    ``directdocs/``, and ``samples.py`` checks out into ``directdocs/.samples``."""
+
+    def test_the_samples_are_the_ones_samples_py_fetches(self):
+        from directdocs import samples
+
+        assert references.SAMPLES == os.path.join(samples.HERE, samples.SAMPLE_DIRECTORY)
+
+    def test_the_cache_is_written_beside_the_script(self, tmp_path, monkeypatch):
+        script = tmp_path / 'directdocs'
+        script.mkdir()
+        elsewhere = tmp_path / 'elsewhere'
+        elsewhere.mkdir()
+        monkeypatch.setattr(references, 'HERE', str(script))
+        monkeypatch.chdir(elsewhere)
+        written = references.write_cache({'glBegin': []})
+        assert written == str(script / references.CACHE_FILE)
+        assert (script / references.CACHE_FILE).is_file()
+        assert not (elsewhere / references.CACHE_FILE).exists()

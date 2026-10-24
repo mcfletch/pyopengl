@@ -155,9 +155,12 @@ class SampleSource( object ):
         return self.urlTemplate %locals()
         
 
+#: The checkouts ``samples.py`` makes, which this scans.
+SAMPLES = os.path.join(HERE, '.samples')
+
+
 def loadData():
     """Samples are downloaded/updated with ./samples.py"""
-    SAMPLES = '.samples'
     for s in [
         SampleSource(
             os.path.join(SAMPLES,'OpenGLContext'),
@@ -312,12 +315,24 @@ def loadData():
 
 CACHE_FILE = '.reference_cache.pkl'
 
-if __name__ == "__main__":
+
+def write_cache(items):
+    """Write ``items`` to :data:`CACHE_FILE` beside this script; return its path.
+
+    ``generate.py`` reads it from there, whichever directory the scan ran in.
+    """
     import pickle
-    items = loadData()
-    with open( CACHE_FILE + '.partial', 'wb') as handle:
+
+    path = os.path.join(HERE, CACHE_FILE)
+    with open( path + '.partial', 'wb') as handle:
         handle.write( pickle.dumps( items ) )
-    os.replace( CACHE_FILE + '.partial', CACHE_FILE )
+    os.replace( path + '.partial', path )
+    return path
+
+
+if __name__ == "__main__":
+    items = loadData()
+    write_cache( items )
     items = list(items.items())
     items.sort()
     for name, itemset in items:

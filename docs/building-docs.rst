@@ -74,8 +74,7 @@ scanning checkouts of other people's projects:
    $ python directdocs/references.py   # scan them, writing .reference_cache.pkl
 
 Both take a while.  Neither is needed to build the set: without the cache
-file, the pages are written without their sample sections.  ``build-docs.py
---samples`` does the pair as part of a build.
+file, the pages are written without their sample sections.
 
 Publishing
 ----------

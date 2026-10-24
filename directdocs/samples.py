@@ -82,22 +82,57 @@ class HgSource( BaseSource ):
         return 'hg pull && hg update'
 
 class GITSource( BaseSource ):
+    """A git repository, kept on ``branch``
+
+    ``branch`` is the one the reference links in ``references.py`` name.
+    ``None`` follows whatever the repository's default branch was when it was
+    cloned.  An update moves a checkout made on another branch onto
+    ``branch``.  A local edit that the move would overwrite stops the update,
+    and the edit is kept.
+    """
+    def __init__( self, root, project=None, dirname=None, branch=None ):
+        super().__init__( root, project, dirname )
+        self.branch = branch
     @property
     def checkout_command( self ):
-        assert self.root 
+        assert self.root
         assert self.dirname
+        if self.branch:
+            return 'git clone --branch %s %s %s'%(
+                self.branch, self.root, self.dirname,
+            )
         return 'git clone %s %s'%(
             self.root, self.dirname,
         )
-    @property 
+    @property
     def update_command( self ):
-        return 'git pull'
+        return 'git pull --ff-only'
+    def update( self ):
+        if not self.branch or not os.path.exists( self.dirname ):
+            return super().update()
+        def git( *arguments ):
+            print( 'git', *arguments )
+            return subprocess.run(
+                ['git'] + list( arguments ), cwd=self.dirname, check=True,
+                capture_output=True, text=True,
+            )
+        git( 'fetch', 'origin', self.branch )
+        local = subprocess.run(
+            ['git', 'rev-parse', '--verify', '--quiet', 'refs/heads/%s'%(self.branch,)],
+            cwd=self.dirname, capture_output=True, check=False,
+        ).returncode == 0
+        if local:
+            git( 'checkout', self.branch )
+        else:
+            git( 'checkout', '-b', self.branch, 'origin/%s'%(self.branch,) )
+        git( 'merge', '--ff-only', 'origin/%s'%(self.branch,) )
 
 
 checkouts = [
     GITSource(
         'https://github.com/mcfletch/openglcontext.git',
         'OpenGLContext',
+        branch='main',
     ),
     GITSource(
         'https://github.com/mcfletch/pyopengl-demo.git',
@@ -179,6 +214,7 @@ checkouts = [
     GITSource(
         'https://github.com/almarklein/visvis',
         dirname = 'visvis',
+        branch='main',
     ),
     GITSource(
         'https://github.com/mmatl/pyrender.git',
@@ -187,6 +223,7 @@ checkouts = [
     GITSource(
         'https://github.com/vispy/vispy.git',
         dirname='vispy',
+        branch='main',
     ),
     GITSource(
         'https://github.com/pyqtgraph/pyqtgraph.git',
@@ -195,6 +232,7 @@ checkouts = [
     GITSource(
         'https://github.com/psychopy/psychopy.git',
         dirname='psychopy',
+        branch='dev',
     ),
     # pymol # not pyopengl AFAICS
     # {LGPL} mirra # no online view of code AFAICS
