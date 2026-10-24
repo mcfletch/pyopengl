@@ -20,11 +20,11 @@ GL_CHAR = bytes
 GL_HALF_FLOAT = Constant( 'GL_HALF_FLOAT_ARB',0x140B)
 GL_HALF_NV = Constant( 'GL_HALF_NV', 0x1401 )
 GL_VOID_P = object()
-# GLintptr and GLsizeiptr are element types in their own right -- buffer
-# offsets and sizes, and VDPAU surface handles under the GLvdpauSurfaceNV
-# alias -- but GL names no enum for either, so arrays of them are keyed by
-# markers of our own, as GL_VOID_P is.  Here rather than in the raw _types
-# module because they are ours, not names the API has.
+# GLintptr and GLsizeiptr are element types used for buffer offsets and
+# sizes, and for VDPAU surface handles under the GLvdpauSurfaceNV alias.  GL
+# defines no enum for either, so arrays of them are keyed by PyOpenGL marker
+# objects, like GL_VOID_P.  They are defined here instead of in the raw
+# _types module because the GL API does not define these names.
 GL_INTPTR = object()
 GL_SIZEIPTR = object()
 

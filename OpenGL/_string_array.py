@@ -1,16 +1,16 @@
 """The argument type for a ``GLchar *const *`` parameter.
 
-An entry point that takes several strings -- ``glShaderSource``,
-``glTransformFeedbackVaryings``, ``glCreateShaderProgramv`` and their
-neighbours -- is declared as an array of pointers to nul-terminated strings.
-The bare ctypes type for that accepts only a pointer array the caller has
-already built, so this one converts as well: a string, a bytes, or a sequence
-of either becomes the array, and a pointer array is passed through.
+Entry points that take several strings, such as ``glShaderSource``,
+``glTransformFeedbackVaryings`` and ``glCreateShaderProgramv``, are declared
+with an array of pointers to nul-terminated strings.  The bare ctypes type
+accepts only a pointer array the caller has already built.  This type also
+converts a string, a bytes object, or a sequence of either into the array,
+and passes a pointer array through.
 
-What counts as one of those strings is decided here for every implementation
-of every such entry point -- this argument type, the ctypes wrapper's string
-converter, and what the C dispatch layer calls back into -- so that which forms
-work does not depend on which of them a call goes through.
+This module defines which values count as strings for all such entry
+points.  The argument type, the ctypes wrapper's string converter and the C
+dispatch layer's callback all use it, so each implementation accepts the
+same forms.
 """
 
 import ctypes
@@ -24,12 +24,11 @@ CHAR_POINTER_ARRAY = ctypes.POINTER(ctypes.POINTER(ctypes.c_char))
 
 
 def as_bytes(value):
-    """One string as the bytes the driver reads, or None where it is not one.
+    """Return one string as the bytes the driver reads, or None if it is not a string.
 
-    A ``str`` is UTF-8, which is what GLSL source and GLSL names are; a
-    ``bytes`` or ``bytearray`` is already the bytes and is taken as it stands,
-    since a caller who assembled one meant those bytes rather than whatever
-    encoding this would otherwise impose.
+    A ``str`` is encoded as UTF-8, the encoding of GLSL source and GLSL
+    names.  A ``bytes`` or ``bytearray`` is used unchanged, since the caller
+    chose those bytes.
     """
     if isinstance(value, str):
         return value.encode('utf-8')
@@ -39,7 +38,7 @@ def as_bytes(value):
 
 
 def as_bytes_list(value):
-    """The strings, as bytes, or None where `value` is not a set of strings."""
+    """Return the strings as a list of bytes, or None if `value` is not a set of strings."""
     one = as_bytes(value)
     if one is not None:
         return [one]
@@ -59,19 +58,19 @@ def as_bytes_list(value):
 class StringArray(CHAR_POINTER_ARRAY):
     """A ``char **`` argument, from strings or from a prepared array."""
 
-    #: What it points to.  A ctypes pointer subclass states this itself; the
-    #: base class's is not inherited, and an instance cannot be made without
-    #: it -- which is what a cast to this class asks for.
+    #: The pointed-to type.  A ctypes pointer subclass must set this itself,
+    #: because the base class's value is not inherited.  Without it no
+    #: instance can be made, and a cast to this class makes one.
     _type_ = ctypes.POINTER(ctypes.c_char)
 
     @classmethod
     def from_param(cls, value):
-        """The array of pointers ctypes should pass for `value`.
+        """Return the array of pointers ctypes should pass for `value`.
 
         The array of ``c_char_p`` holds a reference to each bytes object it
-        points into, and the cast result holds the array, so the text stays
-        alive for as long as ctypes keeps what this returns -- which is the
-        duration of the call.
+        points into, and the cast result holds the array.  ctypes keeps the
+        returned object for the duration of the call, so the text stays alive
+        until the call returns.
         """
         strings = as_bytes_list(value)
         if strings is None:

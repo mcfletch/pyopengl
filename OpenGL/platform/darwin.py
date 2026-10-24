@@ -71,17 +71,16 @@ class DarwinPlatform( baseplatform.BasePlatform ):
         return CGLSetCurrentContext
 
     def releaseCurrentContext( self ):
-        """Let go of the context this thread holds; answer whether there was one
+        """Release this thread's current context; True if one was released
 
-        CGL is the layer NSGL is built on, so a context made through either is
-        the one this releases.  See
+        Cocoa's ``NSOpenGLContext`` is built on CGL, so this releases a context
+        created through either API.  See
         :meth:`OpenGL.platform.baseplatform.BasePlatform.releaseCurrentContext`
-        for why a program with two GL bindings in it needs to be able to say
-        this.
+        for why a program using two GL binding APIs needs this.
 
-        The answer is what the platform reports afterwards rather than that the
-        call was made: a caller releases so that another binding API may take
-        the thread, and takes the answer as permission to.
+        The result is checked with ``CGLGetCurrentContext`` after the release.
+        A caller uses True to decide that another binding API can make its
+        context current on the thread.
         """
         if not self.GetCurrentContext():
             return False
@@ -89,13 +88,13 @@ class DarwinPlatform( baseplatform.BasePlatform ):
         return not self.GetCurrentContext()
 
     def getExtensionProcedure( self, name ):
-        """The address of an entry point, or None where the framework has none
+        """The address of an entry point, or None if the framework lacks it
 
-        macOS has no get-proc-address call: CGL provides none, and the OpenGL
-        framework exports every entry point it serves as an ordinary symbol,
-        which is what EXTENSIONS_USE_BASE_FUNCTIONS says.  So the dynamic
-        loader is asked, and a caller that wants an address rather than a
-        callable does not have to know which platform it is on.
+        CGL has no get-proc-address call.  The OpenGL framework exports every
+        entry point it implements as an ordinary symbol, as
+        EXTENSIONS_USE_BASE_FUNCTIONS records.  The address is therefore looked
+        up through the dynamic loader.  Callers that need an address get one
+        the same way on every platform.
         """
         if not isinstance( name, str ):
             name = name.decode( 'ascii' )

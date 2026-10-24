@@ -34,26 +34,25 @@ glRasterPosDispatch = {
 
 if _configflags.ERROR_CHECKING:
     def _block_checking( event ):
-        """Tell the checker a glBegin block opened or closed, if there is one.
+        """Report a glBegin block opening or closing to the error checker.
 
-        A platform with no desktop GL behind it has no ``glGetError`` to build
-        a checker from, and ``_errors._error_checker`` is then None -- at which
-        point ``glBegin`` is a null entry point like any other and should say
-        so. Calling through the absent checker first turned that into an
-        ``AttributeError`` against ``None``, from a frame naming neither the
-        function the caller asked for nor the library it is missing from.
+        A platform without desktop GL has no ``glGetError`` to build a checker
+        from, so ``_errors._error_checker`` is None.  ``glBegin`` is then a
+        null entry point, and calling it raises the usual null-function error.
+        Skipping the absent checker avoids an ``AttributeError`` on ``None``,
+        whose traceback names neither the function nor the missing library.
         """
         checker = _errors._error_checker
         if checker is not None:
             getattr( checker, event )( )
 
     def _suspend_c_checking( suspend ):
-        """Tell the C dispatch layer, if it is the one in use.
+        """Suspend or resume error checking in the C dispatch layer, if used.
 
-        glGetError between glBegin and glEnd is itself an invalid operation,
-        so both implementations stop checking for the block.  Imported here
-        rather than at module scope so that selecting the ctypes
-        implementation does not load the C extension at all.
+        Calling glGetError between glBegin and glEnd is an invalid operation,
+        so both implementations stop checking inside the block.  The C module
+        is imported inside the function, so selecting the ctypes
+        implementation never loads the C extension.
         """
         from OpenGL import _configflags
         if _configflags.DISPATCH != 'c':
@@ -73,16 +72,15 @@ if _configflags.ERROR_CHECKING:
         from OpenGL import error as _error
 
         if _error.take_lookup_inside_block( ):
-            # An address lookup PyOpenGL made inside the block recorded an
-            # error the caller did not cause, and it becomes visible only now.
-            # End the block with checking still off, then consume it -- there
-            # is no way to tell it apart from the caller's once the block is
-            # closed, and it is ours.
+            # An address lookup PyOpenGL made inside the block recorded a GL
+            # error the caller did not cause.  End the block with checking
+            # still off, then read and discard that error.  After the block
+            # closes it cannot be told apart from an error the caller caused.
             result = baseFunction( )
             _block_checking( 'onEnd' )
             _suspend_c_checking( False )
-            # The platform's own entry point: unchecked, and the same call
-            # whichever error checker is in use.
+            # The platform's own entry point, which is unchecked and is the
+            # same call for every error checker.
             from OpenGL.platform import PLATFORM as _platform
 
             _get_error = getattr( _platform.GL, 'glGetError', None )
@@ -98,11 +96,10 @@ else:
 
 @_lazy( full.glDeleteTextures )
 def glDeleteTextures( baseFunction, size, array=_NULL ):
-    """Delete specified set of textures
-    
-    If array is *not* passed then `size` must be a `GLuintArray`
-    compatible object which can be sized using `arraySize`, the 
-    result of which will be used as size.
+    """Delete the specified textures.
+
+    If `array` is not passed, `size` must be a `GLuintArray`-compatible
+    object.  Its `arraySize` is then used as the count.
     """
     if array is _NULL:
         ptr = arrays.GLuintArray.asArray( size )
@@ -116,9 +113,9 @@ def glMap2( baseFunction, arrayType ):
     def glMap2( target, u1, u2, v1, v2, points):
         """glMap2(target, u1, u2, v1, v2, points[][][]) -> None
 
-        This is a completely non-standard signature which doesn't allow for most
-        of the funky uses with strides and the like, but it has been like this for
-        a very long time...
+        This signature differs from the C API.  It takes the orders and
+        strides from the shape of ``points``, so custom strides are not
+        supported.
         """
         ptr = arrayType.asArray( points )
         uorder,vorder,vstride = arrayType.dimensions( ptr )
@@ -145,9 +142,8 @@ def glMap1( baseFunction, arrayType ):
     def glMap1(target,u1,u2,points):
         """glMap1(target, u1, u2, points[][][]) -> None
 
-        This is a completely non-standard signature which doesn't allow for most
-        of the funky uses with strides and the like, but it has been like this for
-        a very long time...
+        This signature differs from the C API.  It takes the order and stride
+        from the shape of ``points``, so custom strides are not supported.
         """
         ptr = arrayType.asArray( points )
         dims = arrayType.dimensions( ptr )
@@ -218,7 +214,7 @@ def glTexParameter( target, pname, parameter ):
         return full.glTexParameterfv( target, pname, value )
 
 def glMaterial( faces, constant, *args ):
-    """glMaterial -- convenience function to dispatch on argument type
+    """glMaterial - convenience function to dispatch on argument type
 
     If passed a single argument in args, calls:
         glMaterialfv( faces, constant, args[0] )
@@ -239,10 +235,10 @@ glColorDispatch = {
 }
 
 def glColor( *args ):
-    """glColor*f* -- convenience function to dispatch on argument type
+    """Call the glColor variant that matches the arguments
 
-    dispatches to glColor3f, glColor2f, glColor4f, glColor3f, glColor2f, glColor4f
-    depending on the arguments passed...
+    Two, three or four numbers call glColor2d, glColor3d or glColor4d.  A
+    single sequence of three or four values calls glColor3fv or glColor4fv.
     """
     arglen = len(args)
     if arglen == 1:

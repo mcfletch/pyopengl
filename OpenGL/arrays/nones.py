@@ -16,7 +16,7 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
 if NoneHandler is None:
     from OpenGL.arrays import formathandler
     class NoneHandler( formathandler.FormatHandler ):
-        """Numpy-specific data-type handler for OpenGL"""
+        """Data-type handler for None, which is passed as a NULL pointer"""
         HANDLED_TYPES = (type(None), )
         def from_param( self, value, typeCode=None  ):
             """Convert to a ctypes pointer value"""

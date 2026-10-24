@@ -42,9 +42,9 @@ if not BufferHandler:
 
             @classmethod
             def from_param(cls, value, typeCode=None):
-                # Through `dataPointer`, which reads the address out of
-                # whichever shape the value arrived in -- `asArray` now
-                # answers with a memoryview, which has no `.buf`.
+                # Uses `dataPointer`, which reads the address from any of the
+                # accepted types.  `asArray` returns a memoryview, which has
+                # no `.buf`.
                 return _types.GLvoidp(cls.dataPointer(value))
 
         else:
@@ -77,16 +77,16 @@ if not BufferHandler:
 
         @staticmethod
         def _view(value):
-            """`value` as a memoryview, whatever shape it arrived in.
+            """Return `value` as a memoryview, whatever type it arrived as.
 
-            The accessors below are called with whatever a caller passed as
-            well as with what `asArray` answered, so each has to read both.
+            The accessors below receive both the caller's original value and
+            the result of `asArray`, so each must accept both.
             """
             if isinstance(value, memoryview):
                 return value
             if isinstance(value, _buffers.Py_buffer):
-                # A structure a previous release's `asArray` produced, and
-                # what `dataPointer` still builds internally.
+                # A Py_buffer structure, as built internally by
+                # `dataPointer` and returned by `asArray` in older releases.
                 return memoryview(
                     (ctypes.c_ubyte * value.len).from_address(value.buf))
             return memoryview(value)
@@ -118,15 +118,13 @@ if not BufferHandler:
         def asArray(cls, value, typeCode=None):
             """Convert given value to an array value of given typeCode
 
-            A ``memoryview``, which is what the compiled handler answers with
-            too.  It used to be a ``Py_buffer`` -- and that is a
-            ``ctypes.Structure``, which ctypes passes to a ``void *``
-            parameter as *a pointer to the structure*.  So an entry point
-            taking ``const void *data`` received the address of the wrapper
-            and uploaded the wrapper's own bytes: right size, no GL error, and
-            a pointer value in the buffer where the data should be.  A
-            memoryview is passed by ctypes as the address of its data, which
-            is what every one of these calls means.
+            Returns a ``memoryview``, as the compiled handler does.  ctypes
+            passes a memoryview to a ``void *`` parameter as the address of
+            its data.  A ``Py_buffer`` is a ``ctypes.Structure``, which ctypes
+            passes as a pointer to the structure.  An entry point taking
+            ``const void *data`` would then upload the wrapper's own bytes:
+            the size is right, there is no GL error, and the buffer holds a
+            pointer value instead of the data.
 
             See https://github.com/mcfletch/pyopengl/issues/175
             """

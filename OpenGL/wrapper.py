@@ -1,4 +1,4 @@
-"""The wrapping code for providing natural ctypes-based OpenGL interface"""
+"""Wrappers that give ctypes OpenGL functions a natural Python interface"""
 
 import ctypes, logging
 from OpenGL import platform, error, _configflags
@@ -57,11 +57,11 @@ none_or_pass.optional = True
 def attach_arguments(err, cArguments):
     """Attach the arguments the call was about to make to ``err``.
 
-    ctypes says which argument it could not convert and not what was in it,
-    which is most of the diagnosis -- so the converted arguments go on the
-    error.  Shortened, because a GL call's arguments are routinely a mesh or a
-    texture and formatting one produces megabytes of digits in a message
-    nobody can then read.  See :func:`OpenGL._bytes.short_repr` and
+    A ctypes conversion error names the argument it could not convert but
+    not its value, so the converted arguments are added to the error.  They
+    are shortened, because a GL call's arguments are often a mesh or a
+    texture, and formatting one in full produces megabytes of digits.  See
+    :func:`OpenGL._bytes.short_repr` and
     https://github.com/mcfletch/pyopengl/issues/114.
     """
     err.args = err.args + (short_repr_tuple(cArguments),)
@@ -72,28 +72,28 @@ class Wrapper(LateBind):
 
     Attributes:
 
-        wrappedOperation -- base operation, normally a ctypes function
+        wrappedOperation - base operation, normally a ctypes function
             with data-types and error-checking specified
-        pyConverters -- converters for incoming Python arguments,
+        pyConverters - converters for incoming Python arguments,
             provide 1:1 mapping to incoming Python arguments, can
             suppress an argument from the argument-set as well
                 see setPyConverter
-        pyConverterNames -- caching/storage of the argument names
+        pyConverterNames - caching/storage of the argument names
             for the Python converters
-        cConverters -- converters for incoming C-level arguments
+        cConverters - converters for incoming C-level arguments
             produce Python-level objects in 1:1 mapping to ctypes
             arguments from pyConverters results
                 see setCConverter
-        cResolvers -- converters turning Python-level objects into
+        cResolvers - converters turning Python-level objects into
             ctypes-compatible data-types
                 see setCResolver
 
     Generic Attributes:
 
-        {ARG1}_LOOKUP_{ARG2} -- lookup dictionaries to provide sizes for
+        {ARG1}_LOOKUP_{ARG2} - lookup dictionaries to provide sizes for
             ARG1 output value from the value of ARG2, provided for
             documentation/reference
-        {ARG1}_FROM_{ARG2} -- lookup functions to provide sizes for ARG1
+        {ARG1}_FROM_{ARG2} - lookup functions to provide sizes for ARG1
             output value from the value of ARG2, provided for
             documentation/reference
     """
@@ -138,12 +138,13 @@ class Wrapper(LateBind):
     def pyArgNames(self):
         """The names of the arguments a Python caller passes, in order
 
-        The C argument names, less whichever ones ``setPyConverter`` removed:
-        a count read off an array, an output the wrapper allocates.  Which
-        converters were installed does not change it -- with ``ERROR_ON_COPY``
-        an array is passed through without one, and the call is the same -- so
-        this is what to read a wrapper's call from, rather than
-        ``pyConverterNames``, which exists only once a converter has been set.
+        These are the C argument names, minus the ones ``setPyConverter``
+        removed, such as a count taken from an array's length or an output the
+        wrapper allocates.  The installed converters do not change the result.
+        With ``ERROR_ON_COPY`` an array is passed through without a converter,
+        and the call signature is the same.  Use this attribute to read a
+        wrapper's signature.  ``pyConverterNames`` exists only after a
+        converter has been set.
         """
         argNames = getattr(self, 'pyConverterNames', None)
         if argNames is None:
@@ -181,11 +182,11 @@ class Wrapper(LateBind):
     ):
         """Set the given argName to be an output array
 
-        size -- either a tuple compatible with arrayType.zeros or
+        size - either a tuple compatible with arrayType.zeros or
             a function taking pname to produce such a value.
-        arrayType -- array data-type used to generate the output
+        arrayType - array data-type used to generate the output
             array using the zeros class method...
-        pnameArg -- optional argument passed into size function, that
+        pnameArg - optional argument passed into size function, that
             is, the name of the argument whose *value* will be passed
             to the size function, often the name of an input argument
             to be "sized" to match the output argument.
@@ -259,13 +260,12 @@ class Wrapper(LateBind):
         def setInputArraySize(self, argName, size=None):
             """Decorate function with vector-handling code for a single argument
 
-            if OpenGL.ERROR_ON_COPY is False, then we return the
-            named argument, converting to the passed array type,
-            optionally checking that the array matches size.
+            This is the version used when OpenGL.ERROR_ON_COPY is False.  It
+            converts the named argument to the passed array type, and checks
+            that the array matches size when size is given.
 
-            if OpenGL.ERROR_ON_COPY is True, then we will dramatically
-            simplify this function, only wrapping if size is True, i.e.
-            only wrapping if we intend to do a size check on the array.
+            When OpenGL.ERROR_ON_COPY is True, a simpler version is used.  It
+            wraps the argument only when a size check is requested.
             """
             arrayType = self.typeOfArg(argName)
             pointerCConverter = None
@@ -290,9 +290,9 @@ class Wrapper(LateBind):
                     byElement = arraydatatype.arrayTypeForElement(element)
                     if byElement is not None:
                         # A pointer to a type an array class covers.  The
-                        # declaration names the pointer rather than the array
-                        # -- GLintptr and GLsizeiptr parameters do -- and the
-                        # conversion is the array class's all the same.
+                        # declaration names the pointer type instead of the
+                        # array type (GLintptr and GLsizeiptr parameters do
+                        # this), and the array class still does the conversion.
                         arrayType = byElement
                         pointerCConverter = converters.getPyArgsPointer(
                             argName, byElement)
@@ -300,11 +300,10 @@ class Wrapper(LateBind):
                         # is a ctypes array-of-pointers data-type...
                         # requires special handling no matter what...
                         #
-                        # Only where the element is itself a pointer: a simple
-                        # ctypes type also carries a ``_type_``, which is its
-                        # struct format character, so testing for the attribute
-                        # alone sent every pointer-to-simple-type down here to
-                        # be silently left unconverted.
+                        # Only when the element is itself a pointer.  A simple
+                        # ctypes type also has a ``_type_``, its struct format
+                        # character, so testing for the attribute alone would
+                        # leave every pointer-to-simple-type unconverted.
                         if hasattr(element, 'contents') or hasattr(
                             getattr(element, '_type_', None), '_type_'
                         ):
@@ -330,21 +329,18 @@ class Wrapper(LateBind):
         def setInputArraySize(self, argName, size=None):
             """Decorate function with vector-handling code for a single argument
 
-            With ERROR_ON_COPY the conversion is left to the declared type
-            wherever that type can do it: an array class's own ``from_param``
-            takes whatever already has a data pointer and refuses what would
-            have to be copied, which is what the flag asks for.
-            Installing a converter to say the same thing again would cost a
-            call per array argument per draw, which is what the flag is set to
-            avoid.
+            With ERROR_ON_COPY, the declared type does the conversion wherever
+            it can.  An array class's ``from_param`` accepts any object that
+            already has a data pointer and refuses one that would need a copy.
+            An extra converter would repeat that check and add a call per
+            array argument per draw.
 
-            Two cases it cannot leave alone. A **size**, which is a check the
-            type does not make. And a parameter declared as a **bare pointer**
-            -- GLintptr and GLsizeiptr parameters are -- where the ctypes
-            pointer type refuses every array there is, including the one whose
-            memory is exactly what the call wants; the array class for the
-            pointer's element is what converts it, and it refuses a copy the
-            same way.
+            Two cases still get a converter.  The first is a size, because the
+            type does not check sizes.  The second is a parameter declared as a
+            bare pointer, as GLintptr and GLsizeiptr parameters are.  The
+            ctypes pointer type refuses every array, so the array class for
+            the pointer's element converts it instead, and that class also
+            refuses a copy.
             """
             arrayType = self.typeOfArg(argName)
             if not hasattr(arrayType, 'asArray'):
@@ -355,8 +351,9 @@ class Wrapper(LateBind):
                     else None
                 )
                 if byElement is None:
-                    # Nothing here knows how to convert it, and the flag is a
-                    # promise not to copy rather than a promise to convert.
+                    # No array class converts this type.  ERROR_ON_COPY forbids
+                    # copies and does not require a conversion, so the argument
+                    # is passed as declared.
                     return self
                 if size is not None:
                     self.setPyConverter(
@@ -381,27 +378,28 @@ class Wrapper(LateBind):
     def setInputArrayCount(self, argName, countArg, multiplier=1):
         """Convert an input array, refusing fewer than countArg * multiplier elements
 
-        argName -- the array argument
-        countArg -- the argument saying how many items the driver reads
-        multiplier -- elements per item: ``glViewportArrayv`` reads four
+        argName - the array argument
+        countArg - the argument giving how many items the driver reads
+        multiplier - elements per item: ``glViewportArrayv`` reads four
             floats for each of ``count`` viewports
 
-        A longer array is accepted, since the driver reads the stated count
-        and no more.  A ``GLchar *const *`` argument is counted in strings, with
-        a multiplier of one, and one the caller built as a pointer array is
-        passed unmeasured.  With ``ARRAY_SIZE_CHECKING`` off a numeric array is
-        converted and not measured, which is ``setInputArraySize(argName,
-        None)``; the strings are counted either way, for the reason below.
+        A longer array is accepted, since the driver reads only the stated
+        count.  A ``GLchar *const *`` argument is counted in strings, with a
+        multiplier of one.  A pointer array the caller built is passed without
+        a check.  With ``ARRAY_SIZE_CHECKING`` off, a numeric array is
+        converted without a check, as ``setInputArraySize(argName, None)``
+        does.  Strings are counted in both cases, for the reason in the
+        comment below.
         """
         arrayType = self.typeOfArg(argName)
         if isinstance(arrayType, type) and issubclass(arrayType, StringArray):
             # A list of strings counts itself; the argument type converts it.
             #
-            # Measured regardless of ``ARRAY_SIZE_CHECKING``, because the
-            # pointer array the driver reads is one PyOpenGL allocates from
-            # that list and sizes by its length.  The flag is about arrays the
-            # caller owns and vouches for; a count larger than the list is a
-            # read past the end of a buffer built here.
+            # Checked whatever ``ARRAY_SIZE_CHECKING`` says.  PyOpenGL
+            # allocates the pointer array the driver reads, sized by the
+            # list's length.  The flag covers arrays the caller owns, and a
+            # count larger than the list would read past the end of this
+            # buffer.
             self.setPyConverter(
                 argName, arrayhelpers.StringArrayCountChecked(countArg)
             )
@@ -424,9 +422,9 @@ class Wrapper(LateBind):
     def setPyConverter(self, argName, function=NULL):
         """Set Python-argument converter for given argument
 
-        argName -- the argument name which will be coerced to a usable internal
+        argName - the argument name which will be coerced to a usable internal
             format using the function provided.
-        function -- None (indicating a simple copy), NULL (default) to eliminate
+        function - None (indicating a simple copy), NULL (default) to eliminate
             the argument from the Python argument-list, or a callable object with
             the signature:
 
@@ -463,9 +461,9 @@ class Wrapper(LateBind):
     def setCConverter(self, argName, function):
         """Set C-argument converter for a given argument
 
-        argName -- the argument name whose C-compatible representation will
+        argName - the argument name whose C-compatible representation will
             be calculated with the passed function.
-        function -- None (indicating a simple copy), a non-callable object to
+        function - None (indicating a simple copy), a non-callable object to
             be copied into the result-list itself, or a callable object with
             the signature:
 
@@ -475,11 +473,10 @@ class Wrapper(LateBind):
             pyConverters already applied, index is the index of the C argument
             and wrappedOperation is the underlying function.
 
-        C-argument converters are your chance to expand/contract a Python
-        argument list (pyArgs) to match the number of arguments expected by
-        the ctypes baseOperation.  You can't have a "null" C-argument converter,
-        as *something* has to be passed to the C-level function in the
-        parameter.
+        C-argument converters expand or contract a Python argument list
+        (pyArgs) to match the number of arguments the ctypes baseOperation
+        expects.  A "null" C-argument converter is not allowed, because the
+        C-level function needs a value for every parameter.
         """
         if not hasattr(self, 'cConverters'):
             self.cConverters = [None] * len(self.wrappedOperation.argNames)
@@ -504,7 +501,7 @@ class Wrapper(LateBind):
         return self
 
     def setCResolver(self, argName, function=NULL):
-        """Set C-argument converter for a given argument"""
+        """Set the C-argument resolver for a given argument"""
         if not hasattr(self, 'cResolvers'):
             self.cResolvers = [None] * len(self.wrappedOperation.argNames)
         try:
@@ -603,11 +600,11 @@ class Wrapper(LateBind):
     def finaliseCall(self):
         """Produce specialised versions of call for finalised wrapper object
 
-        This returns a version of __call__ that only does that work which is
-        required by the particular wrapper object
+        Returns a version of __call__ that does only the work this wrapper
+        object needs.
 
-        This is essentially a huge set of expanded nested functions, very
-        inelegant...
+        The body is a large set of expanded nested functions, one for each
+        combination of the converters and hooks a wrapper can have.
         """
         pyConverters = getattr(self, 'pyConverters', None)
         cConverters = getattr(self, 'cConverters', None)
@@ -1766,11 +1763,10 @@ class MultiReturn(object):
     def finalise(self, wrapper):
         """Resolve each child's argument names to indices.
 
-        The wrapper finalises whatever its ``returnValues`` is, and for a
-        single output that is the converter itself.  For several it is this,
-        so the children are only reached through here -- and a child that
-        returns a named argument answers about argument zero until it has
-        been reached.
+        The wrapper finalises its ``returnValues``.  With one output, that is
+        the converter itself.  With several, it is this object, so the
+        children are finalised only here.  Until then, a child that returns a
+        named argument returns argument zero.
         """
         for child in self.children:
             if hasattr(child, 'finalise'):
@@ -1790,10 +1786,9 @@ class MultiReturn(object):
 def wrapper(wrappedOperation):
     """Create a Wrapper sub-class instance for the given wrappedOperation
 
-    The purpose of this function is to create a subclass of Wrapper which
-    has the __doc__ and __name__ of the wrappedOperation so that the instance of
-    the wrapper will show up as <functionname instance @ address> by default,
-    and will have the docstring available naturally in pydoc and the like.
+    The subclass has the __doc__ and __name__ of the wrappedOperation, so the
+    wrapper instance shows up as <functionname instance @ address> by default,
+    and pydoc and similar tools show its docstring.
     """
     if isinstance(wrappedOperation, Wrapper):
         return wrappedOperation

@@ -31,7 +31,7 @@ STORAGES = [ storedPointers, storedWeakPointers ]
 def getContext( context = None ):
     """Get the context (if passed, just return)
     
-    context -- the context ID, if None, the current context
+    context - the context ID, if None, the current context
     """
     if context is None:
         context = platform.GetCurrentContext()
@@ -44,12 +44,12 @@ def getContext( context = None ):
 def setValue( constant, value, context=None, weak=False ):
     """Set a stored value for the given context
     
-    constant -- Normally a GL constant value, but can be any hashable value 
-    value -- the value to be stored.  If weak is true must be 
+    constant - Normally a GL constant value, but can be any hashable value 
+    value - the value to be stored.  If weak is true must be 
         weak-reference-able.  If None, then the value will be deleted from 
         the storage 
-    context -- the context identifier for which we're storing the value
-    weak -- if true, value will be stored with a weakref
+    context - the context identifier for which we're storing the value
+    weak - if true, value will be stored with a weakref
         Note: you should always pass the same value for "weak" for a given 
         constant, otherwise you will create two storages for the constant.
     """
@@ -79,8 +79,8 @@ def setValue( constant, value, context=None, weak=False ):
 def delValue( constant, context=None ):
     """Delete the specified value for the given context
     
-    constant -- Normally a GL constant value, but can be any hashable value 
-    context -- the context identifier for which we're storing the value
+    constant - Normally a GL constant value, but can be any hashable value 
+    context - the context identifier for which we're storing the value
     """
     context = getContext( context )
     found = False
@@ -97,8 +97,8 @@ def delValue( constant, context=None ):
 def getValue( constant, context = None ):
     """Get a stored value for the given constant
     
-    constant -- unique ID for the type of data being retrieved
-    context -- the context ID, if None, the current context
+    constant - unique ID for the type of data being retrieved
+    context - the context ID, if None, the current context
     """
     context = getContext( context )
     for storage in STORAGES:

@@ -1,49 +1,47 @@
-"""Offscreen OpenGL on Windows: a context with nothing on screen.
+"""Offscreen OpenGL contexts on Windows, rendering to a pbuffer.
 
-WGL binds a rendering context to a *device context*, and Windows hands out
-device contexts for things it can draw on.  There is no "give me a context on
-this adapter" call to make, as EGL has, and no windowless context, as CGL has.
-What Windows offers instead is the **pbuffer**: a drawable the driver allocates
-out of its own memory, with a device context of its own that belongs to no
-window and appears nowhere.  That is what this module renders on::
+WGL (the Windows OpenGL interface) binds a rendering context to a *device
+context*, which Windows creates for a window, a bitmap or a printer.  WGL has
+no call to create a context on an adapter, as EGL has, and no windowless
+context, as CGL has.  It has the pbuffer, a drawable the driver allocates in
+its own memory.  A pbuffer has its own device context, which belongs to no
+window and is never displayed.  This module renders to a pbuffer::
 
     from OpenGL.WGL.offscreen import headless_context
 
     with headless_context(width=640, height=480) as context:
         ...                                 # the context is current here
 
-A pbuffer *is* the default framebuffer, so ``glClear``, ``glReadPixels`` and a
-screenshot behave exactly as they do on a window and nothing drawing into it
-has to know where it is.  (CGL's headless context differs here: it has no
-default framebuffer at all and needs a framebuffer object bound before
-anything can be drawn.)
+The pbuffer is the context's default framebuffer.  ``glClear``,
+``glReadPixels`` and screenshots work as they do on a window.  (A CGL
+offscreen context has no default framebuffer, and must bind a framebuffer
+object before drawing.)
 
-**One window is created and never shown.**  The calls that make all of this
-possible -- ``wglChoosePixelFormatARB``, ``wglCreatePbufferARB``,
-``wglCreateContextAttribsARB`` -- are WGL extensions, and an extension entry
-point is resolved through ``wglGetProcAddress``, which answers only while a
-context is current.  So there is a chicken and egg, and Windows gives one way
-out of it: a window, a pixel format on its device context, and an OpenGL 1.1
-context on that, used for nothing but resolving the entry points that build the
-real thing.  :func:`bootstrap` creates one of those per process, sized 1x1,
-``WS_POPUP``, never shown and never given to a message loop.  The pbuffer
-outlives it and is not tied to it.
+The module creates one hidden window per process.  The functions that create
+the pbuffer and context (``wglChoosePixelFormatARB``, ``wglCreatePbufferARB``
+and ``wglCreateContextAttribsARB``) are WGL extensions.  Extension entry
+points are resolved with ``wglGetProcAddress``, which works only while a
+context is current.  :func:`bootstrap` therefore creates a window, sets a pixel
+format on its device context, and creates an OpenGL 1.1 context on it, used
+only to resolve those entry points.  The window is 1x1 and ``WS_POPUP``.  It
+is never shown and has no message loop.  The pbuffer is not tied to the
+window, and can outlive it.
 
-What that costs is a window station and a desktop, which a service running in
-session 0 has.  What it does not need is anything on screen, a compositor, a
-logged-in session, or a remote-desktop connection that stays open.
+The window needs a window station and a desktop, which a service running in
+session 0 has.  It does not need a visible display, a compositor, a logged-in
+session or an open remote-desktop connection.
 
-**Where this works.**  ``WGL_ARB_pbuffer``, ``WGL_ARB_pixel_format`` and
-``WGL_ARB_create_context`` are what a driver has to offer, and every hardware
-OpenGL driver for Windows has offered them since about 2009.  Microsoft's own
-fallback rasteriser -- the GDI generic implementation, which is what a machine
-with no vendor driver installed has -- offers none of them and is OpenGL 1.1
-besides.  :func:`available` answers whether this machine can render offscreen,
-and construction raises :class:`WGLError` naming what is missing rather than
-failing obscurely, so an application can try it and fall back.
+The driver must offer ``WGL_ARB_pbuffer``, ``WGL_ARB_pixel_format`` and
+``WGL_ARB_create_context``.  Every hardware OpenGL driver for Windows has
+offered them since about 2009.  Microsoft's GDI generic implementation, used
+on a machine with no vendor driver installed, offers none of them and supports
+only OpenGL 1.1.  :func:`available` returns the extensions this machine is
+missing.  Construction raises :class:`WGLError` naming the missing extensions,
+so an application can try an offscreen context and fall back to something
+else.
 
-The Mesa and ANGLE builds shipped for Windows provide EGL instead, and
-``OpenGL.EGL`` reaches those; ANGLE offers OpenGL ES rather than desktop GL.
+The Mesa and ANGLE builds for Windows provide EGL, which ``OpenGL.EGL``
+supports.  ANGLE provides OpenGL ES and no desktop GL.
 """
 
 import contextlib
@@ -67,11 +65,11 @@ __all__ = (
 
 
 class WGLError(RuntimeError):
-    """A WGL or Win32 call failed, or the machine cannot serve the request.
+    """A WGL or Win32 call failed, or the machine cannot meet the request.
 
-    ``operation`` names the call and ``code`` is the ``GetLastError`` value
-    where there was one, so a caller can tell "this driver has no pbuffers"
-    from "the size asked for was too large" without reading the message.
+    ``operation`` names the call.  ``code`` is the ``GetLastError`` value, or
+    zero if there was none.  A caller can use these to tell a driver without
+    pbuffers from a size that is too large, without parsing the message.
     """
 
     def __init__(self, operation, code=0):
@@ -83,17 +81,16 @@ class WGLError(RuntimeError):
             super().__init__(operation)
 
 
-# -- the Win32 surface this needs ------------------------------------------
+# -- Win32 declarations -----------------------------------------------------
 #
-# Declared here rather than reached for through a wrapper package: PyOpenGL
-# depends on nothing but ctypes, and this is eight functions.
+# The eight Win32 functions this module uses are declared here, so PyOpenGL
+# needs no wrapper package beyond ctypes.
 #
-# In plain ctypes types rather than ``ctypes.wintypes``, and loaded on use
-# rather than at import, so that this module imports on any platform and the
-# half of it that only builds attribute lists can be read and tested from one.
-# A handle is ``c_void_p``: Windows documents USER and GDI handles as 32-bit
-# values sign-extended to 64 bits, so half of the real ones have their top
-# half set and anything narrower loses it.
+# They use plain ctypes types instead of ``ctypes.wintypes``, and are loaded on
+# first use.  The module therefore imports on any platform, and the functions
+# that build attribute lists can be tested there.  A handle is ``c_void_p``.
+# Windows documents USER and GDI handles as 32-bit values sign-extended to 64
+# bits, so a narrower type would lose the top half of many real handles.
 
 _HANDLE = ctypes.c_void_p
 _DWORD = ctypes.c_uint32
@@ -101,11 +98,12 @@ _WORD = ctypes.c_uint16
 
 
 class PIXELFORMATDESCRIPTOR(ctypes.Structure):
-    """What ``ChoosePixelFormat`` and ``SetPixelFormat`` describe a format with.
+    """The pixel format description ``ChoosePixelFormat`` and
+    ``SetPixelFormat`` take.
 
-    Only the bootstrap window needs one: the pbuffer's format is chosen by
-    :func:`pixel_format_attributes` through ``wglChoosePixelFormatARB``, which
-    is the call that can express "must be able to draw to a pbuffer" at all.
+    Only the bootstrap window uses it.  The pbuffer's format comes from
+    :func:`pixel_format_attributes` and ``wglChoosePixelFormatARB``, the only
+    call that can require a format able to draw to a pbuffer.
     """
 
     _fields_ = [
@@ -128,9 +126,9 @@ class PIXELFORMATDESCRIPTOR(ctypes.Structure):
 class WNDCLASSW(ctypes.Structure):
     """The window class the bootstrap window is registered under.
 
-    ``lpfnWndProc`` is a plain pointer here and is filled with the address of
-    ``DefWindowProcW``: the window handles no messages of its own, so there is
-    no Python callback to declare a prototype for -- and none to keep alive.
+    ``lpfnWndProc`` is a plain pointer set to the address of
+    ``DefWindowProcW``.  The window handles no messages itself, so there is no
+    Python callback to declare or keep alive.
     """
 
     _fields_ = [
@@ -183,9 +181,8 @@ _win32 = None
 def win32():
     """The Win32 entry points, loaded and declared on first use.
 
-    Raises :class:`WGLError` rather than ``AttributeError`` off a platform
-    with no ``ctypes.WinDLL``, so a caller that reached here by accident is
-    told what it reached for.
+    Raises :class:`WGLError` on a platform without ``ctypes.WinDLL``.  The
+    message names the modules to use on Linux and macOS.
     """
     global _win32
     if _win32 is None:
@@ -197,51 +194,50 @@ def win32():
         _win32 = _Win32()
     return _win32
 
-#: ``CS_OWNDC``: the window keeps its own device context rather than borrowing
-#: one from a pool.  A pixel format is set on a device context and stays set,
-#: so a borrowed one loses it the moment it is returned.
+#: ``CS_OWNDC``: the window keeps its own device context instead of borrowing
+#: one from a shared pool.  The pixel format is set on the device context, and
+#: a borrowed device context loses it when returned to the pool.
 _CS_OWNDC = 0x0020
 
-#: ``WS_POPUP``: no frame, no caption, no parent, and -- with ``WS_VISIBLE``
-#: left off -- nothing on screen.
+#: ``WS_POPUP``: no frame, no caption and no parent.  Without ``WS_VISIBLE``
+#: the window is not shown.
 _WS_POPUP = 0x80000000
 
 _PFD_DRAW_TO_WINDOW = 0x00000004
 _PFD_SUPPORT_OPENGL = 0x00000020
 _PFD_TYPE_RGBA = 0
 
-#: ``ERROR_CLASS_ALREADY_EXISTS`` from ``RegisterClass``, which is not a
-#: failure: the class this process wanted is there.
+#: ``ERROR_CLASS_ALREADY_EXISTS`` from ``RegisterClass``.  It means the class
+#: is already registered, and is not treated as a failure.
 _ERROR_CLASS_ALREADY_EXISTS = 1410
 
-#: The class the bootstrap window is registered under.  Registration is
-#: per-module-instance, so the name has to be one nothing else will take.
+#: The class the bootstrap window is registered under.  Registration is per
+#: module instance, so the name must not clash with another class.
 _WINDOW_CLASS = 'PyOpenGLOffscreenBootstrap'
 
 
-# -- what a request may ask for --------------------------------------------
+# -- request options ----------------------------------------------------------
 
-#: The context profiles ``wglCreateContextAttribsARB`` offers, by the name this
-#: module takes for them.  ``'legacy'`` asks for no profile at all, which is
-#: what a driver answers with its own default and the only choice below GL 3.2.
+#: The context profiles ``wglCreateContextAttribsARB`` offers, keyed by the
+#: names this module uses.  ``'legacy'`` requests no profile, so the driver
+#: uses its default.  It is the only choice below GL 3.2.
 PROFILES = ('core', 'compatibility', 'legacy')
 
-#: Whether the pixel format has to be one the GPU draws.  ``'accelerated'`` is
-#: what anything caring about speed wants; ``'any'`` lets the driver answer
-#: with whatever it has, which is what a machine with an unusual or virtualised
-#: adapter may need.
+#: Whether the pixel format must be GPU-accelerated.  ``'accelerated'``
+#: requires full acceleration.  ``'any'`` accepts any format the driver has,
+#: which a machine with an unusual or virtualised adapter may need.
 ACCELERATION_KINDS = ('accelerated', 'any')
 
-#: The extensions an offscreen context is built from.  A driver missing any of
-#: them cannot serve one, and :func:`available` says so by name.
+#: The extensions an offscreen context needs.  :func:`available` returns the
+#: names of any the driver lacks.
 REQUIRED_EXTENSIONS = (
     'WGL_ARB_pixel_format',
     'WGL_ARB_pbuffer',
     'WGL_ARB_create_context',
 )
 
-#: Additionally required to ask for a named profile.  Without it the only
-#: context available is the driver's default, which is ``'legacy'``.
+#: Also required for a named profile.  Without it the only context available
+#: is the driver's default, ``'legacy'``.
 PROFILE_EXTENSION = 'WGL_ARB_create_context_profile'
 
 
@@ -256,16 +252,16 @@ def pixel_format_attributes(
 ):
     """The attribute list ``wglChoosePixelFormatARB`` takes, as plain integers.
 
-    Pure, so what a caller asked for can be read off without a Windows machine
-    to ask.  The sizes are bits per buffer, ``color_bits`` counting the three
-    colour channels together as WGL does.  A size of zero or less is left out
-    rather than requested as zero, so the driver picks.
+    The function makes no WGL calls, so it runs on any platform.  The sizes
+    are bits per buffer.  As in WGL, ``color_bits`` counts the three colour
+    channels together.  A size of zero or less is left out of the list, so the
+    driver picks it.
 
-    ``WGL_DRAW_TO_PBUFFER_ARB`` is always requested and is the point of the
-    list: it is the one thing the old ``ChoosePixelFormat`` cannot express, and
-    a format without it produces a pbuffer the driver refuses to create.
+    ``WGL_DRAW_TO_PBUFFER_ARB`` is always requested.  ``ChoosePixelFormat``
+    cannot express it, and the driver refuses to create a pbuffer with a
+    format that lacks it.
 
-    The list is terminated with a zero, which is how WGL knows where it ends.
+    The list ends with a zero, as WGL requires.
     """
     from OpenGL.WGL.ARB import multisample, pbuffer, pixel_format
 
@@ -277,10 +273,9 @@ def pixel_format_attributes(
         pixel_format.WGL_SUPPORT_OPENGL_ARB, 1,
         pixel_format.WGL_PIXEL_TYPE_ARB, pixel_format.WGL_TYPE_RGBA_ARB,
         pixel_format.WGL_COLOR_BITS_ARB, int(color_bits),
-        # Asked for explicitly rather than left to the driver: a format is a
-        # match if it is *at least* what was asked for, and single-buffered is
-        # what an offscreen surface wants -- there is nothing to present to,
-        # and a back buffer nobody swaps is memory spent on nothing.
+        # Always stated, because a format matches if it has at least what was
+        # requested.  An offscreen surface is never presented, so a back
+        # buffer would waste memory.
         pixel_format.WGL_DOUBLE_BUFFER_ARB, 1 if double_buffer else 0,
     ]
     if acceleration == 'accelerated':
@@ -303,10 +298,10 @@ def context_attributes(profile='core', version=(3, 3), debug=False,
                        forward_compatible=False):
     """The attribute list ``wglCreateContextAttribsARB`` takes.
 
-    Pure, as :func:`pixel_format_attributes` is.  ``profile`` is one of
-    :data:`PROFILES`; ``'legacy'`` names no profile bit, which is what a
-    request below GL 3.2 must do -- the profile mask did not exist there, and a
-    driver handed one refuses the whole request.
+    Like :func:`pixel_format_attributes`, it makes no WGL calls.  ``profile``
+    is one of :data:`PROFILES`.  ``'legacy'`` sets no profile bit, as a
+    request below GL 3.2 must.  The profile mask does not exist below 3.2, and
+    a driver given one refuses the request.
     """
     from OpenGL.WGL.ARB import create_context, create_context_profile
 
@@ -345,10 +340,9 @@ def _ints(values):
 class _Bootstrap:
     """A hidden window and an OpenGL 1.1 context on it, to resolve WGL from.
 
-    One per process, from :func:`bootstrap`.  It exists because the calls that
-    build an offscreen context are extensions, and an extension entry point can
-    only be resolved while some context is current.  Nothing is ever drawn
-    through it.
+    :func:`bootstrap` creates one per process.  The calls that create an
+    offscreen context are extensions, and an extension entry point resolves
+    only while a context is current.  Nothing is drawn with this context.
     """
 
     hwnd = None
@@ -399,17 +393,17 @@ class _Bootstrap:
         declaration.lpszClassName = _WINDOW_CLASS
         if not api.user32.RegisterClassW(ctypes.byref(declaration)):
             code = ctypes.get_last_error()
-            # ERROR_CLASS_ALREADY_EXISTS, which is what a second interpreter in
-            # the same process -- or a reloaded module -- meets.
+            # ERROR_CLASS_ALREADY_EXISTS happens with a second interpreter in
+            # the same process, or a reloaded module.
             if code != _ERROR_CLASS_ALREADY_EXISTS:
                 raise WGLError('RegisterClass for the bootstrap window', code)
-        # Kept for the life of the process: Windows reads the class out of
-        # this structure for as long as it is registered.
+        # Kept for the life of the process.  Windows reads the class from this
+        # structure for as long as it is registered.
         cls._declaration = declaration
         cls._instance = instance
 
     def _set_pixel_format(self):
-        """Any format that supports OpenGL will do; nothing is drawn on it."""
+        """Set a pixel format that supports OpenGL; nothing is drawn on it."""
         api = win32()
         descriptor = PIXELFORMATDESCRIPTOR()
         descriptor.nSize = ctypes.sizeof(descriptor)
@@ -431,12 +425,11 @@ class _Bootstrap:
 
     @contextlib.contextmanager
     def current(self):
-        """Make the bootstrap context current for the body, then put back what
-        was current before.
+        """Make the bootstrap context current for the body, then restore the
+        previous context.
 
-        Restoring matters: an application that already had a context of its own
-        current when it asked for an offscreen one must not find that context
-        quietly replaced.
+        An application that had its own context current when it created an
+        offscreen context gets that context back.
         """
         from OpenGL import WGL
         from OpenGL.raw.WGL._types import HDC, HGLRC
@@ -452,7 +445,8 @@ class _Bootstrap:
             WGL.wglMakeCurrent(HDC(was_dc or 0), HGLRC(was_context or 0))
 
     def release(self):
-        """Give back the window, its device context and the GL context."""
+        """Destroy the GL context, release the device context and destroy the
+        window."""
         from OpenGL import WGL
         from OpenGL.raw.WGL._types import HGLRC
 
@@ -474,10 +468,9 @@ _bootstrap = None
 def bootstrap():
     """The process's hidden bootstrap window, built on first use.
 
-    Shared rather than made per context: a pbuffer's device is named by the
-    device context passed to ``wglCreatePbufferARB`` and its buffers by the
-    pixel format passed beside it, so one window serves every offscreen context
-    on the machine.
+    One window serves every offscreen context in the process.  The device
+    context passed to ``wglCreatePbufferARB`` selects the device, and the pixel
+    format passed with it selects the buffers.
     """
     global _bootstrap
     if _bootstrap is None:
@@ -486,13 +479,13 @@ def bootstrap():
 
 
 def release_bootstrap():
-    """Let go of the bootstrap window, if one was built.
+    """Destroy the bootstrap window and context, if they exist.
 
-    Nothing needs to call this -- one hidden 1x1 window and an OpenGL 1.1
-    context cost almost nothing and the process is going to end -- but a test
-    that wants to prove the bootstrap rebuilds itself, or an application
-    unloading a plug-in, can.  Offscreen contexts already made are unaffected:
-    a pbuffer is not tied to the window it was created through.
+    Calling this is optional.  The hidden 1x1 window and its OpenGL 1.1
+    context use very little, and are freed when the process ends.  A test of
+    the bootstrap rebuild, or an application unloading a plug-in, can call it.
+    Existing offscreen contexts keep working, because a pbuffer is not tied to
+    the window it was created through.
     """
     global _bootstrap
     if _bootstrap is not None:
@@ -503,8 +496,9 @@ def release_bootstrap():
 def wgl_extensions():
     """The WGL extension names this machine offers, as a frozenset.
 
-    Empty where the string cannot be read at all, which is what the GDI generic
-    implementation gives: it exports no ``wglGetExtensionsStringARB``.
+    Empty if the extension string cannot be read.  The GDI generic
+    implementation exports no ``wglGetExtensionsStringARB``, so it returns an
+    empty set.
     """
     from OpenGL.raw.WGL._types import HDC
     from OpenGL.WGL.ARB import extensions_string
@@ -519,12 +513,11 @@ def wgl_extensions():
 
 
 def available(profile='core'):
-    """What is missing before an offscreen context can be made, or ``()``.
+    """The required extensions this machine does not offer, as a tuple.
 
-    Returns the names of the required extensions this machine does not offer,
-    so an empty result means yes.  Answers without creating a pbuffer or a
-    context, which is what lets an application decide between this and a window
-    before committing to either.
+    An empty tuple means an offscreen context can be created.  No pbuffer or
+    context is created, so an application can choose between offscreen
+    rendering and a window before creating either.
     """
     try:
         offered = wgl_extensions()
@@ -541,15 +534,15 @@ def available(profile='core'):
 class OffscreenContext:
     """An OpenGL context rendering to a pbuffer, with no window on screen.
 
-    Created current, and current again after :meth:`make_current`.  The pbuffer
-    is the context's default framebuffer, so ``glReadPixels`` against
-    framebuffer zero reads what was drawn and nothing has to be told it is
-    offscreen.
+    The context is current after construction and after :meth:`make_current`.
+    The pbuffer is the context's default framebuffer, so ``glReadPixels`` on
+    framebuffer zero reads what was drawn.  Drawing code needs no changes for
+    offscreen use.
 
-    ``profile`` is one of :data:`PROFILES` and ``version`` the GL version
-    asked for; the remaining keyword arguments are
-    :func:`pixel_format_attributes`'.  A driver that cannot serve the request
-    raises :class:`WGLError` naming what it could not do.
+    ``profile`` is one of :data:`PROFILES` and ``version`` is the requested GL
+    version.  The remaining keyword arguments are those of
+    :func:`pixel_format_attributes`.  If the driver cannot meet the request,
+    the constructor raises :class:`WGLError` naming the step that failed.
 
     Release it with :meth:`release`, or use it as a context manager.
     """
@@ -561,8 +554,8 @@ class OffscreenContext:
 
     def __init__(self, width=256, height=256, profile='core', version=(3, 3),
                  debug=False, forward_compatible=False, share=None, **buffers):
-        # Rounded before it is judged, as `resize` does: a width of 0.5 passes
-        # a `> 0` test and then makes a pbuffer no pixels wide.
+        # Converted to int before the check, as in `resize`.  A width of 0.5
+        # passes a `> 0` test and then makes a pbuffer zero pixels wide.
         width, height = int(width), int(height)
         if width <= 0 or height <= 0:
             raise WGLError('cannot render at %dx%d' % (width, height))
@@ -583,13 +576,13 @@ class OffscreenContext:
                 self.context = self._create_context(
                     debug, forward_compatible, share)
         except BaseException:
-            # Part-way construction leaks a pbuffer per attempt otherwise, and
-            # an application is invited to try this and fall back.
+            # Release what was created, so an application that tries this and
+            # falls back does not leak a pbuffer per attempt.
             self.release()
             raise
         self.make_current()
 
-    # -- construction, one step per call that can fail ----------------------
+    # -- construction, one method per call that can fail --------------------
 
     def _choose_pixel_format(self):
         from OpenGL.raw.WGL._types import HDC
@@ -654,7 +647,7 @@ class OffscreenContext:
             )
         return context
 
-    # -- using it -----------------------------------------------------------
+    # -- use ----------------------------------------------------------------
 
     def make_current(self):
         """Bind this context and its pbuffer to the calling thread."""
@@ -673,7 +666,7 @@ class OffscreenContext:
         WGL.wglMakeCurrent(HDC(0), HGLRC(0))
 
     def maximum_size(self):
-        """``(width, height)`` -- the largest pbuffer this driver will make."""
+        """The largest pbuffer this driver creates, as ``(width, height)``."""
         from OpenGL.raw.WGL._types import HDC
         from OpenGL.WGL.ARB import pbuffer, pixel_format
 
@@ -688,12 +681,11 @@ class OffscreenContext:
 
     @property
     def lost(self):
-        """Whether the driver has taken this pbuffer's memory back.
+        """True if the driver has discarded this pbuffer's contents.
 
         Windows may discard a pbuffer's contents on a display-mode change or a
-        remote-desktop disconnect.  The pbuffer is still there and still the
-        right size; what it held is gone, so the answer is to draw the frame
-        again rather than to rebuild anything.
+        remote-desktop disconnect.  The pbuffer still exists at the same size.
+        Redraw the frame; nothing needs to be recreated.
         """
         from OpenGL.WGL.ARB import pbuffer
 
@@ -707,11 +699,10 @@ class OffscreenContext:
     def resize(self, width, height):
         """Render at a new size.
 
-        A pbuffer is created at a fixed size and cannot be resized, so this
-        builds a replacement on the same pixel format and drops the old one.
-        The GL context survives -- textures, buffers and programs are all still
-        there afterwards -- because a context binds to any drawable sharing its
-        format.
+        A pbuffer has a fixed size, so this creates a new pbuffer with the same
+        pixel format and destroys the old one.  The GL context is kept, with
+        its textures, buffers and programs, because a context can bind to any
+        drawable with its pixel format.
         """
         width, height = int(width), int(height)
         if width <= 0 or height <= 0:
@@ -730,7 +721,7 @@ class OffscreenContext:
         self._release_pbuffer(*previous)
         self.width, self.height = width, height
 
-    # -- letting go ---------------------------------------------------------
+    # -- teardown -----------------------------------------------------------
 
     def _release_pbuffer(self, handle, dc):
         from OpenGL.raw.WGL._types import HDC
@@ -745,23 +736,22 @@ class OffscreenContext:
     def release(self, forget=True):
         """Destroy the context and the pbuffer.
 
-        Written to be callable part-way through construction, where some of
-        them do not exist yet, and harmless to call twice.
+        Safe to call part-way through construction, when some of these do not
+        exist yet, and safe to call twice.
 
-        The order is what the two rules leave: ``wglDestroyPbufferARB`` refuses
-        a pbuffer that is current to any thread, and it is itself an extension
-        entry point, which resolves only while *some* context is current.  So
-        the bootstrap context takes over for the teardown -- it unbinds this
-        one and answers for the resolution at the same time.
+        ``wglDestroyPbufferARB`` refuses a pbuffer that is current on any
+        thread.  It is also an extension entry point, which resolves only while
+        a context is current.  The bootstrap context is therefore made current
+        for the teardown.  That unbinds this context and lets the entry point
+        resolve.
 
-        The dispatch layer is told the context has gone: it keeps a table of
-        resolved entry points per context handle, and a handle the driver hands
-        out again would otherwise arrive with the dead context's function
-        pointers already in it.  ``forget=False`` leaves that to the caller,
-        which is for a caller that manages the layer itself -- one holding
-        several contexts and retiring their tables together, or one
-        reproducing what a program that never notifies PyOpenGL actually
-        faces.  A caller that simply wants the context gone wants the default.
+        With ``forget=True`` (the default), the context is removed from the
+        dispatch layer.  The layer keeps a table of resolved entry points per
+        context handle.  Without this, a handle the driver reuses would get the
+        destroyed context's function pointers.  ``forget=False`` leaves that to
+        a caller that manages the layer itself.  Examples are a caller retiring
+        the tables of several contexts together, or a test reproducing a
+        program that never calls ``forget_context``.
         """
         from OpenGL import WGL
         from OpenGL.raw.WGL._types import HDC, HGLRC
@@ -770,18 +760,17 @@ class OffscreenContext:
             return
         was_dc = WGL.wglGetCurrentDC()
         was_context = WGL.wglGetCurrentContext()
-        # Only worth putting back if it belongs to somebody else; this one is
-        # about to stop existing.
+        # Restore the previous context only if it is a different context; this
+        # one is being destroyed.
         restore = was_context and int(was_context) != int(self.context or 0)
         from OpenGL import _dispatch
 
         booted = bootstrap()
         WGL.wglMakeCurrent(HDC(booted.dc), HGLRC(booted.context))
-        # Said whatever `forget` asks, because the teardown below is itself
-        # dispatched: ``wglReleasePbufferDCARB`` has to resolve, and it
-        # resolves in whichever context the layer has recorded as current.  Left
-        # unsaid, that is the context being destroyed, whose table does not
-        # have it.
+        # Recorded whatever `forget` is, because the teardown below goes
+        # through the dispatch layer.  ``wglReleasePbufferDCARB`` resolves in
+        # the context the layer has recorded as current.  Without this call
+        # that is the context being destroyed, whose table lacks the entry.
         _dispatch.make_current(booted.context)
         try:
             if self.context:
@@ -796,10 +785,10 @@ class OffscreenContext:
                 HDC(was_dc or 0) if restore else HDC(0),
                 HGLRC(was_context or 0) if restore else HGLRC(0),
             )
-            # And say so, since the bootstrap was named above: left standing,
-            # the layer goes on dispatching through the bootstrap's table -- a
-            # legacy context that has resolved almost nothing -- and reports
-            # entry points the caller's own context had as undefined.
+            # Record the restored context in the dispatch layer too.  Otherwise
+            # the layer keeps using the bootstrap context's table, which has
+            # almost no entries, and reports the caller's entry points as
+            # undefined.
             _dispatch.make_current(was_context if restore else 0)
 
     def __enter__(self):
@@ -819,7 +808,7 @@ class OffscreenContext:
 def headless_context(width=256, height=256, **named):
     """An offscreen context, current for the body and then released.
 
-    The convenience form of :class:`OffscreenContext`, and the counterpart of
+    A shorthand for :class:`OffscreenContext`, matching
     ``OpenGL.CGL.headless_context``::
 
         with headless_context(64, 48) as context:

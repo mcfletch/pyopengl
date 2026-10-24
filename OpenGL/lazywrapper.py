@@ -1,4 +1,4 @@
-"""Simplistic wrapper decorator for Python-coded wrappers"""
+"""Lazy-binding decorator for wrappers written in Python"""
 from OpenGL.latebind import Curry
 from OpenGL import MODULE_ANNOTATIONS
 

@@ -1,10 +1,10 @@
 OpenGL on Windows
 =================
 
-Windows ships OpenGL and GLU -- ``opengl32.dll`` and ``glu32.dll`` are part of
-the system -- so PyOpenGL reaches desktop GL with nothing installed.  GLUT and
-GLE are not part of Windows and arrive separately, and neither are OpenGL ES
-and EGL: :doc:`ANGLE <angle-gles>` supplies those.
+Windows ships OpenGL and GLU as system libraries, ``opengl32.dll`` and
+``glu32.dll``, so PyOpenGL can use desktop GL with nothing installed.  GLUT and
+GLE are not part of Windows and are installed separately.  Windows also has no
+OpenGL ES or EGL; :doc:`ANGLE <angle-gles>` provides those.
 
 Installing
 ----------
@@ -16,151 +16,153 @@ Installing
 
 ``PyOpenGL`` is a pure-Python wheel and installs anywhere.
 ``PyOpenGL_accelerate`` is compiled, and publishes ``win32`` and ``win_amd64``
-wheels for every supported CPython, so a 32-bit or 64-bit interpreter installs
-a binary and needs no compiler.  There is no Windows ARM64 wheel: an ARM
-machine either builds it, which wants Visual Studio's C compiler and the Python
-headers, or runs the x64 interpreter under emulation.  PyOpenGL itself works
-without accelerate either way.
+wheels for every supported CPython, so 32-bit and 64-bit interpreters install
+a binary and need no compiler.  There is no Windows ARM64 wheel.  An ARM
+machine either builds it, which needs Visual Studio's C compiler and the
+Python headers, or runs the x64 interpreter under emulation.  PyOpenGL works
+without accelerate in both cases.
 
-Which DLLs load is decided by the interpreter's word size: a 32-bit Python
-loads only 32-bit DLLs.  Windows keeps the two sets apart -- 64-bit system DLLs
-in ``System32``, 32-bit ones in ``SysWOW64``, with the redirector giving each
-process the right set -- so the system libraries are correct for either
-interpreter without anything being said.  A library you install yourself is
-yours to match: a 64-bit ``freeglut.dll`` on a 32-bit Python does not load.
+The interpreter's word size decides which DLLs it can load: a 32-bit Python
+loads only 32-bit DLLs.  Windows keeps 64-bit system DLLs in ``System32`` and
+32-bit ones in ``SysWOW64``, and the file system redirector gives each process
+the matching set.  The system libraries therefore load correctly in either
+interpreter with no configuration.  A library you install yourself must match
+the interpreter: a 64-bit ``freeglut.dll`` does not load into a 32-bit Python.
 
 Where the GL library comes from
 -------------------------------
 
-``opengl32.dll`` is asked of Windows rather than looked for on ``PATH``: the
-copy in ``System32`` is a trampoline to whatever the graphics driver installed,
-and a directory on ``PATH`` is somewhere a different one arrives because
-something else was installed.  A conda environment's ``Library\bin`` carries a
-Mesa ``opengl32.dll`` and sits ahead of ``System32`` on ``PATH``, so a program
-that asked for the driver got software rendering with nothing saying so.
-``glu32`` is chosen the same way.
+PyOpenGL loads ``opengl32.dll`` through the Windows system library search
+instead of searching ``PATH``.  The copy in ``System32`` forwards to whatever
+the graphics driver installed.  A directory on ``PATH`` can hold a different
+``opengl32.dll`` installed by some other software.  For example, a conda
+environment's ``Library\bin`` contains a Mesa ``opengl32.dll`` and comes before
+``System32`` on ``PATH``.  A program loading from ``PATH`` there would get
+software rendering with no warning.  ``glu32`` is loaded the same way.
 
-A copy *beside the running executable* is preferred to both, which is how a
-machine with no vendor driver is given one.  Mesa's Windows build is
-distributed to be unpacked next to the program that will use it, so putting its
-``opengl32.dll`` in the directory holding ``python.exe`` -- the virtual
-environment's ``Scripts``, for a virtual environment -- gives that interpreter
-llvmpipe, with the pbuffer and create-context extensions that
-:ref:`offscreen-wgl` needs.  The same directory holds the libraries Mesa's
-``opengl32.dll`` loads in turn, and it is the first place they are looked for.
+A copy *beside the running executable* takes priority over both.  This lets
+you give a machine with no vendor driver an OpenGL implementation.  Mesa's
+Windows build is meant to be unpacked next to the program that uses it.  Put
+its ``opengl32.dll`` in the directory holding ``python.exe`` (the ``Scripts``
+directory, for a virtual environment), and that interpreter gets llvmpipe.
+llvmpipe provides the pbuffer and create-context extensions that
+:ref:`offscreen-wgl` needs.  The libraries Mesa's ``opengl32.dll`` loads in
+turn go in the same directory, which is the first place they are searched for.
 
-Everything that is *not* a system library -- GLUT, GLE, ANGLE's DLLs -- is
-looked up the ordinary way instead, through ``ctypes.util.find_library`` and
-then Windows' own search, so ``PATH`` is what points at those.
+Libraries that are *not* part of Windows (GLUT, GLE, ANGLE's DLLs) are found
+the ordinary way, through ``ctypes.util.find_library`` and then the Windows
+DLL search.  ``PATH`` is how to point PyOpenGL at those.
 
-With no vendor driver and no Mesa, what answers is Microsoft's GDI generic
+With no vendor driver and no Mesa, Windows uses Microsoft's GDI generic
 rasteriser: OpenGL 1.1, almost no extensions, and no pbuffers.
 
 Entry points come from the driver, through the context
 ------------------------------------------------------
 
-``opengl32.dll`` exports the OpenGL 1.1 entry points and no more.  Everything
-above that -- every GL 1.2-and-later command, and every extension -- is
-resolved through ``wglGetProcAddress``, which answers only while a context is
-current and answers for the pixel format that context was made on.  A program
-therefore creates its window and its context before it calls anything modern,
-and PyOpenGL builds each entry point on first use for that reason.
+``opengl32.dll`` exports only the OpenGL 1.1 entry points.  Everything newer,
+meaning every GL 1.2 and later command and every extension, is resolved through
+``wglGetProcAddress``.  ``wglGetProcAddress`` works only while a context is
+current, and returns entry points for that context's pixel format.  A program
+therefore creates its window and context before calling anything newer than
+1.1.  PyOpenGL resolves each entry point on first use for the same reason.
 
-Two consequences:
+Two consequences follow:
 
-- An entry point resolved inside a ``glBegin`` block makes
-  ``wglGetProcAddress`` record ``GL_INVALID_OPERATION``, which would surface
-  out of ``glEnd`` for a call nobody wrote.  PyOpenGL notes the error against
-  the lookup instead.
-- ``ChoosePixelFormat``, ``SetPixelFormat``, ``SwapBuffers`` and the rest of
-  that family are GDI entry points rather than GL ones.  ``OpenGL.WGL`` offers
-  them, taking them from ``gdi32``, since ``opengl32`` exports none of them and
-  ``wglGetProcAddress`` does not answer for them either.
+- Resolving an entry point inside a ``glBegin`` block makes
+  ``wglGetProcAddress`` record ``GL_INVALID_OPERATION``.  That error would
+  then be reported by ``glEnd``, for a call the program never made.  PyOpenGL
+  attributes the error to the lookup instead.
+- ``ChoosePixelFormat``, ``SetPixelFormat``, ``SwapBuffers`` and related
+  functions are GDI entry points, not GL ones.  ``opengl32`` exports none of
+  them and ``wglGetProcAddress`` does not resolve them.  ``OpenGL.WGL``
+  provides them, loaded from ``gdi32``.
 
-Because an entry point belongs to the context it was resolved on, a program
-with more than one context tells PyOpenGL when it changes which is current:
-``OpenGL.dispatch.make_current(handle)``, and
-``OpenGL.dispatch.forget_context(handle)`` when one is destroyed.
-:doc:`c-dispatch` has the detail.
+Each entry point belongs to the context it was resolved on.  A program with
+more than one context tells PyOpenGL when it changes the current one, with
+``OpenGL.dispatch.make_current(handle)``.  It calls
+``OpenGL.dispatch.forget_context(handle)`` when it destroys a context.
+:doc:`c-dispatch` has the details.
 
 GLUT and GLE
 ------------
 
-Neither is part of Windows, so ask for them:
+Neither is part of Windows.  Install them with:
 
 .. code-block:: console
 
    $ pip install PyOpenGL[glut]
 
-That pulls in `PyOpenGL-glut-binaries
-<https://github.com/mcfletch/pyopengl-glut-binaries>`__, which carries builds
-of both freeglut and GLE, in both word sizes.  It is a Windows-only download --
-a Linux or macOS install never fetches it -- and nothing needs configuring
-afterwards.  Installing it is agreeing to the licences of the GLUT and GLE
-libraries, which ship beside the binaries.
+That installs `PyOpenGL-glut-binaries
+<https://github.com/mcfletch/pyopengl-glut-binaries>`__, which contains
+freeglut and GLE builds for both word sizes.  The package downloads only on
+Windows; a Linux or macOS install never fetches it.  It needs no configuration
+after installation.  Installing it means accepting the GLUT and GLE licences,
+which ship beside the binaries.
 
-A freeglut installed some other way wins over the bundled build.  The names are
-tried in this order, and the first that loads is used:
+A freeglut installed some other way takes priority over the bundled build.
+PyOpenGL tries these names in order and uses the first that loads:
 
 ``freeglut``, ``glut32``, ``glut``
-    What the official freeglut Windows binaries, MSYS2 and vcpkg install.
-    Yours is the build that gets fixes, so it is preferred.
+    The names the official freeglut Windows binaries, MSYS2 and vcpkg
+    install.  These come first because those builds receive fixes.
 ``freeglut64.vc14``, ``glut64.vc14`` (``32`` on a 32-bit interpreter)
-    The builds in ``PyOpenGL-glut-binaries``, which nothing else uses those
-    names for.
+    The builds in ``PyOpenGL-glut-binaries``.  No other package uses these
+    names.
 
-A DLL of the wrong architecture, or one with a missing dependency, fails to
-load and the next name is tried, so a 32-bit ``freeglut.dll`` on ``PATH`` does
-not stop a 64-bit interpreter finding the bundled build.  With none of them, a
-GLUT call raises ``NullFunctionError``.
+A DLL with the wrong architecture or a missing dependency fails to load, and
+PyOpenGL tries the next name.  A 32-bit ``freeglut.dll`` on ``PATH`` therefore
+does not stop a 64-bit interpreter from finding the bundled build.  If no name
+loads, a GLUT call raises ``NullFunctionError``.
 
 OpenGL ES
 ---------
 
-A Windows machine's OpenGL is desktop GL through WGL; there is no EGL and no
-OpenGL ES behind it.  ANGLE supplies both, translating ES onto Direct3D 11, and
-``PYOPENGL_PLATFORM=angle`` binds PyOpenGL to a copy of it.  :doc:`angle-gles`
-covers where the DLLs come from and what that platform does and does not offer.
+Windows OpenGL is desktop GL through WGL, with no EGL or OpenGL ES.  ANGLE
+provides both, translating ES calls to Direct3D 11.
+``PYOPENGL_PLATFORM=angle`` binds PyOpenGL to a copy of ANGLE.
+:doc:`angle-gles` covers where the DLLs come from and what that platform
+supports.
 
-ANGLE is never installed system-wide: it travels inside applications, and every
-Chromium browser and every Electron application carries one, so a machine may
-hold several of different ages.  ``PYOPENGL_ANGLE_PATH`` names the directory
-holding ``libEGL.dll`` and ``libGLESv2.dll``, and that directory goes on the
-DLL search path before the load so ANGLE's own dependencies resolve beside it.
+ANGLE is never installed system-wide.  Applications ship their own copy:
+every Chromium browser and every Electron application includes one, so a
+machine may hold several of different ages.  ``PYOPENGL_ANGLE_PATH`` names the
+directory holding ``libEGL.dll`` and ``libGLESv2.dll``.  PyOpenGL adds that
+directory to the DLL search path before loading, so ANGLE's own dependencies
+load from the same directory.
 
-``OpenGL.EGL``, ``OpenGL.GLES1`` and ``OpenGL.GLES2`` also load an ANGLE or an
-EGL-providing Mesa that is already reachable under its ordinary name, without
-the platform being selected.  What selecting the platform adds is the search
-path for a copy that is not.
+``OpenGL.EGL``, ``OpenGL.GLES1`` and ``OpenGL.GLES2`` also load an ANGLE, or a
+Mesa that provides EGL, if one is already reachable under its ordinary name.
+This works without selecting the ``angle`` platform.  Selecting the platform
+adds the search path for a copy that is not reachable that way.
 
 Rendering with no window
 ------------------------
 
-:ref:`offscreen-wgl` is the route for desktop GL: a **pbuffer**, a drawable the
-display driver allocates out of its own memory, with a device context of its
-own that belongs to no window and appears nowhere.  It is framebuffer zero for
-the context that renders to it, so nothing in a program has to know where it
-is.  The three extensions it needs have been in every hardware driver for
-Windows since about 2009.
+:ref:`offscreen-wgl` is the route for desktop GL.  It uses a *pbuffer*, a
+drawable that the display driver allocates in its own memory.  A pbuffer has
+its own device context, belongs to no window and is never displayed.  It is
+framebuffer zero for the context that renders to it, so a program draws to it
+as it would to a window.  Every hardware driver for Windows since about 2009
+has the three extensions it needs.
 
-Two other routes work here:
+Two other routes work on Windows:
 
-- ANGLE's EGL makes a pbuffer surface the same way EGL does on Linux: see
-  :doc:`angle-gles`, which is OpenGL ES rather than desktop GL.
+- ANGLE's EGL creates a pbuffer surface the same way EGL does on Linux.  This
+  gives OpenGL ES, not desktop GL; see :doc:`angle-gles`.
 - ``PYOPENGL_PLATFORM=osmesa`` with Mesa's ``osmesa.dll`` rasterises into an
-  array the caller owns, needing no driver at all: :ref:`offscreen-osmesa`.
+  array the caller owns, and needs no driver at all: :ref:`offscreen-osmesa`.
 
 Naming the platform yourself
 ----------------------------
 
-``PYOPENGL_PLATFORM`` has to be set before ``OpenGL`` is imported.  On Windows
-the values that mean anything are:
+``PYOPENGL_PLATFORM`` must be set before ``OpenGL`` is imported.  The values
+that have an effect on Windows are:
 
 ``nt``
-    Desktop GL through WGL, which is what PyOpenGL selects here anyway.
+    Desktop GL through WGL.  PyOpenGL selects this on Windows by default.
 ``angle``
-    OpenGL ES and EGL through ANGLE, and no desktop GL at all.  Never selected
-    automatically -- see :doc:`angle-gles`.
+    OpenGL ES and EGL through ANGLE, with no desktop GL.  Never selected
+    automatically; see :doc:`angle-gles`.
 ``osmesa``
     Mesa's off-screen interface, from ``osmesa.dll``.  See
     :ref:`offscreen-osmesa`.
@@ -168,7 +170,7 @@ the values that mean anything are:
 Freezing an application
 -----------------------
 
-PyInstaller needs to collect the GLUT and GLE builds, and to put them where the
-running loader looks for them.  PyOpenGL ships the hook that does it
-(``OpenGL/__pyinstaller/``), so a frozen application picks it up with nothing
-declared.
+PyInstaller has to collect the GLUT and GLE builds and place them where the
+loader looks at run time.  PyOpenGL ships a PyInstaller hook that does this
+(``OpenGL/__pyinstaller/``).  PyInstaller finds the hook automatically, so a
+frozen application needs no extra declarations.

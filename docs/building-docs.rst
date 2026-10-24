@@ -8,8 +8,8 @@ Building the documentation
    $ pip install -e ".[docs]"
    $ python build-docs.py
 
-The result is in ``docs/_build/html``.  It takes a few minutes -- there are a
-couple of thousand pages -- and ends with a summary of what it wrote.
+The result is in ``docs/_build/html``.  The build writes a couple of thousand
+pages, takes a few minutes, and ends with a summary of what it wrote.
 
 What it is made of
 ------------------
@@ -33,10 +33,10 @@ Three parts, two of them generated:
     lists; ``generate.py`` reads the DocBook with lxml and needs none of it.
 
 ``docs/api/``
-    The :doc:`API pages <api/index>`, written by ``directdocs/dumbpydoc.py`` by
-    importing the packages and looking at what they hold -- which is the only
-    way to see what PyOpenGL exports, since most of it is built at import time
-    from the declaration tables rather than written out as ``def``.
+    The :doc:`API pages <api/index>`, written by ``directdocs/dumbpydoc.py``.
+    It imports the packages and inspects their contents.  Most of PyOpenGL's
+    exports have no ``def`` in the source.  They are built at import time from
+    the declaration tables, so importing is the only way to list them.
 
 The two generated directories are not in version control.  ``directdocs/README.md``
 describes each generator, and ``plans/SPHINX-DOCS.md`` records how the set is
@@ -51,24 +51,24 @@ Running one part at a time
    $ python build-docs.py --only api --only html
    $ python build-docs.py --no-fetch           # do not pull the Khronos sources
 
-``--skip OpenGL.raw`` and friends leave a subtree out of the API pages, which
-is how to get a look at a change without waiting for the whole set.
-``-W`` turns Sphinx's warnings into errors, which is what CI wants.
+``--skip OpenGL.raw`` (and the same flag with other packages) leaves a subtree
+out of the API pages, so a change can be previewed without building the whole
+set.  ``-W`` turns Sphinx's warnings into errors, as CI requires.
 
 The usage references
 --------------------
 
 Each reference page can list source code that calls the entry point it
-describes, which is often the fastest way to see how one is used in practice.
-That list is built by scanning checkouts of other people's projects:
+describes, as examples of how the entry point is used.  The list is built by
+scanning checkouts of other people's projects:
 
 .. code-block:: console
 
    $ python directdocs/samples.py      # fetch the projects, into directdocs/.samples
    $ python directdocs/references.py   # scan them, writing .reference_cache.pkl
 
-Both take a while and neither is needed to build the set: without the cache
-file the pages are written without their sample sections.  ``build-docs.py
+Both take a while.  Neither is needed to build the set: without the cache
+file, the pages are written without their sample sections.  ``build-docs.py
 --samples`` does the pair as part of a build.
 
 Publishing
@@ -80,14 +80,16 @@ Publishing
    $ python build-docs.py --publish             # onto the gh-pages branch
    $ python build-docs.py --publish --push      # and send it to the remote
 
-Publishing writes through git's plumbing rather than checking the branch out,
-so it never touches the working tree, and it replaces ``gh-pages`` with a
-single commit that has no parent -- the repository then carries one copy of the
-site rather than one per release.  That means a forced push, made against a
-lease taken before the build starts, so a publish from somewhere else during
-those minutes is refused rather than lost.
+Publishing writes through git's plumbing commands without checking the branch
+out, so it never touches the working tree.  It replaces ``gh-pages`` with a
+single commit that has no parent, so the repository holds one copy of the site
+instead of one per release.  Replacing the branch needs a forced push.  The
+push uses a lease taken before the build starts, so if someone else publishes
+during the build, this push is refused and their publish is kept.
 
-``.github/workflows/documentation.yml`` does this on a push to ``master``.
+``.github/workflows/documentation.yml`` runs the build when it is started by
+hand, once a release has settled.  It publishes only when its ``publish``
+input is ticked.
 Nothing leaves the machine without ``--push``.
 
 ``python build-docs.py --help`` has the rest.

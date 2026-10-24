@@ -31,11 +31,11 @@ class NumpyHandler( buffers.BufferHandler ):
     def contiguous( cls, source, typeCode=None ):
         """Get contiguous array from source
 
-        source -- numpy Python array (or compatible object)
+        source - numpy Python array (or compatible object)
             for use as the data source.  If this is not a contiguous
             array of the given typeCode, a copy will be made,
             otherwise will just be returned unchanged.
-        typeCode -- optional 1-character typeCode specifier for
+        typeCode - optional 1-character typeCode specifier for
             the numpy.array function.
 
         All gl*Pointer calls should use contiguous arrays, as non-
@@ -75,9 +75,8 @@ class NumpyHandler( buffers.BufferHandler ):
                 if typeCode is None:
                     typeCode = source.dtype.char
                 return numpy.ascontiguousarray( source, typeCode )
-#: numpy's own typecodes for the two 16-bit integers.  See the note beside the
-#: same pair in ``OpenGL/arrays/numpymodule.py``: the probe these replace left
-#: ``USHORT_TYPE`` unbound on the branch it could take.
+#: numpy's typecodes for the two 16-bit integers, as in
+#: ``OpenGL/arrays/numpymodule.py``.
 SHORT_TYPE = 'h'
 USHORT_TYPE = 'H'
 
@@ -111,10 +110,10 @@ GL_TYPE_TO_ARRAY_MAPPING = {
     GL_1_1.GL_UNSIGNED_BYTE: lookupDtype('B'),
     GL_1_1.GL_UNSIGNED_SHORT: lookupDtype(USHORT_TYPE),
     _types.GL_VOID_P: lookupDtype('P'),
-    # GLintptr is as wide as a pointer, and numpy's 'p' is the dtype for
-    # that.  One-directional, as GL_VOID_P is: on a 64-bit build 'p' is
-    # indistinguishable from 'q', so the reverse mapping would answer
-    # GL_INTPTR for every 64-bit integer array.
+    # GLintptr is as wide as a pointer, and numpy's 'p' is that dtype.  The
+    # mapping is one-way, as for GL_VOID_P.  On a 64-bit build 'p' equals
+    # 'q', so a reverse mapping would return GL_INTPTR for every 64-bit
+    # integer array.
     _arrayconstants.GL_INTPTR: lookupDtype('p'),
     _arrayconstants.GL_SIZEIPTR: lookupDtype('P'),
     None: None,

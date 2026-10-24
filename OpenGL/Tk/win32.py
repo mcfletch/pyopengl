@@ -1,25 +1,26 @@
 """An OpenGL context on a Tk widget's Windows window.
 
-Tk gives out the ``HWND`` (``winfo_id()``); WGL makes a context against its
-device context.  Two questions are asked of the driver, and
-:func:`pixelFormatAttributes` and :func:`contextAttributes` are what a
-:class:`~OpenGL.Tk.attributes.ContextAttributes` becomes for each.
+Tk provides the ``HWND`` (``winfo_id()``), and WGL creates a context on its
+device context in two steps: choose a pixel format, then create the context.
+:func:`pixelFormatAttributes` and :func:`contextAttributes` translate a
+:class:`~OpenGL.Tk.attributes.ContextAttributes` into the attribute list for
+each step.
 
-**Both of the calls that answer them are extensions, and an extension entry
-point can only be looked up while a context is already current.**  So a
-throwaway context is made first, on a pixel format chosen by the ancient
-``ChoosePixelFormat``, purely to have somewhere to ask from; the real format
-and the real context are chosen through the extensions, and the throwaway is
-destroyed.  This is the documented sequence and there is no shorter one.
+Both steps use extension functions (``wglChoosePixelFormatARB`` and
+``wglCreateContextAttribsARB``).  An extension entry point can only be looked
+up while a context is current.  A temporary context is therefore created
+first, on a pixel format chosen by ``ChoosePixelFormat``.  The real format and
+context are then chosen through the extensions, and the temporary context is
+destroyed.  This is the sequence Microsoft documents.
 
-**A window's pixel format is set once and cannot be changed**, which is why the
-throwaway context is made on a window of its own rather than on the widget's:
-setting a format on the widget to ask the question would spend the one chance
-to set the format the answer names.
+A window's pixel format can be set only once.  The temporary context is
+therefore created on a separate hidden window.  Setting a format on the
+widget's window for the temporary context would prevent setting the format the
+extension chooses.
 
-**Every Win32 entry point used here is declared** in :data:`SIGNATURES`, and
-reached through :func:`windowsLibrary` rather than ``ctypes.windll``.  See
-:data:`SIGNATURES` for why a handle has to say how wide it is.
+Every Win32 entry point used here is declared in :data:`SIGNATURES` and loaded
+through :func:`windowsLibrary` rather than ``ctypes.windll``.  See
+:data:`SIGNATURES` for why handles need declared widths.
 """
 
 from __future__ import annotations
@@ -44,22 +45,21 @@ __all__ = [
 def _arb(name: str) -> Any:
     """One of PyOpenGL's WGL extension modules
 
-    Imported on use rather than at module scope, because importing
-    ``OpenGL.WGL`` loads ``opengl32``, which exists only on Windows -- and this
-    module is imported wherever the package is, if only to be looked at.
+    Imported on use rather than at module scope.  Importing ``OpenGL.WGL``
+    loads ``opengl32``, which exists only on Windows, and this module can be
+    imported on any platform.
 
-    The constants and entry points in these modules arrive from the generated
-    declaration tables as they are imported, so a checker reading the source
-    finds none of them by name; ``Any`` is what there is to say about a table it
-    cannot see.
+    The constants and entry points in these modules come from the generated
+    declaration tables at import time.  A type checker reading the source
+    cannot find them by name, so the result is typed ``Any``.
     """
     import importlib
 
     return importlib.import_module('OpenGL.WGL.ARB.' + name)
 
-#: What ``PIXELFORMATDESCRIPTOR.dwFlags`` needs for a window a GL context can
-#: be made current on.  Named here rather than imported because the values are
-#: part of the Win32 ABI and do not change.
+#: The ``PIXELFORMATDESCRIPTOR`` values for a window a GL context can be made
+#: current on.  Defined here because the values are part of the Win32 ABI and
+#: do not change.
 PFD_DRAW_TO_WINDOW = 0x00000004
 PFD_SUPPORT_OPENGL = 0x00000020
 PFD_DOUBLEBUFFER = 0x00000001
@@ -68,7 +68,7 @@ PFD_MAIN_PLANE = 0
 
 
 def pixelFormatAttributes(attributes: ContextAttributes) -> list[int]:
-    """The ``wglChoosePixelFormatARB`` attribute list a request asks for
+    """The ``wglChoosePixelFormatARB`` attribute list for ``attributes``
 
     Terminated with 0, as that call requires.
     """
@@ -98,10 +98,10 @@ def pixelFormatAttributes(attributes: ContextAttributes) -> list[int]:
 
 
 def contextAttributes(attributes: ContextAttributes) -> list[int]:
-    """The ``wglCreateContextAttribsARB`` attribute list a request asks for
+    """The ``wglCreateContextAttribsARB`` attribute list for ``attributes``
 
-    Terminated with 0.  A ``legacy`` request has nothing to say here and is
-    created through ``wglCreateContext`` instead.
+    Terminated with 0.  A ``legacy`` request is created through
+    ``wglCreateContext`` instead.
     """
     create_context = _arb('create_context')
     create_context_profile = _arb('create_context_profile')
@@ -130,10 +130,11 @@ def contextAttributes(attributes: ContextAttributes) -> list[int]:
 
 
 class PIXELFORMATDESCRIPTOR(ctypes.Structure):
-    """What ``ChoosePixelFormat`` and ``SetPixelFormat`` describe a format with
+    """The pixel format description ``ChoosePixelFormat`` and
+    ``SetPixelFormat`` take
 
-    Only the fields this module sets are commented; the rest are laid out
-    because the structure's size and order are its ABI.
+    Every field is declared, including those this module never sets, because
+    the structure's size and field order are part of the ABI.
     """
 
     _fields_ = [
@@ -167,12 +168,11 @@ class PIXELFORMATDESCRIPTOR(ctypes.Structure):
 
 
 def describedFormat(attributes: ContextAttributes) -> PIXELFORMATDESCRIPTOR:
-    """The old-style format description a request amounts to
+    """The ``PIXELFORMATDESCRIPTOR`` for ``attributes``
 
-    What ``ChoosePixelFormat`` takes.  It is a request for the *nearest*
-    format rather than a filter, so it always matches something; the
-    extension-based choice is the one that honours multisampling and exact
-    channel sizes.
+    ``ChoosePixelFormat`` takes this and returns the nearest format, so it
+    always finds one.  Only ``wglChoosePixelFormatARB`` honours multisampling
+    and exact channel sizes.
     """
     described = PIXELFORMATDESCRIPTOR()
     described.nSize = ctypes.sizeof(PIXELFORMATDESCRIPTOR)
@@ -190,32 +190,28 @@ def describedFormat(attributes: ContextAttributes) -> PIXELFORMATDESCRIPTOR:
     return described
 
 
-#: Win32's own names for the types these calls pass around, so a signature
-#: below reads as the one in the platform's headers.  A handle is pointer-sized
-#: whatever it is a handle to, and ``BOOL`` is a C ``int``.
+#: Win32 type names, so the signatures below match the platform headers.  Every
+#: handle is pointer-sized, and ``BOOL`` is a C ``int``.
 HWND = HDC = HMENU = HINSTANCE = LPVOID = ctypes.c_void_p
 BOOL = ctypes.c_int
 DWORD = ctypes.c_uint32
 LPCWSTR = ctypes.c_wchar_p
 PPIXELFORMATDESCRIPTOR = ctypes.POINTER(PIXELFORMATDESCRIPTOR)
 
-#: Every Win32 entry point this module calls, by ``(library, name)``, with the
-#: type it answers and the types it takes.
+#: Every Win32 entry point this module calls, keyed by ``(library, name)``,
+#: with its return type and argument types.
 #:
-#: Declaring them is not optional on a 64-bit build.  ``ctypes`` gives an
-#: undeclared function a return type of C ``int``, which is half the width of a
-#: handle: an undeclared ``GetDC`` answers the low 32 bits of the ``HDC``, as a
-#: signed number.  The rest of the sequence then disagrees about which device
-#: context it means -- ``SetPixelFormat``, taking an undeclared argument, is
-#: handed the truncated value zero-extended, while ``wglCreateContext``, whose
-#: ``HDC`` *is* declared, is handed it sign-extended -- so the format is set on
-#: one device context and the context asked for on another.  The driver answers
-#: ``ERROR_INVALID_PIXEL_FORMAT`` and no context, and there is nothing in that
-#: to say a handle was the problem.
+#: A 64-bit build requires these declarations.  ``ctypes`` gives an undeclared
+#: function a C ``int`` return type, which is half the width of a handle.  An
+#: undeclared ``GetDC`` returns the low 32 bits of the ``HDC`` as a signed
+#: number.  ``SetPixelFormat``, with undeclared arguments, then receives that
+#: value zero-extended.  ``wglCreateContext``, whose ``HDC`` is declared,
+#: receives it sign-extended.  The format is set on one device context and the
+#: context is requested on another.  The driver returns no context and
+#: ``ERROR_INVALID_PIXEL_FORMAT``, which does not mention the handle.
 #:
-#: Which half of the handle a window happens to land in decides whether any of
-#: this shows, so the same program makes a context on one window and not the
-#: next.
+#: Whether this fails depends on the handle's value, so the same program can
+#: create a context on one window and fail on the next.
 SIGNATURES: dict[tuple[str, str], tuple[Any, list[Any]]] = {
     ('gdi32', 'ChoosePixelFormat'): (
         ctypes.c_int, [HDC, PPIXELFORMATDESCRIPTOR]),
@@ -239,15 +235,15 @@ _LIBRARIES: dict[str, Any] = {}
 def windowsLibrary(name: str) -> Any:
     """``name``.dll, with the entry points :data:`SIGNATURES` names declared
 
-    A library object of this module's own rather than ``ctypes.windll.<name>``,
-    which every library in the process shares: a prototype declared on that one
-    changes the signature under whoever else is calling through it.
+    This module loads its own library object.  ``ctypes.windll.<name>`` is
+    shared by all code in the process, and a prototype declared on it changes
+    the signature for every other caller.
     """
     library = _LIBRARIES.get(name)
     if library is None:
         # windll and WinDLL exist only on Windows, which is the only place
-        # this is called; see OpenGL.Tk.context, which picks an implementation
-        # by Tk's own windowing system.
+        # this is called.  OpenGL.Tk.context picks the implementation from
+        # Tk's windowing system.
         windows: Any = ctypes
         library = _LIBRARIES[name] = windows.WinDLL(name)
         for (where, entryPoint), (restype, argtypes) in SIGNATURES.items():
@@ -261,13 +257,13 @@ def windowsLibrary(name: str) -> Any:
 class WGLContext(object):
     """A WGL context bound to the window a Tk widget owns
 
-    Built by :func:`OpenGL.Tk.context.createContext`; a caller reaches it as
+    Created by :func:`OpenGL.Tk.context.createContext` and available as
     ``frame.context``.
 
     Attributes:
-        handle -- the ``HGLRC`` the driver made
-        window -- the ``HWND`` Tk gave the widget
-        deviceContext -- the ``HDC`` this draws through
+        handle - the driver's ``HGLRC``
+        window - the widget's ``HWND``
+        deviceContext - the ``HDC`` this context draws through
     """
 
     handle = None
@@ -295,7 +291,7 @@ class WGLContext(object):
 
     ### creation
     def _chooseAndSetFormat(self) -> None:
-        """Settle this window's pixel format, which can only be done once"""
+        """Choose and set this window's pixel format, which is set only once"""
         described = describedFormat(self.attributes)
         index = self._extensionFormat()
         if index is None:
@@ -313,11 +309,10 @@ class WGLContext(object):
     def _extensionFormat(self):
         """The format ``wglChoosePixelFormatARB`` picks, or None
 
-        None where the extension is not there to ask, which is what the
-        old-style choice is the fallback for.  The dance around it is in
-        :meth:`_withProbeContext`: an extension entry point cannot be looked up
-        without a context, and this is the call that decides which context to
-        make.
+        Returns None when the extension is missing, and the caller falls back
+        to ``ChoosePixelFormat``.  An extension entry point cannot be looked up
+        without a current context, so the call runs inside
+        :meth:`_withProbeContext`.
         """
         pixel_format = _arb('pixel_format')
 
@@ -339,10 +334,10 @@ class WGLContext(object):
     def _withProbeContext(self):
         """A context on a scratch window, current for the body
 
-        The scratch window is why this is not simply done on the widget: a
-        window's pixel format may be set once, so asking the question on the
-        widget's own window would use up the one chance to answer it.  The
-        answer -- a format index -- is valid for any window on the same device.
+        A window's pixel format can be set only once.  Setting one on the
+        widget's window for this probe would prevent setting the chosen
+        format later.  The chosen format index is valid for any window on the
+        same device.
         """
         import contextlib
 
@@ -382,11 +377,10 @@ class WGLContext(object):
         return probe()
 
     def _scratchWindow(self):
-        """A hidden window to make the probe context on, or None
+        """A hidden window for the probe context, or None
 
-        ``STATIC`` is a class every Windows process already has registered, so
-        there is no class to register and unregister for a window that exists
-        for the length of two calls.
+        ``STATIC`` is a window class registered in every Windows process, so
+        no class needs to be registered for this short-lived window.
         """
         WS_OVERLAPPED = 0x00000000
         window = self._user32.CreateWindowExW(
@@ -399,7 +393,7 @@ class WGLContext(object):
         return window
 
     def _create(self):
-        """Make the context, saying why if the driver will not"""
+        """The new context handle; raises TkContextError with the reason"""
         create_context = _arb('create_context')
 
         share = getattr(self.attributes.share, 'handle',
@@ -439,7 +433,7 @@ class WGLContext(object):
 
     ### the context protocol
     def makeCurrent(self) -> bool:
-        """Draw into this widget from now on; False if the driver refused"""
+        """Make this context current; False if the driver refused"""
         if self.handle is None:
             return False
         made = bool(self._wgl.wglMakeCurrent(self.deviceContext, self.handle))
@@ -448,7 +442,7 @@ class WGLContext(object):
         return made
 
     def releaseCurrent(self) -> None:
-        """Let go of the current context, leaving none current"""
+        """Release the current context, leaving none current"""
         self._wgl.wglMakeCurrent(None, None)
         nowCurrent(None)
 
@@ -458,7 +452,7 @@ class WGLContext(object):
             self._gdi32.SwapBuffers(self.deviceContext)
 
     def setSwapInterval(self, interval: int) -> bool:
-        """Wait ``interval`` refreshes between swaps; False if it cannot"""
+        """Wait ``interval`` refreshes between swaps; False if unsupported"""
         import importlib
 
         swap_control: Any = importlib.import_module(
@@ -473,13 +467,12 @@ class WGLContext(object):
             return False
 
     def destroy(self) -> None:
-        """Give the context and the device context back
+        """Delete the context and release the device context
 
-        Called twice is called once; the second call has nothing to do.
+        A second call does nothing.
 
-        A ``glBegin`` block left open goes with it: a context destroyed inside
-        one is undefined and a driver need not survive it, so the block is
-        closed while there is still a context to close it in.  See
+        An open ``glBegin`` block is closed first.  Destroying a context inside
+        one is undefined behaviour, and some drivers crash.  See
         :func:`OpenGL.error.end_abandoned_block`.
         """
         if self.handle is not None:
@@ -496,6 +489,6 @@ class WGLContext(object):
             self.deviceContext = None
 
     def describe(self) -> str:
-        """A one-line description of what this context is, for a log line"""
+        """A one-line description of this context, for a log line"""
         return 'WGL context on window 0x%x for %s' % (
             self.window, self.attributes.describe())

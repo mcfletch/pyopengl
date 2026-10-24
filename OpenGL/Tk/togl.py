@@ -1,17 +1,14 @@
 """The Togl widget, and the examination widgets built on it.
 
-**Togl is a Tcl C extension that has to be installed separately** -- Debian
-calls it ``libtogl2`` -- and it is the only thing in this package that needs
-anything outside Python.  :class:`~OpenGL.Tk.widget.GLFrame` needs none of it;
-this is here for code that already used :class:`Togl` directly, and it loads
-Togl the first time :func:`loadTogl` is called rather than when the module is
-imported.
+Togl is a Tcl C extension that must be installed separately (Debian packages
+it as ``libtogl2``).  :class:`Togl` is the only class in this package that
+needs it.  :class:`~OpenGL.Tk.widget.GLFrame` does not.  :class:`Togl` is
+provided for code that uses it directly.  Togl is loaded by the first call to
+:func:`loadTogl`, not when this module is imported.
 
-:class:`RawOpengl` and :class:`Opengl` keep their names, their constructors and
-their methods, and no longer need Togl at all: they are ``GLFrame`` subclasses
-now.  Both draw with the fixed-function pipeline -- ``glMatrixMode``,
-``gluPerspective``, ``glLightfv`` -- so both ask for a compatibility profile,
-which is what those calls need.
+:class:`RawOpengl` and :class:`Opengl` are ``GLFrame`` subclasses and do not
+need Togl.  Both draw with the fixed-function pipeline (``glMatrixMode``,
+``gluPerspective``, ``glLightfv``), so both request a compatibility profile.
 """
 
 from __future__ import annotations
@@ -41,11 +38,11 @@ from OpenGL._scalar import as_int
 
 log = logging.getLogger(__name__)
 
-#: Every value ``GL_MATRIX_MODE`` can answer.  A read that comes back with
-#: something else did not reach a context: ``glGetIntegerv`` leaves its output
-#: untouched and answers 0 when none is current, and 0 is not a mode.  Putting
-#: that back raises out of the ``finally`` in :meth:`RawOpengl.render`, after
-#: the frame is drawn and before it is swapped, so the frame goes with it.
+#: Every value ``GL_MATRIX_MODE`` can return.  Any other value means no context
+#: was current: ``glGetIntegerv`` then leaves its output untouched and returns
+#: 0, which is not a mode.  Restoring 0 would raise from the ``finally`` in
+#: :meth:`RawOpengl.render`, after the frame is drawn and before it is swapped,
+#: and the frame would be lost.
 MATRIX_MODES = frozenset((GL_MODELVIEW, GL_PROJECTION, GL_TEXTURE, GL_COLOR))
 
 __all__ = [
@@ -58,16 +55,16 @@ __all__ = [
 TOGL_NORMAL = 1
 TOGL_OVERLAY = 2
 
-#: What the fixed-function widgets below ask their context for.  Everything
-#: they draw with was removed in the core profile.
+#: The context attributes the fixed-function widgets below request.  The core
+#: profile removed every call they draw with.
 LEGACY_ATTRIBUTES = dict(profile='compatibility', version=None, depthSize=24)
 
-#: Togl's own widget options, and what each says about the context.  A script
-#: written for the Togl widget says ``Opengl(master, double=1, depth=1)``, and
-#: that is the idiom in every example this package has ever shipped, so the
-#: names go on meaning what they meant.  A value is either the attribute the
-#: option sets, or a ``(attribute, value-when-true)`` pair for the ones Togl
-#: spells as a flag where a size is what is wanted.
+#: Togl's widget options, mapped to context attributes.  Scripts written for
+#: the Togl widget, including this package's examples, use calls such as
+#: ``Opengl(master, double=1, depth=1)``, so these options keep their Togl
+#: meaning.  Each value is the attribute the option sets.  For options Togl
+#: spells as a flag where a size is needed, the value is an
+#: ``(attribute, value-when-true)`` pair.
 TOGL_OPTIONS = {
     'double': 'doubleBuffer',
     'depth': ('depthSize', 24),
@@ -82,10 +79,9 @@ TOGL_OPTIONS = {
     'stereo': 'stereo',
 }
 
-#: Togl options that describe something a context made this way does not have,
-#: or that Tk itself settles.  Accepted and ignored, with a line in the log,
-#: rather than refused: a script that says ``privatecmap=0`` is asking for what
-#: it already gets.
+#: Togl options for features a window-system context does not have, or that
+#: Tk itself controls.  They are accepted, logged and ignored.  A script that
+#: passes ``privatecmap=0`` already gets that behaviour.
 TOGL_OPTIONS_IGNORED = (
     'accum', 'accumredsize', 'accumgreensize', 'accumbluesize',
     'accumalphasize', 'auxbuffers', 'ident', 'indirect', 'overlay',
@@ -96,12 +92,12 @@ TOGL_OPTIONS_IGNORED = (
 def attributesFromToglOptions(options):
     """Split Togl's widget options out of a widget's keyword arguments
 
-    Answers ``(attributes, remaining, animate)``: the context to ask for, the
-    options that are Tk's to deal with, and the animation interval Togl spells
-    ``time``.  ``options`` is left alone.
+    Returns ``(attributes, remaining, animate)``: the context attributes to
+    request, the options to pass to Tk, and the animation interval (Togl's
+    ``time`` option).  ``options`` is not modified.
 
-    Nothing here touches Tk or a display, so what a given call amounts to can
-    be looked at without one.
+    This function does not use Tk or a display, so it can be tested without
+    one.
     """
     remaining = dict(options)
     asked = dict(LEGACY_ATTRIBUTES)
@@ -167,11 +163,11 @@ def v3distsq(a, b):
 
 
 def toglLibraryPath():
-    """Where a Togl built for this interpreter would be, in this package
+    """The directory in this package for a Togl built for this interpreter
 
-    ``src/togl.py`` in the source distribution downloads a binary Togl into it.
-    Togl 2.0 and above use Tcl stubs, so the Tk version does not matter, but a
-    64-bit Python needs a 64-bit build -- hence the suffix.
+    ``src/togl.py`` in the source distribution downloads a binary Togl into
+    it.  Togl 2.0 and above use Tcl stubs, so the Tk version does not matter.
+    A 64-bit Python needs a 64-bit build, so the name has a ``-64`` suffix.
     """
     suffix = '-64' if sys.maxsize > 2 ** 32 else ''
     try:
@@ -184,12 +180,12 @@ def toglLibraryPath():
 def loadTogl(master=None):
     """Load the Togl Tcl package into ``master``'s interpreter
 
-    Answers the interpreter it was loaded into.  Raises ``TclError`` where
-    Togl is not installed, saying which package provides it.
+    Returns the widget whose interpreter Togl was loaded into.  Raises
+    ``TclError`` if Togl is not installed, naming the package that provides
+    it.
 
-    Called on demand -- by :class:`Togl` -- rather than when this module is
-    imported, so that importing :mod:`OpenGL.Tk` neither needs a display nor
-    needs Togl.
+    :class:`Togl` calls this when it is created.  Importing :mod:`OpenGL.Tk`
+    therefore needs neither a display nor Togl.
     """
     if master is None:
         master = tkinter._default_root
@@ -220,9 +216,9 @@ class Togl(Widget):
     University of Groningen, The Netherlands
     Very basic widget which provides access to Togl functions.
 
-    Needs the Togl Tcl extension, which :func:`loadTogl` loads the first time
-    one of these is made.  :class:`~OpenGL.Tk.widget.GLFrame` is the widget
-    that needs nothing outside Python.
+    Needs the Togl Tcl extension, which :func:`loadTogl` loads when the first
+    instance is created.  :class:`~OpenGL.Tk.widget.GLFrame` needs no Tcl
+    extension.
     """
 
     def __init__(self, master=None, cnf=None, **kw):
@@ -284,9 +280,9 @@ class Togl(Widget):
 class RawOpengl(GLFrame, Misc):
     """Widget without any sophisticated bindings by Tom Schwaller
 
-    A :class:`~OpenGL.Tk.widget.GLFrame` that protects the projection matrix
-    around each frame, which is what its subclasses expect.  The context is a
-    compatibility profile, since there is a matrix stack in that sentence.
+    A :class:`~OpenGL.Tk.widget.GLFrame` that saves and restores the
+    projection matrix around each frame, as its subclasses expect.  The matrix
+    stack needs a compatibility profile context.
     """
 
     def __init__(self, master=None, cnf=None, **kw):
@@ -301,20 +297,20 @@ class RawOpengl(GLFrame, Misc):
             self.animate = animate
 
     def render(self):
-        """Draw one frame with the projection matrix left as it was found"""
-        # Tk settles first, and the context is taken after it. Pending idle
-        # work maps and resizes widgets, and doing that for a *sibling* widget
-        # makes the sibling's context current -- so a `makeCurrent` before this
-        # line no longer holds after it, and the state read below then comes
-        # back zero. `glMatrixMode(0)` out of the `finally` is what that looks
-        # like, and only in a process where a second widget exists.
+        """Draw one frame, restoring the projection matrix afterwards"""
+        # Process Tk's idle work before making the context current.  Idle
+        # work maps and resizes widgets, and mapping a sibling widget makes
+        # the sibling's context current.  A makeCurrent before this line
+        # would not hold after it, and the state read below would be zero.
+        # The symptom is glMatrixMode(0) from the finally, in a process with
+        # a second widget.
         self.update_idletasks()
         if not self.makeCurrent():
             return False
-        # An enum, so the integer getter: the double one answers 5888.0,
-        # and restoring the mode with a float is a ctypes.ArgumentError
-        # out of the finally below -- which loses the frame, since the
-        # buffers are swapped after it.
+        # The mode is an enum, so use the integer getter.  The double getter
+        # returns 5888.0, and restoring the mode with a float raises
+        # ctypes.ArgumentError from the finally below.  The frame is then
+        # lost, because the buffers are swapped after it.
         mode = as_int(glGetIntegerv(GL_MATRIX_MODE))
         try:
             glMatrixMode(GL_PROJECTION)
@@ -335,11 +331,11 @@ class RawOpengl(GLFrame, Misc):
         return True
 
     def tkExpose(self, *dummy):
-        """Draw one frame, under the name the Togl-based widget used"""
+        """Draw one frame; :meth:`render` under the Togl widget's name"""
         self.render()
 
     def tkMap(self, *dummy):
-        """Draw one frame, under the name the Togl-based widget used"""
+        """Draw one frame; :meth:`render` under the Togl widget's name"""
         self.render()
 
 
@@ -351,9 +347,9 @@ Department of Chemistry
 University of York, UK
 http://www.yorvic.york.ac.uk/~mjh/
 
-A viewer with the mouse bindings a model is examined by: button 1 translates,
-button 2 rotates and button 3 zooms.  Set ``redraw`` to a callable taking the
-widget, or subclass and override it.
+A model viewer with mouse bindings: button 1 translates, button 2 rotates and
+button 3 zooms.  Set ``redraw`` to a callable taking the widget, or subclass
+and override it.
 """
 
     def __init__(self, master=None, cnf=None, **kw):
@@ -435,10 +431,9 @@ widget, or subclass and override it.
         Also switch on the depth buffer."""
 
         self.activate()
-        # Built as an array rather than written as a tuple: a tuple has no
-        # data pointer to give the driver, so under ERROR_ON_COPY -- which is
-        # a caller's instruction that this library make no implicit copies for
-        # them -- the call is refused, in code of ours they never wrote.
+        # A ctypes array rather than a tuple.  A tuple has no data pointer,
+        # so with ERROR_ON_COPY set (the caller's request that PyOpenGL make
+        # no implicit copies) the call would raise inside this library.
         light_position = (GLfloat * 4)(1.0, 1.0, 1.0, 0.0)
         glLightfv(GL_LIGHT0, GL_POSITION, light_position)
         glEnable(GL_LIGHTING)
@@ -449,7 +444,7 @@ widget, or subclass and override it.
         glLoadIdentity()
 
     def initgl(self):
-        """Light the scene the first time there is a context to light it in"""
+        """Set up lighting once the context exists"""
         self.basic_lighting()
         self.initialised = 1
 
@@ -612,7 +607,7 @@ widget, or subclass and override it.
         """Prevent access errors if user doesn't set redraw fast enough"""
 
     def reshape(self, width, height):
-        """The camera is rebuilt per frame, so a resize needs nothing here"""
+        """Do nothing; :meth:`render` sets the viewport and camera per frame"""
 
     def tkPrint(self, file):
         """Turn the current scene into PostScript via the feedback buffer."""

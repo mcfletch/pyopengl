@@ -5,59 +5,58 @@ PyOpenGL is normally distributed via PyPI using standard pip::
 
     $ pip install PyOpenGL PyOpenGL_accelerate
 
-The two carry the same version number and have to be equal.  They are released
-together and share the dispatch extension's generated tables, so a mismatched
-pair does not degrade, it dispatches through the wrong slot indices;
-``PyOpenGL_accelerate`` therefore requires the *exact* ``PyOpenGL`` it was
-released with.  That constraint travels in one direction only: installing or
-upgrading accelerate brings the matching PyOpenGL with it, while upgrading
-``PyOpenGL`` on its own leaves the older accelerate in place -- which pip
-reports as a conflict once it has already installed, and other installers may
-not report at all.  Name both packages whenever you upgrade either::
+The two packages carry the same version number, and the versions must match.
+They are released together and share the dispatch extension's generated tables.
+A mismatched pair dispatches calls through the wrong slot indices, so
+``PyOpenGL_accelerate`` requires the *exact* ``PyOpenGL`` it was released with.
+Installing or upgrading accelerate also installs the matching PyOpenGL.
+Upgrading ``PyOpenGL`` on its own leaves the older accelerate in place.  pip
+reports that as a conflict only after installing, and other installers may not
+report it at all.  Name both packages whenever you upgrade either::
 
     $ pip install -U PyOpenGL PyOpenGL_accelerate
 
-A pair that has come apart is refused when the first entry point is built, in a
-message naming both versions.  Until it is put right,
-``PYOPENGL_USE_ACCELERATE=0`` in the environment runs on ctypes.
+PyOpenGL detects a mismatched pair when it builds the first entry point, and
+raises an error naming both versions.  Until the versions match,
+``PYOPENGL_USE_ACCELERATE=0`` in the environment makes PyOpenGL use ctypes.
 
 `RELEASE-NOTES-4.0.md <RELEASE-NOTES-4.0.md>`_ covers what changed between the
 3.x series and 4.0, including the requirements a 3.x program has to meet.
 
-You can install this repository by branching/cloning and running
-``pip``::
+To install from a clone of this repository, run ``pip``::
 
     $ cd pyopengl
     $ pip install -e . ./accelerate
 
-Both at once, for the same reason.  Between releases the version in this tree is
-on no index, so installing accelerate on its own asks PyPI for a version that is
-not there yet and the resolver refuses.  Installing both from the checkout in
-one command resolves them against each other.
+Install both packages in one command, because their versions must match.
+Between releases, the version in this tree is not on any package index.
+Installing accelerate on its own asks PyPI for that version, and the resolver
+fails.  Installing both from the checkout in one command resolves each against
+the other.
 
-Note that to compile PyOpenGL_accelerate you will need to have 
-a functioning Python extension-compiling environment.
+Compiling PyOpenGL_accelerate needs a working Python extension-building
+environment.
 
 Freezing an application
 ------------------------
 
 PyOpenGL chooses its platform module and its array format handlers through a
-plug-in registry (``OpenGL.plugins``), which names each one as a string and
-imports it when something matches. A tool that follows import statements sees
-none of them, and freezes an application that cannot load a platform at all.
+plug-in registry (``OpenGL.plugins``). The registry names each module as a
+string and imports it when it matches. A freezing tool that follows import
+statements does not find these modules. The frozen application then cannot
+load any platform.
 
-PyOpenGL therefore ships its own PyInstaller hook, which PyInstaller finds by
-itself through the ``pyinstaller40`` entry point: there is nothing to configure
-and nothing to list. It reports the modules the registries would import --
-read from the registries themselves, so a plug-in added by another package is
-carried too -- and on Windows the GLUT and GLE libraries, which
-``OpenGL.platform.ctypesloader`` opens by path. Those come from
-``PyOpenGL-glut-binaries`` where it is installed, so a frozen application gets
-them if the build host asked for ``PyOpenGL[glut]`` and is frozen without GLUT
-if it did not.
+PyOpenGL ships its own PyInstaller hook to include them. PyInstaller finds the
+hook through the ``pyinstaller40`` entry point, with no configuration. The hook
+lists the modules the registries would import, read from the registries
+themselves, so plug-ins added by other packages are included too. On Windows it
+also lists the GLUT and GLE libraries, which ``OpenGL.platform.ctypesloader``
+opens by path. Those libraries come from ``PyOpenGL-glut-binaries``. A frozen
+application includes them if the build host installed ``PyOpenGL[glut]``, and
+is frozen without GLUT otherwise.
 
-For another freezer, ``OpenGL.plugins.registered_modules()`` is the same answer
-without PyInstaller in the way::
+For another freezer, ``OpenGL.plugins.registered_modules()`` returns the same
+module list without PyInstaller::
 
     >>> from OpenGL import plugins
     >>> plugins.registered_modules('OpenGL')
@@ -66,11 +65,11 @@ without PyInstaller in the way::
 Learning PyOpenGL
 -----------------
 
-If you are new to PyOpenGL, you likely want to start with the OpenGLContext `tutorial page`_.
-Those tutorials require OpenGLContext, (which is a big wrapper including a whole
-scenegraph engine, VRML97 parser, lots of demos, etc) you can install that with::
+If you are new to PyOpenGL, start with the OpenGLContext `tutorial page`_.
+The tutorials require OpenGLContext, a large package with a scenegraph engine,
+a VRML97 parser and many demos.  Install it with::
 
-    $ pip2.7 install "OpenGLContext-full==3.1.1"
+    $ pip install OpenGLContext
 
 Or you can clone it (including the tutorial sources) with::
 
@@ -91,35 +90,36 @@ Choosing a dispatch implementation
 -----------------------------------
 
 PyOpenGL has two implementations of the OpenGL entry points.  The C
-implementation is generated from the Khronos registry and reaches the driver
-roughly seven times faster per call -- eleven times for a call that passes an
-array.  What a program gains from that depends on how much of its frame goes on
-dispatch: one structured around shaders and buffer objects makes few calls per
-frame, and the measured uplift on optimised PyOpenGL applications is about 5%.
-Being compiled, the C implementation ships in ``PyOpenGL_accelerate``::
+implementation is generated from the Khronos registry.  It calls the driver
+roughly seven times faster per call, and eleven times faster for a call that
+passes an array.  The gain for a program depends on how much of each frame is
+spent in dispatch.  A program built around shaders and buffer objects makes few
+calls per frame.  On optimised PyOpenGL applications the measured gain is about
+5%.  The C implementation is compiled, so it ships in ``PyOpenGL_accelerate``::
 
     $ pip install PyOpenGL PyOpenGL_accelerate
 
 ``pip install PyOpenGL`` on its own gives the ctypes implementation, which is
-pure Python and needs nothing compiled.  The extension is built for CPython
-only, so the C implementation runs where ``PyOpenGL_accelerate`` is installed
-under CPython, and ctypes runs everywhere else.  Where the C implementation is
-available, ctypes is selected with::
+pure Python and needs no compiler.  The extension is built for CPython only.
+The C implementation runs under CPython with ``PyOpenGL_accelerate`` installed.
+ctypes runs everywhere else.  Where the C implementation is available, select
+ctypes with::
 
     $ PYOPENGL_DISPATCH=ctypes python yourprogram.py
 
-Both implement the same API and the test suite runs under both.  Asking for the
-C implementation where none was built is not an error -- the ctypes one stays in
-place -- so a program that means to be on it asks::
+Both implement the same API, and the test suite runs under both.  Requesting
+the C implementation where it was not built is not an error.  PyOpenGL keeps
+using ctypes.  A program that requires the C implementation checks
+``dispatch.status()``::
 
     >>> from OpenGL import dispatch
     >>> dispatch.status()
     Status(requested='c', active='c', available=True, reason=None)
 
-``OpenGL.dispatch`` is also where a program says a context has become current or
-been destroyed, which is what gives each context its own function pointer for
-every entry point.  See `the C dispatch layer`_ for what it covers, what
-differs, and how to tell it that the current context changed.
+A program also calls ``OpenGL.dispatch`` to report that a context has become
+current or been destroyed.  Those calls give each context its own function
+pointer for every entry point.  See `the C dispatch layer`_ for what it covers,
+how it differs from ctypes, and how to report a change of current context.
 
 .. _`the C dispatch layer`: https://mcfletch.github.io/pyopengl/c-dispatch.html
 
@@ -127,23 +127,25 @@ differs, and how to tell it that the current context changed.
 Rendering without a display server
 -----------------------------------
 
-``OpenGL.EGL.devices`` reports which EGL devices a system offers and which of
-them rasterise on the CPU, which is what a program needs before it can render
-offscreen on a named device::
+``OpenGL.EGL.devices`` lists the EGL devices a system offers, and which of
+them rasterise on the CPU.  A program uses that list to choose a device for
+offscreen rendering::
 
     from OpenGL.EGL import devices
 
     for device in devices.devices():
         print(device.index, device.driver, device.software)
 
-See `EGL devices`_ for what each field means, how the software question is
-decided, and the ``eglGetPlatformDisplayEXT`` call a handle is for.
+See `EGL devices`_ for what each field means, how a device is classed as
+software, and the ``eglGetPlatformDisplayEXT`` call that a device handle is
+passed to.
 
 .. _`EGL devices`: https://mcfletch.github.io/pyopengl/egl-devices.html
 
-On macOS the equivalent is ``OpenGL.CGL``, which creates a context with no
-window and no window server -- CGL is the layer NSGL and AGL are built on, and
-the only one of the three that will::
+On macOS the equivalent is ``OpenGL.CGL``.  CGL is the lowest-level OpenGL
+interface on macOS.  NSGL (the ``NSOpenGLContext`` Cocoa classes) and AGL (the
+older Carbon interface) are built on it.  Of the three, only CGL can create a
+context with no window and no window server::
 
     from OpenGL.CGL import OffscreenTarget, headless_context
 
@@ -152,9 +154,10 @@ the only one of the three that will::
         ...                      # there is no framebuffer zero; draw into this
         target.release()
 
-See `Offscreen OpenGL on macOS`_ for the profiles available, how the renderer is
-chosen on a machine with no accelerated one, and why a framebuffer object is not
-optional there.
+An offscreen CGL context has no default framebuffer (framebuffer zero), so
+rendering must target a framebuffer object.  See `Offscreen OpenGL on macOS`_
+for the available profiles, how the renderer is chosen on a machine without an
+accelerated one, and the framebuffer object requirement.
 
 .. _`Offscreen OpenGL on macOS`: https://mcfletch.github.io/pyopengl/cgl-offscreen.html
 
@@ -162,9 +165,9 @@ optional there.
 OpenGL ES through ANGLE
 ------------------------
 
-Windows has no EGL and no OpenGL ES of its own.  ANGLE supplies both, by
-translating ES onto Direct3D 11, and ``PYOPENGL_PLATFORM=angle`` is how
-PyOpenGL binds to it::
+Windows has no EGL and no OpenGL ES of its own.  ANGLE supplies both by
+translating ES calls to Direct3D 11.  ``PYOPENGL_PLATFORM=angle`` makes
+PyOpenGL bind to ANGLE::
 
     PYOPENGL_PLATFORM=angle
     PYOPENGL_ANGLE_PATH=C:\path\to\angle     # holding libEGL.dll, libGLESv2.dll
@@ -175,22 +178,21 @@ pick a config, make a pbuffer current, and render with no window::
     from OpenGL.EGL import eglGetDisplay, eglInitialize, eglBindAPI, ...
     from OpenGL.GLES2 import glClear, glClearColor, glReadPixels
 
-The platform is chosen by asking for it and never by guessing.  A Windows
-machine's OpenGL is WGL's, and a program that did not ask for ES goes on
-getting desktop GL from the driver.
+PyOpenGL uses the ANGLE platform only when ``PYOPENGL_PLATFORM`` requests it.
+Otherwise a Windows program uses WGL and gets desktop GL from the driver.
 
-**It supplies OpenGL ES only.**  ANGLE has no desktop GL: it advertises
-``EGL_CLIENT_APIS`` of ``OpenGL_ES``, offers no config carrying
-``EGL_OPENGL_BIT``, and refuses ``eglBindAPI(EGL_OPENGL_API)``.  So this
-platform's ``GL`` is ``None``, ``OpenGL.GL`` still imports, and calling a
-desktop-only entry point raises ``NullFunctionError`` naming it rather than
-binding to something that is not there.  ES 1, 2 and 3 all come from
-``libGLESv2.dll``, ANGLE's ES 1 emulation included.
+ANGLE supplies OpenGL ES only, with no desktop GL.  It advertises
+``EGL_CLIENT_APIS`` of ``OpenGL_ES``, offers no config with
+``EGL_OPENGL_BIT``, and rejects ``eglBindAPI(EGL_OPENGL_API)``.  On this
+platform ``GL`` is therefore ``None``.  ``OpenGL.GL`` still imports, and
+calling a desktop-only entry point raises ``NullFunctionError`` naming that
+entry point.  ES 1, 2 and 3 all come from ``libGLESv2.dll``, including ANGLE's
+ES 1 emulation.
 
-``PYOPENGL_ANGLE_PATH`` is needed because ANGLE is not installed system-wide:
-it travels inside browsers and Electron applications, so a machine may hold
-several copies of different ages.  Without the variable the ordinary library
-search runs, which finds an ANGLE that is on ``PATH`` and nothing otherwise.
+ANGLE is not installed system-wide.  Browsers and Electron applications each
+bundle their own copy, so a machine may hold several copies of different ages.
+``PYOPENGL_ANGLE_PATH`` names the copy to use.  Without it, the ordinary
+library search runs, which finds ANGLE only if it is on ``PATH``.
 
 See `OpenGL ES through ANGLE`_ for what a context can be asked for and what the
 platform does and does not supply.
@@ -202,9 +204,9 @@ OpenGL in a Tkinter window
 ---------------------------
 
 ``OpenGL.Tk.GLFrame`` is an ordinary ``tkinter.Frame`` that owns an OpenGL
-context on its own native window.  Tkinter ships with Python, so this is the
-one GUI toolkit that needs nothing installed, and the context is a core profile
-by default -- shaders and vertex array objects, in a Tk application::
+context on its own native window.  Tkinter ships with Python, so it is the one
+GUI toolkit that needs nothing extra installed.  The context is a core profile
+by default, so a Tk application can use shaders and vertex array objects::
 
     import tkinter
     from OpenGL.GL import GL_COLOR_BUFFER_BIT, glClear, glClearColor
@@ -220,10 +222,10 @@ by default -- shaders and vertex array objects, in a Tk application::
     Scene(root, width=640, height=480).pack(fill='both', expand=True)
     root.mainloop()
 
-``examples/tk_shader.py`` is a longer one.  See `OpenGL in a Tkinter widget`_
-for what the context can be asked for, when it arrives, what happens when a
-driver refuses one, and which of the older widgets still need Togl
-(``RawOpengl`` and ``Opengl`` do not; ``Togl`` does).
+``examples/tk_shader.py`` is a longer example.  See
+`OpenGL in a Tkinter widget`_ for the context options, when the context is
+created, what happens when a driver rejects a request, and which of the older
+widgets still need Togl (``RawOpengl`` and ``Opengl`` do not; ``Togl`` does).
 
 .. _`OpenGL in a Tkinter widget`: https://mcfletch.github.io/pyopengl/tk-widget.html
 
@@ -231,8 +233,8 @@ driver refuses one, and which of the older widgets still need Togl
 Running Tests
 --------------
 
-You can run the PyOpenGL test suite from a source-code checkout, the easiest
-way to run the tests with the uv runner:
+You can run the PyOpenGL test suite from a source-code checkout.  The easiest
+way is with the uv runner, which needs:
 
 
 * git (for the checkout)
@@ -245,64 +247,61 @@ Running the test suite from a top-level checkout looks like::
 
     $ uv run --with tox,tox-uv tox
 
-The result being a lot of tests being run in a matrix of environments.
-All of the environments will pull in glfw, some will also pull in 
-numpy. Some will have accelerate, and some will not.
+This runs the tests in a matrix of environments.  Every environment installs
+glfw.  Some also install numpy, and some install accelerate.
 
 Test Suite Concerns
 ....................
 
-The test suite takes a long time to complete due to the matrix of 
-supported configurations; it will open *many* windows, so it will be
-difficult to interact with your machine's keyboard as it runs.
+The test suite takes a long time because it covers a matrix of supported
+configurations.  It opens *many* windows, so using the keyboard while it runs
+is difficult.
 
-On a powerful linux machine a single test run when uv has already cached 
-all dependencies is around 90s (i.e. just for actually running the tests).
-There is a matrix of 6 python versions, 2 numpy conditions, and 2 
-acceleration conditions for around 40 minutes to run the full tox suite
-if you already have all dependencies built and cached.
+On a powerful Linux machine, with all dependencies already cached by uv, a
+single test run takes around 90s (for running the tests alone).  The matrix
+has 7 CPython and 2 PyPy versions, 2 numpy conditions and 2 acceleration
+conditions.  The
+full tox suite takes around 40 minutes with all dependencies built and cached.
 
-You can run parallel test suites with tox's -p flag, but beware that
-you can crash your desktop that way.
+tox's -p flag runs test suites in parallel, but it can crash your desktop.
 
-The glfw window generally will not proceed if your Wayland session
-has locked or is otherwise preventing display of the windows.
+The glfw windows usually stall if your Wayland session is locked or otherwise
+not displaying windows.
 
-You can set `TEST_VISIBLE=false` in your environment and many of the
-tests will run "headless" (i.e. will not create an on-screen display)::
+With `TEST_VISIBLE=false` in your environment, many tests run "headless"
+(without an on-screen window)::
 
     $ TEST_VISIBLE=false uv run --with tox,tox-uv tox
 
-there are, however, a number of tests which do not respect this flag
-(mostly the test_checks.py suite which runs out-of-process scripts),
-for those which do the speedup and ergonimic improvement is considerable.
+Some tests ignore this flag, mostly the test_checks.py suite, which runs
+scripts out of process.  The tests that honour it run much faster and do not
+take over the desktop.
 
-You can control the inter-test pause (dwell time) by setting the 
-environment variable TEST_DWELL to a floating point value. Note that
-there is no point having a long dwell on non-visible runs, since the
-rendered frames will not be visible to you anyway.
+The environment variable TEST_DWELL sets the pause between tests (the dwell
+time) as a floating point value.  On a run without visible windows a long dwell
+has no use, because the rendered frames are not shown.
 
-You can use the pygame context for many test cases, to do so::
+Many test cases can use the pygame context::
 
     $ TEST_WINDOWING=pygame uv run --with tox,tox-uv tox
 
-Keep in mind that pygame versions for python3.9 often do not support
-Wayland desktops.
+pygame versions for Python 3.9 often do not support Wayland desktops.
 
 The ``TEST_WINDOWING`` flag selects the windowing backend used by the
 ``tests/gl``, ``tests/gles`` and ``tests/glu`` suites:
 
 * ``glfw`` (the default) and ``pygame`` create an on-screen window.  On a
-  desktop these render on your GPU; inside a container whose compositor is
-  software-rendered they will use llvmpipe regardless of the GPU present.
+  desktop they render on your GPU.  Inside a container with a
+  software-rendered compositor they use llvmpipe (Mesa's CPU rasteriser),
+  whatever GPU is present.
 * ``cgl`` is the *headless* backend on macOS: a CGL context with no window and
-  no window server, which is the only kind those runners and remote shells can
-  have.  ``TEST_CGL_RENDERER`` pins the renderer kind (``accelerated`` /
-  ``any`` / ``software``); unset, an accelerated renderer is preferred and the
-  CPU one taken where there is no other.  OpenGL-ES and a compatibility profile
-  above 2.1 do not exist there, so cases wanting either are skipped with the
-  reason.  ``python tests/check_cgl_context.py`` reports what a given Mac can
-  give::
+  no window server.  CI runners and remote shells on macOS can only create this
+  kind of context.  ``TEST_CGL_RENDERER`` pins the renderer kind
+  (``accelerated`` / ``any`` / ``software``).  When it is unset, an accelerated
+  renderer is preferred, and the CPU renderer is used when there is no other.
+  macOS has no OpenGL-ES and no compatibility profile above 2.1, so cases that
+  need either are skipped with that reason.  ``python
+  tests/check_cgl_context.py`` reports what contexts a given Mac supports::
 
       $ TEST_WINDOWING=cgl uv run --with tox,tox-uv tox
 
@@ -311,58 +310,52 @@ The ``TEST_WINDOWING`` flag selects the windowing backend used by the
 
       $ TEST_WINDOWING=egl uv run --with tox,tox-uv tox
 
-  This is the right choice for CI / containers (e.g. with the NVIDIA container
-  runtime), where it reaches the real GPU even though the on-screen path would
-  fall back to llvmpipe.  It forces ``PYOPENGL_PLATFORM=egl`` and serves both
-  desktop OpenGL and OpenGL-ES contexts via an offscreen pbuffer; because there
-  is no window, ``TEST_VISIBLE`` and the inter-test dwell do not apply.  By
-  default it picks the first non-software EGL device; ``LIBGL_ALWAYS_SOFTWARE=1``
-  (or ``GALLIUM_DRIVER=llvmpipe``) asks for the software one instead, and
-  ``TEST_EGL_DEVICE=<n>`` pins a device index.  The two have to agree: Mesa
-  refuses to force software rasterisation onto a display built on a hardware
-  device and crashes rather than saying no, so a run that demands software and
-  pins a GPU is refused by name.  The legacy root-level ``tests/*.py`` have no
-  headless equivalent and fall back to a windowed backend under this setting.
-  They need a display server to open their window on, and skip where there is
-  none; run them under a virtual one to have them run::
+  Use it for CI and containers (for example with the NVIDIA container
+  runtime).  There it reaches the real GPU, where the on-screen path would use
+  llvmpipe.  It forces ``PYOPENGL_PLATFORM=egl`` and provides both desktop
+  OpenGL and OpenGL-ES contexts through an offscreen pbuffer.  There is no
+  window, so ``TEST_VISIBLE`` and the inter-test dwell do not apply.  By
+  default it picks the first non-software EGL device.
+  ``LIBGL_ALWAYS_SOFTWARE=1`` (or ``GALLIUM_DRIVER=llvmpipe``) selects the
+  software device instead, and ``TEST_EGL_DEVICE=<n>`` pins a device index.
+  The two settings must agree.  Mesa crashes when asked to force software
+  rasterisation on a display created from a hardware device.  A run that
+  requests software and pins a GPU is therefore refused with an error that
+  names the conflict.  The legacy root-level ``tests/*.py`` have no headless equivalent
+  and use a windowed backend under this setting.  They need a display server
+  for their windows and are skipped where there is none.  To run them, use a
+  virtual display server::
 
       $ xvfb-run -a uv run --with tox,tox-uv tox
 
 Continuous integration
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Every push to ``develop`` runs the suite against two unrelated OpenGL
-implementations, both free for a public repository:
+Every push to ``develop`` runs the suite against two independent OpenGL
+implementations.  Both runners are free for a public repository:
 
-* Mesa's llvmpipe on a Linux runner, reached headless through the EGL device
-  platform -- no X server and no GPU, and the same renderer on every run.  The
-  interpreters 3.10 to 3.14, both dispatch implementations, with and without
-  numpy, and with and without ``PyOpenGL_accelerate``: one tox environment per
-  job, so a failure names the axis it happened on.
+* Mesa's llvmpipe on a Linux runner, run headless through the EGL device
+  platform.  There is no X server and no GPU, and every run uses the same
+  renderer.  The jobs cover Python 3.10 to 3.14, both dispatch
+  implementations, with and without numpy, and with and without
+  ``PyOpenGL_accelerate``.  Each job runs one tox environment, so a failing
+  job identifies the configuration that failed.
 * Apple's GL on the ``macos-14`` and ``macos-15`` runners, through ``CGL``.
-  A second vendor's implementation is the half llvmpipe cannot cover: a call we
-  get away with under Mesa because Mesa is lenient fails there.  Those runners
-  have no accelerated renderer, so what answers is Apple's CPU one.
+  Mesa accepts some incorrect calls that Apple's implementation rejects, so
+  this job catches errors the llvmpipe job misses.  These runners have no
+  accelerated renderer, so the tests run on Apple's CPU renderer.
 
-GitHub's GPU runner is not an option for either: it is a larger runner, billed
-per minute on Team and Enterprise plans and never free, whatever the
-repository's visibility.
+GitHub's GPU runner is a larger runner.  It is billed per minute on Team and
+Enterprise plans and is never free, whatever the repository's visibility, so
+neither job uses it.
 
 Reproduce the Linux job on a machine that has a GPU with::
 
     $ LIBGL_ALWAYS_SOFTWARE=1 TEST_WINDOWING=egl python -m pytest tests/
 
-Tests carrying the ``performance`` marker assert how fast something draws, which
-a CPU rasteriser cannot answer, so that job deselects them with
+Tests with the ``performance`` marker assert drawing speed, which a CPU
+rasteriser cannot measure meaningfully.  The Linux job deselects them with
 ``-m "not performance"``.
-
-.. image:: https://travis-ci.org/mcfletch/pyopengl.svg?branch=master
-    :target: https://travis-ci.org/mcfletch/pyopengl
-    :alt: Travis Tests
-
-.. image:: https://ci.appveyor.com/api/projects/status/github/mcfletch/pyopengl
-    :target: https://ci.appveyor.com/project/MikeCFletcher/pyopengl
-    :alt: Appveyor Build
 
 .. image:: https://img.shields.io/pypi/v/pyopengl.svg
     :target: https://pypi.python.org/pypi/pyopengl

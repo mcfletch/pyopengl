@@ -1,13 +1,12 @@
-"""What a caller asks a Tk OpenGL context for.
+"""The attributes requested for a Tk OpenGL context.
 
-One object, so a request can be written down, passed around and compared, and
-so each platform has one thing to translate rather than a signature to keep in
-step with two others.  What each platform does with it is
+A request is a single object, so it can be stored, passed around and compared.
+Each platform translates that one object into its own attribute list; see
 :mod:`OpenGL.Tk.glx` and :mod:`OpenGL.Tk.win32`.
 
-Nothing here touches Tk, a display or a driver, which is the point: a wrong
-constant in an attribute list produces "could not create a context" and no
-other evidence, so the lists are worth being able to look at without one.
+This module does not use Tk, a display or a driver.  A wrong constant in an
+attribute list only produces "could not create a context", so the lists can be
+built and inspected here without a display.
 """
 
 from __future__ import annotations
@@ -18,18 +17,18 @@ __all__ = ['PROFILES', 'ContextAttributes']
 
 #: The profiles a context may be asked for.
 #:
-#: ``core`` is OpenGL 3.2 and above with the fixed-function pipeline removed --
-#: shaders, vertex array objects, and what everything written since 2008 uses.
-#: ``compatibility`` is the same era with the old pipeline still present, which
-#: is what the fixed-function widgets in :mod:`OpenGL.Tk.togl` need.
-#: ``legacy`` asks for no version and no profile at all: the driver is left to
-#: choose, through the entry point that predates the choice existing, which is
-#: the only thing a driver without ``ARB_create_context`` will answer.
+#: ``core`` is OpenGL 3.2 and above with the fixed-function pipeline removed.
+#: It provides shaders and vertex array objects.
+#: ``compatibility`` is OpenGL 3.2 and above with the fixed-function pipeline
+#: still present.  The fixed-function widgets in :mod:`OpenGL.Tk.togl` need it.
+#: ``legacy`` requests no version and no profile, so the driver chooses.  It uses
+#: the older context-creation entry point, which is the only one available on a
+#: driver without ``ARB_create_context``.
 PROFILES = ('core', 'compatibility', 'legacy')
 
-#: The version asked for when a caller names a profile but no version.  The
-#: floor for a core profile is 3.2; 3.3 is where the shading language stopped
-#: moving in ways that matter and is what shaders are written against.
+#: The version requested when a caller names a profile but no version.  The
+#: minimum for a core profile is 3.2.  Most shaders are written against GLSL
+#: 3.30, so 3.3 is the default.
 DEFAULT_VERSION = (3, 3)
 
 #: Bits per colour channel asked for when nothing says otherwise.
@@ -39,10 +38,9 @@ DEFAULT_COLOUR_SIZE = 8
 #: visibly short on any scene deeper than a few metres.
 DEFAULT_DEPTH_SIZE = 24
 
-#: The first version that has profiles to choose between.  Below it there is no
-#: profile mask to send, and a driver handed one refuses the whole request --
-#: which is how "core 2.1", a thing that does not exist, comes back as an X
-#: ``BadValue`` rather than as a context.
+#: The first version that has profiles.  Below it there is no profile mask to
+#: send, and a driver given one refuses the whole request.  Sent with a
+#: profile mask, a request for "core 2.1" fails with an X ``BadValue`` error.
 PROFILE_FLOOR = (3, 2)
 
 #: The first version that can be asked to leave out what it has deprecated.
@@ -52,31 +50,30 @@ FORWARD_COMPATIBLE_FLOOR = (3, 0)
 class ContextAttributes(object):
     """The description of a GL context a widget is to be given
 
-    profile -- one of :data:`PROFILES`
-    version -- ``(major, minor)`` to ask for, or ``None`` to leave it to the
-        driver.  A ``legacy`` profile forces ``None``, since the entry point
+    profile - one of :data:`PROFILES`
+    version - ``(major, minor)`` to request, or ``None`` to let the driver
+        choose.  A ``legacy`` profile forces ``None``, because the entry point
         that creates one takes no version.
-    doubleBuffer -- whether to draw into a back buffer and swap
-    redSize, greenSize, blueSize -- bits per colour channel
-    alphaSize -- bits of destination alpha.  Zero unless asked for: a
-        compositor that honours it treats cleared pixels as transparent, so a
-        window with an alpha channel shows what is behind it.
-    depthSize, stencilSize -- bits of depth and stencil
-    samples -- multisample samples per pixel, or 0 for none
-    stereo -- whether to ask for a stereo pair of colour buffers
-    debug -- whether to ask for a debug context, which is what makes
-        ``GL_KHR_debug`` report anything
-    forwardCompatible -- whether the context may not offer anything deprecated.
-        Defaults to true for a core profile and false otherwise, which is what
-        each of those means; naming it outranks the default.
-    share -- a context to share display lists, textures and buffers with, or
+    doubleBuffer - whether to draw into a back buffer and swap
+    redSize, greenSize, blueSize - bits per colour channel
+    alphaSize - bits of destination alpha, default zero.  Some compositors
+        treat cleared pixels in a window with an alpha channel as transparent
+        and show what is behind the window.
+    depthSize, stencilSize - bits of depth and stencil
+    samples - multisample samples per pixel, or 0 for none
+    stereo - whether to request a stereo pair of colour buffers
+    debug - whether to request a debug context.  ``GL_KHR_debug`` reports
+        messages only in a debug context.
+    forwardCompatible - whether the context omits deprecated functionality.
+        Defaults to true for a core profile and false otherwise.  An explicit
+        value overrides the default.
+    share - a context to share display lists, textures and buffers with, or
         None
-    swapInterval -- display refreshes a buffer swap waits for, or None to leave
-        it to the platform.  Zero swaps at once, which is what a benchmark
-        wants and what a machine with no display needs: a swap that waits for a
-        refresh nothing delivers does not return.  Applied before the first
-        frame is drawn; :meth:`~OpenGL.Tk.widget.GLFrame.setSwapInterval`
-        changes it afterwards.
+    swapInterval - display refreshes a buffer swap waits for, or None to use
+        the platform default.  Zero swaps immediately, for benchmarks and for
+        machines with no display, where a swap waiting for a refresh never
+        returns.  Applied before the first frame is drawn;
+        :meth:`~OpenGL.Tk.widget.GLFrame.setSwapInterval` changes it later.
     """
 
     __slots__ = (
@@ -128,8 +125,8 @@ class ContextAttributes(object):
         self.share = share
         self.swapInterval = None if swapInterval is None else int(swapInterval)
 
-    #: The constructor's own parameters, so a widget can take them among its
-    #: Tk options and hand the right ones on; see
+    #: The constructor's parameter names.  A widget uses them to separate these
+    #: keywords from its Tk options; see
     #: :meth:`OpenGL.Tk.widget.GLFrame.__init__`.
     KEYWORDS = tuple(name for name in __slots__)
 
@@ -142,10 +139,9 @@ class ContextAttributes(object):
     def profileApplies(self) -> bool:
         """Whether this request has a profile to name
 
-        A profile is a GL 3.2 idea.  Asked for a version below that, a driver
-        refuses the request outright rather than ignoring the part of it that
-        means nothing -- so "core 2.1" has to come out as a plain 2.1 context,
-        which is what every windowing toolkit gives for it.
+        Profiles exist from GL 3.2.  A driver refuses a request that names a
+        profile for an earlier version.  A request for "core 2.1" is therefore
+        sent as a plain 2.1 request, as other windowing toolkits do.
         """
         if self.profile == 'legacy':
             return False

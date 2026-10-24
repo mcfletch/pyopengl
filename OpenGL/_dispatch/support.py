@@ -1,8 +1,8 @@
-"""What the C dispatch layer calls back into Python for.
+"""Python functions the C dispatch layer calls back into.
 
-Everything here is off the hot path: resolving a proc address once per entry
-point per context, converting an array the fast path did not match, raising a
-GL error, and building the ctypes binding an entry point falls back to when a
+None of these run on the hot path.  They resolve a proc address once per
+entry point per context, convert an array the fast path did not match, raise
+GL errors, and build the ctypes binding an entry point falls back to when a
 client demotes it.
 """
 
@@ -30,13 +30,13 @@ _ctypes_bindings = {}
 _modules = {}
 
 #: The exception each API raises for its own errors, by API name.  EGL's codes
-#: are not GL's and are named by a class of its own, so the class comes from the
-#: API whose call failed rather than from one shared default.
+#: differ from GL's and have their own class, so the class comes from the API
+#: whose call failed instead of from one shared default.
 _error_classes = {}
 
 
 def register_error_class(api, errorClass):
-    """Remember which exception ``api`` reports its errors with."""
+    """Record the exception class ``api`` raises for its errors."""
     _error_classes[api] = errorClass
 
 _API_NAMES = ('GL', 'GLES1', 'GLES2', 'GLES3', 'GLSC2', 'GLX', 'WGL', 'EGL')
@@ -60,22 +60,23 @@ def _dll_for(api):
 
 
 def resolve(name, extension, alternates, api_index):
-    """The address of an entry point *in the current context*, or None.
+    """Return the address of an entry point in the current context, or None.
 
-    This reproduces what ``BasePlatform.constructFunction`` decides, so that an
-    entry point the ctypes path would have refused is refused here too.  It runs
-    once per entry point per context.
+    This applies the same rules as ``BasePlatform.constructFunction``, so an
+    entry point the ctypes path refuses is refused here too.  It runs once per
+    entry point per context.
 
-    ``alternates`` names the other extensions that declare the same command,
-    comma-joined.  A command is often declared by two -- ``glUniform1i64NV`` by
-    both ``GL_NV_gpu_shader5`` and ``GL_AMD_gpu_shader_int64`` -- and a driver
-    advertising either has the function, so any one of them is enough.
+    ``alternates`` is a comma-separated list of the other extensions that
+    declare the same command.  Many commands are declared by two extensions.
+    ``glUniform1i64NV``, for example, is in both ``GL_NV_gpu_shader5`` and
+    ``GL_AMD_gpu_shader_int64``.  A driver advertising either has the
+    function, so one match is enough.
     """
     from OpenGL import _dispatch, dispatch as _dispatch_api
 
-    # The first resolution is the first moment a context exists, so it is
-    # where the layer learns how to ask which one is current, and where a
-    # context is offered the cheaper of the two error checks.
+    # The first resolution is the first point at which a context exists.  It
+    # installs the current-context getter and offers the context debug-output
+    # error checking.
     _dispatch.install_context_getter()
     _dispatch_api.offer_debug_output()
     api = _API_NAMES[api_index]
@@ -84,12 +85,10 @@ def resolve(name, extension, alternates, api_index):
     if not is_core and not _extension_gate_passes(platform_, extension, alternates):
         return None
     if is_core:
-        # The API's own library first, then whatever else this platform says
-        # holds its entry points -- on Windows the pixel-format calls and
-        # SwapBuffers are GDI rather than OpenGL, and opengl32 does not export
-        # them. constructFunction has always fallen back that way; asking the
-        # platform means both paths bind the same set rather than one of them
-        # quietly finding fewer.
+        # The API's own library first, then the platform's secondary
+        # libraries.  On Windows the pixel-format calls and SwapBuffers are in
+        # GDI, and opengl32 does not export them.  constructFunction falls
+        # back the same way, so both paths bind the same set of functions.
         dll = _dll_for(api)
         libraries = [dll] if dll is not None else []
         libraries.extend(platform_.secondaryLibraries())
@@ -111,20 +110,19 @@ def resolve(name, extension, alternates, api_index):
 
 
 def _extension_gate_passes(platform_, extension, alternates):
-    """Whether the extension gate lets this command through.
+    """Return whether the extension check allows this command.
 
-    The gate reads the context's extension string, and no GL query is legal
-    between ``glBegin`` and ``glEnd``.  That is exactly where an immediate-mode
-    extension command -- ``glColor3hNV``, ``glPrimitiveRestartNV``,
-    ``glMultiTexCoord2fARB`` -- is first called, because a Begin/End block is
-    the only place it *may* be called.  Asking anyway answers "no extensions",
-    which reports a command the driver does have as undefined and leaves
-    GL_INVALID_OPERATION recorded against the block.
+    The check reads the context's extension string, and no GL query is legal
+    between ``glBegin`` and ``glEnd``.  Immediate-mode extension commands such
+    as ``glColor3hNV``, ``glPrimitiveRestartNV`` and ``glMultiTexCoord2fARB``
+    can only be called inside a Begin/End block, so that is where they are
+    first resolved.  Querying there returns no extensions, reports a command
+    the driver has as undefined, and records GL_INVALID_OPERATION against the
+    block.
 
-    So inside a block the gate stands aside, and the address the windowing
-    system hands back decides instead -- a question that does have an answer
-    there.  The gate resumes as soon as the block closes, so a command first
-    reached outside one is refused exactly as before.
+    Inside a block the check is skipped, and the address returned by the
+    windowing system decides instead.  Outside a block the check applies as
+    usual.
     """
     if error.inside_begin_block():
         return True
@@ -132,7 +130,7 @@ def _extension_gate_passes(platform_, extension, alternates):
 
 
 def _any_extension_present(platform_, extension, alternates):
-    """Whether the context advertises any extension that declares the command."""
+    """Return whether the context advertises an extension with the command."""
     for name in (extension, *(alternates or '').split(',')):
         if not name:
             continue
@@ -144,14 +142,14 @@ def _any_extension_present(platform_, extension, alternates):
 
 
 def is_pointer_sized(value):
-    """Whether ``value`` is a ctypes scalar whose value *is* an address.
+    """Return whether ``value`` is a ctypes scalar whose value is an address.
 
-    ``c_void_p`` is the familiar one, and WGL's handles -- ``HDC``, ``HGLRC``,
-    ``HPBUFFERARB`` -- are the reason this asks about the declaration rather
-    than naming a class.  They are pointer-sized simple types rather than
-    pointer classes, because ctypes shares every reference to ``c_void_p`` and
-    a shared one would disable the array machinery for everything else.  So
-    ``isinstance(handle, c_void_p)`` is False for them while ``.value`` is the
+    ``c_void_p`` is the common case.  WGL's handles (``HDC``, ``HGLRC``,
+    ``HPBUFFERARB``) are why this checks the type code instead of a class.
+    They are pointer-sized simple types instead of pointer classes, because
+    ctypes shares every reference to ``c_void_p`` and a shared one would
+    disable the array machinery for every other use.  So
+    ``isinstance(handle, c_void_p)`` is False for them, while ``.value`` is the
     handle itself.
     """
     return (isinstance(value, ctypes._SimpleCData)
@@ -159,12 +157,12 @@ def is_pointer_sized(value):
 
 
 def as_pointer(value):
-    """The address of anything a client may pass where a pointer is wanted.
+    """Return the address of a value a client passes as a pointer argument.
 
-    Covers what the ctypes layer accepts today: plain integers, ctypes
-    instances, the opaque pointer classes, and the byref result that the ctypes
-    array handlers answer ``dataPointer`` with -- which carries its address
-    rather than stating it.
+    Accepts what the ctypes layer accepts: plain integers, ctypes instances,
+    the opaque pointer classes, and the byref result the ctypes array handlers
+    return from ``dataPointer``.  A byref result holds a reference to its
+    object instead of an address.
     """
     if value is None:
         return 0
@@ -173,14 +171,13 @@ def as_pointer(value):
     referent = getattr(value, '_obj', None)
     if referent is not None:
         return ctypes.addressof(referent)
-    # A c_void_p's value *is* an address; a c_int's is not.  Reading `.value`
-    # off anything that has one turns ctypes.c_int(1234) into address 1234 --
-    # so ask what the object is rather than what attributes it happens to
-    # carry.  The pointer-sized scalars answer here, and the opaque handle
-    # classes are pointer subclasses and answer here too.  Anything that
-    # reaches the fallbacks below is answered with the address *of* itself,
-    # which for a handle would be a pointer into the interpreter's heap handed
-    # to a display driver, with nothing raising to say so.
+    # A c_void_p's value is an address; a c_int's is not.  Reading `.value`
+    # from any object with one would turn ctypes.c_int(1234) into address
+    # 1234, so the type is checked instead of the attributes.  Pointer-sized
+    # scalars and the opaque handle classes (pointer subclasses) are handled
+    # here.  The fallbacks below return the address of the object itself.
+    # For a handle, that would pass the display driver a pointer into the
+    # interpreter's heap, with no error raised.
     if is_pointer_sized(value):
         return value.value or 0
     if isinstance(value, ctypes._Pointer):
@@ -205,12 +202,11 @@ def as_pointer(value):
 _opaque_classes = {}
 
 
-#: Where the handle classes are declared.  It has to be *these* classes rather
-#: than freshly built ones: they are what the ctypes bindings name in their
-#: argtypes and restypes, so a GLsync built from a different class of the same
-#: name is rejected by any entry point still on the ctypes path, and a WGL
-#: handle found nowhere would come back as a fabricated pointer class instead
-#: of the integer ctypes produces.
+#: The modules that declare the handle classes.  The C layer must use these
+#: classes, not new ones.  The ctypes bindings name them in their argtypes and
+#: restypes, so a GLsync of a different class with the same name is rejected by
+#: any entry point still on the ctypes path.  A WGL handle not found here would
+#: come back as a new pointer class instead of the integer ctypes produces.
 _OPAQUE_MODULES = (
     'OpenGL.raw.GL._types',
     'OpenGL.raw.EGL._types',
@@ -220,10 +216,10 @@ _OPAQUE_MODULES = (
 
 
 def _declared_class(type_name):
-    """The class the bindings declare for ``type_name``, cached.
+    """Return the class the bindings declare for ``type_name``, cached.
 
-    A name none of the modules declares gets a freshly built opaque pointer
-    class, which is what the ctypes path does with it.
+    A name no module declares gets a new opaque pointer class, as on the
+    ctypes path.
     """
     import importlib
 
@@ -247,14 +243,14 @@ def _declared_class(type_name):
 
 
 def opaque(address, type_name):
-    """The object this return type produces, as the ctypes path produces it.
+    """Return the object for an opaque return value, matching the ctypes path.
 
-    A pointer class -- GL's ``GLsync``, EGL's ``EGLDisplay`` -- gives an
-    instance of itself, which is what a caller comparing two of them relies on.
-    A pointer-sized scalar, which is how WGL declares ``HDC`` and its
-    neighbours, gives a plain integer, because that is what ctypes converts
-    such a result to.  The two implementations are alternatives, so a program
-    must not be able to tell from an answer which one it is on.
+    A pointer class, such as GL's ``GLsync`` or EGL's ``EGLDisplay``, gives an
+    instance of that class.  Callers comparing two such values rely on this.
+    A pointer-sized scalar, which is how WGL declares ``HDC`` and similar
+    handles, gives a plain integer, because ctypes converts such a result to
+    one.  Both implementations return the same types, so a program sees the
+    same values on either.
     """
     cls = _declared_class(type_name)
     if issubclass(cls, ctypes._SimpleCData) and getattr(cls, '_type_', None) == 'P':
@@ -263,18 +259,15 @@ def opaque(address, type_name):
 
 
 def raise_gl_error(code, name, arguments=None, api=None):
-    """The exception a failed call produces.
+    """Raise the exception for a failed call.
 
-    It carries the arguments the call was made with, because that is what
-    tells a reader which call went wrong -- clients read ``err.pyArgs``, which
-    the ctypes path leaves empty.
+    The exception carries the call's arguments, which identify the failing
+    call.  Clients read ``err.pyArgs``, which the ctypes path leaves empty.
 
-    ``baseOperation`` is the entry point rather than its name, so that
-    ``err.baseOperation.__name__`` keeps working and ``error.py``'s own
-    ``format_baseOperation`` takes the branch it was written for.  And
-    ``cArguments`` is filled, because ``GLError``'s docstring documents it --
-    leaving it empty while putting the same tuple in ``cArgs`` reads as a
-    name mix-up rather than a decision.
+    ``baseOperation`` is the entry point instead of its name, so
+    ``err.baseOperation.__name__`` works and ``format_baseOperation`` in
+    ``error.py`` takes its entry-point branch.  ``cArguments`` is filled as
+    well as ``cArgs``, because ``GLError``'s docstring documents it.
     """
     raise _error_classes.get(api, error.GLError)(
         err=code,
@@ -286,11 +279,11 @@ def raise_gl_error(code, name, arguments=None, api=None):
 
 
 def _entry_point_or_name(api, name):
-    """The entry point that failed, or its name where the API is not known.
+    """Return the entry point that failed, or its name if the API is unknown.
 
-    ``err.baseOperation.__name__`` is what clients read and what
-    ``error.py``'s ``format_baseOperation`` is written for, so the object is
-    what an exception carries wherever there is one to carry.
+    Clients read ``err.baseOperation.__name__``, and ``format_baseOperation``
+    in ``error.py`` expects an entry point, so the exception carries the entry
+    point object wherever one exists.
     """
     if api is None:
         return name
@@ -300,7 +293,7 @@ def _entry_point_or_name(api, name):
 
 
 def register_ctypes_binding(api, name, binding):
-    """Remember the ctypes binding a C entry point was installed over."""
+    """Record the ctypes binding a C entry point replaced."""
     _ctypes_bindings[(api, name)] = binding
 
 
@@ -308,26 +301,26 @@ def register_module(api, name, module):
     _modules[(api, name)] = module
 
 
-#: How to build a ctypes binding for an entry point whose declaration has not
-#: been run.  Populated by the module finder, which stands in for the files
-#: that would have run them.
+#: Factories for the ctypes bindings of entry points whose declarations have
+#: not been run.  Filled by the module finder, which replaces the module files
+#: that ran them.
 _ctypes_factories = {}
 
 
 def register_ctypes_factory(api, name, factory):
-    """Remember how to build the ctypes binding an entry point demotes to."""
+    """Record the factory for the ctypes binding an entry point demotes to."""
     _ctypes_factories.setdefault((api, name), factory)
 
 
 def ctypes_callable(name, api=None):
-    """The ctypes binding for an entry point, for demotion and attributes.
+    """Return an entry point's ctypes binding, for demotion and attributes.
 
-    ``api`` identifies which one: ``glClear`` exists in GL and in GLES2 as
-    separate bindings resolved from separate libraries, so scanning for the
-    first name that matches can hand back the desktop GL function for a GLES2
-    entry point -- and on a system serving both, demoting then binds the wrong
-    library.  The C passes it; ``None`` keeps the old scan for any caller that
-    does not.
+    ``api`` selects the binding.  ``glClear`` exists in GL and in GLES2 as
+    separate bindings from separate libraries.  Taking the first name that
+    matches can return the desktop GL function for a GLES2 entry point, and on
+    a system with both, demoting would then bind the wrong library.  The C
+    layer passes ``api``.  With ``None``, the first match in API order is
+    returned.
     """
     order = (api,) + tuple(_API_NAMES) if api else tuple(_API_NAMES)
     for candidate in order:
@@ -344,10 +337,10 @@ def ctypes_callable(name, api=None):
 
 
 def module_for(name, api=None):
-    """Which module declared this entry point.
+    """Return the name of the module that declared this entry point.
 
-    ``api`` for the same reason as :func:`ctypes_callable`: without it,
-    ``GLES2.glClear.__module__`` reports the desktop GL module.
+    ``api`` is needed for the same reason as in :func:`ctypes_callable`.
+    Without it, ``GLES2.glClear.__module__`` reports the desktop GL module.
     """
     order = (api,) + tuple(_API_NAMES) if api else tuple(_API_NAMES)
     for candidate in order:
@@ -358,37 +351,37 @@ def module_for(name, api=None):
 
 
 def swallowed_for(proc):
-    """The customisations a chain swallowed, as a mapping; empty for anything else.
+    """Return the customisations a chain absorbed, as a mapping (may be empty).
 
-    The record is kept on the chain -- the ``GLProc`` a friendly module's
-    chain holds once the C has swallowed one of its calls -- so an entry point
-    itself, and anything that is not a ``GLProc``, has none.
+    The record is kept on the chain: the ``GLProc`` a friendly module holds
+    once the C layer has absorbed one of its customisation calls.  An entry
+    point itself, and anything that is not a ``GLProc``, has an empty record.
     """
     return getattr(proc, '_swallowed', None) or {}
 
 
 def record_custom(proc, method, args):
-    """Record a customisation the C already performs; return the chain it continues.
+    """Record a customisation the C layer performs; return the chain.
 
-    A friendly module may build a *derived* function from the same entry point
-    -- glVertexPointerd(array) out of glVertexPointer(size, type, stride,
-    pointer) -- by continuing the chain with a call that changes the arity.
-    That one has to demote, and the wrapper it demotes to needs whatever its
-    chain swallowed before it.  Each derived function states its own
-    customisations -- glVertexPointerf converts to float where
-    glVertexPointerd converts to double -- so the record is the chain's:
-    ``proc._chained()`` is `proc` where it already is a chain, and a new
-    ``GLProc`` for the same command where it is the entry point.
+    A friendly module may build a derived function from an entry point, such
+    as glVertexPointerd(array) from glVertexPointer(size, type, stride,
+    pointer).  It does so by continuing the chain with a call that changes the
+    arity.  That call must demote, and the wrapper it demotes to needs the
+    customisations its chain absorbed before it.  Each derived function has
+    its own customisations (glVertexPointerf converts to float, and
+    glVertexPointerd to double), so the record belongs to the chain.
+    ``proc._chained()`` returns `proc` if it is already a chain, and a new
+    ``GLProc`` for the same command if it is the entry point.
     """
     chain = proc._chained()
-    # Keyed by what it customises.  Of two converters a chain gives one
-    # argument, the second is the one used, as on a wrapper.
+    # Keyed by what it customises.  If a chain gives one argument two
+    # converters, the second is used, as on a wrapper.
     chain._swallowed[(method, args[0] if args else None)] = tuple(args)
     return chain
 
 
 def _replayed(proc, customisations):
-    """The ctypes wrapper for `proc`, carrying `customisations`."""
+    """Return the ctypes wrapper for `proc`, with `customisations` applied."""
     from OpenGL import wrapper
 
     binding = ctypes_callable(proc.__name__, getattr(proc, 'api', None))
@@ -399,12 +392,12 @@ def _replayed(proc, customisations):
 
 
 def demote_and_call(proc, method, args, keywords):
-    """A customisation the C does not implement falls back to the wrapper.
+    """Apply a customisation the C layer lacks, through the ctypes wrapper.
 
-    Correctness before speed: a call the C cannot perform -- one that changes
-    which arguments the entry point takes -- rebuilds the chain's wrapper over
-    the ctypes binding, replaying what the chain swallowed first so the result
-    is what it would have been without this layer at all.
+    Some calls change which arguments the entry point takes, and the C layer
+    cannot perform them.  Such a call rebuilds the chain's wrapper over the
+    ctypes binding.  The customisations the chain absorbed are replayed first,
+    so the result is the same as without the C layer.
     """
     return getattr(_replayed(proc, swallowed_for(proc)), method)(
         *args, **keywords
@@ -412,20 +405,20 @@ def demote_and_call(proc, method, args, keywords):
 
 
 def demoted_callable(proc):
-    """What an entry point becomes when a client demotes it.
+    """Return the callable that replaces an entry point a client demotes.
 
     Assigning ``errcheck`` or ``argtypes`` moves one entry point to the ctypes
-    path, and what it moves to has to be the function the friendly module
-    would have built -- so where customisations were swallowed because the C
-    performs them, the wrapper that performs them is what answers.
-    ``glShaderSource(shader, string)`` demoted must still take two arguments;
-    the binding underneath it takes the four the registry declares.  What is
-    replayed is `proc`'s own chain's record, so the entry point that
-    ``OpenGL.raw`` exports demotes to the binding.
+    path.  The replacement must be the function the friendly module would
+    have built.  Where the C layer absorbed customisations, the replacement is
+    a wrapper that applies them.  ``glShaderSource(shader, string)`` must
+    still take two arguments after demotion, while the binding underneath
+    takes the four the registry declares.  Only `proc`'s own chain record is
+    replayed, so the entry point ``OpenGL.raw`` exports demotes to the
+    binding.
 
-    Everything else -- the great majority, which the friendly modules describe
-    declaratively or not at all -- demotes to the binding itself, as it always
-    has, so ``argtypes``, ``DLL`` and the rest are read straight off it.
+    Most entry points have declarative customisations or none, and demote to
+    the binding itself.  ``argtypes``, ``DLL`` and the other attributes are
+    then read from the binding.
     """
     customisations = swallowed_for(proc)
     if not customisations:
@@ -434,17 +427,17 @@ def demoted_callable(proc):
 
 
 def array_type_map():
-    """Every ``OpenGL.arrays`` class, by the name the C element table names it.
+    """Return every ``OpenGL.arrays`` class, keyed by its C table name.
 
-    The C table carries a name per element and resolves it here at configure
-    time, filling its own table in its own order, so the two sides share a name
-    and never a position.  A position would have to be agreed by a generated
-    Python list and a compiled index, and a tree whose Python is newer than its
-    built extension would then convert with the wrong class and say nothing.
+    The C table stores a name per element and looks the names up here at
+    configure time, filling its own table in its own order.  The two sides
+    share names, never positions.  Shared positions would need a generated
+    Python list to match a compiled index.  A checkout whose Python is newer
+    than its built extension would then convert with the wrong class and
+    raise no error.
 
-    Built from the package rather than from a generated list, so a class the
-    table names is found if it exists at all, and reported by name if it does
-    not.
+    Built from the package instead of a generated list, so any class the
+    table names is found if it exists, and reported by name if it does not.
     """
     found = {'ArrayDatatype': arrays.ArrayDatatype}
     for name in dir(arrays):
@@ -468,21 +461,21 @@ _RESTYPE_EQUIVALENTS = {
 
 
 def restype_matches(kind, value):
-    """Whether an assigned ``restype`` is the conversion already in place.
+    """Return whether an assigned ``restype`` matches the existing conversion.
 
-    Assigning the conversion the C stub already performs changes nothing, so it
-    is accepted.  Asking for a different one demotes that entry point to
-    ctypes, where an arbitrary restype means what it has always meant.
+    Assigning the conversion the C stub already performs changes nothing, so
+    it is accepted.  Assigning a different one demotes that entry point to
+    ctypes, where any restype behaves as in ctypes.
     """
     return value in _RESTYPE_EQUIVALENTS.get(kind, ())
 
 
 def lookup_int(pname):
-    """The element count for an output whose size is itself a GL query.
+    """Return the element count for an output whose size is a GL query.
 
-    ``_glgets`` records a handful of pnames -- GL_COMPRESSED_TEXTURE_FORMATS
-    and the pixel-map sizes -- whose output length is whatever a
-    ``glGetIntegerv`` of another pname answers.
+    ``_glgets`` records a few pnames, such as GL_COMPRESSED_TEXTURE_FORMATS
+    and the pixel-map sizes, whose output length is the result of
+    ``glGetIntegerv`` on another pname.
     """
     from OpenGL.GL import glGetIntegerv
 
@@ -495,19 +488,18 @@ _signatures = {}
 
 
 def signature_for(proc):
-    """An ``inspect.Signature`` for an entry point.
+    """Return an ``inspect.Signature`` for an entry point.
 
     ``inspect.signature()`` reads ``__text_signature__`` only from the builtin
-    callable types, so an entry point answers with the Signature itself, built
-    from the same string the C carries.
+    callable types.  Entry points therefore return the Signature directly,
+    built from the same string the C code carries.
 
-    The string is *read* rather than compiled and run.  This is what pydoc,
-    Sphinx autodoc and PyOpenGL's own documentation generator ask for, and a
-    generated signature that would not parse should not surface there as a
-    SyntaxError raised against whatever they were documenting.
+    The string is parsed instead of compiled and run.  pydoc, Sphinx autodoc
+    and PyOpenGL's documentation generator call this.  A generated signature
+    that fails to parse must not raise a SyntaxError in those tools.
 
-    Cached per ``(api, name)``: two APIs declare ``glClear``, and an entry
-    point's signature is not something to hand out by name alone.
+    Cached per ``(api, name)``, because two APIs declare ``glClear`` and the
+    name alone does not identify the entry point.
     """
     import inspect
 
@@ -521,13 +513,13 @@ def signature_for(proc):
 
 
 def _parameters(text_signature):
-    """The parameters a ``__text_signature__`` describes.
+    """Return the parameters a ``__text_signature__`` describes.
 
-    The whole vocabulary the generator writes is ``$module``, argument names,
-    ``=None`` for an output array a caller may supply, and the ``/`` that makes
-    them positional-only -- which is what the stubs implement, since they reject
-    a keyword rather than dropping it.  Anything else is not something this
-    library produced.
+    The generator writes only ``$module``, argument names, ``=None`` for an
+    output array a caller may supply, and ``/``.  The ``/`` makes the
+    parameters positional-only, matching the stubs, which reject keyword
+    arguments.  Any other content was not produced by this library and raises
+    ValueError.
     """
     import inspect
 
@@ -563,20 +555,17 @@ def _parameters(text_signature):
 
 
 def raise_debug_error(code, identifier, message, name, arguments=None, api=None):
-    """Turn a GL_KHR_debug error report into the exception glGetError would.
+    """Raise a GL_KHR_debug error report as the exception glGetError gives.
 
-    The driver has already said what went wrong in prose, so ``description`` is
-    the driver's own message rather than a code looked up after the fact.
-    ``err`` stays the GL error code, because that is what ``GLError`` documents
-    it as and what a caller branches on; the driver's message identifier is a
-    per-driver, per-message number and rides along as ``debugMessageID`` for
-    anyone who wants it.
+    ``description`` is the driver's own message, instead of a description
+    looked up from the code.  ``err`` stays the GL error code, because
+    ``GLError`` documents it that way and callers branch on it.  The driver's
+    message identifier is a per-driver, per-message number, stored as
+    ``debugMessageID``.
 
-    ``baseOperation`` is the entry point rather than its name, as it is in
-    :func:`raise_gl_error`: which mechanism noticed an error is not something a
-    caller reading the exception should have to know.  The class comes from the
-    same table for the same reason -- one call cannot raise two classes
-    depending on which mechanism saw it.
+    ``baseOperation`` is the entry point instead of its name, as in
+    :func:`raise_gl_error`, and the class comes from the same table.  A
+    caller gets the same exception whichever mechanism detected the error.
     """
     raised = _error_classes.get(api, error.GLError)(
         err=code,
@@ -591,10 +580,10 @@ def raise_debug_error(code, identifier, message, name, arguments=None, api=None)
 
 
 def probe_allowed():
-    """Whether the layer may load EGL/GLX in order to ask about contexts.
+    """Return whether the layer may load EGL or GLX to find the context.
 
-    Only where the caller has asked to be told about a missing context, which
-    is the one case where "do not know" is not an acceptable answer.
+    True only when ``CONTEXT_CHECKING`` is on.  That setting asks for an error
+    when no context is current, which requires a definite answer.
     """
     from OpenGL import _configflags
 
@@ -602,26 +591,24 @@ def probe_allowed():
 
 
 def current_context():
-    """Which context is current, as an integer handle.
+    """Return the current context as an integer handle, or 0.
 
-    The platform layer is the only thing that knows which interface owns it:
-    a Linux process can hold GLX and EGL contexts at once, and asking the
-    wrong one answers "none".
+    The platform layer determines which interface owns the context.  A Linux
+    process can hold GLX and EGL contexts at once, and querying the wrong one
+    returns no context.
 
-    Read through :func:`as_pointer`, because :meth:`GetCurrentContext` is
-    documented for the opaque pointer a platform names a context by and every
-    platform answers in the shape its own API declares.  ``int()`` would not
-    do: handed anything offering the buffer protocol -- which every ctypes
-    object does -- it reads the bytes as a string of digits, so a pointer
-    falls to the 0 below, which says no context is current while one is.
+    Converted with :func:`as_pointer`, because :meth:`GetCurrentContext`
+    returns each platform's own handle type.  ``int()`` parses any object
+    with the buffer protocol as a string of digits, and every ctypes object
+    has one.  A pointer would then fail into the 0 below, reporting no current
+    context while one is current.
     """
     try:
-        # Probing means loading EGL and GLX to ask each of them, and loading
-        # them costs 26 MB of driver.  A program that merely imports PyOpenGL
-        # should not pay that, so the question is normally answered only from
-        # an interface already loaded -- but CONTEXT_CHECKING is a caller
-        # asking to be told when no context is current, and that answer cannot
-        # be had without asking.  The flag is what buys the probe.
+        # Probing loads EGL and GLX to query each, which costs 26 MB of
+        # driver.  A program that only imports PyOpenGL should not pay that,
+        # so normally only an already loaded interface is queried.
+        # CONTEXT_CHECKING asks for an error when no context is current,
+        # which needs the probe, so the flag enables it.
         return as_pointer(
             platform.PLATFORM.GetCurrentContext(probe=probe_allowed())
         )
@@ -636,11 +623,11 @@ def current_context():
 
 # ---------------------------------------------------------------- images
 #
-# The tables that decide an image's length -- component counts per format,
-# element type per storage type, the pixel-store settings per rank -- are
-# built at import and extended at run time by OpenGL.images.registerImage,
-# which third parties use for their own formats.  Reusing that code rather
-# than restating it in C is what keeps those registrations working.
+# The tables that determine an image's length (component counts per format,
+# element type per storage type, pixel-store settings per rank) are built at
+# import.  OpenGL.images.registerImage extends them at run time, and third
+# parties use it for their own formats.  The C layer calls this Python code
+# instead of duplicating it, so those registrations keep working.
 
 
 def _image_dims(rank, d0, d1, d2):
@@ -648,10 +635,10 @@ def _image_dims(rank, d0, d1, d2):
 
 
 def image_input(name, format, type, rank, d0, d1, d2, value):
-    """The array a pixels argument becomes, with the transfer mode set.
+    """Return the array for a pixels argument, after setting the transfer mode.
 
-    ``None`` stays ``None``: an upload with no pixels allocates storage
-    without initialising it, which is a real and common call.
+    ``None`` stays ``None``.  An upload with no pixels allocates storage
+    without initialising it, which is a common call.
     """
     from OpenGL import images
     from OpenGL.arrays import GL_CONSTANT_TO_ARRAY_TYPE
@@ -665,7 +652,7 @@ def image_input(name, format, type, rank, d0, d1, d2, value):
 
 
 def image_output(name, format, type, rank, d0, d1, d2, value):
-    """Where a read puts its result: the caller's array, or a new one."""
+    """Return the array a read writes into: the caller's, or a new one."""
     from OpenGL import images
     from OpenGL.arrays import GL_CONSTANT_TO_ARRAY_TYPE
 
@@ -680,11 +667,11 @@ def image_output(name, format, type, rank, d0, d1, d2, value):
 
 
 def image_pointer(array):
-    """The address of a converted image, or the offset it already is.
+    """Return the address of a converted image, or the buffer offset unchanged.
 
-    A `const void *` argument that named a buffer offset has already been
-    turned into the ``c_void_p`` holding it, and that is the value to pass:
-    taking its address would hand the driver a pointer to the offset.
+    A `const void *` argument that names a buffer offset has already been
+    converted to a ``c_void_p`` holding it, and that value is passed as is.
+    Taking its address would pass the driver a pointer to the offset.
     """
     if isinstance(array, ctypes.c_void_p):
         return array
@@ -692,13 +679,13 @@ def image_pointer(array):
 
 
 def image_result(array, type):
-    """What a read hands back.
+    """Return the result of a pixel read.
 
-    ``OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING`` turns an unsigned byte image into
-    bytes, which is what it does today -- but only for an image this layer
-    allocated.  A caller who passed a raw pointer, as ``OpenGL.GL.images``
-    does when it has already made the storage itself, gets it back unchanged:
-    formatting a pointer as an image reads from wherever it happens to point.
+    ``OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING`` converts an unsigned byte image
+    to bytes, but only for an image this layer allocated.  A raw pointer
+    passed by the caller is returned unchanged.  ``OpenGL.GL.images`` passes
+    one when it has allocated the storage itself.  Formatting a pointer as an
+    image would read from whatever memory it points at.
     """
     from OpenGL import images
 
@@ -710,11 +697,10 @@ def image_result(array, type):
 def as_typed_array(value, type):
     """Convert to the array type the GL constant names.
 
-    ``glDrawElements`` and the client-side array pointers say what their data
-    is made of in an argument rather than in their signature, so the element
-    type is a value rather than a property of the entry point.  A type
-    registered in ``GL_CONSTANT_TO_ARRAY_TYPE`` works here without this
-    knowing about it.
+    ``glDrawElements`` and the client-side array pointers take the element
+    type as an argument, so the type is a value and not a property of the
+    entry point.  Any type registered in ``GL_CONSTANT_TO_ARRAY_TYPE`` works
+    here.
     """
     from OpenGL.arrays import GL_CONSTANT_TO_ARRAY_TYPE
     from OpenGL.arrays.arraydatatype import buffer_offset
@@ -728,15 +714,15 @@ def as_typed_array(value, type):
         return offset
     array_type = GL_CONSTANT_TO_ARRAY_TYPE.get(type)
     if array_type is None:
-        # No type named, or one that is not an array element type: hand it to
-        # the generic path, which accepts whatever the handlers accept.
+        # No type given, or not an array element type: use the generic path,
+        # which accepts anything the handlers accept.
         return arrays.ArrayDatatype.asArray(value)
     return array_type.asArray(value)
 
 
 #: Where each client-array entry point's pointer is stored against the
-#: context.  These are the constants OpenGL/GL/pointers.py uses, so a program
-#: that reads them back with glGetPointerv sees what it always has.
+#: context.  These are the constants OpenGL/GL/pointers.py uses, so
+#: glGetPointerv returns the same values under either implementation.
 _POINTER_CONSTANTS = {
     'glVertexPointer': 0x808E,       # GL_VERTEX_ARRAY_POINTER
     'glNormalPointer': 0x808F,       # GL_NORMAL_ARRAY_POINTER
@@ -744,15 +730,15 @@ _POINTER_CONSTANTS = {
     'glIndexPointer': 0x8091,        # GL_INDEX_ARRAY_POINTER
     'glTexCoordPointer': 0x8092,     # GL_TEXTURE_COORD_ARRAY_POINTER
     'glEdgeFlagPointer': 0x8093,     # GL_EDGE_FLAG_ARRAY_POINTER
-    'glInterleavedArrays': 0x8093,   # shares the edge-flag slot, as today
+    'glInterleavedArrays': 0x8093,   # edge-flag slot, as in pointers.py
 }
 
 
 def retain(name, index, array):
     """Keep an argument alive against the current context.
 
-    The GL goes on reading a client-side array after the call that registered
-    it returns, so dropping the reference is a crash rather than a leak.
+    GL keeps reading a client-side array after the call that registered it
+    returns.  Dropping the reference would cause a crash.
     """
     from OpenGL import contextdata
 
@@ -762,12 +748,11 @@ def retain(name, index, array):
 
 
 def string_list(value):
-    """A list of bytes, from one string or a sequence of them.
+    """Return a list of bytes from one string or a sequence of strings.
 
-    ``glShaderSource`` and ``glTransformFeedbackVaryings`` both take either
-    form, and a caller who passes one string means a list of one.  What counts
-    as a string is ``OpenGL._string_array``'s to say, so that this answers as
-    the ctypes bindings do.
+    ``glShaderSource`` and ``glTransformFeedbackVaryings`` take either form.
+    One string becomes a list of one.  ``OpenGL._string_array`` decides what
+    counts as a string, so the result matches the ctypes bindings.
     """
     from OpenGL._string_array import as_bytes
 

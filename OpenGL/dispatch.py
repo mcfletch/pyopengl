@@ -1,11 +1,11 @@
-"""Which implementation is running the entry points, and control of it.
+"""Report and control which implementation dispatches the GL entry points.
 
-PyOpenGL dispatches through one of two implementations.  The C one is
-generated from the Khronos registry and compiled, so it ships in
-``PyOpenGL_accelerate`` and runs where that is installed under CPython; the
-ctypes one is pure Python and runs everywhere else.  Both implement the same
-API, so a program need not care which it has -- until it does, and then this
-is where to ask::
+PyOpenGL dispatches through one of two implementations.  The C
+implementation is generated from the Khronos registry and compiled.  It ships
+in ``PyOpenGL_accelerate`` and runs under CPython where that package is
+installed.  The ctypes implementation is pure Python and runs everywhere else.
+Both implement the same API.  This module reports which one a process is
+using::
 
     >>> from OpenGL import dispatch
     >>> dispatch.active()
@@ -13,26 +13,26 @@ is where to ask::
     >>> dispatch.status()
     Status(requested='c', active='c', available=True, reason=None)
 
-The extension is optional and its absence is not an error: asking for the C
-implementation where none was built leaves the ctypes one in place and says
-nothing.  A program or a test suite that means to be *on* the C implementation
-therefore has to ask, and :func:`status` says why it is not where it is not.
+The extension is optional.  Asking for the C implementation where it is not
+installed leaves the ctypes implementation in place, with no warning or
+error.  A program or test suite that requires the C implementation must
+check, and :func:`status` gives the reason when it is not active.
 
-The rest of the module is the dispatch layer's own controls.  Under the C
+The rest of the module controls the dispatch layer.  Under the C
 implementation each context holds its own function pointer for every entry
-point, so a process with two contexts of differing capability resolves each of
-them correctly; :func:`make_current` says a context has become current and
-:func:`forget_context` that one has been destroyed.  Both are worth calling
-under either implementation, because both decide which context PyOpenGL checks
-errors in.  :func:`context_identity` is what they make exact for everything
-else: an object standing for the current context, which a destroyed context's
-successor does not share even where the driver gives it the same handle.
+point, so two contexts with different capabilities each resolve correctly.
+:func:`make_current` records that a context has become current, and
+:func:`forget_context` records that one has been destroyed.  Call both under
+either implementation, because both determine which context PyOpenGL checks
+errors in.  :func:`context_identity` returns an object representing the
+current context.  A context created after another is destroyed gets a new
+identity, even where the driver reuses the old handle.
 
-Error checking is the other half.  A context that offers ``GL_KHR_debug`` is
-given the cheaper of the two mechanisms without being asked -- the driver
-reports an error through a callback during the call, so the check is a flag
-read rather than a ``glGetError`` round trip -- and
-:func:`error_checking_mode` says which one a context ended up with.
+The module also controls error checking.  A context that supports
+``GL_KHR_debug`` uses debug output by default.  The driver reports an error
+through a callback during the call, so the check after each call reads a flag
+instead of calling ``glGetError``.  :func:`error_checking_mode` returns the
+mechanism a context uses.
 """
 
 import ctypes
@@ -61,7 +61,7 @@ __all__ = [
 
 
 class Status(NamedTuple):
-    """The dispatch selection: what was asked for, what is running, and why."""
+    """The requested and active implementations, availability, and reason."""
 
     #: Which implementation the configuration asks for: ``'c'`` or ``'ctypes'``.
     requested: str
@@ -76,11 +76,10 @@ class Status(NamedTuple):
 def _layer():
     """The compiled layer, or None where the entry points are the ctypes ones.
 
-    Read out of ``sys.modules`` rather than imported.  The extension is 13 MB
-    and nothing imports it on the ctypes path, so a program that calls
-    :func:`make_current` there -- as it should, unconditionally -- must not be
-    the thing that loads it.  Where it is not loaded it is not installed
-    either, since installing is what loads it.
+    Read from ``sys.modules`` instead of imported.  The extension is 13 MB and
+    the ctypes path never imports it.  Programs on the ctypes path still call
+    :func:`make_current`, and that call must not load the extension.  If the
+    module is not loaded, it is not installed, because installing it loads it.
     """
     module = sys.modules.get('OpenGL._dispatch')
     if module is None or not module.ACTIVE:
@@ -89,12 +88,12 @@ def _layer():
 
 
 def requested():
-    """Which implementation the configuration asks for: ``'c'`` or ``'ctypes'``.
+    """Return the requested implementation, ``'c'`` or ``'ctypes'``.
 
     ``PYOPENGL_DISPATCH`` names one directly.  Unset, it is ``'c'`` on CPython
-    and ``'ctypes'`` on every other interpreter, which is where the extension
-    is not built.  ``OpenGL.USE_ACCELERATE = False`` and ``OpenGL.FULL_LOGGING``
-    each ask for ctypes as well; :func:`status` says which of them did.
+    and ``'ctypes'`` on other interpreters, where the extension is not built.
+    ``OpenGL.USE_ACCELERATE = False`` and ``OpenGL.FULL_LOGGING`` also request
+    ctypes; :func:`status` reports which setting did.
     """
     from OpenGL import _configflags
 
@@ -104,22 +103,20 @@ def requested():
 
 
 def active():
-    """Which implementation the entry points built so far dispatch through.
+    """Return the implementation the entry points use, ``'c'`` or ``'ctypes'``.
 
-    The choice is made when the first entry point is built, so this answers
-    ``'ctypes'`` in a process that has imported nothing from ``OpenGL.GL`` yet
-    however it is configured.  :func:`settle` makes the choice rather than
-    reporting it, for a caller that has to ask first.
+    The choice is made when the first entry point is built.  Before anything
+    from ``OpenGL.GL`` is imported, this returns ``'ctypes'`` whatever the
+    configuration.  Call :func:`settle` to make the choice earlier.
     """
     return 'ctypes' if _layer() is None else 'c'
 
 
 def available():
-    """Whether the compiled layer is installed and importable.
+    """Return whether the compiled layer is installed and importable.
 
-    Answered from the module where it has already been loaded, and from the
-    import system where it has not, so asking does not load 13 MB of extension
-    to find out that it exists.
+    Uses the loaded module where there is one.  Otherwise it queries the
+    import system, which does not load the 13 MB extension.
     """
     module = sys.modules.get('OpenGL._dispatch')
     if module is not None:
@@ -133,16 +130,15 @@ def available():
 
 
 def settle():
-    """Choose the implementation now; returns ``'c'`` or ``'ctypes'``.
+    """Choose the implementation now and return ``'c'`` or ``'ctypes'``.
 
-    The first entry point built would otherwise make this choice, and it reads
-    ``OpenGL.ERROR_CHECKING`` and its neighbours as it does -- so call this
-    *after* setting them, exactly as one would import ``OpenGL.GL`` after
-    setting them.
+    Without this call, the first entry point built makes the choice.  The
+    choice reads ``OpenGL.ERROR_CHECKING`` and the related flags, so call this
+    after setting them, as with importing ``OpenGL.GL``.
 
-    For a caller that has to know before it has anything to draw with: a test
-    suite written to exercise the C implementation, or a program that means to
-    fail rather than run several times slower than it planned to.
+    Use it where code must know the implementation before rendering.  Examples
+    are a test suite for the C implementation, or a program that should fail
+    instead of running several times slower on ctypes.
     """
     if requested() != 'c':
         return 'ctypes'
@@ -154,10 +150,10 @@ def settle():
 
 
 def status():
-    """Returns a :class:`Status`: requested, active, available and reason.
+    """Return a :class:`Status` of requested, active, available and reason.
 
-    The reason is a sentence naming the switch or the absence responsible, for
-    a caller to put in the message it raises::
+    The reason is a sentence naming the setting or the missing package
+    responsible.  A caller can include it in an error message::
 
         state = dispatch.status()
         if state.active != 'c':
@@ -181,9 +177,9 @@ def _reason(asked, running):
     if not _configflags.USE_ACCELERATE:
         return 'OpenGL.USE_ACCELERATE is off, which turns off every compiled accelerator'
     if asked != 'c':
-        # The switch first where a caller set it: naming the interpreter there
-        # would answer a question nobody asked and hide the setting that
-        # actually decided.  Unset, the interpreter is what decided.
+        # Where a caller set the environment variable, that setting decided,
+        # so it is reported instead of the interpreter.  Unset, the
+        # interpreter decided.
         if 'PYOPENGL_DISPATCH' in os.environ:
             return 'PYOPENGL_DISPATCH asks for the ctypes implementation'
         if sys.implementation.name != 'cpython':
@@ -201,24 +197,23 @@ def _reason(asked, running):
 
 
 def _end_suspended_block():
-    """End the glBegin block, if any, error checking is suspended for.
+    """End the glBegin block that error checking is suspended for, if any.
 
     A Begin/End block belongs to the context it was opened in, so a context
-    change ends it.  That matters because ``glEnd`` is otherwise the only thing
-    that turns checking back on, and an exception raised between the two -- a
-    bad vertex, an entry point the driver does not export -- means ``glEnd``
+    change ends it.  Error checking is suspended inside the block, and only
+    ``glEnd`` turns it back on.  If an exception is raised inside the block
+    (a bad vertex, or an entry point the driver does not export), ``glEnd``
     never runs and every later call in the process goes unchecked.
 
-    The block is closed in GL as well, because the switch is a record of the
-    driver's state rather than the state itself, and a context destroyed with
-    a block still open is undefined -- see
-    :func:`OpenGL.error.end_abandoned_block`, which is what does both and is
-    what a toolkit making contexts of its own calls for the changes PyOpenGL
-    is not told about.
+    The block is also closed in GL.  The suspension flag records the driver's
+    state but does not change it, and destroying a context with a block still
+    open is undefined.  :func:`OpenGL.error.end_abandoned_block` does both.  A
+    toolkit that creates its own contexts calls it for context changes that do
+    not go through :func:`make_current`.
 
-    Imported on use rather than at module scope: a process using only ES or
-    EGL has no desktop-GL block to close, and this module is loaded to decide
-    how entry points are dispatched, before there is any question of one.
+    Imported on use instead of at module scope.  A process using only ES or
+    EGL has no desktop GL block to close, and this module is loaded before any
+    entry point is dispatched.
     """
     from OpenGL import error
 
@@ -228,17 +223,16 @@ def _end_suspended_block():
 def make_current(handle):
     """Dispatch this thread through the table for ``handle``.
 
-    Call this wherever the application makes a context current, so that N
-    contexts in one process each resolve and hold their own entry points.  The
-    handle is the one ``OpenGL.platform.PLATFORM.GetCurrentContext()`` returns,
-    in whichever shape that platform names a context by -- an ``int``, a
-    ``c_void_p``, or a ctypes pointer such as GLX's ``GLXContext``.  ``None``
-    or a null pointer names no context.
+    Call this wherever the application makes a context current, so that each
+    context in a process resolves and holds its own entry points.  ``handle``
+    is the value ``OpenGL.platform.PLATFORM.GetCurrentContext()`` returns, in
+    that platform's type: an ``int``, a ``c_void_p``, or a ctypes pointer such
+    as GLX's ``GLXContext``.  ``None`` or a null pointer means no context.
 
-    It is worth calling under either implementation.  The C one dispatches
-    through the named context's table from here on; the ctypes one has no
-    per-context tables to switch, but this is how it learns that error checking
-    belongs to a different context now.
+    Call it under either implementation.  The C implementation dispatches
+    through the named context's table from then on.  The ctypes implementation
+    has no per-context tables, but uses this call to check errors in the new
+    context.
     """
     global _ctypes_current_context
 
@@ -250,39 +244,38 @@ def make_current(handle):
     else:
         _drop_unnamed_arming()
         _ctypes_current_context = address
-    # Before the offer, which may arm this context and start the reading
-    # itself: what this settles is the context that arrives *unarmed*.
+    # Called before the offer.  The offer may arm this context and start
+    # reading the flag itself; this call handles a context that arrives
+    # unarmed.
     _follow_debug_output()
     offer_debug_output()
 
 
 def forget_context(handle):
-    """Retire the dispatch table for a context that has been destroyed.
+    """Retire the dispatch table for a destroyed context.
 
-    The table is emptied and set aside rather than freed: ``make_current`` is
-    per thread, so a thread that never noticed the context go still points at
-    it, and freeing here would be a use-after-free in the ordinary shape of a
-    program with a window per thread.  :func:`reclaim_retired` frees the set
-    aside ones at a moment the caller says is quiet.
+    The table is emptied and kept instead of freed.  ``make_current`` is per
+    thread, so another thread may still point at the table.  Freeing it would
+    be a use-after-free in a program with one window per thread.
+    :func:`reclaim_retired` frees retired tables when the caller says no
+    thread is using them.
     """
     _end_suspended_block()
-    # Two things are keyed by a context and they do not agree on what the key
-    # is: the dispatch table by the address, and `contextdata` by the handle
-    # object the platform answered with.  On a platform whose handle *is* an
-    # integer -- WGL, CGL, EGL here -- the two coincide and one value serves
-    # both.  On one whose handle is an opaque pointer, OSMesa's or GLX's, an
-    # address looks up nothing contextdata ever stored, and the destroyed
-    # context's cached extension list is left for whichever context the driver
-    # hands that address to next.
+    # Two stores are keyed by a context, with different keys: the dispatch
+    # table by address, and `contextdata` by the handle object the platform
+    # returned.  On platforms whose handle is an integer (WGL, CGL and EGL
+    # here) the two are equal.  On platforms whose handle is an opaque pointer
+    # (OSMesa, GLX) the address finds nothing in contextdata.  The destroyed
+    # context's cached extension list would then pass to whichever context the
+    # driver next gives that address.
     context = handle
     handle = _as_address(handle)
     if handle and handle in _installed_callbacks and handle == _current_context():
-        # Take our callback back out while there is still a context to take it
-        # out of.  The driver holds the address until something replaces it,
-        # and a context is destroyed with whatever it was last given.  Which
-        # context is current is the driver's to say and not the record's: this
-        # is called for a context that has gone, and nothing makes another
-        # current after it, so the record still names the dead one.
+        # Remove our callback while the context still exists.  The driver
+        # keeps the callback address until it is replaced, and a context is
+        # destroyed holding its last callback.  The current context comes from
+        # the driver instead of the record: nothing has been made current
+        # since this context was destroyed, so the record still names it.
         use_debug_output(False)
     _offered.discard(handle)
     _installed_callbacks.pop(handle, None)
@@ -299,15 +292,14 @@ def forget_context(handle):
     _follow_debug_output()
 
 
-#: The identity :func:`context_identity` has handed out for each context, by
-#: address, until :func:`forget_context` says the context at that address is
-#: gone.
+#: The identity :func:`context_identity` returned for each context, by
+#: address, until :func:`forget_context` reports that context destroyed.
 _identities = {}
 _identities_lock = threading.Lock()
 
 
 class ContextIdentity:
-    """Stands for one context for as long as it lives; see :func:`context_identity`."""
+    """One context for its lifetime; see :func:`context_identity`."""
 
     __slots__ = ('address', '__weakref__')
 
@@ -319,18 +311,19 @@ class ContextIdentity:
 
 
 def context_identity():
-    """An object standing for the current context, or None where none is current.
+    """Return an object representing the current context, or None.
 
-    The same object for as long as the context lives, and a different one once
-    :func:`forget_context` has said it is gone -- which the handle cannot say,
-    since the driver hands a destroyed context's address to the next context it
-    makes.  Something that belongs to one context -- a buffer, a texture, a
-    program, all numbered per context from 1 -- keeps this beside its name and
-    compares before using the name, rather than using it in whichever context
-    happens to be current, where the same number is some other object.
+    The object stays the same while the context lives.  After
+    :func:`forget_context`, a context at the same address gets a new object.
+    The handle alone cannot show this, because the driver reuses a destroyed
+    context's address for the next context.  Buffers, textures and programs
+    are numbered from 1 in each context.  Code holding one can store this
+    identity beside the name and compare it before use.  That prevents using
+    the name in another context, where the same number is a different object.
 
-    As exact as :func:`forget_context` is told: a context destroyed without it,
-    and another made at the same address, share an identity.
+    Identities are only as accurate as the calls to :func:`forget_context`.
+    If a context is destroyed without that call and another is created at the
+    same address, the two share an identity.
     """
     address = _current_context()
     if not address:
@@ -343,28 +336,27 @@ def context_identity():
 
 
 def _forget_context_data(handle):
-    """Drop what is cached *about* a context, as well as its dispatch table.
+    """Drop the values cached about a context, as well as its dispatch table.
 
-    A context's extension list and version are cached against its handle, and a
-    handle is an address the driver hands out again -- a destroyed context and
-    the next one can share it.  The dispatch table is retired here already; the
-    caches were not, so the new context read the dead one's extension list and
-    every entry point gated on an extension only the new one has was refused.
+    A context's extension list and version are cached against its handle.
+    The driver reuses handles, so a destroyed context and the next one can
+    share one.  Without this, the new context reads the destroyed context's
+    extension list.  Entry points gated on an extension only the new context
+    has are then refused.
 
-    That is not a rare shape: a program that closes a window and opens another,
-    or one that makes a GL context and then an OpenGL-ES context, hits it.  It
-    surfaced as `bool(glTexParameterIivEXT)` answering False under an ES
-    context that exports it, because a desktop-GL context had held the handle
-    first and had not.
+    Closing a window and opening another reuses handles, as does creating a
+    GL context and then an OpenGL ES context.  For example,
+    ``bool(glTexParameterIivEXT)`` returns False under an ES context that
+    exports it, if a desktop GL context without it held the handle first.
 
-    Only what *describes* the context, and not everything held against it:
-    ``contextdata.cleanupContext`` releases the client array pointers too, and
-    its own docstring warns that doing so while the driver may still be reading
-    them is a protection fault.  The queriers' answers are ours and describe
-    nothing the driver holds.
+    Only the cached description of the context is dropped.
+    ``contextdata.cleanupContext`` also releases client array pointers, and its
+    docstring warns that doing so while the driver may still read them causes
+    a protection fault.  The cached query results belong to PyOpenGL and
+    describe nothing the driver holds.
 
-    Best effort: this runs while a context is being torn down, and a failure to
-    tidy up must not become the caller's exception.
+    Errors are suppressed.  This runs during context teardown, and a cleanup
+    failure must not raise in the caller.
     """
     if not handle:
         return
@@ -376,10 +368,10 @@ def _forget_context_data(handle):
         try:
             held = storage.get(handle)
         except TypeError:
-            # An unhashable handle -- a bare ctypes pointer, as a caller may
-            # hand us straight from a binding of its own.  Nothing was ever
-            # filed under it, because `contextdata.setValue` would have raised
-            # the same TypeError trying to, so there is nothing here to drop.
+            # An unhashable handle, such as a bare ctypes pointer from a
+            # caller's own binding.  Nothing is stored under it, because
+            # `contextdata.setValue` raises the same TypeError, so there is
+            # nothing to drop.
             return
         if not held:
             continue
@@ -393,16 +385,16 @@ def _forget_context_data(handle):
 #: Keys under which a context's own description is cached: the queriers'
 #: version and extension lists, keyed
 #: ``('OpenGL.extensions', <kind>, <prefix>)`` one per API, and the per-name
-#: answers ``BasePlatform.checkExtension`` memoises under ``'extensions'``.
+#: results ``BasePlatform.checkExtension`` memoises under ``'extensions'``.
 _CONTEXT_DESCRIPTION_KEY = 'OpenGL.extensions'
 
 
 def _describes_a_context(key):
-    """Whether `key` names something cached *about* a context.
+    """Return whether `key` names a value cached about a context.
 
-    Everything else held against a context is the caller's -- client array
-    pointers the driver may still be reading -- and dropping those is what
-    ``contextdata.cleanupContext`` warns about, so only these go.
+    Other keys hold the caller's data, such as client array pointers the
+    driver may still read.  ``contextdata.cleanupContext`` warns against
+    dropping those, so only these keys are dropped.
     """
     if key == 'extensions':
         return True
@@ -410,22 +402,21 @@ def _describes_a_context(key):
 
 
 def _drop_unnamed_arming():
-    """Give up an arming made before the program named a context.
+    """Release debug output armed before the program named a context.
 
-    Only the ctypes implementation records one.  It holds a single binding for
-    the process and knows only what :func:`make_current` told it, so a context
-    it armed while it had been told nothing is recorded under 0 -- which says
-    "we were not told", and names no context.
+    Only the ctypes implementation records one.  It holds one binding for the
+    process and has only the handles passed to :func:`make_current`.  A
+    context armed before any such call is recorded under 0, which names no
+    context.
 
-    That record stops describing anything the moment the program says the
-    situation has changed.  A context has gone, or another is current; either
-    way the driver now answering has never been given our callback, and a check
-    reading a flag nothing sets is a check that passes everything.  So the
-    arming is given up here and the next context is offered afresh, rather than
-    left for the next audit to find.
+    That record is stale once the program reports a change: a context
+    destroyed, or another made current.  The context now current has never
+    been given our callback, and a check reading a flag that nothing sets
+    passes every call.  So the arming is released here and the next context
+    gets a fresh offer, without waiting for the next audit.
 
-    The compiled layer needs none of this: it reads the handle itself, so 0
-    there is a context that genuinely had none to give.
+    The compiled layer does not need this.  It reads the handle itself, so 0
+    there means the platform reported no context.
     """
     if 0 not in _installed_callbacks:
         return
@@ -434,16 +425,16 @@ def _drop_unnamed_arming():
 
 
 def reclaim_retired():
-    """Free the tables of contexts that have been forgotten; returns how many.
+    """Free the tables of forgotten contexts and return how many were freed.
 
-    A retired table costs about 43 KB and is unreachable, so a program with one
-    or two contexts need never call this.  A program that opens and closes a
-    context per document window over a long session accumulates them, and this
-    is how it says they can go.
+    A retired table uses about 43 KB and is unreachable.  A program with one
+    or two contexts does not need this.  A program that opens and closes a
+    context per document window over a long session accumulates retired
+    tables, and calls this to free them.
 
-    **Only call this where no thread is still dispatching through a context
-    this process has destroyed.**  Whether that holds is something the caller
-    knows and PyOpenGL does not, so the caller says it by making this call.
+    Only call this where no thread is still dispatching through a context this
+    process has destroyed.  The caller knows whether that holds and PyOpenGL
+    does not, so the caller asserts it by making this call.
     """
     layer = _layer()
     if layer is None:
@@ -454,9 +445,9 @@ def reclaim_retired():
 def set_error_checking(enable=True, entry_point=None):
     """Turn per-call error checking on or off, for one entry point or all.
 
-    Unlike ``OpenGL.ERROR_CHECKING``, which is read once when the layer is
-    configured, this takes effect immediately and can be scoped to a single
-    entry point.  It is the C implementation's; under ctypes it does nothing.
+    ``OpenGL.ERROR_CHECKING`` is read once, when the layer is configured.
+    This function takes effect immediately and can apply to one entry point.
+    It affects only the C implementation; under ctypes it does nothing.
     """
     layer = _layer()
     if layer is not None:
@@ -471,25 +462,25 @@ _DEBUG_SEVERITY_NOTIFICATION = 0x826B
 _DEBUG_CALLBACK_FUNCTION = 0x8244
 _DONT_CARE = 0x1100
 
-#: The two mechanisms, as :func:`error_checking_mode` names them.
+#: The error checking modes, as :func:`error_checking_mode` names them.
 DEBUG_OUTPUT, GET_ERROR, NOT_CHECKED = 'debug-output', 'get-error', 'off'
 
 #: Context handles debug output has already been offered to, so that the offer
 #: is made once per context rather than at every entry point resolved in it.
 _offered = set()
 
-#: Set while the offer is running, because arming calls entry points and each
-#: of those resolves, which is what makes the offer in the first place.
+#: Set while the offer runs.  Arming calls entry points, each of those
+#: resolves, and resolving an entry point makes the offer.
 _offering = False
 
 
 def error_checking_mode():
-    """How GL errors are detected in the current context.
+    """Return how GL errors are detected in the current context.
 
     ``'debug-output'`` where the driver reports them through a
-    ``GL_KHR_debug`` callback and the check is a read of the flag it sets,
-    ``'get-error'`` where the check is a ``glGetError`` round trip, and
-    ``'off'`` where nothing is checked at all.
+    ``GL_KHR_debug`` callback and the check reads the flag it sets,
+    ``'get-error'`` where the check calls ``glGetError``, and ``'off'`` where
+    errors are not checked.
     """
     from OpenGL import _configflags
 
@@ -502,7 +493,7 @@ def error_checking_mode():
 
 
 def _ctypes_checking_mode():
-    """The mechanism the ctypes implementation's error checker is using."""
+    """Return the mode the ctypes implementation's error checker uses."""
     checker = _ctypes_error_checker()
     if checker is None or not checker:
         return NOT_CHECKED
@@ -510,22 +501,21 @@ def _ctypes_checking_mode():
 
 
 def _ctypes_error_checker():
-    """The desktop-GL error checker, where one has been built.
+    """Return the desktop GL error checker, or None if none has been built.
 
-    Read out of ``sys.modules`` for the reason :func:`_end_suspended_block`
-    gives: a process that has never imported desktop GL has no checker, and
-    importing one to find that out would load a driver.
+    Read from ``sys.modules`` instead of imported.  A process that has never
+    imported desktop GL has no checker, and importing one would load a driver.
     """
     module = sys.modules.get('OpenGL.raw.GL._errors')
     return getattr(module, '_error_checker', None) if module else None
 
 
 def _has_current_context():
-    """Whether the platform says a context is current, where it can say.
+    """Return whether the platform reports a current context.
 
-    A platform that cannot tell answers True: the ctypes implementation has
-    always assumed a caller calling GL means to have a context, and a guess of
-    "no" here would decline the offer forever on such a platform.
+    Returns True where the platform cannot report.  The ctypes implementation
+    assumes that code calling GL has a context, and returning False here would
+    decline the offer permanently on such a platform.
     """
     from OpenGL import platform
 
@@ -536,18 +526,19 @@ def _has_current_context():
 
 
 def _current_context():
-    """Which context the platform says is current, or None where it cannot say.
+    """Return the current context's address, or None if the platform cannot say.
 
-    :func:`_context_key` answers what the layer was last *told*, which is what
-    a callback is filed under and all the ctypes implementation has.  Which
-    context is current now is a different question, and a destroyed one is
-    where they part: nothing is made current after it, so the record goes on
-    naming it while the driver names none.
+    :func:`_context_key` returns the handle last passed to
+    :func:`make_current`.  Callbacks are filed under that key, and it is all
+    the ctypes implementation has.  The two differ after a context is
+    destroyed.  Nothing is made current after it, so the record still names
+    it while the driver reports none.
 
-    None rather than 0 where there is no way to ask, because the caller is
-    deciding whether to call GL and a guess either way is wrong -- unlike
-    :func:`_has_current_context`, whose caller is deciding whether to *offer*
-    and would otherwise decline forever on such a platform.
+    Returns None instead of 0 where the platform cannot report.  The caller
+    is deciding whether to call GL, and either guess would be wrong.
+    :func:`_has_current_context` returns True in that case, because its
+    caller is deciding whether to make the offer and would otherwise decline
+    permanently.
     """
     from OpenGL import platform
 
@@ -558,11 +549,12 @@ def _current_context():
 
 
 def _debug_output_wanted():
-    """Whether the layer should offer debug output to a context at all.
+    """Return whether the layer should offer debug output to contexts.
 
-    ``OpenGL.ERROR_DEBUG_OUTPUT = False`` before the first call declines it for
-    the process, for a program that installs its own ``GL_KHR_debug`` callback
-    or does not want the driver put into synchronous debug output.
+    Setting ``OpenGL.ERROR_DEBUG_OUTPUT = False`` before the first call turns
+    it off for the process.  Use this in a program that installs its own
+    ``GL_KHR_debug`` callback, or that must not put the driver into
+    synchronous debug output.
     """
     from OpenGL import _configflags
 
@@ -570,16 +562,16 @@ def _debug_output_wanted():
 
 
 def offer_debug_output():
-    """Give the current context the cheaper error check, once.
+    """Switch the current context to debug-output error checking, once.
 
-    Called from entry-point resolution, which is the first moment a context
-    exists to be offered anything.  Everything about it is a no-op the second
-    time: the context is recorded as offered whether or not it accepted, so a
-    context that has no ``GL_KHR_debug`` is asked once and never again.
+    Called from entry-point resolution, the first point at which a context
+    exists.  Later calls for the same context do nothing.  The context is
+    recorded as offered whether or not it accepted, so a context without
+    ``GL_KHR_debug`` is only tried once.
 
-    A ``glBegin`` block is the one place this must not run.  No GL query is
-    legal inside one, ``glEnable`` included, and an immediate-mode entry point
-    is first resolved from exactly there.
+    This must not run inside a ``glBegin`` block.  No GL query is legal there,
+    ``glEnable`` included, and immediate-mode entry points are first resolved
+    inside one.
     """
     global _offering
 
@@ -593,12 +585,12 @@ def offer_debug_output():
     if handle in _offered:
         return
     if not _has_current_context():
-        # Nothing to offer anything to.  Entry points are resolved before a
-        # context exists -- a probe for what a platform has, a cleanup handler
-        # after the window has gone -- and the GL calls that arm debug output
-        # would be made into no context at all.  Having a handle for it is not
-        # evidence to the contrary: that is what make_current was last told,
-        # and the context it named is exactly what may since have gone.
+        # No context to offer to.  Entry points can be resolved with no
+        # context, for example by a probe of what a platform supports, or by
+        # a cleanup handler after the window has closed.  The GL calls that
+        # arm debug output would then run with no context.  The recorded
+        # handle does not prove a context exists: it is the value make_current
+        # last received, and that context may have been destroyed.
         return
     _offering = True
     try:
@@ -607,14 +599,15 @@ def offer_debug_output():
     finally:
         _offering = False
 
-#: The live callback per context handle.  A dict rather than a list because the
-#: reference has to outlive the enabling call and no longer: keeping every one
-#: ever made would hold a callback per context for the life of the process.
+#: The live callback per context handle.  A dict instead of a list, because
+#: each reference must last until its context releases the callback and no
+#: longer.  Keeping every callback ever made would hold one per context for
+#: the life of the process.
 _installed_callbacks = {}
 
 
 def debug_output_available():
-    """Whether the current context reports errors through GL_KHR_debug."""
+    """Return whether the current context can report errors via GL_KHR_debug."""
     layer = _layer()
     if layer is None:
         from OpenGL.GL import glDebugMessageCallback
@@ -629,24 +622,24 @@ def debug_output_available():
 def use_debug_output(enable=True):
     """Use GL_KHR_debug callbacks instead of a ``glGetError`` per call.
 
-    Polling ``glGetError`` is an expensive operation, often as heavy as the call
-    it checks, and it introduces a stall.  Most modern implementations support a
-    callback-based error reporting mechanism, ``GL_KHR_debug``, which calls back
-    only when there is something to report; the check after each call is then a
-    read of the flag that callback set.  What a caller sees does not change: the same entry
-    points are checked -- ``OpenGL.ERROR_CHECKING`` and :func:`set_error_checking`
-    decide that either way -- and the same exception is raised from the same
-    call, carrying the same GL error code.
+    Polling ``glGetError`` is expensive, often as costly as the call it
+    checks, and it introduces a stall.  Most current implementations support
+    ``GL_KHR_debug``, which calls a callback only when there is something to
+    report.  The check after each call then reads the flag that callback set.
+    Callers see the same behaviour either way.  ``OpenGL.ERROR_CHECKING`` and
+    :func:`set_error_checking` still choose which entry points are checked.
+    The same exception is raised from the same call, with the same GL error
+    code.
 
-    Both implementations use it, and a context that offers ``GL_KHR_debug`` is
-    offered it without being asked, so this is mostly how a program turns it
-    *off*.  Switching it off undoes what switching it on did for *this*
-    context, callback and driver state together: synchronous debug output
-    serialises the driver, which is the cost the switch exists to stop paying.
+    Both implementations use it.  A context that supports ``GL_KHR_debug``
+    gets it by default, so programs mostly call this to turn it off.  Turning
+    it off removes the callback and restores the driver state for the current
+    context.  Synchronous debug output serialises the driver, and turning it
+    off removes that cost.
 
-    Returns True when it took effect.  It needs a context offering
-    ``GL_KHR_debug`` and no other callback installed in it; where either is
-    missing, checking stays the ``glGetError`` round trip it was.
+    Returns True when the change took effect.  Turning it on needs a context
+    that supports ``GL_KHR_debug`` and has no other callback installed.
+    Otherwise checking stays on ``glGetError``.
     """
     from OpenGL.GL import (
         glDebugMessageCallback,
@@ -656,18 +649,18 @@ def use_debug_output(enable=True):
     )
 
     key = _context_key()
-    # Asked for either way, this context is decided: the offer is what happens
-    # to a context nobody has said anything about, and it must not undo a
-    # program that has.  Without this a program's ``use_debug_output(False)``
-    # lasts until the next entry point it resolves.
+    # On or off, the program has now chosen for this context.  The automatic
+    # offer applies only to contexts with no explicit choice, and must not
+    # override one.  Without this, ``use_debug_output(False)`` lasts only
+    # until the next entry point is resolved.
     _offered.add(key)
     if not enable:
         if _release_debug_callback(key):
             glDisable(_DEBUG_OUTPUT_SYNCHRONOUS)
             glDisable(_DEBUG_OUTPUT)
-            # A null GLDEBUGPROC rather than None: the ctypes binding is
-            # declared to take one and refuses anything else, and it is what
-            # the C implementation passes the driver for None in any case.
+            # A null GLDEBUGPROC instead of None.  The ctypes binding is
+            # declared to take one and refuses anything else, and the C
+            # implementation passes the driver a null pointer for None.
             glDebugMessageCallback(_debug_callback_type()(), None)
         return True
     if not debug_output_available():
@@ -675,31 +668,29 @@ def use_debug_output(enable=True):
 
     callback = _our_callback()
     if _foreign_callback_installed(key, _callback_address(callback)):
-        # The application is using GL_KHR_debug itself.  Installing over its
-        # callback would take its debug output away, and its next
-        # glDebugMessageCallback would take our error checking away, with
-        # neither side recording the exchange -- so the context keeps
-        # glGetError.
+        # The application uses GL_KHR_debug itself.  Installing our callback
+        # would remove its debug output, and its next glDebugMessageCallback
+        # would remove our error checking, with neither side detecting the
+        # change.  So the context keeps glGetError.
         return False
     glEnable(_DEBUG_OUTPUT)
     # Synchronous, because the callback has to run during the call it belongs
     # to for the error to be attributed to the right entry point.
     glEnable(_DEBUG_OUTPUT_SYNCHRONOUS)
     glDebugMessageCallback(callback, None)
-    # Notifications are chatter; the callback only cares about errors, and not
-    # asking for the rest keeps the driver from formatting them.
+    # The callback handles only errors.  Disabling notifications saves the
+    # driver formatting them.
     glDebugMessageControl(
         _DONT_CARE, _DONT_CARE, _DEBUG_SEVERITY_NOTIFICATION, 0, None, False
     )
-    # The callback holds the reference the driver will call through, for as
-    # long as that context has it installed.  Recorded before the switch,
-    # because from the switch onwards the checking depends on it.
+    # Holds the reference the driver calls through, for as long as that
+    # context has it installed.  Recorded before the checker switches over,
+    # because checking depends on it from then on.
     _installed_callbacks[key] = callback
     if key:
-        # A context armed before anything could name it was recorded under 0.
-        # Naming it now supersedes that: it is one context, armed once, and
-        # two records of it would be two contexts to disarm and one that never
-        # existed.
+        # A context armed before it had a handle was recorded under 0.  The
+        # record under the real handle replaces it.  Keeping both would mean
+        # two contexts to disarm, one of which does not exist.
         _installed_callbacks.pop(0, None)
         _offered.discard(0)
     _start_reading_debug_output()
@@ -707,27 +698,27 @@ def use_debug_output(enable=True):
 
 
 def _follow_debug_output():
-    """Read the flag only while the context that sets it is the current one.
+    """Read the flag only while the context that sets it is current.
 
-    The driver's callback is installed **per context**; the ctypes error
-    checker is one object for the whole process.  So a context with no callback
-    of its own sets no flag, and a checker still reading one finds no errors in
-    it at all -- every ``GLError`` the driver reports is lost and the call that
-    caused it returns as though it had worked.  A silence rather than a cost,
-    and the opposite of what error checking is for.
+    The driver installs callbacks per context, but the ctypes error checker is
+    one object for the whole process.  A context without our callback never
+    sets the flag.  A checker reading the flag in that context finds no
+    errors.  Every ``GLError`` the driver reports is lost, and the failing
+    call returns as if it had succeeded.
 
-    :func:`_release_debug_callback` cannot answer this on its own: it goes back
-    to the round trip once *nothing* holds a callback, which is right for the
-    context giving one up and says nothing about which context is now current.
+    :func:`_release_debug_callback` does not cover this.  It returns to
+    ``glGetError`` only once no context holds a callback.  That is correct
+    for the context releasing one, but ignores which context is now current.
 
-    The Windows offscreen path is the ordinary case rather than a corner.
-    ``OpenGL.WGL.offscreen`` makes a bootstrap context to resolve entry points
-    through, names it current, arms it, and then names back whatever was
-    current before -- leaving the flag being read for a context nobody draws
-    in, and every real one unchecked.
+    The Windows offscreen path does this in normal use.
+    ``OpenGL.WGL.offscreen`` creates a bootstrap context to resolve entry
+    points, makes it current, arms it, then restores the previous context.
+    Without this function, the checker keeps reading the flag for the
+    bootstrap context, which nothing draws in, and every real context goes
+    unchecked.
 
-    The compiled layer keeps the mode with the context's own dispatch table, so
-    it follows the context by construction and there is nothing to do here.
+    The compiled layer stores the mode in each context's dispatch table, so
+    the mode follows the current context and this function does nothing.
     """
     global _reading_debug_output
 
@@ -735,9 +726,9 @@ def _follow_debug_output():
         return
     wanted = _context_key() in _installed_callbacks
     if wanted == _reading_debug_output:
-        # Nothing to re-point.  ``make_current`` is called on every context
-        # switch a program makes, and pointing the checker at what it is
-        # already reading would be work per switch for no change.
+        # No change.  ``make_current`` runs on every context switch, and
+        # re-pointing the checker at its current reader would cost work on
+        # each switch.
         return
     _reading_debug_output = wanted
     if wanted:
@@ -746,19 +737,19 @@ def _follow_debug_output():
         _stop_reading_debug_output()
 
 
-#: Whether the ctypes checker is reading the flag rather than asking the
-#: driver.  Kept because :func:`_follow_debug_output` re-points it only on a
-#: change; the two functions that do the pointing keep it true.
+#: Whether the ctypes checker reads the flag instead of calling glGetError.
+#: :func:`_follow_debug_output` re-points the checker only when this changes.
+#: The two functions that re-point the checker keep this value accurate.
 _reading_debug_output = False
 
 
 def _context_key():
-    """What the installed callbacks are recorded against.
+    """Return the key installed callbacks are recorded under.
 
-    The C implementation knows which context is current and says so.  The
-    ctypes implementation cannot: it holds one binding per process and has no
-    context tracking of its own, so what it has is what the program last told
-    :func:`make_current`, and 0 until it says anything.
+    The C implementation tracks the current context and returns its handle.
+    The ctypes implementation holds one binding per process and does no
+    context tracking.  It returns the handle last passed to
+    :func:`make_current`, or 0 before the first call.
     """
     layer = _layer()
     if layer is not None:
@@ -766,19 +757,19 @@ def _context_key():
     return _ctypes_current_context
 
 
-#: The context the ctypes implementation was last told about.  See
+#: The handle last passed to :func:`make_current` under ctypes.  See
 #: :func:`_context_key`.
 _ctypes_current_context = 0
 
 
 def _our_callback():
-    """The ``GLDEBUGPROC`` to install for this implementation.
+    """Return the ``GLDEBUGPROC`` to install for the active implementation.
 
-    The C one is a C function that sets a thread-local flag the stub reads --
-    no Python runs during the driver's call.  The ctypes one has to be a Python
-    callback, which is the same trade the ctypes implementation makes
-    everywhere: it runs only when the driver reports an error, and the check on
-    the ordinary path stays a flag read.
+    The C implementation's callback is a C function that sets a thread-local
+    flag the stub reads, so no Python runs during the driver's call.  The
+    ctypes implementation's callback is a Python function.  It runs only when
+    the driver reports an error, so the check on the normal path is still a
+    flag read.
     """
     layer = _layer()
     if layer is not None:
@@ -790,47 +781,46 @@ def _our_callback():
     return _ctypes_callback
 
 
-#: The ctypes implementation's callback, built once: the driver is given its
-#: address, so it has to outlive every context that holds it.
+#: The ctypes implementation's callback, built once.  The driver holds its
+#: address, so it must outlive every context that uses it.
 _ctypes_callback = None
 
-#: GL_DEBUG_TYPE_ERROR.  A message of any other type is the driver being
-#: helpful about performance or portability, not an error to raise.
+#: GL_DEBUG_TYPE_ERROR.  Messages of other types report performance or
+#: portability issues and are not raised.
 _DEBUG_TYPE_ERROR = 0x824C
 
-#: Per thread, because the call the error belongs to was made by one thread and
-#: is checked by that thread.
+#: Per thread, because the thread that makes a call also checks it.
 _ctypes_pending = threading.local()
 
 
 def _ctypes_debug_callback(source, type_, id_, severity, length, message, user):
-    """What the driver calls during a failing call, on the ctypes path."""
+    """Record a pending error reported by the driver, on the ctypes path."""
     if type_ == _DEBUG_TYPE_ERROR:
         _ctypes_pending.pending = True
 
 
-#: One glGetError per this many calls, in a context that is checking through
-#: the callback.  See :func:`_read_debug_error`; the C implementation audits
-#: itself on the same interval.
+#: In a context checking through the callback, one glGetError per this many
+#: calls.  See :func:`_read_debug_error`; the C implementation audits on the
+#: same interval.
 AUDIT_INTERVAL = 64
 
 _audit_countdown = AUDIT_INTERVAL
 
 
 def _read_debug_error():
-    """The error code for the call just made, without a round trip per call.
+    """Return the error code for the call just made, using the callback flag.
 
-    Installed as the ctypes error checker's source of error codes while debug
-    output is in use.  The round trip happens where the callback says there is
-    something to fetch -- which is where an exception is about to be raised
-    anyway -- and once every :data:`AUDIT_INTERVAL` calls besides.
+    Installed as the ctypes error checker's error reader while debug output
+    is in use.  ``glGetError`` is called when the callback has set the flag,
+    where an exception is about to be raised, and once every
+    :data:`AUDIT_INTERVAL` calls.
 
-    The audit is what makes the flag trustworthy.  A flag that is never set
-    looks exactly like a context with nothing wrong, and a context can stop
-    being ours without saying so: the ctypes implementation is not told when a
-    program destroys a context and makes another current.  So the
-    driver is asked anyway, rarely, and a context that turns out to be
-    reporting elsewhere goes back to a ``glGetError`` per call.
+    The periodic audit catches a context that no longer sets the flag.  An
+    unset flag looks the same as a context with no errors.  A program can
+    destroy a context and make another current without calling
+    :func:`forget_context` or :func:`make_current`.  So the driver is checked
+    every :data:`AUDIT_INTERVAL` calls.  If that check finds an error, the
+    context goes back to a ``glGetError`` per call.
     """
     global _audit_countdown
 
@@ -865,16 +855,16 @@ def _start_reading_debug_output():
 
 
 def offer_on_first_check(checker):
-    """Have the ctypes error checker make the offer when it first checks.
+    """Make the ctypes error checker run the offer on its first check.
 
-    The ctypes implementation has no resolution callback to hang this on, and
-    at import there is no context to offer anything to.  Its first *check* is
-    the first moment there is one, and a check that has just happened is a safe
-    place to make GL calls from: the call it belongs to is complete.
+    The ctypes implementation has no resolution hook for the offer, and at
+    import there is no context.  The first check is the first point where a
+    context exists.  GL calls are safe right after a check, because the call
+    being checked has completed.
 
-    Costs nothing per call afterwards.  The bootstrap replaces itself with
-    whichever reader the offer settled on, so the ordinary path is a flag read
-    or a ``glGetError``, never a test of whether the offer has been made.
+    After the first check this costs nothing per call.  The bootstrap reader
+    replaces itself with the reader the offer chose.  Each later check is a
+    flag read or a ``glGetError``, with no test of whether the offer was made.
     """
 
     def bootstrap():
@@ -900,17 +890,16 @@ def _stop_reading_debug_output():
 
 
 def _release_debug_callback(key):
-    """Give up ``key``'s callback and stop reading the flag it set.
+    """Release ``key``'s callback and stop reading the flag it set.
 
-    Whose reading stops depends on where the mode is kept.  The C
-    implementation keeps it with the context's table, so this context is the
-    only one affected.  The ctypes one holds a single checker for the process,
-    so it goes back to the round trip once nothing holds a callback any more
-    and not before -- sooner would leave every other context paying for
-    synchronous debug output and reading neither the flag it sets nor an error
-    of its own.
+    Which contexts stop reading depends on where the mode is stored.  The C
+    implementation stores it in the context's table, so only this context
+    changes.  The ctypes implementation has one checker for the process.  It
+    returns to ``glGetError`` only once no context holds a callback.
+    Returning earlier would leave every other context paying for synchronous
+    debug output while reading neither its flag nor its own errors.
 
-    Returns whether ``key`` had a callback to give up.
+    Returns whether ``key`` had a callback to release.
     """
     held = _installed_callbacks.pop(key, None) is not None
     if _layer() is None and _installed_callbacks:
@@ -926,21 +915,21 @@ def _debug_callback_type():
 
 
 def _foreign_callback_installed(key, ours):
-    """Whether this context already reports debug messages somewhere else.
+    """Return whether this context already has another debug callback.
 
-    Asked before installing, because ``glDebugMessageCallback`` holds one
-    callback per context: a second one replaces the first rather than joining
-    it.  A context that already has one belongs to a program using
-    ``GL_KHR_debug`` for its own purposes, and taking that over would silence
-    its diagnostics as surely as its next call would silence our checking.
+    Checked before installing, because ``glDebugMessageCallback`` holds one
+    callback per context, and a second call replaces the first.  A context
+    with a callback already belongs to a program using ``GL_KHR_debug``
+    itself.  Replacing it would silence the program's diagnostics, and the
+    program's next call would silence our error checking.
     """
     from OpenGL.GL import glGetPointerv
 
     try:
         address = _as_address(glGetPointerv(_DEBUG_CALLBACK_FUNCTION))
     except Exception:  # noqa: BLE001 a context that will not answer fails in its own way  # pragma: no cover
-        # An answer is what would let us decline; without one, declining every
-        # time would mean no context ever got the cheaper check.
+        # Without an answer there is no reason to decline.  Declining on
+        # every failure would mean no context ever got debug-output checking.
         return False
     if not address:
         return False
@@ -952,50 +941,50 @@ def _foreign_callback_installed(key, ours):
 
 
 def _callback_address(callback):
-    """The address the driver was given for a ctypes callback object."""
+    """Return the address the driver receives for a ctypes callback object."""
     return ctypes.cast(callback, ctypes.c_void_p).value
 
 
 def _as_address(value):
-    """A pointer, as a plain integer, in whichever shape it arrived.
+    """Return a pointer as a plain integer, whatever type it arrived as.
 
-    Two sources produce these.  A context handle comes from the platform,
-    which declares its getter as the type its API names: ``c_void_p`` on WGL
-    and CGL, so an ``int``, and ``GLXContext`` on GLX, so a ctypes pointer to
-    an opaque struct.  A callback address comes back from ``glGetPointerv``
-    through the array handler in use -- a numpy scalar where numpy is
-    installed, a ctypes pointer where it is not, and a one-element array
-    holding either where ``SIZE_1_ARRAY_UNPACK`` is off.  Read as zero, that
-    last one would say no application callback is installed, and PyOpenGL
-    would take one over that is not its to take.
+    Two sources produce these values.  Context handles come from the
+    platform, whose getter returns the type its API declares.  That is
+    ``c_void_p`` on WGL and CGL, which arrives as an ``int``, and
+    ``GLXContext`` on GLX, a ctypes pointer to an opaque struct.  Callback
+    addresses come from ``glGetPointerv`` through the active array handler.
+    That is a numpy scalar where numpy is installed, a ctypes pointer where it
+    is not, and a one-element array holding either where
+    ``SIZE_1_ARRAY_UNPACK`` is off.  If that array were read as zero, PyOpenGL
+    would conclude no application callback is installed and replace the
+    application's callback.
 
-    Each is asked what it is rather than handed to ``int()`` to see how it
-    fails.  ``int()`` reads anything offering the buffer protocol as a string
-    of digits, and every ctypes object offers one: a pointer put through it
-    is not refused as the wrong kind of thing but accepted and then reported
-    as a misspelt number -- and, in the rare case where the bytes of an
-    address are all digits, accepted and answered wrongly.
+    Each type is checked explicitly instead of being passed to ``int()``.
+    ``int()`` parses any object offering the buffer protocol as a string of
+    digits, and every ctypes object offers one.  A pointer passed to ``int()``
+    fails with an error about an invalid number instead of a type error.
+    Where every byte of the address is an ASCII digit, ``int()`` returns a
+    wrong value.
     """
     if value is None:
         return 0
-    # A one-element array holding the pointer.  Unwrapped by length rather than
-    # by trying to index: a ctypes pointer answers indexing by dereferencing
-    # what it points at, so asking it for element zero reads memory instead of
-    # saying it is not a sequence.
+    # A one-element array holding the pointer.  Checked by length instead of
+    # by indexing: indexing a ctypes pointer dereferences it and reads memory
+    # instead of raising.
     if hasattr(value, '__len__') and len(value) == 1:
         value = value[0]
         if value is None:
             return 0
-    # An integer, or something that is one on request: numpy's scalars are.
+    # An integer, or an object convertible to one, such as a numpy scalar.
     if hasattr(value, '__index__'):
         return int(value)
-    # A pointer-sized scalar, whose value *is* the address: c_void_p, and
-    # WGL's HGLRC and HDC.  Those are declared as simple types rather than as
-    # pointer classes, because ctypes shares every reference to c_void_p and a
-    # shared one would disable the array machinery for everything else -- so
-    # neither ``isinstance`` against a pointer class nor ``ctypes.cast``
-    # recognises one.  The same rule is stated for the C layer as
-    # ``OpenGL._dispatch.support.is_pointer_sized``.
+    # A pointer-sized scalar whose value is the address: c_void_p, and WGL's
+    # HGLRC and HDC.  These are declared as simple types instead of pointer
+    # classes.  ctypes shares every reference to c_void_p, and a shared one
+    # would disable the array machinery for every other use.  So neither
+    # ``isinstance`` against a pointer class nor ``ctypes.cast`` recognises
+    # them.  ``OpenGL._dispatch.support.is_pointer_sized`` states the same
+    # rule for the C layer.
     if (isinstance(value, ctypes._SimpleCData)
             and getattr(type(value), '_type_', None) == 'P'):
         return value.value or 0

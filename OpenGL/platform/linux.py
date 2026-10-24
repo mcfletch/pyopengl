@@ -1,21 +1,18 @@
 """Linux (and BSD) platform supporting either GLX or EGL at runtime
 
-Historically PyOpenGL shipped two separate platforms here: ``glx`` (desktop
-X11/GLX) and ``egl`` (embedded / Wayland / headless).  The choice was made
-*once*, at import time, from environment guesses (e.g. the presence of
-``WAYLAND_DISPLAY``).  That guess is frequently wrong: a GLX toolkit such as
-GLUT run under XWayland creates a *GLX* context even though ``WAYLAND_DISPLAY``
-is set, and a GLFW window can create either a GLX or an EGL context regardless
-of the session type.
+The session type does not determine which context API a program uses.  GLUT
+running under XWayland creates a GLX context even though ``WAYLAND_DISPLAY``
+is set.  A GLFW window can create either a GLX or an EGL context in any
+session.
 
-The toolkit is invisible and irrelevant to us; the only thing we actually need
-to know is which *context API* (GLX or EGL) owns the current context, and that
-is discoverable at runtime because GLX and EGL keep independent per-thread
-current-context state.  This platform therefore loads both interfaces (when
-available) and *probes* for the live context rather than committing to one API
-up front.
+PyOpenGL must determine which context API (GLX or EGL) owns the current
+context.  GLX and EGL keep independent per-thread current-context state, so
+both can be queried at runtime.  This platform loads both interfaces where
+available and queries each for a current context.
 
-WGL (win32) and AGL/CGL (darwin) are single-API platforms and are left as-is.
+The ``linux``, ``glx``, ``egl``, ``x11``, ``wayland`` and ``xwayland``
+platform keys all select this class.  WGL (win32) and CGL (darwin) each have
+a single API and use their own platforms.
 """
 
 import ctypes, ctypes.util
@@ -25,10 +22,10 @@ from OpenGL.platform import baseplatform, ctypesloader
 class LinuxPlatform(baseplatform.BasePlatform):
     """Linux/BSD implementation supporting GLX and/or EGL, chosen at runtime
 
-    The library loaders below are the union of the old GLXPlatform and
-    EGLPlatform loaders.  Everything is loaded lazily and tolerantly: a missing
-    interface (no libGLX on a pure-EGL box, or no libEGL on a legacy GLX box)
-    yields ``None`` rather than raising, so the runtime probe can simply skip it.
+    The library loaders below cover both GLX and EGL.  Each library is loaded
+    on first use.  A missing interface (no libGLX on an EGL-only system, or no
+    libEGL on a GLX-only system) yields ``None`` rather than raising, and the
+    runtime query skips it.
     """
 
     # Which context API served the most recent GetCurrentContext()/extension
@@ -169,25 +166,25 @@ class LinuxPlatform(baseplatform.BasePlatform):
         return base
 
     def getExtensionProcedure(self, name):
-        """Resolve an extension procedure via the interface that owns it
+        """The address of extension procedure ``name``, from the owning API
 
-        An ``egl*`` or ``glX*`` name names its own interface, so it is resolved
-        by that interface's get-proc-address and never the other's.  A core
-        ``gl*`` name is served by both, so it follows whichever API currently
-        owns a context, falling back -- when nothing is current -- to GLX (the
-        historical desktop default).
+        An ``egl*`` name is resolved first by ``eglGetProcAddress``, and a
+        ``glX*`` name first by ``glXGetProcAddressARB``.  Both APIs resolve a
+        core ``gl*`` name, so it is resolved by the API that owns the current
+        context.  With no current context, GLX is tried first, as the desktop
+        default.
         """
         prefix = name[:3]
         if isinstance(prefix, bytes):
             prefix = prefix.decode('ascii', 'replace')
         if prefix == 'egl':
-            # The prefix, not the current context, decides here: GLVND's
-            # glXGetProcAddressARB manufactures a non-null dispatch stub for
-            # *any* name asked of it, including an ``egl*`` one.  That pointer
-            # marshals and calls without error but is not the function's entry
-            # point, so an EGL client extension resolved through GLX (as the
-            # device-enumeration family was, being called before any context
-            # exists) silently returns failure with EGL_SUCCESS set.
+            # The prefix decides, regardless of the current context.  GLVND's
+            # glXGetProcAddressARB returns a non-null dispatch stub for any
+            # name, including an ``egl*`` one.  That pointer can be called
+            # without error but is not the function's entry point.  An EGL
+            # client extension resolved through GLX (such as the
+            # device-enumeration functions, called before any context exists)
+            # then returns failure with EGL_SUCCESS set.
             order = (self.eglGetProcAddress, self.glXGetProcAddressARB)
         elif prefix == 'glX':
             order = (self.glXGetProcAddressARB, self.eglGetProcAddress)
@@ -235,16 +232,16 @@ class LinuxPlatform(baseplatform.BasePlatform):
         return fn
 
     def currentContextAddress(self, probe=True):
-        """The address of whichever of EGL/GLX owns the current context.
+        """The address of the get-current-context function of the active API.
 
-        Which interface answers is a runtime fact here, so the C dispatch layer
-        is told the active one rather than a fixed symbol.
+        The active API (EGL or GLX) is found at runtime, so the C dispatch
+        layer receives this address instead of a fixed symbol.
 
-        Finding out costs a probe of both, and a probe loads the driver: 26 MB
-        of it on an NVIDIA machine, for a question with no answer until an
-        application has made a context current.  With ``probe`` false, only an
-        interface already loaded into the process is considered, and ``None``
-        means "ask again later" rather than "there is none".
+        Finding the active API queries both, and each query loads its driver
+        (26 MB on an NVIDIA machine).  Before an application makes a context
+        current there is nothing to find.  With ``probe`` false, only an
+        interface already loaded into the process is considered.  ``None``
+        then means "not known yet; call again later".
         """
         if self._active_api is None:
             if not probe:
@@ -258,8 +255,8 @@ class LinuxPlatform(baseplatform.BasePlatform):
             return None
         return ctypes.cast(function, ctypes.c_void_p).value
 
-    #: The two interfaces that can own a context here, and the name each is
-    #: remembered under once it has answered.
+    #: The two interfaces that can own a context here, as (lazy property name,
+    #: value stored in ``_active_api`` when it reports a current context).
     _CONTEXT_APIS = (('_eglGetCurrentContext', 'egl'), ('_glXGetCurrentContext', 'glx'))
 
     def GetCurrentContext(self, probe=True):
@@ -268,14 +265,14 @@ class LinuxPlatform(baseplatform.BasePlatform):
         Probes EGL first, then GLX.  Both queries read independent per-thread
         driver state and are safe to call even when the corresponding interface
         has no current context (they return a null pointer).  The API that
-        returns a live context is remembered so extension lookups route to the
+        returns a live context is stored, so extension lookups use the
         matching get-proc-address function.
 
-        Probing loads both libraries, and on an NVIDIA machine loading GLX
-        brings 26 MB of driver with it.  With ``probe`` false only an interface
-        already loaded into this process is asked, so the question costs
-        nothing and the answer is ``None`` until something has loaded one --
-        by which time anything with a context has loaded the one it uses.
+        Probing loads both libraries.  On an NVIDIA machine, loading GLX loads
+        26 MB of driver.  With ``probe`` false, only an interface already
+        loaded into this process is queried, at no load cost.  The result is
+        ``None`` until an interface is loaded.  Any program with a current
+        context has already loaded the interface it uses.
         """
         if not probe:
             for attribute, api in self._CONTEXT_APIS:
@@ -303,16 +300,17 @@ class LinuxPlatform(baseplatform.BasePlatform):
         return None
 
     def releaseCurrentContext(self):
-        """Let go of the context this thread holds, EGL's or GLX's
+        """Release this thread's current EGL or GLX context; True if released
 
-        Answers whether there was one.  See
+        See
         :meth:`OpenGL.platform.baseplatform.BasePlatform.releaseCurrentContext`
-        for why a program with two GL bindings in it needs this: neither API
-        knows about the other, and the one that finds the thread taken refuses
-        -- GLX by way of an X error that ends the process.
+        for why a program using two GL binding APIs needs this.  EGL and GLX
+        do not track each other.  Each refuses to make a context current while
+        the other's context is current.  GLX refuses with an X error that ends
+        the process.
 
-        Both are asked, because either may be holding it and asking is cheap
-        beside making a context.
+        Both APIs are checked, because either may hold the thread.  The checks
+        cost little compared with creating a context.
         """
         released = False
         if self._releaseEGL():
@@ -322,7 +320,7 @@ class LinuxPlatform(baseplatform.BasePlatform):
         return released
 
     def _releaseEGL(self):
-        """Release a current EGL context; answer whether there was one"""
+        """Release a current EGL context; True if one was current"""
         fn = self._eglGetCurrentContext
         if fn is None or not fn():
             return False
@@ -338,7 +336,7 @@ class LinuxPlatform(baseplatform.BasePlatform):
         return True
 
     def _releaseGLX(self):
-        """Release a current GLX context; answer whether there was one"""
+        """Release a current GLX context; True if one was current"""
         fn = self._glXGetCurrentContext
         if fn is None or not fn():
             return False

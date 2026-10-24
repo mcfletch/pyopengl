@@ -19,12 +19,12 @@ __all__ = (
 class Error( Exception ):
     """Base class for all PyOpenGL-specific exception classes"""
 class NoContext( Error ):
-    """Raised to indicate that there is no currently active context
-    
-    Technically almost *any* OpenGL call can segfault if there is 
-    no active context.  The OpenGL.CHECK_CONTEXT flag, if enabled 
-    will cause this error to be raised whenever a GL or GLU call is 
-    issued (via PyOpenGL) if there is no currently valid context.
+    """Raised when a GL call is made with no current context.
+
+    Almost any OpenGL call can crash the process when no context is
+    current.  With the ``OpenGL.CONTEXT_CHECKING`` flag set, a GL or GLU
+    call made through PyOpenGL with no valid current context raises this
+    error instead.
     """
 class CopyError( Error ):
     """Raised to indicate that operation requires data-copying
@@ -49,14 +49,14 @@ class GLError( Error ):
     
     Attributes:
     
-        err -- the OpenGL error code for the error 
-        result -- the OpenGL result code for the operation
-        baseOperation -- the "function" being called
-        pyArgs -- the translated set of Python arguments
-        cArgs -- the Python objects matching 1:1 the C arguments
-        cArguments -- ctypes-level arguments to the operation,
+        err - the OpenGL error code for the error
+        result - the OpenGL result code for the operation
+        baseOperation - the "function" being called
+        pyArgs - the translated set of Python arguments
+        cArgs - the Python objects matching 1:1 the C arguments
+        cArguments - ctypes-level arguments to the operation,
             often raw integers for pointers and the like
-        description -- OpenGL description of the error (textual)
+        description - OpenGL description of the error (textual)
     """
     def __init__( 
         self, 
@@ -162,30 +162,29 @@ class EGLError( GLError ):
 
 
 def inside_begin_block( ):
-    """Whether a ``glBegin`` block is open on this thread.
+    """Return True if a ``glBegin`` block is open on this thread.
 
-    ``glBegin`` switches error checking off for the block -- ``glGetError`` is
-    itself illegal between the two -- so that switch is the record of being in
-    one, whichever dispatch implementation is running.
+    ``glBegin`` suspends error checking until ``glEnd``, because
+    ``glGetError`` is illegal inside the block.  That suspension is the
+    record of an open block, under either dispatch implementation.
 
-    It matters beyond error checking because *no* GL query is legal in a block,
-    the extension string included, and an immediate-mode extension command has
-    nowhere but a block to be first called from.  Entry-point resolution reads
-    this to know that the extension string cannot be asked for right now.
+    No GL query is legal inside a block, including the extension string.  An
+    immediate-mode extension command may be called for the first time inside
+    a block.  Entry-point resolution reads this function to avoid querying
+    the extension string there.
 
-    Read from ``sys.modules`` rather than imported: a process that has never
-    imported desktop GL has no ``glBegin`` to have called, and loading one to
-    find that out would load a driver to answer a question about a block that
-    cannot exist.
+    The desktop GL checker is looked up in ``sys.modules`` instead of being
+    imported.  A process that never imported desktop GL cannot have called
+    ``glBegin``, and importing it would load a driver.
     """
     checker = _desktop_checker( )
     return bool( checker is not None and getattr( checker, 'suspended', False ) )
 
 
 def _desktop_checker( ):
-    """Desktop GL's error checker, or None where nothing has made one.
+    """Return desktop GL's error checker, or None if none has been created.
 
-    Read from ``sys.modules`` rather than imported, for the reason
+    Looked up in ``sys.modules`` instead of imported, for the reason
     :func:`inside_begin_block` gives.
     """
     import sys
@@ -195,29 +194,29 @@ def _desktop_checker( ):
 
 
 def end_abandoned_block( ):
-    """Close a ``glBegin`` block left open; True where there was one.
+    """Close a ``glBegin`` block left open, returning True if there was one.
 
-    A block belongs to the context it was opened in and has to be closed
-    there.  A context created or destroyed while one is open is undefined, and
-    a driver need not survive being denied the ``glEnd``: Intel's Windows ICD
-    leaves state that the *next* context creation in the process faults on,
-    which reaches the program as an access violation with nothing near it to
-    name the block that caused it.
+    A block must be closed in the context that opened it.  Creating or
+    destroying a context while a block is open is undefined behaviour, and
+    some drivers fail later because of the missing ``glEnd``.  Intel's Windows
+    ICD leaves state that makes the *next* context creation in the process
+    fault.  The program then sees an access violation far from the block that
+    caused it.
 
-    A block is left open when an exception escapes it -- a bad vertex, an
-    entry point the driver does not export -- which is why the exception-safe
-    form is ``glBegin(...)`` then ``try: ... finally: glEnd()``.  This is what
-    a toolkit calls before it creates or destroys a context, while the context
-    holding the block is still current, so a program that got that shape wrong
-    is answered with a closed block rather than a crash.  PyOpenGL calls it
-    for the context changes it is told about, in
+    A block is left open when an exception escapes it, for example from a bad
+    vertex or an entry point the driver does not export.  The exception-safe
+    form is ``glBegin(...)`` then ``try: ... finally: glEnd()``.  A toolkit
+    calls this function before it creates or destroys a context, while the
+    context holding the block is still current.  A program that skipped the
+    ``try``/``finally`` then gets a closed block instead of a crash.
+    PyOpenGL calls it for the context changes that go through
     :func:`OpenGL.dispatch.make_current` and
-    :func:`OpenGL.dispatch.forget_context`; a toolkit that makes contexts of
-    its own calls it for the change it makes and PyOpenGL does not see.
+    :func:`OpenGL.dispatch.forget_context`.  A toolkit that creates contexts
+    without those functions calls it for its own context changes.
 
-    With ``PYOPENGL_ERROR_CHECKING=0`` there is no checker and so no record
-    that a block was opened, and this answers False: a program built that way
-    closes its own blocks.
+    With ``PYOPENGL_ERROR_CHECKING=0`` there is no checker, so no record that
+    a block was opened, and this returns False.  Such a program must close its
+    own blocks.
     """
     checker = _desktop_checker( )
     if checker is None:
@@ -235,12 +234,12 @@ def end_abandoned_block( ):
 
 
 def _close_block_in_gl( ):
-    """Issue the ``glEnd`` an abandoned block never got, if there is a context.
+    """Call ``glEnd`` for an abandoned block, if a context is current.
 
-    Only where one is current to close it in: :func:`end_abandoned_block` is
-    also reached for a context that has already gone, and there ``glEnd``
-    would be a call into nothing.  The platform's own entry point rather than
-    ``OpenGL.GL.glEnd``, which would re-enter the bookkeeping this is part of.
+    :func:`end_abandoned_block` is also called for contexts that have already
+    been destroyed, and ``glEnd`` needs a current context.  The platform's own
+    entry point is called, because ``OpenGL.GL.glEnd`` would re-enter this
+    bookkeeping.
     """
     from OpenGL.platform import PLATFORM
 
@@ -255,12 +254,11 @@ def _close_block_in_gl( ):
 
 
 def _resume_compiled_checking( ):
-    """Turn the compiled dispatch layer's own check back on, where it is in use.
+    """Turn the compiled dispatch layer's error check back on, if it is in use.
 
-    It keeps a suspension switch of its own -- ``glBegin`` throws both -- so a
-    block closed here has to be closed in both.  Imported on use, so choosing
-    the ctypes implementation does not load the C extension to say it is not
-    wanted.
+    The compiled layer has its own suspension switch, and ``glBegin`` sets
+    both, so a block closed here is closed in both.  The C extension is
+    imported only when needed, so the ctypes implementation does not load it.
     """
     from OpenGL import _configflags
 
@@ -277,18 +275,18 @@ _lookup_dirtied_block = False
 
 
 def note_lookup_inside_block( ):
-    """Record that an address lookup inside a block recorded an error.
+    """Record that an address lookup inside a block set a GL error.
 
-    Called by the platform whose lookup does that -- WGL's.  The error belongs
-    to a call the caller never made, and it is invisible until the block ends,
-    so glEnd consumes it rather than raising it at them.
+    The WGL platform calls this, because its lookup can set an error.  The
+    error comes from a call the caller did not make, and it cannot be read
+    until the block ends.  glEnd consumes it instead of raising it.
     """
     global _lookup_dirtied_block
     _lookup_dirtied_block = True
 
 
 def take_lookup_inside_block( ):
-    """Whether a lookup dirtied this block, clearing the record."""
+    """Return True if a lookup set an error in this block, and clear the record."""
     global _lookup_dirtied_block
     dirtied, _lookup_dirtied_block = _lookup_dirtied_block, False
     return dirtied
@@ -307,12 +305,12 @@ if _configflags.ERROR_CHECKING:
             """Per-API error-checking object
             
             Attributes:
-                _registeredChecker -- the checking function enabled when
+                _registeredChecker - the checking function enabled when
                     not doing onBegin/onEnd processing
-                _currentChecker -- currently active checking function
-                suspended -- whether a glBegin block currently has checking
+                _currentChecker - currently active checking function
+                suspended - whether a glBegin block currently has checking
                     switched off, so that a caller can tell "no errors" from
-                    "not looking"
+                    "not checking"
             """
             _getErrors = None
             suspended = False
@@ -322,12 +320,11 @@ if _configflags.ERROR_CHECKING:
             def __init__( self, platform, baseOperation=None, noErrorResult=0, errorClass=GLError, needs_context=True ):
                 """Initialize from a platform module/reference
 
-                needs_context -- whether this API's calls are made with a GL
-                    context current.  EGL, GLX and WGL manage the display, the
-                    config and the context itself, so theirs are made before
-                    one exists and by definition; waiting for a context there
-                    would report none of their errors, since the part of a
-                    program that calls them is the part with no GL context.
+                needs_context - whether this API's calls are made with a GL
+                    context current.  EGL, GLX and WGL calls manage the
+                    display, the config and the context, so they run before
+                    a GL context exists.  Checking for a context first would
+                    skip every one of their errors.
                 """
                 self._isValid = platform.CurrentContextIsValid
                 self._getErrors = baseOperation
@@ -338,11 +335,11 @@ if _configflags.ERROR_CHECKING:
                 self._install()
                 self._currentChecker = self._registeredChecker
             def _install( self ):
-                """Settle which callable a check calls, from `_getErrors`."""
+                """Choose the callable a check calls, from `_getErrors`."""
                 #: Whether a check asks the platform for a context before
-                #: reading the error.  The compiled checker publishes the same
-                #: name for the same thing and gates on it, so a program -- or
-                #: a test -- reads either implementation the same way.
+                #: reading the error.  The compiled checker has an attribute of
+                #: the same name and meaning, so programs and tests read
+                #: either implementation the same way.
                 self.checkContext = bool(
                     _configflags.CONTEXT_CHECKING and self.needs_context
                 )
@@ -354,15 +351,15 @@ if _configflags.ERROR_CHECKING:
                 else:
                     self._registeredChecker = self.nullGetError
             def baseGetErrors( self ):
-                """The driver's own glGetError, whatever is reading errors now."""
+                """Call the driver's own glGetError, whichever error reader is installed."""
                 return self._baseGetErrors()
             def setErrorReader( self, reader=None ):
                 """Read error codes from `reader`, or from glGetError again.
 
                 A GL_KHR_debug callback records the error during the call, so
-                the check afterwards is a flag read rather than a round trip.
-                `OpenGL.dispatch.use_debug_output` is the way in; this is where
-                the choice takes effect.
+                the check afterwards is a flag read instead of a round trip.
+                `OpenGL.dispatch.use_debug_output` makes the choice and calls
+                this method to apply it.
                 """
                 self._getErrors = reader or self._baseGetErrors
                 self.readsDebugOutput = reader is not None
@@ -370,16 +367,16 @@ if _configflags.ERROR_CHECKING:
                 if not self.suspended:
                     self._currentChecker = self._registeredChecker
             def __bool__( self ):
-                """We are "true" if we actually do anything"""
+                """Return True if this checker checks for errors"""
                 if self._registeredChecker is self.nullGetError:
                     return False 
                 return True
             def safeGetError( self ):
                 """Check for error, testing for context before operation
-                
-                With no context there is nothing to ask, which is "no error to
-                report" rather than an error of its own: answering None instead
-                would be unequal to _noErrorResult and raise one.
+
+                With no context current, this returns _noErrorResult.
+                Returning None would compare unequal to _noErrorResult and
+                raise an error.
                 """
                 if self._isValid():
                     return self._getErrors()

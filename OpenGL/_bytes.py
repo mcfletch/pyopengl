@@ -1,8 +1,8 @@
-"""Naming the difference between text and 8-bit strings.
+"""Conversions between text and 8-bit strings.
 
-An entry point that takes a ``const char *`` wants bytes, and a caller may
-hand it either those or text; the conversions live here so that every wrapper
-that has to make the distinction makes it the same way.
+An entry point that takes a ``const char *`` needs bytes, and a caller may
+pass bytes or text.  Every wrapper uses the conversions in this module, so
+they all treat the two the same way.
 
     STR_IS_BYTES
     STR_IS_UNICODE
@@ -21,9 +21,9 @@ that has to make the distinction makes it the same way.
 
     bytes, unicode, long, integer_types, maxsize
 
-        Type names a wrapper can read for what it means rather than for what
-        it is: `unicode` where text is wanted as against `bytes`, and `long`
-        where a value may exceed a machine word.
+        Type names that say what a wrapper expects: `unicode` where text is
+        expected instead of `bytes`, and `long` where a value may exceed a
+        machine word.
 """
 import sys
 
@@ -32,10 +32,9 @@ import sys
 STR_IS_BYTES = False
 STR_IS_UNICODE = True
 
-#: The aliases this module exists to provide.  `unicode` and `long` name the
-#: same types as `str` and `int`; they are here because the modules that read
-#: them say what they mean by the name -- text as against bytes, and a value
-#: that may exceed a machine word.
+#: Type aliases.  `unicode` and `long` are the same types as `str` and `int`.
+#: Modules use the names to say what they expect: text instead of bytes, and
+#: a value that may exceed a machine word.
 bytes = bytes
 unicode = str
 long = int
@@ -46,7 +45,7 @@ _NULL_8_BYTE = b'\000'
 
 
 def as_8_bit( x, encoding='utf-8' ):
-    """`x` as an 8-bit string, encoding it only if it is text."""
+    """Return `x` as an 8-bit string, encoding it only if it is text."""
     if isinstance( x, unicode ):
         return x.encode(encoding)
     elif isinstance( x, bytes ):
@@ -58,7 +57,7 @@ def as_8_bit( x, encoding='utf-8' ):
 
 
 def as_str( x, encoding='utf-8'):
-    """`x` as a `str`, decoding it if it arrived as bytes."""
+    """Return `x` as a `str`, decoding it if it is bytes."""
     if isinstance(x,unicode):
         return x
     elif isinstance(x,bytes):
@@ -86,18 +85,16 @@ ARGUMENT_REPR_LIMIT = 100
 
 
 def short_repr(value, limit=ARGUMENT_REPR_LIMIT):
-    """``repr(value)``, shortened, for putting in an error message.
+    """Return ``repr(value)``, shortened, for use in an error message.
 
-    The arguments of a GL call are routinely enormous -- a vertex buffer, a
-    texture, a mesh -- and an exception that formats one produces megabytes of
-    digits. What the caller sees then is not a diagnosis but a terminal that
-    has stopped responding: IDLE hangs outright, and elsewhere the message
-    they needed scrolls past behind the contents of a buffer.
+    The arguments of a GL call are often large (a vertex buffer, a texture, a
+    mesh), and an exception that formats one in full produces megabytes of
+    digits.  IDLE hangs on such a message, and other terminals scroll the
+    useful part of the message out of view.
 
-    Shortened here, where the message is built, rather than by whatever prints
-    it: `str(error)` is called by logging, by `repr`, and by the traceback
-    machinery before anything decides whether to show it, so the cost is paid
-    whether or not anybody ever reads the result.
+    The value is shortened when the message is built.  Logging, `repr` and
+    the traceback machinery all call `str(error)` before anything decides
+    whether to show it, so shortening at print time would not avoid the cost.
 
     https://github.com/mcfletch/pyopengl/issues/114
     """
@@ -112,5 +109,5 @@ def short_repr(value, limit=ARGUMENT_REPR_LIMIT):
 
 
 def short_repr_tuple(values, limit=ARGUMENT_REPR_LIMIT):
-    """A tuple of arguments, each shortened -- ``(a, b, c)``."""
+    """Return a tuple of arguments as ``(a, b, c)``, each one shortened."""
     return '(%s)' % (', '.join(short_repr(one, limit) for one in values),)

@@ -63,16 +63,17 @@ def registered_modules( prefix=None ):
     """Report the modules the registered plug-ins import, as a sorted list
 
     A plug-in declares its entry point as a dotted ``import_path`` and imports
-    it only once something matches, so a tool that follows import statements --
-    a freezer such as PyInstaller, cx_Freeze or Nuitka -- sees none of them and
-    freezes an application that cannot load a platform, a format handler or,
-    with OpenGLContext on top, a scenegraph node. This reports the modules
-    those paths name so that such a tool can be told about them.
+    it only when something matches.  Freezers such as PyInstaller, cx_Freeze
+    and Nuitka follow import statements, so they miss these modules.  The
+    frozen application then cannot load a platform, a format handler or,
+    with OpenGLContext, a scenegraph node.  Pass this list to the freezer so
+    it includes those modules.
 
-    Every registry is read, including those declared by packages layered on
-    PyOpenGL, so the answer covers whatever is imported at the time of the call.
+    Every registry is read, including those declared by packages built on
+    PyOpenGL, so the result covers every package imported at the time of the
+    call.
 
-    prefix -- when given, report only the modules within this package. Matching
+    prefix - when given, report only the modules within this package. Matching
         is on whole dotted components, so ``OpenGL`` selects ``OpenGL.arrays``
         and not ``OpenGLContext``.
     """
@@ -96,7 +97,7 @@ class PlatformPlugin( Plugin ):
     def match( cls, key ):
         """Determine what platform module to load
         
-        key -- (sys.platform,os.name) key to load 
+        key - (sys.platform,os.name) key to load
         """
         for possible in key:
             # prefer sys.platform, *then* os.name

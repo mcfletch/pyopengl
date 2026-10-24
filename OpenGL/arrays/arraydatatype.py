@@ -14,26 +14,24 @@ from OpenGL import acceleratesupport
 
 
 def buffer_offset(value):
-    """``value`` as a byte offset into a bound buffer, or ``None``.
+    """Return ``value`` as a byte offset into a bound buffer, or ``None``.
 
-    A great many entry points declare a parameter ``const void *`` and, with a
-    buffer object bound, read it as an offset from the start of that buffer
-    rather than as an address: ``glDrawElements``' indices,
-    ``glVertexAttribPointer``' pointer, the client-side array pointers, and
-    the pixel calls when a pixel buffer is bound.  Zero is overwhelmingly the
-    value wanted, and ``0`` is how a caller writes it.
+    Many entry points declare a ``const void *`` parameter that, with a buffer
+    object bound, is read as an offset from the start of that buffer instead
+    of an address.  Examples are the indices of ``glDrawElements``, the
+    pointer of ``glVertexAttribPointer``, the client-side array pointers, and
+    the pixel calls when a pixel buffer is bound.  The usual value is zero,
+    written as ``0``.
 
-    Without this an integer reaches the array machinery, which is not wrong to
-    treat a number as data -- that is what it is for -- and turns it into a
-    one-element array holding that number.  The *address* of that array then
-    goes to the driver as the offset, which is a pointer into the heap where a
-    small offset was meant.
+    Without this check, the array machinery converts an integer into a
+    one-element array holding that number.  The address of that array then
+    goes to the driver as the offset: a pointer into the heap instead of a
+    small offset.
 
-    Only a Python ``int``, and not a ``bool``: a numpy integer or a ctypes
-    scalar arriving here is as likely to be data the caller means to upload,
-    and reading it as an offset would be the same mistake in the other
-    direction.  ``None`` means "not an offset", so a caller falls through to
-    the array conversion.
+    Only a Python ``int`` counts, not a ``bool``.  A numpy integer or a ctypes
+    scalar is as likely to be data to upload, and reading it as an offset
+    would be the opposite error.  ``None`` means the value is not an offset,
+    and the caller goes on to the array conversion.
     """
     if type(value) is int:
         return ctypes.c_void_p(value)
@@ -41,11 +39,12 @@ def buffer_offset(value):
 
 
 def as_offset_or_array(value, typeCode=None):
-    """A ``const void *`` argument: the offset it names, or the array it is.
+    """Convert a ``const void *`` argument to a buffer offset or an array.
 
-    The conversion for every parameter the C API declares as a pointer and the
-    GL reads as either one.  ``typeCode`` is the element type where the entry
-    point names one in another argument, as ``glDrawElements`` does.
+    Used for every parameter the C API declares as a pointer and GL reads as
+    either an offset or an address.  ``typeCode`` is the element type, where
+    the entry point gives one in another argument, as ``glDrawElements``
+    does.
     """
     offset = buffer_offset(value)
     if offset is not None:
@@ -184,7 +183,7 @@ if ADT is None:
             ``ArrayDatatype`` marker is not itself a ctypes type, but its
             ``from_param`` always yields a plain data pointer, so a ``void *``
             ffi type is the correct declaration.  CPython's C ``ctypes`` never
-            calls this hook, so it is inert there.
+            calls this hook.
             """
             return ctypes.c_void_p.get_ffi_argtype()
 
@@ -354,7 +353,7 @@ if ADT is None:
         typeConstant = _types.GL_INT64
 
     class GLuint64Array(ArrayDatatype, ctypes.POINTER(_types.GLuint64)):
-        """Array datatype for GLuint types"""
+        """Array datatype for GLuint64 types"""
 
         baseType = _types.GLuint64
         typeConstant = _types.GL_UNSIGNED_INT64
@@ -362,8 +361,8 @@ if ADT is None:
     class GLintptrArray(ArrayDatatype, ctypes.POINTER(_types.GLintptr)):
         """Array datatype for GLintptr types (buffer offsets, VDPAU handles)
 
-        As wide as a pointer, which is what distinguishes it from
-        GLint64Array: the two agree on a 64-bit build and not on a 32-bit one.
+        As wide as a pointer.  It matches GLint64Array on a 64-bit build and
+        differs from it on a 32-bit build.
         """
 
         baseType = _types.GLintptr
@@ -388,7 +387,7 @@ if ADT is None:
         typeConstant = _types.GL_INT
 
     class GLvoidpArray(ArrayDatatype, ctypes.POINTER(_types.GLvoid)):
-        """Array datatype for GLenum types"""
+        """Array datatype for GLvoidp (void pointer) types"""
 
         baseType = _types.GLvoidp
         typeConstant = _types.GL_VOID_P
@@ -447,18 +446,18 @@ GL_CONSTANT_TO_ARRAY_TYPE = {
 
 
 #: Every array class by the ctypes element type it holds, built once.  A
-#: declaration that names ``ctypes.POINTER(GLintptr)`` rather than
+#: declaration naming ``ctypes.POINTER(GLintptr)`` instead of
 #: ``arrays.GLintptrArray`` still describes an array of that element, and this
-#: is how the conversion for it is found.
+#: table finds its conversion.
 _BY_ELEMENT = None
 
 
 def arrayTypeForElement(element):
-    """The array class whose elements are ``element``, or ``None``.
+    """Return the array class whose elements are ``element``, or ``None``.
 
-    ``None`` is an answer rather than an error: not every ctypes type an
-    argument may be declared as has an array class, and the caller decides what
-    to do about that.
+    Not every ctypes type an argument may be declared as has an array class.
+    In that case this returns ``None`` instead of raising, and the caller
+    decides what to do.
     """
     global _BY_ELEMENT
     if _BY_ELEMENT is None:

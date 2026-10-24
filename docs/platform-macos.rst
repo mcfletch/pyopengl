@@ -2,60 +2,59 @@ OpenGL on macOS
 ===============
 
 macOS ships OpenGL as part of the system, in
-``/System/Library/Frameworks/OpenGL.framework``, so PyOpenGL reaches it with
-nothing installed.  One framework serves GL, GLU and CGL alike, and GLUT comes
-from a second, ``GLUT.framework``, which is also part of the system.
+``/System/Library/Frameworks/OpenGL.framework``, so PyOpenGL needs nothing
+installed to use it.  That one framework provides GL, GLU and CGL.  GLUT comes
+from a second system framework, ``GLUT.framework``.
 
-Intel and Apple Silicon Macs both have it.
+Intel and Apple Silicon Macs both have OpenGL.
 
 CGL and NSGL
 ------------
 
-Two interfaces get a context on a current macOS, and PyOpenGL binds one of
-them:
+macOS has two interfaces for creating a context.  PyOpenGL binds one of them:
 
 ``CGL``
-    Core OpenGL, the lowest-level OpenGL interface on macOS.  It has no
-    windows, and creates a context with no window server running.
+    Core OpenGL, the lowest-level OpenGL interface on macOS.  It has no window
+    functions, and it can create a context with no window server running.
     :py:mod:`OpenGL.CGL` binds it: pixel formats, contexts, renderer queries
-    and the offscreen path.  The test suite's macOS context is made with it.
+    and the offscreen path.  The test suite creates its macOS context with CGL.
 ``NSGL``
     The AppKit interface, built on CGL: `NSOpenGLContext
     <https://developer.apple.com/documentation/appkit/nsopenglcontext>`__ and
-    ``NSOpenGLPixelFormat``.  A Cocoa toolkit -- PyQt, PySide, wxPython,
-    pygame -- makes its context through this, and PyOpenGL draws into whatever
-    it made current.  PyOpenGL does not bind NSGL.  :doc:`OpenGL.Tk
-    <tk-widget>` on Aqua makes an ``NSOpenGLContext``, choosing its pixel
-    format and profile with :py:mod:`OpenGL.CGL`.
+    ``NSOpenGLPixelFormat``.  Cocoa toolkits (PyQt, PySide, wxPython, pygame)
+    create their contexts through NSGL, and PyOpenGL draws into whichever
+    context the toolkit made current.  PyOpenGL does not bind NSGL.
+    :doc:`OpenGL.Tk <tk-widget>` on Aqua creates an ``NSOpenGLContext`` and
+    chooses its pixel format and profile with :py:mod:`OpenGL.CGL`.
 
-Releasing a context works for both, because CGL is underneath: a context made
-through NSGL is one ``OpenGL.platform.PLATFORM.releaseCurrentContext()`` can
-give up, which is what lets a program hand the thread to a second GL binding.
+``OpenGL.platform.PLATFORM.releaseCurrentContext()`` releases a context made
+through either interface, because CGL is underneath both.  Releasing the
+context lets a program pass the thread to a second GL binding.
 
 What version Apple's OpenGL is
 ------------------------------
 
-GL 4.1 core is as far as it goes, and there is no compatibility profile above
-2.1: a context is legacy 2.1 with the fixed-function pipeline, or 3.2 core, or
-4.1 core, and nothing in between.  :ref:`The profile table <offscreen-cgl>`
-names them.
+The highest version is GL 4.1 core.  There is no compatibility profile above
+2.1.  A context is one of legacy 2.1 with the fixed-function pipeline, 3.2
+core or 4.1 core.  :ref:`The profile table <offscreen-cgl>` lists them.
 
-Apple deprecated OpenGL in macOS 10.14, and it has shipped in every release
-since.  A program wanting more than 4.1 on a Mac is looking at Metal, or at
-`MoltenVK <https://github.com/KhronosGroup/MoltenVK>`__ and Vulkan; PyOpenGL
-binds neither.
+Apple deprecated OpenGL in macOS 10.14, and every release since has still
+shipped it.  For more than GL 4.1 on a Mac, a program has to use Metal, or
+Vulkan through `MoltenVK <https://github.com/KhronosGroup/MoltenVK>`__.
+PyOpenGL binds neither.
 
 Hardware and the software renderer
 ----------------------------------
 
 A Mac with a usable GPU has an accelerated renderer.  A virtual machine, a
 session with no window server, or a remote shell may have only Apple's CPU
-renderer.  **Asking for acceleration there fails rather than falling back**, so
-a library that requires ``kCGLPFAAccelerated`` gets no context at all on such a
-machine.
+renderer.  On such a machine a request for acceleration fails instead of
+falling back, so a library that requires ``kCGLPFAAccelerated`` gets no
+context at all.
 
-``OpenGL.CGL.renderers()`` reports what a machine has.  It creates no context
-and opens no window, so it answers where a context could not be made:
+``OpenGL.CGL.renderers()`` lists the renderers a machine has.  It creates no
+context and opens no window, so it works on a machine where no context can be
+made:
 
 ::
 
@@ -64,77 +63,76 @@ and opens no window, so it answers where a context could not be made:
    for renderer in renderers():
        print(renderer)      # index, id, accelerated or software, GL version, VRAM
 
-Each reports whether it is accelerated, whether it is *online* -- attached to a
-display, a GPU with no display attached still being usable for rendering -- the
-major GL version it serves, and how much video memory it has.  The software
-renderer and the hardware on the same machine need not serve the same GL
-version, so the version a program can compile shaders against is a question for
-the renderer it actually got.
+Each entry reports whether the renderer is accelerated, whether it is
+*online*, the major GL version it supports, and how much video memory it has.
+An online renderer is attached to a display.  A GPU with no display attached
+can still render.  The software renderer and the hardware renderer on one
+machine can support different GL versions, so a program should check the GL
+version of the renderer it actually got before choosing a shader version.
 
 ``choose_pixel_format`` tries ``accelerated``, then ``any``, then ``software``,
-and returns the kind it settled on alongside the format.  ``renderer=`` pins
-one kind and tries no other.
+and returns the kind it chose alongside the format.  ``renderer=`` selects one
+kind and tries no other.
 
 Rendering with no window
 ------------------------
 
-:ref:`offscreen-cgl` is the route, and the only one here: macOS has no EGL, and
-Apple's frameworks carry no OSMesa.  That section covers making the context,
-building a framebuffer object to render into -- a windowless context has no
-default framebuffer, so drawing to framebuffer zero silently goes nowhere --
-and the renderer question above.
+:ref:`offscreen-cgl` is the only offscreen route on macOS.  macOS has no EGL,
+and Apple's frameworks do not include OSMesa.  That section covers creating
+the context, the renderer choice above, and building a framebuffer object to
+render into.  A windowless context has no default framebuffer, so drawing to
+framebuffer zero silently produces nothing.
 
-``python tests/report_cgl_context.py`` says whether a context can be made on a
-given machine, and by which renderer, for each of the three profiles.  It is
-the first thing to run when a suite skips every GL case on a Mac.
+``python tests/report_cgl_context.py`` reports whether a context can be made
+on a given machine, and by which renderer, for each of the three profiles.
+Run it first when a suite skips every GL case on a Mac.
 
 Apple Silicon and Intel
 -----------------------
 
 ``PyOpenGL`` is a pure-Python wheel and installs on either.
 ``PyOpenGL_accelerate`` is compiled, and the published wheels are
-``macosx_11_0_arm64``: an Apple Silicon interpreter installs a binary, and an
-Intel Mac -- or an x86_64 interpreter running under Rosetta on an Apple Silicon
-machine -- builds it from the source distribution, which needs the Xcode
+``macosx_11_0_arm64``.  An Apple Silicon interpreter installs the binary
+wheel.  An Intel Mac, or an x86_64 interpreter running under Rosetta on Apple
+Silicon, builds it from the source distribution.  That build needs the Xcode
 command line tools (``xcode-select --install``).  PyOpenGL runs on ctypes
 without accelerate.
 
-An interpreter and the libraries it loads have to be the same architecture.
-The system frameworks are universal and load into either, so desktop GL is
-unaffected; a library you installed is the one to check.  Homebrew installs
-under ``/opt/homebrew`` on Apple Silicon and ``/usr/local`` on Intel, and a
-universal2 Python launched as x86_64 on an Apple Silicon machine looks for
-x86_64 libraries in whichever of those it was told about.
+An interpreter and the libraries it loads must have the same architecture.
+The system frameworks are universal and load into either, so desktop GL always
+loads.  Check the architecture of libraries you installed yourself.  Homebrew
+installs under ``/opt/homebrew`` on Apple Silicon and ``/usr/local`` on
+Intel.  A universal2 Python launched as x86_64 on Apple Silicon looks for
+x86_64 libraries in whichever of those directories it was configured with.
 
 Finding the libraries
 ---------------------
 
-``ctypes.util.find_library`` is asked first, and where it answers, that is what
-loads.  Where it comes up empty the bare name is tried, and then the framework
-path is built explicitly:
-``/System/Library/Frameworks/<name>.framework/<name>``.  That last step is what
-makes ``OpenGL`` and ``GLUT`` load on a machine where ``find_library``'s
-heuristics find nothing -- the dyld shared cache holds the frameworks rather
-than the filesystem, so looking for the file does not find them.
+PyOpenGL first calls ``ctypes.util.find_library``, and loads what it returns.
+If it returns nothing, PyOpenGL tries the bare name, then the explicit
+framework path ``/System/Library/Frameworks/<name>.framework/<name>``.  The
+explicit path loads ``OpenGL`` and ``GLUT`` on machines where
+``find_library`` finds nothing.  The frameworks live in the dyld shared cache
+and not as files on disk, so a search for the file fails.
 
-A library outside the frameworks -- a Homebrew freeglut, say -- is found by
-``find_library`` or by the dynamic loader's own search.
-``/opt/homebrew/lib`` is not on that search path by default, so
-``DYLD_FALLBACK_LIBRARY_PATH`` is how a Homebrew library is pointed at.
+A library outside the frameworks, such as a Homebrew freeglut, is found by
+``find_library`` or by the dynamic loader's own search.  ``/opt/homebrew/lib``
+is not on that search path by default.  Set ``DYLD_FALLBACK_LIBRARY_PATH`` to
+point the loader at a Homebrew library.
 
 Getting a window
 ----------------
 
 GLFW, pygame, PyQt, PySide and wxPython all create Mac windows with a GL
 context.  GLUT is in the system frameworks, so ``OpenGL.GLUT`` works with
-nothing installed -- though Apple's GLUT is the original implementation rather
-than freeglut, and is as deprecated as the rest of the framework.
+nothing installed.  Apple ships the original GLUT implementation instead of
+freeglut, and deprecates it along with the rest of the framework.
 ``OpenGL.Tk`` works with the system Tcl/Tk or a Homebrew one.
 
 Naming the platform yourself
 ----------------------------
 
-``PYOPENGL_PLATFORM=darwin`` selects this implementation explicitly, which is
-what PyOpenGL selects here anyway.  There is no second choice on macOS:
-``osmesa`` wants an OSMesa this system does not have, and ``angle`` loads
+``PYOPENGL_PLATFORM=darwin`` selects this implementation explicitly.  PyOpenGL
+selects the same one on macOS by default.  No other value works on macOS:
+``osmesa`` needs an OSMesa this system does not have, and ``angle`` loads
 Windows DLLs.

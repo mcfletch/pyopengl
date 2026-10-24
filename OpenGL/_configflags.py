@@ -2,14 +2,13 @@
 import OpenGL as _package
 
 # A directory named `OpenGL` with no `__init__.py` in it, on sys.path, is
-# imported as a namespace package -- and the finder that does that runs ahead
-# of the one an editable install adds, so an empty directory wins over the
+# imported as a namespace package.  The finder that does this runs before the
+# one an editable install adds, so the empty directory is used instead of the
 # real installation.  The submodules still load, because the editable
-# install's finder answers for those by name, so what a caller sees is this
-# import failing four frames inside some friendly module rather than
-# `import OpenGL` failing.  Said here because this is the first module to read
-# anything off the package, and because none of what follows is answerable:
-# `__init__.py` never ran, so there are no flags to hold.
+# install's finder handles them by name.  The caller then sees this import
+# fail four frames inside a friendly module, instead of `import OpenGL`
+# failing.  The check is here because this is the first module to read
+# anything from the package.  `__init__.py` never ran, so there are no flags.
 if getattr(_package, '__file__', None) is None:
     raise ImportError(
         'PyOpenGL was imported as a namespace package, so its OpenGL/'
@@ -49,20 +48,18 @@ import sys as _sys
 #: Which implementation of the entry points to use: 'c', the
 #: registry-generated C dispatch, or 'ctypes', the pure-Python one.  'c' is
 #: the default from 4.0 on CPython, and takes effect where
-#: PyOpenGL_accelerate is installed; where the extension is absent the layer
-#: falls back to ctypes on its own, so this is safe to leave alone.
-#: PYOPENGL_DISPATCH=ctypes selects the ctypes implementation, which remains
-#: supported and is not scheduled for removal.
-#: Off CPython the C layer is not built (see accelerate/setup.py) and would be
-#: slower than ctypes if it were, so the default follows the interpreter.
+#: PyOpenGL_accelerate is installed.  Without the extension, the layer falls
+#: back to ctypes.  PYOPENGL_DISPATCH=ctypes selects the ctypes
+#: implementation, which remains supported.
+#: On other interpreters the C layer is not built (see accelerate/setup.py),
+#: and it would be slower than ctypes there, so the default is 'ctypes'.
 _DEFAULT_DISPATCH = 'c' if _sys.implementation.name == 'cpython' else 'ctypes'
 DISPATCH = _os.environ.get('PYOPENGL_DISPATCH', _DEFAULT_DISPATCH).strip().lower()
 
-#: Call tracing is a ctypes-layer feature: the wrapper chain is where the log
-#: line is written, and the C calls the driver directly.  Somebody who turns
-#: tracing on to find out what their program is calling must not be handed
-#: silence and conclude the calls are not happening -- so asking for the trace
-#: selects the implementation that can produce it.
+#: Call tracing works only in the ctypes implementation.  The wrapper chain
+#: writes the log line, and the C implementation calls the driver directly.
+#: Under C dispatch, FULL_LOGGING would log nothing, so it selects the ctypes
+#: implementation.
 if FULL_LOGGING and DISPATCH == 'c':
     DISPATCH = 'ctypes'
 

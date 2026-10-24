@@ -44,9 +44,8 @@ if os.name == "nt":
     )
     __glutCreateWindowWithExit = platform.createBaseFunction(
         '__glutCreateWindowWithExit', dll=platform.PLATFORM.GLUT, resultType=ctypes.c_int,
-        # _simple.STRING rather than c_char_p: the title arrives as a str, and
-        # STRING is what the portable declaration of glutCreateWindow encodes
-        # it with.
+        # _simple.STRING and not c_char_p, because the title is a str and the
+        # portable declaration of glutCreateWindow encodes it with STRING.
         argTypes=[_simple.STRING,_exitfunctype],
         doc='glutCreateWindow( STRING(title) ) -> c_int',
         argNames=('title',),
@@ -58,10 +57,9 @@ if os.name == "nt":
         argNames=('callback',),
     )
 else:
-    # Linux, OSX, etceteras.  Both names are bound on every platform: the
-    # block below reads `_exitfunctype`, and spelling its guard as "is
-    # `__glutInitWithExit` set" left whether the other name exists to a
-    # coincidence of the two branches.
+    # Linux, OSX, etceteras.  Both names are bound on every platform, because
+    # the block below reads `_exitfunctype`.  A guard testing only whether
+    # `__glutInitWithExit` is set would not ensure `_exitfunctype` exists.
     _exitfunctype = None
     __glutInitWithExit = None
 if __glutInitWithExit:
@@ -104,9 +102,8 @@ _base_glutDestroyWindow = getattr(GLUT, 'glutDestroyWindow', None)
 class GLUTCallback( object ):
     """Class implementing GLUT Callback registration functions"""
 
-    #: whether GLUT exports the registration function this stands for; the
-    #: error raised on calling one it does not says to check for it, so it
-    #: has to be checkable.
+    #: Whether GLUT exports this registration function.  Calling a missing
+    #: one raises an error that tells the caller to check this flag.
     resolved = False
 
     def __nonzero__( self ):
@@ -203,7 +200,7 @@ class GLUTMenuCallback( object ):
     def glutCreateMenu( cls, func ):
         """Create a new (current) menu, return small integer identifier
         
-        func( int ) -- Function taking a single integer reflecting
+        func( int ) - Function taking a single integer reflecting
             the user's choice, the value passed to glutAddMenuEntry
         
         return menuID (small integer)
@@ -217,7 +214,7 @@ class GLUTMenuCallback( object ):
     def glutDestroyMenu( cls, menu ):
         """Destroy (cleanup) the given menu
         
-        Deregister's the interal pointer to the menu callback 
+        Deregisters the internal pointer to the menu callback 
         
         returns None
         """
@@ -360,14 +357,13 @@ def glutInit( baseOperation, *args ):
     ]
 
 def cleanupWindowContext( window ):
-    """Let go of the data stored against a GLUT window's context
+    """Clean up the data stored for a GLUT window's context.
 
-    The names in it -- textures, buffers, arrays -- belong to a context that is
-    about to stop existing, so they are dropped before the window is destroyed.
+    The stored textures, buffers and arrays belong to a context that is about
+    to be destroyed, so they are removed before the window is destroyed.
 
-    Answers whether the cleanup ran.  It raises nothing: the window has to be
-    destroyed either way, and a cleanup that could not find its context is a
-    thing to report rather than a reason to leave the window in place.
+    Returns True if the cleanup ran.  A failed cleanup is logged and returns
+    False.  It never raises, because the window is destroyed either way.
     """
     try:
         GLUT.glutSetWindow(window)
@@ -383,6 +379,6 @@ def cleanupWindowContext( window ):
 
 @lazy( _base_glutDestroyWindow )
 def glutDestroyWindow( baseOperation, window ):
-    """Want to destroy the window, we need to do some cleanup..."""
+    """Destroy the window, after cleaning up its context data."""
     cleanupWindowContext( window )
     return baseOperation( window )

@@ -15,8 +15,8 @@ PyOpenGL is developed on `GitHub <https://github.com/mcfletch/pyopengl>`__:
    $ cd pyopengl
    $ pip install -e . ./accelerate
 
-Both packages at once; :doc:`installation` says why.  Changes go in as pull
-requests, with test cases wherever a case can be written.
+The last command installs both packages; :doc:`installation` explains why.
+Send changes as pull requests, with test cases wherever a case can be written.
 
 Design goals
 ------------
@@ -26,18 +26,17 @@ Access to all of OpenGL
     extensions.
 
 Compatibility with existing PyOpenGL code
-    Most code should run unchanged and the rest with small changes, and the
-    application programmer should be insulated from the implementation
-    underneath so that code survives a change of it.
+    Most code should run unchanged, and the rest with small changes.
+    Application code should not depend on the implementation underneath, so
+    it keeps working when that implementation changes.
 
 Playing well with others
-    Alternative Python implementations, GUI libraries, numeric libraries,
-    multimedia libraries, and whatever threading model the host program has
-    chosen.
+    Working with alternative Python implementations, GUI libraries, numeric
+    libraries, multimedia libraries, and the host program's threading model.
 
 Robustness
-    Degrading rather than failing where functionality is absent, reporting
-    errors that name what went wrong, and being debuggable.
+    Degrading instead of failing where functionality is absent, reporting
+    errors that name the cause, and being easy to debug.
 
 Ease of installation
     Portable to anywhere ctypes runs, installable with standard tooling, and
@@ -46,9 +45,9 @@ Ease of installation
 Platform abstraction
 --------------------
 
-PyOpenGL exposes the host platform's OpenGL to Python, and the differences
-between platforms live in one place: porting to a new one is largely a matter
-of writing a small module in the ``platform`` subpackage.
+PyOpenGL exposes the host platform's OpenGL to Python.  The differences
+between platforms are kept in the ``platform`` subpackage, so porting to a new
+platform is mostly a matter of writing one small module there.
 
 Each platform has its own
 :py:class:`OpenGL.platform.baseplatform.BasePlatform` subclass, which provides:
@@ -56,8 +55,8 @@ Each platform has its own
 - the library objects for GL, GLU, GLUT and GLE.  How the libraries are found,
   what they are called and what flags loading them needs are all
   platform-specific;
-- the function type used to call into those libraries -- the calling
-  convention, which is ``stdcall`` on Windows and ``cdecl`` elsewhere;
+- the function type used to call into those libraries, which sets the calling
+  convention (``stdcall`` on Windows, ``cdecl`` elsewhere);
 - ``GetCurrentContext()`` and ``CurrentContextIsValid()``, which the
   context-specific storage is keyed on;
 - ``getExtensionProcedure(name)``, to resolve an extension entry point;
@@ -65,8 +64,8 @@ Each platform has its own
   differently;
 - the flags ``HAS_DYNAMIC_EXT`` and ``EXT_DEFINES_PROTO``, saying whether the
   platform can load extensions dynamically and whether it defines prototypes;
-- ``safeGetError()``, which reports OpenGL's error state where asking for it is
-  safe -- a valid context, or a platform that tolerates the question without
+- ``safeGetError()``, which reads OpenGL's error state only where that is
+  safe: with a valid context, or on a platform that allows the call without
   one;
 - ``createBaseFunction`` and ``createExtensionFunction``, which build the
   callable for an entry point:
@@ -85,11 +84,11 @@ Each platform has its own
          doc=None, argNames=(),
      ):
 
-Each platform implementation is registered under one or more names as a
-``PlatformPlugin`` in ``OpenGL/__init__.py``; one of your own is a
-``PlatformPlugin`` created before ``OpenGL.platform`` is imported.  Importing
-``OpenGL.platform`` loads the first plugin whose name matches one of these, in
-order:
+Each platform implementation is registered as a ``PlatformPlugin`` in
+``OpenGL/__init__.py``, under one or more names.  To add your own, create a
+``PlatformPlugin`` before importing ``OpenGL.platform``.  Importing
+``OpenGL.platform`` loads the first plugin whose name matches one of these
+values, in order:
 
 #. ``PYOPENGL_PLATFORM``, from the environment;
 #. ``XDG_SESSION_TYPE``, lower-cased (``x11`` and ``wayland`` are registered);
@@ -98,19 +97,19 @@ order:
 #. ``sys.platform``;
 #. ``os.name``.
 
-A value that names no plugin is skipped, so a misspelt ``PYOPENGL_PLATFORM``
-gets the platform PyOpenGL would have chosen without it.  A plugin whose import
-fails raises ``ImportError`` naming the plugin, with the reason in the
-``OpenGL.plugins`` logger.  The values each platform accepts are in
-:doc:`platform-linux`, :doc:`platform-macos` and :doc:`platform-windows`.
+A value that names no plugin is skipped.  A misspelt ``PYOPENGL_PLATFORM``
+therefore has no effect, and PyOpenGL chooses the platform as if it were
+unset.  If a plugin's import fails, PyOpenGL raises ``ImportError`` naming the
+plugin, and logs the reason to the ``OpenGL.plugins`` logger.  The values each
+platform accepts are in :doc:`platform-linux`, :doc:`platform-macos` and
+:doc:`platform-windows`.
 
 Generated bindings
 ------------------
 
 Almost everything PyOpenGL exports is generated from the Khronos XML
-registries rather than written out.  Two repositories, because Khronos
-publishes them separately, and both are working copies rather than files
-vendored here:
+registries.  Khronos publishes two registry repositories.  Both are fetched as
+working copies; neither is vendored into this repository:
 
 .. code-block:: console
 
@@ -124,13 +123,12 @@ vendored here:
     `EGL-Registry <https://github.com/KhronosGroup/EGL-Registry>`__:
     ``api/egl.xml``.
 
-Which commit of each the shipped bindings came from is recorded in
-``src/cdispatch/registry_lock.json``.  A fetch that finds a different one
-stops the run: every enum value and every signature comes out of those
-repositories, and no test can catch a wrong one, because the tests are
-generated from the same input.  Moving to a newer registry is a decision with
-a diff attached rather than whatever the network answered today, so it is
-asked for:
+``src/cdispatch/registry_lock.json`` records the commit of each registry that
+the shipped bindings came from.  A fetch that finds a different commit stops
+the run.  Every enum value and signature comes from those repositories, and
+the tests are generated from the same input, so no test can catch a wrong
+value.  Moving to a newer registry is therefore requested explicitly, and
+produces a diff to review:
 
 .. code-block:: console
 
@@ -146,24 +144,22 @@ What the generators write
 
 ``regenerate_c.py`` writes the C dispatch layer into
 ``accelerate/src/c/generated``, which is compiled into
-``OpenGL_accelerate.dispatch``.  :doc:`c-dispatch` describes what that layer
-does and ``src/cdispatch/README.md`` is the guide to the generator --
-including how to add an entry point that needs hand-written C.
+``OpenGL_accelerate.dispatch``.  :doc:`c-dispatch` describes that layer.
+``src/cdispatch/README.md`` is the guide to the generator, including how to
+add an entry point that needs hand-written C.
 
 ``xml_generate.py`` writes the Python-level API: the declaration tables in
-``OpenGL/raw/_declarations/*.dat``, which a finder turns into the
-``OpenGL.raw`` namespaces at import time, and the friendly modules beside
-them.  There are no ``OpenGL.raw`` source files to read; the tables are what
-there is.
+``OpenGL/raw/_declarations/*.dat``, and the friendly modules beside them.  At
+import time a finder turns the tables into the ``OpenGL.raw`` namespaces.
+There are no ``OpenGL.raw`` source files; the tables are the only source.
 
-``glGet`` output sizes are part of that: the generator registers each constant
-against the size of the array it returns, so a ``glGet*`` call comes back the
-right length.  The sizes come from the specifications together with
-``src/glgetsizes.csv``.  Each extension module also gets the specification's
-"Overview" as its docstring.
+The generator also registers each ``glGet`` constant against the size of the
+array it returns, so a ``glGet*`` call returns an array of the right length.
+The sizes come from the specifications and ``src/glgetsizes.csv``.  Each
+extension module also gets the specification's "Overview" as its docstring.
 
-GLU, GLUT and GLE are not in the registries and are not generated; those
-wrappers are written by hand, all three APIs being long settled.
+GLU, GLUT and GLE are not in the registries, so their wrappers are written by
+hand.  All three APIs have been stable for many years.
 
 Checking a regeneration
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -172,25 +168,24 @@ Checking a regeneration
 
    $ python src/check_registry.py --verbose
 
-Reports what the shipped bindings and the registry disagree about: a registry
+This reports where the shipped bindings and the registry disagree: a registry
 command with no binding, a binding whose signature no longer matches, an enum
-with no constant, and every entry point still on the ctypes path with the
-reason.  Differences that have already been looked at are recorded in
-``src/cdispatch/registry_baseline.json`` with a reason each, and
-``--new-only`` exits non-zero for what is new since.
+with no constant, and every entry point still on the ctypes path, with the
+reason.  Known differences are recorded in
+``src/cdispatch/registry_baseline.json``, each with a reason.  With
+``--new-only``, the command exits non-zero for any difference not recorded
+there.
 
-**A scheduled job already does this.**
-``.github/workflows/registry-update.yml`` runs weekly: it fetches the
-registries, regenerates, checks for drift nobody has recorded, and opens a
-pull request when the regeneration produced a diff -- with the report in the
-body, so the change can be read without checking anything out.  The registry
-gains entry points continuously, and a gap in the bindings is otherwise only
-noticed when somebody tries to call the thing that is missing.
+``.github/workflows/registry-update.yml`` runs this check weekly.  It fetches
+the registries, regenerates, checks for unrecorded drift, and opens a pull
+request when the regeneration produced a diff.  The pull request body holds
+the report, so the change can be reviewed without a checkout.  Khronos adds
+entry points to the registry continuously.  Without this job, a missing
+binding would only be found when someone tried to call it.
 
-So regenerating by hand is for working on a generator, not for keeping up with
-Khronos.  An entry point whose generated body is not a plain macro expansion
-is the one thing in that pull request that needs a person; the rest is table
-data.
+Regenerating by hand is therefore only needed when working on a generator.  In
+the weekly pull request, only an entry point whose generated body is not a
+plain macro expansion needs review by a person; the rest is table data.
 
 Customising a generated module
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -203,10 +198,9 @@ An extension module is a single file with its generated half above a marker:
    ...
    ### END AUTOGENERATED SECTION
 
-Customisations go below it.  Removing the marker takes the module out of the
-generator's reach, and out of reach of later improvements to it as well.
-Making an extension module more Pythonic and sending the change back is
-welcome.
+Customisations go below the marker.  Removing the marker stops the generator
+from updating the module, so the module also misses later improvements to the
+generator.  Changes that make an extension module more Pythonic are welcome.
 
 Converters and wrappers
 -----------------------
@@ -214,30 +208,30 @@ Converters and wrappers
 Where the generated ctypes wrapper cannot be used as it stands, the entry point
 is built from :py:class:`OpenGL.wrapper.Wrapper` and the converters in
 :py:mod:`OpenGL.converters`.  ``Wrapper`` provides a set of argument
-transformation stages, so that most entry points compose out of a small number
-of simple operations -- explicitly specified, rather than matched by rule as a
-SWIG-style generator would.
+transformation stages, and most entry points are composed from a few simple
+operations.  Each operation is specified explicitly for its entry point.  A
+SWIG-style generator would match them by rule instead.
 
-Where a custom function using raw ctypes is simpler, writing one and binding it
-to the name works; the lazy wrapper below makes that easier.
+Where a custom function using raw ctypes is simpler, write one and bind it to
+the entry point's name.  The lazy wrapper below makes that easier.
 
 The stages of a wrapped call are:
 
-1. **pyConverters** -- accept or suppress an incoming Python argument.  A
+1. ``pyConverters`` - accept or suppress an incoming Python argument.  A
    converter can convert an argument to the expected type, or remove it from
-   the argument list entirely, which is how an argument implied by the shape of
-   another one disappears.
-2. **cConverters** -- look at the whole Python argument list and produce a
+   the argument list entirely.  Removal is how an argument implied by the
+   shape of another one disappears from the Python signature.
+2. ``cConverters`` - look at the whole Python argument list and produce a
    one-to-one list of Python objects for the ctypes call.
-3. **cResolvers** -- turn those into the low-level values ctypes passes.
-4. the call itself, with error checking; an error is annotated with the
+3. ``cResolvers`` - turn those into the low-level values ctypes passes.
+4. the call itself, with error checking.  An error is annotated with the
    arguments the call was made with.
-5. **storeValues** -- keep alive anything the driver will read after the call
+5. ``storeValues`` - keep alive anything the driver reads after the call
    returns, such as the array behind a pointer.
-6. **returnValues** -- decide what the wrapped entry point gives back.
+6. ``returnValues`` - decide what the wrapped entry point returns.
 
 ``Wrapper.setOutput`` builds an output array for a call from a size tuple, a
-dictionary or a function.  :py:mod:`OpenGL.GL.glget` is full of examples.
+dictionary or a function.  :py:mod:`OpenGL.GL.glget` has many examples.
 
 Lazy wrapping
 ~~~~~~~~~~~~~
@@ -264,22 +258,22 @@ operation as its first argument:
 Array handling
 --------------
 
-Array operations are how a Python program pushes work into the OpenGL
-implementation, so how naturally arrays are handled decides how fast the
-binding is in practice.  NumPy is the array implementation PyOpenGL prefers.
+A Python program passes most of its work to OpenGL through array operations,
+so array handling largely sets the binding's speed in practice.  NumPy is the
+preferred array implementation.
 
-The machinery is in :py:mod:`OpenGL.arrays`.  Two kinds of class do the work:
-a :py:mod:`FormatHandler <OpenGL.arrays.formathandler>` knows how one Python
-type stores its data, and an ``ArrayDatatype`` models one OpenGL array format.
-``ArrayDatatype`` uses the format handlers to get at whatever the caller
-passed.
+The machinery is in :py:mod:`OpenGL.arrays`.  Two kinds of class do the work.
+A :py:mod:`FormatHandler <OpenGL.arrays.formathandler>` gives access to the
+data of one Python type, and an ``ArrayDatatype`` models one OpenGL array
+format.  ``ArrayDatatype`` uses the format handlers to read whatever data the
+caller passed.
 
 ArrayDatatypes
 ~~~~~~~~~~~~~~
 
-The ``ArrayDatatype`` API is made mostly of classmethods, called on the class
-rather than on an instance, and is used throughout PyOpenGL to handle a Python
-argument in a way specific to its array format.  The types defined are:
+The ``ArrayDatatype`` API is mostly classmethods, called on the class instead
+of an instance.  PyOpenGL uses it throughout to handle a Python argument for a
+particular array format.  The types defined are:
 
 ``ArrayDatatype``
     generic array operations.
@@ -303,9 +297,9 @@ data needs.
 Format handlers
 ~~~~~~~~~~~~~~~
 
-A format handler implements the API ``ArrayDatatype`` calls, and may implement
-only the part that makes sense for its type: a write-only type such as a byte
-string has no use for ``zeros``.  The handlers shipped are:
+A format handler implements the API that ``ArrayDatatype`` calls.  It may
+implement only the parts that apply to its type.  For example, a write-only
+type such as a byte string does not need ``zeros``.  The handlers shipped are:
 
 :py:mod:`nones.NoneHandler <OpenGL.arrays.nones>`
     passes ``None`` as an array pointer.  Registered as ``nones``.
@@ -333,7 +327,7 @@ string has no use for ``zeros``.  The handlers shipped are:
 Registering a new format handler
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:py:mod:`OpenGL.plugins` takes the registration:
+Register a handler with :py:mod:`OpenGL.plugins`:
 
 .. code-block:: python
 
@@ -344,35 +338,33 @@ The first argument names the plugin, the second is the class to load, and the
 third, if given, is the list of ``module.classname`` values the handler claims.
 A plugin registered without that third argument is loaded unconditionally.
 
-The set of handlers is resolved at the first call that needs one, so until then
-an application can say which handler should build output arrays -- that handler
-has to define ``zeros``:
+The set of handlers is resolved at the first call that needs one.  Before that
+call, an application can choose which handler builds output arrays, naming it
+by its registered name.  The chosen handler must define ``zeros``:
 
 .. code-block:: python
 
    from OpenGL.arrays import formathandler
    formathandler.FormatHandler.chooseOutput('ctypesarrays')
 
-naming the handler by its registered name.
-
 Image handling
 --------------
 
-Image data is array data, so most of the work is the array handling above.
-What is left is the OpenGL state: Python image libraries hand over tightly
+Image data is array data, so the array handling above does most of the work.
+The rest is OpenGL pixel-store state.  Python image libraries produce tightly
 packed buffers, and OpenGL's default packing would read them wrongly.
 
 :py:mod:`OpenGL.images` holds the functions and the tables that describe each
 image format, for input and for output.  Registering a new image type means
 adding to those tables.  :py:mod:`OpenGL.GL.images` implements the core image
-entry points on top of that module, and is the worked example.
+entry points on top of that module, and is an example to follow.
 
 Error handling
 --------------
 
-PyOpenGL runs :py:func:`OpenGL.error.glCheckError` after each call, and that
-check is ``glBegin``/``glEnd``-aware, since ``glGetError`` reports nothing
-between the two.  The checker can be replaced -- a program that always has a
+PyOpenGL runs :py:func:`OpenGL.error.glCheckError` after each call.  The check
+is skipped between ``glBegin`` and ``glEnd``, because ``glGetError`` reports
+nothing between the two.  The checker can be replaced.  A program that always has a
 valid context can register the raw ``glGetError`` and skip the context test:
 
 .. code-block:: python
@@ -381,16 +373,16 @@ valid context can register the raw ``glGetError`` and skip the context test:
    error.ErrorChecker.registerChecker(myAlternateFunction)
 
 :py:mod:`OpenGL.error` defines the errors raised; :py:exc:`ValueError` and
-:py:exc:`TypeError` come out of argument conversion.  The wrappers catch an
+:py:exc:`TypeError` come from argument conversion.  The wrappers catch an
 OpenGL error and annotate it with the arguments of the call that raised it.
 
 Context-specific data
 ---------------------
 
-A pointer handed to the driver needs the Python object behind it to stay alive.
-:py:mod:`OpenGL.contextdata` stores such objects against a key for the current
-context, which the platform module's ``GetCurrentContext()`` provides.  A
-``context`` argument of ``None`` means the current one.
+A pointer passed to the driver needs the Python object behind it to stay
+alive.  :py:mod:`OpenGL.contextdata` stores such objects against a key for the
+current context, which the platform module's ``GetCurrentContext()``
+provides.  A ``context`` argument of ``None`` means the current context.
 
 .. code-block:: python
 
@@ -403,21 +395,21 @@ context, which the platform module's ``GetCurrentContext()`` provides.  A
    def delValue(constant, context=None):
        """Delete the specified value for the given context"""
 
-``getValue`` returns ``None`` where nothing is stored; ``delValue`` returns
-whether there was a value to delete.  Destroying a rendering context means
-clearing each stored value, or calling
-:py:func:`OpenGL.contextdata.cleanupContext` for the lot.
+``getValue`` returns ``None`` where nothing is stored, and ``delValue``
+returns whether there was a value to delete.  When a rendering context is
+destroyed, clear each stored value, or call
+:py:func:`OpenGL.contextdata.cleanupContext` to clear them all.
 
 Extensions
 ----------
 
 Most new OpenGL functionality appears as an extension before it reaches the
-core, and there are hundreds registered.  Most add constants and a few entry
-points, and the generator handles them without help.
+core, and hundreds of extensions are registered.  Most add constants and a few
+entry points, and the generator handles them without help.
 
-A few of the larger ones -- :py:mod:`OpenGL.GL.ARB.shader_objects`,
-:py:mod:`OpenGL.GL.ARB.vertex_buffer_object` -- need hand-written code beyond
-what the generator writes.  Those wrappers live under ``OpenGL.GL.*``, with the
+A few of the larger ones, such as :py:mod:`OpenGL.GL.ARB.shader_objects` and
+:py:mod:`OpenGL.GL.ARB.vertex_buffer_object`, need hand-written code beyond
+the generated code.  Those wrappers live under ``OpenGL.GL.*``, with the
 generated API underneath them in ``OpenGL.raw.*``.
 
 Running the tests and the gates
@@ -428,6 +420,6 @@ Running the tests and the gates
    $ pytest
    $ tox -e errorpaths
 
-``tox.ini`` declares the environments CI runs, including the linting and typing
-gates.  ``tests/`` has the suite; the backends in :doc:`offscreen` are how it gets a
-context without a display.
+``tox.ini`` declares the environments CI runs, including the linting and
+typing gates.  ``tests/`` has the suite.  The backends in :doc:`offscreen`
+give it a context without a display.

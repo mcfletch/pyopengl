@@ -93,12 +93,12 @@ class ShaderProgram( int ):
 def compileProgram(*shaders, **named):
     """Create a new program, attach shaders and validate
 
-    shaders -- arbitrary number of shaders to attach to the
+    shaders - arbitrary number of shaders to attach to the
         generated program.
-    separable (keyword only) -- set the separable flag to allow 
+    separable (keyword only) - set the separable flag to allow 
         for partial installation of shader into the pipeline (see 
         glUseProgramStages)
-    retrievable (keyword only) -- set the retrievable flag to 
+    retrievable (keyword only) - set the retrievable flag to 
         allow retrieval of the program binary representation, (see 
         glProgramBinary, glGetProgramBinary)
 
@@ -140,8 +140,8 @@ def compileProgram(*shaders, **named):
 def compileShader( source, shaderType ):
     """Compile shader source of given type
 
-    source -- GLSL source-code for the shader
-    shaderType -- GLenum GL_VERTEX_SHADER, GL_FRAGMENT_SHADER, etc,
+    source - GLSL source-code for the shader
+    shaderType - GLenum GL_VERTEX_SHADER, GL_FRAGMENT_SHADER, etc,
 
     returns GLuint compiled shader reference
     raises RuntimeError when a compilation failure occurs

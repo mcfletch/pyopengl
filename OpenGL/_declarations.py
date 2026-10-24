@@ -1,24 +1,20 @@
-"""What the generated ``OpenGL.raw`` modules used to declare.
+"""Declarations for the ``OpenGL.raw`` modules, read from generated tables.
 
-Every one of them held the same three things -- an extension name, a set of
-constants, and a set of entry-point declarations -- and nothing else.  A
-friendly module took them all with ``from OpenGL.raw.GL.VERSION.GL_1_1 import
-*``, which meant building a module object and a dictionary in order to copy
-that dictionary into another one.
+Each ``OpenGL.raw`` module declares an extension name, a set of constants and
+a set of entry points.  A friendly module (the hand-written module a program
+imports, such as ``OpenGL.GL.VERSION.GL_1_1``) calls :func:`define`, which
+writes those names straight into its namespace.  No ``OpenGL.raw`` module
+object is built.
 
-:func:`define` writes them into the friendly module's own namespace instead, so
-there is one dictionary rather than two and no module in between.
+The declarations come from one of two sources, depending on the build:
 
-Two sources hold the same facts, and which one answers depends only on what was
-built:
+* the C dispatch extension, which keeps them in ``.rodata`` and decodes them on
+  first use;
+* ``OpenGL/raw/_declarations/<API>.dat``, used by an installation without the
+  compiled extension.
 
-* the C dispatch extension, where the declarations sit in ``.rodata`` and cost
-  nothing until asked for;
-* ``OpenGL/raw/_declarations/<API>.dat``, written by the generator in the same
-  pass, for an installation with no compiled extension.
-
-They are generated together from the registry and the shipped tree, so they
-cannot drift.  ``python src/regenerate_c.py`` writes both.
+``python src/regenerate_c.py`` writes both sources in one pass, from the
+registry and the shipped tree, so they hold the same declarations.
 """
 
 import ast
@@ -37,21 +33,19 @@ __all__ = [
     'resolve_type',
 ]
 
-#: Where the marshalled declarations live inside the package, as path segments
-#: rather than as a path: they have to be reachable through whatever loader the
-#: package was imported by, and a zip or a frozen application is not a
-#: directory.
+#: Where the marshalled declarations live inside the package, as path segments.
+#: They are read through the package's loader, which may be a zip or a frozen
+#: application instead of a directory.
 DATA = ('raw', '_declarations')
 
 
 def _table(name):
-    """One shipped table, as a resource rather than as a filename.
+    """Return one shipped table as an importlib resource.
 
-    A path built from ``__file__`` names nothing when the package is a zip, a
-    frozen application, or anything else that is not a directory on disk.  With
-    the generated modules no longer shipped these tables are the only
-    description of :mod:`OpenGL.raw` there is, so they are read the way package
-    data has to be read.
+    A path built from ``__file__`` does not exist when the package is a zip, a
+    frozen application, or anything else that is not a directory on disk.
+    The tables are the only description of :mod:`OpenGL.raw` that ships, so
+    they are read as package data.
     """
     resource = importlib.resources.files('OpenGL')
     for part in DATA + (name,):
@@ -60,19 +54,16 @@ def _table(name):
 
 
 def _read_table(name):
-    """The unmarshalled contents of one shipped table.
+    """Return the unmarshalled contents of one shipped table.
 
-    Failure to read one is fatal rather than empty.  An empty table means "this
-    API declares nothing", which is indistinguishable from a working
-    installation right up to the point where a module that ought to exist
-    cannot be imported, several frames from the missing file.
+    A table that cannot be read raises :class:`ImportError`.  Returning an
+    empty table would mean "this API declares nothing", and the failure would
+    surface later as a missing module, several frames from the missing file.
 
-    A table that is *there* but damaged -- a truncated extraction, a bad mirror,
-    a filesystem that lost a block -- has to say so the same way.  ``marshal``
-    is what reads these because it is the fastest thing in the standard library
-    at the job, and the price is that malformed input raises whatever it happens
-    to raise rather than one named error; catching the set is what turns that
-    back into the sentence above.
+    A damaged table (a truncated extraction, a bad mirror, a lost disk block)
+    raises the same error.  ``marshal`` is the fastest reader in the standard
+    library, but malformed input makes it raise one of several exception
+    types.  The ``except`` clause catches all of them.
     """
     import marshal
 
@@ -88,18 +79,18 @@ def _read_table(name):
         ) from error
 
 
-#: One resolved path per API.  ``find_spec`` asks for every generated module
-#: imported, and resolving the resource means an import lookup and a stat --
-#: which is a cost per module, for an answer that cannot change during a run.
+#: One resolved path per API.  ``find_spec`` asks for it on every generated
+#: module import, and resolving the resource costs an import lookup and a stat.
+#: The path cannot change during a run.
 _table_paths = {}
 
 
 def table_path(api):
-    """The filesystem path of one table, or ``None`` where it is not a file.
+    """Return the filesystem path of one table, or ``None`` if it is not a file.
 
-    What a generated module reports as its ``__file__``.  Inside a zip or a
-    frozen application there is no path to report, and saying nothing is better
-    than naming something that cannot be opened.
+    A generated module reports this path as its ``__file__``.  Inside a zip or
+    a frozen application the table has no path, so the result is ``None``
+    instead of a path that cannot be opened.
     """
     if api not in _table_paths:
         try:
@@ -116,29 +107,28 @@ APIS = ('GL', 'GLES1', 'GLES2', 'GLES3', 'GLSC2', 'EGL', 'GLX', 'WGL')
 #: One entry per API, filled on the first module of that API that asks.
 _data = {}
 
-#: The customisations, read from the shipped table on first use.  What a
-#: friendly module used to apply as a chain of wrapper.wrapper(...) calls.
+#: The customisations, read from the shipped table on first use.  Each one is
+#: the equivalent of a chain of wrapper.wrapper(...) calls on an entry point.
 _annotations = None
 
-#: Resolved type expressions, keyed by ``(api, text)``.  The vocabulary is
-#: small and the uses are not: ``_cs.GLenum`` is written thousands of times
-#: across the tree, and evaluating it thousands of times was the largest single
-#: cost of importing without the C extension.
+#: Resolved type expressions, keyed by ``(api, text)``.  There are few distinct
+#: expressions, but ``_cs.GLenum`` alone appears thousands of times.  Without
+#: this cache, evaluating them is the largest cost of importing without the C
+#: extension.
 _types_cache = {}
 
-#: The C extension, once, or False when there is none to use.
+#: The C extension, looked up once, or False when there is none to use.
 _extension = None
 
-#: The namespace each generated module declares, built on the first friendly
-#: module that asks and copied from thereafter.  GL_1_1 re-exports GL_1_0,
-#: GL_1_2 re-exports GL_1_1, and forty friendly modules stand on the chain; a
-#: module object used to be what stopped that from being rebuilt every time,
-#: and this is what stops it now.
+#: The namespace each generated module declares, built for the first friendly
+#: module that needs it and copied after that.  GL_1_1 re-exports GL_1_0,
+#: GL_1_2 re-exports GL_1_1, and forty friendly modules depend on the chain.
+#: This cache stops the chain being rebuilt for each of them.
 _namespaces = {}
 
 
 def _c_source():
-    """The dispatch extension, if it is the implementation in use."""
+    """Return the C dispatch extension, or False if it is not in use."""
     global _extension
     if _extension is None:
         from OpenGL import _configflags
@@ -150,22 +140,19 @@ def _c_source():
             except ImportError:
                 pass
             else:
-                # Installing is what fills `entry_points`, and nothing else
-                # does it now: it used to happen on the first createFunction
-                # call, and no generated declaration runs any more.
+                # install() fills `entry_points`.  No other code path does.
                 if _dispatch.install():
                     _extension = _dispatch._c
     return _extension
 
 
 def _data_source(api):
-    """The shipped declarations for one API, read once.
+    """Return the shipped declarations for one API, read once.
 
-    An API with no table is not an error: GLU, GLUT, GLE and OSMesa are
-    hand-maintained rather than registry-described, so nothing generates a
-    table for them and their modules are shipped as files.  It is a *missing*
-    table, for one of the APIs :data:`APIS` says is generated, that means a
-    broken installation -- and :func:`_read_table` raises for that.
+    An API outside :data:`APIS` returns an empty mapping.  GLU, GLUT, GLE and
+    OSMesa are maintained by hand, so no table is generated for them and their
+    modules ship as files.  A missing table for an API in :data:`APIS` means a
+    broken installation, and :func:`_read_table` raises for it.
     """
     if api not in _data:
         _data[api] = _read_table('%s.dat' % (api,)) if api in APIS else {}
@@ -173,12 +160,11 @@ def _data_source(api):
 
 
 class _DataDeclarations:
-    """The declaration tables, in the shape the finder asks the C for.
+    """The declaration tables, with the two methods the finder calls on the C.
 
-    The finder was written against the extension because that was the only
-    source that could enumerate the generated modules.  With the modules gone
-    the finder has to answer on the ctypes path too, and the tables hold the
-    same facts -- so they answer the same two questions.
+    The finder calls ``module_names()`` and ``module_contents()`` on the C
+    extension.  On the ctypes path it calls the same methods on this class,
+    which reads the shipped tables.
     """
 
     def module_names(self):
@@ -192,12 +178,12 @@ class _DataDeclarations:
 
 
 def data_declarations():
-    """A declaration source backed by the shipped tables."""
+    """Return a declaration source backed by the shipped tables."""
     return _DataDeclarations()
 
 
 def api_of(module_name):
-    """``OpenGL.raw.GL.VERSION.GL_1_1`` names the GL API."""
+    """Return the API a module name belongs to: ``'GL'`` for ``OpenGL.raw.GL.VERSION.GL_1_1``."""
     parts = module_name.split('.')
     return parts[2] if len(parts) > 2 else 'GL'
 
@@ -207,20 +193,18 @@ _core_commands = {}
 
 
 def core_command_names(api):
-    """The entry points a core version of ``api`` declares.
+    """Return the frozenset of entry points a core version of ``api`` declares.
 
-    An extension may re-specify a name a core version already has:
-    ``GL_KHR_debug`` gave ``glGetPointerv`` the pnames that report a debug
-    callback, and the entry point itself has been GL 1.1 since 1995.  What a
-    caller reaches is settled by which module they imported from, and the gate
-    that refuses an unadvertised extension has to know which names those are
-    -- or importing from the extension's module answers that a GL 1.1 entry
-    point does not exist, on a driver that has always had it.
+    An extension may re-specify an entry point a core version already has.
+    ``GL_KHR_debug`` adds pnames to ``glGetPointerv`` for the debug callback,
+    and ``glGetPointerv`` has been core since GL 1.1 in 1995.  The gate that
+    refuses entry points of an unadvertised extension uses this set to let
+    core entry points through.  Without it, importing ``glGetPointerv`` from
+    the extension's module would report a GL 1.1 entry point as missing.
 
-    Read from the shipped tables, which is where the core versions are listed,
-    and built once per API on the first gate that needs one.  The compiled
-    layer is told the same fact at generation time, held as each command's
-    ``alternates``; this is how the ctypes path comes to know it.
+    The set is read from the shipped tables and built once per API, on first
+    use.  The C dispatch layer gets the same information at generation time,
+    in each command's ``alternates``.
     """
     known = _core_commands.get(api)
     if known is not None:
@@ -232,9 +216,10 @@ def core_command_names(api):
             continue
         contents = declarations.module_contents(module_name) or {}
         extension = contents.get('extension') or ''
-        # The same rule BasePlatform.constructFunction applies: a core version
-        # names itself GL_VERSION_1_1 or GL_ES_VERSION_3_2, so the token is not
-        # always in the same place and the name is asked rather than the path.
+        # The same rule BasePlatform.constructFunction applies.  A core version
+        # is named GL_VERSION_1_1 or GL_ES_VERSION_3_2, so the VERSION token is
+        # not always in the same position, and the extension name is checked
+        # instead of the module path.
         if extension and 'VERSION' not in extension.split('_'):
             continue
         names.update(command for command, _arguments, _types in contents['commands'])
@@ -243,18 +228,17 @@ def core_command_names(api):
 
 
 def contents_for(module_name):
-    """What one generated module declared, or None if nothing describes it.
+    """Return what one generated module declares, or None if no source has it.
 
-    A mapping with ``extension``, ``constants``, ``commands`` and ``reexports``
-    -- the same shape from either source, so nothing above here has to know
-    which one answered.
+    The result is a mapping with ``extension``, ``constants``, ``commands`` and
+    ``reexports`` keys.  Both sources return the same shape, so callers do not
+    depend on which source is in use.
     """
     extension = _c_source()
     if extension:
-        # The two sources are generated together and describe the same set, so
-        # one that does not know a module says the module is not generated --
-        # reading the other to be told so again would mean loading half a
-        # megabyte to learn nothing.
+        # Both sources are generated together and list the same modules.  A
+        # module missing from the extension is missing from the table too, so
+        # the half-megabyte table is not loaded to check.
         return extension.module_contents(module_name)
     blob = _data_source(api_of(module_name)).get(module_name)
     if blob is None:
@@ -263,7 +247,7 @@ def contents_for(module_name):
 
 
 def _decoded(module_name, blob):
-    """One module's marshalled table entry, in the shape :func:`contents_for` answers."""
+    """Decode one module's marshalled table entry into the :func:`contents_for` mapping."""
     import marshal
 
     try:
@@ -283,12 +267,12 @@ def _decoded(module_name, blob):
 
 
 def declared_commands(api):
-    """``(module name, command, argument names, types)`` for each command ``api``'s table declares.
+    """Yield ``(module name, command, argument names, types)`` for each command in ``api``'s table.
 
-    Read from the shipped table, which is what an installation has whether or
-    not the C extension was built.  ``types`` is the result type followed by
-    one per argument, as the declaration wrote them.  A command declared by
-    two modules appears once for each.
+    Reads the shipped table, which every installation has, with or without the
+    C extension.  ``types`` is the result type followed by one type per
+    argument, as text.  A command declared by two modules appears once for
+    each.
     """
     for module_name, blob in sorted(_data_source(api).items()):
         for command, arguments, types in _decoded(module_name, blob)['commands']:
@@ -301,11 +285,11 @@ def declared_commands(api):
 
 
 def ctypes_entry_point(module_name, name):
-    """The ctypes path's binding for ``name`` from ``module_name``, customised from the table.
+    """Return the customised ctypes binding for ``name`` from ``module_name``.
 
-    What a friendly module that calls ``define(...)`` holds for
-    that command when the ctypes path is the implementation, built whichever
-    implementation this process is running.
+    The result is the entry point a friendly module gets from ``define(...)``
+    under the ctypes implementation.  It is built even when this process runs
+    the C implementation.
     """
     contents = contents_for(module_name)
     if contents is None:
@@ -325,7 +309,7 @@ def ctypes_entry_point(module_name, name):
 
 
 def annotations():
-    """The customisation table: what each entry point wraps its call in."""
+    """Return the customisation table, which says how each entry point is wrapped."""
     global _annotations
     if _annotations is None:
         _annotations = _read_table('_annotations.dat')
@@ -333,34 +317,35 @@ def annotations():
 
 
 def customise_entry(entry, api, name, declared):
-    """Apply what the table says about this entry point, and return it.
+    """Return ``entry`` wrapped as the customisation table describes.
 
-    The rule:
+    Input parameters follow these rules:
 
-    * a parameter takes an array conversion when the table says ``array``;
-    * the length comes from the table where there is one, and there usually is
-      not -- ``setInputArraySize(x, None)`` states a conversion and no length;
-    * a ``from-argument`` length is a minimum read off another argument,
-      ``count * multiplier`` elements, applied with ``setInputArrayCount``.
+    * a parameter gets an array conversion when the table marks it ``array``;
+    * the length comes from the table when it has one, which is rare, and
+      ``setInputArraySize(x, None)`` sets a conversion with no length;
+    * a ``from-argument`` length is a minimum of ``count * multiplier``
+      elements, read from another argument and applied with
+      ``setInputArrayCount``.
 
-    The table says it rather than the declared type saying it, because the type
-    cannot: ``glDrawElements`` and relatives declare their array
+    The table marks array parameters because the declared type cannot.
+    ``glDrawElements`` and similar calls declare their array as
     ``ctypes.c_void_p``, since it may be a client pointer or a buffer offset.
-    Reading array-ness off the type instead both loses those and invents
-    conversions for parameters the friendly layer never wrapped, which is 171
-    entry points' worth of difference from what the modules did.
+    Inferring arrays from the type would miss those and add conversions to
+    parameters the friendly layer never wrapped, which changes 171 entry
+    points.
 
-    An **output** parameter is rebuilt from the same table.  What ``setOutput``
-    needs beyond a size is the argument whose value sizes it and whether a
-    caller may pass the array in instead; the table holds the first and the
-    second is ``True`` for every one of the 688 calls in the tree, so it is not
-    recorded per entry.  Three of the four size kinds are expressed here --
-    a fixed count, a count read from another argument, and the ``_glgets``
-    table.  An **image** size is not: it is computed from the format and type
-    arguments together, and the modules that need one keep their own chain.
+    Output parameters are rebuilt from the same table.  Besides a size,
+    ``setOutput`` needs the argument whose value gives the size and whether a
+    caller may pass the array in.  The table holds the argument.  Passing the
+    array in is allowed for all 688 calls in the tree, so it is not recorded
+    per entry.  Three of the four size kinds are handled here: a fixed count,
+    a count read from another argument, and the ``_glgets`` table.  An image
+    size depends on the format and type arguments together, so the modules
+    that need one keep their own wrapper chain.
 
-    A ``GLProc`` is returned untouched: the C already performs all of this,
-    which is what ``implements_friendly`` records.
+    A ``GLProc`` is returned unchanged, because the C implementation already
+    does all of this, as ``implements_friendly`` records.
     """
     entry_annotations = annotations().get('%s.%s' % (api, name))
     parameters = (entry_annotations or {}).get('parameters', {})
@@ -370,9 +355,9 @@ def customise_entry(entry, api, name, declared):
 
     outputs = _output_parameters(parameters)
     if outputs is None:
-        # A size this rule cannot state.  Rebuilding the inputs and leaving the
-        # outputs would be worse than leaving the module its chain, because the
-        # result would be a wrapper that looks complete and is not.
+        # An output size these rules cannot express.  The module keeps its own
+        # chain.  Wrapping only the inputs would produce a wrapper that looks
+        # complete and is not.
         return entry
 
     built = entry
@@ -419,18 +404,18 @@ def customise_entry(entry, api, name, declared):
     return built
 
 
-#: The size kinds the rule states.  ``image`` is absent deliberately: an image
-#: size comes from the format and type arguments together rather than from one
-#: value, and the modules that need one keep their chain.
+#: The output size kinds :func:`customise_entry` handles.  ``image`` is left
+#: out because an image size depends on the format and type arguments
+#: together, and the modules that need one keep their own chain.
 _OUTPUT_SIZE_KINDS = frozenset(['fixed', 'from-argument', 'glget-table'])
 
 
 def _output_parameters(parameters):
-    """``[(order, name, size), ...]``, or ``None`` if one cannot be stated.
+    """Return ``[(order, name, size), ...]``, or ``None`` if a size kind is unsupported.
 
-    The order is the one the chain applied them in, which the table records
-    because ``setOutput`` builds the Python signature and the signature is
-    ordered.
+    The order is the order the wrapper chain applied the outputs in.  The
+    table records it because ``setOutput`` builds the Python signature, and
+    argument order matters there.
     """
     outputs = []
     for parameter, bits in parameters.items():
@@ -445,7 +430,7 @@ def _output_parameters(parameters):
 
 
 def _scaled_by(divisor, multiplier):
-    """``setOutput``'s size function: the named argument's value, times M over N."""
+    """Return a ``setOutput`` size function: the argument's value times ``multiplier // divisor``."""
     if divisor == 1 and multiplier == 1:
         return lambda value: (value,)
     return lambda value: (value * multiplier // divisor,)
@@ -458,30 +443,30 @@ def _import(name):
 
 
 def also(namespace, *modules):
-    """Take from each of ``modules`` only the names ``namespace`` lacks.
+    """Copy into ``namespace`` the names from ``modules`` that it does not already have.
 
-    The modules are passed as objects rather than named, so the ``import`` that
-    fetched them is an ordinary static one: a freezer reads those and bundles
-    what they name, and a dynamic import here leaves the extension modules out
-    of the bundle and the frozen application dying on its first import.
+    The modules are passed as objects, so the caller imports them with an
+    ordinary static ``import``.  Freezers bundle what static imports name.  A
+    dynamic import here would leave the extension modules out of a frozen
+    application, which would then fail on its first import.
 
-    A GL version adopts extensions wholesale -- 4.1 is
-    ``ARB_separate_shader_objects`` and five others -- and the version module
-    carries their names so that a client importing ``OpenGL.GL`` finds them.
-    It must not take their *entry points* over its own.
+    A GL version includes whole extensions (4.1 includes
+    ``ARB_separate_shader_objects`` and five others).  The version module
+    carries their names so that a client importing ``OpenGL.GL`` finds them,
+    but it keeps its own entry points for commands both declare.
 
-    A command declared by both is declared twice, and the two differ in the one
-    way that matters: the extension declaration is gated on the driver
-    advertising the extension string, and the core one is not.  A driver is
-    entitled to stop advertising an extension it has promoted, and a core
-    profile commonly does -- macOS's 4.1 core profile does not list
-    ``GL_ARB_separate_shader_objects`` -- so the gated declaration answers
-    ``NullFunctionError`` for a function the context implements.
+    The two declarations of such a command differ in one way.  The extension
+    declaration works only if the driver advertises the extension string, and
+    the core declaration has no such check.  Drivers may stop advertising an
+    extension once it is core, and core profiles often do: the macOS 4.1 core
+    profile does not list ``GL_ARB_separate_shader_objects``.  The extension
+    declaration would then raise ``NullFunctionError`` for a function the
+    context implements.
 
-    Which is why this is not ``import *``: that runs after :func:`define` has
-    put the version's own declarations in place, and takes them back out.  The
-    C dispatch layer records the same pair the same way round, with the core
-    name as the declaration and the extension as an alternate.
+    ``import *`` would run after :func:`define` and replace the version's own
+    declarations, so this function is used instead.  The C dispatch layer
+    stores the same pair the same way, with the core name as the declaration
+    and the extension as an alternate.
     """
     for module in modules:
         exported = getattr(module, '__all__', None)
@@ -493,24 +478,21 @@ def also(namespace, *modules):
 
 
 def define(namespace, module_name):
-    """Define, in ``namespace``, everything ``module_name`` declared.
+    """Define in ``namespace`` every name ``module_name`` declares, and return its extension name.
 
-    Each command is customised from the annotation table as it is defined:
-    the array conversions and output parameters that make its Python
-    signature differ from the C one.  A friendly module therefore carries no
-    ``wrapper.wrapper(...).setInputArraySize(...)`` chain of its own, and must
-    not, because applying a customisation twice is an error rather than a
-    no-op -- ``wrapper`` raises ``Double wrapping of output parameter``.
-    Hand-written code in the module that follows this call sees the
+    Each command is customised from the annotation table as it is defined.
+    The customisations are the array conversions and output parameters that
+    make its Python signature differ from the C one.  A friendly module must
+    not add its own ``wrapper.wrapper(...).setInputArraySize(...)`` chain:
+    applying a customisation twice makes ``wrapper`` raise ``Double wrapping
+    of output parameter``.  Code in the module after this call sees the
     customised entry points.
 
-    Called from a friendly module in place of the ``import *`` that used to
-    reach the generated module::
+    A friendly module calls it like this::
 
         _EXTENSION_NAME = define(globals(), 'OpenGL.raw.GL.VERSION.GL_1_1')
 
-    Returns the extension name, because the caller wants it under
-    ``_EXTENSION_NAME`` and it is the one thing the module says about itself.
+    The caller stores the returned extension name as ``_EXTENSION_NAME``.
     """
     built, extension = _build(module_name)
     namespace.update(built)
@@ -529,13 +511,13 @@ def define(namespace, module_name):
 
 
 def _array_parameters(arguments, types):
-    """``[(name, 'array' | 'scalar'), ...]`` from the declaration's text.
+    """Return ``[(name, 'array' | 'scalar'), ...]`` parsed from the declaration's text.
 
-    Array-ness is half the rebuild rule, and the half the table does not hold:
-    it is a property of the type the declaration stated.  Read from the text
-    rather than from the built binding, because on a C entry point reading
-    ``argtypes`` builds the ctypes binding the import path exists to avoid --
-    which is what made this cost 1,143 bindings the first time it was written.
+    The customisation table does not record which parameters are arrays.
+    That comes from the declared type.  The type is read from the text
+    because reading ``argtypes`` on a C entry point builds its ctypes binding,
+    which the import path avoids.  Reading ``argtypes`` here would build 1,143
+    bindings.
     """
     if isinstance(arguments, str):
         arguments = [name for name in arguments.split(',') if name]
@@ -552,10 +534,9 @@ def _array_parameters(arguments, types):
 
 
 def _build(module_name):
-    """The names one generated module declares, and its extension name.
+    """Return ``(names, extension name)`` for one generated module.
 
-    Built once and handed out by reference after that, which is what a module
-    object used to do for this.
+    The result is built once and cached in ``_namespaces``.
     """
     remembered = _namespaces.get(module_name)
     if remembered is not None:
@@ -563,14 +544,14 @@ def _build(module_name):
 
     contents = contents_for(module_name)
     if contents is None:
-        # Nothing describes it: the module is one of the hand-written few, or
-        # this is a checkout with neither the extension nor the data.  Importing
-        # it is what used to happen and still works.
+        # No source describes it.  The module is one of the few written by
+        # hand, or this checkout has neither the extension nor the tables.
+        # Import the module itself.
         module = importlib.import_module(module_name)
         exported = getattr(module, '__all__', None)
         if exported is None:
-            # What ``import *`` would have taken: a private name is the
-            # module's own working material, not something it defines.
+            # The names ``import *`` would take.  Private names are the
+            # module's internals and are skipped.
             exported = [key for key in vars(module) if not key.startswith('_')]
         built = {key: getattr(module, key) for key in exported}
         result = (built, getattr(module, '_EXTENSION_NAME', ''))
@@ -600,24 +581,24 @@ def _build(module_name):
 
 
 def entry_point(api, name, extension, module_name, arguments, types):
-    """The callable a client gets for one entry point.
+    """Return the callable a client gets for one entry point.
 
-    The C implementation where there is one, and the ctypes binding otherwise.
-    Either way the declaration is remembered rather than built, because what
-    builds a ctypes binding is only wanted where a client demotes -- which
-    happens for a few dozen entry points out of nearly five thousand.
+    That is the C implementation when there is one, and the ctypes binding
+    otherwise.  With a C implementation, the ctypes binding is only needed
+    when a client demotes the entry point to ctypes.  That happens for a few
+    dozen of nearly five thousand entry points, so the declaration is stored
+    and the binding is built on demand.
     """
     from OpenGL._dispatch import entry_points, support
 
     proc = entry_points.get((api, name))
     if proc is None:
-        # No C entry point, so the ctypes binding is the entry point rather
-        # than something to fall back to: build it, and do not also record how
-        # to build it.
+        # No C entry point, so the ctypes binding is the entry point.  Build it
+        # now and do not register a factory.
         return Declaration(api, name, extension, module_name, arguments, types)()
-    # Where the C implements it, what the binding is for is demotion and the
-    # argtypes/restype/DLL attributes.  Few callers ever ask, so the
-    # declaration is remembered and the binding built if one does.
+    # With a C entry point, the binding is only used for demotion and for the
+    # argtypes/restype/DLL attributes.  Few callers use either, so the
+    # declaration is registered and the binding built on first request.
     support.register_ctypes_factory(
         api, name, Declaration(api, name, extension, module_name, arguments, types)
     )
@@ -625,23 +606,23 @@ def entry_point(api, name, extension, module_name, arguments, types):
     return proc
 
 
-#: The constructors a declared type may be built with.  A declaration's whole
-#: vocabulary is an attribute lookup on one of three namespaces, or one of
-#: these applied to such lookups -- and holding it to that is what makes
-#: "the text is read, not executed" a fact rather than an intention.  Anything
-#: else reachable from ``ctypes`` is a way for a data file to run code.
+#: The constructors a declared type may be built with.  A type expression is
+#: an attribute lookup on one of three namespaces, or one of these
+#: constructors applied to such lookups.  Limiting expressions to that set
+#: means the text is evaluated without being executed.  Other callables in
+#: ``ctypes`` could let a data file run code.
 _TYPE_CONSTRUCTORS = ('POINTER', 'CFUNCTYPE', 'WINFUNCTYPE')
 
 
 def _accepting(kind):
-    """The binding's form of a declared type: the same C type, taking more.
+    """Return the type a ctypes binding uses for a declared type.
 
-    A declaration states the C signature, and for most parameters that is also
-    what Python passes.  Where it is not -- an array of strings is declared
-    ``GLchar *const *``, and a caller has a list of strings -- the type the
-    binding is built with is one that converts, so that the ctypes path accepts
-    what the C dispatch path accepts.  It is the same C type either way, and
-    what a caller could pass before is still passed unchanged.
+    For most parameters the C type is also what Python passes.  An array of
+    strings is declared ``GLchar *const *``, but a caller passes a list of
+    strings.  For that type the binding uses ``_string_array.StringArray``,
+    which converts the list, so the ctypes path accepts what the C dispatch
+    path accepts.  The C type is the same, and values that ``GLchar *const *``
+    accepts still pass unchanged.
     """
     from OpenGL import _string_array
 
@@ -651,7 +632,7 @@ def _accepting(kind):
 
 
 def resolve_type(text, namespace):
-    """``_cs.GLenum``, ``ctypes.POINTER(_cs.GLchar)``, ``None`` -- as a value.
+    """Evaluate a type expression such as ``_cs.GLenum``, ``ctypes.POINTER(_cs.GLchar)`` or ``None``.
 
     ``namespace`` offers the three names a declaration is written against:
     ``ctypes``, ``arrays`` and ``_cs``, the API's own types module.
@@ -676,10 +657,9 @@ def _evaluate(node, text, namespace):
                 'unknown name %r in type expression %r' % (node.id, text)
             ) from None
     if isinstance(node, ast.Attribute):
-        # A dunder is Python's own machinery -- __class__, __globals__,
-        # __subclasses__ -- and reaching it from a data file is a way out of the
-        # three namespaces.  Leading underscores alone are not: GLX declares
-        # __GLXextFuncPtr, which is an ordinary type of ours.
+        # Dunder attributes (__class__, __globals__, __subclasses__) lead out
+        # of the three namespaces, so they are refused.  Leading underscores
+        # alone are allowed: GLX declares __GLXextFuncPtr, an ordinary type.
         if node.attr.startswith('__') and node.attr.endswith('__'):
             raise ValueError(
                 'not a type expression: %r names %r' % (text, node.attr)
@@ -700,11 +680,11 @@ def _evaluate(node, text, namespace):
 
 
 def as_sequence(value):
-    """``'a,b'`` or ``('a', 'b')`` -- both are a sequence of items.
+    """Return ``'a,b'`` or ``('a', 'b')`` as the list ``['a', 'b']``.
 
-    The C table hands these over comma-joined and the marshalled tables keep
-    them as tuples.  Either way they are names and expressions, and the
-    difference is not one anything below here should have to know.
+    The C table passes names and type expressions as comma-joined strings.
+    The marshalled tables keep them as tuples.  Callers get a list from
+    either.
     """
     if isinstance(value, str):
         return value.split(',')
@@ -712,14 +692,14 @@ def as_sequence(value):
 
 
 class Declaration:
-    """What a generated module's ``@_p.types(...) def glFoo(...)`` said.
+    """One entry point declaration, equivalent to ``@_p.types(...) def glFoo(...)``.
 
-    Held as the text it was written in and turned into a ctypes binding on the
-    first call that asks for one, because most entry points never see one.
+    The declaration is stored as text.  Calling the instance builds the ctypes
+    binding, which most entry points never need.
 
-    One class for both routes into it: the C extension carries the declarations
-    in ``.rodata`` and the shipped tables carry the same ones marshalled, and
-    they describe the same entry points.
+    Both declaration sources use this class.  The C extension keeps the
+    declarations in ``.rodata`` and the shipped tables keep the same ones
+    marshalled.
     """
 
     __slots__ = ('_arguments', '_types', 'api', 'extension', 'module', 'name')
@@ -733,9 +713,8 @@ class Declaration:
         self._types = tuple(as_sequence(types))
 
     def _resolve_types(self):
-        """``('None', '_cs.GLenum', 'arrays.GLfloatArray')`` as the types."""
-        # ctypes and arrays are named by the expressions; the three names are
-        # the whole vocabulary a declaration is written in.
+        """Resolve type text such as ``('None', '_cs.GLenum', 'arrays.GLfloatArray')``."""
+        # Type expressions use only three names: ctypes, arrays and _cs.
         import ctypes
 
         from OpenGL import arrays
@@ -761,14 +740,13 @@ class Declaration:
         return resolved
 
     def __call__(self):
-        """The ctypes binding the declaration describes."""
+        """Build and return the ctypes binding the declaration describes."""
         from OpenGL import platform
 
         types = self._resolve_types()
         errors = importlib.import_module('OpenGL.raw.%s._errors' % (self.api,))
-        # nullFunction rather than createFunction: createFunction hands back
-        # the C entry point where there is one, and what wants a binding here
-        # wants the thing underneath it.
+        # nullFunction, because createFunction returns the C entry point when
+        # there is one, and the caller here needs the ctypes binding.
         return platform.nullFunction(
             self.name,
             getattr(platform.PLATFORM, self.api, None) or platform.PLATFORM.GL,
@@ -783,7 +761,7 @@ class Declaration:
 
 
 def clear_caches():
-    """Forget which source answered.  For the tests that compare them."""
+    """Clear the cached source and tables, for tests that compare the two sources."""
     global _extension, _annotations
     _extension = None
     _annotations = None

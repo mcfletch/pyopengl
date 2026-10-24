@@ -1,13 +1,12 @@
-"""GLX (X11) platform -- compatibility shim
+"""GLX (X11) platform alias
 
-The GLX and EGL platforms have been merged into
-:class:`OpenGL.platform.linux.LinuxPlatform`, which supports either interface
-and selects between them at runtime by probing for the current context.  This
-module is retained so that existing imports (and the ``glx`` PYOPENGL_PLATFORM
-key) keep working.
+:class:`OpenGL.platform.linux.LinuxPlatform` implements both GLX and EGL.  It
+selects between them at runtime by checking which API has a current context.
+This module keeps imports of ``GLXPlatform`` from it working.  The ``glx``
+PYOPENGL_PLATFORM key selects ``LinuxPlatform`` directly.
 """
 
 from OpenGL.platform.linux import LinuxPlatform
 
-# Backwards-compatible alias; GLXPlatform now supports GLX *or* EGL.
+# Alias for existing imports; LinuxPlatform supports GLX and EGL.
 GLXPlatform = LinuxPlatform

@@ -1,22 +1,21 @@
 """The EGL devices this system offers, and what each one is.
 
 ``EGL_EXT_device_enumeration`` lets a program render on a specific device
-without a display server, which is how offscreen and headless rendering is done
-on EGL.  Getting from "the extension exists" to "this handle is the one I want"
-means three separate extensions and a pair of string queries, so this module
-does that once.
+without a display server.  EGL uses it for offscreen and headless rendering.
+Identifying each device takes three extensions and two string queries, which
+this module wraps.
 
-What it reports is fact: which devices exist, which extensions each advertises,
-what its driver calls itself, and whether it renders in software.  *Choosing*
-between them is policy and belongs to the caller -- a renderer wanting speed and
-a test wanting reproducibility disagree about which device is the right one.
+The module lists the devices, the extensions each one advertises, its driver
+name and whether it renders in software.  The caller chooses which device to
+use.  For example, a renderer may prefer a GPU, and a test may prefer a
+software renderer for reproducible output.
 
     >>> from OpenGL.EGL import devices
     >>> for device in devices.devices():
     ...     print(device.index, device.driver, device.software)
 
-Each :class:`DeviceInfo` keeps the handle it was built from, which is what
-``eglGetPlatformDisplayEXT(EGL_PLATFORM_DEVICE_EXT, handle, None)`` takes.
+Each :class:`DeviceInfo` keeps its device handle, for use in
+``eglGetPlatformDisplayEXT(EGL_PLATFORM_DEVICE_EXT, handle, None)``.
 """
 
 import ctypes
@@ -36,8 +35,8 @@ __all__ = (
     'devices',
 )
 
-#: A Mesa device that rasterises on the CPU advertises this.  Where it is
-#: present it is definitive, which is why it is checked before driver names.
+#: The extension a Mesa device that rasterises on the CPU advertises.  It is
+#: checked before driver names because it is definitive.
 SOFTWARE_EXTENSION = 'EGL_MESA_device_software'
 
 #: Driver names that mean CPU rasterisation, for implementations that do not
@@ -47,12 +46,11 @@ SOFTWARE_DRIVER_NAMES = ('llvmpipe', 'swrast', 'softpipe', 'swr', 'lavapipe')
 
 
 class DeviceInfo:
-    """One EGL device, and what could be learned about it.
+    """One EGL device and the properties its queries returned.
 
-    ``handle`` is the ``EGLDeviceEXT`` itself; the rest is what the device
-    answered when asked.  Either string query may return nothing -- they come
-    from optional extensions -- so ``extensions`` can be empty and ``driver``
-    can be ``''``.
+    ``handle`` is the ``EGLDeviceEXT``.  The other attributes come from string
+    queries in optional extensions, which may return nothing.  ``extensions``
+    can therefore be empty and ``driver`` can be ``''``.
     """
 
     __slots__ = ('driver', 'extensions', 'handle', 'index')
@@ -67,9 +65,9 @@ class DeviceInfo:
     def software(self) -> bool:
         """Whether this device rasterises on the CPU.
 
-        A device that cannot be identified is reported as hardware: that is the
-        safer answer, since treating a real GPU as software costs performance
-        while the reverse can mean selecting a device that cannot do the work.
+        A device that cannot be identified is reported as hardware.  Treating a
+        GPU as software costs performance.  Treating a software renderer as a
+        GPU can select a device that cannot do the work, which is worse.
         """
         if SOFTWARE_EXTENSION in self.extensions:
             return True
@@ -90,13 +88,12 @@ class DeviceInfo:
         return hash(self._key())
 
     def _key(self):
-        """The handle, as an address.
+        """The handle's address, used for equality and hashing.
 
-        The device is the handle: ``index`` is a property of one enumeration,
-        and two enumerations of one system may number the same devices
-        differently.  The handle is an ``EGLDeviceEXT``, which is a pointer
-        class rather than something hashable, so it is compared as the address
-        it holds.
+        Devices are compared by handle.  ``index`` belongs to one enumeration,
+        and two enumerations may number the same devices differently.  The
+        handle is an ``EGLDeviceEXT`` pointer, which is not hashable, so its
+        address is used.
         """
         return _address_of(self.handle)
 
@@ -112,12 +109,11 @@ def _address_of(handle) -> int:
 
 
 def _device_string(handle, token) -> str:
-    """One string query, or ``''`` when the device declines to answer.
+    """The result of one device string query, or ``''`` if it fails.
 
-    Both tokens come from optional extensions, so a device that does not
-    implement them is expected rather than exceptional.  The EGL error the
-    failed query recorded is taken with it: EGL keeps one error per thread, and
-    a caller's next ``eglGetError`` would otherwise read this module's.
+    Both tokens come from optional extensions, so a failed query is normal.
+    The EGL error a failed query records is cleared.  EGL keeps one error per
+    thread, and the caller's next ``eglGetError`` would otherwise return it.
     """
     try:
         value = eglQueryDeviceStringEXT(handle, token)
@@ -134,7 +130,7 @@ def _device_string(handle, token) -> str:
 
 
 def _clear_egl_error() -> None:
-    """Read and discard the error a query of ours recorded."""
+    """Read and discard the EGL error a query in this module recorded."""
     try:
         eglGetError()
     except Exception as error:  # noqa: BLE001 - no EGL to ask is not a failure
@@ -154,8 +150,8 @@ def _query_handles():
             return None
         return [handles[index] for index in range(count.value)]
     except Exception as error:  # noqa: BLE001 - see below; any failure means "cannot say"
-        # No EGL_EXT_device_enumeration here.  That is a fact about the system,
-        # not a failure of the caller's, so it is reported as "cannot say".
+        # The system has no EGL_EXT_device_enumeration.  The caller did nothing
+        # wrong, so this returns None and does not raise.
         log.debug('eglQueryDevicesEXT unavailable: %s', error)
         return None
 
@@ -163,10 +159,10 @@ def _query_handles():
 def devices(query=_query_handles) -> tuple:
     """Every EGL device on this system, in the order EGL reports them.
 
-    Returns an empty tuple when the system cannot enumerate devices at all --
-    no ``EGL_EXT_device_enumeration``, or no devices behind it.  A caller that
-    needs a display in that case should fall back to ``eglGetDisplay`` with
-    ``EGL_DEFAULT_DISPLAY``.
+    Returns an empty tuple when the system cannot enumerate devices.  That
+    happens without ``EGL_EXT_device_enumeration``, or when it reports no
+    devices.  A caller that needs a display should then use ``eglGetDisplay``
+    with ``EGL_DEFAULT_DISPLAY``.
 
     ``query`` is the enumeration step, exposed so it can be replaced in tests.
     """

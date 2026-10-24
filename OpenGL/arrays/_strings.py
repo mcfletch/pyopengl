@@ -43,7 +43,7 @@ def calculateOffset( ):
         def dataPointer( data ):
             """Return the data-pointer from the array using calculated offset
             
-            data -- a Python string
+            data - a Python string
             
             Returns the raw data-pointer to the internal buffer of the passed string
             """

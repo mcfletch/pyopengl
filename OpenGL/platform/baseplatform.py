@@ -11,15 +11,14 @@ from typing import ClassVar
 
 log = logging.getLogger(__name__)
 
-#: Which library an entry point lives in, read from the prefix of its name.
+#: The library an entry point belongs to, by the prefix of its name.
 #:
 #: Longest first, because ``glutInit`` also begins with ``glu``.
 #:
-#: The prefix is the API's own naming rather than a guess -- the registry and
-#: the SGI headers assign it -- and where the library could not be loaded at
-#: all it is the only thing left to read.  The platform answers ``None`` for
-#: such a library, so every declaration in the module is built against
-#: ``None`` and there is no object to ask which one it was.
+#: The Khronos registry and the SGI headers assign these prefixes.  When a
+#: library could not be loaded, the platform attribute for it is ``None``, and
+#: every declaration in the module is built against ``None``.  The name prefix
+#: is then the only way to tell which library was missing.
 ENTRY_POINT_PREFIXES = (
     ('glut', 'GLUT'),
     ('glu', 'GLU'),
@@ -30,15 +29,13 @@ ENTRY_POINT_PREFIXES = (
     ('gl', 'GL'),
 )
 
-#: Where to get a library this machine does not have.
+#: The package that provides each library, per operating system.
 #:
-#: Per platform, because the answer differs and the reader has one machine in
-#: front of them -- #59 was on Arch and then on CentOS, and #54's answer, when
-#: it came thirteen months later, was a Debian package name.
+#: Package names differ by distribution (see issues #54 and #59), so each
+#: message lists several.
 #:
-#: GL is deliberately absent: no OpenGL library at all means no graphics
-#: driver, which is a different conversation from a package that was not
-#: installed, and a package name would be the wrong advice.
+#: GL has no entry.  A machine with no OpenGL library has no graphics driver,
+#: and a package name would be the wrong advice.
 LIBRARY_SOURCES = {
     'GLU': (
         'Debian and Ubuntu: libglu1-mesa; Fedora: mesa-libGLU; Arch: glu; '
@@ -59,11 +56,11 @@ LIBRARY_SOURCES = {
 }
 
 
-#: Why an entry point does not resolve when there is no context.
+#: The error text for an entry point that does not resolve without a context.
 #:
-#: Shared with :func:`OpenGL.extensions.alternate`, which reports the same
-#: situation for a call that has several possible names and found none of
-#: them -- the framebuffer-object entry points among them.
+#: Also used by :func:`OpenGL.extensions.alternate`, which reports the same
+#: situation for a call with several possible names (such as the
+#: framebuffer-object entry points) when none of them resolved.
 NO_CONTEXT_EXPLANATION = (
     'no OpenGL context is current, and every entry point above GL 1.1 is '
     'resolved through the context -- so this says the call came before a '
@@ -74,9 +71,9 @@ NO_CONTEXT_EXPLANATION = (
 
 
 def library_for_entry_point(name):
-    """The library ``name`` belongs to, or None where the prefix says nothing.
+    """The library ``name`` belongs to, or None for an unknown prefix.
 
-    See :data:`ENTRY_POINT_PREFIXES` for why the name is what answers this.
+    See :data:`ENTRY_POINT_PREFIXES` for why the name prefix is used.
     """
     for prefix, library in ENTRY_POINT_PREFIXES:
         if name.startswith(prefix):
@@ -85,31 +82,29 @@ def library_for_entry_point(name):
 
 
 def undefined_function_message(name, dll, has_context=None):
-    """Why ``name`` cannot be called, in terms the caller can act on.
+    """The error message for calling the undefined entry point ``name``.
 
-    Three situations reach here and they want different answers.
+    The message distinguishes three cases.
 
-    A ``dll`` of ``None`` means the library itself was not found, so every
-    entry point in it is undefined and there is one thing to do about it.
+    A ``dll`` of ``None`` means the library was not found, so every entry
+    point in it is undefined.  The message names the package to install.
 
-    A library that loaded, with no context current, means the entry point
-    could not be *resolved* rather than that it is absent: above GL 1.1 an
-    address comes from the context, so every such name is undefined until
-    there is one.  This is the usual way to meet the error on Windows, where
-    ``wglGetProcAddress`` needs a current context; GLX answers without one,
-    so it is rarer on Linux.  It is the case the old message described least
-    well, naming a driver problem for what is an ordering problem in the
-    caller's own program.
+    A loaded library with no current context means the entry point could not
+    be resolved yet.  Above GL 1.1, addresses come from the context, so every
+    such name is undefined until a context is current.  This is the usual
+    case on Windows, where ``wglGetProcAddress`` needs a current context.  GLX
+    resolves names without one, so the case is rarer on Linux.  The message
+    says to create a context before the call.
 
-    A library that loaded with a context current, and still no entry point, is
-    a driver too old for it or an extension this machine does not have. There
-    is nothing to install.
+    A loaded library with a current context and no entry point means the
+    driver is too old or the machine lacks the extension.  There is nothing to
+    install.
 
-    ``has_context`` is ``None`` where it could not be determined, which reads
-    as the third case rather than guessing.
+    ``has_context`` is ``None`` when it could not be determined, and is then
+    treated as the third case.
 
-    All three end by naming ``bool(name)``, which is the check this error has
-    always pointed at and what a caller already handling it looks for.
+    Every message ends by naming ``bool(name)``, the check callers use to test
+    for an entry point before calling it.
     """
     if dll is None:
         library = library_for_entry_point(name)
@@ -136,11 +131,11 @@ def undefined_function_message(name, dll, has_context=None):
 
 
 def _context_is_current():
-    """Whether a GL context is current, or None where that cannot be asked.
+    """Whether a GL context is current, or None if that cannot be determined.
 
-    Only ever called while building an error message, so the cost of asking
-    the driver is paid on a path that is already failing -- and any platform
-    that cannot answer says so rather than turning one error into another.
+    Called only while building an error message, so the driver query runs
+    only on a path that is already failing.  Any exception from the query
+    returns None, so the original error is not replaced by another.
     """
     try:
         from OpenGL import platform
@@ -151,11 +146,11 @@ def _context_is_current():
 
 
 class lazy_property(object):
-    """An attribute worked out when it is first read, then cached on the instance
+    """An attribute computed on first read, then cached on the instance
 
-    The platform objects describe libraries, and finding one means loading it.
-    Doing that for every attribute at import would load libraries the program
-    never asks about.
+    Platform attributes are libraries, and finding a library loads it.
+    Computing every attribute at import would load libraries the program never
+    uses.
     """
 
     def __init__(self, function):
@@ -165,10 +160,9 @@ class lazy_property(object):
 
     def __get__(self, obj, cls=None):
         if obj is None:
-            # Read from the class, where there is no instance to work anything
-            # out for.  Answering with the descriptor is what every other
-            # descriptor in Python does, and it is how help(), inspect and a
-            # documentation build ask a class what it has without owning one.
+            # Read from the class, with no instance.  Return the descriptor, as
+            # other Python descriptors do, so help(), inspect and documentation
+            # builds can list the class's attributes without an instance.
             return self
         value = self.fget(obj)
         setattr(obj, self.__name__, value)
@@ -221,10 +215,9 @@ def _find_module(exclude=(__name__,)):
 def _also_core(functionName, module):
     """Whether a core version of ``module``'s API declares ``functionName``.
 
-    ``module`` is the generated module the declaration came from, which is
-    what says the API to ask about.  False where there is none to ask -- a
-    caller building a binding by hand, or one of the hand-maintained APIs
-    (GLU, GLUT, GLE) that no table describes.
+    ``module`` is the generated module the declaration came from, which
+    identifies the API.  False when there is no module (a binding built by
+    hand) or no declaration table (the hand-maintained GLU, GLUT and GLE).
     """
     if not module:
         return False
@@ -240,24 +233,23 @@ class BasePlatform(object):
 
     Attributes of note:
 
-        EXPORTED_NAMES -- set of names exported via the platform
+        EXPORTED_NAMES - set of names exported via the platform
             module's namespace...
 
-        GL, GLU, GLUT, GLE, GLES1, GLES2, GLES3, GLSC2, EGL, GLX -- ctypes
+        GL, GLU, GLUT, GLE, GLES1, GLES2, GLES3, GLSC2, EGL, GLX - ctypes
             libraries, or None where this platform has no such library.
-            A subclass normally overrides the ones it can provide with a
-            lazy_property, so that a library is only loaded once something
-            asks for it.
+            A subclass normally overrides the ones it provides with a
+            lazy_property, so each library is loaded on first use.
 
-        DEFAULT_FUNCTION_TYPE -- used as the default function
+        DEFAULT_FUNCTION_TYPE - used as the default function
             type for functions unless overridden on a per-DLL
             basis with a "FunctionType" member
 
-        GLUT_GUARD_CALLBACKS -- if True, the GLUT wrappers
+        GLUT_GUARD_CALLBACKS - if True, the GLUT wrappers
             will provide guarding wrappers to prevent GLUT
             errors with uninitialised GLUT.
 
-        EXTENSIONS_USE_BASE_FUNCTIONS -- if True, uses regular
+        EXTENSIONS_USE_BASE_FUNCTIONS - if True, uses regular
             dll attribute-based lookup to retrieve extension
             function pointers.
     """
@@ -277,13 +269,11 @@ class BasePlatform(object):
     GLUT_GUARD_CALLBACKS = False
     EXTENSIONS_USE_BASE_FUNCTIONS = False
 
-    # The libraries every platform is asked about.  None means "this platform
-    # has no such library", which the OpenGL.raw modules read as "no entry
-    # points here": the namespace still imports, and calling into it raises
-    # NullFunctionError naming the function that is missing.  Leaving one
-    # undefined instead turns `import OpenGL.GLES2` into an AttributeError
-    # against the platform object, several frames from anything the caller
-    # wrote.
+    # The libraries every platform defines.  None means the platform has no
+    # such library.  The OpenGL.raw modules then still import, and each call
+    # raises NullFunctionError naming the missing function.  Without the
+    # attribute, `import OpenGL.GLES2` would raise an AttributeError on the
+    # platform object, several frames away from the caller's code.
     GL = None
     GLU = None
     GLUT = None
@@ -291,37 +281,34 @@ class BasePlatform(object):
     GLES1 = None
     GLES2 = None
     GLES3 = None
-    # OpenGL SC 2.0, the safety-critical profile.  No platform here loads one:
-    # it ships with a conformant SC implementation rather than with a desktop
-    # driver.  Named all the same, so `OpenGL.GLSC2` imports and its entry
-    # points report themselves unavailable, which is what every other API a
-    # machine lacks does.
+    # OpenGL SC 2.0, the safety-critical profile.  No platform here loads it,
+    # because it ships with conformant SC implementations rather than desktop
+    # drivers.  Defined anyway, so `OpenGL.GLSC2` imports and its entry points
+    # report themselves unavailable, like any other API a machine lacks.
     GLSC2 = None
     EGL = None
     GLX = None
 
-    #: APIs that belong to one platform rather than being a library every
-    #: platform may or may not have, mapped to the ``PYOPENGL_PLATFORM`` value
-    #: that selects it.  Asking any other platform for one of these is not a
-    #: machine missing a library, it is a program that has not said which
-    #: platform it wants -- and the answer is a setting, so the refusal names
-    #: it.  See https://github.com/mcfletch/pyopengl/issues/129
+    #: APIs that only one platform provides, mapped to the
+    #: ``PYOPENGL_PLATFORM`` value that selects that platform.  Requesting one
+    #: from another platform means the program did not select the platform, so
+    #: the error names the setting.  See
+    #: https://github.com/mcfletch/pyopengl/issues/129
     PLATFORM_SPECIFIC_APIS: ClassVar[dict] = {
         'OSMesa': 'osmesa',
     }
 
     def __getattr__(self, name):
-        """Say how to reach an API that belongs to a platform this is not.
+        """Raise AttributeError naming the platform that provides ``name``.
 
-        Reached only when ordinary lookup has failed, so a platform that
-        provides the API answers with it and never arrives here.
+        Called only when ordinary lookup fails, so a platform that provides
+        the API returns it without reaching this method.
 
-        The default ``AttributeError`` names an attribute of a class the
-        caller has never heard of -- ``'EGLPlatform' object has no attribute
-        'OSMesa'`` -- which reads as a defect in PyOpenGL rather than as a
-        choice they have not made.  Whoever meets this one can least afford
-        that: OSMesa is how a machine with no display renders, so by
-        construction they cannot see what their session is.
+        The default ``AttributeError`` names a class the caller does not know
+        (``'EGLPlatform' object has no attribute 'OSMesa'``) and looks like a
+        PyOpenGL defect.  The message here names the ``PYOPENGL_PLATFORM``
+        setting instead.  OSMesa users render on machines with no display, so
+        the message gives them the setting directly.
         """
         platform = self.PLATFORM_SPECIFIC_APIS.get(name)
         if platform is None:
@@ -339,13 +326,12 @@ class BasePlatform(object):
         """Libraries to search when an API's own does not export a name.
 
         Empty for a platform whose libraries each hold their own entry points.
-        Windows is the exception and says so for itself: the pixel-format calls
-        and SwapBuffers that a WGL program makes are GDI entry points rather
-        than OpenGL ones, and live in gdi32 instead of opengl32.
+        Windows overrides it: the pixel-format calls and SwapBuffers that a
+        WGL program makes are GDI entry points, exported by gdi32 rather than
+        opengl32.
 
-        Both ways of binding a function ask this -- ``constructFunction`` here
-        and the dispatcher's own resolver -- so that an entry point one of them
-        can reach is not missing from the other.
+        ``constructFunction`` here and the C dispatcher's resolver both call
+        this, so both find the same entry points.
         """
         return ()
 
@@ -377,14 +363,13 @@ class BasePlatform(object):
     def wrapContextCheck(self, func, dll):
         """Wrap function with context-checking if appropriate
 
-        ``CONTEXT_CHECKING`` is a question about *GL*, and three display APIs
-        ship in the GL library rather than in one of their own: ``libGL``
-        exports ``glX*``, ``opengl32`` exports ``wgl*``, and the OSMesa
-        platform's GL library is ``libOSMesa``, which is where ``OSMesa*``
-        lives.  Their calls are what a program makes to *get* a context, so a
-        guard on one asks for a context before there can be one and leaves no
-        way to make the first.  EGL and CGL need no exemption, being libraries
-        of their own.
+        ``CONTEXT_CHECKING`` applies to GL calls.  Three window-system APIs are
+        exported from the GL library itself: ``libGL`` exports ``glX*``,
+        ``opengl32`` exports ``wgl*``, and the OSMesa platform's GL library
+        ``libOSMesa`` exports ``OSMesa*``.  A program calls these to create a
+        context, so a context check on them would prevent creating the first
+        context.  They are exempt.  EGL and CGL are separate libraries and
+        need no exemption.
         """
         if (
             _configflags.CONTEXT_CHECKING
@@ -430,46 +415,45 @@ class BasePlatform(object):
     ):
         """Core operation to create a new base ctypes function
 
-        A name is looked for where its declaration says it lives: a core entry
-        point in the library, an extension one through the platform's
+        A name is looked up where its declaration places it: a core entry
+        point in the library, an extension entry point through the platform's
         ``getExtensionProcedure``.  ``force_extension`` and ``force_base``
-        override that either way, for a platform whose libraries do not divide
-        them where the declarations do -- see
-        :class:`SplitEntryPointPlatform`, which asks each route in turn.
-        ``force_base`` also stands the extension gate aside, since a name the
+        override that choice for platforms whose libraries split entry points
+        differently from the declarations.  See
+        :class:`SplitEntryPointPlatform`, which tries each route in turn.
+        ``force_base`` also skips the extension check, because a name the
         library exports is present whether or not the extension that
         re-specified it is advertised.
 
         raises AttributeError if can't find the procedure...
         """
         # Core/version modules name themselves e.g. GLES2_VERSION_GLES2_2_0 or
-        # GLES2_ES_VERSION_3_2 -- the 'VERSION' token is not always at index 1.
+        # GLES2_ES_VERSION_3_2, so the 'VERSION' token is not always at index 1.
         from OpenGL.error import inside_begin_block
 
         is_core = (not extension) or 'VERSION' in extension.split('_')
-        # The gate stands aside inside a glBegin block, where the extension
-        # string cannot be read -- see _dispatch.support._extension_gate_passes,
-        # which states the same rule for the compiled dispatch layer.  And for
-        # force_base, which says the name is one the library exports: what an
-        # extension re-specifies about a GL 1.1 entry point is which arguments
-        # it takes, and the entry point is there either way.
+        # The extension check is skipped inside a glBegin block, where the
+        # extension string cannot be read.
+        # _dispatch.support._extension_gate_passes applies the same rule in
+        # the compiled dispatch layer.  The check is also
+        # skipped for force_base, which marks a name the library exports.  An
+        # extension that re-specifies a GL 1.1 entry point changes its
+        # arguments, and the entry point exists either way.
         if (
             (not is_core)
             and not force_base
             and not inside_begin_block()
             and not self.checkExtension(extension)
         ):
-            # A core version declaring the same name means the library exports
-            # it, and what the extension re-specified is which arguments it
-            # takes rather than whether it exists.  So the gate stands aside
-            # and the library answers -- which is what the compiled layer does
-            # with the same fact, held as each command's ``alternates``.
+            # If a core version declares the same name, the library exports it
+            # and the extension only re-specified its arguments.  The lookup
+            # then goes to the library.  The compiled layer does the same,
+            # using each command's ``alternates``.
             #
-            # Only for such a name, and not for whatever the library happens
-            # to export: macOS exports every entry point its framework
-            # implements whether or not the current context does, so answering
-            # from the library alone would report an unadvertised extension as
-            # present there, which is the question the gate exists to answer.
+            # This applies only to names a core version declares.  macOS
+            # exports every entry point its framework implements, whether or
+            # not the current context supports it.  Looking up any exported
+            # name would report an unadvertised extension as present on macOS.
             if _also_core(functionName, module):
                 force_base = True
             else:
@@ -708,33 +692,30 @@ class BasePlatform(object):
         )
 
     def releaseCurrentContext(self):
-        """Let go of the GL context this thread holds; answer whether there was one
+        """Release this thread's current GL context; True if one was released
 
-        **A thread may have one current context, and a platform's GL binding
-        APIs do not know about each other.**  On Linux, asking EGL to make a
-        context current while GLX holds the thread is ``EGL_BAD_ACCESS``, and
-        the reverse is an X ``BadAccess`` on ``X_GLXMakeCurrent`` -- which
-        Xlib's default error handler turns into a process exit rather than an
-        exception anything can catch.
+        A thread has at most one current context, and a platform's GL binding
+        APIs do not track each other.  On Linux, making an EGL context current
+        while a GLX context is current fails with ``EGL_BAD_ACCESS``.  The
+        reverse is an X ``BadAccess`` on ``X_GLXMakeCurrent``, and Xlib's
+        default error handler exits the process.
 
-        So a program with two GL views in it -- two windowing toolkits in one
-        process, an engine's suite exercising one backend while a helper opens
-        a window through another -- needs to be able to say "let go" before it
-        takes the thread.  Safe to call when nothing is current, which is why a
-        caller can simply always call it.
+        A program with two GL views can hit this, for example two windowing
+        toolkits in one process.  It calls this method before making its own
+        context current.  The call is safe when no context is current, so a
+        caller can always make it.
 
-        A platform with one binding API and no way to release answers False.
+        A platform with one binding API and no way to release returns False.
         """
         return False
 
     def currentContextAddress(self):
         """The address of the platform's current-context function, or None.
 
-        The C dispatch layer calls it directly to decide which context's
-        entry-point table a thread dispatches through, so it needs the address
-        rather than the ctypes callable.  Returning None is not a failure: the
-        layer then dispatches through a single table, which is correct for a
-        process that only ever has one context current.
+        The C dispatch layer calls the function directly to choose which
+        context's entry-point table a thread uses, so it needs the address
+        rather than the ctypes callable.  With None, the layer uses a single
+        table, which is correct for a process with only one context.
         """
         try:
             return ctypes.cast(self.GetCurrentContext, ctypes.c_void_p).value
@@ -760,27 +741,26 @@ class BasePlatform(object):
 class SplitEntryPointPlatform(BasePlatform):
     """A platform holding its entry points in more than one place
 
-    Windows' ``opengl32`` exports the GL 1.1 set and nothing above it, and
-    ``wglGetProcAddress`` answers for everything above GL 1.1 and returns NULL
-    for the 1.1 set; Mesa's Windows ``osmesa`` library is built to the same
-    export list, with ``OSMesaGetProcAddress`` beside it.  Neither split
-    follows the declarations -- ``glVertexAttribPointer`` is declared by a core
-    version, and it is an ordinary export of the same Mesa built for Linux --
-    so a name is looked for by each route in turn.
+    Windows' ``opengl32`` exports only the GL 1.1 set.  ``wglGetProcAddress``
+    returns everything above GL 1.1 and NULL for the 1.1 set.  Mesa's Windows
+    ``osmesa`` library has the same export list, with
+    ``OSMesaGetProcAddress`` for the rest.  Neither split follows the
+    declarations.  ``glVertexAttribPointer`` is declared by a core version,
+    and the same Mesa built for Linux exports it directly.  Each route is
+    therefore tried in turn.
 
-    Only a platform whose procedure lookup is a *query* belongs here: it has to
-    be able to say no.  ``glXGetProcAddressARB`` under libglvnd answers with a
-    dispatch stub for any name at all, one no API has included, so a Linux
-    platform taking this route would report every undefined entry point as
-    present and hand the caller a stub to call.
+    Only a platform whose procedure lookup returns NULL for unknown names
+    belongs here.  ``glXGetProcAddressARB`` under libglvnd returns a dispatch
+    stub for any name, including names no API defines.  A Linux platform
+    using this class would report every undefined entry point as present.
     """
 
     def entryPointRoutes(self, dll):
-        """Where a name may be found, in the order to try
+        """The lookups to try for a name, in order
 
-        Each is the keyword arguments for one attempt at
-        :meth:`BasePlatform.constructFunction`: the library its declaration
-        names, then the platform's procedure lookup.
+        Each is the keyword arguments for one call to
+        :meth:`BasePlatform.constructFunction`: first the library the
+        declaration names, then the platform's procedure lookup.
         """
         return (
             dict(dll=dll),
@@ -788,14 +768,13 @@ class SplitEntryPointPlatform(BasePlatform):
         )
 
     def constructFunction(self, functionName, dll, force_extension=False, **named):
-        """The first of :meth:`entryPointRoutes` that answers with the name
+        """The function from the first of :meth:`entryPointRoutes` that finds it
 
-        ``AttributeError`` from the last route is the answer that there is
-        nowhere left to look, which is what
-        :meth:`BasePlatform.createBaseFunction` turns into a null function.
+        If the last route also fails, its ``AttributeError`` propagates, and
+        :meth:`BasePlatform.createBaseFunction` turns it into a null function.
 
-        Every route is tried here, so a caller's ``force_extension`` cannot
-        change what is found and is not passed on.
+        Every route is tried, so a caller's ``force_extension`` cannot change
+        the result and is not passed on.
         """
         routes = self.entryPointRoutes(dll)
         for index, route in enumerate(routes):
@@ -838,9 +817,9 @@ class _NullFunctionPointer(object):
         self.deprecated = deprecated
         self.error_checker = error_checker
         self.force_extension = force_extension
-        #: The generated module this was declared in, which is what says the
-        #: API a later resolution is for.  Kept because :meth:`load` runs
-        #: ``constructFunction`` again, and the answer differs by API.
+        #: The generated module this was declared in, which identifies the
+        #: API.  Stored because :meth:`load` calls ``constructFunction`` again,
+        #: and the result depends on the API.
         self.module = module
 
     resolved = False
@@ -848,14 +827,13 @@ class _NullFunctionPointer(object):
     def __nonzero__(self):
         """Whether calling this entry point will reach the library
 
-        This is the check :class:`OpenGL.error.NullFunctionError` names, so it
-        has to answer for the call rather than for the bookkeeping: an entry
-        point the library exports but nothing has called yet is present, and
-        saying otherwise sends the caller past work the driver would have done.
-        Trying to resolve it is the only thing that can tell them apart.
+        :class:`OpenGL.error.NullFunctionError` tells callers to make this
+        check, so it attempts resolution.  An entry point the library exports
+        is present even if nothing has called it yet.  Returning False for it
+        would make the caller skip work the driver supports.
 
-        A no is about the moment it was asked -- an entry point that needs a
-        current context resolves once there is one -- so it is not remembered.
+        A False result is not cached.  An entry point that needs a current
+        context resolves once a context is current.
         """
         if not self.resolved:
             self.load()
@@ -914,11 +892,10 @@ class _DeprecatedFunctionPointer(_NullFunctionPointer):
     deprecated = True
 
     def __nonzero__(self):
-        """Always absent: the call is refused whatever the driver exports
+        """Always False, whatever the driver exports
 
-        ``FORWARD_COMPATIBLE_ONLY`` is what puts an entry point here, and it
-        refuses the call rather than resolving it, so resolving it is not the
-        question.
+        Entry points become this class under ``FORWARD_COMPATIBLE_ONLY``,
+        which refuses every call to them, so no resolution is attempted.
         """
         return False
     __bool__ = __nonzero__

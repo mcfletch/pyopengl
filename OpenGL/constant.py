@@ -6,10 +6,9 @@ from OpenGL import _configflags
 class Constant( object ):
     """OpenGL constant that displays itself as a name rather than a value
 
-    The purpose of this class is to make debugging OpenGL code easier,
-    as you recieve messages that say what value you passed in in a
-    human-readable form, rather than as a bald number that requires
-    lookup and disambiguation in the header file.
+    This class makes OpenGL code easier to debug.  Messages show the
+    value you passed as a readable name, instead of a bare number that
+    you must look up in the header file.
     """
     def __new__( cls, name, value=None ):
         """Initialise the constant with the given name and value"""
@@ -37,7 +36,7 @@ class Constant( object ):
                 base.__module__ = frame.f_back.f_globals['__name__']
         return base
     def __repr__( self ):
-        """Return the name, rather than the bald value"""
+        """Return the name instead of the bare value"""
         return self.name
     def __getnewargs__( self ):
         """Produce the new arguments for recreating the instance"""
@@ -71,16 +70,16 @@ class StringConstant( Constant, bytes ):
         return '%s (%s)'%(self.name,super(Constant,self).__str__())
 
 def declared( name, value, module ):
-    """A constant that reports ``module`` as the module declaring it
+    """Return a constant that reports ``module`` as the module declaring it
 
-    ``Constant`` takes the module from the frame that built it, which is the
-    right answer only while each module builds its own constants.  The
-    declaration tables build them all from one place, so that guess would name
-    the loader for every constant in the library; this says which module the
-    declaration belongs to instead.
+    ``Constant`` takes the module from the frame that built it.  That is
+    correct only when each module builds its own constants.  The declaration
+    tables build every constant from one place, so the frame would name the
+    loader for all of them.  This function records the declaring module
+    instead.
 
-    Under the default ``MODULE_ANNOTATIONS`` nothing is recorded at all, here
-    or in ``Constant``, and this is ``Constant`` with an argument it ignores.
+    With ``MODULE_ANNOTATIONS`` off (the default), neither this function nor
+    ``Constant`` records a module, and ``module`` is ignored.
     """
     constant = Constant( name, value )
     if _configflags.MODULE_ANNOTATIONS:

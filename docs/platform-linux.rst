@@ -1,77 +1,77 @@
 OpenGL on Linux
 ===============
 
-Linux reaches OpenGL through two interfaces, and a machine usually has both.
-PyOpenGL loads whichever of them is installed and works out which one a context
-came from, so a program does not have to say, and nothing has to be configured
-for the common cases.
+Linux provides OpenGL through two interfaces, GLX and EGL, and a machine
+usually has both.  PyOpenGL loads whichever are installed and detects which
+one created the current context.  A program does not have to name the
+interface, and the common cases need no configuration.
 
-BSD systems take this same path.
+BSD systems use the same code path.
 
 GLX, EGL, X11 and Wayland
 -------------------------
 
-GLX is part of the X protocol: a GLX context belongs to an X display and an X
-drawable, and it is how X11 programs have got OpenGL since 1992.
+GLX is part of the X protocol.  A GLX context belongs to an X display and an X
+drawable.  X11 programs have used GLX for OpenGL since 1992.
 
-EGL is a window-system-neutral interface to the same drivers.  It is what
-Wayland clients use, since Wayland carries no GLX; it is also the interface on
-Android, and the one that renders with no display server at all -- see
-:ref:`offscreen-egl`.
+EGL is an interface to the same drivers that does not depend on a window
+system.  Wayland clients use EGL, because Wayland has no GLX.  EGL is also the
+interface on Android, and it can render with no display server at all (see
+:ref:`offscreen-egl`).
 
-A Wayland session runs XWayland so that X11 programs keep working, and an X11
-program under it gets a GLX context through XWayland exactly as it would on an
-X server.  GLUT is usually one of those: freeglut has a Wayland backend, but
-the builds distributions ship are X11 builds, so a GLUT program on a Wayland
-desktop is an XWayland client with a GLX context.
+A Wayland session runs XWayland so that X11 programs keep working.  An X11
+program under XWayland gets a GLX context, as it would on an X server.  GLUT
+programs usually run this way.  freeglut has a Wayland backend, but
+distributions ship X11 builds, so a GLUT program on a Wayland desktop is an
+XWayland client with a GLX context.
 
 Which interface a context came from
 -----------------------------------
 
-The environment does not answer that question.  GLUT under XWayland creates a
-GLX context with ``WAYLAND_DISPLAY`` set; GLFW creates either, on either
-session type, depending on how it was built and what it was asked for.  The
-choice belongs to the toolkit, and is not visible from inside PyOpenGL.
+The environment does not show which interface created a context.  GLUT under
+XWayland creates a GLX context while ``WAYLAND_DISPLAY`` is set.  GLFW creates
+either kind on either session type, depending on how it was built and what the
+program requested.  The toolkit makes the choice, and PyOpenGL is not told
+which.
 
-GLX and EGL keep independent per-thread current-context state, so the state can
-be read rather than inferred: PyOpenGL loads both where both exist and probes
-for a live context in each.  The interface holding one is the interface an
-entry point is resolved through, and the probe runs at the point of resolution
-rather than at import, so a program that makes its context after importing
-``OpenGL`` is answered correctly.
+GLX and EGL each keep their own per-thread current-context state.  PyOpenGL
+loads both where both exist and checks each for a current context.  An entry
+point is resolved through the interface that has a current context.  The check
+runs when an entry point is resolved, not at import, so a program that creates
+its context after importing ``OpenGL`` gets the right interface.
 
-A name that says which interface it belongs to goes to that interface whatever
-is current: ``glX*`` through ``glXGetProcAddressARB``, ``egl*`` through
-``eglGetProcAddress``.  A core ``gl*`` name follows the context, and falls back
-to GLX where nothing is current.
+A name with an interface prefix always goes to that interface.  ``glX*`` names
+resolve through ``glXGetProcAddressARB`` and ``egl*`` names through
+``eglGetProcAddress``.  A core ``gl*`` name follows the current context, and
+falls back to GLX when no context is current.
 
-Routing an ``egl*`` name by its prefix is what keeps it off GLX.  Under
-libglvnd, ``glXGetProcAddressARB`` manufactures a dispatch stub for *any* name
-asked of it, including an ``egl*`` one: the pointer marshals and calls without
-error but is not the entry point, and an EGL client extension resolved that way
-returns failure with ``EGL_SUCCESS`` set.  The device-enumeration family in
-:ref:`offscreen-egl` is called before any context exists, so the prefix is all
-there is to route it by.
+The prefix rule keeps ``egl*`` names away from GLX.  Under libglvnd,
+``glXGetProcAddressARB`` returns a dispatch stub for *any* name, including an
+``egl*`` one.  Calling the stub raises no error, but it is not the real entry
+point.  An EGL client extension resolved this way returns failure with
+``EGL_SUCCESS`` set.  The device-enumeration functions in
+:ref:`offscreen-egl` are called before any context exists, so the prefix is
+the only information available for routing them.
 
-The same stub is why PyOpenGL cannot report on Linux whether the driver has a
-given entry point: a lookup always answers.  :doc:`c-dispatch` covers which
-platforms can.
+Because of the same stub, PyOpenGL cannot report on Linux whether the driver
+has a given entry point: every lookup returns a pointer.  :doc:`c-dispatch`
+lists the platforms where that report is possible.
 
 Finding the libraries
 ---------------------
 
-Each library is loaded when something first needs it.  The name asked for
-(``GL``, ``GLU``, ``glut``) becomes ``lib<name>.so``, and that is handed
-straight to ``dlopen`` rather than to ``ctypes.util.find_library`` -- so
-``LD_LIBRARY_PATH``, the linker cache and an ``LD_PRELOAD`` all apply, which is
-how a program is pointed at a particular driver stack.
+Each library is loaded the first time something needs it.  The requested name
+(``GL``, ``GLU``, ``glut``) becomes ``lib<name>.so``, which is passed directly
+to ``dlopen`` instead of to ``ctypes.util.find_library``.
+``LD_LIBRARY_PATH``, the linker cache and ``LD_PRELOAD`` therefore all apply.
+Use them to point a program at a particular driver stack.
 
 ``lib<name>.so`` is the development symlink, and most distributions ship it
-only in the ``-dev`` package.  Where it is absent the versioned names are tried
-in turn, highest first: ``lib<name>.so.9`` down to ``lib<name>.so.0``.  So a
-machine with ``libGLU.so.1`` and no ``libGLU.so`` loads GLU.
+only in the ``-dev`` package.  If it is absent, PyOpenGL tries the versioned
+names from highest to lowest: ``lib<name>.so.9`` down to ``lib<name>.so.0``.
+A machine with ``libGLU.so.1`` and no ``libGLU.so`` therefore loads GLU.
 
-What is asked for, in order:
+The names tried, in order:
 
 .. list-table::
    :widths: auto
@@ -84,7 +84,7 @@ What is asked for, in order:
      - ``libOpenGL``, then ``libGL``; then ``libGLESv2``/``libGLESv1_CM`` on a
        system that has only those
    * - GLX
-     - ``libGLX``, ``libOpenGL``, ``libGL`` -- the first that exports
+     - ``libGLX``, ``libOpenGL``, ``libGL``: the first that exports
        ``glXCreateContext``
    * - EGL
      - ``libEGL``
@@ -97,22 +97,22 @@ What is asked for, in order:
    * - GLES 1
      - ``libGLESv1_CM``
    * - GLES 2 and 3
-     - ``libGLESv2``, for both, which is what the implementer's guide asks for
+     - ``libGLESv2``, for both, as the implementer's guide specifies
 
-``libOpenGL`` before ``libGL`` is the libglvnd split: on a glvnd system
-``libGL`` is the compatibility name that also carries GLX, and ``libOpenGL`` is
-the vendor-neutral dispatch library for GL itself.
+``libOpenGL`` comes before ``libGL`` because of the libglvnd split.  On a
+glvnd system, ``libGL`` is the compatibility library that also contains GLX,
+and ``libOpenGL`` is the vendor-neutral dispatch library for GL alone.
 
-Everything is loaded with ``RTLD_GLOBAL``, because GLUT resolves its own
-references to GL and GLU against what is already loaded in the process.  A
-library that is missing is ``None`` rather than an error, so a system with no
-GLU and no GLUT imports and runs; calling an entry point from a library that is
-not there raises ``NullFunctionError`` naming the function.
+Every library is loaded with ``RTLD_GLOBAL``, because GLUT resolves its own
+references to GL and GLU against libraries already loaded in the process.  A
+missing library is ``None`` instead of an error, so a system with no GLU and
+no GLUT can still import and run PyOpenGL.  Calling an entry point from a
+missing library raises ``NullFunctionError`` naming the function.
 
 Installing the libraries
 ------------------------
 
-The GL library comes with the graphics driver.  The rest are packages:
+The GL library comes with the graphics driver.  The others are packages:
 
 .. code-block:: console
 
@@ -124,19 +124,19 @@ A container or build image usually has none of them, and often no GL either.
 Two GPUs in one machine
 -----------------------
 
-A laptop with integrated and discrete graphics has two drivers installed, and
-which one a context lands on is chosen per process or per context:
+A laptop with integrated and discrete graphics has two drivers installed.  The
+driver a context uses is chosen per process or per context:
 ``DRI_PRIME=1`` or ``__NV_PRIME_RENDER_OFFLOAD=1`` in the environment, or an
 EGL device named explicitly (:ref:`offscreen-egl`).  A server with several
-cards is the same situation.
+cards works the same way.
 
-Two contexts on two drivers are not interchangeable.  They report different
-extensions, different limits and different versions, and an entry point that
-exists in one may be absent in the other -- so which context is current decides
-what a call means.
+Contexts on two different drivers are not interchangeable.  They report
+different extensions, limits and versions, and an entry point present in one
+may be missing from the other.  The result of a call therefore depends on
+which context is current.
 
-PyOpenGL keeps a resolved entry point per context for that reason, and it has
-to be told when the program changes which context is current:
+PyOpenGL keeps a separate table of resolved entry points for each context.  A
+program tells PyOpenGL when it changes the current context:
 
 ::
 
@@ -145,64 +145,64 @@ to be told when the program changes which context is current:
    toolkit.make_current(window)             # whatever the toolkit calls it
    dispatch.make_current(platform.PLATFORM.GetCurrentContext())
 
-``dispatch.forget_context(handle)`` says a context has been destroyed, so its
-table is retired rather than left for whichever context the driver gives that
-address to next.  Neither call is required -- PyOpenGL re-reads the current
-context when it has to resolve something, and that covers a program whose
-contexts have the same capabilities.  On a machine whose contexts differ, both
-notifications are what keeps dispatch on the right table.  :doc:`c-dispatch`
-has the detail, including what the tables cost and what an unannounced switch
-looks like when it goes wrong.
+``dispatch.forget_context(handle)`` tells PyOpenGL a context was destroyed.
+PyOpenGL then retires its table, so a later context that the driver gives the
+same address does not reuse it.  Neither call is required.  PyOpenGL re-reads
+the current context whenever it resolves an entry point, which is enough when
+all of a program's contexts have the same capabilities.  When contexts differ,
+both calls keep dispatch on the right table.  :doc:`c-dispatch` has the
+details, including the cost of the tables and the symptoms of an unreported
+switch.
 
-A widget toolkit inside PyOpenGL does this itself: :doc:`tk-widget` says so for
-``OpenGL.Tk``, where a program calls neither.
+PyOpenGL's own widget toolkit makes these calls itself.  :doc:`tk-widget`
+documents this for ``OpenGL.Tk``, where a program calls neither.
 
 Software rendering
 ------------------
 
 Mesa's ``llvmpipe`` rasterises on the CPU.  A machine with no GPU, or no
 access to one, renders through it.  ``LIBGL_ALWAYS_SOFTWARE=1`` in the
-environment demands it, and most distributions install it alongside the
-hardware drivers.
+environment forces it.  Most distributions install it alongside the hardware
+drivers.
 
-Demanding software while asking for a hardware device is a contradiction Mesa
-crashes on rather than refuses, which is why :py:mod:`OpenGL.EGL.devices`
-reports which devices rasterise on the CPU.  :ref:`offscreen-egl` has the rule
-and a worked example.
+Setting ``LIBGL_ALWAYS_SOFTWARE`` while requesting a hardware device makes
+Mesa crash instead of returning an error.  :py:mod:`OpenGL.EGL.devices`
+therefore reports which devices rasterise on the CPU.  :ref:`offscreen-egl`
+has the rule and a worked example.
 
-``PYOPENGL_PLATFORM=osmesa`` is a different software route: OSMesa is not a
-driver behind GLX or EGL but an interface of its own, needing no display server
-and no device node.  See :ref:`offscreen-osmesa`.
+``PYOPENGL_PLATFORM=osmesa`` is a separate software route.  OSMesa is its own
+interface, not a driver behind GLX or EGL, and it needs no display server and
+no device node.  See :ref:`offscreen-osmesa`.
 
 Rendering with no display server
 --------------------------------
 
-:doc:`offscreen` covers this in full.  In short, on Linux:
+:doc:`offscreen` covers this in full.  The Linux options are:
 
-- :ref:`EGL device enumeration <offscreen-egl>` picks a GPU by name and renders
-  on it, with no X server and no compositor.
-- :py:mod:`OpenGL.EGL.gbmdevice` opens a DRM render node where that
-  enumeration answers with nothing.
+- :ref:`EGL device enumeration <offscreen-egl>` selects a GPU by name and
+  renders on it, with no X server and no compositor.
+- :py:mod:`OpenGL.EGL.gbmdevice` opens a DRM render node when device
+  enumeration returns no devices.
 - :ref:`OSMesa <offscreen-osmesa>` rasterises into an array the caller owns,
-  needing neither.
+  and needs neither an X server nor a compositor.
 
 Naming the platform yourself
 ----------------------------
 
-``PYOPENGL_PLATFORM`` overrides what PyOpenGL selects, and has to be set before
-``OpenGL`` is imported.  On Linux the values that mean anything are:
+``PYOPENGL_PLATFORM`` overrides the platform PyOpenGL selects, and must be set
+before ``OpenGL`` is imported.  The values that have an effect on Linux are:
 
 ``linux``, ``glx``, ``egl``, ``x11``, ``wayland``, ``xwayland``, ``posix``
-    All the same implementation, the one described above.  Setting one of them
-    changes nothing about which interface serves a context, since that is
-    decided per context; it is useful where the automatic selection picks
-    something else entirely.
+    All select the same implementation, described above.  None of them
+    changes which interface serves a context, because that is decided per
+    context.  Set one when automatic selection picks a different platform
+    entirely.
 ``osmesa``
-    Mesa's off-screen interface, which is a different library and a different
-    set of entry points.  See :ref:`offscreen-osmesa`.
+    Mesa's off-screen interface, which uses a different library and a
+    different set of entry points.  See :ref:`offscreen-osmesa`.
 
-A value naming no plugin is skipped, and PyOpenGL selects the platform as it
-would with the variable unset.  A plugin whose import fails raises
-``ImportError`` naming the plugin and the variable; the reason goes to the
-``OpenGL.plugins`` logger.  :doc:`development` lists the full order of what is
-consulted.
+A value that names no plugin is ignored, and PyOpenGL selects the platform as
+it would with the variable unset.  If a plugin's import fails, PyOpenGL raises
+``ImportError`` naming the plugin and the variable, and logs the reason to the
+``OpenGL.plugins`` logger.  :doc:`development` lists the full order in which
+sources are checked.

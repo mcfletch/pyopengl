@@ -1,13 +1,13 @@
 The C dispatch layer
 ====================
 
-PyOpenGL has two implementations of the OpenGL entry points. The *C* implementation is generated from the Khronos registry and compiled into an extension module; it ships in ``PyOpenGL_accelerate``, and it is what runs where that package is installed under CPython. The *ctypes* implementation is pure Python, needs nothing compiled, and is what runs otherwise. Where the C implementation is available, an environment variable selects the ctypes one instead:
+PyOpenGL has two implementations of the OpenGL entry points. The *C* implementation is generated from the Khronos registry and compiled into an extension module. It ships in ``PyOpenGL_accelerate`` and runs under CPython wherever that package is installed. The *ctypes* implementation is pure Python and needs nothing compiled. It runs everywhere else. Where the C implementation is available, an environment variable selects ctypes instead:
 
 ::
 
    PYOPENGL_DISPATCH=ctypes   python yourprogram.py
 
-Both implement the same API. A call reaches the driver about seven times faster through the C implementation, and about eleven times faster for a call that passes an array; the numbers below are on a GeForce RTX 3060 Ti with CPython 3.12 and ``OpenGL_accelerate`` installed.
+Both implement the same API. A call reaches the driver about seven times faster through the C implementation, and about eleven times faster when it passes an array. The figures below were measured on a GeForce RTX 3060 Ti with CPython 3.12 and ``PyOpenGL_accelerate`` installed.
 
 ======================================== ======= ======
 call                                     ctypes  C
@@ -15,51 +15,51 @@ call                                     ctypes  C
 ``glBindTexture(GL_TEXTURE_2D, 0)``      407 ns  58 ns
 ``glUniform1f(loc, 1.0)``                382 ns  51 ns
 ``glUniformMatrix4fv(loc, 1, False, m)`` 1184 ns 106 ns
-an empty Python function, for scale      32 ns   
+an empty Python function, for scale      32 ns
 ======================================== ======= ======
 
-Those are per-call figures, and a program gains from them in proportion to how much of its frame goes on dispatch. A program structured around modern GL — shaders, vertex array objects, uniform buffers, instancing — issues few calls per frame and spends its time in the driver and on the GPU: measured uplift on optimised PyOpenGL applications is about 5%. The table's ratios are what a program approaches as its calls per frame rise — immediate-mode drawing, a uniform set per object, geometry pushed through the client-side arrays every frame — and a program between the two sees a figure between the two.
+These are per-call figures. A program gains in proportion to the share of its frame spent on dispatch. A program written for modern GL (shaders, vertex array objects, uniform buffers, instancing) issues few calls per frame. It spends its time in the driver and on the GPU, and optimised PyOpenGL applications measure about 5% faster. A program with many calls per frame approaches the table's ratios: immediate-mode drawing, a uniform set per object, or geometry pushed through client-side arrays every frame. A program between the two sees a gain between the two.
 
 Where the C implementation comes from
 -------------------------------------
 
-The C dispatch is compiled, so it ships in the ``PyOpenGL_accelerate`` distribution rather than in ``PyOpenGL`` itself:
+The C dispatch is compiled, so it ships in a separate distribution, ``PyOpenGL_accelerate``:
 
 ::
 
    pip install PyOpenGL PyOpenGL_accelerate
 
-``pip install PyOpenGL`` on its own gives the ctypes implementation, on every platform. That is a working PyOpenGL — the two implementations are the same bindings with the same semantics — and it is what runs where no compiled wheel is available and where there is no compiler to build one.
+``pip install PyOpenGL`` on its own gives the ctypes implementation on every platform. That is a complete PyOpenGL: both implementations are the same bindings with the same semantics. It is also what runs where no compiled wheel exists and no compiler is available to build one.
 
-The extension is built for CPython only. Another interpreter reaches CPython's vectorcall protocol through an emulation layer, where the C implementation would be slower than ctypes, so ``PyOpenGL_accelerate`` does not build it there and ctypes is what runs.
+The extension is built for CPython only. Other interpreters reach CPython's vectorcall protocol through an emulation layer, where the C implementation would be slower than ctypes. ``PyOpenGL_accelerate`` does not build it there, and ctypes runs instead.
 
 Keeping the pair matched
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-The two distributions carry the same version number and have to be equal. The extension's tables are generated from a particular ``PyOpenGL``, and the slot numbering in one release is meaningless to another, so a mismatched pair does not degrade — it dispatches through the wrong entry points. ``PyOpenGL_accelerate`` therefore requires the exact ``PyOpenGL`` it was released with, which is what stops a resolver assembling such a pair in the first place.
+The two distributions carry the same version number, and the versions must be equal. The extension's tables are generated from one ``PyOpenGL`` release, and their slot numbers mean nothing to another release. A mismatched pair dispatches through the wrong entry points. ``PyOpenGL_accelerate`` therefore requires the exact ``PyOpenGL`` it was released with, so a resolver cannot assemble a mismatched pair.
 
-That constraint travels in one direction only. Installing or upgrading ``PyOpenGL_accelerate`` brings the matching ``PyOpenGL`` with it; upgrading ``PyOpenGL`` on its own leaves the older accelerate installed, since an installer resolves what it was asked for rather than what is already there. pip reports that as a conflict after it has installed, and other installers may not report it at all, so name both packages whenever you upgrade either:
+The requirement runs in one direction. Installing or upgrading ``PyOpenGL_accelerate`` brings the matching ``PyOpenGL`` with it. Upgrading ``PyOpenGL`` alone leaves the older accelerate installed, because an installer resolves only the packages it was asked for. pip reports the conflict after installing, and other installers may not report it at all. Name both packages whenever you upgrade either:
 
 ::
 
    pip install -U PyOpenGL PyOpenGL_accelerate
 
-A pair that has come apart is refused when the first entry point is built, in a message naming both versions. Two things are checked: the C dispatch extension states the ``PyOpenGL`` its tables were generated from and is held to equality with it, and the older Cython accelerators — the wrapper, array-datatype and format-handler modules, which follow PyOpenGL's internals rather than sharing its tables — are held to a floor that moves with the major version. ``PYOPENGL_USE_ACCELERATE=0`` in the environment runs on ctypes until the versions are put right, and is read before the pair is judged so that it works from inside a broken installation.
+PyOpenGL refuses a mismatched pair when it builds the first entry point, with a message naming both versions. It checks two things. The C dispatch extension records the ``PyOpenGL`` version its tables were generated from, and that version must be equal. The older Cython accelerators (the wrapper, array-datatype and format-handler modules) follow PyOpenGL's internals and do not share its tables. They must meet a minimum version that moves with the major version. Setting ``PYOPENGL_USE_ACCELERATE=0`` in the environment runs on ctypes until the versions are fixed. It is read before the versions are compared, so it works inside a broken installation.
 
 Selecting an implementation
 ---------------------------
 
 ``PYOPENGL_DISPATCH=c``
-   The default on CPython, taking effect where ``PyOpenGL_accelerate`` is installed. Every entry point that has a C implementation uses it; one that does not keeps its ctypes binding, so the two coexist and you never have to choose per function.
+   The default on CPython, effective where ``PyOpenGL_accelerate`` is installed. Every entry point with a C implementation uses it. An entry point without one keeps its ctypes binding. The two coexist, so there is no per-function choice to make.
 ``PYOPENGL_DISPATCH=ctypes``
-   The reference semantics, the bootstrap route for a new platform, and the default on every interpreter other than CPython. It is what runs with ``PyOpenGL`` alone, and it is not scheduled for removal.
+   The reference semantics, the bootstrap route for a new platform, and the default on every interpreter other than CPython. It runs with ``PyOpenGL`` alone, and there is no plan to remove it.
 
-With the extension absent, ``PYOPENGL_DISPATCH=c`` leaves the ctypes implementation in place rather than failing. Two other settings select ctypes for the process: ``OpenGL.USE_ACCELERATE = False``, which turns off every compiled accelerator, and ``OpenGL.FULL_LOGGING``, since the call trace is written by the ctypes wrapper chain.
+When the extension is absent, ``PYOPENGL_DISPATCH=c`` falls back to ctypes without an error. Two other settings select ctypes for the whole process. ``OpenGL.USE_ACCELERATE = False`` turns off every compiled accelerator. ``OpenGL.FULL_LOGGING`` needs ctypes because the ctypes wrapper chain writes the call trace.
 
 Asking which one you got
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Since asking for the C implementation and running without it is not an error, a program that means to be on it has to ask. ``OpenGL.dispatch`` is where:
+Requesting the C implementation and running without it is not an error. A program that requires the C dispatch must check, using ``OpenGL.dispatch``:
 
 ::
 
@@ -71,7 +71,7 @@ Since asking for the C implementation and running without it is not an error, a 
    >>> dispatch.status()
    Status(requested='c', active='c', available=True, reason=None)
 
-``status().reason`` is a sentence naming whatever chose ctypes — an absent extension, ``USE_ACCELERATE``, ``FULL_LOGGING``, an interpreter the extension is not built for — so a program can put it in the error it raises:
+``status().reason`` is a sentence naming what selected ctypes: an absent extension, ``USE_ACCELERATE``, ``FULL_LOGGING``, or an interpreter the extension is not built for. A program can include it in the error it raises:
 
 ::
 
@@ -79,46 +79,51 @@ Since asking for the C implementation and running without it is not an error, a 
    if state.active != 'c':
        raise SystemExit('this program needs the C dispatch: %s' % state.reason)
 
-The choice is made when the first entry point is built, so ``active()`` answers ``'ctypes'`` in a process that has imported nothing from ``OpenGL.GL`` yet, however it is configured. ``dispatch.settle()`` makes the choice rather than reporting it, for a test suite or a program that has to know before it has anything to draw with. It reads ``OpenGL.ERROR_CHECKING`` and its neighbours as the first entry point would, so call it after setting them.
+The implementation is chosen when the first entry point is built. Until a process imports something from ``OpenGL.GL``, ``active()`` returns ``'ctypes'`` whatever the configuration. ``dispatch.settle()`` makes the choice immediately and returns it. Use it in a test suite, or in a program that must know before it has a context to draw with. It reads ``OpenGL.ERROR_CHECKING`` and the related flags as the first entry point would, so call it after setting them.
 
 What is implemented in C
 ------------------------
 
-4,859 of PyOpenGL's 4,880 bindings, across GL, GLES 1/2/3, GLSC2, GLX, WGL and EGL. That includes the families whose length is a computation rather than a description — images, sized from format, type, dimensions and the current pixel-store state; arrays whose element type is an argument, such as ``glDrawElements``; the client-side array pointers, whose memory the GL keeps after the call returns; and the string-array parameters. The image sizing itself stays in Python, because ``OpenGL.images.registerImage`` is a public entry point a third party can add a format through, and the C calls it.
+4,859 of PyOpenGL's 4,880 bindings are implemented in C, across GL, GLES 1/2/3, GLSC2, GLX, WGL and EGL. This includes the families whose array length is computed from other values: images, sized from format, type, dimensions and the current pixel-store state; arrays whose element type is an argument, such as ``glDrawElements``; the client-side array pointers, whose memory the GL keeps after the call returns; and the string-array parameters. Image sizing stays in Python because ``OpenGL.images.registerImage`` is a public entry point that third parties use to add formats. The C code calls into it.
 
-The remaining twenty-one keep their ctypes binding, and ``python src/check_registry.py`` lists them with the reason for each: twelve that return a pointer to a struct the binding has no element type for (mostly GLX and X11 — ``XVisualInfo *``, ``GLXFBConfig *``, ``Display *``), seven whose output argument is not the last one, one with a parameter type the generator does not know (``EGLnsecsANDROID``), and one whose family is hand-written.
+The remaining 21 keep their ctypes binding. ``python src/check_registry.py`` lists them with the reason for each:
+
+-  12 return a pointer to a struct the binding has no element type for, mostly GLX and X11 (``XVisualInfo *``, ``GLXFBConfig *``, ``Display *``).
+-  7 have an output argument that is not the last argument.
+-  1 has a parameter type the generator does not know (``EGLnsecsANDROID``).
+-  1 belongs to a hand-written family.
 
 Contexts
 --------
 
-Under the C implementation each OpenGL context holds its own function pointer for every entry point, resolved in that context. This matters where two contexts differ: a discrete-GPU context beside a software one, a core context beside a compatibility one, or GLES beside desktop GL. Under the ctypes implementation whichever context resolved an entry point first determines the binding for the whole process.
+Under the C implementation, each OpenGL context holds its own function pointer for every entry point, resolved in that context. This matters when two contexts differ: a discrete-GPU context beside a software one, a core context beside a compatibility one, or GLES beside desktop GL. Under the ctypes implementation, the first context to resolve an entry point sets the binding for the whole process.
 
-Two consequences reach the Python surface. ``bool(glFoo)`` and ``glInitXxx()`` answer for the context that is current, so the same expression can correctly be true in one context and false in another. And a binding held in a local variable across a context switch still dispatches correctly, because the entry point object holds a slot index rather than an address.
+Two consequences are visible from Python. ``bool(glFoo)`` and ``glInitXxx()`` report on the current context, so the same expression can be true in one context and false in another. A binding held in a local variable across a context switch still dispatches correctly. The entry point object holds a slot index and does not store an address.
 
 Knowing which context is current
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-An application makes a context current inside its windowing toolkit — glfw, Qt, pygame and SDL all call ``glXMakeCurrent`` or ``eglMakeCurrent`` themselves — and PyOpenGL is not on that call path, so it cannot observe the switch. Asking the driver instead costs about 97 ns per call on the reference machine, more than a whole dispatch.
+Applications make a context current through their windowing toolkit. glfw, Qt, pygame and SDL all call ``glXMakeCurrent`` or ``eglMakeCurrent`` themselves. PyOpenGL is not on that call path and is not told about the switch. Querying the driver instead costs about 97 ns per call on the reference machine, more than a whole dispatch.
 
-The default therefore re-reads the current context whenever an entry point needs resolving, and otherwise assumes it has not changed. The ctypes implementation holds one binding per process and cannot tell contexts apart at all, so under it a process with two contexts of differing capability is exposed on every entry point; per-context tables narrow that rather than widening it.
+By default, PyOpenGL re-reads the current context whenever an entry point needs resolving. Otherwise it assumes the context has not changed. The ctypes implementation holds one binding per process and cannot distinguish contexts at all. Under ctypes, a process with two contexts of differing capability is exposed on every entry point. Per-context tables reduce that exposure.
 
-Where it matters — a program that switches between contexts of genuinely different capability, such as a discrete-GPU context beside a software one — there are two ways to be exact:
+A program that switches between contexts of different capability, such as a discrete-GPU context and a software one, has two exact options:
 
--  ``PYOPENGL_CONTEXT_TRACKING=verify`` asks the driver on every call. Nothing to change in the program, and it costs the 97 ns: about 177 ns per call rather than 58, against 383 for ctypes.
--  ``OpenGL.dispatch.make_current(handle)`` after each switch, with the handle ``OpenGL.platform.PLATFORM.GetCurrentContext()`` returns. Exact and free, for a program willing to say so.
+-  ``PYOPENGL_CONTEXT_TRACKING=verify`` queries the driver on every call. The program needs no change. The cost is the 97 ns: about 177 ns per call instead of 58, compared with 383 for ctypes.
+-  Call ``OpenGL.dispatch.make_current(handle)`` after each switch, with the handle that ``OpenGL.platform.PLATFORM.GetCurrentContext()`` returns. This is exact and costs nothing, and the program must make the call itself.
 
-The handle goes in whichever shape names a context on the platform: an ``int`` from WGL or CGL, a ``c_void_p``, or a ctypes pointer such as GLX's ``GLXContext``. A toolkit that holds the object its own API handed it passes that object; ``None`` or a null pointer names no context.
+The handle takes whatever form names a context on the platform: an ``int`` from WGL or CGL, a ``c_void_p``, or a ctypes pointer such as GLX's ``GLXContext``. A toolkit can pass the object its own API returned. ``None`` or a null pointer means no context.
 
-``OpenGL.dispatch.forget_context(handle)`` releases a destroyed context's table. A table is a slot and a flag per entry point, about 43 KB, so a hundred live contexts cost 4.3 MB.
+``OpenGL.dispatch.forget_context(handle)`` releases a destroyed context's table. A table holds a slot and a flag per entry point, about 43 KB, so a hundred live contexts use 4.3 MB.
 
-``OpenGL.dispatch.context_identity()`` answers an object standing for the current context: the same object for as long as the context lives, and a different one once ``forget_context`` has been told it is gone, even where the driver gives the next context the same handle. Buffers, textures and programs are numbered per context from 1, so a name kept past its context is, in the next one, some other object; keep the identity beside the name and compare before using it. ``OpenGL.arrays.vbo.VBO`` does this before it deletes its buffer when it is garbage-collected, and leaves the buffer to its context otherwise. It is as exact as ``forget_context`` is told: a context destroyed without it, and another made at the same address, share an identity.
+``OpenGL.dispatch.context_identity()`` returns an object representing the current context. The object stays the same for the life of the context. It changes once ``forget_context`` has been called for that context, even if the driver reuses the handle for the next context. Buffers, textures and programs are numbered from 1 in each context, so a name kept after its context is gone refers to some other object in the next one. Store the identity with the name and compare it before using the name. ``OpenGL.arrays.vbo.VBO`` compares it before deleting its buffer at garbage collection, and otherwise leaves the buffer to its context. The identity is only as exact as the ``forget_context`` calls. A context destroyed without one and a new context at the same address share an identity.
 
 A glBegin block and the life of a context
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A ``glBegin`` block is closed in the context that opened it. A context created or destroyed while one is still open is undefined, and a driver need not survive being denied the ``glEnd``: Intel's Windows ICD leaves state that the *next* context creation in the process faults on, so the access violation arrives with nothing near it to name the block that caused it.
+A ``glBegin`` block must be closed in the context that opened it. Creating or destroying a context while a block is open is undefined, and a driver may crash on the missing ``glEnd``. Intel's Windows ICD leaves state behind that makes the *next* context creation in the process fault. The access violation then appears far from the block that caused it.
 
-A block is left open when an exception escapes it — a bad vertex, an entry point the driver does not export — which is why the exception-safe form is:
+An exception that escapes a block leaves it open, for example a bad vertex or an entry point the driver does not export. The exception-safe form is:
 
 ::
 
@@ -128,26 +133,26 @@ A block is left open when an exception escapes it — a bad vertex, an entry poi
    finally:
        glEnd()
 
-``make_current`` and ``forget_context`` close such a block for you, so the two notifications above are worth making for this reason as well as for the tables. For the change PyOpenGL is *not* told about — creating a context, which happens inside the toolkit — call ``OpenGL.error.end_abandoned_block()`` first; it answers whether there was one. ``OpenGL.error.inside_begin_block()`` asks without closing anything. With ``PYOPENGL_ERROR_CHECKING=0`` there is no record that a block was opened and both answer False, so a program built that way closes its own.
+``make_current`` and ``forget_context`` close an open block, which is a second reason to call them. PyOpenGL is *not* told when a context is created, because creation happens inside the toolkit. Call ``OpenGL.error.end_abandoned_block()`` before creating one. It closes any open block and returns whether there was one. ``OpenGL.error.inside_begin_block()`` returns whether a block is open without closing it. With ``PYOPENGL_ERROR_CHECKING=0``, PyOpenGL keeps no record of an open block and both return False. A program run that way must close its own blocks.
 
 Arrays
 ------
 
-Nothing you can pass today stops being accepted. Where an array is wanted, a buffer whose element type already matches is used directly; anything else — a different dtype, a non-contiguous array, a list, ``bytes``, a ctypes object, a VBO, an object from a ``FormatHandler`` you registered yourself — is converted by ``ArrayDatatype`` exactly as it is today. A type the C layer does not recognise is not an error; it is simply not accelerated.
+The C implementation accepts every array argument the ctypes implementation accepts. A buffer whose element type already matches is used directly. Anything else is converted by ``ArrayDatatype`` exactly as under ctypes: a different dtype, a non-contiguous array, a list, ``bytes``, a ctypes object, a VBO, or an object from a ``FormatHandler`` you registered yourself. A type the C layer does not recognise is not an error. It takes the unaccelerated path.
 
-Registering a new array type therefore needs no knowledge of this layer, and a type registered against an older PyOpenGL keeps working. Acceleration is optional; acceptance is not.
+Registering a new array type therefore needs no knowledge of this layer. A type registered against an older PyOpenGL keeps working.
 
 A pass-in array of the wrong type
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Entry points that fill an array take one you supply, and hand it back:
+Entry points that fill an array accept one you supply, and return it:
 
 ::
 
    names = glGenTextures(4)              # allocated for you
    glGenTextures(4, names)               # or filled in an array you own
 
-**Read the return value, not the array you passed.** Where the array you pass already has the element type the call wants, the GL writes directly into it and the two are the same object. Where it does not — an ``int32`` array of four where ``uint32`` was wanted, or a list — the array is converted first, the GL writes into the converted copy, and *that* is what comes back. Your original is left as it was:
+Use the return value, because it may be a different object from the array you passed. When the array you pass already has the element type the call needs, the GL writes into it directly and the two are the same object. Otherwise (an ``int32`` array of four where ``uint32`` was wanted, or a list) the array is converted first. The GL writes into the converted copy, and *that* copy is returned. Your original is unchanged:
 
 ::
 
@@ -155,14 +160,14 @@ Entry points that fill an array take one you supply, and hand it back:
    b = glGetFloatv(GL_COLOR_CLEAR_VALUE, a)
    # b holds the clear colour; a is still [0 0 0 0]
 
-Passing an array means this in both implementations, and a great deal of code relies on being able to pass a list or an array of a convenient type and read the result from the return value. So it is not refused. Passing ``None``, or an array of the right type, are both ways to get an array written in place.
+Both implementations behave this way. Much code passes a list or an array of a convenient type and reads the result from the return value, so this is not refused. Passing ``None`` or an array of the right type both get an array written in place.
 
-Two cases are refused, because in them nothing usable comes back at all: a conversion that produced a *smaller* buffer than you passed, and an array too short for the number of elements the call was told to write — which would otherwise let the driver write past the end of it.
+Two cases are refused, because nothing usable would come back: a conversion that produced a *smaller* buffer than the one you passed, and an array too short for the number of elements the call was told to write. The second would let the driver write past the end of the array.
 
 Strings
 -------
 
-The entry points that take several strings — ``glShaderSource``, ``glTransformFeedbackVaryings``, ``glGetUniformIndices``, ``glCreateShaderProgramv``, ``glCompileShaderIncludeARB`` and their ``ARB``/``EXT`` spellings — are declared as an array of pointers to nul-terminated strings. Four forms are accepted for one:
+Some entry points take several strings: ``glShaderSource``, ``glTransformFeedbackVaryings``, ``glGetUniformIndices``, ``glCreateShaderProgramv``, ``glCompileShaderIncludeARB`` and their ``ARB``/``EXT`` spellings. They are declared as an array of pointers to nul-terminated strings. They accept four forms:
 
 ::
 
@@ -171,13 +176,13 @@ The entry points that take several strings — ``glShaderSource``, ``glTransform
    glShaderSource(shader, [header, body])          # a list or tuple of any of those
    glShaderSource(shader, prepared_char_pp)        # a pointer array you built
 
-A ``str`` is encoded as UTF-8; ``bytes`` and ``bytearray`` are taken as the bytes they hold. One string on its own is an array of one, which is how a single shader source or a single varying name is usually passed. An item that is not a string is refused — rendering it would compile the text of a Python repr as GLSL, and the error the driver then reports names a line of the shader rather than the argument.
+A ``str`` is encoded as UTF-8. ``bytes`` and ``bytearray`` are passed as the bytes they hold. A single string counts as an array of one, the usual way to pass one shader source or one varying name. An item that is not a string is refused. Converting it would compile the text of a Python repr as GLSL, and the driver's error would name a shader line instead of the argument.
 
-The same forms are accepted under both implementations, and by every entry point in the list. What counts as a string is decided in one place, ``OpenGL._string_array``, which the C layer calls back into and the ctypes bindings convert with; the two differ only in which exception carries a refusal, since ctypes wraps what a conversion raises in ``ctypes.ArgumentError``.
+Both implementations accept the same forms, for every entry point in the list. ``OpenGL._string_array`` defines what counts as a string. The C layer calls back into it, and the ctypes bindings convert with it. The two differ only in the exception type for a refusal: ctypes wraps the conversion's exception in ``ctypes.ArgumentError``.
 
-Where the entry point also takes the count — ``glTransformFeedbackVaryings(program, count, varyings, bufferMode)`` — the driver reads ``count`` pointers, so fewer strings than that, or ``None`` for a positive count, raises ``ValueError`` before the call. More strings than the count is accepted, and a pointer array you built is passed as it is, since only you know its length. ``OpenGL.ARRAY_SIZE_CHECKING = False`` switches the check off along with the other array-length checks.
+Some of these entry points also take the count, such as ``glTransformFeedbackVaryings(program, count, varyings, bufferMode)``. The driver reads ``count`` pointers. Fewer strings than the count, or ``None`` with a positive count, raises ``ValueError`` before the call. More strings than the count are accepted. A pointer array you built is passed unchanged, because only the caller knows its length. ``OpenGL.ARRAY_SIZE_CHECKING = False`` disables this check along with the other array-length checks.
 
-``glGetUniformIndices`` takes the names the same way and reads the count from them, and the ``GLuint`` array it answers with is one index per name:
+``glGetUniformIndices`` takes the names the same way and derives the count from them. It returns a ``GLuint`` array with one index per name:
 
 ::
 
@@ -186,33 +191,33 @@ Where the entry point also takes the count — ``glTransformFeedbackVaryings(pro
    glGetUniformIndices(program, uniformNames=names)    # by keyword
    glGetUniformIndices(program, 2, prepared_char_pp)   # or the C ordering
 
-A name the program does not declare, or one its compiler removed, answers ``GL_INVALID_INDEX``. The C ordering — the count, then the names — is recognised by its second argument being a count, is accepted for a caller who has built the pointer array themselves, and allocates the answer from the count. The names are required in either form. ``OpenGL.GL``, ``OpenGL.GL.ARB.uniform_buffer_object`` and ``OpenGL.GLES3`` offer the same function: GL 3.1 adopted the extension and OpenGL ES 3.0 declares the same entry point.
+A name the program does not declare, or one its compiler removed, gets ``GL_INVALID_INDEX``. The C ordering (the count, then the names) is detected when the second argument is a count. It serves a caller who built the pointer array themselves, and the result array is allocated from the count. The names are required in either form. ``OpenGL.GL``, ``OpenGL.GL.ARB.uniform_buffer_object`` and ``OpenGL.GLES3`` provide the same function, because GL 3.1 adopted the extension and OpenGL ES 3.0 declares the same entry point.
 
 Error checking
 --------------
 
-``OpenGL.ERROR_CHECKING`` is read when the layer is configured and applies per entry point per context. The API's ``getError`` is called from C rather than through a Python callback, so checking costs the driver round trip and nothing else. ``OpenGL.dispatch.set_error_checking(enable, entry_point=None)`` changes it at run time, for one entry point or for all — which the import-time flag cannot do.
+``OpenGL.ERROR_CHECKING`` is read when the layer is configured and applies per entry point, per context. The API's ``getError`` function is called from C without a Python callback, so checking costs the driver round trip only. ``OpenGL.dispatch.set_error_checking(enable, entry_point=None)`` changes the setting at run time, for one entry point or for all. The import-time flag cannot do that.
 
-Which function is asked is a property of the API the entry point belongs to, because the APIs do not agree on the question or on the answer:
+Each API has its own error function and its own success value, so the function called depends on the API the entry point belongs to:
 
 +----------------------+-----------------+--------------------------+--------------+
-| API                  | asked           | means success            | raises       |
+| API                  | error function  | means success            | raises       |
 +======================+=================+==========================+==============+
 | GL, GLES1/2/3, GLSC2 | ``glGetError``  | ``GL_NO_ERROR`` (0)      | ``GLError``  |
 +----------------------+-----------------+--------------------------+--------------+
 | EGL                  | ``eglGetError`` | ``EGL_SUCCESS`` (0x3000) | ``EGLError`` |
 +----------------------+-----------------+--------------------------+--------------+
-| GLX, WGL             | nothing to poll | —                        | not checked  |
+| GLX, WGL             | nothing to poll | none                     | not checked  |
 +----------------------+-----------------+--------------------------+--------------+
 
-Each API states this once, in ``OpenGL/raw/<api>/_errors.py``, and both implementations read that statement: the ctypes bindings call the checker it builds, and ``register_error_source`` hands the same three facts to the compiled layer, which does the call itself. A single ``glGetError`` answering for all of them would report none of EGL's errors, and where a GL context happened to be current would report a GL error against whichever EGL call asked next.
+Each API states this once, in ``OpenGL/raw/<api>/_errors.py``, and both implementations read that file. The ctypes bindings call the checker it builds. ``register_error_source`` passes the same three facts to the compiled layer, which makes the call itself. A single ``glGetError`` for every API would miss all of EGL's errors. When a GL context happened to be current, it would also report a GL error against the next EGL call.
 
-``GL_KHR_debug`` below, and the suspension ``glBegin`` performs, apply to the GL family alone: both are GL constructs, and an EGL call is checked by asking EGL either way.
+``GL_KHR_debug`` (below) and the error-checking suspension inside ``glBegin`` apply only to the GL family. Both are GL constructs. An EGL call is checked with ``eglGetError`` in every case.
 
 Checking through GL_KHR_debug
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The round trip *is* the cost of error checking. Where the context offers ``GL_KHR_debug``, the driver reports an error through a callback during the call instead, and the check afterwards is a read of the flag that callback set. **A context that offers it is given it**, under either implementation, without the program asking:
+The driver round trip is the cost of error checking. When the context offers ``GL_KHR_debug``, the driver reports errors through a callback during the call. The check afterwards reads the flag that the callback set. PyOpenGL enables this on every context that offers the extension, under either implementation, without the program asking:
 
 ::
 
@@ -228,46 +233,46 @@ checking via ``GL_KHR_debug`` 38.4
 no checking at all            37.6
 ============================= ====
 
-Checking costs 0.8 ns rather than 11 ns, so leaving it on is not a trade against speed. The exception is the same ``GLError`` with the same ``err`` and the same ``baseOperation``, raised from the same call; what is added is ``description``, the driver's own account of what was wrong, and ``debugMessageID``.
+With the callback, checking costs 0.8 ns instead of 11 ns, so it can stay on without a speed penalty. The exception is the same ``GLError`` with the same ``err`` and ``baseOperation``, raised from the same call. It also carries ``description``, the driver's own message about the error, and ``debugMessageID``.
 
-``GL_DEBUG_OUTPUT_SYNCHRONOUS`` is turned on with it, because the callback has to run during the call it belongs to for the error to be attributed to the right entry point. Messages that are not errors are not requested, so the driver does not spend time formatting them.
+``GL_DEBUG_OUTPUT_SYNCHRONOUS`` is enabled with it. The callback must run during the call that caused the error, so the error is attributed to the right entry point. Non-error messages are not requested, so the driver does not spend time formatting them.
 
 Turning it off
 ^^^^^^^^^^^^^^
 
 ``OpenGL.ERROR_DEBUG_OUTPUT = False``
-   Before the first call, for a program that does not want the driver put into synchronous debug output at all. Checking stays the ``glGetError`` round trip.
+   Set before the first call, for a program that does not want the driver in synchronous debug output at all. Checking uses the ``glGetError`` round trip.
 ``dispatch.use_debug_output(False)``
-   At any point, for the current context: the callback is removed and the driver state undone. A context a program has spoken for is left alone afterwards.
+   Callable at any point, for the current context. It removes the callback and restores the driver state. PyOpenGL does not enable debug output on that context again.
 
-A context that already has a debug callback installed keeps it: PyOpenGL looks before it installs, and where somebody else is using ``GL_KHR_debug`` the context stays on ``glGetError``. Taking that callback over would silence the program's own diagnostics, and its next ``glDebugMessageCallback`` would silence PyOpenGL's checking.
+A context that already has a debug callback keeps it. PyOpenGL checks for one before installing its own. If another component uses ``GL_KHR_debug``, the context stays on ``glGetError``. Replacing that callback would silence the program's own diagnostics, and the program's next ``glDebugMessageCallback`` would silence PyOpenGL's checking.
 
-Why it audits itself
-^^^^^^^^^^^^^^^^^^^^
+Checking the callback with glGetError
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A flag that is never set looks exactly like a context with nothing wrong. So a context checking this way asks the driver anyway, once every 64 calls, and what that finds decides whether the flag is still to be trusted: an error the callback never reported means the callback is not this context's, and the context goes back to ``glGetError`` for good.
+A flag that is never set looks the same as a context with no errors. So a context checking this way also queries the driver once every 64 calls. If that query finds an error the callback never reported, the callback does not belong to this context. The context then switches to ``glGetError`` permanently.
 
-That is what makes it safe to leave on. A context handle is an address the driver hands out again, so a program that destroys a context without saying so can leave a table describing a context that no longer exists — and checking that reads only the flag would pass everything. The audit bounds that to 64 calls and repairs it, and a thread returning to a context it left audits on its first call back. It costs about a sixth of a nanosecond per call.
+The audit keeps the mechanism safe to leave on. The driver reuses context handles. A program that destroys a context without telling PyOpenGL can leave a table describing a context that no longer exists. A check that reads only the flag would then pass every call. The audit limits that to 64 calls and repairs it. A thread returning to a context it left audits on its first call back. The audit costs about a sixth of a nanosecond per call.
 
-The ctypes implementation has no handle to record against until a program gives it one, so a context it arms before then is recorded as unnamed. That record is given up as soon as the program says the situation has changed — ``forget_context``, or ``make_current`` naming a context — because whatever is current afterwards cannot be shown to be the context that was armed. The next context is offered the mechanism afresh.
+The ctypes implementation has no context handle to record until the program provides one. A context it enables before then is recorded as unnamed. That record is dropped when the program reports a change, through ``forget_context`` or a ``make_current`` naming a context. The context current afterwards may not be the one that was enabled. The next context is offered the mechanism again.
 
-Telling PyOpenGL is still better than being caught by the audit: ``dispatch.forget_context(handle)`` when a context goes, and ``dispatch.make_current(handle)`` when one becomes current. Neither is required — nothing breaks without them — and both are worth calling under either implementation.
+Calling ``dispatch.forget_context(handle)`` when a context is destroyed, and ``dispatch.make_current(handle)`` when one becomes current, is better than relying on the audit. Neither is required, and both help under either implementation.
 
 Extensions that declare the same function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A command is often declared by more than one extension — ``glUniform1i64NV`` by both ``GL_NV_gpu_shader5`` and ``GL_AMD_gpu_shader_int64``, the EGL sync entry points by two KHR extensions each. A context advertising any one of them has the function, and that is what resolution requires. ``proc.extension`` reports the one the entry point is recorded under, which is a single name.
+A command is often declared by more than one extension. ``GL_NV_gpu_shader5`` and ``GL_AMD_gpu_shader_int64`` both declare ``glUniform1i64NV``, and two KHR extensions declare each EGL sync entry point. A context advertising any one of them has the function, which is all resolution requires. ``proc.extension`` reports the single extension the entry point is recorded under.
 
-A command may also be declared by a core version *and* by an extension: ``glGetPointerv`` is GL 1.1, and ``GL_KHR_debug`` re-specifies it to report a debug callback. Which declaration ``OpenGL.GL`` holds is settled by import order, and it does not change where the entry point is found. That matters most on Windows, where the split is real: ``opengl32`` exports GL 1.1 and nothing above it, while ``wglGetProcAddress`` answers for everything above GL 1.1 and returns NULL for the 1.1 set. A name is looked for in both.
+A command may also be declared by a core version *and* by an extension. ``glGetPointerv`` is GL 1.1, and ``GL_KHR_debug`` re-specifies it to report a debug callback. Import order decides which declaration ``OpenGL.GL`` holds. It does not change where the entry point is looked up. This matters most on Windows, where ``opengl32`` exports GL 1.1 and nothing above it. ``wglGetProcAddress`` returns everything above GL 1.1, and NULL for the 1.1 set. PyOpenGL looks up each name in both.
 
-Windows is not the only platform built that way. Mesa's Windows ``osmesa`` library carries the same export list, with ``OSMesaGetProcAddress`` for the rest, so ``PYOPENGL_PLATFORM=osmesa`` there asks the library and then the lookup as well. A platform says which routes it has, and only one whose lookup is a *query* — one that answers NULL for a name it does not have — takes this one: ``glXGetProcAddressARB`` under libglvnd answers with a dispatch stub for any name at all, so a Linux fallback would report an entry point the driver lacks as present.
+Mesa's Windows ``osmesa`` library has the same split: the same export list, with ``OSMesaGetProcAddress`` for the rest. With ``PYOPENGL_PLATFORM=osmesa`` on Windows, PyOpenGL looks in the library and then through the lookup function. Each platform declares which lookup routes it has. Only a platform whose lookup function is a *query*, returning NULL for a name it does not have, uses this fallback. Under libglvnd, ``glXGetProcAddressARB`` returns a dispatch stub for any name at all. A Linux fallback would therefore report an entry point as present when the driver lacks it.
 
-Nor does the driver's extension string decide it. What an extension re-specifies about a core entry point is which arguments it takes, not whether the entry point is there, so importing ``glGetPointerv`` from ``OpenGL.GL.KHR.debug`` gives a working entry point on a driver that does not advertise ``GL_KHR_debug`` — Apple's, which implements no version that has it. The gate stands aside only for a name a core version declares: macOS exports every entry point its framework implements whether or not the current context does, so an extension that is genuinely absent is still reported absent.
+The driver's extension string does not decide it either. An extension that re-specifies a core entry point changes which arguments it takes. The entry point exists either way. Importing ``glGetPointerv`` from ``OpenGL.GL.KHR.debug`` therefore gives a working entry point on a driver that does not advertise ``GL_KHR_debug``. Apple's driver is one: it implements no GL version that includes it. The extension check is skipped only for a name a core version declares. macOS exports every entry point its framework implements, whether or not the current context supports it, so an extension that is absent is still reported absent.
 
 Docstrings and introspection
 ----------------------------
 
-Entry points carry a docstring and a text signature under the C implementation, which they do not have under ctypes:
+Under the C implementation, entry points carry a docstring and a text signature. Under ctypes they have neither:
 
 ::
 
@@ -278,12 +283,12 @@ Entry points carry a docstring and a text signature under the C implementation, 
    >>> inspect.signature(glGenTextures)
    <Signature (n, textures=None, /)>
 
-The signature is built from the registry, so it is available for every entry point without any external documentation source. The types are the registry's own, because ``GLenum`` and ``GLuint`` are a distinction the caller makes and the man page they read next uses; an array argument is written ``GLfloat[]``, one level of ``[]`` per level of indirection. The ``.pyi`` stubs beside the package state the same signatures in Python types, which is what a type checker can use.
+The signature is built from the registry, so every entry point has one without an external documentation source. The types are the registry's own, such as ``GLenum`` and ``GLuint``, because callers make that distinction and the man pages use those names. An array argument is written ``GLfloat[]``, with one ``[]`` per level of indirection. The ``.pyi`` stubs beside the package give the same signatures in Python types, for type checkers.
 
 What an editor sees
 ~~~~~~~~~~~~~~~~~~~
 
-A friendly module fills its namespace when it is imported, from the same tables the entry points come from — ``_define(globals(), 'OpenGL.raw.GL.ARB.vertex_array_object')``. Nothing reading the file can follow that, so every module ships a stub beside it saying what the import leaves in it:
+A friendly module (a public wrapper such as ``OpenGL.GL.ARB.vertex_array_object``) fills its namespace at import, from the same tables the entry points come from: ``_define(globals(), 'OpenGL.raw.GL.ARB.vertex_array_object')``. A tool reading the file cannot follow that call. Each module therefore ships a stub beside it listing what the import defines:
 
 ::
 
@@ -295,28 +300,28 @@ A friendly module fills its namespace when it is imported, from the same tables 
    def glGenVertexArrays(n: int, arrays: UIntArray | None = None) -> UIntArrayResult: ...
    def glInitVertexArrayObjectARB() -> bool: ...
 
-Completion in ``from OpenGL.GL.ARB import vertex_array_object`` therefore offers what that extension declares, and a type checker knows the signatures rather than answering ``Any``. 1,299 of them, generated from the module table in the same pass as the C, so a registry update carries them along; the array aliases they annotate with are in ``OpenGL/_typing.pyi``, which is a stub and not a module to import.
+Completion on ``from OpenGL.GL.ARB import vertex_array_object`` therefore offers what that extension declares. A type checker sees the signatures instead of ``Any``. There are 1,299 stubs, generated from the module table in the same pass as the C, so a registry update regenerates them. The array aliases they use are defined in ``OpenGL/_typing.pyi``, a stub file with no module to import.
 
 Threads
 -------
 
-A GL context belongs to one thread at a time, so the usual arrangement is one rendering thread and other threads doing everything else. Two properties of the dispatch layer matter to that arrangement.
+A GL context is current in one thread at a time. The usual arrangement is one rendering thread, with other threads doing everything else. Two properties of the dispatch layer affect that arrangement.
 
 Calls that can wait release the GIL
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A call that waits on the driver — ``glFinish``, ``glReadPixels``, ``glClientWaitSync``, a shader compile, a buffer mapping, a swap under vsync, a large texture or buffer upload — releases the GIL for the duration, so the other threads in the process keep running while it waits. On a 4096×4096 ``glReadPixels`` taking 20 ms, a second thread runs several hundred times during the call rather than once or twice.
+A call that waits on the driver releases the GIL while it waits, so the other threads in the process keep running. These calls include ``glFinish``, ``glReadPixels``, ``glClientWaitSync``, a shader compile, a buffer mapping, a swap under vsync, and a large texture or buffer upload. During a 4096×4096 ``glReadPixels`` taking 20 ms, a second thread runs several hundred times instead of once or twice.
 
-Releasing costs 15–25 ns against the 57 ns a ``glBindTexture`` takes, so it is done for the calls that can actually block rather than for all of them. The list is ``src/cdispatch/blocking.py``: 26 exact names and 19 family patterns, 244 entry points in total, and the choice is made when the C is generated rather than tested on each call. A call not in that list holds the GIL, which is the right trade for one that returns in tens of nanoseconds.
+Releasing the GIL costs 15 to 25 ns, against 57 ns for a whole ``glBindTexture``. It is therefore done only for calls that can block. ``src/cdispatch/blocking.py`` holds the list: 26 exact names and 19 family patterns, 244 entry points in total. The choice is made when the C is generated, with no test on each call. A call not on the list holds the GIL, which suits a call that returns in tens of nanoseconds.
 
-Arguments converted for the call — the arrays, the strings, the buffers — are held by the calling frame across the released region, so nothing the driver is reading from can be collected while it reads.
+Arguments converted for the call (the arrays, the strings, the buffers) are held by the calling frame while the GIL is released. Nothing the driver is reading from can be collected during the call.
 
 Free-threaded builds
 ~~~~~~~~~~~~~~~~~~~~
 
-The dispatch layer itself declares compatibility with the free-threaded builds of Python 3.13 and later (``Py_mod_gil``). What makes that safe is that a call touches only its own context's table; the registry of tables is guarded by a lock, and the configuration a call reads is set once at import. Where two threads share a table — on a platform that cannot say which context is current — the value they race to write is the same resolved address.
+The dispatch layer declares compatibility with the free-threaded builds of Python 3.13 and later (``Py_mod_gil``). Each call touches only its own context's table. A lock guards the registry of tables, and the configuration a call reads is set once at import. On a platform that cannot report the current context, two threads may share a table. They then race to write the same resolved address.
 
-**Importing PyOpenGL on a free-threaded build re-enables the GIL anyway.** The dispatch layer ships in ``PyOpenGL_accelerate`` alongside that package's other compiled modules, and ``import OpenGL.GL`` loads six of them — ``errorchecker``, ``arraydatatype``, ``formathandler``, ``latebind``, ``wrapper`` and ``vbo``. None of those declares itself free-threading compatible, so each one turns the GIL back on as it loads, and the interpreter says so:
+Importing PyOpenGL on a free-threaded build still re-enables the GIL. The dispatch layer ships in ``PyOpenGL_accelerate`` with that package's other compiled modules, and ``import OpenGL.GL`` loads six of them: ``errorchecker``, ``arraydatatype``, ``formathandler``, ``latebind``, ``wrapper`` and ``vbo``. None of the six declares free-threading compatibility. Each one turns the GIL back on as it loads, and the interpreter prints a warning:
 
 ::
 
@@ -324,61 +329,61 @@ The dispatch layer itself declares compatibility with the free-threaded builds o
    module 'OpenGL_accelerate.errorchecker', which has not declared that it can
    run safely without the GIL.
 
-Running ``PyOpenGL`` without ``PyOpenGL_accelerate`` keeps the GIL disabled, at the ctypes implementation's speed. Getting both at once needs those six modules audited for free-threaded safety and declared, which is not something their current code supports: ``LateBind``, for one, resolves its target by writing an attribute on first call, and two threads reaching that write together is a race on a reference count rather than on a value. Until that work is done the combination is the GIL or the C dispatch, not both.
+Running ``PyOpenGL`` without ``PyOpenGL_accelerate`` keeps the GIL disabled, at ctypes speed. Having both needs those six modules audited for free-threaded safety and declared, and their current code does not support that. For example, ``LateBind`` resolves its target by writing an attribute on its first call. Two threads reaching that write together race on a reference count. Until those modules are audited, a free-threaded process gets either the GIL with the C dispatch or no GIL with ctypes.
 
-Suspending error checking, which ``glBegin`` does, is a property of the calling thread rather than the process. The ctypes implementation holds that flag on a shared object, so there one thread's ``glBegin`` block silences error checking for every thread; under C it does not.
+Error-checking suspension inside ``glBegin`` is per thread under the C implementation. The ctypes implementation keeps the flag on a shared object, so one thread's ``glBegin`` block silences error checking for every thread.
 
-Subinterpreters with their own GIL are refused at import. The layer keeps one set of context tables for the process, and a second interpreter would share the first one's contexts rather than have its own.
+Subinterpreters with their own GIL are refused at import. The layer keeps one set of context tables per process, so a second interpreter would share the first one's contexts.
 
 What differs from the ctypes implementation
 -------------------------------------------
 
-These are the differences a program can observe. Everything not listed here behaves identically, and the test suite runs under both implementations to keep it that way.
+These are the differences a program can observe. Everything else behaves identically, and the test suite runs under both implementations to check that.
 
-+------------------------------------------------------+-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| behaviour                                            | ctypes                                                                              | C                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-+======================================================+=====================================================================================+==================================================================================================================================================================================================================================================================================================================================================================================================================================================================================+
-| ``type(glBindTexture)``                              | a ctypes function pointer, or ``_NullFunctionPointer``                              | ``GLProc``. An ``isinstance`` check against ``ctypes._CFuncPtr`` is the one idiom likely to notice.                                                                                                                                                                                                                                                                                                                                                                              |
-+------------------------------------------------------+-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``repr(glBindTexture)``                              | ctypes' wording                                                                     | ``<OpenGL entry point glBindTexture>``                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-+------------------------------------------------------+-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| exception message text for a bad argument            | ctypes' wording                                                                     | ours. The exception *type* is preserved: ``ctypes.ArgumentError`` for a bad argument, ``NullFunctionError`` for an absent entry point.                                                                                                                                                                                                                                                                                                                                           |
-+------------------------------------------------------+-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``bool(glFoo)``, ``glInitXxx()``                     | resolved once, cached for the process                                               | answered for the current context                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-+------------------------------------------------------+-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| error checking suspended by ``glBegin``              | process-wide: one thread's block silences another's checking                        | per thread                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-+------------------------------------------------------+-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``OpenGL.FULL_LOGGING``                              | logs every call                                                                     | not implemented in C. Tracing selects the ctypes implementation for the process.                                                                                                                                                                                                                                                                                                                                                                                                 |
-+------------------------------------------------------+-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``glFoo.__doc__`` and ``inspect.signature(glFoo)``   | ``None``; ``signature()`` raises                                                    | a signature line, and a Signature. Gained, not changed.                                                                                                                                                                                                                                                                                                                                                                                                                          |
-+------------------------------------------------------+-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``glFoo.extension`` for a command promoted into core | whichever declaration the namespace ended up holding, which depends on import order | the core declaration. A command adopted into a GL version is declared twice, by the extension that introduced it and by the version that adopted it, and ``proc.extension`` reports one of the two. Both implementations resolve it either way: a name a core version declares is present whether or not the extension that re-specified it is advertised, so neither the declaration a caller reached nor the driver's extension string decides whether the entry point exists. |
-+------------------------------------------------------+-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------------------------------+--------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| behaviour                                            | ctypes                                                                   | C                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
++======================================================+==========================================================================+=========================================================================================================================================================================================================================================================================================================================================================================================================================================================================================+
+| ``type(glBindTexture)``                              | a ctypes function pointer, or ``_NullFunctionPointer``                   | ``GLProc``. An ``isinstance`` check against ``ctypes._CFuncPtr`` is the idiom most likely to be affected.                                                                                                                                                                                                                                                                                                                                                                               |
++------------------------------------------------------+--------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``repr(glBindTexture)``                              | ctypes' wording                                                          | ``<OpenGL entry point glBindTexture>``                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
++------------------------------------------------------+--------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| exception message text for a bad argument            | ctypes' wording                                                          | PyOpenGL's own wording. The exception *type* is the same: ``ctypes.ArgumentError`` for a bad argument, ``NullFunctionError`` for an absent entry point.                                                                                                                                                                                                                                                                                                                                 |
++------------------------------------------------------+--------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``bool(glFoo)``, ``glInitXxx()``                     | resolved once, cached for the process                                    | evaluated for the current context                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
++------------------------------------------------------+--------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| error checking suspended by ``glBegin``              | process-wide: one thread's block silences another thread's checking      | per thread                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
++------------------------------------------------------+--------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``OpenGL.FULL_LOGGING``                              | logs every call                                                          | not implemented in C. Tracing selects the ctypes implementation for the process.                                                                                                                                                                                                                                                                                                                                                                                                        |
++------------------------------------------------------+--------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``glFoo.__doc__`` and ``inspect.signature(glFoo)``   | ``None``; ``signature()`` raises                                         | a signature line, and a Signature. Both are additions under C.                                                                                                                                                                                                                                                                                                                                                                                                                          |
++------------------------------------------------------+--------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``glFoo.extension`` for a command promoted into core | whichever declaration the namespace holds, which depends on import order | the core declaration. A command adopted into a GL version is declared twice: by the extension that introduced it and by the version that adopted it. ``proc.extension`` reports one of the two. Both implementations resolve the entry point either way. A name a core version declares is present whether or not the extension that re-specified it is advertised. Neither the declaration a caller imported nor the driver's extension string decides whether the entry point exists. |
++------------------------------------------------------+--------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-The full list is not a matter of recollection: ``tests/bindings/dispatch/test_attribute_surface.py`` surveys every entry point under both implementations in separate processes and compares the answers, so a difference that is not in the table above is a test failure.
+``tests/bindings/dispatch/test_attribute_surface.py`` surveys every entry point under both implementations in separate processes and compares the results. A difference not in the table above fails that test.
 
 Ways out
 ~~~~~~~~
 
-Assigning ``errcheck`` or ``argtypes`` to an entry point moves that one entry point to the ctypes implementation for the life of the process, so a debugging habit that relies on either keeps working. Assigning ``restype`` the conversion the entry point already performs changes nothing; assigning a different one moves it likewise. ``PYOPENGL_DISPATCH=ctypes`` is the way out for everything else.
+Assigning ``errcheck`` or ``argtypes`` to an entry point moves that entry point to the ctypes implementation for the life of the process. Debugging habits that use either keep working. Assigning ``restype`` the conversion the entry point already performs has no effect. Assigning a different ``restype`` also moves the entry point to ctypes. ``PYOPENGL_DISPATCH=ctypes`` switches everything else.
 
 What is not implemented in C
 ----------------------------
 
-GL, GLES 1/2/3, GLSC2, GLX, WGL and EGL are generated from the registry. **GLU, GLUT, GLE and OSMesa are not** — they are hand-maintained rather than registry-described, so there is no table to generate them from. They keep their ctypes bindings, which is about 210 entry points, none of them on a hot path.
+GL, GLES 1/2/3, GLSC2, GLX, WGL and EGL are generated from the registry. GLU, GLUT, GLE and OSMesa are hand-maintained and the registry does not describe them, so there is no table to generate them from. They keep their ctypes bindings, about 210 entry points, none of them on a hot path.
 
 Where the OpenGL.raw modules come from
 --------------------------------------
 
-The modules under ``OpenGL.raw`` hold constants, entry-point declarations and re-exports, and nothing else. They are not shipped as files. They are built on import from declaration tables — ``OpenGL/raw/_declarations/<API>.dat``, one per API — by a finder that PyOpenGL puts on ``sys.meta_path`` for itself. The tables describe 1,298 modules in 1.2 MB; as files those modules were 1,298 entries in the wheel, which is most of the difference between a 4.0 MB wheel and a 2.9 MB one.
+The modules under ``OpenGL.raw`` hold only constants, entry-point declarations and re-exports. They are not shipped as files. A finder that PyOpenGL adds to ``sys.meta_path`` builds them on import from declaration tables, one per API: ``OpenGL/raw/_declarations/<API>.dat``. The tables describe 1,298 modules in 1.2 MB. As files, those modules would be 1,298 entries in the wheel. That accounts for most of the difference between a 4.0 MB wheel and a 2.9 MB one.
 
-Nothing has to be switched on, and an importing program sees no difference: ``from OpenGL.raw.GL.VERSION.GL_1_1 import *`` works as it always has. What changes is what a tool asking about the module finds — ``__spec__.origin`` is the table the definitions came from, and ``__file__`` names that table rather than a ``.py`` source.
+Nothing needs to be enabled, and importing code sees no difference: ``from OpenGL.raw.GL.VERSION.GL_1_1 import *`` works unchanged. A tool that inspects the module sees the tables. ``__spec__.origin`` is the table the definitions came from, and ``__file__`` names that table instead of a ``.py`` source.
 
-Where the C extension is installed the same definitions are read from its own tables instead, since they are already resident; the two are generated together in one pass and describe the same set.
+Where the C extension is installed, the definitions are read from its own tables instead, which are already in memory. Both sets of tables are generated in one pass and describe the same modules.
 
-Two kinds are real files still. The packages, which have ``__init__.py`` as before, and the private modules — ``_types``, ``_errors``, ``_glgets`` — which carry classes and conditionals rather than data, so there is nothing to tabulate.
+Two kinds of module are real files. The packages have ``__init__.py`` files. The private modules (``_types``, ``_errors``, ``_glgets``) hold classes and conditionals, which have no table form.
 
-There is no switch for this, because there is nothing to switch to: the files are not shipped and the generator does not write them, so these names resolve from the tables or not at all. What the tables hold is held to what the files defined by ``tests/bindings/generated/test_virtual_modules.py``, which compares every constant and every signature against a recorded survey of the modules as files.
+There is no switch to turn this off. The files are not shipped and the generator does not write them, so these names resolve from the tables or not at all. ``tests/bindings/generated/test_virtual_modules.py`` holds the tables to what the files defined. It compares every constant and every signature against a recorded survey of the modules as files.
 
 Regenerating and keeping up with the registry
 ---------------------------------------------
@@ -388,6 +393,6 @@ Regenerating and keeping up with the registry
    python src/regenerate_c.py     # registry and shipped tree in, C out
    python src/check_registry.py   # what changed, and what needs a person
 
-Maintaining or extending the generator is covered separately, in ``src/cdispatch/README.md``: how the pipeline fits together, how to add an entry point that needs hand-written C, and how to add an array element type.
+Maintaining or extending the generator is covered in ``src/cdispatch/README.md``: how the pipeline fits together, how to add an entry point that needs hand-written C, and how to add an array element type.
 
-``check_registry.py`` reports registry commands with no binding, bindings whose signature no longer matches, enums with no constant, and every entry point still on the ctypes path with the reason. Differences that are already known are recorded in ``src/cdispatch/registry_baseline.json`` with a reason for each, and the tool exits non-zero only for what is new since, so it can drive a scheduled job.
+``check_registry.py`` reports registry commands with no binding, bindings whose signature no longer matches, enums with no constant, and every entry point still on the ctypes path with its reason. Known differences are recorded in ``src/cdispatch/registry_baseline.json``, each with a reason. The tool exits non-zero only for new differences, so it can drive a scheduled job.

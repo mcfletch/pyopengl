@@ -17,8 +17,8 @@ class Converter(object):
 
     Each Converter has two (class) attributes:
 
-        argNames -- list of argument names for initialisation
-        indexLookups -- set of (indexname, argName,methodName) values
+        argNames - list of argument names for initialisation
+        indexLookups - set of (indexname, argName,methodName) values
             to lookup on wrapper.  These allow us to use argument-name
             references to refer to which arguments to use when
             processing (prevents the need to revise pointers when
@@ -34,8 +34,8 @@ class Converter(object):
     def __init__(self, *args, **named):
         """Store arguments in attributes
 
-        *args -- mapped to self.argNames in order to set attributes
-        **named -- mapped to self.argNames by name to set attributes
+        *args - mapped to self.argNames in order to set attributes
+        **named - mapped to self.argNames by name to set attributes
         """
         argNames = list(self.argNames)
         for a in self.argNames:
@@ -62,11 +62,11 @@ class PyConverter(Converter):
     """
 
     def __call__(self, incoming, function, arguments):
-        """Convert incoming argument into compatable data-types
+        """Convert incoming argument into compatible data-types
 
-        incoming -- the Python argument for this parameter
-        function -- the wrapper.Wrapper class we are supporting
-        arguments -- the complete set of arguments passed to the
+        incoming - the Python argument for this parameter
+        function - the wrapper.Wrapper class we are supporting
+        arguments - the complete set of arguments passed to the
             function
 
 
@@ -86,10 +86,10 @@ class CConverter(Converter):
     def __call__(self, pyArgs, index, baseOperation):
         """Calculate C-compatible Python object from Python arguments
 
-        pyArgs -- set of Python argument objects converted by
+        pyArgs - set of Python argument objects converted by
             pyConverters from the incoming arguments
-        index -- our index in baseOperation.cConverters
-        baseOperation -- the Wrapper object which we are supporting
+        index - our index in baseOperation.cConverters
+        baseOperation - the Wrapper object which we are supporting
         """
         raise NotImplementedError(
             """%s class doesn't implement __call__""" % (self.__class__.__name__,)
@@ -106,10 +106,10 @@ class ReturnValues(Converter):
     def __call__(self, result, baseOperation, pyArgs, cArgs):
         """Return a final value to the caller
 
-        result -- the raw ctypes result value
-        baseOperation -- the Wrapper object which we are supporting
-        pyArgs -- the set of Python arguments produced by pyConverters
-        cArgs -- the set of C-compatible arguments produced by CConverter
+        result - the raw ctypes result value
+        baseOperation - the Wrapper object which we are supporting
+        pyArgs - the set of Python arguments produced by pyConverters
+        cArgs - the set of C-compatible arguments produced by CConverter
 
         return the Python object for the final result
         """
@@ -238,11 +238,11 @@ if CallFuncPyConverter is None:
 
             When the caller's array is already an acceptable buffer, asArray
             returns it unchanged and the GL result is written straight back into
-            it. When it is the wrong type, asArray must *copy* it to match; if
-            that copy is smaller than the caller's buffer, the read is truncated
-            into the copy and never reaches the caller's array -- the silent
-            "returns zeroes" bug. Detect the shrinking copy and raise, so the
-            caller passes a correctly-typed array (or None to allocate one).
+            it.  When it is the wrong type, asArray must *copy* it to match.  If
+            that copy is smaller than the caller's buffer, the result is written
+            into the copy and never reaches the caller's array, so the caller
+            sees zeroes.  This method raises in that case, so the caller passes
+            a correctly-typed array (or None to allocate one).
             """
             value = pyArgs[index]
             result = self.arrayType.asArray(value)
@@ -251,9 +251,9 @@ if CallFuncPyConverter is None:
                     rbytes = self.arrayType.arrayByteCount(result)
                     vbytes = self.arrayType.arrayByteCount(value)
                 except Exception:  # noqa: BLE001 each format handler refuses an unmeasurable value in its own way
-                    # Not measurable -- a list has no byte count of its own --
-                    # so there is no shrinking coercion to detect here.  The
-                    # size the call will write is still checked below.
+                    # Not measurable (a list has no byte count of its own), so
+                    # there is no shrinking coercion to detect here.  The size
+                    # the call will write is still checked below.
                     rbytes = vbytes = 0
                 if rbytes < vbytes:
                     raise TypeError(
@@ -266,13 +266,12 @@ if CallFuncPyConverter is None:
             return result
 
         def expectedElements(self, pyArgs):
-            """How many elements the call will write, or ``None``.
+            """Return how many elements the call will write, or ``None``.
 
-            ``getSize`` answers a shape -- ``(n,)`` for the count arguments,
-            ``(1,)`` for the fixed single-value getters -- and what is wanted
-            here is the number of elements that shape holds.  ``None`` where
-            the size cannot be worked out, which is not an error: an unsized
-            output is a different (and unchecked) case.
+            ``getSize`` returns a shape: ``(n,)`` for the count arguments and
+            ``(1,)`` for the fixed single-value getters.  This method returns
+            the number of elements in that shape.  It returns ``None`` when the
+            size cannot be computed, and an unsized output is not checked.
             """
             try:
                 shape = self.getSize(pyArgs)
@@ -301,33 +300,31 @@ if CallFuncPyConverter is None:
         def checkOutputSize(self, array, pyArgs):
             """Refuse an output array smaller than the call will write into it.
 
-            The count is an argument -- ``glGenTextures(n, textures)`` writes
-            ``n`` names -- and nothing ties it to the array the caller passed
-            alongside.  Where the array is short, the driver writes past its
-            end: not an exception but a heap overrun, which surfaces much later
-            somewhere unrelated, and on the pure-ctypes path there was nothing
-            to stop it.
+            The count is an argument: ``glGenTextures(n, textures)`` writes
+            ``n`` names, and the count is independent of the array the caller
+            passes.  If the array is short, the driver writes past its end.
+            That is a heap overrun, which shows up later in unrelated code
+            instead of raising an exception.
 
-            Only a *shortfall* is refused.  A larger array is a caller
-            deliberately reusing one buffer for several calls, which is
-            ordinary and safe.
+            Only a *shortfall* is refused.  A larger array is allowed, so a
+            caller can reuse one buffer for several calls.
             """
             if not self.SIZE_IS_A_PROMISE:
                 return
             wanted = self.expectedElements(pyArgs)
             if not wanted:
                 return
-            # Compared in bytes, not elements.  The count is in units of the
-            # type the *declaration* names -- glGetBufferSubData's `size` is a
-            # byte count, glGenTextures' `n` is a count of GLuint -- and the
-            # caller may pass an array of some other type that holds the same
-            # bytes.  A GLfloat[5] is a legitimate destination for twenty
-            # bytes; counting its five elements against twenty is not.
-            # Only what carries its own length.  A bare ctypes pointer does
-            # not -- the hand-written wrappers in OpenGL/GL/exceptional.py pass
-            # `typedPointer` results straight down -- and arrayByteCount
-            # answers for one anyway, with the size of a single element.  A
-            # confident wrong number is worse here than no number.
+            # Compared in bytes.  The count is in units of the type the
+            # *declaration* names: glGetBufferSubData's `size` is a byte
+            # count, and glGenTextures' `n` is a count of GLuint.  The caller
+            # may pass an array of another type that holds the same bytes.  A
+            # GLfloat[5] is a valid destination for twenty bytes, so its five
+            # elements are not compared with twenty.
+            # Only arrays that carry their own length are checked.  A bare
+            # ctypes pointer does not, and the hand-written wrappers in
+            # OpenGL/GL/exceptional.py pass `typedPointer` results straight
+            # down.  arrayByteCount returns the size of a single element for
+            # a pointer, which would make the check refuse valid calls.
             if not hasattr(array, '__len__'):
                 return
             try:
@@ -378,20 +375,20 @@ if CallFuncPyConverter is None:
 
         @property
         def SIZE_IS_A_PROMISE(self):
-            """Whether the looked-up size says what this call will write.
+            """Return True if the looked-up size is exactly what this call writes.
 
-            It does when the size comes from a *count* the caller passed --
-            ``glGenTextures(n, names)`` writes n, ``glGetBufferSubData(target,
-            offset, size, data)`` writes size bytes -- and the declaration
-            spells that ``size=lambda x: (x,)``.
+            That is the case when the size comes from a *count* the caller
+            passed.  ``glGenTextures(n, names)`` writes n names, and
+            ``glGetBufferSubData(target, offset, size, data)`` writes size
+            bytes.  The declaration writes this as ``size=lambda x: (x,)``.
 
-            It does not when the size comes from a table keyed on a *pname*,
-            which says how large that piece of state is in total.  How much of
-            it a call fills is the call's business: ``glGetIntegeri_v`` writes
-            one element of a three-element pname, one index at a time.  The
-            declaration spells that ``size=<a dict>``, which ``setOutput`` hands
-            on as its ``__getitem__`` -- so the dict it is bound to is what
-            tells the two apart.
+            It is not the case when the size comes from a table keyed on a
+            *pname*.  The table gives the total size of that piece of state,
+            and a call may fill only part of it: ``glGetIntegeri_v`` writes one
+            element of a three-element pname, one index at a time.  The
+            declaration writes this as ``size=<a dict>``, and ``setOutput``
+            passes on the dict's ``__getitem__``.  The object that method is
+            bound to tells the two cases apart.
             """
             return not isinstance(getattr(self.lookup, '__self__', None), dict)
 
@@ -457,12 +454,12 @@ if CallFuncPyConverter is None:
 class getPyArgsPointer(CConverter):
     """CConverter returning a typed pointer into a named Python argument
 
-    For a parameter the declaration gives as a plain ctypes pointer rather
-    than as an array class -- ``GLintptr`` and ``GLsizeiptr`` parameters
-    are -- ctypes has no ``from_param`` to reach for, so the pointer is
-    made here.  The converted array itself stays in ``pyArgs``, which is
-    what keeps it alive for the duration of the call: handing the pointer
-    over without it would leave the GL reading freed memory.
+    Some parameters are declared as a plain ctypes pointer instead of an
+    array class, as ``GLintptr`` and ``GLsizeiptr`` parameters are.  Such a
+    type has no array ``from_param``, so this converter builds the pointer.
+    The converted array stays in ``pyArgs``, which keeps it alive for the
+    duration of the call.  Without that reference the GL would read freed
+    memory.
     """
 
     argNames = ('name', 'arrayType')
@@ -490,13 +487,13 @@ class StringLengths(CConverter):
 
     Provides also:
 
-        stringArray -- PyConverter callable ensuring list-of-strings
+        stringArray - PyConverter callable ensuring list-of-strings
             format for the python argument
 
-        stringArrayForC -- CResolver converting the array to
+        stringArrayForC - CResolver converting the array to
             POINTER(c_char_p) format for passing to C
 
-        totalCount -- CConverter callable giving count of string
+        totalCount - CConverter callable giving count of string
             pointers (that is, length of the pointer array)
     """
 
@@ -521,11 +518,11 @@ class StringLengths(CConverter):
     def stringArray(self, arg, baseOperation, args):
         """Create basic array-of-strings object from pyArg
 
-        One string is a set of one, which is how callers pass a single shader
-        source.  Anything in the set that is not a string is refused rather
-        than rendered: ``str(value)`` of something that is not text compiles
-        as GLSL source, and the error the driver then reports names a line of
-        the shader rather than the argument.
+        A single string is treated as a list of one, which is how callers
+        pass a single shader source.  Any item that is not a string raises an
+        error instead of being converted.  ``str(value)`` of a non-text value
+        would be compiled as GLSL source, and the driver's error would name a
+        shader line instead of the argument.
         """
         from OpenGL._string_array import as_bytes
 

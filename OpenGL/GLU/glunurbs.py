@@ -123,9 +123,9 @@ class GLUnurbs(glustruct.GLUStruct, _simple.GLUnurbs):
     def _tex( self, function ):
         """Texture coordinate callback
 
-        NOTE: there is no way for *us* to tell what size the array is, you will
-        get back a raw data-point, not an array, as you do for all other callback
-        types!!!
+        NOTE: PyOpenGL cannot tell what size the array is, so this callback
+        receives a raw data-pointer.  All other callback types receive an
+        array.
         """
         def oor( *args ):
             if len(args) > 1:
@@ -154,13 +154,10 @@ def _callbackWithType( funcType ):
     return result
 
 def _registerCallbackTypes():
-    """Give each callback constant a gluNurbsCallback typed for it.
+    """Register a gluNurbsCallback typed for each callback constant.
 
-    A function rather than a loop at module scope: the loop's targets stay
-    bound afterwards and became three names exported from this module, which
-    the ``del`` below it removed under a ``try``/``except NameError`` -- a
-    guard for the loop running no times, which it cannot, and which left the
-    last callback type reachable as ``cb`` when it did.
+    The loop is in a function so its variables do not become module-level
+    names.
     """
     for which, funcType in GLUnurbs.CALLBACK_TYPES.items():
         registrar = _callbackWithType( funcType )
@@ -299,10 +296,10 @@ def gluNurbsSurface( baseFunction, nurb, sKnots, tKnots, control, type ):
 
 @_lazy( _simple.gluPwlCurve )
 def gluPwlCurve( baseFunction, nurb, data, type ):
-    """gluPwlCurve -- piece-wise linear curve within GLU context
+    """gluPwlCurve - piece-wise linear curve within GLU context
 
-    data -- the data-array
-    type -- determines number of elements/data-point
+    data - the data-array
+    type - determines number of elements/data-point
     """
     data = arrays.GLfloatArray.asArray( data )
     if type == _simple.GLU_MAP1_TRIM_2:

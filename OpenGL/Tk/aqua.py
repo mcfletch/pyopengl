@@ -1,33 +1,33 @@
-"""An OpenGL context on a Tk widget's place in a macOS window.
+"""An OpenGL context over a Tk widget in a macOS window.
 
-Tk on Aqua has no window id to make a context against.  Its widgets are
-rectangles drawn into the one ``NSView`` that fills each toplevel, so
-``winfo_id()`` names nothing a GL context could be attached to.  What a context
-can be attached to is a view, so this module makes one: a plain ``NSView``
-added to the toplevel's content view, kept over the widget's rectangle, with an
-``NSOpenGLContext`` drawing into it.
+Tk on Aqua has no per-widget native window.  Its widgets are rectangles drawn
+into the single ``NSView`` that fills each toplevel, so ``winfo_id()`` gives
+nothing a GL context can attach to.  A GL context on macOS attaches to an
+``NSView``.  This module adds a plain ``NSView`` to the toplevel's content
+view, keeps it over the widget's rectangle, and attaches an
+``NSOpenGLContext`` to it.
 
-The pixel format and the profile come from :mod:`OpenGL.CGL`, which is what
-the headless test backend uses too: :func:`cglProfile` turns a
-:class:`~OpenGL.Tk.attributes.ContextAttributes` into one of its profiles, and
-:func:`OpenGL.CGL.pixel_format_candidates` into the attribute lists to try, a
-GPU renderer first and the CPU one where a machine has no other.
+The pixel format and profile come from :mod:`OpenGL.CGL`, which the headless
+test backend also uses.  :func:`cglProfile` converts a
+:class:`~OpenGL.Tk.attributes.ContextAttributes` into a CGL profile name.
+:func:`OpenGL.CGL.pixel_format_candidates` converts it into attribute lists to
+try, a GPU renderer first and then the CPU renderer.
 
-* The view sits **above** Tk's own drawing.  A Tk widget placed over a GL
-  widget is covered by it, and a widget that is unmapped hides the view.
-* The surface has the widget's size in points, not pixels.  On a Retina
-  display it is scaled up by the system, which keeps ``glViewport(0, 0,
-  winfo_width(), winfo_height())`` correct.
+* The view is drawn above Tk's own drawing.  A Tk widget placed over a GL
+  widget is hidden by the view.  Unmapping the GL widget hides the view.
+* The surface has the widget's size in points.  On a Retina display the system
+  scales it up, so ``glViewport(0, 0, winfo_width(), winfo_height())`` stays
+  correct.
 * macOS provides OpenGL up to 4.1, and a compatibility profile only at 2.1
-  (``profile='legacy'``, or ``'compatibility'`` with ``version=None``).  A
-  request for anything else raises :class:`~OpenGL.Tk.errors.TkContextError`
-  saying so.  A pixel format has no debug attribute, so ``debug=True`` makes an
+  (``profile='legacy'``, or ``'compatibility'`` with ``version=None``).  Any
+  other request raises :class:`~OpenGL.Tk.errors.TkContextError` with the
+  reason.  A pixel format has no debug attribute, so ``debug=True`` creates an
   ordinary context.
 
-Everything that decides something is a plain function taking plain values --
-:func:`cglProfile`, :func:`viewFrame`, :func:`widgetOffset`,
-:func:`chooseWindow` -- so it is readable and testable without a Mac.
-:class:`AquaContext` sends the messages.
+The decisions are made by plain functions that take plain values
+(:func:`cglProfile`, :func:`viewFrame`, :func:`widgetOffset`,
+:func:`chooseWindow`), so they can be tested without a Mac.
+:class:`AquaContext` sends the Objective-C messages.
 """
 
 from __future__ import annotations
@@ -57,15 +57,15 @@ NSOpenGLPixelFormatAttribute = ctypes.c_uint32
 
 
 def cglProfile(attributes: ContextAttributes) -> str:
-    """The :data:`OpenGL.CGL.PROFILES` name serving a request
+    """The :data:`OpenGL.CGL.PROFILES` name for ``attributes``
 
-    Raises :class:`~OpenGL.Tk.errors.TkContextError` saying why where macOS
-    has nothing to give: a version above 4.1, a compatibility profile above
-    2.1, or a core profile below 3.2.
+    Raises :class:`~OpenGL.Tk.errors.TkContextError` with the reason when
+    macOS has no matching context: a version above 4.1, a compatibility
+    profile above 2.1, or a core profile below 3.2.
 
-    A request that names no profile-bearing version (``legacy``, or any
-    profile with a version below 3.2) is a plain 2.1 context, which is what
-    every windowing toolkit gives for it.
+    A request without a profile-bearing version (``legacy``, or any profile
+    with a version below 3.2) gets a plain 2.1 context, as in other windowing
+    toolkits.
     """
     version = tuple(attributes.version or (0, 0))
     if version > CGL.MAX_VERSION:
@@ -86,11 +86,11 @@ def cglProfile(attributes: ContextAttributes) -> str:
 
 
 def swapIntervalFor(attributes: ContextAttributes) -> int:
-    """The swap interval a new context is given: the request's, or zero
+    """The requested swap interval for a new context, or zero
 
-    A windowed context is composited and synchronised to the display by the
-    window server.  An interval of one on top of that waits for a refresh that
-    a machine without a display never delivers, and the swap does not return.
+    The window server composites a windowed context and synchronises it to the
+    display.  An interval of one adds a wait for a refresh.  On a machine
+    without a display that refresh never arrives, and the swap does not return.
     """
     interval = attributes.swapInterval
     return 0 if interval is None else interval
@@ -114,11 +114,11 @@ def pixelFormatSizes(attributes: ContextAttributes) -> dict[str, Any]:
 
 
 def widgetOffset(widget: Any, toplevel: Any) -> tuple[int, int]:
-    """Where ``widget``'s top-left corner is in ``toplevel``, in Tk points
+    """The ``(x, y)`` of ``widget``'s top-left corner in ``toplevel``, in points
 
     Summed up the parent chain from ``winfo_x`` and ``winfo_y``, which Tk
-    answers relative to the parent, so it is the same whatever window decoration
-    the toplevel has.
+    reports relative to the parent.  The result does not depend on the
+    toplevel's window decoration.
     """
     x = y = 0
     current = widget
@@ -137,10 +137,10 @@ def viewFrame(
 ) -> tuple[float, float, float, float]:
     """The ``(x, y, width, height)`` to give the view in its superview
 
-    ``offset`` is the widget's top-left in the toplevel with y growing
-    downwards, as Tk counts.  A flipped superview counts the same way; an
-    ordinary one has its origin at the bottom-left, so the view's lower edge is
-    measured up from the bottom of a host ``hostHeight`` high.
+    ``offset`` is the widget's top-left in the toplevel, with y increasing
+    downwards as in Tk.  A flipped superview uses the same convention.  An
+    ordinary superview has its origin at the bottom-left, so the view's lower
+    edge is measured up from the bottom of a host ``hostHeight`` high.
     """
     x, y = offset
     width, height = size
@@ -153,11 +153,11 @@ def chooseWindow(
     candidates: Sequence[Any],
     matches: Any,
 ) -> Optional[Any]:
-    """The one of ``candidates`` that is the toplevel being looked for
+    """The candidate window that is the toplevel, or None
 
-    ``matches(candidate)`` answers whether it is.  A single candidate is taken
-    without asking, since there is nothing to tell apart; with several, exactly
-    one has to match, and ``None`` is the answer to none or to more than one.
+    ``matches(candidate)`` returns whether a candidate is the toplevel.  A
+    single candidate is returned without calling ``matches``.  With several,
+    exactly one must match.  Returns ``None`` if none or more than one match.
     """
     if len(candidates) == 1:
         return candidates[0]
@@ -166,11 +166,12 @@ def chooseWindow(
 
 
 def unbind(widget: Any, sequence: str, identifier: str) -> None:
-    """Remove the one binding ``identifier`` that ``widget.bind`` made
+    """Remove the single binding ``identifier`` made by ``widget.bind``
 
-    ``Misc.unbind(sequence, funcid)`` removes every binding of the sequence on
-    the Pythons before 3.12, which would take the widget's own with it.  The
-    script is read back and the line naming this command left out instead.
+    Before Python 3.12, ``Misc.unbind(sequence, funcid)`` removes every
+    binding of the sequence, including the widget's own.  This function reads
+    the binding script back and rewrites it without the line naming this
+    command.
     """
     try:
         script = str(widget.tk.call('bind', widget._w, sequence))
@@ -179,20 +180,20 @@ def unbind(widget: Any, sequence: str, identifier: str) -> None:
         widget.tk.call('bind', widget._w, sequence, kept)
         widget.deletecommand(identifier)
     except tkinter.TclError:
-        pass                    # the widget is already gone with its bindings
+        pass                    # the widget and its bindings are destroyed
 
 
 class AquaContext(object):
     """A GL context drawing into an ``NSView`` over a Tk widget
 
-    Built by :func:`OpenGL.Tk.context.createContext`; a caller reaches it as
+    Created by :func:`OpenGL.Tk.context.createContext` and available as
     ``frame.context``.
 
     Attributes:
-        handle -- the ``CGLContextObj`` the driver made, which is what
-            PyOpenGL's per-context dispatch tables are keyed by
-        profile -- the :data:`OpenGL.CGL.PROFILES` name it was made with
-        renderer -- ``'accelerated'``, ``'any'`` or ``'software'``
+        handle - the driver's ``CGLContextObj``; PyOpenGL's per-context
+            dispatch tables are keyed by it
+        profile - the :data:`OpenGL.CGL.PROFILES` name it was created with
+        renderer - ``'accelerated'``, ``'any'`` or ``'software'``
     """
 
     handle: Optional[int] = None
@@ -266,10 +267,10 @@ class AquaContext(object):
         return int(found)
 
     def _pixelFormat(self, profile: str) -> int:
-        """An ``NSOpenGLPixelFormat`` the machine can serve, owned by the caller
+        """An ``NSOpenGLPixelFormat`` this machine supports, owned by the caller
 
-        Each renderer kind of :func:`OpenGL.CGL.pixel_format_candidates` is
-        tried in turn, and the first the machine offers is taken.
+        Each renderer kind from :func:`OpenGL.CGL.pixel_format_candidates` is
+        tried in turn, and the first one the machine supports is used.
         """
         objc = self.objc
         sizes = pixelFormatSizes(self.attributes)
@@ -287,37 +288,36 @@ class AquaContext(object):
             'renderer on this machine' % (self.attributes.describe(), profile))
 
     def _createView(self) -> None:
-        """The ``NSView`` added to the toplevel's content view, still empty"""
+        """Add an empty ``NSView`` to the toplevel's content view"""
         objc = self.objc
         host = self._hostView()
         log.debug('host view %#x (%s)', host, objc.className(host))
         view = objc.new('NSView')
         self._view = view
         self._host = host
-        # The frame is set once there is a window to measure against; see
-        # resize().  Tk's content view goes on drawing the widgets, and this
-        # view sits above them.
+        # The frame is set later by resize(), once there is a window to
+        # measure.  Tk's content view still draws the widgets, and this view
+        # is drawn above them.
         objc.send(host, 'addSubview:', view, argtypes=(cocoa.ID,),
                   restype=None)
 
     def _attach(self) -> None:
-        """Point the context at the view and make it the size of the widget"""
+        """Size the view to the widget and attach the context to it"""
         objc = self.objc
-        # Placed before it is attached: a context is told about a view that
-        # moves or resizes with ``update``, and a view that is attached where
-        # it is going to stay has nothing to be told.
+        # The view is placed before attaching.  A context needs an ``update``
+        # message only when its view moves or resizes after attaching.
         self.resize(update=False)
         log.debug('setView:')
         objc.send(self._context, 'setView:', self._view,
                   argtypes=(cocoa.ID,), restype=None)
 
     def _checkVersion(self) -> None:
-        """Refuse a context that is lower than the profile it was made with
+        """Raise TkContextError if the context's version is below its profile's
 
         CGL accepts a pixel format naming the 3.2 core profile on a renderer
-        that implements 2.1, and answers with a 2.1 context.  macOS resolves
-        every entry point from the framework whether or not the context has it,
-        so the first 3.x call on that context is a crash rather than an error.
+        that implements 2.1, and returns a 2.1 context.  macOS resolves every
+        entry point from the framework whether or not the context supports
+        it, so the first 3.x call on that context crashes the process.
         """
         from OpenGL.GL import GL_VERSION, glGetString
 
@@ -349,8 +349,8 @@ class AquaContext(object):
             window for window in objc.items(objc.send(application, 'windows'))
             if objc.send(window, 'contentView')
         ]
-        # Tk's own content view class first: a process with other windows in it
-        # (a second toolkit, a file dialog) has views that are not Tk's.
+        # Prefer windows whose content view is Tk's class.  A process can also
+        # have windows from a second toolkit or a file dialog.
         tkWindows = [
             window for window in windows
             if objc.className(objc.send(window, 'contentView'))
@@ -364,13 +364,12 @@ class AquaContext(object):
         return objc.send(window, 'contentView')
 
     def _isOurToplevel(self, window: int) -> bool:
-        """Whether ``window`` is the toplevel's, found by what it is titled
+        """Whether ``window`` is the toplevel's ``NSWindow``, matched by title
 
-        Tk keeps no handle to an ``NSWindow`` that a script can read, and
-        nothing else a Tk toplevel and its window share is unique -- two
-        toplevels can have one size and one position.  So the toplevel is given
-        a title nothing else has for the length of the question, and the
-        window wearing it is the one.
+        Tk exposes no ``NSWindow`` handle to scripts.  Size and position do not
+        identify a window, because two toplevels can share both.  The toplevel
+        is given a unique temporary title, and the window with that title is
+        the match.  The original title is then restored.
         """
         previous = self.toplevel.wm_title()
         token = 'OpenGL.Tk %s' % (uuid.uuid4().hex,)
@@ -384,7 +383,7 @@ class AquaContext(object):
 
     ### keeping the view where the widget is
     def _follow(self) -> None:
-        """Move and hide the view as the widget and its toplevel do"""
+        """Bind events that move, show and hide the view with the widget"""
         self._bind(self.widget, '<Configure>', self._onGeometry)
         self._bind(self.widget, '<Unmap>', self._onUnmap)
         self._bind(self.widget, '<Map>', self._onMap)
@@ -414,12 +413,12 @@ class AquaContext(object):
                            argtypes=(cocoa.BOOL,), restype=None)
 
     def resize(self, update: bool = True) -> None:
-        """Put the view over the widget again and tell the context its size
+        """Move the view over the widget and send the context ``update``
 
-        Called for you as the widget and its toplevel change.  The context is
-        told only when the view's frame is different from the last one it was
-        given, and only if ``update`` is true.  A no-op once the context is
-        gone.
+        Called automatically when the widget or its toplevel changes.  The
+        view's frame is set only when it differs from the last frame.  The
+        context receives ``update`` only then, and only if ``update`` is true.
+        Does nothing after the context is destroyed.
         """
         if self._view is None or self._context is None:
             return
@@ -444,7 +443,7 @@ class AquaContext(object):
 
     ### the context protocol
     def makeCurrent(self) -> bool:
-        """Draw into this widget from now on; False if the driver refused"""
+        """Make this context current; False if the driver refused"""
         if self._context is None:
             return False
         with self.objc.pool():
@@ -455,7 +454,7 @@ class AquaContext(object):
         return made
 
     def releaseCurrent(self) -> None:
-        """Let go of the current context, leaving none current"""
+        """Release the current context, leaving none current"""
         CGL.library().CGLSetCurrentContext(None)
         nowCurrent(None)
 
@@ -468,19 +467,18 @@ class AquaContext(object):
             log.debug('flushed')
 
     def setSwapInterval(self, interval: int) -> bool:
-        """Wait ``interval`` refreshes between swaps; False if it cannot"""
+        """Wait ``interval`` refreshes between swaps; False if unsupported"""
         if self.handle is None:
             return False
         return CGL.set_swap_interval(ctypes.c_void_p(self.handle), interval)
 
     def destroy(self) -> None:
-        """Give the context and its view back
+        """Release the context and remove its view
 
-        Called twice is called once; the second call has nothing to do.
+        A second call does nothing.
 
-        A ``glBegin`` block left open goes with it: a context destroyed inside
-        one is undefined and a driver need not survive it, so the block is
-        closed while there is still a context to close it in.  See
+        An open ``glBegin`` block is closed first.  Destroying a context inside
+        one is undefined behaviour, and some drivers crash.  See
         :func:`OpenGL.error.end_abandoned_block`.
         """
         for widget, sequence, identifier in self._bindings:
@@ -507,6 +505,6 @@ class AquaContext(object):
         self.toplevel = None
 
     def describe(self) -> str:
-        """A one-line description of what this context is, for a log line"""
+        """A one-line description of this context, for a log line"""
         return 'NSOpenGLContext (%s profile, %s renderer) for %s' % (
             self.profile, self.renderer, self.attributes.describe())

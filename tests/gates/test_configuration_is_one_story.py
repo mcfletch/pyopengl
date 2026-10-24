@@ -35,8 +35,8 @@ import pytest
 PACKAGE_INIT = os.path.join(paths.PACKAGE, '__init__.py')
 CONFIGFLAGS = os.path.join(paths.PACKAGE, '_configflags.py')
 
-#: How the docstring introduces a flag: ``    NAME -- what it does``.
-DOCUMENTED = re.compile(r'^ {4}([A-Z][A-Z0-9_]+) --', re.MULTILINE)
+#: How the docstring introduces a flag: ``    NAME - what it does``.
+DOCUMENTED = re.compile(r'^ {4}([A-Z][A-Z0-9_]+) - ', re.MULTILINE)
 
 
 def tree(path):

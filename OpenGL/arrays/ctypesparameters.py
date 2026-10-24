@@ -44,15 +44,15 @@ class CtypesParameterHandler( formathandler.FormatHandler ):
     def zeros( self, dims, typeCode ):
         """Return a ctypes array of zeros in the given size
 
-        ``dims`` is a shape or a single length, as ``numpy.zeros`` takes
-        either: the handlers answer the same call whichever is installed.
+        ``dims`` is a shape or a single length, as for ``numpy.zeros``, so
+        every handler accepts the same call.
         """
         type = GL_TYPE_TO_ARRAY_MAPPING[ typeCode ]
         for dim in _as_shape(dims):
             type *= int(dim)
         return type() # ctypes arrays are zero-initialised
     def ones( self, dims, typeCode='d' ):
-        """Return numpy array of ones in given size"""
+        """Not implemented for ctypes parameters; raises NotImplementedError"""
         raise NotImplementedError( """Haven't got a good ones implementation yet""" )
 ##		type = GL_TYPE_TO_ARRAY_MAPPING[ typeCode ]
 ##		for dim in dims:

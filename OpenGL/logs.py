@@ -75,7 +75,7 @@ class _ErrorLoggedFunction ( _LoggedFunction ):
 def logOnFailDec( log ):
     """Decorator that optionally enables logging to given log on failures
     
-    log -- logger to which to log the messages
+    log - logger to which to log the messages
 
     Uses ERROR_LOGGING and FULL_LOGGING
     to determine whether/how to wrap the function.

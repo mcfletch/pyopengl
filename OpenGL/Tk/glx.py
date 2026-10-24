@@ -1,20 +1,20 @@
 """An OpenGL context on a Tk widget's X11 window.
 
-Tk gives out the X window id (``winfo_id()``); GLX makes a context against one.
-Two questions are asked of the driver, and :func:`configAttributes` and
-:func:`contextAttributes` are what a
-:class:`~OpenGL.Tk.attributes.ContextAttributes` becomes for each:
+Tk provides the X window id (``winfo_id()``), and GLX creates a context for
+that window in two steps.  :func:`configAttributes` and
+:func:`contextAttributes` translate a
+:class:`~OpenGL.Tk.attributes.ContextAttributes` into the attribute list for
+each step:
 
-* which framebuffer configuration to use (``glXChooseFBConfig``), and
-* which context to make on it (``glXCreateContextAttribsARB``, where the
-  profile and version come from).
+* choose a framebuffer configuration (``glXChooseFBConfig``), and
+* create a context on it (``glXCreateContextAttribsARB``, which takes the
+  profile and version).
 
-**The window has to already have the visual the configuration wants.**  X ties
-a window to a visual when it is created and a context can only be made current
-on a window whose visual matches its configuration, so the configuration is
-chosen from among those matching the visual Tk already gave the widget rather
-than from the whole list.  A widget cannot be re-made with another visual after
-the fact, which is why nothing here tries.
+X assigns a visual to a window when the window is created.  A context can only
+be made current on a window whose visual matches the context's configuration.
+The configuration is therefore chosen from those that match the visual Tk gave
+the widget.  An X window cannot change its visual after creation, so this
+module does not try to recreate the widget.
 """
 
 from __future__ import annotations
@@ -34,11 +34,10 @@ from OpenGL.Tk.errors import TkContextError
 
 log = logging.getLogger(__name__)
 
-# The constants and entry points in these two arrive from PyOpenGL's generated
-# declaration tables as the module is imported, so a checker reading the source
-# finds none of them by name.  Aliased through Any rather than annotated one at
-# a time: there is nothing a checker could usefully say about a table it cannot
-# see, and forty suppressions would bury the errors it *can* find here.
+# The constants and entry points in these two modules come from PyOpenGL's
+# generated declaration tables at import time, so a type checker reading the
+# source cannot find them by name.  They are aliased through Any, which avoids
+# about forty separate suppressions in this module.
 create_context: Any = _create_context
 create_context_profile: Any = _create_context_profile
 
@@ -46,12 +45,12 @@ __all__ = ['GLXContext', 'configAttributes', 'contextAttributes']
 
 
 def configAttributes(attributes: ContextAttributes) -> list[int]:
-    """The ``glXChooseFBConfig`` attribute list a request asks for
+    """The ``glXChooseFBConfig`` attribute list for ``attributes``
 
-    Terminated with ``GL_NONE``, as that call requires.  What is *not* in the
-    list matters: an attribute nobody asked for is left out rather than asked
-    for as zero, because ``glXChooseFBConfig`` treats a named attribute as a
-    minimum and a driver with no such configuration then matches nothing.
+    Terminated with ``GL_NONE``, as that call requires.  Multisampling and
+    stereo are only included when requested.  ``glXChooseFBConfig`` treats a
+    listed attribute as a minimum, and a driver with no matching
+    configuration returns none.
     """
     wanted = [
         GLX.GLX_X_RENDERABLE, 1,
@@ -75,11 +74,11 @@ def configAttributes(attributes: ContextAttributes) -> list[int]:
 
 
 def contextAttributes(attributes: ContextAttributes) -> list[int]:
-    """The ``glXCreateContextAttribsARB`` attribute list a request asks for
+    """The ``glXCreateContextAttribsARB`` attribute list for ``attributes``
 
-    Terminated with 0.  A ``legacy`` request has nothing to say here -- no
-    version and no profile -- and is created through ``glXCreateNewContext``
-    instead; see :meth:`GLXContext._create`.
+    Terminated with 0.  A ``legacy`` request has no version and no profile.
+    It is created through ``glXCreateNewContext`` instead; see
+    :meth:`GLXContext._create`.
     """
     wanted: list[int] = []
     if attributes.version:
@@ -105,10 +104,10 @@ def contextAttributes(attributes: ContextAttributes) -> list[int]:
 
 
 class XErrorEvent(ctypes.Structure):
-    """The X error report an error handler is handed
+    """The X error report passed to an error handler
 
-    Only as far as the fields this reads; the rest of the structure is longer
-    and nothing here looks past ``resourceid``.
+    Declared only up to ``resourceid``.  The real structure is longer, but no
+    later field is read here.
     """
 
     _fields_ = [
@@ -122,9 +121,8 @@ class XErrorEvent(ctypes.Structure):
     ]
 
 
-#: The signature ``XSetErrorHandler`` takes.  Kept at module scope because a
-#: ctypes callback must outlive every call that could reach it, and one built
-#: inside a function would be collected the moment it returned.
+#: The callback type ``XSetErrorHandler`` takes.  Defined at module scope
+#: because a ctypes callback must outlive every call that can reach it.
 ERROR_HANDLER = ctypes.CFUNCTYPE(
     ctypes.c_int, ctypes.c_void_p, ctypes.POINTER(XErrorEvent))
 
@@ -145,19 +143,18 @@ def _x11() -> Any:
 
 
 class collectedXErrors(object):
-    """Catch X's errors for the length of the block instead of dying of them
+    """Collect X errors raised inside the block instead of exiting
 
-    **Xlib's default error handler prints to stderr and calls ``exit()``.**  A
-    library cannot leave that in place around a request the server may refuse:
-    asking for a GL version a driver will not give would end the application
-    rather than raise something it could catch and answer.
+    Xlib's default error handler prints to stderr and calls ``exit()``.  A
+    request for a GL version the driver does not support would then end the
+    application instead of raising an exception it can catch.
 
-    X reports errors asynchronously, so the request has to be flushed and the
-    reply read before the block ends -- :meth:`sync` is that, and it is called
-    on the way out.
+    X reports errors asynchronously, so requests must be flushed and replies
+    read before the block ends.  :meth:`sync` does that, and ``__exit__``
+    calls it.
 
-    ``XSetErrorHandler`` is process-wide, so this is not thread-safe; there is
-    no per-display handler in Xlib to be safe with.
+    ``XSetErrorHandler`` is process-wide and Xlib has no per-display handler,
+    so this class is not thread-safe.
     """
 
     def __init__(self, library: Any, display: Any) -> None:
@@ -175,7 +172,7 @@ class collectedXErrors(object):
         return 0
 
     def sync(self) -> None:
-        """Flush what has been asked and read whatever the server said"""
+        """Flush pending requests and process the server's replies"""
         self.library.XSync(self.display, False)
 
     def __enter__(self) -> "collectedXErrors":
@@ -192,14 +189,14 @@ class collectedXErrors(object):
 class GLXContext(object):
     """A GLX context bound to the X window a Tk widget owns
 
-    Built by :func:`OpenGL.Tk.context.createContext`; a caller reaches it as
+    Created by :func:`OpenGL.Tk.context.createContext` and available as
     ``frame.context``.
 
     Attributes:
-        handle -- the ``GLXContext`` the driver made, which is what PyOpenGL's
-            per-context dispatch tables are keyed by
-        display -- the ``Display*`` this context's connection uses
-        drawable -- the X window id it draws into
+        handle - the driver's ``GLXContext``; PyOpenGL's per-context dispatch
+            tables are keyed by it
+        display - the ``Display*`` of this context's X connection
+        drawable - the X window id it draws into
     """
 
     handle = None
@@ -209,10 +206,9 @@ class GLXContext(object):
     def __init__(self, widget: Any, attributes: ContextAttributes) -> None:
         self.attributes = attributes
         self._x11 = _x11()
-        # A connection of this module's own rather than Tk's.  Tk does not hand
-        # its Display* out, and a second connection to the same server draws
-        # into the same window perfectly well -- it is the window id that
-        # identifies the target, not the connection that asked about it.
+        # This module opens its own X connection because Tk does not expose
+        # its Display*.  A second connection to the same server can draw into
+        # the same window, since the window id identifies the target.
         self.display = self._x11.XOpenDisplay(
             widget.winfo_screen().encode('utf-8'))
         if not self.display:
@@ -231,13 +227,13 @@ class GLXContext(object):
     def _chooseConfig(self, widget: Any) -> Any:
         """The framebuffer configuration matching both the request and Tk
 
-        A context is only ever current on a window whose visual its
-        configuration was chosen for, and Tk chose the widget's visual when it
-        made the window, so the search is narrowed to configurations on that
-        visual.  Where none matches -- Tk's default visual has no depth buffer
-        on some servers -- the best of the rest is taken and the difference is
-        logged, since a context on the wrong visual is a ``BadMatch`` and no
-        other explanation.
+        A context can only be current on a window whose visual matches its
+        configuration.  Tk chose the widget's visual when it created the
+        window, so the search is limited to configurations on that visual.  On
+        some servers Tk's default visual has no depth buffer, and nothing
+        matches.  The first matching configuration is then used and the
+        mismatch is logged, because a context on the wrong visual fails with
+        an unexplained ``BadMatch``.
         """
         screen = self._x11.XDefaultScreen(self.display)
         wanted = configAttributes(self.attributes)
@@ -268,11 +264,11 @@ class GLXContext(object):
     def _keep(config: Any) -> Any:
         """A copy of a configuration handle that outlives the array it was in
 
-        Indexing a ctypes pointer array gives a **view onto that memory**, not
-        a copy of the value: after ``XFree`` releases the array, reading the
-        handle again gives whatever is in the freed block, and the driver
-        answers ``GLXBadFBConfig`` -- fatally, since Xlib's default error
-        handler exits.  ``cast`` builds an object holding the address itself.
+        Indexing a ctypes pointer array returns a view onto the array's
+        memory.  After ``XFree`` releases the array, the handle reads whatever
+        is in the freed block.  The driver then reports ``GLXBadFBConfig``,
+        and Xlib's default error handler exits the process.  ``cast`` builds an
+        object that holds the address itself.
         """
         return ctypes.cast(config, type(config))
 
@@ -285,11 +281,11 @@ class GLXContext(object):
         return int(value.value)
 
     def _create(self, attributes: ContextAttributes) -> Any:
-        """Make the context, saying why if the driver will not
+        """The new context handle; raises TkContextError with the reason
 
-        ``ARB_create_context`` is what a version or a profile is asked through,
-        and a driver without it can only answer the older call -- which is
-        also the only thing a ``legacy`` request wants.
+        A version or profile can only be requested through
+        ``ARB_create_context``.  A driver without that extension only supports
+        ``glXCreateNewContext``, which is also what a ``legacy`` request uses.
         """
         share = getattr(attributes.share, 'handle', attributes.share) or None
         legacy = attributes.version is None and attributes.profile == 'legacy'
@@ -308,8 +304,8 @@ class GLXContext(object):
                     self.display, self.config, share, True,
                     (ctypes.c_int * len(wanted))(*wanted),
                 )
-            # X reports a refusal asynchronously, so the request has to be
-            # flushed and the reply read before the answer means anything.
+            # X reports a refusal asynchronously, so flush the request and read
+            # the reply before checking the result.
             errors.sync()
         if errors.errors or not handle:
             raise TkContextError(
@@ -321,15 +317,14 @@ class GLXContext(object):
 
     ### the context protocol
     def makeCurrent(self) -> bool:
-        """Draw into this widget from now on; False if the driver refused
+        """Make this context current; False if the driver refused
 
-        Whatever held the thread is let go of first.  A thread may have one
-        current context, and EGL and GLX do not know about each other: asking
-        GLX for the thread while an EGL context holds it is an X ``BadAccess``,
-        which Xlib's default error handler turns into a process exit rather
-        than something a caller could answer.  That is not a contrived pairing
-        -- a program with a Tk view and a second renderer through another
-        toolkit has both -- and letting go first costs one query.
+        Any context current on the thread is released first.  A thread has at
+        most one current context, and EGL and GLX do not track each other.
+        Calling ``glXMakeCurrent`` while an EGL context is current is an X
+        ``BadAccess``, and Xlib's default error handler exits the process.  A
+        program with a Tk view and a second renderer in another toolkit can
+        have both.  The release costs one query.
         """
         if self.handle is None:
             return False
@@ -344,7 +339,7 @@ class GLXContext(object):
         return made
 
     def releaseCurrent(self) -> None:
-        """Let go of the current context, leaving none current"""
+        """Release the current context, leaving none current"""
         GLX.glXMakeCurrent(self.display, 0, None)
         nowCurrent(None)
 
@@ -354,7 +349,7 @@ class GLXContext(object):
             GLX.glXSwapBuffers(self.display, self.drawable)
 
     def setSwapInterval(self, interval: int) -> bool:
-        """Wait ``interval`` refreshes between swaps; False if it cannot"""
+        """Wait ``interval`` refreshes between swaps; False if unsupported"""
         from OpenGL.GLX.EXT import swap_control as _swap_control
 
         swap_control: Any = _swap_control
@@ -370,13 +365,12 @@ class GLXContext(object):
         return True
 
     def destroy(self) -> None:
-        """Give the context and this module's display connection back
+        """Destroy the context and close this module's display connection
 
-        Called twice is called once; the second call has nothing to do.
+        A second call does nothing.
 
-        A ``glBegin`` block left open goes with it: a context destroyed inside
-        one is undefined and a driver need not survive it, so the block is
-        closed while there is still a context to close it in.  See
+        An open ``glBegin`` block is closed first.  Destroying a context inside
+        one is undefined behaviour, and some drivers crash.  See
         :func:`OpenGL.error.end_abandoned_block`.
         """
         if self.handle is not None:
@@ -393,6 +387,6 @@ class GLXContext(object):
             self.display = None
 
     def describe(self) -> str:
-        """A one-line description of what this context is, for a log line"""
+        """A one-line description of this context, for a log line"""
         return 'GLX context on window 0x%x for %s' % (
             self.drawable or 0, self.attributes.describe())

@@ -35,17 +35,16 @@ class FormatHandler(object):
     def loadPlugin(cls, entrypoint):
         """Load a single entry-point via plugins module
 
-        A handler that cannot be imported is an ordinary state of affairs --
-        numpy is an optional dependency, and the handler for it is registered
-        whether or not numpy is installed -- so this reports and carries on
-        rather than raising.  ``WARN_ON_FORMAT_UNAVAILABLE`` says at which
-        level, since for most callers an absent numpy is not news.
+        A handler that cannot be imported is logged and skipped, without
+        raising.  This is normal: numpy is optional, and its handler is
+        registered whether or not numpy is installed.
+        ``WARN_ON_FORMAT_UNAVAILABLE`` selects the log level, warning or info.
         """
         from OpenGL.arrays.arraydatatype import ArrayDatatype
 
         if not entrypoint.loaded:
-            # `plugins.Plugin.load` reports the ImportError to the
-            # "OpenGL.plugins" logger and answers None; it does not raise.
+            # `plugins.Plugin.load` logs the ImportError to the
+            # "OpenGL.plugins" logger and returns None; it does not raise.
             plugin_class = entrypoint.load()
             entrypoint.loaded = True
             if plugin_class is None:
@@ -122,9 +121,6 @@ class FormatHandler(object):
     def dimensions(self, value):
         """Determine dimensions of the passed array value (if possible)
 
-        The shape of an array is a property of the array, so this takes no
-        type code: no handler here has ever accepted one, and no caller has
-        ever passed one.  Declaring it meant the interface a third party
-        writing a handler reads described an argument every implementation
-        would have refused.
+        An array's shape does not depend on a type code, so this method takes
+        none.
         """

@@ -14,13 +14,12 @@ from OpenGL.raw.osmesa import _types
 class OSMesaPlatform( baseplatform.SplitEntryPointPlatform ):
     """OSMesa implementation for PyOpenGL
 
-    Which entry points the library exports is the build's business rather than
-    the API's.  Built for Linux it is the whole of Mesa and exports every name
-    in it; built for Windows it carries the ``opengl32`` export list, the GL
-    1.1 set and nothing above it, and ``OSMesaGetProcAddress`` answers for the
-    rest -- so this is a
-    :class:`~OpenGL.platform.baseplatform.SplitEntryPointPlatform`, and its
-    lookup is a query that says no for a name Mesa does not have.
+    The entry points the library exports depend on the build.  A Linux build
+    contains all of Mesa and exports every name.  A Windows build has the
+    ``opengl32`` export list, which stops at GL 1.1, and
+    ``OSMesaGetProcAddress`` returns the rest.  This class is therefore a
+    :class:`~OpenGL.platform.baseplatform.SplitEntryPointPlatform`.  Its lookup
+    returns null for a name Mesa does not implement.
     """
     EXPORTED_NAMES = baseplatform.BasePlatform.EXPORTED_NAMES[:] + [
         'OSMesa',
@@ -79,18 +78,18 @@ class OSMesaPlatform( baseplatform.SplitEntryPointPlatform ):
     def CurrentContextIsValid( self ): return self.GetCurrentContext
     
     def releaseCurrentContext( self ):
-        """Let go of the context this thread holds; answer whether there was one
+        """Release this thread's current context; True if one was current
 
         See
         :meth:`OpenGL.platform.baseplatform.BasePlatform.releaseCurrentContext`
-        for why a program with two GL bindings in it needs this.  OSMesa says
-        "no context" the same way it says "this context": a make-current with
-        a null context and no buffer, which it accepts whether or not one was
-        held.
+        for why a program using two GL binding APIs needs this.  OSMesa
+        releases a context through ``OSMesaMakeCurrent`` with a null context
+        and no buffer.  It accepts that call whether or not a context was
+        current.
 
-        So whether there *was* one is read first, and the release is only
-        attempted when there was -- the answer this returns is that question
-        and not whether the call succeeded.
+        The current context is therefore read first, and the release is made
+        only if there was one.  The result reports whether a context was
+        current before the call.  OSMesa gives no success result to report.
         """
         current = self.GetCurrentContext()
         if not current:

@@ -27,10 +27,10 @@ class CtypesPointerHandler( formathandler.FormatHandler ):
         """Given value in a known data-pointer type, return void_p for pointer"""
         return ctypes.cast( value, ctypes.c_void_p )
     def zeros( self, dims, typeCode ):
-        """Return Numpy array of zeros in given size"""
+        """Not implemented for ctypes pointers; raises NotImplementedError"""
         raise NotImplementedError( """Sized output doesn't yet work...""" )
     def ones( self, dims, typeCode='d' ):
-        """Return numpy array of ones in given size"""
+        """Not implemented for ctypes pointers; raises NotImplementedError"""
         raise NotImplementedError( """Haven't got a good ones implementation yet""" )
     def arrayToGLType( self, value ):
         """Given a value, guess OpenGL type of the corresponding pointer"""
@@ -51,11 +51,11 @@ class CtypesPointerHandler( formathandler.FormatHandler ):
     def arrayByteCount( self, value, typeCode = None ):
         """Number of bytes in the pointed-to data
 
-        A bare pointer carries no length, so we report the size of a single
-        pointed-to element.  On CPython ``ctypes.byref`` yields a lightweight
-        ``CArgObject`` (handled by CtypesParameterHandler); on PyPy it yields a
-        real ``_Pointer`` which lands here instead, so this keeps the
-        size-checked output converters working consistently across the two.
+        A bare pointer carries no length, so this returns the size of one
+        pointed-to element.  On CPython ``ctypes.byref`` returns a
+        ``CArgObject``, handled by CtypesParameterHandler.  On PyPy it returns
+        a ``_Pointer``, handled here, so the size-checked output converters
+        behave the same on both.
         """
         return ctypes.sizeof( value._type_ )
     def unitSize( self, value, typeCode=None ):

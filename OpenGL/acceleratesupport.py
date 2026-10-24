@@ -4,22 +4,21 @@ import logging
 
 import OpenGL
 
-#: The oldest accelerate whose wrapper, array-datatype and format-handler
-#: accelerators track this PyOpenGL's internals.  Those do not share the
-#: generated tables the dispatch extension does -- that pair is held to exact
-#: equality in OpenGL._dispatch -- but they follow the same internals, so the
-#: floor moves with the major version.  PyOpenGL-accelerate pins the pairing
-#: from its own side; this is the backstop for an installation assembled
-#: without a resolver.
+#: The oldest OpenGL_accelerate whose wrapper, array-datatype and
+#: format-handler accelerators match this PyOpenGL's internals.  These
+#: accelerators do not use the generated tables, unlike the dispatch
+#: extension, whose version OpenGL._dispatch requires to match exactly.  They
+#: depend on the same internals, so this minimum follows the major version.
+#: PyOpenGL-accelerate also pins the pairing in its own requirements.  This
+#: check covers installations assembled without a dependency resolver.
 needed_version = (4, 0, 0)
 _log = logging.getLogger("OpenGL.acceleratesupport")
 try:
     import OpenGL_accelerate
 
-    # Read from the package, not from the _configflags snapshot: that is taken
-    # when _configflags is first imported, which may be a framework's import
-    # rather than the caller's, and would then predate the assignment this
-    # switch exists for.
+    # Read from the package instead of _configflags.  _configflags copies the
+    # flags when it is first imported, which may happen in a framework's
+    # import before the caller sets USE_ACCELERATE.
     if OpenGL.USE_ACCELERATE:
         if OpenGL_accelerate.__version_tuple__ < needed_version:
             _log.warning(

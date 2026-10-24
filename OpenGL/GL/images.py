@@ -288,13 +288,13 @@ for suffix,type in [
     def glGetTexImage( target, level,format,type=type, array=None, outputType=bytes ):
         """Get a texture-level as an image
         
-        target -- enum constant for the texture engine to be read
-        level -- the mip-map level to read
-        format -- image format to read out the data
-        type -- data-type into which to read the data
-        array -- optional array/offset into which to store the value
+        target - enum constant for the texture engine to be read
+        level - the mip-map level to read
+        format - image format to read out the data
+        type - data-type into which to read the data
+        array - optional array/offset into which to store the value
 
-        outputType -- default (bytes) provides string output of the
+        outputType - default (bytes) provides string output of the
             results iff OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING is True
             and type == GL_UNSIGNED_BYTE.  Any other value will cause
             output in the default array output format.
@@ -344,12 +344,12 @@ for suffix,type in [
 def glReadPixels( x,y,width,height,format,type, array=None, outputType=bytes ):
     """Read specified pixels from the current display buffer
 
-    x,y,width,height -- location and dimensions of the image to read
+    x,y,width,height - location and dimensions of the image to read
         from the buffer
-    format -- pixel format for the resulting data
-    type -- data-format for the resulting data
-    array -- optional array/offset into which to store the value
-    outputType -- default (bytes) provides string output of the
+    format - pixel format for the resulting data
+    type - data-format for the resulting data
+    array - optional array/offset into which to store the value
+    outputType - default (bytes) provides string output of the
         results iff OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING is True
         and type == GL_UNSIGNED_BYTE.  Any other value will cause
         output in the default array output format.
@@ -384,13 +384,13 @@ def glReadPixels( x,y,width,height,format,type, array=None, outputType=bytes ):
 def glGetTexImage( target, level,format,type, array=None, outputType=bytes ):
     """Get a texture-level as an image
 
-    target -- enum constant for the texture engine to be read
-    level -- the mip-map level to read
-    format -- image format to read out the data
-    type -- data-type into which to read the data
-    array -- optional array/offset into which to store the value
+    target - enum constant for the texture engine to be read
+    level - the mip-map level to read
+    format - image format to read out the data
+    type - data-type into which to read the data
+    array - optional array/offset into which to store the value
 
-    outputType -- default (bytes) provides string output of the
+    outputType - default (bytes) provides string output of the
         results iff OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING is True
         and type == GL_UNSIGNED_BYTE.  Any other value will cause
         output in the default array output format.
@@ -527,12 +527,11 @@ def setImageInput(
         argName for argName in baseOperation.argNames
         if argName in dimNames
     ]) + 1
-    # Each customisation is *rebound*, not applied in place.  A wrapper is free
-    # to answer a setter with a different object -- and the C dispatch layer
-    # does exactly that when a call changes which arguments the entry point
-    # takes, as dropping the dimensions and the type here does.  Throwing the
-    # answer away would leave this holding the base and give the typed variant
-    # the base's signature.
+    # Each setter's return value is assigned back.  A setter may return a
+    # different object.  The C dispatch layer does so when a call changes
+    # which arguments the entry point takes, as removing the dimensions and
+    # the type does here.  Ignoring the return value would give the typed
+    # variant the base function's signature.
     if arrayType:
         converter = TypedImageInputConverter( rank, pixelName, arrayType, typeName=typeName )
         for _i,argName in enumerate(baseOperation.argNames):

@@ -6,13 +6,13 @@ from OpenGL._bytes import long, integer_types
 class GLUStruct( object ):
     """Mix-in class for GLU Structures that want to retain references to callbacks
     
-    Also provides original-object-return for the "datapointer" style paremters
+    Also provides original-object-return for the "datapointer" style parameters
     
     Each sub-class must override:
-        CALLBACK_TYPES -- maps a "which" constant to a function type 
-        CALLBACK_FUNCTION_REGISTRARS -- maps a "which" constant to the 
+        CALLBACK_TYPES - maps a "which" constant to a function type 
+        CALLBACK_FUNCTION_REGISTRARS - maps a "which" constant to the 
             registration function for functions of that type
-        WRAPPER_METHODS -- maps a "which" consant to a method of the structure 
+        WRAPPER_METHODS - maps a "which" constant to a method of the structure 
             that produces a callable around the function which takes care of 
             input/output arguments, data conversions, error handling and the 
             like.

@@ -1,308 +1,270 @@
 """ctypes-based OpenGL wrapper for Python
 
-This is the PyOpenGL 3.x tree, it attempts to provide
-a largely compatible API for code written with the
-PyOpenGL 2.x series using the ctypes foreign function
-interface system.
+PyOpenGL 3.x and later call OpenGL through the ctypes foreign function
+interface.  The API stays largely compatible with code written for the
+PyOpenGL 2.x series.
 
 Configuration Variables:
 
-There are a few configuration variables in this top-level
-module.  Applications should be the only code that tweaks
-these variables, mid-level libraries should not take it
-upon themselves to disable/enable features at this level.
-The implication there is that your library code should be
-able to work with any of the valid configurations available
-with these sets of flags.
+This top-level module holds a few configuration variables.  Only the
+application should set them.  A library should not enable or disable
+features at this level, and library code should work with any valid
+combination of these flags.
 
-Further, once any entry point has been loaded, the variables 
-can no longer be updated.  The OpenGL._confligflags module 
-imports the variables from this location, and once that 
-import occurs the flags should no longer be changed.
+The flags are read once, when the first entry point is loaded.  The
+OpenGL._configflags module copies them from this module at that point,
+and later changes have no effect.
 
-    ERROR_CHECKING -- if set to a False value before
-        importing any OpenGL.* libraries will completely
-        disable error-checking.  This can dramatically
-        improve performance, but makes debugging far
-        harder.
+    ERROR_CHECKING - if set to a False value before any OpenGL.*
+        module is imported, error checking is disabled completely.
+        This can greatly improve performance, but makes debugging
+        much harder.
 
-        This is intended to be turned off *only* in a
-        production environment where you *know* that
-        your code is entirely free of situations where you
-        use exception-handling to handle error conditions,
-        i.e. where you are explicitly checking for errors
-        everywhere they can occur in your code.
+        Turn it off *only* in a production environment where your
+        code never uses exception handling for error conditions,
+        i.e. where it explicitly checks for errors everywhere they
+        can occur.
 
         Default: True
 
-    ERROR_LOGGING -- If True, then wrap array-handler
-        functions with  error-logging operations so that all exceptions
-        will be reported to log objects in OpenGL.logs, note that
-        this means you will get lots of error logging whenever you
-        have code that tests by trying something and catching an
-        error, this is intended to be turned on only during
-        development so that you can see why something is failing.
+    ERROR_LOGGING - if True, array-handler functions are wrapped
+        with error logging, so every exception is reported to a
+        logger in OpenGL.logs.  Code that tests by trying something
+        and catching the error then logs a lot.  Turn it on during
+        development to see why something is failing.
 
         Errors are normally logged to the OpenGL.errors logger.
 
-        Only triggers if ERROR_CHECKING is True
+        Only applies if ERROR_CHECKING is True.
 
         Default: False
 
-    ERROR_ON_COPY -- if set to a True value before
-        importing the numpy/lists support modules, will
-        cause array operations to raise
-        OpenGL.error.CopyError if the operation
-        would cause a data-copy in order to make the
-        passed data-type match the target data-type.
+    ERROR_ON_COPY - if set to a True value before the numpy/lists
+        support modules are imported, an array operation raises
+        OpenGL.error.CopyError when it would have to copy the data
+        to match the target data type.
 
-        This effectively disables all list/tuple array
-        support, as they are inherently copy-based.
+        This disables list and tuple array support, since lists and
+        tuples are always copied.
 
-        Array *data* is what this is about: the per-frame
-        vertex or pixel copy that costs a program its speed,
-        and whose temporary can be freed while the driver
-        still holds the pointer.  A string parameter -- a
-        uniform or attribute name, a debug label, GLSL source
-        -- is not that, and a str is still accepted and
-        encoded for one: it happens once, the driver reads it
-        before the call returns, and there is no other way to
-        pass a str.
+        The flag applies to array *data*.  A per-frame vertex or
+        pixel copy costs speed, and its temporary can be freed while
+        the driver still holds the pointer.  String parameters (a
+        uniform or attribute name, a debug label, GLSL source) are
+        still accepted as str and encoded.  That copy happens once,
+        the driver reads it before the call returns, and a str
+        cannot be passed any other way.
 
-        This feature allows for optimisation of your
-        application.  It should only be enabled during
-        testing stages to prevent raising errors on
-        recoverable conditions at run-time.
+        Use this flag to find copies while optimising an
+        application.  Enable it only during testing, so that
+        recoverable conditions do not raise errors at run time.
 
         Default: False
 
-    ERROR_DEBUG_OUTPUT -- if True, a context offering GL_KHR_debug
-        reports errors through the driver's callback rather than
-        through a glGetError after every call.  The callback runs
-        during the failing call, so the check on the ordinary path
-        is a flag read; the same GLError is raised from the same
-        call either way.
+    ERROR_DEBUG_OUTPUT - if True, a context offering GL_KHR_debug
+        reports errors through the driver's debug callback instead
+        of a glGetError after every call.  The callback runs during
+        the failing call, so the check on the normal path is a flag
+        read.  Both modes raise the same GLError from the same call.
 
-        Switching it off leaves error checking on the glGetError
-        round trip, which is what a program wants if it installs a
-        GL_KHR_debug callback of its own -- though PyOpenGL leaves
-        an existing callback alone in any case -- or if it does not
-        want the driver put into synchronous debug output.
+        With the flag off, error checking uses the glGetError round
+        trip.  Turn it off if the program installs its own
+        GL_KHR_debug callback, or if the driver should not be put
+        into synchronous debug output.  PyOpenGL never replaces an
+        existing callback.
 
         OpenGL.dispatch.error_checking_mode() reports which
-        mechanism a context ended up with.
+        mechanism a context uses.
 
         Default: True
 
-    CONTEXT_CHECKING -- if set to True, PyOpenGL will wrap
-        *every* GL and GLU call with a check to see if there
-        is a valid context.  If there is no valid context
-        then will throw OpenGL.errors.NoContext.  This is an
-        *extremely* slow check and is not enabled by default,
-        intended to be enabled in order to track down (wrong)
-        code that uses GL/GLU entry points before the context
-        has been initialized (something later Linux GLs are
-        very picky about).
+    CONTEXT_CHECKING - if set to True, PyOpenGL wraps *every* GL
+        and GLU call with a check for a valid context, and raises
+        OpenGL.errors.NoContext when there is none.  The check is
+        *extremely* slow and is off by default.  Use it to find code
+        that calls GL/GLU entry points before the context has been
+        initialized (later Linux GL implementations reject this).
 
-        GL and GLU only.  EGL, GLX and WGL manage the display,
-        the config and the context itself, so their calls are
-        made before a GL context exists and by definition;
-        their errors are checked whether or not one is
-        current, since the part of a program that calls them
-        is the part that has none.
+        The check covers GL and GLU only.  EGL, GLX and WGL calls
+        create and manage the display, the config and the context,
+        so they run before any GL context exists.  Their errors are
+        checked whether or not a context is current.
 
         Default: False
 
-        With it off, what a call made *after* the context has gone
-        does is the platform's to decide, and the platforms differ.
-        A cleanup handler deleting GL objects is the ordinary case:
+        With the flag off, the result of a call made *after* the
+        context is gone depends on the platform.  A cleanup handler
+        that deletes GL objects is the common case:
 
-        - On Linux, libGL answers glGetError with zero when no
+        - On Linux, libGL returns zero from glGetError when no
           context is current, so the call is silent and the handler
           finishes.
         - On Windows, opengl32 reports GL_INVALID_OPERATION for the
-          same call, so ERROR_CHECKING turns it into a GLError.
-          A handler that must run to the end there should either
-          delete its objects while the context is still current, or
-          catch GLError around the calls that may follow it.
+          same call, so ERROR_CHECKING raises a GLError.  A handler
+          that must run to the end there should delete its objects
+          while the context is still current, or catch GLError
+          around the calls that may follow it.
 
-        PyOpenGL does not paper over the difference: hiding it would
-        mean a context check on every call, which is what this flag
-        is and what it costs.  Both dispatch implementations, C and
-        ctypes, behave identically on each platform.
+        PyOpenGL keeps this difference.  Hiding it would need a
+        context check on every call, which is what this flag does
+        and what it costs.  The C and ctypes dispatch
+        implementations behave the same way on each platform.
 
-    ARRAY_SIZE_CHECKING -- if True, an output array a caller passes
-        in is measured against what the call will write into it
-        before the driver is handed the pointer.
+    ARRAY_SIZE_CHECKING - if True, an output array passed in by the
+        caller is compared with the amount the call will write into
+        it, before the driver receives the pointer.
 
-        Only a size the call *promises* is checked -- one derived
-        from a count argument, where the driver will write exactly
-        that many.  A fixed size and a pname table lookup say "no
-        more than this" instead, and passing a smaller array for a
-        pname that returns one value is not an error.
+        Only sizes derived from a count argument are checked, since
+        the driver writes exactly that many.  A fixed size or a
+        pname table lookup is only an upper bound, so passing a
+        smaller array for a pname that returns one value is not an
+        error.
 
-        What this prevents is a heap overrun: glGenTextures(1024, a)
-        with a sixteen-byte array writes 4096 bytes into it, and the
+        The check prevents heap overruns.  glGenTextures(1024, a)
+        with a sixteen-byte array writes 4096 bytes into it.  The
         bytes past the end belong to another live allocation, so the
-        damage surfaces somewhere else entirely.
+        damage shows up in unrelated code.
 
-        Input arrays are checked the same way.  One with a fixed size
-        must hold exactly that many elements: glVertex3dv takes three.
-        One the driver reads a count of items from must hold at least
-        that many: glViewportArrayv(first, count, v) reads four floats
-        per viewport, so v needs count * 4 of them, and a longer array
-        is accepted.  A short one would have the driver read past its
-        end.
+        Input arrays are checked the same way.  An input with a
+        fixed size must hold exactly that many elements: glVertex3dv
+        takes three.  An input whose length comes from a count must
+        hold at least that many items.  glViewportArrayv(first,
+        count, v) reads four floats per viewport, so v needs
+        count * 4 of them, and a longer array is accepted.  With a
+        shorter one the driver would read past its end.
 
-        Switching the check off trades these guards for the cost of
-        measuring, which is a few array attribute reads per call.  It
-        applies to the arrays a caller passes in.
+        Turning the check off removes these guards and saves a few
+        array attribute reads per call.  It applies only to arrays
+        the caller passes in.
 
-        An array of strings the driver reads count of --
-        glTransformFeedbackVaryings(program, count, varyings, mode) --
-        must hold at least that many regardless of this flag, and None
-        for a positive count is refused rather than read from address
-        zero.  The pointer array the driver reads there is one PyOpenGL
-        allocates from the sequence given and sizes by its length, so a
-        larger count is a read past the end of PyOpenGL's own buffer.
-        A GLchar *const * the caller built for themselves is passed
-        unmeasured: only its builder knows how long it is.
+        String arrays are checked whatever this flag says.  In
+        glTransformFeedbackVaryings(program, count, varyings, mode),
+        varyings must hold at least count strings, and None with a
+        positive count is refused instead of being read from address
+        zero.  PyOpenGL builds the pointer array from the sequence
+        and sizes it by the sequence's length, so a larger count
+        would read past the end of that buffer.  A GLchar *const *
+        built by the caller is passed unchecked, because PyOpenGL
+        does not have its length.
 
         Default: True
 
-    STORE_POINTERS -- if set to True, PyOpenGL array operations
-        will attempt to store references to pointers which are
-        being passed in order to prevent memory-access failures
-        if the pointed-to-object goes out of scope.  This
-        behaviour is primarily intended to allow temporary arrays
-        to be created without causing memory errors, thus it is
-        trading off performance for safety.
+    STORE_POINTERS - if set to True, PyOpenGL array operations
+        keep references to the arrays whose pointers they pass, so
+        the memory stays valid if the caller's object goes out of
+        scope.  Programs can then pass temporary arrays without
+        memory errors, at some cost in speed.
 
-        To use this flag effectively, you will want to first set
-        ERROR_ON_COPY to True and eliminate all cases where you
-        are copying arrays.  Copied arrays *will* segfault your
-        application deep within the GL if you disable this feature!
+        To use this flag, first set ERROR_ON_COPY to True and remove
+        every array copy from your application.  Copied arrays *will*
+        segfault your application deep within the GL if you disable
+        this feature!
 
-        Once you have eliminated all copying of arrays in your
-        application, you will further need to be sure that all
-        arrays which are passed to the GL are stored for at least
-        the time period for which they are active in the GL.  That
-        is, you must be sure that your array objects live at least
-        until they are no longer bound in the GL.  This is something
-        you need to confirm by thinking about your application's
-        structure.
+        Next, make sure every array passed to the GL lives at least
+        as long as the GL uses it, i.e. until it is no longer bound
+        in the GL.  That depends on your application's structure.
 
-        When you are sure your arrays won't cause seg-faults, you
-        can set STORE_POINTERS=False in your application and enjoy
-        a (slight) speed up.
+        Once your arrays cannot cause segfaults, set
+        STORE_POINTERS=False in your application for a small speed
+        up.
 
         Note: this flag is *only* observed when ERROR_ON_COPY == True,
-            as a safety measure to prevent pointless segfaults
+            so that copied arrays cannot cause segfaults.
 
         Default: True
 
-    WARN_ON_FORMAT_UNAVAILABLE -- If True, generates
-        logging-module warn-level events when a FormatHandler
-        plugin is not loadable (with traceback).
+    WARN_ON_FORMAT_UNAVAILABLE - if True, logs a warning (with
+        traceback) through the logging module when a FormatHandler
+        plugin cannot be loaded.
 
         Default: False
 
-    FULL_LOGGING -- If True, then wrap functions with
-        logging operations which reports each call along with its
-        arguments to  the OpenGL.calltrace logger at the INFO
-        level.  This is *extremely* slow.  You should *not* enable
-        this in production code!
+    FULL_LOGGING - if True, functions are wrapped so that each call
+        and its arguments are logged to the OpenGL.calltrace logger
+        at INFO level.  This is *extremely* slow.  Do *not* enable it
+        in production code.
 
-        You will need to have a  logging configuration (e.g.
-            logging.basicConfig()
-        ) call  in your top-level script to see the results of the
-        logging.
+        The top-level script needs a logging configuration (e.g. a
+        call to logging.basicConfig()) to show the output.
 
         Default: False
 
-    ALLOW_NUMPY_SCALARS -- no effect from 4.0; the flag is
-        still readable so that setting it is not an error.
+    ALLOW_NUMPY_SCALARS - no effect from 4.0; the flag is still
+        readable, so setting it is not an error.
 
-        A numpy integer scalar is accepted wherever an
-        integer is wanted, with this or without it: ctypes
-        converts it through __index__.  So the value a call
-        handed back may be passed straight to the next one,
-        which is what the flag was wanted for:
+        A numpy integer scalar is accepted wherever an integer is
+        expected, whatever this flag says, because ctypes converts it
+        through __index__.  A value returned by one call can be
+        passed straight to the next:
 
             textures = glGenTextures(2)
             glBindTexture(GL_TEXTURE_2D, textures[0])
 
-        What the flag switched on beyond that was a further
-        retry through int(), which also accepted a numpy
-        *float* where an integer was wanted and truncated it
-        silently. That is a caller's mistake rather than a
-        conversion to make for them, so it is gone.
+        Before 4.0 the flag also enabled a retry through int().  That
+        retry accepted a numpy *float* where an integer was expected
+        and truncated it silently, and 4.0 removed it.
 
-    UNSIGNED_BYTE_IMAGES_AS_STRING -- if True, we will return
-        GL_UNSIGNED_BYTE image-data as strings, instead of arrays
-        for glReadPixels and glGetTexImage
+    UNSIGNED_BYTE_IMAGES_AS_STRING - if True, glReadPixels and
+        glGetTexImage return GL_UNSIGNED_BYTE image data as strings
+        instead of arrays.
 
         Default: True
 
-    FORWARD_COMPATIBLE_ONLY -- no effect from 4.0; the flag is
-        still readable and settable so that a program that sets
-        it is not an error.
+    FORWARD_COMPATIBLE_ONLY - no effect from 4.0; the flag is still
+        readable and settable, so a program that sets it does not
+        fail.
 
-        It was meant to make the entry points OpenGL 3.1 dropped
-        refuse the call, whatever the driver exported.  What it
-        reads is a `deprecated` mark on each entry point as it is
-        built, and nothing marks one: the list of forward-
-        compatible names is in OpenGL/platform/entrypoint31.py and
-        nothing imports it.  So the flag has had nothing to gate
-        on, and turning it on changes no call.
+        The flag was meant to make calls to the entry points removed
+        in OpenGL 3.1 fail, whatever the driver exported.  It checks
+        a `deprecated` mark on each entry point as the entry point is
+        built, and no entry point carries that mark.  The list of
+        forward-compatible names is in
+        OpenGL/platform/entrypoint31.py, and no module imports it.
+        Turning the flag on changes no call.
 
-        What a context is asked for is a different question and is
-        unaffected: a forward-compatible *context* is requested
-        through the window system, and the backends that can ask
-        for one do.
+        Requesting a forward-compatible *context* is separate and
+        still works.  The window system creates such a context, and
+        the backends that support the request make it.
 
         Default: False
 
-    SIZE_1_ARRAY_UNPACK -- if True, unpack size-1 arrays to be
-        scalar values, as done in PyOpenGL 1.5 -> 3.0.0, that is,
-        if a glGenList( 1 ) is done, return a uint rather than
-        an array of uints.
+    SIZE_1_ARRAY_UNPACK - if True, size-1 arrays are returned as
+        scalar values, as in PyOpenGL 1.5 to 3.0.0.  For example,
+        glGenLists( 1 ) returns a uint instead of an array of uints.
 
-        Settable as PYOPENGL_SIZE_1_ARRAY_UNPACK, as the flags
-        around it are; until 4.0 it was the one among them that
-        was not, so setting the variable did nothing and only
-        assigning to this name before the first import worked.
+        Like the flags around it, it can be set from the environment
+        as PYOPENGL_SIZE_1_ARRAY_UNPACK.
 
         Default: True
 
-    USE_ACCELERATE -- if True, attempt to use the OpenGL_accelerate
-        package to provide Cython-coded accelerators for core wrapping
-        operations.
+    USE_ACCELERATE - if True, use the OpenGL_accelerate package,
+        when installed, for Cython-coded versions of the core
+        wrapping operations.
 
         Default: True
-    
-    MODULE_ANNOTATIONS -- if True, attempt to annotate alternates() and 
-        constants to track in which module they are defined (only useful 
-        for the documentation-generation passes, really).
-        
+
+    MODULE_ANNOTATIONS - if True, alternates() and constants are
+        annotated with the module that defines them.  Only the
+        documentation generator uses this.
+
         Default: False
-    
-    TYPE_ANNOTATIONS -- if True, fill __annotations__ on the entry
-        points declared with OpenGL.platform.types.
 
-        That is nine of them from 4.0: OSMesa's eight and one EGL
-        extension, which are the raw modules still written by
-        hand.  Everything the registry generates arrives from the
-        declaration tables and never passes through that
-        decorator, so the flag does not reach it.
+    TYPE_ANNOTATIONS - if True, __annotations__ is filled on the
+        entry points declared with OpenGL.platform.types.
 
-        The values are ctypes types and ArrayDatatype classes, so
-        what they describe is the C signature rather than the call
-        a caller writes.  What a type checker reads is the .pyi
-        stub beside each package, generated from the registry and
-        shipped with a py.typed marker, which describes the Python
-        signature -- including the arguments the friendly form
-        drops.  See docs/c-dispatch.rst.
+        From 4.0 that is nine entry points: eight in OSMesa and one
+        EGL extension, in the raw modules still written by hand.
+        Entry points generated from the registry are built from the
+        declaration tables and do not pass through that decorator,
+        so the flag does not affect them.
+
+        The annotation values are ctypes types and ArrayDatatype
+        classes, so they describe the C signature.  Type checkers
+        read the .pyi stub beside each package instead.  The stubs
+        are generated from the registry, ship with a py.typed
+        marker, and describe the Python signature, including the
+        arguments it drops from the C signature.  See
+        docs/c-dispatch.rst.
 
         Default: False
 """
@@ -354,9 +316,9 @@ PlatformPlugin("glx", "OpenGL.platform.linux.LinuxPlatform")
 PlatformPlugin("posix", "OpenGL.platform.linux.LinuxPlatform")
 PlatformPlugin("x11", "OpenGL.platform.linux.LinuxPlatform")  # xdg session type
 PlatformPlugin("osmesa", "OpenGL.platform.osmesa.OSMesaPlatform")
-# ANGLE supplies EGL and OpenGL ES on a machine whose own GL is not ES -- which
-# on Windows is every machine. Asked for by name and never guessed at: it has
-# no desktop GL to offer, so nothing should land on it by accident.
+# ANGLE supplies EGL and OpenGL ES on machines whose own GL is not ES, which on
+# Windows is every machine.  It is selected only by name and never guessed,
+# because it offers no desktop GL.
 PlatformPlugin("angle", "OpenGL.platform.angle.ANGLEPlatform")
 PlatformPlugin("egl", "OpenGL.platform.linux.LinuxPlatform")
 PlatformPlugin("wayland", "OpenGL.platform.linux.LinuxPlatform")  # xdg session type
@@ -485,9 +447,9 @@ FormatHandler(
         "numpy.float128",
         # numpy names each scalar type twice: by width above, and after the C
         # type of that width here.  Whether the two names are one object
-        # depends on the platform's C model -- on LLP64 (Windows) intc and
-        # uintc are types of their own, and an array built from a ctypes
-        # declaration yields them.
+        # depends on the platform's C model.  On LLP64 (Windows), intc and
+        # uintc are separate types, and an array built from a ctypes
+        # declaration has them.
         "numpy.byte",
         "numpy.ubyte",
         "numpy.short",
@@ -524,24 +486,23 @@ FormatHandler(
     isOutput=False,
 )
 
-# The generated modules under OpenGL/raw are not shipped: they held nothing the
-# declaration tables beside them do not, and a module that is nothing but data
-# does not need to be a module.  Something still has to answer when a program
-# imports one -- PyOpenGL does it itself, three lines into importing OpenGL.GL
-# -- so a stand-in goes on sys.meta_path here and loads the real finder on the
-# first OpenGL.raw.* import.  A stand-in rather than the finder because the
-# flags above are set by a program in the lines after `import OpenGL`, and
-# anything imported here that reads them would read them too early.
+# The generated modules under OpenGL/raw are not shipped.  Their content is in
+# the declaration tables beside them.  Programs still import OpenGL.raw.*
+# modules, and so does PyOpenGL, three lines into importing OpenGL.GL.  A
+# stand-in finder goes on sys.meta_path here and loads the real finder on the
+# first OpenGL.raw.* import.  The real finder reads the flags above, which a
+# program sets in the lines after `import OpenGL`, so importing it here would
+# read them too early.
 from OpenGL import _rawfinder as _rawfinder_module
 
 _rawfinder_module.install()
 
 
-# -- a flag set too late says so ---------------------------------------------
+# Warning for a flag set too late
 #
 # The flags above are read once, when the first entry point is built, and
-# frozen into `OpenGL._configflags`; every wrapper is built from that snapshot.
-# So this is the documented order, and works:
+# copied into `OpenGL._configflags`.  Every wrapper is built from that copy.
+# This is the documented order, and it works:
 #
 #     import OpenGL
 #     OpenGL.ERROR_ON_COPY = True
@@ -552,18 +513,17 @@ _rawfinder_module.install()
 #     import OpenGL.GL
 #     OpenGL.ERROR_ON_COPY = True
 #
-# The second is easy to reach without meaning to -- under pytest, another test
+# The second order is easy to reach by accident.  Under pytest, another test
 # module's `import OpenGL.GL` runs during collection, before the module that
-# sets the flag -- and a caller then runs on believing a setting is in force
-# that is not. Two tracker issues are exactly that, each spent looking at the
-# array machinery, which was behaving correctly the whole time:
+# sets the flag.  The program then runs without the setting it asked for.
+# Issues #5 and #159 report this case:
 # https://github.com/mcfletch/pyopengl/issues/5 and .../issues/159
 #
-# Warned rather than raised, and the assignment is still not honoured: making
-# it work would mean rebuilding every entry point already bound, which is not
-# something an attribute assignment may do.
+# The late assignment warns and is not applied.  Applying it would mean
+# rebuilding every entry point already bound, which an attribute assignment
+# should not do.
 
-#: The names whose value is snapshotted into `_configflags`.
+#: The names whose values are copied into `_configflags`.
 _SNAPSHOTTED_FLAGS = frozenset([
     'ERROR_CHECKING', 'ERROR_DEBUG_OUTPUT', 'ERROR_LOGGING', 'ERROR_ON_COPY',
     'ARRAY_SIZE_CHECKING', 'STORE_POINTERS', 'WARN_ON_FORMAT_UNAVAILABLE',
@@ -578,12 +538,11 @@ class _ConfigurationHasBeenReadWarning(RuntimeWarning):
 
 
 def _warn_if_too_late(name, value):
-    """Warn where assigning `name` can no longer have any effect.
+    """Warn when assigning `name` can no longer have any effect.
 
-    Only once the snapshot exists, since until then the assignment is exactly
-    what the caller intends, and only where the value actually differs from
-    what was taken -- setting a flag to the value already in force changes
-    nothing whenever it happens.
+    Warns only after `_configflags` has copied the flags, since before that the
+    assignment takes effect.  Warns only when the value differs from the
+    copied one, since setting a flag to its current value changes nothing.
     """
     import sys as _sys
 
@@ -607,7 +566,7 @@ def _warn_if_too_late(name, value):
 
 
 def _install_flag_guard():
-    """Give this module a ``__setattr__`` that can see a late assignment."""
+    """Give this module a ``__setattr__`` that warns on a late assignment."""
     import sys as _sys
     from types import ModuleType as _ModuleType
 

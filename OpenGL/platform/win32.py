@@ -40,21 +40,18 @@ class Win32Platform( baseplatform.SplitEntryPointPlatform ):
             return None
     #: The GLUT libraries to try, in order.
     #:
-    #: The plain names come first because a GLUT the *user* installed is one
-    #: they chose, and theirs is the build that gets fixes.  Those names are
-    #: what such a GLUT is actually called: the official freeglut Windows
-    #: binaries, MSYS2 and vcpkg all install ``freeglut.dll``, and the original
-    #: GLUT is ``glut32.dll`` -- 32 for the Win32 API rather than for the word
-    #: size, so it is that name on a 64-bit machine too.
+    #: The plain names come first, so a GLUT the user installed takes
+    #: precedence over the bundled builds.  The official freeglut Windows
+    #: binaries, MSYS2 and vcpkg all install ``freeglut.dll``.  The original
+    #: GLUT is ``glut32.dll`` on 64-bit machines too, because the 32 refers to
+    #: the Win32 API rather than the word size.
     #:
-    #: The vc-tagged names are the builds in ``PyOpenGL-glut-binaries``, which
-    #: nothing but we ship under those names.  Asking for only those meant a
-    #: user who had downloaded freeglut and put it on ``PATH`` still got
-    #: ``NullFunctionError`` from ``glutInit``, with nothing to say the file
-    #: they had wanted renaming.
+    #: The vc-tagged names are the builds in ``PyOpenGL-glut-binaries``.  Only
+    #: that package uses those names.  A freeglut on ``PATH`` under its usual
+    #: name is still found through the plain names.
     #:
-    #: freeglut before GLUT at each step: freeglut is the maintained one, and
-    #: the builds we ship are freeglut too.
+    #: Each freeglut name comes before the matching GLUT name, because freeglut
+    #: is maintained and the bundled builds are also freeglut.
     #:
     #: https://github.com/mcfletch/pyopengl/issues/76
     #: https://github.com/mcfletch/pyopengl/issues/125
@@ -75,8 +72,7 @@ class Win32Platform( baseplatform.SplitEntryPointPlatform ):
                 )
             except OSError:
                 # The wrong architecture, a missing dependency, or no such
-                # library: all reasons to go on to the next name rather than
-                # to stop with the one that happened to be found first.
+                # library.  Try the next name.
                 pass
         return None
     @baseplatform.lazy_property
@@ -91,11 +87,10 @@ class Win32Platform( baseplatform.SplitEntryPointPlatform ):
         return None
 
     def _optional_library( self, *names ):
-        """The first of names that loads, or None if this machine has none
+        """The first library in ``names`` that loads, or None
 
-        The ES and EGL libraries are not part of Windows: they arrive with an
-        application that ships ANGLE, so their absence is ordinary rather than
-        an error.
+        The ES and EGL libraries are not part of Windows.  They are installed
+        by applications that ship ANGLE, so most machines lack them.
         """
         for name in names:
             try:
@@ -106,9 +101,9 @@ class Win32Platform( baseplatform.SplitEntryPointPlatform ):
                 continue
         return None
 
-    # OpenGL-ES and EGL reach Windows through ANGLE, which installs beside the
-    # application that ships it (Chromium, Qt and Electron all do) under the
-    # names below.  The bare names are the ones an SDK or a driver vendor uses.
+    # On Windows, OpenGL ES and EGL come from ANGLE.  Applications that ship
+    # ANGLE (Chromium, Qt and Electron) install it beside the application under
+    # the lib-prefixed names below.  SDKs and driver vendors use the bare names.
     @baseplatform.lazy_property
     def GLES1( self ):
         return self._optional_library( 'libGLESv1_CM', 'GLESv1_CM' )
@@ -129,14 +124,13 @@ class Win32Platform( baseplatform.SplitEntryPointPlatform ):
     GDI32 = ctypes.windll.gdi32
 
     def secondaryLibraries(self):
-        """gdi32, where the pixel-format calls and SwapBuffers actually live.
+        """gdi32, which exports the pixel-format calls and SwapBuffers.
 
-        A WGL program reaches ChoosePixelFormat, DescribePixelFormat,
-        GetPixelFormat, SetPixelFormat and SwapBuffers through OpenGL.WGL, but
-        they are GDI entry points and opengl32 does not export them. Nor does
-        wglGetProcAddress answer for them -- it returns extension entry points,
-        and these are not extensions -- so a search that does not know about
-        gdi32 finds them nowhere.
+        OpenGL.WGL declares ChoosePixelFormat, DescribePixelFormat,
+        GetPixelFormat, SetPixelFormat and SwapBuffers.  They are GDI entry
+        points, and opengl32 does not export them.  wglGetProcAddress returns
+        only extension entry points, so it returns NULL for them too.  The
+        lookup must search gdi32 to find them.
         """
         return (self.GDI32,)
     @baseplatform.lazy_property
@@ -148,13 +142,13 @@ class Win32Platform( baseplatform.SplitEntryPointPlatform ):
         wglGetProcAddress.restype = ctypes.c_void_p
 
         def getExtensionProcedure( name ):
-            """Address for name, noting the error a lookup in a block records
+            """The address of ``name``, recording a lookup inside a glBegin block
 
-            Every entry point above GL 1.1 is reached through this, so the
-            first call to one made inside a glBegin block resolves here -- and
-            wglGetProcAddress records GL_INVALID_OPERATION when it is called
-            there.  glGetError answers 0 until the block ends, so the error
-            would surface out of glEnd, for a call the caller never wrote.
+            Every entry point above GL 1.1 is resolved here, so the first call
+            to one inside a glBegin block triggers a lookup.
+            wglGetProcAddress records GL_INVALID_OPERATION when called inside
+            the block.  glGetError returns 0 until the block ends, so the error
+            would be reported by glEnd, for a call the caller did not make.
             """
             from OpenGL import error
 
@@ -197,16 +191,16 @@ class Win32Platform( baseplatform.SplitEntryPointPlatform ):
         return wglGetCurrentContext
 
     def releaseCurrentContext( self ):
-        """Let go of the context this thread holds, WGL's or EGL's
+        """Release this thread's current WGL or EGL context; True if released
 
-        Answers whether there was one.  See
+        See
         :meth:`OpenGL.platform.baseplatform.BasePlatform.releaseCurrentContext`
-        for why a program with two GL bindings in it needs this.  Windows has
-        the same pair as Linux does whenever an application ships ANGLE, which
-        is how OpenGL-ES and EGL reach this platform at all.
+        for why a program using two GL binding APIs needs this.  When an
+        application ships ANGLE, Windows has both WGL and EGL, as Linux has
+        both GLX and EGL.
 
-        Both are asked, because either may be holding it and asking is cheap
-        beside making a context.
+        Both APIs are checked, because either may hold the thread.  The checks
+        cost little compared with creating a context.
         """
         released = False
         if self._releaseWGL():
@@ -216,7 +210,7 @@ class Win32Platform( baseplatform.SplitEntryPointPlatform ):
         return released
 
     def _releaseWGL( self ):
-        """Release a current WGL context; answer whether there was one"""
+        """Release a current WGL context; True if one was current"""
         if not self.GetCurrentContext():
             return False
         from OpenGL.raw.WGL._types import HDC, HGLRC
@@ -225,13 +219,13 @@ class Win32Platform( baseplatform.SplitEntryPointPlatform ):
         return True
 
     def _releaseEGL( self ):
-        """Release a current EGL context; answer whether there was one
+        """Release a current EGL context; True if one was current
 
-        Only where an EGL library was found, and asked of the platform rather
-        than of the import: a machine with no ANGLE beside it is the ordinary
-        case here, this is called before every context a program makes, and a
-        failed import is not remembered -- so importing to find out would run
-        the whole of ``OpenGL.raw.EGL`` again on each one.
+        Runs only when the platform found an EGL library.  The check uses
+        :attr:`EGL` rather than an import attempt.  Most machines have no
+        ANGLE, this runs before every context a program creates, and Python
+        does not cache a failed import.  An import attempt would re-run all of
+        ``OpenGL.raw.EGL`` each time.
         """
         if self.EGL is None:
             return False
@@ -246,21 +240,21 @@ class Win32Platform( baseplatform.SplitEntryPointPlatform ):
         return True
 
     def entryPointRoutes( self, dll ):
-        """Where a name may be found on Windows, in the order to try
+        """The lookups to try for a name on Windows, in order
 
-        Windows splits the entry points between three places and the split does
-        not follow the declarations.  ``opengl32`` exports GL 1.1 and nothing
-        above it; ``wglGetProcAddress`` answers for everything above GL 1.1 and
-        returns NULL for the 1.1 set; the pixel-format calls and SwapBuffers
-        are in gdi32.  So each is tried in turn, and the last two are each
-        other's mirror: a core-declared name the driver only offers as an
-        extension, and an extension-declared name that is in the 1.1 export
-        set.
+        Windows splits the entry points across three sources, and the split
+        does not follow the declarations.  ``opengl32`` exports GL 1.1 only.
+        ``wglGetProcAddress`` returns everything above GL 1.1 and NULL for the
+        1.1 set.  The pixel-format calls and SwapBuffers are in gdi32.  Each is
+        tried in turn.  The last two routes cover opposite cases: a
+        core-declared name the driver offers only as an extension, and an
+        extension-declared name in the 1.1 export set.
 
-        The second is what ``GL_KHR_debug`` does to ``glGetPointerv``.  A name
-        declared by both a core version and an extension is held once in
-        ``OpenGL.GL``, by whichever module imported last, and which one that is
-        must not decide whether the entry point works.
+        ``glGetPointerv`` is an example of the second case, through
+        ``GL_KHR_debug``.  A name declared by both a core version and an
+        extension is stored once in ``OpenGL.GL``, by whichever module was
+        imported last.  The import order must not decide whether the entry
+        point works.
         """
         return (
             dict(dll=dll),

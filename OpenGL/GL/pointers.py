@@ -109,12 +109,11 @@ def wrapPointerFunction( name, baseFunction, glType, arrayType,startArgs, defaul
     else:
         pointer_name = 'pointer'
     assert not getattr( function, 'pyConverters', None ), """Reusing wrappers?"""
-    # Each customisation is *rebound*, not applied in place.  A wrapper is free
-    # to answer a setter with a different object -- and the C dispatch layer
-    # does exactly that when a call changes which arguments the entry point
-    # takes, as dropping size/type/stride here does.  Throwing the answer away
-    # would leave this holding the base and give the typed variant the base's
-    # signature.
+    # Each setter's return value is assigned back to `function`.  A setter may
+    # return a different object.  The C dispatch layer does so when a call
+    # changes which arguments the entry point takes, as removing size, type
+    # and stride does here.  Ignoring the return value would give the typed
+    # variant the base function's signature.
     if arrayType:
         arrayModuleType = arraydatatype.GL_CONSTANT_TO_ARRAY_TYPE[ glType ]
         function = function.setPyConverter( pointer_name, arrayhelpers.asArrayType(arrayModuleType) )
@@ -175,9 +174,8 @@ glIndexPointer = wrapper.wrapper( _simple.glIndexPointer ).setPyConverter(
     wrapper.returnPyArgument( 'pointer' )
 )
 glEdgeFlagPointer = wrapper.wrapper( _simple.glEdgeFlagPointer ).setPyConverter(
-    # An edge-flag array is GLboolean, which is an unsigned byte.  Declared as
-    # GLushort here for a long time, which silently widened a correct caller's
-    # array to two bytes an element and handed the driver that.
+    # An edge-flag array is GLboolean, which is an unsigned byte.  A GLushort
+    # declaration would widen the caller's array to two bytes per element.
     'pointer', arrayhelpers.AsArrayTyped( 'pointer', arraydatatype.GLbooleanArray ),
 ).setStoreValues(
     arrayhelpers.storePointerType( 'pointer', _simple.GL_EDGE_FLAG_ARRAY_POINTER )
@@ -237,7 +235,11 @@ def glSelectBuffer( size, buffer = None ):
     contextdata.setValue( _simple.GL_SELECTION_BUFFER_POINTER, buffer )
     return buffer
 def glFeedbackBuffer( size, type, buffer = None ):
-    """Create a selection buffer of the given size
+    """Return the feedback buffer, after passing it to glFeedbackBuffer
+
+    ``buffer`` defaults to a new array of ``size`` floats.  The buffer and
+    ``type`` are stored in the context data, so the buffer stays alive while
+    GL writes to it.
     """
     if buffer is None:
         buffer = arraydatatype.GLfloatArray.zeros( (size,) )
@@ -263,9 +265,9 @@ def glRenderMode( newMode ):
     if currentMode in (_simple.GL_RENDER,0):
         # no array needs to be returned...
         return _simple.glRenderMode( newMode )
-    # The count of elements copied, which is a size-1 query like any other:
-    # SIZE_1_ARRAY_UNPACK decides whether it arrives as the number or as a
-    # one-element array holding it, and everything below compares it.
+    # The count of elements copied.  Like any size-1 query, SIZE_1_ARRAY_UNPACK
+    # decides whether it is a number or a one-element array, so it is
+    # converted to an int before the comparisons below.
     result = as_int(_simple.glRenderMode( newMode ))
 
     if result < 0:

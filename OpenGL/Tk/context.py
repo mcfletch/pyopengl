@@ -1,23 +1,22 @@
-"""Choosing the way a GL context is made for a Tk widget.
+"""Select the GL context implementation for a Tk widget.
 
-The choice is made from **Tk's own** answer to ``tk windowingsystem`` rather
-than from :data:`sys.platform`, because they can differ and Tk's is the one
-that matters: an X11 build of Tk running on macOS through XQuartz has X windows
-and wants GLX, and asking ``sys.platform`` there would send it to a Cocoa
-implementation for windows that are not Cocoa's.
+The implementation is chosen from Tk's ``tk windowingsystem`` result rather
+than from :data:`sys.platform`, because the two can differ.  An X11 build of Tk
+running on macOS through XQuartz creates X windows and needs GLX.
+``sys.platform`` would select the Cocoa implementation for those windows.
 
-A context object -- whichever this returns -- answers:
+Every context object returned here provides:
 
 ``makeCurrent()``
-    draw into this widget from now on; False if the driver refused
+    make this widget's context current; False if the driver refused
 ``releaseCurrent()``
-    let go, leaving no context current
+    leave no context current
 ``swapBuffers()``
     show what has been drawn
 ``setSwapInterval(n)``
-    wait n refreshes between swaps; False where the driver offers no way
+    wait n refreshes between swaps; False where the driver has no way to set it
 ``destroy()``
-    give the context back; calling it twice is calling it once
+    release the context; a second call does nothing
 ``describe()``
     one line, for a log message
 ``handle``
@@ -35,19 +34,18 @@ __all__ = ['createContext', 'gone', 'nowCurrent', 'windowingSystem']
 
 
 def nowCurrent(handle: object) -> None:
-    """Tell the dispatch layer which context this thread draws through now.
+    """Record ``handle`` as the context current on this thread.
 
-    Its table of resolved entry points is keyed by the context handle, and a
-    handle is an address the driver hands out again.  An implementation here
-    makes contexts the application never sees -- WGL needs two throwaway ones
-    per widget, since ``wglChoosePixelFormatARB`` and
-    ``wglCreateContextAttribsARB`` can only be looked up through a context that
-    already exists -- so those addresses come back quickly, and often as the
-    widget's own.
+    The dispatch layer keys its table of resolved entry points by context
+    handle.  The driver reuses handle addresses.  The implementations here also
+    create contexts the application never sees.  WGL creates two temporary
+    contexts per widget, because ``wglChoosePixelFormatARB`` and
+    ``wglCreateContextAttribsARB`` can only be looked up through an existing
+    context.  Their addresses are often reused for the widget's own context.
 
-    ``OpenGL.Tk`` owns these contexts, so it is the only thing that can say.  A
-    program driving the widget through :class:`~OpenGL.Tk.widget.GLFrame` never
-    calls ``OpenGL.dispatch.make_current`` itself and should not have to.
+    ``OpenGL.Tk`` creates these contexts, so it reports each switch itself.  A
+    program using :class:`~OpenGL.Tk.widget.GLFrame` does not need to call
+    ``OpenGL.dispatch.make_current``.
     """
     from OpenGL import _dispatch
 
@@ -55,13 +53,12 @@ def nowCurrent(handle: object) -> None:
 
 
 def gone(handle: object) -> None:
-    """Tell the dispatch layer a context is about to stop existing.
+    """Retire the dispatch table for ``handle`` before the context is destroyed.
 
-    While it still does: the table is retired for that handle, so the next
-    context to be given the address resolves its own entry points rather than
-    inheriting the dead one's.  Left unsaid, the stale table answers about a
-    context that is no longer there -- an entry point reported undefined where
-    this context has it, or resolved where it does not.
+    A later context given the same address then resolves its own entry points.
+    Without this call it would use the destroyed context's table, which can
+    report an entry point as undefined when the new context has it, or as
+    resolved when it does not.
     """
     from OpenGL import _dispatch
 
@@ -85,13 +82,13 @@ def createContext(
 ) -> Any:
     """A GL context on ``widget``'s native window
 
-    widget -- a mapped Tk widget; a window has no native handle before it is
+    widget - a mapped Tk widget; a window has no native handle before it is
         mapped, so this is called from the widget's ``<Map>`` binding
-    attributes -- a :class:`~OpenGL.Tk.attributes.ContextAttributes`, or None
+    attributes - a :class:`~OpenGL.Tk.attributes.ContextAttributes`, or None
         for the defaults
 
-    Raises :class:`~OpenGL.Tk.errors.TkContextError` where no context can be
-    had, saying which of the reasons it was.
+    Raises :class:`~OpenGL.Tk.errors.TkContextError` when no context can be
+    created.  The message gives the reason.
     """
     attributes = attributes or ContextAttributes()
     system = windowingSystem(widget)

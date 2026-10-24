@@ -30,16 +30,15 @@ XDG = 'XDG_SESSION_TYPE'
 WAYLAND_DISPLAY = 'WAYLAND_DISPLAY'
 
 #: The platform implementation for this machine, and the entry points it
-#: exports onto this module.  `_load()` at the foot of this module installs
-#: every one of them -- `BasePlatform.install` sets `PLATFORM` and each name in
-#: `BasePlatform.EXPORTED_NAMES` -- and it runs while the module is being
-#: imported, so an importer never sees the interval before they are here.
+#: exports onto this module.  `_load()` at the end of this module installs
+#: them: `BasePlatform.install` sets `PLATFORM` and each name in
+#: `BasePlatform.EXPORTED_NAMES`.  `_load()` runs during import, so importers
+#: always see the names set.
 #:
-#: Declared rather than assigned `None`: a reader and a checker both need to
-#: know what these are, and `PLATFORM = None` told them it is `None` forever.
-#: Bare annotations bind no value, so the names are still absent until `_load()`
-#: puts them there, and an import cycle that reached this module early would
-#: raise NameError rather than return a `None` to call.
+#: The names are annotated rather than assigned `None`, so readers and type
+#: checkers see their real types.  A bare annotation binds no value.  An import
+#: cycle that reaches this module before `_load()` raises NameError instead of
+#: getting `None`.
 PLATFORM: 'BasePlatform'
 GetCurrentContext: Callable[..., Any]
 CurrentContextIsValid: Callable[..., Any]
@@ -72,12 +71,10 @@ def _load():
     plugin_class = plugin.load()
     plugin.loaded = True
     if plugin_class is None:
-        # `load()` answers None where importing the plugin raised, having put
-        # the reason in the log and nowhere else.  Calling it produced
-        # `TypeError: 'NoneType' object is not callable`, which names neither
-        # the plugin nor the ImportError underneath it -- and this is the
-        # first thing a broken install does, so it is the error most likely to
-        # be somebody's first contact with PyOpenGL.
+        # `load()` returns None when importing the plugin raised, and logs the
+        # reason.  Calling None would raise `TypeError: 'NoneType' object is
+        # not callable`, which names neither the plugin nor the ImportError.
+        # A broken install fails here first, so the message names both.
         # See https://github.com/mcfletch/pyopengl/issues/43
         raise ImportError(
             'PyOpenGL could not load the %r platform plugin (%s), which is '
@@ -182,16 +179,14 @@ def createFunction(
         )
 
     if _c_dispatch:
-        # The ctypes binding stays reachable behind the C entry point -- it is
-        # what argtypes, restype and DLL read, and what a client demotes to --
-        # but it is built when something asks.  Almost nothing does, and
-        # building 4,819 of them to discard them is the bulk of what importing
-        # used to cost.
+        # The C entry point keeps the ctypes binding available.  argtypes,
+        # restype and DLL read from it, and a client can demote to it.  It is
+        # built only on first access, which few callers need.  Building all
+        # 4,819 bindings at import would take most of the import time.
         proc = _c_dispatch.entry_point_for(function, build_binding)
         if proc is not None:
-            # `proc or binding` would be the obvious way to write this, and it
-            # would be wrong: truth for an entry point means "resolvable in the
-            # current context", so asking would resolve every entry point at
-            # import, against whatever context happens to be current then.
+            # Not `proc or binding`.  An entry point's truth value means
+            # "resolvable in the current context", so testing it would resolve
+            # every entry point at import, against whatever context is current.
             return proc
     return build_binding()

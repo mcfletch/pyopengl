@@ -15,13 +15,12 @@ import operator
 
 
 def _as_shape( dims ):
-    """``dims`` as a sequence of lengths, whether it arrived as one or not.
+    """Return ``dims`` as a tuple of lengths, accepting a single length.
 
-    ``numpy.zeros`` takes ``3`` and ``(3,)`` alike, and the entry points that
-    allocate their own result pass whichever suits them -- so a handler that
-    took only the sequence answered `TypeError: 'int' object is not
-    reversible` on the plainest call there is, on any installation without
-    numpy.
+    ``numpy.zeros`` accepts both ``3`` and ``(3,)``, and the entry points that
+    allocate their own result pass either form.  A handler that accepted only
+    a sequence would raise `TypeError: 'int' object is not reversible` on
+    installations without numpy.
     """
     try:
         return tuple(dims)
@@ -45,10 +44,9 @@ class CtypesArrayHandler( formathandler.FormatHandler ):
     def zeros( cls, dims, typeCode ):
         """Return ctypes array of zeros in given size
 
-        ``dims`` is a shape or a single length, as ``numpy.zeros`` takes
-        either: an entry point that produces `n` values asks for `n` and the
-        two handlers have to answer the same call, or a program that runs with
-        numpy installed stops running without it.
+        ``dims`` is a shape or a single length, as for ``numpy.zeros``.  An
+        entry point that produces `n` values passes `n`.  Both handlers accept
+        the same call, so a program behaves the same with or without numpy.
         """
         type = GL_TYPE_TO_ARRAY_MAPPING[ typeCode ]
         # build inner-most dimension first so the array indexes outer->inner,

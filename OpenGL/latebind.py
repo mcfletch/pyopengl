@@ -35,9 +35,8 @@ if LateBind is None:
         def __call__( self, *args, **named ):
             """Call self._finalCall, calling finalise() first if not already called
 
-            There's actually *no* reason to unpack and repack the arguments,
-            but unfortunately I don't know of a Cython syntax to specify
-            that.
+            The arguments are unpacked and repacked.  This step is not
+            needed, but Cython has no known syntax to avoid it.
             """
             try:
                 return self._finalCall( *args, **named )
@@ -49,8 +48,8 @@ if Curry is None:
     class Curry(object):
         """Provides a simple Curry which can bind (only) the first element
 
-        This is used by lazywrapper, which explains the weird naming
-        of the two attributes...
+        lazywrapper uses this class, which is where the names of the two
+        attributes come from.
         """
         wrapperFunction = None
         baseFunction = None

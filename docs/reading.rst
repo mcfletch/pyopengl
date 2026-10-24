@@ -1,9 +1,9 @@
 Learning OpenGL
 ===============
 
-OpenGL from Python is OpenGL, so most of what has been written about OpenGL
-applies whatever language the example is in.  This page collects the material
-worth starting from.
+OpenGL calls from Python are the same calls as from C, so most OpenGL material
+applies whatever language its examples use.  This page lists good places to
+start.
 
 Tutorials
 ---------
@@ -11,60 +11,60 @@ Tutorials
 OpenGLContext
 ~~~~~~~~~~~~~
 
-`OpenGLContext <https://github.com/mcfletch/openglcontext>`__ carries the
+`OpenGLContext <https://github.com/mcfletch/openglcontext>`__ contains the
 tutorial series written for PyOpenGL, as annotated source you can run.  It
-teaches the OpenGL you would write today -- buffer objects, shaders,
-framebuffer objects -- rather than the fixed-function pipeline.
+teaches current OpenGL (buffer objects, shaders and framebuffer objects)
+instead of the fixed-function pipeline.
 
 The shader series runs from a first triangle to a scenegraph:
 
-- **First steps** -- geometry in a vertex buffer object, a vertex and a
-  fragment shader, and the draw call that uses them
-- **Interpolated values** -- colour across a primitive
-- **Uniform values** -- fog, and how a uniform reaches a shader
-- **Attribute values** -- per-vertex data, and tweening between two meshes
-- **Diffuse, ambient and directional lighting**, then **specular highlights
-  with indexed geometry**
-- **Multiple lights** -- GLSL arrays and structures, and then optimising the
+- First steps - geometry in a vertex buffer object, a vertex and a fragment
+  shader, and the draw call that uses them
+- Interpolated values - colour across a primitive
+- Uniform values - fog, and how a uniform reaches a shader
+- Attribute values - per-vertex data, and tweening between two meshes
+- Diffuse, ambient and directional lighting, then specular highlights with
+  indexed geometry
+- Multiple lights - GLSL arrays and structures, then optimising the
   directional case
-- **Point lights** and **spot-lights**
-- **Declarative structures** and **shader scenegraph nodes** -- moving from a
-  script that draws to a description of what to draw
+- Point lights and spot-lights
+- Declarative structures and shader scenegraph nodes - moving from a script
+  that draws to a description of what to draw
 
-Beyond it:
+Other tutorials in the series:
 
-- **Instanced geometry** -- drawing many copies in one call, with texture
-  buffer objects supplying the per-instance data
-- **Shadows**, in three parts: depth comparison on the back buffer, the same
-  thing in a framebuffer object, and then from the scenegraph
-- **Particle systems**, **transforms**, **NURBS surfaces** and **text**
+- Instanced geometry - drawing many copies in one call, with texture buffer
+  objects supplying the per-instance data
+- Shadows, in three parts: depth comparison on the back buffer, the same
+  technique in a framebuffer object, then shadows from the scenegraph
+- Particle systems, transforms, NURBS surfaces and text
 
 The engine's own source and documentation cover more: core-profile and
 physically based rendering passes, a line-by-line walk through a PBR fragment
-shader, levels of detail, overlay UI.
+shader, levels of detail, and overlay UI.
 
 NeHe
 ~~~~
 
 The `NeHe tutorials <http://nehe.gamedev.net/>`__ by Jeff Molofee are widely
-recommended and worth knowing about, with one caveat that matters:
+recommended, with one caveat:
 
 .. note::
 
-   They teach **fixed-function OpenGL** -- ``glBegin``, ``glVertex``,
-   ``glMatrixMode``, the fixed lighting model.  All of it is deprecated, none
-   of it is in a core profile, and a program written that way today is
-   writing against a compatibility path.  Read them for the ideas -- what a
-   texture is, what a depth buffer does, how a frame is put together -- and
-   write the code with buffer objects and shaders.
+   They teach **fixed-function OpenGL**: ``glBegin``, ``glVertex``,
+   ``glMatrixMode`` and the fixed lighting model.  All of it is deprecated,
+   and none of it is in a core profile.  A program written that way today
+   uses a compatibility profile.  Read the tutorials for the concepts (what a
+   texture is, what a depth buffer does, how a frame is put together).  Write
+   the code with buffer objects and shaders.
 
-Python translations, if you want them:
+Python translations:
 
 - ``PyOpenGL-Demo/NeHe`` has tutorials 1 through 6, kept close to the original
   C so they read alongside the tutorial text.
 - OpenGLContext's tests directory has ``nehe1.py`` through ``nehe8.py``,
-  written for the result rather than the structure, plus ``glprint.py`` as a
-  loose translation of 13.
+  which reproduce each tutorial's result with their own code structure.
+  ``glprint.py`` is a loose translation of tutorial 13.
 - `Paul Furber's PyGame versions <https://www.pygame.org/gamelets/#NEHE>`__
   cover 1 through 10 in idiomatic, function-oriented Python.
 
@@ -72,8 +72,8 @@ Elsewhere
 ~~~~~~~~~
 
 `Learn OpenGL <https://learnopengl.com/>`__ is a modern, shader-first course.
-The code is C++, but the concepts and the GLSL carry over directly, and it is
-the best free introduction to the pipeline as it now is.
+The code is C++, but the concepts and the GLSL apply directly.  It is the best
+free introduction to the current pipeline.
 
 Books
 -----
@@ -91,29 +91,29 @@ Books
 
 *OpenGL Shading Language* (the Orange Book)
     An introduction to shaders, from one-line shaders through emulating fixed
-    function to non-photorealistic shading and caustics.  Adapting its code to
-    a real scene is part of the work, but the grounding is sound.
+    function to non-photorealistic shading and caustics.  Its code needs
+    adapting to work in a real scene, but its explanations are sound.
     Addison-Wesley, ISBN 978-0-321-33489-3 for the second edition.
 
 *OpenGL SuperBible*
-    Covers OpenGL 1.0-era operations through to the 2.x model.  Older features
-    get exhaustive coverage and newer ones less.  Sams, ISBN 0-672-32601-9 for
-    the third edition.
+    Covers OpenGL from 1.0-era operations through to the 2.x model.  It covers
+    older features in full detail and newer ones in less.  Sams,
+    ISBN 0-672-32601-9 for the third edition.
 
 Specifications and registries
 -----------------------------
 
-- `The OpenGL registry <https://registry.khronos.org/OpenGL/index_gl.php>`__ --
-  the specifications, the header files and the XML PyOpenGL's bindings are
-  generated from.
+- `The OpenGL registry <https://registry.khronos.org/OpenGL/index_gl.php>`__ -
+  the specifications, the header files, and the XML that PyOpenGL's bindings
+  are generated from.
 - `The extension registry
-  <https://registry.khronos.org/OpenGL/extensions/>`__ -- what each extension
+  <https://registry.khronos.org/OpenGL/extensions/>`__ - what each extension
   means and what it declares.
 - `Khronos' OpenGL reference pages
-  <https://registry.khronos.org/OpenGL-Refpages/>`__ -- the upstream of the
+  <https://registry.khronos.org/OpenGL-Refpages/>`__ - the source of the
   :doc:`reference pages <reference/index>` here.
-- `The EGL registry <https://registry.khronos.org/EGL/>`__ -- the EGL
-  specifications, extensions and reference pages, the upstream of the
+- `The EGL registry <https://registry.khronos.org/EGL/>`__ - the EGL
+  specifications, extensions and reference pages, and the source of the
   :doc:`EGL reference <reference/egl/index>` here.
 - `MSDN's OpenGL documentation
   <https://learn.microsoft.com/en-us/windows/win32/opengl/opengl>`__, for WGL.
@@ -121,9 +121,9 @@ Specifications and registries
 Other resources
 ---------------
 
-- `OpenGL.org <https://www.opengl.org/>`__ -- specifications, documentation and
-  the community around them.
-- `LightHouse3D tutorials <https://www.lighthouse3d.com/tutorials/>`__ --
+- `OpenGL.org <https://www.opengl.org/>`__ - specifications, documentation and
+  community.
+- `LightHouse3D tutorials <https://www.lighthouse3d.com/tutorials/>`__ -
   intermediate material on particular OpenGL subjects.
 
 Support

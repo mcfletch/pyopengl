@@ -1,7 +1,8 @@
-"""Utility module for interacting with GBM to select rendering device
+"""GBM device and surface helpers for selecting an EGL rendering device.
 
-The base code here comes from github bug report #6 in the pyopengl
-project, thanks to @abandoned-cocoon for that.
+GBM (Generic Buffer Management) is the Linux library that allocates graphics
+buffers on a DRM device.  The code is based on PyOpenGL GitHub issue #6, by
+@abandoned-cocoon.
 """
 import weakref, ctypes, logging, os, glob
 from OpenGL.platform import ctypesloader
@@ -10,9 +11,8 @@ log = logging.getLogger(__name__)
 try:
     gbm = ctypesloader.loadLibrary(ctypes.CDLL,"gbm")
 except OSError as err:
-    # libgbm is Linux graphics infrastructure; everything here is a wrapper
-    # around it, so without it there is no module.  ImportError is what a
-    # caller guards an optional import with.
+    # Every function here wraps libgbm, so the module cannot work without it.
+    # ImportError lets a caller guard the import as optional.
     raise ImportError("OpenGL.EGL.gbmdevice needs the gbm library: %s" % (err,)) from err
 __all__ = ('enumerate_devices','open_device','close_device','gbm')
 _DEVICE_HANDLES = {}
@@ -29,10 +29,13 @@ gbm.gbm_create_device.restype = GBMDevice
 gbm.gbm_surface_create.restype = GBMSurface
 
 def filter_bad_drivers(cards, bad_drivers=('nvidia',)):
-    """Lookup the driver for each card to exclude loading nvidia devices"""
-    # this is pci specific, which I suppose means we're going to fail
-    # if the GPU isn't on the PCI bus, but we don't seem to have
-    # another way to match up the card to the driver :(
+    """Return ``cards`` without the cards whose driver is in ``bad_drivers``.
+
+    The default excludes nvidia devices.
+    """
+    # The lookup uses /dev/dri/by-path/pci-*, so a GPU that is not on the PCI
+    # bus is never excluded.  No other way to match a card to its driver is
+    # known.
     bad_cards = set()
     for link in glob.glob('/dev/dri/by-path/pci-*-card'):
         base = os.path.basename(link)
@@ -50,10 +53,9 @@ def filter_bad_drivers(cards, bad_drivers=('nvidia',)):
     return filtered
 
 def enumerate_devices():
-    """Enumerate the set of gbm renderD* devices on the system
-    
-    Attempts to filter out any nvidia drivers with filter_bad_drivers
-    along the way.
+    """Return the paths of the gbm devices on the system, sorted.
+
+    Cards using an nvidia driver are removed with :func:`filter_bad_drivers`.
     """
     import glob
     # gbm says card* is the correct entry point...
@@ -61,21 +63,20 @@ def enumerate_devices():
 def open_device(path):
     """Open a particular gbm device
     
-    * path -- integer index of devices in sorted enumeration, or
-              device basename (`renderD128`) or a full path-name
-              as returned from enumerate_devices
+    * path - integer index into :func:`enumerate_devices`, a device
+      basename (`renderD128`), or a full path as returned from
+      :func:`enumerate_devices`
 
-    Will raise (at least):
+    Raises at least:
 
-    * RuntimeError for invalid indices
-    * IOError/OSError for device access failures
-    * RuntimeError if we cannot create the gbm device
+    * RuntimeError for an invalid index
+    * IOError/OSError when the device cannot be opened
+    * RuntimeError when GBM cannot create the device
 
-    Caller is responsible for calling close_device(display) on the 
-    resulting opaque pointer in order to release the open file-handle
-    and deallocate the gbm_device record.
+    The caller must pass the result to :func:`close_device`, which closes the
+    file handle and frees the ``gbm_device``.
 
-    returns GBMDevice, an opaque pointer
+    Returns a GBMDevice, an opaque pointer.
     """
     if isinstance(path,int):
         try:
@@ -86,9 +87,9 @@ def open_device(path):
     else:
         path = os.path.join('/dev/dri',path) # allow for specifying "renderD128"
     log.debug("Final device path: %s", path)
-    # Read-write, because the driver maps buffers through this descriptor and a
-    # write-only one refuses a readable mapping.  Not 'w', which creates a file
-    # where there is none and truncates one where there is.
+    # Read-write, because the driver maps buffers through this descriptor, and
+    # a write-only descriptor refuses a readable mapping.  Mode 'w' would
+    # create a missing file and truncate an existing one.
     fh = open(path,'r+b',buffering=0)  # noqa: OGC121 a DRM device node, opened for its descriptor; nothing is read or written through the file object
     dev = gbm.gbm_create_device(fh.fileno())
     if dev == 0:
@@ -106,15 +107,15 @@ def close_device(device):
         pass
 
 def create_surface(device, width=512, height=512, format=None, flags=GBM_BO_USE_RENDERING):
-    """Create a GBM surface to use on the given device
-    
-    devices -- opaque GBMDevice pointer
-    width,height -- dimensions
-    format -- EGL_NATIVE_VISUAL_ID from an EGL configuration
-    flags -- surface flags regarding reading/writing pattern that
-             is expected for the buffer
-    
-    returns GBMSurface opaque pointer
+    """Create a GBM surface on the given device.
+
+    device - opaque GBMDevice pointer
+    width,height - dimensions in pixels
+    format - EGL_NATIVE_VISUAL_ID from an EGL configuration
+    flags - ``GBM_BO_USE_*`` flags for how the buffer will be read and
+            written
+
+    Returns a GBMSurface opaque pointer.
     """
     if not format:
         raise ValueError(

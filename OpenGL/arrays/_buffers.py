@@ -78,20 +78,19 @@ class Py_buffer(ctypes.Structure):
     def _as_parameter_(self):
         """The data address, for a parameter declared ``void *``.
 
-        This is a ``ctypes.Structure``, and ctypes passes one of those to a
-        pointer parameter as *a pointer to the structure*. Without saying
-        otherwise, an entry point declared ``const void *data`` therefore
-        received the address of this wrapper and uploaded the wrapper's own
-        bytes: the size was right, the call succeeded, ``glGetError`` said
-        nothing, and the buffer held a pointer value where the data should be.
+        This class is a ``ctypes.Structure``, and ctypes passes a structure to
+        a pointer parameter as a pointer to the structure.  Without this
+        property, an entry point declared ``const void *data`` receives the
+        address of this wrapper and uploads the wrapper's own bytes.  The size
+        is correct, the call succeeds and ``glGetError`` reports nothing, but
+        the buffer holds a pointer value instead of the data.
 
-        Reached only where the compiled accelerators are absent, since with
-        them the array machinery answers with the ``memoryview`` itself --
-        which is to say on PyPy, on any platform with no wheel, and under
+        Used only without the compiled accelerators, which pass the
+        ``memoryview`` itself.  That means PyPy, platforms with no wheel, and
         ``PYOPENGL_USE_ACCELERATE=0``.
 
-        ``ctypes.byref(a_py_buffer)`` is unaffected and still refers to the
-        structure, which is what ``from_object`` and the release below want.
+        ``ctypes.byref(a_py_buffer)`` still refers to the structure, as
+        ``from_object`` and the release below require.
 
         See https://github.com/mcfletch/pyopengl/issues/175
         """
@@ -125,11 +124,10 @@ class Py_buffer(ctypes.Structure):
 BUFFER_POINTER = ctypes.POINTER(Py_buffer)
 
 
-# The buffer protocol is reached through CPython's own C API, and an
-# interpreter that does not offer one -- PyPy -- has no `ctypes.pythonapi` at
-# all.  Said as an ImportError, because that is what it is: this module cannot
-# be imported there, and the plugin that names it then reports no handler for a
-# memoryview rather than raising from inside the first call that passes one.
+# The buffer protocol is reached through CPython's C API.  PyPy does not
+# provide that API and has no `ctypes.pythonapi`.  This module raises
+# ImportError there, so the plugin that names it reports no handler for a
+# memoryview instead of raising inside the first call that passes one.
 if not hasattr(ctypes, 'pythonapi'):
     raise ImportError(
         'the buffer-protocol handler needs ctypes.pythonapi, which %s does '
@@ -141,14 +139,14 @@ try:
     CheckBuffer.argtypes = [ctypes.py_object]
     CheckBuffer.restype = ctypes.c_int
 except AttributeError as err:
-    # An interpreter whose `ctypes.pythonapi` does not export the symbol. There
-    # is then no way to ask whether an object supports the buffer protocol, so
-    # the answer is yes and `GetBuffer` below is what finds out -- it returns
-    # non-zero for an object that cannot serve one, and that is already checked.
+    # An interpreter whose `ctypes.pythonapi` does not export the symbol.
+    # There is then no way to check whether an object supports the buffer
+    # protocol, so this returns True.  `GetBuffer` below returns non-zero for
+    # an object without buffer support, and that result is already checked.
     #
-    # `return True`, not a bare `True`: without the return this answers None,
-    # every caller takes the `not CheckBuffer(...)` branch, and the buffer
-    # protocol is refused for every object on the interpreters that land here.
+    # The function must return True.  A body that only evaluates `True`
+    # returns None, every caller then takes the `not CheckBuffer(...)` branch,
+    # and the buffer protocol is refused for every object.
     def CheckBuffer(x):
         return True
 

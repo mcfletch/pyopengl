@@ -1,15 +1,16 @@
 """The C implementation of the OpenGL entry points.
 
-It is compiled, so it ships in ``PyOpenGL_accelerate``; where that is installed
-on CPython it is what runs, and ``PYOPENGL_DISPATCH=ctypes`` selects the ctypes
-implementation instead.  That one is the reference semantics, the bootstrap
-route for a new platform, and what runs with ``PyOpenGL`` alone and on every
-interpreter other than CPython; it is not scheduled for removal.
+The C implementation is compiled and ships in ``PyOpenGL_accelerate``.  It
+runs on CPython where that package is installed.  ``PYOPENGL_DISPATCH=ctypes``
+selects the ctypes implementation instead.  The ctypes implementation defines
+the reference behaviour and is the starting point for a new platform.  It runs
+with ``PyOpenGL`` alone and on every interpreter other than CPython, and it
+remains supported.
 
 Installing this layer replaces the ctypes binding for an entry point with a
-``GLProc``, which implements the friendly API directly rather than wrapping a
-raw call.  An entry point the generator does not fully implement keeps its
-ctypes binding, so the two coexist.
+``GLProc``.  A ``GLProc`` implements the friendly API directly instead of
+wrapping a raw call.  Entry points the generator does not fully implement keep
+their ctypes binding, so the two kinds coexist.
 """
 
 import ctypes
@@ -29,14 +30,13 @@ __all__ = [
 #: How the layer decides which context's table to dispatch through.
 #:
 #: ``auto`` (the default) re-reads the current context whenever an entry point
-#: needs resolving, and otherwise trusts ``make_current``.  That is the same
-#: exposure the ctypes implementation has always had -- it holds one binding
-#: per process and cannot tell contexts apart at all -- so per-context tables
-#: can only improve on it.
+#: needs resolving, and otherwise relies on ``make_current``.  The ctypes
+#: implementation holds one binding per process and cannot tell contexts
+#: apart, so ``auto`` is never less accurate than ctypes.
 #:
-#: ``verify`` asks the platform on every call, for a program that switches
-#: between contexts of differing capability without saying so.  It costs about
-#: 97ns per call on the reference machine.
+#: ``verify`` queries the platform on every call.  Use it for a program that
+#: switches between contexts of different capability without calling
+#: ``make_current``.  It costs about 97ns per call on the reference machine.
 CONTEXT_TRACKING = os.environ.get('PYOPENGL_CONTEXT_TRACKING', 'auto').strip().lower()
 _TRACK_VERIFY, _TRACK_NOTIFY = 0, 1
 TRACKING = _TRACK_VERIFY if CONTEXT_TRACKING in ('verify', 'strict') else _TRACK_NOTIFY
@@ -45,11 +45,11 @@ AVAILABLE = False
 ACTIVE = False
 entry_points = {}
 
-#: Where the compiled layer lives.  It is built by ``pyopengl_accelerate``,
-#: the optional compiled companion released from the same repository, so that
-#: PyOpenGL itself stays a single universal wheel.  Without accelerate
-#: installed there is no extension and the ctypes implementation runs, which is
-#: the arrangement the rest of PyOpenGL's accelerators are in.
+#: The compiled layer.  It is built by ``pyopengl_accelerate``, an optional
+#: compiled package released from the same repository, so that PyOpenGL itself
+#: stays a single universal wheel.  Without accelerate installed there is no
+#: extension and the ctypes implementation runs.  PyOpenGL's other
+#: accelerators work the same way.
 try:
     from OpenGL_accelerate import dispatch as _c
 except ImportError as _err:  # pragma: no cover - depends on what is installed
@@ -61,17 +61,16 @@ else:
 
 
 def _versions_match():
-    """Whether the two packages are the pair they were generated as.
+    """Return whether PyOpenGL and the extension were generated together.
 
-    They share the generated slot numbering and table layout, so a mismatched
-    pair does not fail cleanly -- it dispatches through the wrong indices.
-    They are released together, so requiring equality costs nothing and turns
-    a confusing crash into a sentence.
+    They share the generated slot numbering and table layout.  A mismatched
+    pair does not fail cleanly: it dispatches through the wrong indices.  The
+    two are released together, so requiring equal versions replaces a crash
+    with an error message.
 
-    An extension that does not say which version it holds is a mismatch, not a
-    pass.  The pair this exists to refuse is an accelerate left behind by a
-    partial upgrade, and an accelerate old enough to be dangerous is exactly the
-    one that would not carry the attribute.
+    An extension without a version attribute counts as a mismatch.  The usual
+    mismatch is an old accelerate left by a partial upgrade, and the oldest
+    builds do not carry the attribute.
     """
     if _c is None:
         return True
@@ -81,28 +80,27 @@ def _versions_match():
 
 
 def _current_context_getter():
-    """The address of the platform's "which context is current" function.
+    """Return the address of the platform's current-context function, or None.
 
-    Returning ``None`` is not a failure: without it the layer dispatches
-    through one table, which is right for the single-context processes that are
-    the overwhelming majority, and ``make_current`` remains available.
+    With ``None`` the layer dispatches through one table.  That is correct for
+    a process with a single context, which is the common case, and
+    ``make_current`` still works.
 
-    Not called at import.  Finding out whether EGL or GLX owns the current
-    context means probing both, and probing loads the driver -- 26 MB of
-    libnvidia here -- to answer a question that has no answer yet, because at
-    import there is no current context.  :func:`install_context_getter` calls
-    this at the first resolution instead, which is the first moment a context
-    exists to be asked about.
+    Not called at import.  Finding whether EGL or GLX owns the current context
+    means probing both, and probing loads the driver (26 MB of libnvidia on
+    the development machine).  At import there is no current context to find.
+    :func:`install_context_getter` calls this at the first entry-point
+    resolution instead, the first point at which a context can exist.
     """
     from OpenGL import platform
 
     from OpenGL._dispatch import support
 
     try:
-        # Without probing unless the caller has asked for context checking:
-        # the application's own toolkit loads whichever of EGL and GLX it
-        # uses, so by the time a context exists the answer is usually there
-        # for the taking, and before that there is nothing to take.
+        # Probe only if the caller has asked for context checking.  The
+        # application's toolkit loads EGL or GLX itself, so once a context
+        # exists the library is usually already loaded.  Before that there is
+        # no context to find.
         return platform.PLATFORM.currentContextAddress(
             probe=support.probe_allowed()
         )
@@ -120,7 +118,7 @@ _context_getter_installed = False
 
 
 def install_context_getter():
-    """Tell the C layer how to ask which context is current.
+    """Pass the C layer the function that returns the current context.
 
     Called from the first entry-point resolution.  Idempotent and cheap after
     the first call, because it is on that path.
@@ -130,14 +128,14 @@ def install_context_getter():
         return
     address = _current_context_getter()
     if address:
-        # Only settled once there is an answer.  Before a context exists there
-        # is none, and asking again next time costs an attribute read.
+        # Marked installed only once an address is found.  Before a context
+        # exists there is none, and trying again costs an attribute read.
         _context_getter_installed = True
         _c.set_context_getter(address)
 
 
 def configure():
-    """Hand the C layer the Python facilities it calls back into."""
+    """Pass the C layer the Python functions it calls back into."""
     from OpenGL import _configflags, arrays  # noqa: F401 -- registers handlers
     from OpenGL._dispatch import _tables, support
 
@@ -169,24 +167,24 @@ _GL_FAMILY = ('GL', 'GLES1', 'GLES2', 'GLES3', 'GLSC2')
 
 
 def register_error_source(api, checker):
-    """Say how ``api`` is asked for its errors, from the checker it declares.
+    """Register how errors are read for ``api``, from the checker it declares.
 
-    ``OpenGL/raw/<api>/_errors.py`` builds one checker per API stating which
-    function is asked, which code means success and which exception carries the
-    answer.  Both implementations read that one statement: the ctypes bindings
-    call the checker, and this hands the same three facts to the compiled
-    layer, which does the call itself.
+    ``OpenGL/raw/<api>/_errors.py`` builds one checker per API.  The checker
+    names the function to call, the code that means success, and the
+    exception to raise.  Both implementations use it.  The ctypes bindings
+    call the checker, and this function passes the same three values to the
+    compiled layer, which makes the call itself.
 
-    A checker with nothing to ask -- GLX's, and WGL's absence of one -- leaves
-    the API unpolled, which is what it does under ctypes, where such a checker
-    answers its no-error result and never raises.
+    A checker with no error function (GLX's, or WGL's missing checker) leaves
+    the API unpolled.  Under ctypes such a checker returns its no-error result
+    and never raises, so the behaviour is the same.
 
-    The function taken is the driver's own, ``_baseGetErrors``, and not
-    whichever reader the checker is pointed at now: ``setErrorReader`` swaps
-    ``_getErrors`` for a Python callable reading the GL_KHR_debug flag, which
-    is the ctypes implementation's business and names no entry point.  Handing
-    that one over would leave the compiled layer with no slot to ask and the
-    API unpolled -- error checking off for every call it makes.
+    The function passed is the driver's own, ``_baseGetErrors``, instead of
+    the checker's current reader.  ``setErrorReader`` replaces ``_getErrors``
+    with a Python callable that reads the GL_KHR_debug flag.  That callable
+    belongs to the ctypes implementation and names no entry point.  Passing it
+    would leave the compiled layer with no slot to call, and error checking
+    would be off for every call in the API.
     """
     from OpenGL._dispatch import _tables, support
 
@@ -217,21 +215,21 @@ def error_module():
 
 
 def install_finder():
-    """Answer for the generated module names, whichever implementation is used.
+    """Install the import finder for the generated module names.
 
-    The modules under ``OpenGL/raw`` are not shipped -- they held nothing the
-    declaration tables do not -- so something has to answer when a program
-    imports one, and that is as true on ctypes as it is on C.
+    The modules under ``OpenGL/raw`` are not shipped, because the declaration
+    tables hold the same information.  A finder must supply them when a
+    program imports one, under either implementation.
 
-    Which of the two answers is settled on the first module built, not here.
-    This runs at ``import OpenGL``, and a program sets ``OpenGL.ERROR_CHECKING``
-    and its neighbours in the lines *after* that import; deciding now would
-    read the configuration before it had been written.
+    The implementation is chosen when the first module is built, not here.
+    This runs at ``import OpenGL``, and a program sets
+    ``OpenGL.ERROR_CHECKING`` and the related flags after that import.
+    Choosing now would read the configuration before it is set.
     """
-    # Imported here rather than at module level: a module nobody has switched
-    # on should cost nothing to leave switched off.  finder decides whether it
-    # is wanted without importing _configflags, which would read every flag off
-    # OpenGL before a program had finished setting them.
+    # Imported here instead of at module level, so an unused module costs
+    # nothing.  finder checks whether it is needed without importing
+    # _configflags, which would read every flag from OpenGL before a program
+    # had set them.
     from OpenGL._dispatch import finder
 
     if ACTIVE:
@@ -240,24 +238,23 @@ def install_finder():
 
 
 def _wanted():
-    """Whether the caller has asked for the compiled layer at all.
+    """Return whether the configuration requests the compiled layer.
 
-    Both switches are read here rather than at import.  A program sets
-    ``OpenGL.USE_ACCELERATE`` in the lines *after* ``import OpenGL``, and this
-    runs later still, when the first entry point is built -- reading either one
-    at import would see the configuration before it had been written.
+    Both settings are read here instead of at import.  A program sets
+    ``OpenGL.USE_ACCELERATE`` after ``import OpenGL``.  This runs later, when
+    the first entry point is built, so it reads the value the program set.
 
-    Asking this *before* the pair is judged is what keeps somebody who has said
-    they do not want the extension from being handed an error about the
-    extension.  A mismatched accelerate left behind by a partial upgrade is
-    exactly when a person reaches for the switch, and it has to work.
+    This is checked before the version check.  A program that turns the
+    extension off then gets no error about the extension.  Turning it off is
+    the usual response to a mismatched accelerate left by a partial upgrade,
+    so it must work in that case.
 
-    ``USE_ACCELERATE`` is read from the package rather than from
-    ``_configflags``, which snapshots it when *it* is first imported -- and the
-    first import may be a framework's, a profiler's, or another binding
-    stacked on PyOpenGL, none of which the caller controls.  The snapshot would
-    then predate the assignment and the switch would do nothing, with no error
-    to say so.  ``DISPATCH`` comes from the environment and has no such setter.
+    ``USE_ACCELERATE`` is read from the package instead of from
+    ``_configflags``.  ``_configflags`` copies it when first imported, and the
+    first import may come from a framework, a profiler or another binding
+    built on PyOpenGL.  The copy would then predate the program's assignment,
+    and the setting would silently have no effect.  ``DISPATCH`` comes from
+    the environment and has no setter.
     """
     import OpenGL
     from OpenGL import _configflags
@@ -268,10 +265,10 @@ def _wanted():
 def install():
     """Make the C layer the implementation of the entry points.
 
-    Two hooks are enough, so none of the 1,299 generated modules changes:
-    ``platform.createFunction`` hands back a ``GLProc`` where one exists, and
-    ``wrapper.wrapper`` passes a ``GLProc`` straight through because the C
-    already implements what the wrapper would have added.
+    Two hooks are installed, and none of the 1,299 generated modules changes.
+    ``platform.createFunction`` returns a ``GLProc`` where one exists.
+    ``wrapper.wrapper`` passes a ``GLProc`` through unchanged, because the C
+    code already implements what the wrapper would add.
     """
     global ACTIVE
     if ACTIVE or not AVAILABLE:
@@ -296,24 +293,25 @@ def install():
     from OpenGL import platform, wrapper
 
     _base_wrapper = wrapper.wrapper
-    # The platform installs its bound methods into the module namespace at
-    # import, and that is the name the friendly modules call, so the module
-    # attribute is what has to be replaced.
+    # The platform copies its bound methods into the module namespace at
+    # import, and the friendly modules call that name, so the module attribute
+    # is replaced.
     _base_extension = platform.createExtensionFunction
 
     def wrapper_(base):
-        """A C entry point already implements what the wrapper would add."""
+        """Return a C entry point unchanged; wrap anything else."""
         if isinstance(base, _c.GLProc):
             return base
         return _base_wrapper(base)
 
     def createExtensionFunction(functionName, dll, *args, **named):
-        """A few friendly modules rebuild an entry point from scratch.
+        """Return the hand-written C entry point for a rebuilt binding, if any.
 
-        ``OpenGL.GL.VERSION.GL_2_0`` builds its own ``glShaderSource`` rather
-        than customising the generated one, so that declaration never reaches
-        ``createFunction``.  Catching it here lets the hand-written C
-        implementation win where there is one.
+        A few friendly modules build an entry point themselves.
+        ``OpenGL.GL.VERSION.GL_2_0`` builds its own ``glShaderSource`` instead
+        of customising the generated one, so that declaration never reaches
+        ``createFunction``.  Intercepting it here uses the hand-written C
+        implementation where there is one.
         """
         binding = _base_extension(functionName, dll, *args, **named)
         proc = _handwritten_for(functionName, dll)
@@ -327,14 +325,14 @@ def install():
     wrapper.wrapper = wrapper_
     platform.createExtensionFunction = createExtensionFunction
     ACTIVE = True
-    # Last, because the finder hands out the C entry points and ACTIVE is what
-    # tells it there are any.
+    # Last, because the finder returns the C entry points only when ACTIVE is
+    # set.
     install_finder()
     return True
 
 
-#: Which namespace a library object serves.  GL, GLX and WGL share one library,
-#: so the name's prefix settles it where they overlap.
+#: The API namespaces a library object can serve.  GL, GLX and WGL share one
+#: library, so the function name's prefix decides between them.
 _DLL_APIS = ('GLES2', 'GLES3', 'GLES1', 'EGL', 'GL')
 
 
@@ -348,7 +346,7 @@ def _api_of_dll(dll):
 
 
 def _handwritten_for(name, dll):
-    """The hand-written C entry point for a rebuilt binding, if there is one."""
+    """Return the hand-written C entry point for a rebuilt binding, or None."""
     from OpenGL._dispatch import _tables
 
     if name not in _tables.HANDWRITTEN:
@@ -357,11 +355,11 @@ def _handwritten_for(name, dll):
 
 
 def entry_point_for(function, build_binding):
-    """The C entry point for a declaration, or None to keep the ctypes one.
+    """Return the C entry point for a declaration, or None to keep ctypes.
 
-    ``build_binding`` is a callable rather than a binding: what it builds is
-    only wanted where a client demotes, which is rare enough that building one
-    per entry point is the larger part of what importing costs.
+    ``build_binding`` is a callable instead of a binding.  The binding is only
+    needed when an entry point is demoted to ctypes, which is rare.  Building
+    one per entry point would be most of the import cost.
     """
     api = _api_of(function.__module__)
     name = function.__name__
@@ -376,7 +374,10 @@ def entry_point_for(function, build_binding):
 
 
 def _api_of(module_name):
-    """``OpenGL.raw.GL.VERSION.GL_1_1`` names the GL API."""
+    """Return the API a raw module belongs to.
+
+    ``OpenGL.raw.GL.VERSION.GL_1_1`` belongs to ``GL``.
+    """
     parts = module_name.split('.')
     if len(parts) > 2 and parts[1] == 'raw':
         return parts[2]
@@ -386,19 +387,17 @@ def _api_of(module_name):
 def suspend_error_checking(suspend):
     """Turn the C layer's per-call error check off, and on again.
 
-    ``glGetError`` between ``glBegin`` and ``glEnd`` is itself an invalid
-    operation, so OpenGL.GL.exceptional suspends checking for the block.  Those
-    two entry points stay on the ctypes path, so they tell the C layer rather
-    than the C layer keeping a second switch of its own.
+    ``glGetError`` between ``glBegin`` and ``glEnd`` is an invalid operation,
+    so OpenGL.GL.exceptional suspends checking for the block.  Those two entry
+    points stay on the ctypes path and call this function, so the C layer
+    needs no separate switch.
     """
     if ACTIVE:
         _c.suspend_error_checking(bool(suspend))
 
 
-#: The names a program calls live in :mod:`OpenGL.dispatch`, which is where
-#: their implementation lives too.  They are re-exported here because that is
-#: the module the documentation named before there was a public one, and code
-#: written against it keeps working.
+#: These functions are defined in :mod:`OpenGL.dispatch`.  They are
+#: re-exported here for code that imports them from this module.
 from OpenGL.dispatch import (  # noqa: E402  -- after the layer it reads
     debug_output_available,
     forget_context,

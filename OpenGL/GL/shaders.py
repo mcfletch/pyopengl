@@ -1,12 +1,11 @@
 """Convenience module providing common shader entry points
 
-The point of this module is to allow client code to use
-OpenGL Core names to reference shader-related operations
-even if the local hardware only supports ARB extension-based
-shader rendering.
+This module lets client code use the OpenGL core names for
+shader operations, even when the local hardware only supports
+the ARB shader extensions.
 
-There are also two utility methods compileProgram and compileShader
-which make it easy to create demos which are shader-using.
+It also provides two utility functions, compileProgram and
+compileShader, for building shader programs in demos.
 """
 import logging
 from typing import Any, Union
@@ -89,20 +88,20 @@ GL_LINK_STATUS = GL.GL_LINK_STATUS
 GL_FALSE = GL.GL_FALSE
 GL_TRUE = GL.GL_TRUE
 
-#: Enums whose name carries the word SAMPLER but which are not uniform types:
-#: a pname, an object-type token for debug labels, and a limit.  A set that
-#: claims a pname is a uniform type is one nothing can be reasoned about.
+#: Enums whose names contain SAMPLER but which are not uniform types: a pname,
+#: an object-type token for debug labels, and a limit.  They are excluded so
+#: the set holds only uniform types.
 _NOT_SAMPLER_TYPES = ( 'GL_SAMPLER', 'GL_SAMPLER_BINDING', 'GL_MAX_SAMPLES' )
 
-#: Built on the first ask and kept: it describes the GL enums, not any program.
+#: Built on first use and kept.  It depends only on the GL enums.
 _SAMPLER_TYPES = None
 
 
 def _sampler_types( ):
     """Every uniform type that is a sampler, as a set of enum values.
 
-    Read off the constant names rather than listed, so a sampler target added
-    by a later GL version counts from the day its enum arrives.
+    The set is built from the constant names, so a sampler type added in a
+    later GL version is included once PyOpenGL has its enum.
     """
     global _SAMPLER_TYPES
     if _SAMPLER_TYPES is None:
@@ -123,22 +122,20 @@ def _sampler_types( ):
 
 
 def _distinct_sampler_targets( program ):
-    """How many differently-targeted samplers the linked program declares.
+    """The number of sampler types the linked program declares, up to 2.
 
-    Every sampler uniform reads texture image unit 0 until the program is
-    given its units, so a program declaring two targets sits, the moment it
-    links, in exactly the state ``glValidateProgram`` is required to reject:
-    "active samplers with a different type refer to the same texture image
-    unit".  A driver that answers strictly fails it; one that answers leniently
-    does not; neither answer says anything about the program, only that its
-    uniforms have not been set yet.  Ordinary shaders read a texture and a
-    buffer, or a texture and a shadow map, so this is not a corner.
+    Every sampler uniform uses texture image unit 0 until the program assigns
+    units.  A program with samplers of two types is therefore, just after
+    linking, in the state ``glValidateProgram`` must reject: "active samplers
+    with a different type refer to the same texture image unit".  A strict
+    driver fails validation and a lenient one passes it.  Either result only
+    shows that the uniforms are not set yet.  Common shaders sample a texture
+    and a buffer, or a texture and a shadow map, so this case is frequent.
 
-    Counts to two and stops, because two is all the caller asks about: the
-    alternative is a ``glGetActiveUniform`` round trip per uniform in the
-    program, at every link.
+    Counting stops at two, the only number the caller tests.  Counting further
+    costs a ``glGetActiveUniform`` call per uniform at every link.
 
-    Returns 0 where the count cannot be had, which reads as "nothing to skip".
+    Returns 0 if the count cannot be read, so validation is not skipped.
     """
     try:
         count = as_int(glGetProgramiv( program, GL.GL_ACTIVE_UNIFORMS ))
@@ -163,9 +160,8 @@ def _distinct_sampler_targets( program ):
 class ShaderProgram( int ):
     """Integer sub-class with context-manager operation"""
     validated: bool = False
-    #: True where a validation the caller asked for was not performed because
-    #: the answer would have been about the program's uniforms rather than
-    #: about the program.  See :meth:`check_validate`.
+    #: True when a requested validation was skipped because its result would
+    #: only reflect unset uniforms.  See :meth:`check_validate`.
     validation_deferred: bool = False
     def __enter__( self ) -> 'ShaderProgram':
         """Start use of the program"""
@@ -180,17 +176,15 @@ class ShaderProgram( int ):
 
         Validation has to occur *after* linking/loading
 
-        when_meaningful -- skip the check where the answer would be about the
-            program's uniforms not having been set rather than about the
-            program.  Used at link time, where that is always the case for a
-            program with samplers of two targets; see
-            :func:`_distinct_sampler_targets`.  An explicit call still checks
-            unconditionally, because by then the caller has set its state and
-            the answer means what it says.
+        when_meaningful - skip the check when its result would only reflect
+            unset uniforms.  Used at link time, where a program with samplers
+            of two types always has unset uniforms; see
+            :func:`_distinct_sampler_targets`.  An explicit call always checks,
+            because the caller has set its state by then.
 
-        A skip is recorded on :attr:`validation_deferred` and logged, because
-        the caller asked for a check and did not get one -- and the answer they
-        did not get may have said something else about the program as well.
+        A skipped check is recorded on :attr:`validation_deferred` and logged.
+        Validation may have found other problems in the program, which the
+        skip leaves unreported.
 
         raises ShaderValidationError on failures
         """
@@ -257,9 +251,9 @@ class ShaderProgram( int ):
         See notes in retrieve
         """
         get_program_binary.glProgramBinary( self, format, binary, len(binary))
-        # Linked first: validating a program that did not link fails for that
-        # reason, and reports it as a validation failure with the link log --
-        # the one thing that says what went wrong -- left unread.
+        # Link status is checked first.  Validating a program that did not
+        # link reports a validation failure, and the link log, which explains
+        # the failure, would go unread.
         self.check_linked()
         if validate:
             self.check_validate( when_meaningful=True )
@@ -268,25 +262,23 @@ class ShaderProgram( int ):
 def compileProgram(*shaders: int, **named: Any) -> ShaderProgram:
     """Create a new program, attach shaders and validate
 
-    shaders -- arbitrary number of shaders to attach to the
+    shaders - arbitrary number of shaders to attach to the
         generated program.
-    separable (keyword only) -- set the separable flag to allow 
-        for partial installation of shader into the pipeline (see 
+    separable (keyword only) - set the separable flag to allow
+        for partial installation of shader into the pipeline (see
         glUseProgramStages)
-    retrievable (keyword only) -- set the retrievable flag to 
-        allow retrieval of the program binary representation, (see 
+    retrievable (keyword only) - set the retrievable flag to
+        allow retrieval of the program binary representation, (see
         glProgramBinary, glGetProgramBinary)
-    validate (keyword only) -- if False, suppress automatic 
-        validation against current GL state. In advanced usage 
-        the validation can produce spurious errors. Note: this 
-        function is *not* really intended for advanced usage,
-        if you're finding yourself specifying this flag you 
-        likely should be using your own shader management code.
+    validate (keyword only) - if False, suppress automatic
+        validation against current GL state. In advanced usage
+        the validation can produce spurious errors. This function
+        is intended for simple use; code that needs this flag
+        should probably manage its shaders itself.
 
-    This convenience function is *not* standard OpenGL,
-    but it does wind up being fairly useful for demos
-    and the like.  You may wish to copy it to your code
-    base to guard against PyOpenGL changes.
+    This convenience function is not standard OpenGL.  It is
+    useful for demos and small programs.  You may wish to copy
+    it into your code base to guard against PyOpenGL changes.
 
     Usage:
 
@@ -326,8 +318,8 @@ def compileShader( source: Union[str, bytes, Sequence[Union[str, bytes]]],
                    shaderType: int ) -> int:
     """Compile shader source of given type
 
-    source -- GLSL source-code for the shader
-    shaderType -- GLenum GL_VERTEX_SHADER, GL_FRAGMENT_SHADER, etc,
+    source - GLSL source-code for the shader
+    shaderType - GLenum GL_VERTEX_SHADER, GL_FRAGMENT_SHADER, etc,
 
     returns GLuint compiled shader reference
     raises RuntimeError when a compilation failure occurs

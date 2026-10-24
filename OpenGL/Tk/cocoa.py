@@ -1,32 +1,31 @@
-"""The few Objective-C messages Tk on Aqua needs, sent through ctypes.
+"""Objective-C messages for Tk on Aqua, sent through ctypes.
 
-A GL context is attached to an ``NSView`` on macOS, and the only way to reach
-one from Python without a binding package is the Objective-C runtime:
-``objc_getClass`` finds a class, ``sel_registerName`` a selector, and
-``objc_msgSend`` sends the message.  :class:`Runtime` wraps those three and
-nothing else, so ``OpenGL.Tk`` adds no dependency for it.
+On macOS a GL context is attached to an ``NSView``.  Without a binding package,
+Python reaches an ``NSView`` through the Objective-C runtime.
+``objc_getClass`` finds a class, ``sel_registerName`` finds a selector, and
+``objc_msgSend`` sends a message.  :class:`Runtime` wraps those three
+functions, so ``OpenGL.Tk`` needs no extra dependency on macOS.
 
-**``objc_msgSend`` has no signature of its own.**  The caller's declaration of
-the arguments and the result is what gets compiled into the call, so each
-message here names its argument and result types and a function pointer of that
-shape is built once per shape.  A struct passed by value (an ``NSRect``) works
-that way too.  Struct results are not used: on Intel they come back through
-``objc_msgSend_stret`` and on Apple silicon through ``objc_msgSend``, and
-nothing here needs to read one.
+``objc_msgSend`` has no fixed signature.  The caller declares the argument and
+result types, and the call is made with that declaration.  Each message here
+therefore names its argument and result types, and one function pointer is
+built per combination of types.  Structs passed by value (an ``NSRect``) work
+the same way.  Struct results are not used.  They are returned through
+``objc_msgSend_stret`` on Intel and ``objc_msgSend`` on Apple silicon.
 
-**An Objective-C exception ends the process.**  Nothing in ctypes can catch
-one, so a message sent to an object that does not answer it is a crash rather
-than an error, and :meth:`Runtime.responds` is how a caller asks first.
+An Objective-C exception ends the process, because ctypes cannot catch it.  A
+message sent to an object that does not implement it crashes the process.
+Call :meth:`Runtime.responds` first to check.
 
-**The reference counts are the caller's.**  ``alloc`` and ``init`` return an
-object the caller owns and has to :meth:`Runtime.release`; anything else
-returned by a message is autoreleased, which is what :meth:`Runtime.pool` is
-for -- Tk's own event loop drains a pool per event, but a call made from
-Python between events has none unless it makes one.
+The caller manages reference counts.  ``alloc`` and ``init`` return an object
+the caller owns and must :meth:`Runtime.release`.  Any other object returned by
+a message is autoreleased, and :meth:`Runtime.pool` provides the pool for it.
+Tk's event loop drains a pool per event.  A call made from Python between
+events has no pool unless it creates one.
 
-Importing this module touches no library; :func:`runtime` loads the Objective-C
-runtime and AppKit on first use and raises :class:`CocoaError` where there are
-none.
+Importing this module loads no library.  :func:`runtime` loads the Objective-C
+runtime and AppKit on first use and raises :class:`CocoaError` if they are
+missing.
 """
 
 from __future__ import annotations
@@ -44,7 +43,7 @@ LIBOBJC = '/usr/lib/libobjc.A.dylib'
 
 
 class CocoaError(RuntimeError):
-    """The Objective-C runtime is not there, or does not know a class"""
+    """The Objective-C runtime is missing, or a class is not loaded"""
 
 
 class CGRect(ctypes.Structure):
@@ -58,9 +57,9 @@ class CGRect(ctypes.Structure):
     ]
 
 
-#: ``BOOL`` is a ``bool`` on Apple silicon and a ``signed char`` on Intel;
-#: either is one byte holding zero or one, which an unsigned byte reads and
-#: writes the same on both.
+#: ``BOOL`` is a ``bool`` on Apple silicon and a ``signed char`` on Intel.
+#: Both are one byte holding zero or one, so an unsigned byte reads and writes
+#: either correctly.
 BOOL = ctypes.c_ubyte
 NSUInteger = ctypes.c_ulong
 NSInteger = ctypes.c_long
@@ -70,10 +69,10 @@ ID = ctypes.c_void_p
 class Runtime:
     """Messages to Objective-C objects
 
-    Objects are plain integers (the address) or ``None`` for ``nil``; classes
-    are looked up by name with :meth:`cls`.  A message names its selector and,
-    where it takes arguments or answers anything but an object, the ctypes
-    types of each::
+    Objects are plain integers (the address) or ``None`` for ``nil``.  Classes
+    are looked up by name with :meth:`cls`.  A message names its selector.  If
+    it takes arguments or returns something other than an object, it also
+    names their ctypes types::
 
         rt = runtime()
         view = rt.send(rt.send(rt.cls('NSView'), 'alloc'), 'init')
@@ -110,7 +109,7 @@ class Runtime:
         return int(found)
 
     def selector(self, name: str) -> int:
-        """The selector called ``name``, as ``sel_registerName`` answers it"""
+        """The selector called ``name``, as returned by ``sel_registerName``"""
         found = self._selectors.get(name)
         if found is None:
             found = self._selectors[name] = int(
@@ -123,7 +122,7 @@ class Runtime:
         return (name or b'').decode('ascii', 'replace')
 
     def responds(self, receiver: int, name: str) -> bool:
-        """Whether ``receiver`` answers the message ``name``"""
+        """Whether ``receiver`` responds to the message ``name``"""
         return bool(self._objc.class_respondsToSelector(
             self._objc.object_getClass(receiver), self.selector(name)))
 
@@ -136,12 +135,12 @@ class Runtime:
         argtypes: tuple = (),
         restype: Any = ID,
     ) -> Any:
-        """Send ``name`` to ``receiver`` and answer what it returns
+        """The result of sending ``name`` to ``receiver``
 
-        ``argtypes`` are the ctypes types of ``arguments``, one each; a
-        ``restype`` of ``None`` is a message answering ``void``.  A message to
-        ``nil`` answers zero, as it does in Objective-C.  An object result
-        comes back as an ``int``, or ``None`` for ``nil``.
+        ``argtypes`` are the ctypes types of ``arguments``, one each.  Use a
+        ``restype`` of ``None`` for a message returning ``void``.  A message to
+        ``nil`` returns zero, as in Objective-C.  An object result is returned
+        as an ``int``, or ``None`` for ``nil``.
         """
         if len(arguments) != len(argtypes):
             raise TypeError(
@@ -170,7 +169,7 @@ class Runtime:
             self.send(receiver, 'retain')
 
     def release(self, receiver: Optional[int]) -> None:
-        """Give a reference back; ``nil`` is nothing to give"""
+        """Release a reference to ``receiver``; ``nil`` is ignored"""
         if receiver:
             self.send(receiver, 'release', restype=None)
 
@@ -206,9 +205,9 @@ class Runtime:
     def pool(self) -> Iterator[None]:
         """An autorelease pool for the length of the block
 
-        What a message returns without the caller owning it lives until the
-        nearest pool drains.  With none in place the runtime prints a
-        complaint for each such object and leaks it.
+        An autoreleased object returned by a message lives until the nearest
+        pool drains.  With no pool, the runtime prints a warning for each such
+        object and leaks it.
         """
         token = self._objc.objc_autoreleasePoolPush()
         try:
@@ -223,9 +222,9 @@ _runtime: Optional[Runtime] = None
 def runtime() -> Runtime:
     """The shared :class:`Runtime`, loading the libraries on first use
 
-    AppKit is loaded by name so the classes in it can be found even in a
-    process that has not opened a window yet; Tk has done so already in any
-    process that has a widget.
+    AppKit is loaded by path, so its classes can be found in a process that
+    has not opened a window.  In a process with a Tk widget, Tk has already
+    loaded AppKit.
     """
     global _runtime
     if _runtime is None:

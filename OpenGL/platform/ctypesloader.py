@@ -1,7 +1,7 @@
 """ctypes abstraction layer
 
-We keep rewriting functions as the main entry points change,
-so let's just localise the changes here...
+Library loading and function creation through ctypes, kept in one module so
+changes to the ctypes entry points are made in one place.
 """
 import ctypes, logging, os, posixpath, sys
 _log = logging.getLogger( 'OpenGL.platform.ctypesloader' )
@@ -10,29 +10,25 @@ from ctypes import util
 import OpenGL
 
 def _bundled_dll_directory( ):
-    """Where the prebuilt Windows freeglut and GLE builds are
+    """The directory holding the prebuilt Windows freeglut and GLE libraries
 
-    They are a distribution of their own, ``PyOpenGL-glut-binaries``, which a
-    Windows user asks for as ``pip install PyOpenGL[glut]``: a Linux or macOS
-    install then never downloads six freeglut builds it cannot load, and a
-    scanner objecting to a vendored binary objects to a package only GLUT
-    users have.
+    The libraries are a separate distribution, ``PyOpenGL-glut-binaries``,
+    installed on Windows with ``pip install PyOpenGL[glut]``.  Linux and macOS
+    installs do not download six freeglut builds they cannot load.  Security
+    scanners that flag vendored binaries flag only the package GLUT users
+    install.
 
-    Where it is absent the answer is ``OpenGL/DLLS``, which is where they used
-    to live.  Nothing ships that directory any more, so on most machines it
-    names nothing and the caller finds no file there -- but an installation
-    upgraded in place over a pre-4.0 one still has the old builds, and a
-    frozen application may have been packaged with them.  Keeping the fallback
-    costs a path join, and dropping it would take GLUT away from those two
-    without warning.
+    Without that package the result is ``OpenGL/DLLS``.  PyOpenGL no longer
+    ships that directory, so on most machines it does not exist.  It still
+    exists in an installation upgraded in place over a pre-4.0 release, and in
+    frozen applications packaged with it, so those keep GLUT.
 
-    A ``pyopengl_glut_binaries`` too old to name the directory raises
-    ``ImportError`` from the ``from`` clause and reads the same way, rather
-    than raising out of whichever import came first.
+    A ``pyopengl_glut_binaries`` too old to define ``DLL_DIRECTORY`` raises
+    ``ImportError`` from the ``from`` clause and is treated as absent.
 
-    Only the directory is decided here.  What is looked for in it, and that a
-    library the *system* provides is preferred over any of this, are
-    :func:`_loadLibraryWindows`.
+    This function chooses only the directory.  :func:`_loadLibraryWindows`
+    decides which files to load from it, and prefers a library the system
+    provides.
 
     See ``plans/BUNDLED-DLLS.md``.
     """
@@ -47,36 +43,37 @@ DLL_DIRECTORY = _bundled_dll_directory( )
 
 
 def _bundled_dll_destination( ):
-    """Where a frozen application has to put the files from that directory
+    """The path inside a frozen application for the bundled DLL directory
 
-    A freezer collects them from :data:`DLL_DIRECTORY` and has to write them
-    where the *running* loader will look, which is this same lookup performed
-    inside the bundle.  Both answers are a package directory with ``DLLS``
-    under it -- ``pyopengl_glut_binaries/DLLS`` or ``OpenGL/DLLS`` -- and the
-    loader finds that package by its own ``__file__``, so the last two
-    segments of the path are what the bundle has to reproduce.  Taking them
-    rather than branching keeps this right if the providing package is ever
-    renamed.
+    A freezer collects the files from :data:`DLL_DIRECTORY`.  It must write
+    them where the frozen application's loader will look, which is the same
+    lookup run inside the bundle.  Both possible directories are a package
+    directory with ``DLLS`` under it (``pyopengl_glut_binaries/DLLS`` or
+    ``OpenGL/DLLS``).  The loader finds the package by its ``__file__``, so
+    the bundle must reproduce the last two path segments.  Taking the segments
+    from the path, rather than naming either package, still works if the
+    package is renamed.
 
-    Freezing to the other one produces an application that carries the
-    libraries and cannot find them.  ``OpenGL/__pyinstaller/hook-OpenGL.py``
-    is the caller.
+    Writing the files to the other directory produces an application that
+    contains the libraries but cannot find them.  The caller is
+    ``OpenGL/__pyinstaller/hook-OpenGL.py``.
     """
     parent, leaf = os.path.split( DLL_DIRECTORY )
     return os.path.join( os.path.basename( parent ), leaf )
 
 #: The Windows libraries that are part of the operating system.
 #:
-#: ``ctypes.util.find_library`` walks ``PATH`` on Windows, and ``PATH`` is not
-#: where these live.  ``C:\Windows\System32\opengl32.dll`` is a trampoline to
-#: whatever the graphics driver installed, so it is the only correct one --
-#: and a conda environment puts ``Library\bin``, which carries a Mesa
-#: ``opengl32.dll``, ahead of ``System32`` on ``PATH``.  A program that asked
-#: for the driver's GL then got software rendering, with nothing saying so.
+#: ``ctypes.util.find_library`` searches ``PATH`` on Windows, but these
+#: libraries are in the system directory.  ``C:\Windows\System32\opengl32.dll``
+#: forwards to the graphics driver's implementation, so it is the correct
+#: copy.  A conda environment puts ``Library\bin``, which contains a Mesa
+#: ``opengl32.dll``, ahead of ``System32`` on ``PATH``.  Through
+#: ``find_library``, a program would silently get Mesa's software rendering.
 #:
-#: Handed to the loader bare, these resolve through Windows' own search order,
-#: which reaches the system directory before ``PATH``.  A copy the user put
-#: beside the interpreter still comes first; see :func:`beside_the_interpreter`.
+#: Passed to the loader without a path, these names resolve through Windows'
+#: search order, which checks the system directory before ``PATH``.  A copy
+#: placed beside the interpreter still comes first; see
+#: :func:`beside_the_interpreter`.
 #:
 #: https://github.com/mcfletch/pyopengl/issues/174
 SYSTEM_LIBRARIES = set([
@@ -88,17 +85,16 @@ SYSTEM_LIBRARIES = set([
 def beside_the_interpreter( name ):
     """``name``.dll in the directory the running executable is in, or None.
 
-    Replacing Windows' own OpenGL by putting a DLL next to the executable is
-    how a machine with no graphics driver is given one: Mesa's Windows build
-    is distributed to be dropped there, and that is where a CI runner, a
-    headless server and a virtual desktop get their GL from.  Windows' own
-    search order prefers it as well, the application directory coming before
-    the system directory -- this names it so that the preference holds
-    whichever search flags reach ``LoadLibraryEx``.
+    A machine with no graphics driver gets OpenGL from a DLL placed next to
+    the executable.  Mesa's Windows build is distributed for this, and CI
+    runners, headless servers and virtual desktops use it.  Windows' search
+    order also checks the application directory before the system directory.
+    Returning the full path keeps that order whatever search flags reach
+    ``LoadLibraryEx``.
 
-    That is a different question from the one :data:`SYSTEM_LIBRARIES`
-    settles.  A library is on ``PATH`` because something else was installed;
-    it is next to the interpreter because somebody put it there.
+    :data:`SYSTEM_LIBRARIES` handles a different case.  A library on ``PATH``
+    arrives as a side effect of another install.  A library next to the
+    interpreter was placed there on purpose.
     """
     executable = getattr( sys, 'executable', None )
     if not executable:
@@ -109,15 +105,14 @@ def beside_the_interpreter( name ):
     return None
 
 
-#: Where macOS keeps the frameworks this package loads, tried when
-#: ``find_library`` answers nothing.
+#: The macOS directories holding the frameworks this package loads, tried when
+#: ``find_library`` returns None.
 #:
-#: Since Big Sur the system frameworks live in the dynamic linker cache and are
-#: no longer present as files, so nothing here may check that the path names a
-#: file first: ``dlopen`` is what asks the cache, and handing it the path is
-#: the only way to find out.  CPython's ``find_library`` learned the same in
-#: 3.8.10 and 3.9.1, which covers every interpreter this package supports; the
-#: fallback is for the machines where its heuristics still come up empty.
+#: From Big Sur on, the system frameworks are in the dynamic linker cache and
+#: are not present as files.  The path must not be checked for a file first,
+#: because only ``dlopen`` searches the cache.  CPython's ``find_library``
+#: handles the cache from 3.8.10 and 3.9.1, which covers every supported
+#: interpreter.  This fallback serves machines where its search still fails.
 #:
 #: https://github.com/mcfletch/pyopengl/issues/55
 FRAMEWORK_DIRECTORIES = (
@@ -127,11 +122,11 @@ FRAMEWORK_DIRECTORIES = (
 def loadLibrary( dllType, name, mode = ctypes.RTLD_GLOBAL ):
     """Load a given library by name with the given mode
     
-    dllType -- the standard ctypes pointer to a dll type, such as
-        ctypes.cdll or ctypes.windll or the underlying ctypes.CDLL or 
+    dllType - the standard ctypes pointer to a dll type, such as
+        ctypes.cdll or ctypes.windll or the underlying ctypes.CDLL or
         ctypes.WinDLL classes.
-    name -- a short module name, e.g. 'GL' or 'GLU'
-    mode -- ctypes.RTLD_GLOBAL or ctypes.RTLD_LOCAL,
+    name - a short module name, e.g. 'GL' or 'GLU'
+    mode - ctypes.RTLD_GLOBAL or ctypes.RTLD_LOCAL,
         controls whether the module resolves names via other
         modules already loaded into this process.  GL modules
         generally need to be loaded with GLOBAL flags
@@ -163,7 +158,7 @@ def _loadLibraryPosix(dllType, name, mode):
     base_name = prefix + name + suffix
     
     filenames_to_try = [base_name]
-    # If a .so is missing, let's try libs with so version (e.g libGLU.so.9, libGLU.so.8 and so on)
+    # If the unversioned .so is missing, try versioned names (libGLU.so.9, libGLU.so.8 and so on)
     filenames_to_try.extend(list(reversed([
         base_name + '.%i' % i for i in range(0, 10)
     ])))
@@ -182,16 +177,15 @@ def _loadLibraryPosix(dllType, name, mode):
 def _loadLibraryWindows(dllType, name, mode):
     """Load a given library for the systems that are not posix
 
-    Windows and macOS both arrive here, and each wants something different
-    from ``ctypes.util.find_library``: see :data:`SYSTEM_LIBRARIES` and
-    :data:`FRAMEWORK_DIRECTORIES` for what and why.  A library the operating
-    system provides is looked for beside the interpreter before it is asked of
-    the system; see :func:`beside_the_interpreter`.
+    Windows and macOS both use this function, and each needs different
+    handling around ``ctypes.util.find_library``.  See
+    :data:`SYSTEM_LIBRARIES` and :data:`FRAMEWORK_DIRECTORIES`.  A library the
+    operating system provides is looked for beside the interpreter before the
+    system search; see :func:`beside_the_interpreter`.
 
-    Where the first choice does not load -- a library of the wrong
-    architecture, a bundled copy an installer dropped -- the rest are tried in
-    turn, and the error from the last is raised with the name asked for and
-    whatever ``find_library`` answered appended to it.
+    If the first candidate does not load (for example, a library of the wrong
+    architecture), the rest are tried in turn.  The last error is raised, with
+    the requested name and the ``find_library`` result appended to its args.
 
     returns the ctypes C-module object
     """
@@ -217,9 +211,8 @@ def _loadLibraryWindows(dllType, name, mode):
             candidates.append( name )
             candidates.extend([
                 # posixpath rather than os.path: a framework path is a macOS
-                # filesystem path, so the separator is a slash whatever host
-                # builds it.  This function serves Windows as well, where
-                # os.path.join would spell it with backslashes.
+                # path and always uses slashes.  This function also runs on
+                # Windows, where os.path.join would use backslashes.
                 posixpath.join( directory, '%s.framework'%(name,), name )
                 for directory in FRAMEWORK_DIRECTORIES
             ])

@@ -9,28 +9,28 @@ Numpy).
 Generally speaking, there are 3 pieces of information which control how 
 an image is processed in the system:
 
-    format -- this is the pixel format, such as GL_RGB/GL_RED/GL_ABGR_EXT
-    dims -- tuple of dimensions for the image, (width,height,depth) order 
-    type -- the storage data-type for the image, normally GL_UNSIGNED_BYTE 
+    format - this is the pixel format, such as GL_RGB/GL_RED/GL_ABGR_EXT
+    dims - tuple of dimensions for the image, (width,height,depth) order 
+    type - the storage data-type for the image, normally GL_UNSIGNED_BYTE 
         when working in Python, but all of the standard OpenGL types for 
         images can be used if you happen to have your data in some exotic
         format.
     
-    OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING -- if this global value is set,
+    OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING - if this global value is set,
         then read of unsigned byte images using glReadPixels and 
         glGetTexImage produces a string instead of the default array format.
 
 Attributes of Note:
 
-    COMPONENT_COUNTS -- used to lookup how many units of a 
+    COMPONENT_COUNTS - used to lookup how many units of a 
         given storage type are required to store a unit in a given format
     
-    TYPE_TO_ARRAYTYPE -- maps Image storage types to their array data-type
+    TYPE_TO_ARRAYTYPE - maps Image storage types to their array data-type
         constants, i.e. maps GL_UNSIGNED_SHORT_4_4_4_4 to GL_UNSIGNED_SHORT
         so that we can use the standard array types for manipulating 
         image arrays.
     
-    RANK_PACKINGS -- commands required to set up default array-transfer 
+    RANK_PACKINGS - commands required to set up default array-transfer 
         operations for an array of the specified rank.
 
 New image formats and types will need to be registered here to be supported,
@@ -99,7 +99,7 @@ def createTargetArray( format, dims, type ):
     number of components as they define.
     
     Note that the base storage type must provide a zeros method.  The zeros
-    method relies on their being a registered default array-implementation for 
+    method relies on there being a registered default array-implementation for
     the storage type.  The default installation of OpenGL-ctypes will use 
     Numpy arrays for returning the result.
     """

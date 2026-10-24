@@ -113,7 +113,7 @@ class Implementation(object):
     def deleter(self, buffers, key, owner):
         """Produce a deleter callback to delete the given buffers
 
-        owner -- the :func:`OpenGL.dispatch.context_identity` of the context
+        owner - the :func:`OpenGL.dispatch.context_identity` of the context
             the buffers were made in; they are deleted only while that same
             context is current
         """
@@ -124,24 +124,23 @@ class Implementation(object):
         current_identity = dispatch.context_identity
 
         def doBufferDeletion(*args, **named):
-            # A deleter runs from a weakref callback, so it runs wherever the
-            # collector happened to be -- which for a program that loads in the
-            # background is as likely as not a worker thread, with no GL context
-            # current on it at all, and in a program with more than one context
-            # as likely as not while another one is current. Buffer names belong
-            # to the context that made them and every context numbers its own
-            # from 1: with none current the call does nothing or, on some
-            # drivers, takes the process down, and with another current it
-            # deletes that context's buffer of the same number. So the names
-            # are deleted only in their own context -- which a handle alone
-            # cannot recognise once the driver has given its address to a new
-            # one -- and dropped anywhere else; the driver frees them with the
-            # context they belong to.
+            # A deleter runs from a weakref callback, on whichever thread the
+            # garbage collector runs.  In a program that loads in the
+            # background this is often a worker thread with no GL context
+            # current.  In a program with several contexts, another context
+            # may be current.  Buffer names belong to the context that made
+            # them, and each context numbers its own from 1.  With no context
+            # current, the call does nothing or, on some drivers, crashes the
+            # process.  With another context current, it deletes that
+            # context's buffer with the same number.  So the names are deleted
+            # only in their own context, identified by context identity
+            # because the driver reuses handles.  Elsewhere they are dropped,
+            # and the driver frees them with their context.
             try:
                 deletable = owner is not None and current_identity() is owner
             except Exception:  # noqa: BLE001 at interpreter shutdown any global it reads may already be None
-                # Asked during interpreter shutdown, where what it needs may
-                # already be gone. Nothing can be freed then either.
+                # During interpreter shutdown the globals it reads may already
+                # be None, and nothing can be freed.
                 deletable = False
             while buffers:
                 try:
@@ -213,8 +212,8 @@ if TYPE_CHECKING or _ACCELERATED is None:
         ):
             """Initialize the VBO object
 
-            data -- PyOpenGL-compatible array-data structure, numpy arrays, ctypes arrays, etc.
-            usage -- OpenGL usage constant describing expected data-flow patterns (this is a hint
+            data - PyOpenGL-compatible array-data structure, numpy arrays, ctypes arrays, etc.
+            usage - OpenGL usage constant describing expected data-flow patterns (this is a hint
                 to the GL about where/how to cache the data)
 
                 GL_STATIC_DRAW_ARB
@@ -237,14 +236,14 @@ if TYPE_CHECKING or _ACCELERATED is None:
                 STREAM suggests that the data will be updated approximately every time that it is
                 used (that is, it will likely only be used once).
 
-            target -- VBO target to which to bind (array or indices)
-                GL_ARRAY_BUFFER -- array-data binding
-                GL_ELEMENT_ARRAY_BUFFER -- index-data binding
-                GL_UNIFORM_BUFFER -- used to pass mid-size arrays of data packed into a buffer
-                GL_TEXTURE_BUFFER -- used to pass large arrays of data as a pseudo-texture
-                GL_TRANSFORM_FEEDBACK_BUFFER -- used to receive transformed vertices for processing
+            target - VBO target to which to bind (array or indices)
+                GL_ARRAY_BUFFER - array-data binding
+                GL_ELEMENT_ARRAY_BUFFER - index-data binding
+                GL_UNIFORM_BUFFER - used to pass mid-size arrays of data packed into a buffer
+                GL_TEXTURE_BUFFER - used to pass large arrays of data as a pseudo-texture
+                GL_TRANSFORM_FEEDBACK_BUFFER - used to receive transformed vertices for processing
 
-            size -- if not provided, will use arrayByteCount to determine the size of the data-array,
+            size - if not provided, will use arrayByteCount to determine the size of the data-array,
                 thus this value (number of bytes) is required when using opaque data-structures,
                 (such as ctypes pointers) as the array data-source.
             """
@@ -268,8 +267,8 @@ if TYPE_CHECKING or _ACCELERATED is None:
         def set_array(self, data, size=None):
             """Update our entire array with new data
 
-            data -- PyOpenGL-compatible array-data structure, numpy arrays, ctypes arrays, etc.
-            size -- if not provided, will use arrayByteCount to determine the size of the data-array,
+            data - PyOpenGL-compatible array-data structure, numpy arrays, ctypes arrays, etc.
+            size - if not provided, will use arrayByteCount to determine the size of the data-array,
                 thus this value (number of bytes) is required when using opaque data-structures,
                 (such as ctypes pointers) as the array data-source.
             """
@@ -283,9 +282,9 @@ if TYPE_CHECKING or _ACCELERATED is None:
         def __setitem__(self, slice, array):
             """Set slice of data on the array and vbo (if copied already)
 
-            slice -- the Python slice object determining how the data should
+            slice - the Python slice object determining how the data should
                 be copied into the vbo/array
-            array -- something array-compatible that will be used as the
+            array - something array-compatible that will be used as the
                 source of the data, note that the data-format will have to
                 be the same as the internal data-array to work properly, if
                 not, the amount of data copied will be wrong.
@@ -354,10 +353,10 @@ if TYPE_CHECKING or _ACCELERATED is None:
         def create_buffers(self):
             """Create the internal buffer(s)"""
             assert not self.buffers, """Already created the buffer"""
-            # Through `as_int`: `SIZE_1_ARRAY_UNPACK` decides whether a
-            # call that makes one object answers the name or a
-            # one-element array holding it, and the flag is the
-            # caller's -- so the library reads both.
+            # Uses `as_int`, because `SIZE_1_ARRAY_UNPACK` decides whether
+            # a call that makes one object returns the name or a
+            # one-element array holding it.  The caller sets that flag, so
+            # both forms are accepted.
             self.buffers = [as_int(self.implementation.glGenBuffers(1))]
             self.target = self.resolve(self.target)
             self.usage = self.resolve(self.usage)
@@ -402,10 +401,10 @@ if TYPE_CHECKING or _ACCELERATED is None:
             if self.buffers:
                 while self.buffers:
                     try:
-                        # An array rather than the name itself, as the deleter
-                        # that runs at collection also does: a caller who has
-                        # turned the implicit copy off cannot be handed a bare
-                        # int here, and would not be able to delete a buffer.
+                        # An array instead of the bare name, as in the deleter
+                        # that runs at collection.  With ERROR_ON_COPY set, a
+                        # bare int is refused and the buffer could not be
+                        # deleted.
                         name = _types.GLuint(self.buffers.pop(0))
                         self.implementation.glDeleteBuffers(1, name)
                     except (AttributeError, error.NullFunctionError) as err:

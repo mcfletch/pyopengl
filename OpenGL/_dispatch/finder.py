@@ -1,40 +1,34 @@
 """Build the generated ``OpenGL.raw`` modules instead of importing files.
 
-Every module under ``OpenGL/raw`` is purely generated: constants, entry-point
-declarations and re-exports, with no hand-written material anywhere -- the
-hand-written sections all live in the friendly modules above them.  Under the
-C dispatch layer the entry points come from the extension rather than from
-those declarations, so what the file adds is a compile and an exec, whether or
-not anything looks at what it produced.
+Every module under ``OpenGL/raw`` is generated: constants, entry-point
+declarations and re-exports.  All hand-written code lives in the friendly
+modules above them.  Under the C dispatch layer the entry points come from the
+extension instead of from those declarations, so a module file would only add
+a compile and an exec.
 
-The layer has stopped being a layer.  What it still is, is a set of names that
-clients import and that PyOpenGL's own friendly modules import from, so the
-names go on resolving -- built from the same tables the C is generated from,
-on demand.
+Client code and PyOpenGL's friendly modules still import these module names.
+This finder builds the modules on demand from the same tables the C code is
+generated from.
 
-There is nothing for this to be switched off in favour of: the generated files
-are not shipped and the generator does not write them, so these names resolve
-here or not at all.
+The finder cannot be switched off.  The generated files are not shipped and
+the generator does not write them, so these names resolve here or not at all.
 
-Shadowing files would not have been worth an import hook, and the measurement
-is why -- with the friendly modules importing the raw ones eagerly, the module
-objects exist either way:
+Building modules from tables is not faster than importing files.  The friendly
+modules import the raw ones eagerly, so the module objects exist either way:
 
     import OpenGL.GL, warm      58 ms both ways, 62 MB both ways, 309 modules
     import OpenGL.GL, cold     185 ms from files, 166 ms from tables
     the whole raw tree, cold   333 ms from files, 352 ms from tables
 
-What pays is *removing* the 1,278 files, which the definitions being in the
-tables is what allows.  A test asserts that what is built here defines exactly
-what a file defined, which is what made removing them a decision rather than a
-gamble.
+The gain is that the 1,278 files are not shipped, since the tables hold the
+same definitions.  A test asserts that each module built here defines the same
+names as the file it replaces.
 
-Two kinds keep their files either way.  The packages and the private modules
--- ``_types``, ``_errors``, ``_glgets`` -- carry classes and conditionals, so
-no table describes them.  And the finder can only be installed once the
-extension is loaded, which is the first entry point built, so whatever was
-imported to reach that point comes from files: for ``import OpenGL.GL`` that
-is GL_1_0 and GL_1_1.
+Two kinds of module still have files.  The packages and the private modules
+(``_types``, ``_errors``, ``_glgets``) contain classes and conditionals, so no
+table describes them.  The finder is installed only once the extension is
+loaded, at the first entry point built, so modules imported before that come
+from files.  For ``import OpenGL.GL`` those are GL_1_0 and GL_1_1.
 """
 
 import importlib
@@ -47,9 +41,9 @@ from OpenGL import _declarations
 from OpenGL._declarations import Declaration, resolve_type
 from OpenGL._dispatch import support
 
-#: One reader, one declaration class, for both routes into the same
-#: declarations: see :mod:`OpenGL._declarations`.  Re-exported here because
-#: this is where a reader of the import hook looks for them.
+#: The declaration reader and class are shared with the other users of the
+#: declarations; see :mod:`OpenGL._declarations`.  They are re-exported here
+#: beside the import hook that uses them.
 __all__ = [
     'RawModuleFinder',
     'Declaration',
@@ -64,11 +58,11 @@ _installed = None
 class RawModuleFinder:
     """Finds and builds the generated modules from the dispatch tables.
 
-    A meta-path finder is what it does, not what it inherits: the import
-    machinery asks for ``find_spec``, ``create_module`` and ``exec_module`` and
-    never for a base class.  Deriving from ``importlib.abc`` would pull in
-    ``importlib.resources`` and ``inspect`` -- 15 ms, on every import, for a
-    registration this file does not need.
+    The class implements the meta-path finder protocol without a base class.
+    The import machinery calls ``find_spec``, ``create_module`` and
+    ``exec_module`` and does not check the type.  Deriving from
+    ``importlib.abc`` would import ``importlib.resources`` and ``inspect``,
+    which adds 15 ms to every ``import OpenGL``.
     """
 
     def __init__(self, extension=None, entry_points=None):
@@ -78,14 +72,14 @@ class RawModuleFinder:
 
     @property
     def _names(self):
-        """The generated module names, read on the first import that asks.
+        """The generated module names, read on the first import needing them.
 
-        From the tables even where the extension will answer, because the two
-        describe the same set and reading an index is cheaper than installing
-        the dispatch layer.  Read late rather than in ``__init__`` because this
-        object is built during ``import OpenGL``, and a program sets
-        ``OpenGL.ERROR_CHECKING`` and its neighbours in the lines after that --
-        anything read here would be read before it had been written.
+        Read from the tables even where the extension supplies the modules.
+        Both describe the same set, and reading an index is cheaper than
+        installing the dispatch layer.  Read on first use instead of in
+        ``__init__``, because this object is built during ``import OpenGL``.
+        A program sets ``OpenGL.ERROR_CHECKING`` and the related flags after
+        that import, and reading earlier would see them unset.
         """
         if self._known is None:
             self._known = frozenset(
@@ -94,12 +88,11 @@ class RawModuleFinder:
         return self._known
 
     def _source(self):
-        """The extension where it is the implementation, the tables otherwise.
+        """Return the extension if it is the implementation, else the tables.
 
-        Resolved on the first module built rather than at construction: that
-        is the first moment the answer can be right, because deciding it
-        earlier would settle the configuration before a program has finished
-        writing it.
+        Resolved when the first module is built instead of at construction.
+        Deciding earlier would read the configuration before a program has
+        set it.
         """
         if self._extension is None:
             extension = _declarations._c_source()
@@ -114,15 +107,13 @@ class RawModuleFinder:
 
     # -- finding ---------------------------------------------------------
     def find_spec(self, name, path=None, target=None):
-        # The prefix test first, and without touching _names: this is asked
-        # about every import in the process, and reading the index is what
-        # imports OpenGL._declarations -- which would ask about itself.
+        # Test the prefix first, without touching _names.  This runs for every
+        # import in the process.  Reading the index imports
+        # OpenGL._declarations, which would recurse into this finder.
         if not name.startswith('OpenGL.raw.') or name not in self._names:
             return None
-        # The origin is the table the definitions come from, which is the
-        # honest answer to "where did this module come from" and the only one
-        # there is.  has_location stays false: the file is marshalled data
-        # rather than the source of anything, so nothing should try to read it
+        # The origin is the table the definitions come from.  has_location
+        # stays false: the table is marshalled data, so tools must not read it
         # as source or count lines in it.
         return importlib.machinery.ModuleSpec(
             name, self, origin=_declarations.table_path(_api_of(name))
@@ -130,7 +121,7 @@ class RawModuleFinder:
 
     # -- loading ---------------------------------------------------------
     def create_module(self, spec):
-        return None  # the default module object is what is wanted
+        return None  # use the default module object
 
     def exec_module(self, module):
         name = module.__name__
@@ -140,20 +131,19 @@ class RawModuleFinder:
             raise ImportError(name)
 
         namespace = module.__dict__
-        # __file__ names the table the definitions were read from, so that a
-        # tool asking where they came from gets a useful answer rather than
-        # nothing.  It is not read to load anything, and where the package is
-        # not a directory on disk there is no path to give and the attribute
-        # is left unset -- which is a legitimate thing for a module to be.
+        # __file__ names the table the definitions were read from, so tools
+        # that report a module's location get a useful path.  Nothing loads
+        # from it.  Where the package is not a directory on disk there is no
+        # path, and the attribute is left unset, which is valid for a module.
         origin = module.__spec__.origin if module.__spec__ else None
         if origin:
             namespace['__file__'] = origin
         namespace['_EXTENSION_NAME'] = contents['extension']
 
-        # A module re-exports the ones it was built on top of, as the file did
-        # with ``from ... import *`` -- which takes __all__ where the source
-        # defines one, and only falls back to "every public name" where it
-        # does not.  The two differ for _types and _glgets, which define it.
+        # A module re-exports the modules it builds on, as the file did with
+        # ``from ... import *``.  That uses __all__ where the source defines
+        # one, and every public name otherwise.  The two differ for _types and
+        # _glgets, which define __all__.
         for source in contents['reexports']:
             imported = importlib.import_module(source)
             exported = getattr(imported, '__all__', None)
@@ -175,9 +165,9 @@ class RawModuleFinder:
         from OpenGL.constant import declared
 
         for key, value in contents['constants'].items():
-            # Named with the module rather than left to guess, for the same
-            # reason as register_module below: what a constant reports as its
-            # module should not depend on which loader filled the namespace.
+            # Given the module name explicitly, as with register_module below,
+            # so a constant reports the same module whichever loader filled
+            # the namespace.
             namespace[key] = declared(key, value, name)
 
         api = _api_of(name)
@@ -187,19 +177,18 @@ class RawModuleFinder:
                 api, command, extension, name, arguments, types
             )
             # A derived function whose arity differs from the entry point's
-            # demotes to the ctypes binding, and running the declaration used
-            # to be what recorded it.  Registering how to build one, rather
-            # than building it, keeps the import to what it was: nothing but
-            # the names.
+            # demotes to the ctypes binding.  Registering a factory for the
+            # binding, instead of building it, keeps the import cost to
+            # defining the names.
             support.register_ctypes_factory(api, command, declaration)
-            # What ``proc.__module__`` answers.  The file recorded it on its
-            # way through createFunction, and a name that reports where it was
-            # declared should not depend on how the module was filled.
+            # The value of ``proc.__module__``.  Module files recorded it in
+            # createFunction, and it must be the same however the module was
+            # filled.
             support.register_module(api, command, name)
             entry = entry_points.get((api, command))
             if entry is None:
-                # An entry point the C does not implement is what it always
-                # was, so build it now rather than describe it.
+                # The C layer does not implement this entry point, so build
+                # the ctypes binding now.
                 entry = declaration()
                 support.register_ctypes_binding(api, command, entry)
             namespace[command] = entry
@@ -213,31 +202,30 @@ def _api_of(name):
 class _RawDirectoryFinder:
     """A path entry finder for one directory under ``OpenGL/raw``.
 
-    ``pkgutil.iter_modules`` and ``walk_packages`` ask the *path* finder for a
-    package's directory what it holds, never the meta-path finder that builds
-    the modules -- so with the generated files gone the ordinary
-    :class:`FileFinder` reports an empty directory and a walk of
-    ``OpenGL.raw.GL.ARB`` yields nothing at all.  Nothing raises: the caller is
-    told there are no extensions, which is the wrong answer rather than no
-    answer.
+    ``pkgutil.iter_modules`` and ``walk_packages`` list a package's contents
+    through the path finder for its directory, not through the meta-path
+    finder that builds the modules.  Without the generated files, the standard
+    :class:`FileFinder` reports an empty directory, and a walk of
+    ``OpenGL.raw.GL.ARB`` yields nothing.  No error is raised, so the caller
+    sees no extensions.
 
-    So this stands in front of the real finder for those directories, adds the
-    names the tables describe, and defers everything else -- finding and
-    loading included -- to the finder that would have handled the directory.
+    This finder wraps the standard finder for those directories.  It adds the
+    names the tables describe, and passes finding and loading to the wrapped
+    finder.
     """
 
     def __init__(self, path, delegate):
         self.path = path
         self._delegate = delegate
 
-    # -- the import protocol, which is entirely the real finder's job --------
+    # -- the import protocol, handled by the wrapped finder ------------------
     def find_spec(self, name, target=None):
         return self._delegate.find_spec(name, target)
 
     def invalidate_caches(self):
         self._delegate.invalidate_caches()
 
-    # -- what this exists for -----------------------------------------------
+    # -- listing the generated modules ---------------------------------------
     def iter_modules(self, prefix=''):
         seen = set()
         for name, ispkg in pkgutil.iter_importer_modules(self._delegate, ''):
@@ -248,7 +236,7 @@ class _RawDirectoryFinder:
                 yield prefix + name, False
 
     def _generated(self):
-        """The leaf names the tables describe for this directory."""
+        """Return the module names the tables list for this directory."""
         installed = _installed
         if installed is None:
             return ()
@@ -264,7 +252,7 @@ class _RawDirectoryFinder:
 
 
 def _package_for_directory(path):
-    """``OpenGL.raw.GL.ARB`` for the directory that package lives in."""
+    """Return a directory's package name, such as ``OpenGL.raw.GL.ARB``."""
     root = _raw_directory()
     if not root:
         return None
@@ -276,8 +264,8 @@ def _package_for_directory(path):
 
 
 #: The ``OpenGL/raw`` directory, or ``''`` where the package is not on disk.
-#: Resolved once: the hook below is asked about every path entry in the
-#: process, so the question it answers has to be cheap.
+#: Resolved once, because the hook below runs for every path entry in the
+#: process and must be cheap.
 _raw_root = None
 
 
@@ -305,7 +293,7 @@ def _path_hook(path):
 
 
 def _default_path_finder(path):
-    """The finder that would have handled this directory without the hook."""
+    """Return the finder that handles this directory without the hook."""
     for hook in sys.path_hooks:
         if hook is _path_hook:
             continue
@@ -317,15 +305,15 @@ def _default_path_finder(path):
 
 
 def installed():
-    """The finder answering for the generated modules, or ``None``."""
+    """Return the finder for the generated modules, or ``None``."""
     return _installed
 
 
 def install(extension=None, entry_points=None):
-    """Put the finder ahead of the path finder.
+    """Install the finder ahead of the path finder and return it.
 
-    Ahead of it because there are no files for it to be behind: the generated
-    modules are not shipped, and this is what answers for their names.
+    The generated modules are not shipped as files, so this finder goes first
+    and supplies their names.
     """
     global _installed
     if _installed is not None:
@@ -349,7 +337,7 @@ def _claims(path):
 
 
 def uninstall():
-    """Go back to importing the files.  For the tests that compare them."""
+    """Remove the finder and path hook, for tests that compare with files."""
     global _installed
     if _installed is not None:
         try:

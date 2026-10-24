@@ -1,16 +1,14 @@
 Offscreen rendering
 ===================
 
-Offscreen rendering refers to running your OpenGL code in either a buffer with
-no relationship to your screen, or on a hidden window that doesn't graphically
-present on your screen.  There are major use cases for this, including using
-OpenGL accelerated hardware to render a graphic for a web server, test suites
-that want to run in the background, direct-to-video rendering and the like.
+Offscreen rendering runs OpenGL code into a buffer with no relationship to the
+screen, or into a hidden window that is never displayed.  Common uses include
+rendering images for a web server on GPU hardware, test suites that run in the
+background, and rendering directly to video.
 
-The basic idea is that a backing "surface" is mapped into the hardware such
-that the GL can draw into it, and then some mechanism is used to read that
-surface back to the application.  The exact mechanisms differ by platform, but
-they all work in loosely the same way.
+In each case, the GL draws into a backing "surface" in graphics memory, and the
+application then reads that surface back.  The details differ by platform, but
+the mechanism is broadly the same.
 
 Platform implementations
 ------------------------
@@ -36,10 +34,10 @@ Platform implementations
      - :py:mod:`OpenGL.osmesa.offscreen`
      - An array the caller owns
 
-Where a machine offers more than one, the order of that table is the order to
-try them in: the system's own interface first, OSMesa last, since OSMesa
-rasterises on the CPU.  Each module answers ``available()``, or an empty device
-list, before anything is created, so a program can choose between them without
+Where a machine offers more than one, try them in the order of the table: the
+system's own interface first, and OSMesa last, because OSMesa rasterises on the
+CPU.  Each module provides ``available()``, or an empty device list, before
+anything is created.  A program can therefore choose between them without
 catching a construction failure.
 
 :doc:`platform-linux`, :doc:`platform-macos` and :doc:`platform-windows` cover
@@ -48,41 +46,41 @@ the rest of getting OpenGL on each system.
 Reading the frame back
 ----------------------
 
-``glReadPixels`` hands the image over **bottom-up**, whichever route made the
-context, and an image file wants it the other way; the OSMesa context's
-:py:meth:`read` takes ``top_down=True`` for that, and elsewhere it is a
-``[::-1]`` on the array.
+``glReadPixels`` returns the image **bottom-up** on every route, and image
+files expect top-down rows.  The OSMesa context's :py:meth:`read` takes
+``top_down=True`` to flip it.  On the other routes, flip the array with
+``[::-1]``.
 
-Rows are padded to ``GL_PACK_ALIGNMENT``, which is 4 until something sets it.
-An RGBA read at any width is unaffected, since four bytes a pixel is already
-aligned; an RGB or single-channel read at a width that is not a multiple of
-four has padding at the end of every row unless the alignment is set to 1
-first.
+Rows are padded to ``GL_PACK_ALIGNMENT``, which is 4 unless something changes
+it.  An RGBA read is unaffected at any width, because four bytes per pixel is
+already aligned.  An RGB or single-channel read, at a width that is not a
+multiple of four, has padding at the end of every row unless the alignment is
+first set to 1.
 
-A finished frame is in the buffer the context draws to, which is not always
-``GL_BACK``: a pbuffer is single-buffered unless one was asked for with a back
-buffer, and naming a buffer the framebuffer does not have is
-``GL_INVALID_OPERATION`` rather than a quiet fallback.  ``glGetIntegerv`` with
-``GL_DOUBLEBUFFER`` reports which the framebuffer has.
+The finished frame is in the buffer the context draws to, which is not always
+``GL_BACK``.  A pbuffer is single-buffered unless it was requested with a back
+buffer.  Reading a buffer the framebuffer does not have produces
+``GL_INVALID_OPERATION`` instead of falling back to another buffer.
+``glGetIntegerv`` with ``GL_DOUBLEBUFFER`` reports whether the framebuffer has
+a back buffer.
 
-The frame need not come back to the application at all.  It is already in GPU
-memory, and the GPU can process it further before anything crosses the bus --
-`pyopengl-video <https://github.com/mcfletch/pyopengl-video>`__ hands the
-colour buffer to the video encoder on the same die, so a texture goes in and an
-H.264 stream comes out.  A recorder, a streamer or a render farm node reading
-frames back only to compress them can hand them over instead.
+The frame does not have to be copied back to the application.  It is already
+in GPU memory, and the GPU can process it further before any data crosses the
+bus.  `pyopengl-video <https://github.com/mcfletch/pyopengl-video>`__ passes
+the colour buffer to the video encoder on the same chip: a texture goes in and
+an H.264 stream comes out.  A recorder, a streamer or a render farm node that
+reads frames back only to compress them can use it instead.
 
 .. _offscreen-egl:
 
 EGL, on Linux and Android
 -------------------------
 
-``EGL_EXT_device_enumeration`` lets a program render on a device it names, with
-no display server anywhere, and :py:mod:`OpenGL.EGL.devices` reports what those
-devices are: which exist, what each advertises, what its driver calls itself,
-and whether it rasterises on the CPU.  Getting from "the extension exists" to
-"this handle is the one I want" takes three separate extensions and a pair of
-string queries, so the module does it once.
+``EGL_EXT_device_enumeration`` lets a program render on a device it names,
+with no display server.  :py:mod:`OpenGL.EGL.devices` reports those devices:
+which exist, which extensions each advertises, its driver name, and whether it
+rasterises on the CPU.  Selecting a device handle takes three separate
+extensions and two string queries, and the module wraps those steps.
 
 ::
 
@@ -96,58 +94,59 @@ What it reports
 
 ``devices(query=...)``
    Every device, in the order EGL reports them, as a tuple of ``DeviceInfo``.
-   Empty where the system cannot enumerate devices at all -- no
-   ``EGL_EXT_device_enumeration``, or none behind it.  A caller that needs a
-   display in that case falls back to ``eglGetDisplay`` with
-   ``EGL_DEFAULT_DISPLAY``.  ``query`` is the enumeration step, exposed so it
-   can be replaced in tests.
+   Empty where the system cannot enumerate devices at all, either because
+   ``EGL_EXT_device_enumeration`` is missing or because it reports no devices.
+   A caller that needs a display in that case falls back to ``eglGetDisplay``
+   with ``EGL_DEFAULT_DISPLAY``.  ``query`` is the enumeration function, and
+   tests can replace it.
 ``DeviceInfo.handle``
-   The ``EGLDeviceEXT`` itself, which is what
+   The ``EGLDeviceEXT`` that
    ``eglGetPlatformDisplayEXT(EGL_PLATFORM_DEVICE_EXT, handle, None)`` takes.
-   It is the device's identity: two ``DeviceInfo`` compare equal when they hold
-   the same handle, whatever index each was enumerated at.
+   The handle identifies the device: two ``DeviceInfo`` compare equal when they
+   hold the same handle, regardless of their indexes.
 ``DeviceInfo.index``
-   Where it appeared in this enumeration.  Useful for naming a device to a user
-   or in an environment variable; not an identity, since another enumeration
-   may number them differently.
+   The device's position in this enumeration.  Use it to name a device to a
+   user or in an environment variable.  It does not identify the device,
+   because another enumeration may number the devices differently.
 ``DeviceInfo.extensions``
-   What the device says it supports, as a tuple.  Empty where it does not
-   answer the query, which is a device that does not implement the optional
-   extension the query comes from rather than an error.
+   The extensions the device reports, as a tuple.  Empty when the device does
+   not support the optional extension behind this query.  An empty tuple is
+   not an error.
 ``DeviceInfo.driver``
-   What the driver calls itself -- ``EGL_DRIVER_NAME_EXT``.  ``''`` where the
-   device does not answer.
+   The driver's name, from ``EGL_DRIVER_NAME_EXT``.  ``''`` when the device
+   does not support the query.
 ``DeviceInfo.software``
    Whether this device rasterises on the CPU.  See below.
 
 Which device is software
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-The question is decided in two steps, in this order:
+The module decides in two steps, in this order:
 
 #. ``EGL_MESA_device_software`` among the device's extensions.  It is
    definitive where present, so it is checked first.
 #. Otherwise the driver name, matched case-insensitively as a substring against
    ``SOFTWARE_DRIVER_NAMES``: ``llvmpipe``, ``swrast``, ``softpipe``, ``swr``,
-   ``lavapipe``.  Substrings because drivers append versions and build details
-   to the name.
+   ``lavapipe``.  The match uses substrings because drivers append versions and
+   build details to the name.
 
-A device that answers neither is reported as hardware.  Treating a real GPU as
-software costs performance; the reverse can mean selecting a device that cannot
-do the work.
+A device that matches neither test is reported as hardware.  Treating a real
+GPU as software only costs performance.  Treating a software device as
+hardware can select a device that cannot do the work.
 
-Asking Mesa for a display on a *hardware* device while
-``LIBGL_ALWAYS_SOFTWARE`` demands software rendering is a contradiction: Mesa
-warns about it and then crashes, inside ``driCreateNewScreen3``.  A program
-that takes device 0 without asking which devices are software therefore crashes
-on any machine with both a GPU and a software rasteriser.
+Requesting a display on a *hardware* device while ``LIBGL_ALWAYS_SOFTWARE``
+forces software rendering makes Mesa print a warning and then crash inside
+``driCreateNewScreen3``.  A program that takes device 0 without checking which
+devices are software therefore crashes on any machine that has both a GPU and
+a software rasteriser.
 
 Choosing a device
 ~~~~~~~~~~~~~~~~~
 
 The module reports what is available; the application picks the device with the
 features it needs and stops if there is none.  Where
-``LIBGL_ALWAYS_SOFTWARE`` is set, that means a software device.
+``LIBGL_ALWAYS_SOFTWARE`` is set, the application should pick a software
+device.
 
 ::
 
@@ -163,36 +162,36 @@ features it needs and stops if there is none.  Where
        EGL_PLATFORM_DEVICE_EXT, usable[0].handle, None
    )
 
-`OpenGLContext <https://github.com/mcfletch/openglcontext>`__'s offscreen
-backend does this: it honours ``LIBGL_ALWAYS_SOFTWARE`` and ``GALLIUM_DRIVER``,
-and takes an explicit device index from an environment variable where a run has
-to be pinned to one GPU of several.  PyOpenGL's own headless test backend
-(``tests/glcontext_egl.py``) does the same.
+The offscreen backend of `OpenGLContext
+<https://github.com/mcfletch/openglcontext>`__ follows this pattern.  It
+honours ``LIBGL_ALWAYS_SOFTWARE`` and ``GALLIUM_DRIVER``, and reads a device
+index from an environment variable to pin a run to one GPU of several.  PyOpenGL's own
+headless test backend (``tests/glcontext_egl.py``) does the same.
 
 Render nodes, through GBM
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:py:mod:`OpenGL.EGL.gbmdevice` is the other way onto a GPU with no display
-server: it opens a DRM render node from ``/dev/dri`` through libgbm and hands
-back a device EGL will make a display for.  It needs the gbm library, and the
-import raises ``ImportError`` naming it where there is none.  Device
-enumeration above is the first thing to try, since it needs no extra library;
-this is what answers on a driver stack that enumerates no EGL devices.
+:py:mod:`OpenGL.EGL.gbmdevice` is the second way to reach a GPU with no
+display server.  It opens a DRM render node from ``/dev/dri`` through libgbm
+and returns a device EGL can create a display for.  It needs the gbm library,
+and importing it raises ``ImportError`` naming the library when it is missing.
+Try device enumeration first, because it needs no extra library.  Use GBM on
+driver stacks that enumerate no EGL devices.
 
 Where this works
 ~~~~~~~~~~~~~~~~
 
-EGL is the GL binding on Linux and Android.  Windows has no EGL of its own --
-an installed ANGLE or Mesa provides one -- and macOS has none at all.
-``devices()`` answers with an empty tuple wherever the enumeration extension is
-absent, so the empty answer is the signal to fall back.
+EGL is the GL binding on Linux and Android.  Windows has no EGL of its own,
+though an installed ANGLE or Mesa provides one.  macOS has no EGL at all.
+``devices()`` returns an empty tuple wherever the enumeration extension is
+missing, and a program should then fall back to another route.
 
-Having no EGL *library* is a step earlier than that, and it is common: EGL
-ships with the graphics driver, so a machine with none installed -- a virtual
-machine, a container, a build runner -- has nothing for the bindings to call,
-as macOS and a Windows without ANGLE have nothing.  Importing raises
-``ImportError`` there, naming what is missing.  That import is how a program
-asks whether this machine has EGL at all:
+A machine can also lack the EGL *library* itself, which is common.  EGL ships
+with the graphics driver, so a machine with no driver installed (a virtual
+machine, a container, a build runner) has no EGL for the bindings to call.
+macOS and Windows without ANGLE are in the same position.  Importing then
+raises ``ImportError`` naming what is missing.  A program tests for EGL by
+attempting the import:
 
 ::
 
@@ -202,7 +201,7 @@ asks whether this machine has EGL at all:
        devices = None      # no EGL here: render through GLX, WGL or CGL instead
 
 :doc:`platform-linux` covers the rest of getting OpenGL on Linux, including
-which of GLX and EGL a context comes from.
+how PyOpenGL determines whether a context came from GLX or EGL.
 
 .. _offscreen-cgl:
 
@@ -210,9 +209,9 @@ CGL, on macOS
 -------------
 
 :py:mod:`OpenGL.CGL` creates an OpenGL context on macOS with no window and no
-window server.  CGL is the lowest-level OpenGL interface on macOS; NSGL, the
-AppKit interface GUI toolkits use, is built on it and creates a context only for
-a window.  :doc:`platform-macos` describes the two.
+window server.  CGL is the lowest-level OpenGL interface on macOS.  NSGL, the
+AppKit interface that GUI toolkits use, is built on CGL and creates contexts
+only for windows.  :doc:`platform-macos` describes both.
 
 ::
 
@@ -231,45 +230,49 @@ a window.  :doc:`platform-macos` describes the two.
 There is no default framebuffer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Framebuffer zero belongs to a drawable, and a context made this way has none.
-A ``glClear`` or a ``glReadPixels`` against it draws nowhere and reads nothing,
-and raises no error.  Render into a framebuffer object instead.
+An offscreen context created with CGL has no default framebuffer, because
+framebuffer zero belongs to a window drawable.  A ``glClear`` or
+``glReadPixels`` on framebuffer zero draws nothing, reads nothing and raises no
+error.  Rendering must target a framebuffer object instead.
 
-``OffscreenTarget`` is one, built and bound inside a current context: a
-``GL_RGBA8`` colour attachment and a ``GL_DEPTH24_STENCIL8`` depth/stencil one
-at the size asked for, with the viewport set to match.  While it is bound,
-drawing and reading back behave as they do on a window, so nothing else in a
-program has to know.  ``release()`` gives the names back.
+``OffscreenTarget`` creates and binds a framebuffer object inside the current
+context.  It has a ``GL_RGBA8`` colour attachment and a
+``GL_DEPTH24_STENCIL8`` depth/stencil attachment at the requested size, and
+sets the viewport to match.  While it is bound, drawing and reading back work
+as they do on a window, with no other changes to the program.  ``release()``
+deletes the framebuffer and its attachments.
 
-Which renderer answers
-~~~~~~~~~~~~~~~~~~~~~~
+Choosing the renderer
+~~~~~~~~~~~~~~~~~~~~~
 
 A Mac with a GPU has an accelerated renderer.  A virtual machine, or a session
-with no window server, has only Apple's CPU renderer, and asking for
-acceleration there *fails* rather than falling back, so a library that requires
-the accelerated attribute gets no context at all on such a machine.
+with no window server, has only Apple's CPU renderer.  On such a machine, a
+request for acceleration *fails* instead of falling back.  A library that
+requires the accelerated attribute gets no context at all there.
 
-``headless_context`` and ``choose_pixel_format`` therefore try three kinds in
-order and take the first the machine offers:
+``headless_context`` and ``choose_pixel_format`` therefore try three kinds of
+renderer in order, and use the first the machine offers:
 
 ``accelerated``
-   Asks for ``kCGLPFAAccelerated``: a GPU, where there is one.
+   Requests ``kCGLPFAAccelerated``: a GPU, where there is one.
 ``any``
-   Names no renderer at all and lets CGL answer with what it has.  This is what
-   a machine with no accelerated renderer needs.
+   Names no renderer and accepts whichever renderer CGL selects.  A machine
+   with no accelerated renderer needs this.
 ``software``
-   Names ``kCGLRendererGenericFloatID``, Apple's CPU renderer, by id.  There is
-   no "not accelerated" attribute, so asking for it explicitly means naming it.
+   Names Apple's CPU renderer by its id, ``kCGLRendererGenericFloatID``.  CGL
+   has no "not accelerated" attribute, so the software renderer can only be
+   requested by id.
 
-``choose_pixel_format`` returns the kind it settled on alongside the format, so
-a program can report what it got.  Pass ``renderer=`` to try one kind and no
+``choose_pixel_format`` returns the kind it used alongside the format, so a
+program can report what it got.  Pass ``renderer=`` to try one kind and no
 other.
 
 Profiles
 ~~~~~~~~
 
-macOS gives a legacy 2.1 context unless asked otherwise, and it has no
-compatibility profile above that: ``PROFILES`` holds the three CGL offers.
+macOS creates a legacy 2.1 context unless a profile is requested, and has no
+compatibility profile above 2.1.  ``PROFILES`` holds the three profiles CGL
+offers.
 
 .. list-table::
    :widths: auto
@@ -286,15 +289,15 @@ compatibility profile above that: ``PROFILES`` holds the three CGL offers.
      - GL 3.2 core
    * - ``core4``
      - ``kCGLOGLPVersion_GL4_Core``
-     - GL 4.1 core, which is as far as macOS goes
+     - GL 4.1 core, the highest version macOS supports
 
 Building the attribute list yourself
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``pixel_format_attributes`` is the list ``CGLChoosePixelFormat`` takes, as
-plain integers, and it is pure: what a call asked for can be read off without a
-Mac to ask.  A program driving CGL directly can build the list with it and make
-its own call.
+``pixel_format_attributes`` returns the list ``CGLChoosePixelFormat`` takes,
+as plain integers.  It is a pure function and needs no Mac, so the attributes a
+call requests can be inspected on any platform.  A program that calls CGL
+directly can build the list with it and make its own call.
 
 ::
 
@@ -307,27 +310,28 @@ its own call.
 Errors
 ~~~~~~
 
-Every call answers with a ``CGLError`` value, and a failure raises
-``OpenGL.CGL.CGLError`` carrying it.  ``code`` is the number and ``operation``
-the call, so "this machine offers no such pixel format"
-(``kCGLBadPixelFormat``) and "the arguments were wrong" (``kCGLBadAttribute``)
-can be told apart without reading the message.
+Every CGL call returns a ``CGLError`` value, and a failure raises
+``OpenGL.CGL.CGLError`` carrying that value.  ``code`` is the error number and
+``operation`` is the call.  A program can therefore tell "this machine offers
+no such pixel format" (``kCGLBadPixelFormat``) from "the arguments were wrong"
+(``kCGLBadAttribute``) without parsing the message.
 
 Checking a machine
 ~~~~~~~~~~~~~~~~~~
 
-``tests/report_cgl_context.py`` reports whether a context can be made here and
-by which renderer, for each of the three profiles, and exits non-zero when none
-can.  It is the first thing to run when a suite skips every GL case on a Mac.
+``tests/report_cgl_context.py`` reports whether a context can be made on the
+current machine, and by which renderer, for each of the three profiles.  It
+exits non-zero when no profile works.  Run it first when a suite skips every GL
+case on a Mac.
 
 ::
 
    python tests/report_cgl_context.py
 
-CGL is macOS only.  The module imports anywhere -- the attribute-building half
-is arithmetic and has no platform in it -- and the first call that needs the
-framework raises ``CGLError`` elsewhere.  :doc:`platform-macos` covers the rest
-of getting OpenGL there.
+CGL is macOS only.  The module imports on any platform, because the
+attribute-building functions are plain arithmetic.  Elsewhere, the first call
+that needs the framework raises ``CGLError``.  :doc:`platform-macos` covers the
+rest of getting OpenGL on macOS.
 
 .. _offscreen-wgl:
 
@@ -336,11 +340,11 @@ Pbuffers, on Windows
 
 :py:mod:`OpenGL.WGL.offscreen` creates an OpenGL context on Windows with
 nothing on screen.  WGL binds a context to a *device context*, and Windows
-hands those out for things it can draw on -- there is no "give me a context on
-this adapter" call as EGL has, and no windowless context as CGL has.  What
-Windows offers instead is the **pbuffer**: a drawable the display driver
-allocates out of its own memory, with a device context of its own that belongs
-to no window and appears nowhere.
+provides device contexts only for things it can draw on.  WGL has no call
+that creates a context on an adapter, as EGL has, and no windowless context,
+as CGL has.  Windows provides the *pbuffer* instead.  A pbuffer is a drawable
+that the display driver allocates in its own memory.  It has its own device
+context, belongs to no window and is never displayed.
 
 ::
 
@@ -355,39 +359,40 @@ to no window and appears nowhere.
 The pbuffer is the default framebuffer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Unlike the macOS path, this needs no framebuffer object: framebuffer zero is
-the pbuffer, so ``glClear``, ``glReadPixels`` and anything else drawing to it
-behave as they do on a window and nothing in a program has to know where it is.
+A pbuffer needs no framebuffer object, unlike the macOS route.  Framebuffer
+zero is the pbuffer, so ``glClear``, ``glReadPixels`` and other drawing calls
+work as they do on a window, with no changes to the program.
 
-It is **single-buffered**, since nothing presents it, so the finished frame is
-in ``GL_FRONT`` and not ``GL_BACK``.  Pass ``double_buffer=True`` for a pbuffer
-with a back buffer.
+The pbuffer is **single-buffered**, because nothing presents it.  The finished
+frame is therefore in ``GL_FRONT``, not in ``GL_BACK``.  Pass
+``double_buffer=True`` for a pbuffer with a back buffer.
 
 One window, created and never shown
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The calls that build all of this -- ``wglChoosePixelFormatARB``,
-``wglCreatePbufferARB``, ``wglCreateContextAttribsARB`` -- are WGL extensions,
-and an extension entry point is resolved through ``wglGetProcAddress``, which
-answers only while a context is current.  Building the pbuffer therefore needs
-a context already, and Windows gives one way out of that: a window, a pixel
-format on its device context, and an OpenGL 1.1 context on that, used for
-nothing but resolving the entry points that build the real thing.
+The pbuffer is built with three WGL extensions: ``wglChoosePixelFormatARB``,
+``wglCreatePbufferARB`` and ``wglCreateContextAttribsARB``.  Extension entry
+points are resolved through ``wglGetProcAddress``, which works only while a
+context is current.  Building the pbuffer therefore needs an existing context.
+On Windows, the only way to get that first context is a window, a pixel format
+on its device context, and an OpenGL 1.1 context on that.  This context is used
+only to resolve the entry points that build the pbuffer.
 
-``bootstrap()`` makes one of those per process -- 1×1, ``WS_POPUP``, never
-shown, never given a message loop -- and the pbuffer outlives it.  What it
-costs is a window station and a desktop, which a service running in session 0
-has.  What it does not need is anything on screen, a compositor, a logged-in
-session, or a remote-desktop connection that stays open.
-``release_bootstrap()`` gives the window back; contexts already made are
-unaffected, because a pbuffer is not tied to the window it was created through.
+``bootstrap()`` creates one such window per process.  The window is 1×1 and
+``WS_POPUP``, is never shown, and has no message loop.  The pbuffer outlives
+it.  The window needs a window station and a desktop, and a service running in
+session 0 has both.  It does not need anything on screen, a compositor, a
+logged-in session, or a remote-desktop connection that stays open.
+``release_bootstrap()`` destroys the window.  Contexts already created keep
+working, because a pbuffer is not tied to the window used to create it.
 
 Which pixel formats are accepted
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-By default only a fully accelerated format is taken.  An unusual or virtualised
-adapter may advertise no pbuffer format calling itself fully accelerated;
-``acceleration='any'`` takes whatever it offers instead of failing:
+By default only a fully accelerated pixel format is accepted.  An unusual or
+virtualised adapter may offer no pbuffer format marked as fully accelerated.
+``acceleration='any'`` accepts whatever format the adapter offers instead of
+failing:
 
 ::
 
@@ -398,7 +403,8 @@ adapter may advertise no pbuffer format calling itself fully accelerated;
 Profiles and versions
 ~~~~~~~~~~~~~~~~~~~~~
 
-``profile`` is one of ``PROFILES``, and ``version`` the GL version asked for.
+``profile`` is one of ``PROFILES``, and ``version`` is the requested GL
+version.
 
 .. list-table::
    :widths: auto
@@ -412,31 +418,31 @@ Profiles and versions
      - ``WGL_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB``: the fixed-function
        pipeline alongside the modern one
    * - ``legacy``
-     - No profile bit at all, which is what a request below GL 3.2 must do --
-       the profile mask did not exist there, and a driver handed one refuses
-       the whole request rather than ignoring it
+     - No profile bit at all.  A request below GL 3.2 must omit it, because
+       the profile mask does not exist below 3.2.  A driver given one
+       rejects the whole request instead of ignoring the bit
 
 Resizing
 ~~~~~~~~
 
-A pbuffer is created at a fixed size and cannot be resized, so ``resize()``
-builds a replacement on the same pixel format and drops the old one.  The GL
-context survives -- textures, buffers and programs are all still there
-afterwards -- because a context binds to any drawable sharing its format.
+A pbuffer has a fixed size and cannot be resized.  ``resize()`` builds a new
+pbuffer with the same pixel format and releases the old one.  The GL context
+survives, and its textures, buffers and programs remain, because a context can
+bind to any drawable with the same pixel format.
 
-``context.lost`` reports the one case where Windows discards what a pbuffer
-held, on a display-mode change or a remote-desktop disconnect.  The pbuffer is
-still there and still the right size; the answer is to draw the frame again
-rather than to rebuild anything.
+``context.lost`` reports when Windows discards a pbuffer's contents, which
+happens on a display-mode change or a remote-desktop disconnect.  The pbuffer
+still exists at the same size, so the program only needs to draw the frame
+again.
 
 Building the attribute lists yourself
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``pixel_format_attributes`` and ``context_attributes`` are the lists
+``pixel_format_attributes`` and ``context_attributes`` return the lists
 ``wglChoosePixelFormatARB`` and ``wglCreateContextAttribsARB`` take, as plain
-integers, and both are pure: what a call asked for can be read off without a
-Windows machine to ask.  A program driving WGL directly can build the lists
-with them and make its own calls.
+integers.  Both are pure functions and need no Windows machine, so the
+attributes a call requests can be inspected on any platform.  A program that
+calls WGL directly can build the lists with them and make its own calls.
 
 ::
 
@@ -449,16 +455,16 @@ with them and make its own calls.
 Which drivers offer it
 ~~~~~~~~~~~~~~~~~~~~~~
 
-``WGL_ARB_pbuffer``, ``WGL_ARB_pixel_format`` and ``WGL_ARB_create_context``
-are what a driver has to offer, and every hardware OpenGL driver for Windows
-has offered them since about 2009.  Microsoft's own fallback rasteriser -- the
-GDI generic implementation, which is what a machine with no vendor driver
-installed has -- offers none of them and is OpenGL 1.1 besides.
+A driver must offer ``WGL_ARB_pbuffer``, ``WGL_ARB_pixel_format`` and
+``WGL_ARB_create_context``.  Every hardware OpenGL driver for Windows has
+offered them since about 2009.  Microsoft's fallback, the GDI generic
+rasteriser used on machines with no vendor driver, offers none of them and
+supports only OpenGL 1.1.
 
-``available()`` answers before anything is created, returning the names of the
-extensions this machine lacks, so a program can choose between this and a
-window before committing to either.  Construction raises ``WGLError`` naming
-what is missing rather than failing obscurely.
+``available()`` runs before anything is created and returns the names of the
+extensions this machine lacks.  A program can use it to choose between a
+pbuffer and a window.  Construction raises ``WGLError`` naming what is
+missing.
 
 ::
 
@@ -468,27 +474,28 @@ what is missing rather than failing obscurely.
        print('no offscreen GL here:', ', '.join(available()))
    print(len(wgl_extensions()), 'WGL extensions')
 
-The module imports anywhere -- the attribute-building half is arithmetic and
-has no platform in it -- and the first call that needs the Win32 API raises
-``WGLError`` elsewhere.  ``tests/test_wgl_offscreen.py`` holds the cases: the
-attribute lists run on any platform, and the rendering ones on Windows,
-skipping where the driver offers no pbuffers.
+The module imports on any platform, because the attribute-building functions
+are plain arithmetic.  Elsewhere, the first call that needs the Win32 API
+raises ``WGLError``.  ``tests/test_wgl_offscreen.py`` holds the tests.  The
+attribute-list tests run on any platform.  The rendering tests run on Windows,
+and skip when the driver offers no pbuffers.
 
-:doc:`platform-windows` covers the rest of getting OpenGL there, including
-where a machine with no vendor driver gets one.
+:doc:`platform-windows` covers the rest of getting OpenGL on Windows,
+including how to give a machine with no vendor driver an OpenGL
+implementation.
 
 .. _offscreen-osmesa:
 
 OSMesa, wherever Mesa is
 ------------------------
 
-OSMesa is Mesa's off-screen interface, and an API of its own rather than a
-driver reached through GLX or EGL: the caller allocates the framebuffer, OSMesa
-rasterises into it, and there is no display server, no device node and no
-drawable involved.  It therefore works where the other routes have nothing to
-bind to, and it rasterises on the CPU, so it is the slowest of them.
+OSMesa is Mesa's off-screen interface.  It is a separate API, not a driver
+reached through GLX or EGL.  The caller allocates the framebuffer and OSMesa
+rasterises into it, with no display server, no device node and no drawable.
+OSMesa therefore works where the other routes have nothing to bind to.  It
+rasterises on the CPU, so it is the slowest route.
 
-``PYOPENGL_PLATFORM=osmesa`` has to be set before PyOpenGL is imported, because
+``PYOPENGL_PLATFORM=osmesa`` must be set before PyOpenGL is imported, because
 the platform decides which library every entry point is loaded from:
 
 ::
@@ -504,20 +511,20 @@ the platform decides which library every entry point is loaded from:
        glClear(GL_COLOR_BUFFER_BIT)
        image = context.read(top_down=True)     # (height, width, 4) of bytes
 
-The array is the default framebuffer.  ``glClear``, ``glReadPixels`` and the
-queries a program makes against framebuffer zero all land in the array the
-context allocated, so nothing has to be told it is rendering off-screen.
-``read()`` returns a copy of it, bottom-up as OpenGL hands it over;
-``read(top_down=True)`` flips it, which is what an image file wants.
+The array is the default framebuffer.  ``glClear``, ``glReadPixels`` and
+queries against framebuffer zero all use the array the context allocated, so
+the program needs no offscreen-specific code.  ``read()`` returns a copy of the
+array, bottom-up as OpenGL returns it.  ``read(top_down=True)`` flips it into
+the row order image files use.
 
-``profile`` is ``core`` or ``compatibility`` and ``version`` the GL version
-asked for.  Both are served by ``OSMesaCreateContextAttribs``, which Mesa has
-had since 12.0; where that entry point is absent this falls back to
-``OSMesaCreateContext``, which takes neither, so a request for a core profile
-on such a build is refused rather than quietly answered with a legacy context.
+``profile`` is ``core`` or ``compatibility``, and ``version`` is the requested
+GL version.  Both are passed to ``OSMesaCreateContextAttribs``, which Mesa has
+provided since 12.0.  Where that entry point is missing, the module falls back
+to ``OSMesaCreateContext``, which takes neither.  A core-profile request on
+such a build is refused instead of returning a legacy context.
 
-``available()`` names what is missing before anything is created, and is empty
-where a context can be made.
+``available()`` returns the names of anything missing, before anything is
+created.  It is empty when a context can be made.
 
 ::
 
@@ -526,20 +533,20 @@ where a context can be made.
    if available():
        print('no OSMesa here:', ', '.join(available()))
 
-The context owns the array it renders into and holds it for its own lifetime.
-Release it -- ``release()``, or use it as a context manager -- rather than
-dropping it and letting the collector do it, since a context is what keeps
+The context owns the array it renders into, and keeps it for its whole
+lifetime.  Release the context with ``release()``, or use it as a context
+manager.  Do not leave it to the garbage collector, because the context keeps
 that array alive.
 
-Where the library comes from: ``libOSMesa`` is packaged by most Linux
-distributions (``libosmesa6`` on Debian and Ubuntu, ``mesa-libOSMesa``
-elsewhere), and Mesa's Windows build carries ``osmesa.dll``.  There is no
-OSMesa for macOS in Apple's frameworks; :ref:`CGL <offscreen-cgl>` is what
-answers there, and has a CPU renderer of its own.
+Most Linux distributions package ``libOSMesa`` (``libosmesa6`` on Debian and
+Ubuntu, ``mesa-libOSMesa`` elsewhere), and Mesa's Windows build includes
+``osmesa.dll``.  Apple's frameworks include no OSMesa.  On macOS, use
+:ref:`CGL <offscreen-cgl>`, which has its own CPU renderer.
 
 OpenGL ES with no window
 ------------------------
 
-The routes above are desktop OpenGL.  For OpenGL ES, EGL on Linux and Android
-makes a pbuffer surface the same way it makes a window surface, and on Windows
-ANGLE supplies both the EGL and the ES implementation: see :doc:`angle-gles`.
+The routes above provide desktop OpenGL.  For OpenGL ES on Linux and Android,
+EGL creates a pbuffer surface the same way it creates a window surface.  On
+Windows, ANGLE provides both EGL and the ES implementation; see
+:doc:`angle-gles`.

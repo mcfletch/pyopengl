@@ -44,10 +44,10 @@ if AsArrayTypedSizeChecked is None:
     class AsArrayOfType(converters.PyConverter):
         """Given arrayName and typeName coerce arrayName to array of type typeName
 
-        Installed under ``ERROR_ON_COPY`` as well: the type the driver is
-        told comes from another argument, so this is the only thing that
-        compares the array against it, and ``asArray`` is what refuses the
-        copy where they differ.
+        Installed under ``ERROR_ON_COPY`` as well.  The type passed to the
+        driver comes from another argument, and this converter is the only
+        check of the array against it.  Where they differ, ``asArray``
+        refuses the copy.
         """
 
         argNames = ('arrayName', 'typeName')
@@ -62,10 +62,10 @@ if AsArrayTypedSizeChecked is None:
 
         def __call__(self, arg, wrappedOperation, args):
             """Get the arg as an array of the appropriate type"""
-            # An integer here is a byte offset into the bound buffer rather
-            # than one datum to upload: this converter serves `glDrawElements`
-            # and the pixel calls, whose data argument the GL reads as an
-            # offset whenever a buffer object is bound.  See
+            # An integer here is a byte offset into the bound buffer, not a
+            # value to upload.  This converter serves `glDrawElements` and the
+            # pixel calls, whose data argument GL reads as an offset whenever
+            # a buffer object is bound.  See
             # `OpenGL.arrays.arraydatatype.buffer_offset`.
             offset = arraydatatype.buffer_offset(arg)
             if offset is not None:
@@ -78,8 +78,8 @@ if AsArrayTypedSizeChecked is None:
         """Given arrayName and arrayType, convert arrayName to array of type
 
         Installed under ``ERROR_ON_COPY`` as well, for the same reason as
-        :class:`AsArrayOfType`: the element type is the wrapper's rather
-        than the caller's.
+        :class:`AsArrayOfType`.  The wrapper sets the element type, not the
+        caller.
         """
 
         argNames = ('arrayName', 'arrayType')
@@ -114,13 +114,13 @@ else:
 def asArrayType(typ, size=None):
     """Create PyConverter to get first argument as array of type
 
-    Installed regardless of ``ERROR_ON_COPY``.  It is used where the element
-    type is the wrapper's rather than the caller's -- ``glVertexPointerb``
-    passes GL_INT whatever array it was handed, and a parameter declared as a
-    bare pointer has no array class for ctypes to reach for -- so nothing
-    downstream compares the array against the type the driver is told, and
-    without this the driver is handed an array of one width having been told
-    another.  Under the flag it is ``asArray`` that refuses the copy.
+    Installed regardless of ``ERROR_ON_COPY``.  It is used where the wrapper
+    sets the element type, not the caller.  ``glVertexPointerb`` passes GL_INT
+    whatever array it receives, and a parameter declared as a bare pointer has
+    no array class for ctypes to use.  Nothing later compares the array with
+    the type passed to the driver.  Without this converter, the driver could
+    receive an array of one element width while told another.  Under the flag,
+    ``asArray`` refuses the copy.
     """
     return converters.CallFuncPyConverter(typ.asArray)
 
@@ -164,12 +164,11 @@ else:
 class AsArrayTypedCountChecked(converters.PyConverter):
     """Convert to ``arrayType``, refusing fewer than ``count * multiplier`` elements
 
-    For an input the driver reads a number of items the caller states in
-    another argument -- ``glViewportArrayv(first, count, v)`` reads four floats
-    for each of ``count`` viewports -- so an array shorter than that has the
-    driver read past its end.  A longer one is a caller's larger buffer and is
-    accepted.  ``None`` is refused unless the count asks for nothing, since
-    there it is a null pointer the driver would read from.
+    For inputs where another argument gives the number of items the driver
+    reads.  ``glViewportArrayv(first, count, v)`` reads four floats for each
+    of ``count`` viewports, so a shorter array makes the driver read past its
+    end.  A longer array is accepted.  ``None`` is refused unless the count is
+    zero, because the driver would read from a null pointer.
     """
 
     argNames = ('arrayType', 'countName', 'multiplier')
@@ -193,7 +192,7 @@ class AsArrayTypedCountChecked(converters.PyConverter):
                 )
             return result
         counter = getattr(handler, 'arrayByteCount', None)
-        # A bald number converts to a ctypes scalar, an array of one, which
+        # A bare number converts to a ctypes scalar (an array of one), which
         # its handler cannot measure.
         byteSize = counter(result) if counter is not None else ctypes.sizeof(result)
         if byteSize < expected:
@@ -208,12 +207,12 @@ class AsArrayTypedCountChecked(converters.PyConverter):
 class StringArrayCountChecked(converters.PyConverter):
     """Pass a ``GLchar *const *`` argument, refusing fewer strings than ``countName`` says
 
-    The driver reads ``count`` pointers from the array, so fewer strings than
-    that has it read past the array's end, and ``None`` is a null pointer it
-    reads from unless the count asks for nothing.  A pointer array the caller
-    built is passed as it is: only its builder knows its length.  What counts
-    as a string is :func:`OpenGL._string_array.as_bytes_list`'s to say, and the
-    argument type converts what is passed.
+    The driver reads ``count`` pointers from the array.  Fewer strings make it
+    read past the array's end.  ``None`` is a null pointer, refused unless the
+    count is zero.  A pointer array the caller built is passed unchanged,
+    because its length is unknown here.
+    :func:`OpenGL._string_array.as_bytes_list` decides what counts as a
+    string, and the argument type converts the value passed.
     """
 
     argNames = ('countName',)
@@ -259,8 +258,8 @@ else:
 class storePointerType(object):
     """Store named pointer value in context indexed by constant
 
-    pointerName -- named pointer argument
-    constant -- constant used to index in the context storage
+    pointerName - named pointer argument
+    constant - constant used to index in the context storage
 
     Note: OpenGL.STORE_POINTERS can be set with ERROR_ON_COPY
     to ignore this storage operation.

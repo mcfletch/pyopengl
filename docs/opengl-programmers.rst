@@ -8,18 +8,17 @@ documentation does not cover.
 What a call costs
 -----------------
 
-PyOpenGL is configured out of the box to be helpful and strict rather than as
-fast as it can be: it checks for errors after every call, converts array data
-that does not already match what the driver wants, and accepts a wide range of
-types.  Each of those costs something, and this page says how to trade one away
-where a program needs the speed back.
+By default PyOpenGL favours helpfulness and strictness over speed.  It checks
+for errors after every call, converts array data that does not match what the
+driver expects, and accepts many argument types.  Each of these has a cost,
+and this page says how to turn each one off where a program needs the speed.
 
 Where ``PyOpenGL_accelerate`` is installed, the entry points are compiled and
-the per-call overhead is several times smaller; :doc:`c-dispatch` has the
-measurements and the switches.  Whichever implementation is running,
-per-vertex calls -- ``glColor``, ``glNormal``, ``glVertex`` -- pay that
-overhead once per vertex, and array calls pay it once per array.  Draw from
-arrays, and preferably from buffer objects.
+the per-call overhead is several times smaller.  :doc:`c-dispatch` has the
+measurements and the switches.  With either implementation, per-vertex calls
+(``glColor``, ``glNormal``, ``glVertex``) pay that overhead once per vertex,
+and array calls pay it once per array.  Draw from arrays, and preferably from
+buffer objects.
 
 Signatures against the C specification
 --------------------------------------
@@ -52,21 +51,19 @@ returns that array instead:
    bar() -> args[]
 
 The :doc:`reference pages <reference/index>` give both forms for each entry
-point.  The rest of this page covers the differences that are not of that
-shape.
+point.  The rest of this page covers the other differences.
 
 Errors raise exceptions
 -----------------------
 
-PyOpenGL checks for a GL error after each call and raises, rather than leaving
-the program to ask.
+PyOpenGL checks for a GL error after each call and raises an exception, so
+the program does not have to check.
 
-How the check is made depends on the context.  Where it offers
-``GL_KHR_debug``, the driver reports the error through a callback during the
-call and the check afterwards reads the flag that callback set; where it does
-not, the check is a ``glGetError`` round trip.  A context offering the
-extension is given the callback under either implementation, without the
-program asking for it:
+How the check is made depends on the context.  If the context offers
+``GL_KHR_debug``, the driver reports errors through a callback during the
+call, and the check afterwards reads the flag that callback set.  Otherwise
+the check is a ``glGetError`` round trip.  Both implementations install the
+callback automatically on a context that offers the extension:
 
 .. code-block:: python
 
@@ -76,15 +73,17 @@ program asking for it:
 
 ``'get-error'`` is the round trip and ``'off'`` is no checking at all.
 :py:func:`OpenGL.dispatch.use_debug_output` turns the callback off for the
-current context and back on again, and ``OpenGL.ERROR_DEBUG_OUTPUT = False``
-before the first call stops it being offered.  :doc:`c-dispatch` has the
-mechanism and the measurements.
+current context and back on again.  Setting
+``OpenGL.ERROR_DEBUG_OUTPUT = False`` before the first call stops PyOpenGL
+from installing it.
+:doc:`c-dispatch` has the mechanism and the measurements.
 
-The round trip is the cost of checking, and the callback removes it: about one
-nanosecond a call against eleven.  So on a context with ``GL_KHR_debug`` there
-is no speed argument for turning checking off, and a program can ship with it
-on.  Where the round trip is what the context offers, the flag that switches
-checking off is set on the ``OpenGL`` package before any submodule is imported:
+The ``glGetError`` round trip is the cost of checking, and the callback
+removes it: about one nanosecond per call instead of eleven.  On a context
+with ``GL_KHR_debug``, turning checking off gains no speed, so a program can
+ship with checking on.  Where the context offers only the round trip, switch
+checking off with a flag on the ``OpenGL`` package, set before any submodule
+is imported:
 
 .. code-block:: python
 
@@ -92,8 +91,8 @@ checking off is set on the ``OpenGL`` package before any submodule is imported:
    OpenGL.ERROR_CHECKING = False
    from OpenGL.GL import *
 
-That roughly halves the number of calls issued to the driver.  PyOpenGL's own
-helper code assumes errors raise, so code that runs with checking off has to
+This roughly halves the number of calls issued to the driver.  PyOpenGL's own
+helper code assumes errors raise, so code that runs with checking off must
 call ``glGetError`` where it matters.
 
 The exceptions raised are:
@@ -110,7 +109,7 @@ The exceptions raised are:
 :py:exc:`TypeError` and :py:exc:`ValueError`
     for an argument of the wrong type or an impossible value.
 
-``GLError`` carries what the wrapper knew about the call:
+``GLError`` carries these details of the call:
 
 ``err``
     the OpenGL error code.
@@ -144,25 +143,26 @@ switch that off:
    import OpenGL
    OpenGL.ERROR_LOGGING = False
 
-To see every call PyOpenGL makes, with its arguments, ask for full logging:
+To see every call PyOpenGL makes, with its arguments, turn on full logging:
 
 .. code-block:: python
 
    import OpenGL
    OpenGL.FULL_LOGGING = True
 
-which is slow enough to change the behaviour of anything timing-dependent, and
-is for tracing a crash rather than for running.
+Full logging is slow enough to change the behaviour of timing-dependent code.
+Use it to trace a crash, and leave it off for normal runs.
 
 What a wrapped call does
 ------------------------
 
-Under the C implementation, an entry point is a C function generated for it
-from the Khronos registry.  Calling it checks the argument count, converts the
-scalars, acquires a buffer over each array -- directly where the element type
-already matches what the driver wants, and through the format-handler registry
-where it does not -- loads the function pointer held for the current context,
-calls it, releases the buffers, converts the result and checks for an error.
+Under the C implementation, each entry point is a C function generated from
+the Khronos registry.  A call checks the argument count, converts the scalars,
+and acquires a buffer over each array.  It acquires the buffer directly where
+the element type already matches what the driver expects, and through the
+format-handler registry where it does not.  It then loads the function pointer
+held for the current context, calls it, releases the buffers, converts the
+result and checks for an error.
 
 Under the ctypes implementation the same work is done by a chain of Python
 objects built at import time, in these stages:
@@ -170,27 +170,27 @@ objects built at import time, in these stages:
 1. *converters* turn the arguments into the object types the wrapper works
    with (``pyArgs``);
 2. *cConverters* turn ``pyArgs`` into objects mapping one-to-one onto the C
-   arguments (``cArgs``), which is where one Python argument becomes several C
-   ones;
+   arguments (``cArgs``).  This is where one Python argument becomes several
+   C ones;
 3. *cResolvers* turn ``cArgs`` into the final ctypes-compatible arguments
    (``cArguments``);
 4. *storeValues* keeps alive any temporary the driver will read after the call
-   returns -- the object behind a pointer, for instance;
-5. a *return* function decides what the call gives back.
+   returns, such as the object behind a pointer;
+5. a *return* function decides what the call returns.
 
-:py:class:`OpenGL.wrapper.Wrapper` holds that chain, and those are the names
-``GLError`` reports.  The two implementations are meant to be
-indistinguishable from outside; where a module customises an entry point in a
-way the C does not perform, the entry point demotes to its ctypes binding and
-the customisation is replayed onto it.  :doc:`wrapping` describes the machinery
-from the inside, and :doc:`c-dispatch` what differs at the surface.
+:py:class:`OpenGL.wrapper.Wrapper` holds that chain, and ``GLError`` reports
+the arguments under those names.  The two implementations are meant to behave
+identically from outside.  Where a module customises an entry point in a way
+the C does not perform, the entry point demotes to its ctypes binding, and the
+customisation is replayed onto it.  :doc:`wrapping` describes the internals,
+and :doc:`c-dispatch` describes what differs at the surface.
 
 Array handling
 --------------
 
-An entry point that wants an array, or a ``void *``, accepts any type a
+An entry point that takes an array, or a ``void *``, accepts any type that a
 registered :py:mod:`format handler <OpenGL.arrays.formathandler>` claims.  The
-handlers shipped cover:
+shipped handlers cover:
 
 - NumPy arrays
 - byte strings
@@ -200,17 +200,17 @@ handlers shipped cover:
 - vertex buffer objects
 
 Lists, tuples and numbers have no buffer for the driver to read, so each call
-builds a temporary; a NumPy array whose data type does not match what the entry
-point wants is converted, which is another temporary.  Neither belongs in a
-per-frame path.  To find where it is happening:
+builds a temporary array.  A NumPy array whose data type does not match the
+entry point is converted, which also builds a temporary.  Avoid both in code
+that runs every frame.  To find where they happen:
 
 .. code-block:: python
 
    import OpenGL
    OpenGL.ERROR_ON_COPY = True
 
-which makes the format handlers raise :py:exc:`OpenGL.error.CopyError` rather
-than copy.
+which makes the format handlers raise :py:exc:`OpenGL.error.CopyError`
+instead of copying.
 
 Type-specialised array functions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -223,7 +223,7 @@ specification describes, a set of suffixed forms:
    glXPointer{ub|b|us|s|ui|i|f|d}
 
 Each takes a single multidimensional array.  The suffix fixes the element type
--- ``ub`` unsigned byte, ``b`` byte, ``f`` float, ``d`` double -- and the
+(``ub`` unsigned byte, ``b`` byte, ``f`` float, ``d`` double), and the
 remaining arguments come from the array's shape.  For ``glColorPointer``:
 
 .. code-block:: python
@@ -238,7 +238,7 @@ remaining arguments come from the array's shape.  For ``glColorPointer``:
    glColorPointerf(pointer[][]) -> None
    glColorPointerd(pointer[][]) -> None
 
-Other array entry points are decorated the same way.  ``glDrawElements`` has:
+Other array entry points have suffixed forms too.  ``glDrawElements`` has:
 
 .. code-block:: python
 
@@ -254,27 +254,28 @@ reference-counted, and the count follows ``glPushClientAttrib`` and
 ``glPopClientAttrib``.  To release it explicitly, pass ``None``:
 ``glColorPointerub(None)``.
 
-``glPushClientAttrib`` always sets ``GL_CLIENT_VERTEX_ARRAY_BIT``, because
-``glPopClientAttrib`` needs to know the flag was set to decide whether to drop
-the pointer locks.  Bracketing array use in a ``glPushClientAttrib`` /
-``glPopClientAttrib`` pair is a way to release the allocations, provided every
+``glPushClientAttrib`` always sets ``GL_CLIENT_VERTEX_ARRAY_BIT``.
+``glPopClientAttrib`` reads that flag to decide whether to drop the pointer
+locks.  Bracketing array use in a ``glPushClientAttrib`` /
+``glPopClientAttrib`` pair releases the allocations, provided every
 ``glXPointer`` call is inside the pair.
 
-The allocation is automatic, so there is nothing for ``glGetPointerv`` to
-report and it is not wrapped.  ``glInterleavedArrays`` is wrapped, without the
+Because the allocation is automatic, ``glGetPointerv`` has nothing to report,
+and it is not wrapped.  ``glInterleavedArrays`` is wrapped, without the
 suffixed variants.
 
 Image routines
 --------------
 
-``glDrawPixels`` and the texture entry points are decorated the same way as the
-array functions.  The specification form takes the pixel data as a byte string:
+``glDrawPixels`` and the texture entry points have suffixed forms, like the
+array functions.  The specification form takes the pixel data as a byte
+string:
 
 .. code-block:: python
 
    glDrawPixels(width, height, format, type, pixels) -> None
 
-and respects the state ``glPixelStore{i|f}`` set.  The suffixed forms take a
+and uses the state set by ``glPixelStore{i|f}``.  The suffixed forms take a
 multidimensional array and set ``glPixelStore{i|f}`` themselves:
 
 .. code-block:: python
@@ -283,29 +284,29 @@ multidimensional array and set ``glPixelStore{i|f}`` themselves:
 
 where the width, height and type all come from the array.
 
-PyOpenGL sets tightly packed pixel-transfer state for the imaging entry points,
-since Python image libraries hand over tightly packed buffers and reading them
-in OpenGL's default packing would read past the end.
+PyOpenGL sets tightly packed pixel-transfer state for the imaging entry
+points.  Python image libraries produce tightly packed buffers, and reading
+them with OpenGL's default packing would read past the end.
 
 Extensions and conditional functionality
 ----------------------------------------
 
-An extension's entry points come from the module named after it:
+An extension's entry points come from the module named after it, with no
+initialisation call needed:
 
 .. code-block:: python
 
    from OpenGL.GL.ARB.vertex_buffer_object import *
    buffer = glGenBuffersARB(1)
 
-with no initialisation call needed.  The extension's ``init`` function reports
-whether the machine offers it:
+The extension's ``init`` function reports whether the machine supports it:
 
 .. code-block:: python
 
    if glInitVertexBufferObjectARB():
        ...
 
-though testing the entry points you mean to call says more:
+Testing the entry points you intend to call is more specific:
 
 .. code-block:: python
 
@@ -330,9 +331,9 @@ the first entry point.
 Selection and feedback buffers
 ------------------------------
 
-Both are deprecated in OpenGL 3.x; a modern program picks with unique-colour
-rendering or by intersecting in its own coordinates.  Where they are used, C
-allocates the buffer:
+Both are deprecated in OpenGL 3.x.  Modern programs pick objects by rendering
+unique colours, or by intersecting in their own coordinates.  Where selection
+is used, C allocates the buffer:
 
 .. code-block:: c
 
@@ -358,9 +359,9 @@ and PyOpenGL returns it:
 Feedback buffers work the same way, with each item a ``(token, value)`` tuple
 whose value is either a passthrough token or a list of vertices.
 
-Returning the buffer also clears OpenGL's pointer to it, so the buffer
-``glRenderMode`` returns is not overwritten by a later pass.  That means every
-``glRenderMode(GL_SELECT)`` or ``glRenderMode(GL_FEEDBACK)`` has to be preceded
+Returning the buffer also clears OpenGL's pointer to it, so a later pass
+cannot overwrite the buffer ``glRenderMode`` returned.  As a result, each
+``glRenderMode(GL_SELECT)`` or ``glRenderMode(GL_FEEDBACK)`` must be preceded
 by its own ``glSelectBuffer`` or ``glFeedbackBuffer``.  This does not work:
 
 .. code-block:: python
@@ -390,8 +391,7 @@ This does:
 Function aliases
 ----------------
 
-PyOpenGL has long provided undecorated names for some entry points, and
-continues to:
+PyOpenGL provides undecorated names for some entry points:
 
 ============================ ================================================
 Entry point                  Also available as

@@ -116,7 +116,7 @@ def test_every_documented_flag_is_covered_here():
 
     import OpenGL
 
-    documented = set(re.findall(r'^    ([A-Z][A-Z0-9_]{3,}) --', OpenGL.__doc__, re.M))
+    documented = set(re.findall(r'^    ([A-Z][A-Z0-9_]{3,}) - ', OpenGL.__doc__, re.M))
     # These name things a caller sets in code rather than from the environment:
     # they are read while the modules are being built, before any environment
     # is consulted, or they are switches for the generator rather than the run.
@@ -248,7 +248,7 @@ class TestAFlagThatSaysItHasNoEffect:
 
         for name in sorted(NO_EFFECT):
             paragraph = re.search(
-                r'^    %s --(.*?)(?=^    [A-Z][A-Z0-9_]+ --|\Z)' % (name,),
+                r'^    %s - (.*?)(?=^    [A-Z][A-Z0-9_]+ - |\Z)' % (name,),
                 OpenGL.__doc__, re.M | re.S,
             )
             assert paragraph, 'the docstring does not introduce %s' % (name,)

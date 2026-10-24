@@ -5,23 +5,19 @@ pointer = ctypes.pointer
 class _Opaque( ctypes.Structure ):
     """An Opaque Structure reference (base class)"""
 class _opaque_pointer( ctypes.POINTER( _Opaque ) ):
-    """A handle: an address, and the kind of thing it is a handle to.
+    """A handle: an address, and the kind of object it is a handle to.
 
-    Two of these naming the same object are the same handle, and they have to
-    say so.  Nothing hands back the identical Python object twice -- a new
-    pointer is built on every call that returns one -- so comparing by object
-    identity, which is what ctypes leaves in place, makes a handle that is
-    never equal to itself.
+    Two handles to the same object compare equal.  Each call that returns a
+    handle builds a new pointer object, so the default ctypes comparison by
+    object identity would make two handles to one object unequal.
 
-    That is not only a surprise to a caller writing ``if context ==
-    self.context``.  ``OpenGL.contextdata`` keys everything it holds per
-    context by one of these: the client-side arrays the GL goes on reading
-    after the call that registered them, and the cached version and extension
-    list.  With a hash by address and no equality to match it, every lookup
-    hashes to the right bucket and then compares unequal to what is in it --
-    so nothing is ever found again, a fresh entry accumulates on each call,
-    and the arrays that were being kept alive are kept alive forever under
-    keys nobody can reach.
+    Equality also matters inside PyOpenGL.  ``OpenGL.contextdata`` keys its
+    per-context storage by these handles: the client-side arrays the GL reads
+    after the registering call returns, and the cached version and extension
+    list.  With a hash by address and identity equality, every lookup would
+    reach the right bucket and then compare unequal.  Each call would add a
+    new entry, and the stored arrays would stay alive under keys no lookup
+    can match.
     """
     _type_ = _Opaque
     @classmethod
@@ -31,9 +27,9 @@ class _opaque_pointer( ctypes.POINTER( _Opaque ) ):
     def address( self ):
         """The address, or None for a null handle.
 
-        Read by casting rather than with ``addressof(self.contents)``: a null
-        pointer has no contents, so that raises where a driver answering
-        "there is none" should simply read as none.
+        Read by casting instead of with ``addressof(self.contents)``.  A null
+        pointer has no contents, so ``addressof`` would raise, and a null
+        handle from the driver should read as None.
         """
         return ctypes.cast( self, ctypes.c_void_p ).value
     @property
@@ -43,11 +39,11 @@ class _opaque_pointer( ctypes.POINTER( _Opaque ) ):
         """Allow these pointers to be used as keys in dictionaries"""
         return hash( (self.__class__, self.address) )
     def __eq__( self, other ):
-        """Equal to another handle of the same kind at the same address.
+        """Return True for another handle of the same kind at the same address.
 
-        The kind is part of it: an ``EGLContext`` and an ``OSMesaContext`` are
-        different things whatever addresses they happen to hold, and so is the
-        bare integer inside either of them.
+        The kind is compared too.  An ``EGLContext`` and an ``OSMesaContext``
+        are never equal, whatever addresses they hold, and neither equals a
+        bare integer.
         """
         if not isinstance( other, _opaque_pointer ):
             return NotImplemented

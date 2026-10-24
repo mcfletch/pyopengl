@@ -1,9 +1,9 @@
 """A Tk widget with an OpenGL context of its own.
 
 :class:`GLFrame` is an ordinary ``tkinter.Frame`` that owns a GL context on its
-own native window, so it packs, grids, resizes and is destroyed like any other
-widget.  Nothing outside Python is involved: the context is made through the
-window system's own API against the window handle Tk hands out.
+own native window.  It packs, grids, resizes and is destroyed like any other
+widget.  No Tcl extension is needed.  The context is created through the window
+system's API, using the native window handle that Tk provides.
 
     from OpenGL.GL import GL_COLOR_BUFFER_BIT, glClear, glClearColor
     from OpenGL.Tk import GLFrame
@@ -19,11 +19,11 @@ window system's own API against the window handle Tk hands out.
     Scene(root, width=640, height=480).pack(fill='both', expand=True)
     root.mainloop()
 
-**The context is made when the widget is mapped**, because a Tk window has no
-native handle before that.  A program that wants to use GL straight after
-building the widget -- to load textures, or because it drives its own loop --
-calls :meth:`GLFrame.waitForMap`, which pumps Tk until the window is on screen
-and the context exists.
+The context is created when the widget is mapped, because a Tk window has no
+native handle before that.  To use GL immediately after creating the widget
+(to load textures, or to run its own loop), a program calls
+:meth:`GLFrame.waitForMap`.  It processes Tk events until the window is on
+screen and the context exists.
 """
 
 from __future__ import annotations
@@ -42,36 +42,36 @@ log = logging.getLogger(__name__)
 
 __all__ = ['GLFrame']
 
-#: How long :meth:`GLFrame.waitForMap` waits for the window system to put the
-#: window on screen before giving up.  Long enough for a loaded machine, short
-#: enough that a window that will never be mapped does not hang a program.
+#: Seconds :meth:`GLFrame.waitForMap` waits for the window system to map the
+#: window before raising.  Five seconds allows for a loaded machine without
+#: hanging a program whose window is never mapped.
 MAP_TIMEOUT = 5.0
 
-#: How long one pass of the wait loop gives Tk before looking again.
+#: Seconds the wait loop sleeps between checks.
 MAP_POLL = 0.005
 
 
 class GLFrame(tkinter.Frame):
     """A Tk frame that draws with OpenGL
 
-    Subclass it and override :meth:`initgl` and :meth:`redraw`; everything else
-    has a working default.
+    Subclass it and override :meth:`initgl` and :meth:`redraw`.  The other
+    methods have working defaults.
 
-    The context attributes may be given as keywords -- ``profile``,
-    ``version``, ``depthSize`` and the rest of
-    :class:`~OpenGL.Tk.attributes.ContextAttributes` -- alongside the ordinary
-    Tk options, or as a ready-made ``attributes``.  Anything else goes to
-    ``tkinter.Frame`` as usual.
+    Context attributes can be passed as keywords alongside the ordinary Tk
+    options (``profile``, ``version``, ``depthSize`` and the rest of
+    :class:`~OpenGL.Tk.attributes.ContextAttributes`).  They can also be
+    passed as a ready-made ``attributes`` object.  Other keywords go to
+    ``tkinter.Frame``.
 
     Attributes:
-        attributes -- what was asked of the context
-        context -- the context object, or None before the widget is mapped;
-            see :mod:`OpenGL.Tk.context` for what it answers
-        contextError -- the failure that stopped a context being made, where
-            one did.  Kept rather than raised out of the ``<Map>`` binding,
-            where an exception would surface as a Tk callback error with no
-            connection to the code that built the widget; :meth:`waitForMap`
-            and :meth:`makeCurrent` raise it.  Dropped when the widget is
+        attributes - the requested context attributes
+        context - the context object, or None before the widget is mapped;
+            see :mod:`OpenGL.Tk.context` for its methods
+        contextError - the exception raised while creating the context, or
+            None.  It is stored rather than raised from the ``<Map>`` binding.
+            Raised there, it would appear as a Tk callback error unrelated to
+            the code that built the widget.  :meth:`waitForMap` and
+            :meth:`makeCurrent` raise it.  Cleared when the widget is
             destroyed.
     """
 
@@ -96,9 +96,9 @@ class GLFrame(tkinter.Frame):
                 'Give either attributes or the individual context keywords '
                 '(%s), not both' % (', '.join(sorted(asked)),))
         self.attributes = attributes or ContextAttributes(**asked)
-        # Tk paints a widget's background over whatever GL drew, which shows as
-        # a flicker on every expose.  An empty background is Tk's own way of
-        # saying "this widget draws itself".
+        # Tk paints a widget's background over whatever GL drew, which
+        # flickers on every expose.  An empty background tells Tk not to paint
+        # the widget.
         kw.setdefault('background', '')
         tkinter.Frame.__init__(self, master, cnf or {}, **kw)
         self._initialised: bool = False
@@ -110,12 +110,12 @@ class GLFrame(tkinter.Frame):
 
     ### customisation points
     def initgl(self) -> None:
-        """Set up whatever this widget draws with
+        """Create the GL resources this widget draws with
 
-        Called once, with the context current, as soon as there is one.  It is
-        where textures, shaders and buffers are made: before it there is no
-        context to make them in, and it is not called again when the widget is
-        resized or re-exposed.
+        Called once, with the context current, as soon as the context exists.
+        Create textures, shaders and buffers here.  No context exists before
+        this call, and it is not repeated when the widget is resized or
+        re-exposed.
         """
 
     def redraw(self) -> None:
@@ -126,11 +126,10 @@ class GLFrame(tkinter.Frame):
         """
 
     def reshape(self, width: int, height: int) -> None:
-        """Follow the widget's new size
+        """Update GL state for the widget's new size
 
-        The default sets the viewport to the whole widget, which is what a
-        program that draws its own projection wants.  Called with the context
-        current.
+        The default sets the viewport to the whole widget.  Called with the
+        context current.
         """
         from OpenGL.GL import glViewport
 
@@ -138,18 +137,17 @@ class GLFrame(tkinter.Frame):
 
     ### the context's life
     def createContext(self) -> Any:
-        """Make this widget's GL context, if it has none yet
+        """This widget's GL context, created if it does not exist yet
 
-        Answers the context.  Raises
-        :class:`~OpenGL.Tk.errors.TkContextError` where one cannot be had; the
-        widget goes on working as an ordinary frame, so a program can catch it
-        and offer something else.
+        Raises :class:`~OpenGL.Tk.errors.TkContextError` if no context can be
+        created.  The widget still works as an ordinary frame, so a program can
+        catch the error and fall back to something else.
         """
         if self.context is not None:
             return self.context
-        # A context cannot be made while a glBegin block is open on the
-        # current one, and a widget mapped from inside a redraw is exactly
-        # where that happens.  See OpenGL.error.end_abandoned_block.
+        # A context cannot be created while a glBegin block is open on the
+        # current one.  That happens when a widget is mapped from inside a
+        # redraw.  See OpenGL.error.end_abandoned_block.
         end_abandoned_block()
         self.update_idletasks()         # so winfo_id() names a real window
         self.context = createContext(self, self.attributes)
@@ -161,13 +159,12 @@ class GLFrame(tkinter.Frame):
         return self.context
 
     def destroyContext(self) -> None:
-        """Give this widget's context back
+        """Destroy this widget's context
 
-        Called for you when the widget is destroyed.  Calling it twice is
-        calling it once.  Anything the context still holds -- textures,
-        buffers, programs -- goes with it, so a program that caches GL names
-        per context is told through PyOpenGL's own context tracking rather than
-        from here.
+        Called automatically when the widget is destroyed.  A second call does
+        nothing.  The context's textures, buffers and programs are destroyed
+        with it.  A program that caches GL names per context should use
+        PyOpenGL's context tracking to learn of this.
         """
         self.stopAnimation()
         context, self.context = self.context, None
@@ -176,18 +173,16 @@ class GLFrame(tkinter.Frame):
         self._initialised = False
 
     def waitForMap(self, timeout: float = MAP_TIMEOUT) -> Any:
-        """Pump Tk until the window is on screen; returns the context
+        """The context, after processing Tk events until the window is mapped
 
-        A Tk window has no native handle until the window system has mapped
-        it, so there is nothing to make a context against before then.  This is
-        how a program uses GL straight after building the widget rather than
-        waiting for an event: it is what a script, a test and a program driving
-        its own loop all want.
+        A Tk window has no native handle until the window system maps it, so
+        no context can be created before then.  Scripts, tests and programs
+        with their own loop call this to use GL immediately after creating the
+        widget.
 
-        Raises :class:`~OpenGL.Tk.errors.TkContextError` if the window is never
-        mapped, or if making the context failed -- since a caller that asked
-        for the context and did not get one has to be told, and the ``<Map>``
-        binding is no place to raise from.
+        Raises :class:`~OpenGL.Tk.errors.TkContextError` if the window is not
+        mapped within ``timeout`` seconds.  Re-raises the stored
+        :attr:`contextError` if creating the context failed.
         """
         deadline = time.time() + timeout
         while self.context is None and time.time() < deadline:
@@ -205,10 +200,10 @@ class GLFrame(tkinter.Frame):
 
     ### drawing
     def makeCurrent(self) -> bool:
-        """Draw into this widget from now on
+        """Make this widget's context current; False if it has none yet
 
-        False where there is no context yet -- the widget is not mapped -- and
-        raises where making one failed.
+        Returns False before the widget is mapped.  Raises the stored
+        :attr:`contextError` if creating the context failed.
         """
         if self.contextError is not None:
             raise self.contextError
@@ -224,9 +219,9 @@ class GLFrame(tkinter.Frame):
     def render(self) -> bool:
         """Draw one frame and show it; False if there is nothing to draw into
 
-        Make current, :meth:`redraw`, swap.  A program driving its own loop
-        calls this; the widget calls it for itself on expose and while an
-        animation is running.
+        Makes the context current, calls :meth:`redraw`, then swaps buffers.  A
+        program with its own loop calls this.  The widget also calls it on
+        expose and while an animation is running.
         """
         if not self.makeCurrent():
             return False
@@ -235,10 +230,10 @@ class GLFrame(tkinter.Frame):
         return True
 
     def setSwapInterval(self, interval: int) -> bool:
-        """Wait ``interval`` refreshes between swaps; False if it cannot
+        """Set the swap interval; False if it cannot be set
 
-        One waits for the display and caps the frame rate at its refresh; zero
-        draws as fast as the driver will, which is what a benchmark wants.
+        One caps the frame rate at the display's refresh rate.  Zero draws as
+        fast as the driver allows, for benchmarks.
         """
         if self.context is None:
             return False
@@ -246,10 +241,10 @@ class GLFrame(tkinter.Frame):
 
     ### an animation, for a widget that is not driven from outside
     def startAnimation(self, interval: Optional[int] = None) -> None:
-        """Render every ``interval`` milliseconds until told to stop
+        """Render every ``interval`` milliseconds until :meth:`stopAnimation`
 
-        For a widget whose scene changes on its own.  A program with a loop of
-        its own calls :meth:`render` from it instead and leaves this alone.
+        Use this for a widget whose scene changes over time.  A program with
+        its own loop calls :meth:`render` from that loop instead.
         """
         if interval is not None:
             self.animate = int(interval)
@@ -264,7 +259,7 @@ class GLFrame(tkinter.Frame):
             try:
                 self.after_cancel(job)
             except tkinter.TclError:
-                pass                    # the interpreter is already going
+                pass                    # the interpreter is shutting down
 
     def _animationStep(self) -> None:
         self._animationJob = None
@@ -274,21 +269,21 @@ class GLFrame(tkinter.Frame):
 
     ### Tk bindings
     def _onMap(self, event: Any = None) -> None:
-        """The window system has given this widget a window; take a context"""
+        """Create the context once the window system has mapped the widget"""
         if self.context is not None:
             return
         try:
             self.createContext()
         except Exception as error:  # noqa: BLE001 kept as contextError and raised by waitForMap and makeCurrent
-            # Not raised: a Tk binding's exception surfaces as a callback error
-            # with nothing to connect it to the code that built the widget.
-            # waitForMap and makeCurrent raise it where a caller is listening.
+            # Stored rather than raised.  An exception from a Tk binding appears
+            # as a callback error unrelated to the code that built the widget.
+            # waitForMap and makeCurrent raise it to their caller.
             self.contextError = error
-            # Strings, not the objects: a handler that keeps records -- a
-            # MemoryHandler, a QueueHandler, a test's log capture -- would
-            # otherwise keep this widget, and through it the Tk root, alive for
-            # as long as it keeps the record, and let the root go on whichever
-            # thread drops the record last.
+            # Log strings rather than the objects.  A handler that keeps
+            # records (a MemoryHandler, a QueueHandler, a test's log capture)
+            # would keep this widget and its Tk root alive with the record.
+            # The root would then be freed on whichever thread drops the
+            # record last.
             log.error('could not make a GL context for %s: %s',  # noqa: TRY400 a record holding the traceback would hold its frames, and through them this widget
                       str(self), str(error))
             return
@@ -304,18 +299,17 @@ class GLFrame(tkinter.Frame):
             self.initgl()
 
     def _onExpose(self, event: Any = None) -> None:
-        """Part of the widget has been uncovered and wants drawing again"""
+        """Redraw after part of the widget has been uncovered"""
         if self.context is None:
             return
         self._ensureInitialised()
         self.render()
 
     def _onConfigure(self, event: Any = None) -> None:
-        """Follow the widget's new size
+        """Call :meth:`reshape` with the widget's new size and redraw
 
-        Only the size: ``initgl`` is *not* run again, since a resize does not
-        make a new context and re-running it would rebuild every texture and
-        shader each time somebody dragged a corner.
+        ``initgl`` is not run again.  A resize keeps the same context, and
+        re-running it would rebuild every texture and shader on each resize.
         """
         if self.context is None:
             return
@@ -328,26 +322,26 @@ class GLFrame(tkinter.Frame):
         self.render()
 
     def _onDestroy(self, event: Any = None) -> None:
-        """Let the context go with the widget, and the error that stopped one"""
+        """Destroy the context and clear :attr:`contextError` with the widget"""
         if event is not None and event.widget is not self:
-            return                      # a child's destruction, not ours
+            return                      # a child widget was destroyed
         self.destroyContext()
-        # A kept error holds the frames it was raised through, and they hold
-        # this widget.  Kept past destruction that is a cycle only the
-        # collector breaks, and the Tcl interpreter behind the root is then
-        # deleted on whichever thread the collector ran on -- which Tcl
-        # answers by aborting the process.
+        # A stored error holds the frames it was raised through, and they hold
+        # this widget.  Kept after destruction, that forms a cycle only the
+        # garbage collector breaks.  The root's Tcl interpreter is then
+        # deleted on whichever thread the collector runs on, and Tcl aborts
+        # the process.
         self.contextError = None
 
-    ### the names the Togl-based widget answered to
+    ### method names of the Togl-based widget
     def tkRedraw(self, *arguments: Any) -> None:
-        """Draw one frame; :meth:`render` under the name the old widget used"""
+        """Draw one frame; :meth:`render` under the Togl widget's name"""
         self.render()
 
     def tkMakeCurrent(self) -> bool:
-        """:meth:`makeCurrent`, under the name the old widget used"""
+        """:meth:`makeCurrent`, under the Togl widget's name"""
         return self.makeCurrent()
 
     def tkSwapBuffers(self) -> None:
-        """:meth:`swapBuffers`, under the name the old widget used"""
+        """:meth:`swapBuffers`, under the Togl widget's name"""
         self.swapBuffers()

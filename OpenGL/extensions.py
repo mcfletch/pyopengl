@@ -124,14 +124,14 @@ class ExtensionQuerier(object):
     def _context_cached(self, kind, pull):
         """Return the per-context cached ``kind`` ('version'/'extensions').
 
-        The GL version and extension list are properties of the *context*, not
-        the process: two contexts in one process (a GL and a GLES context, or
-        two GL contexts on different drivers) report different lists.  We
-        therefore cache per-context via ``contextdata`` (which is cleaned up
-        when the context is destroyed) rather than on the querier singleton --
-        a singleton cache leaks the first context's list to every later context
-        and never refreshes.  When no context is current we fall back to a
-        singleton attribute so version/extension probes still work.
+        The GL version and extension list belong to a context.  Two contexts
+        in one process (a GL and a GLES context, or two GL contexts on
+        different drivers) report different lists.  The value is cached per
+        context in ``contextdata``, which is cleaned up when the context is
+        destroyed.  A cache on the querier singleton would give every later
+        context the first context's list.  When no context is current, the
+        value is cached on the singleton so version and extension probes
+        still work.
         """
         from OpenGL import platform
 
@@ -201,10 +201,10 @@ class _GLQuerier(ExtensionQuerier):
     # problems. You shouldn't do this, but if you do, this will make
     # the issue clearer
     #
-    # `api_marker` holds the marker and not the space after it, because
-    # `pullVersion` compares it against 'OpenGL ES': the separator belongs to
-    # the pattern rather than to the group, or the comparison is against a
-    # string the group can never hold and no ES context is ever recognised.
+    # `api_marker` holds the marker without the space after it, because
+    # `pullVersion` compares it with 'OpenGL ES'.  The separator is matched
+    # outside the group.  Inside the group, the comparison would never match
+    # and no ES context would be recognised.
     version_matcher = re.compile(
         r'^(?P<api_marker>OpenGL(?: ES)?)?\s*(?P<version>\d+([.]\d+)+)'
     )
@@ -223,17 +223,16 @@ class _GLQuerier(ExtensionQuerier):
         from OpenGL.raw.GL.VERSION.GL_1_1 import glGetString
         from OpenGL.raw.GL.VERSION.GL_1_1 import GL_VERSION
 
-        # The raw entry point's declared restype is an array type, and only the
-        # C dispatch layer turns that into the string this actually is -- under
-        # ctypes it answers with the array, which has nothing to decode.  Say
-        # what the return is, as pullExtensions does: either may be the first
-        # to run, so neither can rely on the other having said it.
+        # The raw entry point's declared restype is an array type.  The C
+        # dispatch layer converts the result to a string, but under ctypes the
+        # call returns the array, which cannot be decoded.  Set the restype
+        # here, as pullExtensions also does, because either may run first.
         glGetString.restype = ctypes.c_char_p
         new = glGetString(GL_VERSION)
         if not new:
-            # A query the context would not answer -- between glBegin and
-            # glEnd, say, where none is legal.  "Not yet known" rather than an
-            # AttributeError on the way to decoding a null string.
+            # The context did not answer the query, for example between
+            # glBegin and glEnd, where no query is legal.  Return False
+            # ("not yet known") instead of failing to decode a null string.
             return False
 
         self.version_string = new.decode('utf-8', errors='ignore')
@@ -336,14 +335,13 @@ hasGLExtension = hasGLUExtension = hasExtension
 
 
 def available(entryPoint: Any) -> bool:
-    """Is this entry point one the driver serves?
+    """Return True if the driver provides this entry point.
 
-    An entry point answers ``bool()`` with this already, so
-    ``if glPointParameterf:`` guards an optional call correctly.  A stub
-    declares the name as a function, though, and a function object is always
-    true -- so a type checker reads that guard as a missing ``()`` and reports
-    code that is right.  This asks the same question as a call, which a checker
-    has nothing to say about.
+    ``bool()`` of an entry point gives the same result, so
+    ``if glPointParameterf:`` guards an optional call correctly.  The type
+    stubs declare the name as a function, and a function object is always
+    true, so a type checker reports that guard as a missing ``()``.  A type
+    checker accepts this function call.
 
     ``None`` is not available, so a name reached with
     ``getattr(module, name, None)`` needs no separate test::
@@ -387,10 +385,10 @@ class _Alternate(LateBind):
         from OpenGL import error
         from OpenGL.platform import baseplatform
 
-        # Same three situations as a single entry point, and the same reason
-        # to tell them apart: none of these names resolving usually says the
-        # call came before there was a context, not that the driver has none
-        # of them.  See baseplatform.undefined_function_message.
+        # The same cases as for a single entry point.  When none of the names
+        # resolves, the usual cause is a call made before a context exists,
+        # and less often a driver that lacks all of them.  See
+        # baseplatform.undefined_function_message.
         if baseplatform._context_is_current() is False:
             why = baseplatform.NO_CONTEXT_EXPLANATION
         else:
@@ -411,9 +409,10 @@ class _Alternate(LateBind):
 
 
 def alternate(name, *functions):
-    """Construct a callable that functions as the first implementation found of given set of alternatives
+    """Construct a callable that uses the first available function of a set of alternatives
 
-    if name is a function then its name will be used....
+    If name is a function, it becomes the first alternative and its name
+    is used as the callable's name.
     """
     if not isinstance(name, (bytes, unicode)):
         functions = (name,) + functions

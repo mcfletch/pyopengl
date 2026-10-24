@@ -19,18 +19,18 @@ window system's own API.
     Scene(root, width=640, height=480).pack(fill='both', expand=True)
     root.mainloop()
 
-What the context is asked for -- profile, version, buffer sizes, multisampling
--- is :class:`~OpenGL.Tk.attributes.ContextAttributes`, given as keywords to the
-widget or as a ready-made object.  The default is a core profile, so a Tk
-application can use shaders and vertex array objects.
+The requested context (profile, version, buffer sizes, multisampling) is
+described by a :class:`~OpenGL.Tk.attributes.ContextAttributes`.  Pass it to the
+widget as keywords or as a ready-made object.  The default is a core profile,
+so a Tk application can use shaders and vertex array objects.
 
-X11, Windows and macOS (Aqua) are implemented: GLX, WGL, and an
-``NSOpenGLContext`` on a view over the widget.  :mod:`OpenGL.Tk.togl` is the
-Togl-based widget for anybody who has Togl.  See ``plans/TK-WIDGET.md``.
+Three window systems are supported.  X11 uses GLX, Windows uses WGL, and macOS
+(Aqua) uses an ``NSOpenGLContext`` on a view over the widget.
+:mod:`OpenGL.Tk.togl` provides widgets built on the Togl Tcl extension, for
+installations that have Togl.  See ``plans/TK-WIDGET.md``.
 
 Importing this module opens no window, needs no display and loads no Tcl
-package: it is a question with an answer rather than an action.  The tkinter
-names come with it, as they always have, so ``from OpenGL.Tk import *`` still
+package.  It also re-exports the tkinter names, so ``from OpenGL.Tk import *``
 gives ``Tk``, ``Frame`` and the rest.
 """
 
@@ -48,10 +48,9 @@ from OpenGL.Tk.widget import GLFrame
 
 import tkinter as _tkinter
 
-#: This module's own names, and tkinter's with them.  ``from OpenGL.Tk import
-#: *`` has always given both -- a script that used it wrote ``Tk()`` and
-#: ``Frame()`` without importing tkinter itself -- so listing only the new
-#: names here would break every one of those scripts.
+#: This module's own names plus tkinter's.  Scripts that use ``from OpenGL.Tk
+#: import *`` call ``Tk()`` and ``Frame()`` without importing tkinter, so the
+#: tkinter names must stay in this list.
 __all__ = list(getattr(_tkinter, '__all__', ())) + [
     'ContextAttributes',
     'GLFrame',
