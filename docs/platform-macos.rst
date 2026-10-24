@@ -91,12 +91,13 @@ Apple Silicon and Intel
 -----------------------
 
 ``PyOpenGL`` is a pure-Python wheel and installs on either.
-``PyOpenGL_accelerate`` is compiled, and the published wheels are
-``macosx_11_0_arm64``.  An Apple Silicon interpreter installs the binary
-wheel.  An Intel Mac, or an x86_64 interpreter running under Rosetta on Apple
-Silicon, builds it from the source distribution.  That build needs the Xcode
-command line tools (``xcode-select --install``).  PyOpenGL runs on ctypes
-without accelerate.
+``PyOpenGL_accelerate`` is compiled, and is published as binary wheels for
+both architectures: ``arm64`` for Apple Silicon (macOS 11 and later) and
+``x86_64`` for Intel Macs and for x86_64 interpreters running under Rosetta.
+There are wheels for CPython 3.9 to 3.14, including the free-threaded 3.14t.
+Another interpreter builds accelerate from the source distribution, which
+needs the Xcode command line tools (``xcode-select --install``).  PyOpenGL
+runs on ctypes without accelerate.
 
 An interpreter and the libraries it loads must have the same architecture.
 The system frameworks are universal and load into either, so desktop GL always
