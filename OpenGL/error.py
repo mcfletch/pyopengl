@@ -1,11 +1,11 @@
-"""Implementation of OpenGL errors/exceptions
+"""The exceptions PyOpenGL raises, and the per-API error checker.
 
-Note that OpenGL-ctypes will also throw standard errors,
-such as TypeError or ValueError when appropriate.
+PyOpenGL also raises standard exceptions, such as TypeError or ValueError,
+where those fit.
 
-ErrorChecker is an _ErrorChecker instance that allows you
-to register a new error-checking function for use 
-throughout the system.
+``_ErrorChecker`` is the class of the checker each API builds in
+``OpenGL/raw/<API>/_errors.py``.  It reads the API's error code after a call
+and raises the API's error class when the code is not the success value.
 """
 import logging
 _log = logging.getLogger( 'OpenGL.error' )

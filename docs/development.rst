@@ -362,15 +362,24 @@ entry points on top of that module, and is an example to follow.
 Error handling
 --------------
 
-PyOpenGL runs :py:func:`OpenGL.error.glCheckError` after each call.  The check
-is skipped between ``glBegin`` and ``glEnd``, because ``glGetError`` reports
-nothing between the two.  The checker can be replaced.  A program that always has a
-valid context can register the raw ``glGetError`` and skip the context test:
+Each API has one error checker, an ``_ErrorChecker`` from
+:py:mod:`OpenGL.error` built in ``OpenGL/raw/<API>/_errors.py``.  It names
+the function that reads an error code (``glGetError``, ``eglGetError``), the
+code that means success and the exception to raise.  The ctypes bindings call
+the checker after each call.  ``OpenGL._dispatch.register_error_source`` hands
+the same three values to the C dispatch layer, which makes the check itself.
 
-.. code-block:: python
+The GL checker starts on ``glGetError``.  On the first check in each context,
+``OpenGL.dispatch`` offers debug output: where the context offers
+``GL_KHR_debug`` and has no callback of its own, it installs a debug callback
+and calls the checker's ``setErrorReader`` with a function that reads the flag
+the callback sets.  ``setErrorReader()`` with no argument goes
+back to ``glGetError``.  :doc:`using` lists when a context stays on
+``glGetError``.
 
-   from OpenGL import error
-   error.ErrorChecker.registerChecker(myAlternateFunction)
+``glBegin`` calls the checker's ``onBegin`` and ``glEnd`` its ``onEnd``.
+Checking is suspended between the two, because ``glGetError`` cannot be called
+inside a ``glBegin`` block.
 
 :py:mod:`OpenGL.error` defines the errors raised; :py:exc:`ValueError` and
 :py:exc:`TypeError` come from argument conversion.  The wrappers catch an

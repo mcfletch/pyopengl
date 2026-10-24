@@ -98,14 +98,39 @@ Error handling
 ~~~~~~~~~~~~~~
 
 PyOpenGL follows Python's *errors should never pass silently*, instead of
-OpenGL's model of explicit checks.  Each entry point runs
-:py:func:`OpenGL.error.glCheckError` after the call.  ``glBegin`` switches
-the check off and ``glEnd`` switches it on again, because ``glGetError`` does
-not report between them.
+OpenGL's model of explicit checks.  A GL call that fails raises
+:py:exc:`OpenGL.error.GLError`, naming the call and its arguments.
 
-Calling C-level ``glBegin``/``glEnd`` from another extension in the same
-process can leave the check out of step with the driver.  Switch checking off
-explicitly in that case.
+On a context that offers ``GL_KHR_debug`` (core in OpenGL 4.3, and offered by
+current Linux and Windows drivers), PyOpenGL installs a debug callback the
+first time it checks for an error.  The driver reports an error to that
+callback during the failing call, and PyOpenGL raises the error when the call
+returns.  A call that succeeds costs one flag read, with no extra trip to the
+driver.
+
+A context uses ``glGetError`` after every call instead when:
+
+- the context does not offer ``GL_KHR_debug``, as on macOS, whose OpenGL
+  stops at 4.1;
+- the program or another library has already installed a debug callback on the
+  context, which PyOpenGL does not replace;
+- ``OpenGL.ERROR_DEBUG_OUTPUT`` is set to False before ``OpenGL.GL`` is
+  imported, or the program calls ``OpenGL.dispatch.use_debug_output(False)``
+  with the context current;
+- an occasional ``glGetError`` check (one call in 64) finds an error the
+  callback did not report.  That context then uses ``glGetError`` from then
+  on.
+
+Both methods raise the same ``GLError`` from the same call.
+``OpenGL.dispatch.error_checking_mode()`` returns ``'debug-output'``,
+``'get-error'`` or ``'off'`` for the current context, and
+:doc:`c-dispatch` gives the timings.
+
+``glBegin`` switches checking off and ``glEnd`` switches it on again, because
+``glGetError`` cannot be called between them.  Calling C-level
+``glBegin``/``glEnd`` from another extension in the same process can leave the
+check out of step with the driver.  Switch checking off explicitly in that
+case. Note: You should not be using glBegin/glEnd in new code.
 
 Checking can be switched off entirely, before anything in the ``OpenGL``
 namespace is imported.  Do this as the first thing in the top-level script:
@@ -118,30 +143,9 @@ namespace is imported.  Do this as the first thing in the top-level script:
 Applications may do this.  Libraries should not, because it removes the error
 reports that someone debugging the application needs.
 
-Under :doc:`the C dispatch layer <c-dispatch>` the same flag applies per entry
-point per context.  The check is made from C instead of through a Python
-callback, so its only cost is the driver round trip.
-
-The driver round trip is most of the cost of checking.  A context offering
-``GL_KHR_debug`` avoids it.  The driver reports the error through a callback
-during the call, and the check reads the flag that callback set.  Both
-implementations use the callback automatically where a context offers it.
-``OpenGL.dispatch.error_checking_mode()`` returns the mechanism a context
-uses, and :doc:`c-dispatch` describes how to turn the callback off.
-
-The checker can also be replaced instead of switched off.  A program that
-always has a valid context can register the raw ``glGetError`` and skip the
-context-validity test:
-
-.. code-block:: python
-
-   from OpenGL import error
-   error.ErrorChecker.registerChecker(myAlternateFunction)
-
 :py:mod:`OpenGL.error` defines the errors PyOpenGL raises.  PyOpenGL also
 raises standard Python exceptions, such as :py:exc:`ValueError` and
-:py:exc:`TypeError`, where those fit.  The wrappers catch OpenGL errors and
-add details of the call, so that the error names the argument that caused it.
+:py:exc:`TypeError`, where those fit.
 
 Performance
 -----------
