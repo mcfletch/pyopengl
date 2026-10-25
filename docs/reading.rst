@@ -12,7 +12,7 @@ OpenGLContext
 ~~~~~~~~~~~~~
 
 `OpenGLContext <https://github.com/mcfletch/openglcontext>`__ contains the
-tutorial series written for PyOpenGL, as annotated source you can run.  It
+shader tutorial series written for PyOpenGL, as annotated source you can run.  It
 teaches current OpenGL (buffer objects, shaders and framebuffer objects)
 instead of the fixed-function pipeline.
 
