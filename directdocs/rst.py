@@ -761,6 +761,38 @@ def argument_entry(line: str) -> tuple[str, str] | None:
     return match.group(1).strip(), match.group(2).strip()
 
 
+def join_wrapped_names(lines: list[str]) -> list[str]:
+    """``lines`` with each list of names that wraps joined onto one line.
+
+    ``backUrl, frontUrl,`` with ``topUrl -- ...`` under it at the same indent
+    is one entry for three names.  A line is joined to the one under it only
+    where it is names ending in a comma and the two together are an entry, so
+    prose that ends a line with a comma is left as it is.
+    """
+    out: list[str] = []
+    at = 0
+    while at < len(lines):
+        line = joined = lines[at]
+        depth = len(line) - len(line.lstrip())
+        end = at
+        while (
+            joined.rstrip().endswith(',')
+            and _ARGUMENT_NAMES.match(joined.strip()[:-1].rstrip())
+            and end + 1 < len(lines)
+            and lines[end + 1].strip()
+            and len(lines[end + 1]) - len(lines[end + 1].lstrip()) == depth
+        ):
+            end += 1
+            joined = '%s %s' % (joined.rstrip(), lines[end].strip())
+        if end > at and argument_entry(joined):
+            out.append(joined)
+            at = end + 1
+        else:
+            out.append(line)
+            at += 1
+    return out
+
+
 def opens_an_entry(line: str) -> bool:
     """Whether ``line`` starts an argument entry or a list item.
 
@@ -813,7 +845,7 @@ def argument_list(lines: list[str]) -> list[tuple[str, list[str]]] | None:
     A description's continuation lines keep their indent, which is what says
     where a list of entries under it starts.
     """
-    body = textwrap.dedent('\n'.join(lines)).split('\n')
+    body = join_wrapped_names(textwrap.dedent('\n'.join(lines)).split('\n'))
     entries: list[tuple[str, list[str]]] = []
     for line in body:
         if not line.strip():
@@ -840,7 +872,7 @@ def convert_argument_lists(text: str) -> str:
     and the reason a docstring that is otherwise ordinary markup cannot simply
     be written through.
     """
-    lines = text.split('\n')
+    lines = join_wrapped_names(text.split('\n'))
     out: list[str] = []
     at = 0
     while at < len(lines):
@@ -897,7 +929,8 @@ def _argument_run(lines: list[str], at: int) -> tuple[list[str] | None, int]:
         return None, at
     written: list[str] = []
     for name, description in entries:
-        written.append(indent + name)
+        # Names, so a star in one is a wildcard (``*_flag``) and not emphasis.
+        written.append(indent + escape(name))
         body = textwrap.fill(
             ' '.join(description), width=max(72 - len(indent), 30)
         )

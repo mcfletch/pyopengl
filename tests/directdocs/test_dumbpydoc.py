@@ -8,6 +8,7 @@ the rest link.  These hold that choice, and the way two exports of one command
 are recognised as the same thing despite being two objects.
 """
 
+import collections.abc
 import decimal
 import sys
 import types
@@ -235,8 +236,10 @@ class TestAnnotations:
     as the text they were written as, ``BoundingBox`` rather than a class.
     Sphinx looks a bare name up in the page's module first and then by suffix
     across the whole set, where two packages with a ``BoundingBox`` each make
-    the reference ambiguous.  A name the module binds to one of the packages'
-    classes is written qualified; the set shows it unqualified
+    the reference ambiguous.  A name the module binds to a class is written
+    qualified, whether or not that class's page is in the set, since a bare
+    ``Sequence`` from :mod:`collections.abc` would otherwise find a class of
+    the packages called ``Sequence``.  The set shows it unqualified
     (``python_use_unqualified_type_names``).
     """
 
@@ -246,6 +249,7 @@ class TestAnnotations:
         home = types.ModuleType('OpenGL._annotated')
         home.Box = type('Box', (), {'__module__': 'OpenGL._boxes'})
         home.Decimal = decimal.Decimal
+        home.Sequence = collections.abc.Sequence
         monkeypatch.setitem(sys.modules, home.__name__, home)
         namespace = {}
         exec(
@@ -276,13 +280,20 @@ class TestAnnotations:
         described = self.described(monkeypatch, {}, ', box: Box')
         assert described['box'] == 'OpenGL._boxes.Box'
 
-    def test_other_names_are_left_as_written(self, monkeypatch):
-        """A builtin, a name the module does not bind, and a class from
-        outside the packages, whose page is not in this set."""
+    def test_a_class_from_outside_the_packages_is_qualified(self, monkeypatch):
+        """Bare, it is looked up by suffix among the packages' classes."""
         described = self.described(
-            monkeypatch, {'count': 'int', 'mystery': 'Unknown', 'price': 'Decimal'}
+            monkeypatch, {'price': 'Decimal', 'sizes': 'Sequence[int]'}
         )
-        assert described == {'count': 'int', 'mystery': 'Unknown', 'price': 'Decimal'}
+        assert described == {
+            'price': 'decimal.Decimal',
+            'sizes': 'collections.abc.Sequence[int]',
+        }
+
+    def test_other_names_are_left_as_written(self, monkeypatch):
+        """A builtin, and a name the module does not bind."""
+        described = self.described(monkeypatch, {'count': 'int', 'mystery': 'Unknown'})
+        assert described == {'count': 'int', 'mystery': 'Unknown'}
 
 
 class TestTheGeneratedHierarchy:

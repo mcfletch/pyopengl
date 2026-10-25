@@ -613,6 +613,51 @@ class TestDocstringsParse:
         assert 'fps\n   frames per second, as a number or a pair. It sets' in out
         assert '\n   set when the encoder made the texture itself' in out
 
+    @pytest.mark.parametrize('shape', ['written through', 'plain'])
+    def test_names_wrapping_onto_a_second_line_share_an_entry(self, shape):
+        """``a, b,`` then ``c -- ...`` on the line under it is one entry.
+
+        Not joined, the first line ends the definition list, and the entry
+        after it is a block quote with unannounced indents.
+        """
+        literal = ' See ``faceLayout``.' if shape == 'written through' else ''
+        out = self.assert_parses(
+            'A background.%s\n'
+            '\n'
+            'back, front -- texture nodes for the faces\n'
+            'backUrl, frontUrl, leftUrl,\n'
+            'rightUrl, topUrl, bottomUrl -- the URLs those\n'
+            '    textures are loaded from\n'
+            'faceLayout -- how each image is turned\n' % (literal,)
+        )
+        assert (
+            'backUrl, frontUrl, leftUrl, rightUrl, topUrl, bottomUrl\n'
+            '   the URLs those textures are loaded from'
+        ) in out.replace('\\_', '_')
+
+    def test_a_prose_line_ending_in_a_comma_is_not_a_name(self):
+        """Only names that go on to an entry are joined to the line under them."""
+        out = self.assert_parses(
+            'Drawn with ``glDrawArrays``.\n'
+            '\n'
+            'This, that,\n'
+            'and the other.\n'
+        )
+        assert 'This, that,\nand the other.' in out
+
+    @pytest.mark.parametrize('shape', ['written through', 'plain'])
+    def test_a_starred_name_is_a_name(self, shape):
+        """``*_flag -- ...`` names a family of fields; its star is not emphasis."""
+        literal = ' Each ``(weight, offset)``.' if shape == 'written through' else ''
+        out = self.assert_parses(
+            'A table.%s\n'
+            '\n'
+            'luma_l0 -- the weights of list 0\n'
+            '*_flag -- whether any entry of that list carried weights\n'
+            % (literal,)
+        )
+        assert '\n\\*\\_flag\n   whether any entry' in out
+
 
 class TestLinkingEntryPoints:
     def render(self, text, entry_points):

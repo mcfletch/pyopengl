@@ -373,7 +373,6 @@ class Class(object):
         ``__init__`` that sets it -- which for a class written this way is the
         only place they are written down at all.
         """
-        roots = self.module.roots
         described = {}
         for base in reversed(getattr(self.cls, '__mro__', [self.cls])):
             namespace = getattr(sys.modules.get(base.__module__), '__dict__', {})
@@ -381,7 +380,7 @@ class Class(object):
                 getattr(base, '__annotations__', None) or {}
             ).items():
                 described[name] = (
-                    annotation_text(annotation, namespace, roots),
+                    annotation_text(annotation, namespace),
                     NOT_SET,
                 )
         try:
@@ -394,7 +393,7 @@ class Class(object):
                 continue
             annotation = described.get(name, (None, NOT_SET))[0]
             if parameter.annotation is not inspect.Parameter.empty:
-                annotation = annotation_text(parameter.annotation, namespace, roots)
+                annotation = annotation_text(parameter.annotation, namespace)
             default = (
                 NOT_SET
                 if parameter.default is inspect.Parameter.empty
@@ -412,24 +411,22 @@ NOT_SET = object()
 _ANNOTATION_NAME = re.compile(r'(?<![\w.])([A-Za-z_]\w*)((?:\.\w+)*)')
 
 
-def annotation_text(
-    annotation: Any, namespace: dict[str, Any] | None = None, roots: Iterable[str] = ()
-) -> str:
+def annotation_text(annotation: Any, namespace: dict[str, Any] | None = None) -> str:
     """An annotation as it should read in the page.
 
     A module using ``from __future__ import annotations`` has these already as
     the strings they were written as, which is what a reader wants; anything
     else is turned into one.
 
-    A name ``namespace`` binds to a class of the packages in ``roots`` is
-    written as that class's full name, since Sphinx finds a bare one by suffix
-    across the whole set, and a second class of that name elsewhere makes the
-    reference ambiguous.  The set shows it unqualified.
+    A name ``namespace`` binds to a class is written as that class's full
+    name, since Sphinx finds a bare one by suffix across the whole set: a
+    second class of that name makes the reference ambiguous, and a class from
+    outside the set (``collections.abc.Sequence``) would be linked to one of
+    the packages' classes of the same name.  The set shows it unqualified.
     """
-    owners = tuple(roots)
     if not isinstance(annotation, str):
         return (
-            qualified_name(annotation, owners)
+            qualified_name(annotation)
             or getattr(annotation, '__name__', None)
             or str(annotation)
         )
@@ -437,17 +434,17 @@ def annotation_text(
         return annotation
 
     def qualify(match: re.Match) -> str:
-        name = qualified_name(namespace.get(match.group(1)), owners)
+        name = qualified_name(namespace.get(match.group(1)))
         return name + match.group(2) if name else match.group(0)
 
     return _ANNOTATION_NAME.sub(qualify, annotation)
 
 
-def qualified_name(value: Any, roots: tuple[str, ...]) -> str | None:
-    """``value``'s full dotted name, where it is a class of the packages in
-    ``roots``; ``None`` for anything else."""
+def qualified_name(value: Any) -> str | None:
+    """``value``'s full dotted name, where it is a class other than a builtin;
+    ``None`` for anything else."""
     home = getattr(value, '__module__', None) or ''
-    if not inspect.isclass(value) or home.split('.')[0] not in roots:
+    if not inspect.isclass(value) or home == 'builtins':
         return None
     return '%s.%s' % (home, value.__qualname__)
 
