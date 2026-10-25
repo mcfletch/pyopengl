@@ -111,9 +111,9 @@ PROJECT_LINKS = [
         'PyOpenGL on PyPI',
     ),
     (
-        'https://pepy.tech/project/pyopengl',
-        'https://img.shields.io/pepy/dt/PyOpenGL',
-        'Total downloads from PyPI',
+        'https://pypistats.org/packages/pyopengl',
+        'https://img.shields.io/pypi/dm/PyOpenGL',
+        'Downloads from PyPI in the last month',
     ),
     (
         'https://github.com/mcfletch/pyopengl/actions/workflows/test.yml',
