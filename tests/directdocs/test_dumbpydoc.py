@@ -204,6 +204,54 @@ class TestRendering:
         assert '- :doc:`OpenGL.GL.ARB <OpenGL.GL.ARB>`' in page
 
 
+class TestClassSections:
+    """A caller can add blocks of its own to a class's entry."""
+
+    @staticmethod
+    def module():
+        module = FakeModule('OpenGL.mine')
+        for name in ('Mine', 'Other'):
+            cls = type(name, (), {'__module__': 'OpenGL.mine', '__doc__': 'A thing.'})
+            module.classes.append((name, dumbpydoc.Class(cls, module)))
+        return module
+
+    def test_the_blocks_follow_the_docstring_inside_the_class(self):
+        asked = []
+
+        def sections(cls):
+            asked.append(cls.__name__)
+            return ['.. rubric:: Seen in\n\n* `a <https://x/a-b>`__'] if cls.__name__ == 'Mine' else []
+
+        page = dumbpydoc.Renderer({}, {}, class_sections=sections).render(self.module())
+        assert '   A thing.\n\n   .. rubric:: Seen in\n\n   * `a <https://x/a-b>`__' in page
+        assert asked == ['Mine', 'Other']
+
+    def test_a_class_with_no_blocks_is_written_as_before(self):
+        plain = dumbpydoc.Renderer({}, {}).render(self.module())
+        asked = dumbpydoc.Renderer({}, {}, class_sections=lambda cls: []).render(
+            self.module()
+        )
+        assert asked == plain
+
+    def test_a_class_that_is_another_project_s_is_not_asked_about(self):
+        module = FakeModule('OpenGL.arrays', classes=[('ArrayType', decimal.Decimal)])
+        asked = []
+        dumbpydoc.Renderer(
+            {}, {}, class_sections=lambda cls: asked.append(cls) or []
+        ).render(module)
+        assert asked == []
+
+    def test_render_projects_passes_it_on(self, tmp_path):
+        asked = []
+        dumbpydoc.render_projects(
+            ['json'],
+            str(tmp_path),
+            entrypoints=None,
+            class_sections=lambda cls: asked.append(cls.__name__) or [],
+        )
+        assert 'JSONDecoder' in asked
+
+
 class TestValues:
     @pytest.mark.parametrize(
         'value,rendered',

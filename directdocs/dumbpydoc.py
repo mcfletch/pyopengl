@@ -64,7 +64,7 @@ import textwrap
 import types
 from ctypes import _CFuncPtr as CFunctionType
 from typing import Any, ClassVar
-from collections.abc import Iterable
+from collections.abc import Callable, Iterable
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PACKAGE_ROOT = os.path.dirname(HERE)
@@ -595,6 +595,7 @@ class Renderer:
         self,
         entry_points: dict[str, dict[str, str]],
         claims: dict[tuple[str, str], Owner],
+        class_sections: Callable[[type], list[str]] | None = None,
     ) -> None:
         #: Entry point name -> the reference page that declares it.
         self.entry_points = entry_points
@@ -603,6 +604,9 @@ class Renderer:
         #: The modules that get a page, so a breadcrumb only names pages that
         #: are there.  Filled in by :func:`render_projects`.
         self.documented: set[str] = set()
+        #: Called with each class this set describes; the reST blocks it
+        #: returns are written after the class's docstring.
+        self.class_sections = class_sections
 
     def reference_link(self, module: PyModule, name: str) -> str | None:
         page = self.entry_points.get(api_package(module.name), {}).get(name)
@@ -780,6 +784,11 @@ class Renderer:
             known = self.entry_points_for(module)
             with writer.indent():
                 write_docstring(docstring_lines(cls), writer, known)
+                if self.class_sections is not None:
+                    for block in self.class_sections(cls.cls):
+                        writer.blank()
+                        writer.line(block)
+                        writer.blank()
                 for _key, prop in cls.properties:
                     writer.directive(
                         'py:attribute', prop.name, attribute_options(prop)
@@ -1021,6 +1030,7 @@ def render_projects(
     paragraphs: Iterable[str] | None = None,
     elsewhere: Iterable[str] = (),
     index: bool = True,
+    class_sections: Callable[[type], list[str]] | None = None,
 ) -> tuple[list[str], list[str]]:
     """Write a page for every module of every project.
 
@@ -1035,7 +1045,9 @@ def render_projects(
     ``directory``.  They are listed under their parent and linked to, and are
     not imported.  The :data:`PLATFORM_PACKAGES` under ``projects`` are added
     to them, from a child process on each one's platform.  ``index=False``
-    writes no ``index.rst``.
+    writes no ``index.rst``.  ``class_sections`` is called with each class
+    described and answers the reST blocks to write after its docstring, as
+    for a project whose classes carry information the docstrings do not.
 
     Returns the names written and the names that could not be documented.
     """
@@ -1082,7 +1094,7 @@ def render_projects(
         module.modules = child_names(module.name, found)
 
     entry_points = load_entry_points(entrypoints) if entrypoints else {}
-    renderer = Renderer(entry_points, claim_owners(modules))
+    renderer = Renderer(entry_points, claim_owners(modules), class_sections)
     renderer.documented = set(found)
     rendered: list[str] = []
     for module in modules:

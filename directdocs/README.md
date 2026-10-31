@@ -101,7 +101,10 @@ cache file, the pages are written without those sections.
 `render_projects(projects, directory, entrypoints=None, title, paragraphs)`
 takes the packages to document and the output directory. Only names defined in
 those packages are described. A name imported from outside them is linked to
-its own documentation. OpenGLContext's documentation set covers the engine and
+its own documentation. `class_sections` is a callable given each class
+described; the reST blocks it returns are written after the class's docstring
+(OpenGLContext lists the files that use each scenegraph node this way).
+OpenGLContext's documentation set covers the engine and
 the eight packages around it, and its `build-docs.py` calls `render_projects`.
 The commentary notation its tutorials use is defined in the OpenGLContext
 repository.
