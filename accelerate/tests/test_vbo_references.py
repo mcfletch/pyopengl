@@ -3,8 +3,19 @@ import gc
 import sys
 
 import numpy as np
+import pytest
 
+from OpenGL import acceleratesupport
 from OpenGL.arrays import vbo
+
+# Switched off is as good as absent: OpenGL.arrays.vbo is then the Python VBO.
+if not acceleratesupport.ACCELERATE_AVAILABLE:
+    pytest.skip('the accelerators are not in use here', allow_module_level=True)
+
+
+def test_the_vbo_is_the_accelerated_one():
+    assert vbo.VBO.__module__ == 'OpenGL_accelerate.vbo'
+    assert vbo.VBOOffset.__module__ == 'OpenGL_accelerate.vbo'
 
 
 def test_an_array_assigned_to_data_outlives_the_buffer():
