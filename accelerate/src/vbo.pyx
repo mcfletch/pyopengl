@@ -9,10 +9,6 @@ try:
 except NameError as err:
     long = int
 
-cdef extern from "Python.h":
-    cdef void Py_XINCREF( object )
-    cdef void Py_XDECREF( object )
-
 _NULL = object()
 
 cdef class VBO:
@@ -90,11 +86,6 @@ cdef class VBO:
         self.target_spec = target
         self._copy_segments = []
         self._I_ = None
-    def __dealloc__( self ):
-        """Deallocate our references"""
-        if self.data is not None:
-            Py_XDECREF( self.data )
-            self.data = None
     @property
     def implementation( self ):
         """Retrieve our implementation reference"""
@@ -117,10 +108,7 @@ cdef class VBO:
         """Update our entire array with new data"""
         return self.c_set_array( data, size )
     cdef c_set_array( self, data, size ):
-        """Set our array pointer with incref/decref support"""
-        if self.data is not None:
-            Py_XDECREF( self.data )
-        Py_XINCREF( data )
+        """Hold ``data`` as the array; an attribute of the extension type holds its own reference"""
         self.data = data
         if size is None and self.data is not None:
             size = self.arrayType.arrayByteCount( self.data )
@@ -275,12 +263,7 @@ cdef class VBOOffset:
     cdef public unsigned int offset
     def __cinit__( self, VBO vbo, unsigned int offset ):
         self.vbo = vbo
-        Py_XINCREF( vbo )
         self.offset = offset
-    def __dealloc__( self ):
-        if self.vbo is not None:
-            Py_XDECREF( self.vbo )
-            self.vbo = None
 
     def __getattr__( self, key ):
         if key != 'vbo':

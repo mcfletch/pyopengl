@@ -382,6 +382,10 @@ well as with the defaults.
   `cimport numpy`, and `cythonize` uses timestamps to decide whether to
   regenerate the C. Without this step, C left over from an earlier build could
   be compiled against numpy headers it no longer matches.
+- The accelerated `VBO` holds its `data` array, and a `VBOOffset` its `vbo`,
+  by the attribute's own reference. An array assigned to `vbo.data` directly
+  is no longer released one reference too many when the VBO is collected,
+  which corrupted memory.
 
 ## Testing and CI
 
