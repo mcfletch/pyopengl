@@ -9,6 +9,8 @@ import sys
 from collections.abc import Sequence
 from typing import Any, TypeAlias
 
+from OpenGL.arrays.vbo import VBO, VBOOffset
+
 if sys.version_info >= (3, 12):
     from collections.abc import Buffer
 else:  # PEP 688 arrived in 3.12; before it there is no way to say "buffer".
@@ -20,18 +22,19 @@ else:  # PEP 688 arrived in 3.12; before it there is no way to say "buffer".
 # is what admits a numpy array, which is neither a Sequence nor a
 # memoryview to a checker.  A bald number is an array of one, as
 # OpenGL.arrays.numbers makes it.  None is a null pointer where one is
-# meaningful.
-ByteArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | int | float | None
-DoubleArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | int | float | None
-FloatArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | int | float | None
-Int64Array: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | int | float | None
-IntArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | int | float | None
-ShortArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | int | float | None
-UByteArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | int | float | None
-UInt64Array: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | int | float | None
-UIntArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | int | float | None
-UShortArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | int | float | None
-AnyArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | int | float | None
+# meaningful.  A VBO, or an offset into one, stands for the buffer's
+# data wherever an array is accepted.
+ByteArray: TypeAlias = Sequence[Any] | VBO | VBOOffset | Buffer | ctypes._CData | int | float | None
+DoubleArray: TypeAlias = Sequence[Any] | VBO | VBOOffset | Buffer | ctypes._CData | int | float | None
+FloatArray: TypeAlias = Sequence[Any] | VBO | VBOOffset | Buffer | ctypes._CData | int | float | None
+Int64Array: TypeAlias = Sequence[Any] | VBO | VBOOffset | Buffer | ctypes._CData | int | float | None
+IntArray: TypeAlias = Sequence[Any] | VBO | VBOOffset | Buffer | ctypes._CData | int | float | None
+ShortArray: TypeAlias = Sequence[Any] | VBO | VBOOffset | Buffer | ctypes._CData | int | float | None
+UByteArray: TypeAlias = Sequence[Any] | VBO | VBOOffset | Buffer | ctypes._CData | int | float | None
+UInt64Array: TypeAlias = Sequence[Any] | VBO | VBOOffset | Buffer | ctypes._CData | int | float | None
+UIntArray: TypeAlias = Sequence[Any] | VBO | VBOOffset | Buffer | ctypes._CData | int | float | None
+UShortArray: TypeAlias = Sequence[Any] | VBO | VBOOffset | Buffer | ctypes._CData | int | float | None
+AnyArray: TypeAlias = Sequence[Any] | VBO | VBOOffset | Buffer | ctypes._CData | int | float | None
 
 # What is *returned*.  Any, because the shape of the result
 # follows the *value* of an argument rather than its type:

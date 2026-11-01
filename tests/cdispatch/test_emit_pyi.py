@@ -194,6 +194,19 @@ class TestSubmodule:
         assert '__all__' not in text
         assert text.count('glBindVertexArray') == 1
 
+    def test_every_array_alias_admits_a_vbo_and_an_offset_into_one(self):
+        """A bound buffer stands for its data wherever an array is accepted,
+        whatever the element type, so no alias omits it."""
+        text = emit_pyi.emit_typing_stub()
+        assert 'from OpenGL.arrays.vbo import VBO, VBOOffset' in text
+        declared = [
+            line for line in text.splitlines()
+            if line.endswith('None') and ': TypeAlias = ' in line
+        ]
+        assert len(declared) == len(set(emit_pyi.ARRAY_ALIASES.values())) + 1
+        for line in declared:
+            assert 'VBO | VBOOffset' in line, line
+
     def test_the_aliases_it_uses_are_imported_by_name(self):
         """Named rather than starred: a stub re-exports an import only when
         asked to, so ``from this import *`` does not offer the aliases."""

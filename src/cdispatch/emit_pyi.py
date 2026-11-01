@@ -84,6 +84,8 @@ import sys
 from collections.abc import Sequence
 from typing import Any, TypeAlias
 
+from OpenGL.arrays.vbo import VBO, VBOOffset
+
 if sys.version_info >= (3, 12):
     from collections.abc import Buffer
 else:  # PEP 688 arrived in 3.12; before it there is no way to say "buffer".
@@ -132,6 +134,11 @@ def __getattr__(name: str) -> Any:
 '''
 
 
+_ARRAY_UNION = (
+    'Sequence[Any] | VBO | VBOOffset | Buffer | ctypes._CData | int | float | None'
+)
+
+
 def _alias_names():
     """Every alias ``OpenGL._typing`` declares: the arrays, then their results."""
     arrays = sorted(set(ARRAY_ALIASES.values())) + ['AnyArray']
@@ -146,16 +153,14 @@ def _alias_declarations():
         '# is what admits a numpy array, which is neither a Sequence nor a',
         '# memoryview to a checker.  A bald number is an array of one, as',
         '# OpenGL.arrays.numbers makes it.  None is a null pointer where one is',
-        '# meaningful.',
+        '# meaningful.  A VBO, or an offset into one, stands for the buffer\'s',
+        '# data wherever an array is accepted.',
     ]
     for alias in sorted(set(ARRAY_ALIASES.values())):
         lines.append(
-            '%s: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | int | float | None'
-            % (alias,)
+            '%s: TypeAlias = %s' % (alias, _ARRAY_UNION)
         )
-    lines.append(
-        'AnyArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | int | float | None'
-    )
+    lines.append('AnyArray: TypeAlias = %s' % (_ARRAY_UNION,))
     lines.append('')
     lines.append('# What is *returned*.  Any, because the shape of the result')
     lines.append('# follows the *value* of an argument rather than its type:')
