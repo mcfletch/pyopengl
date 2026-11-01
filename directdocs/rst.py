@@ -29,6 +29,7 @@ __all__ = [
     'literal',
     'collapse',
     'squeeze',
+    'summary',
     'write_docstring',
 ]
 
@@ -678,6 +679,30 @@ def write_docstring(
             writer.literal_block('\n'.join(lines))
         else:
             writer.paragraph(prose(without_literal_marker(lines)))
+
+
+#: Where the first sentence of a paragraph ends: sentence punctuation, then a
+#: capital.  An abbreviation that ends in a full stop does not end one.
+_SENTENCE_END = re.compile(r'(?<!e\.g\.)(?<!i\.e\.)(?<=[.!?])\s+(?=[A-Z])')
+
+
+def summary(text: str) -> str:
+    """The first sentence of ``text``, as reST that fits in one table cell.
+
+    ``text`` is a docstring.  Its first paragraph is joined into one line and
+    cut after its first sentence.  A docstring written as reST -- one with a
+    role or a literal in that sentence -- is written through; any other is
+    escaped, so an asterisk in it is an asterisk.  A docstring that opens with a
+    directive, or has no text, has no summary.
+    """
+    text = inspect.cleandoc(text)
+    if not text or _RST_DIRECTIVE.match(text):
+        return ''
+    paragraph = ' '.join(text.split('\n\n')[0].split())
+    first = _SENTENCE_END.split(paragraph, 1)[0]
+    if _RST_ROLE.search(first) or _RST_LITERAL.search(first):
+        return first
+    return escape(first)
 
 
 def write_entries(

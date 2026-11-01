@@ -201,7 +201,32 @@ class TestRendering:
         module.modules = ['OpenGL.GL.ARB', 'OpenGL.GL.EXT']
         page = dumbpydoc.Renderer({}, {}).render(module)
         assert ':hidden:' in page
-        assert '- :doc:`OpenGL.GL.ARB <OpenGL.GL.ARB>`' in page
+        assert ':doc:`OpenGL.GL.ARB <OpenGL.GL.ARB>`' in page
+
+    def test_submodules_are_a_table_of_module_and_summary(self):
+        module = FakeModule('OpenGL.GL')
+        module.modules = ['OpenGL.GL.ARB', 'OpenGL.GL.EXT']
+        renderer = dumbpydoc.Renderer({}, {})
+        renderer.summaries = {'OpenGL.GL.ARB': 'Extensions approved by the ARB.'}
+        page = renderer.render(module)
+        assert '.. list-table::' in page
+        assert (
+            '   * - :doc:`OpenGL.GL.ARB <OpenGL.GL.ARB>`\n'
+            '     - Extensions approved by the ARB.\n'
+        ) in page
+
+    def test_a_submodule_with_no_summary_has_an_empty_cell(self):
+        module = FakeModule('OpenGL.GL')
+        module.modules = ['OpenGL.GL.EXT']
+        page = dumbpydoc.Renderer({}, {}).render(module)
+        assert '   * - :doc:`OpenGL.GL.EXT <OpenGL.GL.EXT>`\n     -\n' in page
+
+    def test_a_summary_with_markup_characters_is_written_as_text(self):
+        module = FakeModule('OpenGL.GL')
+        module.modules = ['OpenGL.GL.ARB']
+        renderer = dumbpydoc.Renderer({}, {})
+        renderer.summaries = {'OpenGL.GL.ARB': 'Approved by the *ARB'}
+        assert '     - Approved by the \\*ARB\n' in renderer.render(module)
 
 
 class TestClassSections:

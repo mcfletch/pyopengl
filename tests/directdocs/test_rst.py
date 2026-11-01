@@ -695,3 +695,37 @@ class TestLinkingEntryPoints:
 
     def test_nothing_happens_without_a_manifest(self):
         assert ':doc:' not in self.render('Wraps glBegin for you', {})
+
+
+class TestSummary:
+    """The line a module is listed by: its docstring's first sentence."""
+
+    def test_a_docstring_is_summarised_by_its_first_sentence(self):
+        assert rst.summary('Spatial audio nodes. The engine mixes them.') == (
+            'Spatial audio nodes.'
+        )
+
+    def test_a_first_paragraph_that_wraps_is_one_line(self):
+        assert rst.summary('Cube maps and volumes from DDS, KTX\nand NRRD.\n\nMore.') == (
+            'Cube maps and volumes from DDS, KTX and NRRD.'
+        )
+
+    def test_an_abbreviation_does_not_end_the_sentence(self):
+        assert rst.summary('Shapes, e.g. Box and Cone, drawn by the pass.') == (
+            'Shapes, e.g. Box and Cone, drawn by the pass.'
+        )
+
+    def test_a_docstring_with_no_text_has_no_summary(self):
+        assert rst.summary('') == ''
+        assert rst.summary('   \n\n') == ''
+
+    def test_plain_text_is_escaped_so_an_asterisk_is_not_emphasis(self):
+        assert rst.summary('Multiplies by *scale') == 'Multiplies by \\*scale'
+
+    def test_a_docstring_written_as_reST_is_written_through(self):
+        assert rst.summary('The :func:`render` and ``draw`` calls.') == (
+            'The :func:`render` and ``draw`` calls.'
+        )
+
+    def test_a_docstring_that_opens_with_a_directive_has_no_summary(self):
+        assert rst.summary('.. note:: Not a sentence.\n\nBody.') == ''

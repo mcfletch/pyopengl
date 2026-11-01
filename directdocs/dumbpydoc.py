@@ -604,6 +604,9 @@ class Renderer:
         #: The modules that get a page, so a breadcrumb only names pages that
         #: are there.  Filled in by :func:`render_projects`.
         self.documented: set[str] = set()
+        #: Module name -> its docstring, for the table of submodules on its
+        #: parent's page.  Filled in by :func:`render_projects`.
+        self.summaries: dict[str, str] = {}
         #: Called with each class this set describes; the reST blocks it
         #: returns are written after the class's docstring.
         self.class_sections = class_sections
@@ -699,13 +702,14 @@ class Renderer:
         writer.blank()
 
     def write_submodules(self, module: PyModule, writer: Writer) -> None:
-        """List the modules one level below this one.
+        """List the modules one level below this one, with what each is for.
 
-        The toctree is hidden and the list is written out beside it.  A
+        The toctree is hidden and the table is written out beside it.  A
         visible toctree here would put every module of the package into the
         sidebar of every page in the set -- a few thousand entries, rendered
-        several thousand times -- and the list says the same thing on the one
-        page where it belongs.
+        several thousand times -- and the table says the same thing on the one
+        page where it belongs.  :attr:`summaries` supplies the second column;
+        a module with none has an empty cell.
         """
         children = module.modules
         if not children:
@@ -716,8 +720,14 @@ class Renderer:
             for child in children:
                 writer.line(child)
         writer.blank()
-        for child in children:
-            writer.line('- :doc:`%s <%s>`' % (child, child))
+        writer.directive('list-table', options={'header-rows': '1', 'widths': '35 65'})
+        with writer.indent():
+            for cells in [('Module', 'Summary')] + [
+                (':doc:`%s <%s>`' % (child, child), rst.summary(self.summaries.get(child, '')))
+                for child in children
+            ]:
+                for index, cell in enumerate(cells):
+                    writer.line(('* - ' if index == 0 else '  - ') + cell)
         writer.blank()
 
     def write_functions(self, module: PyModule, writer: Writer) -> None:
@@ -1096,6 +1106,7 @@ def render_projects(
     entry_points = load_entry_points(entrypoints) if entrypoints else {}
     renderer = Renderer(entry_points, claim_owners(modules), class_sections)
     renderer.documented = set(found)
+    renderer.summaries = {module.name: docstring_lines(module) for module in modules}
     rendered: list[str] = []
     for module in modules:
         try:
