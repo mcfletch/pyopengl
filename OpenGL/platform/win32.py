@@ -1,6 +1,6 @@
 """Windows-specific platform features"""
 import ctypes
-import platform
+import sysconfig
 from OpenGL.platform import ctypesloader, baseplatform
 import sys
 from typing import ClassVar
@@ -15,7 +15,15 @@ else:
     vc = 'vc9'
 
 def _size():
-    return platform.architecture()[0].strip( 'bits' )
+    """Bundled DLL suffix for the interpreter ABI, not the host CPU.
+
+    ARM64 and AMD64 both have 64-bit pointers.  platform.machine() can also
+    describe the ARM64 host when Python itself runs under x64 emulation.
+    On Windows sysconfig derives its platform from the interpreter build.
+    Keep unknown platforms distinct rather than trying an x86 DLL for them.
+    """
+    target = sysconfig.get_platform()
+    return {'win32': '32', 'win-amd64': '64', 'win-arm64': 'arm64'}.get(target, target)
 size = _size()
 
 class Win32Platform( baseplatform.SplitEntryPointPlatform ):

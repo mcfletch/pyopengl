@@ -1,0 +1,17 @@
+# This repository is Python, not a Visual Studio solution. Keep AppVeyor
+# useful without requiring a display or a hardware OpenGL context.
+image: Visual Studio 2022
+environment:
+  PYTHON: C:\Python312-x64
+init:
+  - set PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
+install:
+  - python -m pip install --upgrade pip
+  - python -m pip install build pytest pytest-timeout
+build_script:
+  - python -m build --wheel
+test_script:
+  - python -m pytest tests/bindings/glut/test_glut_library_names.py tests/bindings/glut/test_windows_interpreter_architecture.py tests/bindings/platform/test_library_loading.py tests/bindings/platform/test_plugin_load_failure.py -q --junitxml=loader-tests.xml
+artifacts:
+  - path: dist\*.whl
+  - path: loader-tests.xml
