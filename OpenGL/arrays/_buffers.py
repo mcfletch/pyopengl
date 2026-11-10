@@ -1,4 +1,3 @@
-#! /usr/bin/env python
 """Python 3.x buffer-handling (currently just for bytes/bytearray types)
 """
 import ctypes, sys

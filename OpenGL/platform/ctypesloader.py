@@ -135,7 +135,7 @@ def loadLibrary( dllType, name, mode = ctypes.RTLD_GLOBAL ):
     """
     if isinstance( dllType, ctypes.LibraryLoader ):
         dllType = dllType._dlltype
-    if sys.platform.startswith('linux'):
+    if sys.platform.startswith(('linux', 'sunos')):
         return _loadLibraryPosix(dllType, name, mode)
     else:
         return _loadLibraryWindows(dllType, name, mode)
