@@ -1,4 +1,3 @@
-#! /usr/bin/env python
 """Test for a buffer-protocol-based access mechanism
 
 Will *only* work for Python 2.6+, and pretty much just works for strings
