@@ -159,6 +159,14 @@ class Context(object):
         with Context(profile='core', gl_version=(3, 3)) as context:
             ...
 
+    ``share_with`` is another :class:`Context`: the new one is created to share
+    its buffers, textures and programs with that one, as ``glfwCreateWindow``'s
+    ``share`` argument or ``eglCreateContext``'s ``share_context`` does.  It
+    skips on a backend that cannot make a shared context.  The harness does not
+    tell PyOpenGL about the sharing -- that is
+    :func:`OpenGL.dispatch.share_context`, which a case calls where it means a
+    program to have done so.
+
     Raises :exc:`unittest.SkipTest` where the machine cannot serve the
     request -- which is what the backends raise, and what pytest and unittest
     both read as a skip -- including where the context that came back is older
@@ -169,8 +177,11 @@ class Context(object):
     #: the entry-point module each API's version string is read through.
     _API_MODULES: ClassVar[dict] = {'gl': 'OpenGL.GL', 'gles': 'OpenGL.GLES2', 'es': 'OpenGL.GLES2'}
 
-    def __init__(self, **requirements):
-        namespace = dict(requirements, runTest=lambda self: None)
+    def __init__(self, share_with=None, **requirements):
+        namespace = dict(
+            requirements, runTest=lambda self: None,
+            share_with=None if share_with is None else share_with._case,
+        )
         self._case = type(
             'StandaloneContext', (pick_backend(), ContextTestCase), namespace,
         )('runTest')
@@ -359,6 +370,11 @@ class ContextTestCase(unittest.TestCase):
     #: module exporting the indexed glGetStringi query (GL / GLES3); subclass.
     gl3 = None
 
+    #: The case whose context this one is created to share objects with, or
+    #: ``None``.  Set by :class:`Context`; a backend that can share reads it
+    #: through :meth:`_sharing`.
+    share_with = None
+
     # --- backend hooks (a mixin must implement these) --------------------
     def _create_context(self):
         raise NotImplementedError(
@@ -368,6 +384,27 @@ class ContextTestCase(unittest.TestCase):
 
     def _swap(self):
         raise NotImplementedError
+
+    def _native_context(self):
+        """What the toolkit takes as the context to share with (a GLFW window,
+        an EGL context handle).  A backend that can make a shared context
+        defines this and reads :meth:`_sharing` where it creates one."""
+        raise NotImplementedError
+
+    def _sharing(self):
+        """The native context to create this one sharing with, or ``None``.
+
+        Skips where the backend has no :meth:`_native_context`, which is how a
+        backend says it cannot make a shared context.
+        """
+        if self.share_with is None:
+            return None
+        try:
+            return self.share_with._native_context()
+        except NotImplementedError:
+            self.skipTest(
+                'the %s backend cannot make a context that shares with another'
+                % (getattr(self, 'backend_name', type(self).__name__),))
 
     def _make_current(self):
         """Make this instance's context current on the calling thread.
@@ -398,6 +435,7 @@ class ContextTestCase(unittest.TestCase):
         from OpenGL import error
 
         error.end_abandoned_block()
+        self._sharing()  # skips on a backend that cannot honour share_with
         self._create_context()
 
     # --- giving a context back -------------------------------------------

@@ -94,7 +94,8 @@ class GLFWBackend(object):
 
         try:
             window = glfw.create_window(
-                self.width, self.height, self._window_title(), None, None
+                self.width, self.height, self._window_title(), None,
+                self._sharing(),
             )
         except glfw.GLFWError as err:
             window = None
@@ -119,6 +120,9 @@ class GLFWBackend(object):
             self.gl_version[1],
             getattr(self, 'profile', ''),
         )
+
+    def _native_context(self):
+        return self._window
 
     def _swap(self):
         if self._window is not None:

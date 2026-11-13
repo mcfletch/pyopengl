@@ -27,6 +27,7 @@ from __future__ import annotations
 
 from typing import Any, Optional
 
+from OpenGL import dispatch
 from OpenGL.Tk.attributes import ContextAttributes
 from OpenGL.Tk.errors import TkContextError
 
@@ -99,4 +100,11 @@ def createContext(
             % (system, ', '.join(sorted(IMPLEMENTATIONS))))
     moduleName, className = named
     module = __import__(moduleName, {}, {}, [className])
-    return getattr(module, className)(widget, attributes)
+    made = getattr(module, className)(widget, attributes)
+    if attributes.share is not None:
+        # The driver numbers the two contexts' buffers, textures and programs
+        # together; PyOpenGL is told so that a ``VBO`` made in one is deleted
+        # from the other.
+        dispatch.share_context(
+            made.handle, getattr(attributes.share, 'handle', attributes.share))
+    return made

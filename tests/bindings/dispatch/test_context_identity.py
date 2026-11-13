@@ -64,3 +64,66 @@ def test_there_is_none_with_no_context_current(current, nothing):
 
 def test_it_is_part_of_the_public_surface():
     assert 'context_identity' in dispatch.__all__
+
+
+class TestContextsThatShareObjects:
+    """Contexts made to share their buffers, textures and programs are one namespace.
+
+    A name made in one is the same object in the others, so the identity that
+    says whose names these are is the group's.
+    """
+
+    def test_a_shared_context_has_the_identity_of_the_one_it_shares_with(self, current):
+        current(0x1234)
+        main = dispatch.context_identity()
+        dispatch.share_context(0x5678, with_handle=0x1234)
+        current(0x5678)
+        assert dispatch.context_identity() is main
+
+    def test_a_context_not_in_the_group_is_still_told_apart(self, current):
+        current(0x1234)
+        main = dispatch.context_identity()
+        dispatch.share_context(0x5678, with_handle=0x1234)
+        current(0x9ABC)
+        assert dispatch.context_identity() is not main
+
+    def test_the_context_shared_with_may_not_have_been_current_yet(self, current):
+        dispatch.share_context(0x5678, with_handle=0x1234)
+        current(0x5678)
+        shared = dispatch.context_identity()
+        current(0x1234)
+        assert dispatch.context_identity() is shared
+
+    def test_forgetting_the_shared_context_leaves_the_group_as_it_was(self, current):
+        current(0x1234)
+        main = dispatch.context_identity()
+        dispatch.share_context(0x5678, with_handle=0x1234)
+        dispatch.forget_context(0x5678)
+        current(0x1234)
+        assert dispatch.context_identity() is main
+
+    def test_a_context_destroyed_and_its_address_reused_is_not_in_the_group(self, current):
+        current(0x1234)
+        main = dispatch.context_identity()
+        dispatch.share_context(0x5678, with_handle=0x1234)
+        dispatch.forget_context(0x5678)
+        current(0x5678)
+        assert dispatch.context_identity() is not main
+
+    def test_the_group_outlives_the_context_it_began_with(self, current):
+        current(0x1234)
+        main = dispatch.context_identity()
+        dispatch.share_context(0x5678, with_handle=0x1234)
+        dispatch.forget_context(0x1234)
+        current(0x5678)
+        assert dispatch.context_identity() is main
+
+    def test_a_handle_is_shared_with_itself_harmlessly(self, current):
+        current(0x1234)
+        main = dispatch.context_identity()
+        dispatch.share_context(0x1234, with_handle=0x1234)
+        assert dispatch.context_identity() is main
+
+
+def test_sharing_is_part_of_the_public_surface():
+    assert 'share_context' in dispatch.__all__

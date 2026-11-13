@@ -245,6 +245,12 @@ Useful class attributes (override per test): `profile` (`'core'` /
 `'compatibility'`), `gl_version`, `api` (`'gl'` / `'gles'`), `red_size` …
 `stencil_size`, `accum_size`, `width` / `height`, `visible`, `dwell`.
 
+A case that needs more than one context, or one on a worker thread, uses
+`glcontext.Context(...)` with the same requirements as keywords. `share_with=`
+another `Context` makes the new one share buffers, textures and programs with
+it (GLFW and EGL; other backends skip). The harness does not call
+`OpenGL.dispatch.share_context`; a case that models a program doing so calls it.
+
 Helpers on the base classes:
 
 - `require_extension(name)` / `require_version(major, minor)` - skip if absent.

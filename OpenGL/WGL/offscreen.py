@@ -575,6 +575,12 @@ class OffscreenContext:
                     self.width, self.height)
                 self.context = self._create_context(
                     debug, forward_compatible, share)
+                if share:
+                    from OpenGL import dispatch
+
+                    # PyOpenGL is told the two contexts number their buffers,
+                    # textures and programs together.
+                    dispatch.share_context(self.context, share)
         except BaseException:
             # Release what was created, so an application that tries this and
             # falls back does not leak a pbuffer per attempt.

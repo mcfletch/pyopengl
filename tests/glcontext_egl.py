@@ -244,7 +244,8 @@ class EGLDeviceBackend(object):
         # a skip and not a failure.
         try:
             context = eglCreateContext(
-                display, config[0], EGL_NO_CONTEXT, context_attrs)
+                display, config[0], self._sharing() or EGL_NO_CONTEXT,
+                context_attrs)
         except EGLError as err:
             context = EGL_NO_CONTEXT
             reason = str(err.err)
@@ -271,6 +272,9 @@ class EGLDeviceBackend(object):
 
         self._egl_context = context
         self._egl_surface = surface
+
+    def _native_context(self):
+        return self._egl_context
 
     def _swap(self):
         # Offscreen pbuffer: nothing to present.  Tests read back with

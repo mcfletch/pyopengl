@@ -51,6 +51,7 @@ __all__ = [
     'make_current',
     'forget_context',
     'context_identity',
+    'share_context',
     'reclaim_retired',
     'set_error_checking',
     'error_checking_mode',
@@ -333,6 +334,32 @@ def context_identity():
         if identity is None:
             identity = _identities[address] = ContextIdentity(address)
     return identity
+
+
+def share_context(handle, with_handle):
+    """Say that the context at ``handle`` shares its objects with the one at ``with_handle``.
+
+    Contexts made to share (the ``share`` argument of ``glfwCreateWindow`` and
+    of ``eglCreateContext``, ``wglShareLists``) number their
+    buffers, textures, samplers and programs together: a name made in one is
+    the same object in the others.  Afterwards :func:`context_identity` answers
+    the same object whichever of them is current, so the deleter of a buffer
+    made on a loading thread's context runs from the rendering thread's, and
+    the other way round.  Objects that are not shared, such as vertex arrays,
+    framebuffers and the state of the context, stay the one context's.
+
+    Call it after the context is made, from any thread.  The group outlives
+    each member: :func:`forget_context` on one leaves the others as they were.
+    """
+    shared = _as_address(handle)
+    owner = _as_address(with_handle)
+    if not shared or not owner or shared == owner:
+        return
+    with _identities_lock:
+        identity = _identities.get(owner)
+        if identity is None:
+            identity = _identities[owner] = ContextIdentity(owner)
+        _identities[shared] = identity
 
 
 def _forget_context_data(handle):

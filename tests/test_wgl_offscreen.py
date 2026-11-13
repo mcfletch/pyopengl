@@ -434,3 +434,55 @@ class TestSayingWhetherItCanRunAtAll:
         with pytest.raises(offscreen.WGLError) as raised:
             offscreen.OffscreenContext(width=size[0], height=size[1])
         assert 'cannot render at' in str(raised.value)
+
+
+class TestAnOffscreenContextMadeToShare:
+    """``share=`` names the context whose buffers, textures and programs the
+    new one uses.  PyOpenGL is told, and a ``VBO`` made in either is deleted
+    from the other."""
+
+    @pytest.fixture
+    def pair(self):
+        missing = offscreen.available()
+        if missing:
+            pytest.skip('no offscreen WGL here: %s missing' % (', '.join(missing),))
+        first = offscreen.OffscreenContext(width=64, height=48)
+        try:
+            second = offscreen.OffscreenContext(
+                width=64, height=48, share=first.context)
+        except BaseException:
+            first.release()
+            raise
+        try:
+            yield first, second
+        finally:
+            second.release()
+            first.release()
+
+    def test_the_contexts_have_one_identity(self, pair):
+        from OpenGL import dispatch
+
+        first, second = pair
+        first.make_current()
+        owner = dispatch.context_identity()
+        second.make_current()
+        assert dispatch.context_identity() is owner
+
+    def test_a_buffer_dropped_while_the_other_is_current_is_deleted(self, pair):
+        import gc
+
+        import numpy as np
+        from OpenGL.arrays import vbo
+        from OpenGL.GL import glIsBuffer
+
+        first, second = pair
+        first.make_current()
+        buffer = vbo.VBO(np.zeros((3, 3), 'f'))
+        buffer.bind()
+        buffer.unbind()
+        name = int(buffer)
+        assert glIsBuffer(name)
+        second.make_current()
+        del buffer
+        gc.collect()
+        assert not glIsBuffer(name)

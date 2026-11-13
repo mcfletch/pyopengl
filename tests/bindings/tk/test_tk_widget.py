@@ -338,6 +338,83 @@ class TestTheContext:
 
 
 @needs_display
+class TestAContextMadeToShare:
+    """``share=`` names the context whose buffers, textures and programs the
+    new one uses, so the driver numbers them together.  PyOpenGL is told, and
+    a ``VBO`` made in either is deleted from the other."""
+
+    def frame(self, root, **options):
+        from OpenGL.Tk import GLFrame
+
+        made = GLFrame(root, width=64, height=64, version=(3, 3), **options)
+        made.pack(side='left')
+        made.waitForMap()
+        return made
+
+    def a_buffer(self):
+        import numpy as np
+        from OpenGL.arrays import vbo
+        from OpenGL.GL import glIsBuffer
+
+        buffer = vbo.VBO(np.zeros((3, 3), 'f'))
+        buffer.bind()
+        buffer.unbind()
+        assert glIsBuffer(int(buffer))
+        return buffer
+
+    def test_the_contexts_have_one_identity(self, root):
+        from OpenGL import dispatch
+
+        first = self.frame(root)
+        second = self.frame(root, share=first.context)
+        first.makeCurrent()
+        owner = dispatch.context_identity()
+        second.makeCurrent()
+        assert dispatch.context_identity() is owner
+
+    def test_contexts_that_were_not_made_to_share_have_two(self, root):
+        from OpenGL import dispatch
+
+        first = self.frame(root)
+        second = self.frame(root)
+        first.makeCurrent()
+        owner = dispatch.context_identity()
+        second.makeCurrent()
+        assert dispatch.context_identity() is not owner
+
+    def test_a_buffer_dropped_while_the_other_is_current_is_deleted(self, root):
+        import gc
+
+        from OpenGL.GL import glIsBuffer
+
+        first = self.frame(root)
+        second = self.frame(root, share=first.context)
+        first.makeCurrent()
+        buffer = self.a_buffer()
+        name = int(buffer)
+        second.makeCurrent()
+        del buffer
+        gc.collect()
+        assert not glIsBuffer(name)
+
+    def test_a_buffer_dropped_where_nothing_is_shared_is_left_alone(self, root):
+        import gc
+
+        from OpenGL.GL import glIsBuffer
+
+        first = self.frame(root)
+        second = self.frame(root)
+        first.makeCurrent()
+        buffer = self.a_buffer()
+        name = int(buffer)
+        second.makeCurrent()
+        del buffer
+        gc.collect()
+        first.makeCurrent()
+        assert glIsBuffer(name)
+
+
+@needs_display
 class TestTheSwapIntervalRequest:
     """``swapInterval`` is applied once, before the first frame is drawn: the
     first swap is made by the ``<Map>`` binding, before any code of the
